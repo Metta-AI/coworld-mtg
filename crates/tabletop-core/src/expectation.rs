@@ -36,4 +36,5 @@ pub enum EndReason {
     LifeZero,
     DrewFromEmptyLibrary,
     TurnCap,
+    ClockFlag,
 }

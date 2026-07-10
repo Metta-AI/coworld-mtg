@@ -211,6 +211,22 @@ impl Game {
         &self.log
     }
 
+    pub fn flag(&mut self, seat: SeatId) {
+        if !seat.is_valid() || matches!(self.expectation, Expectation::GameOver { .. }) {
+            return;
+        }
+        self.end_game(Some(seat.opponent()), EndReason::ClockFlag);
+    }
+
+    pub fn system_say(&mut self, seat: SeatId, text: String) -> Vec<LoggedEvent> {
+        if !seat.is_valid() || text.chars().count() > 2000 {
+            return Vec::new();
+        }
+        let start = self.log.len();
+        self.emit(None, Event::Said { seat, text });
+        self.log[start..].to_vec()
+    }
+
     fn submit_mulligan(&mut self, seat: SeatId, action: Action) -> Result<(), ActionError> {
         match action {
             Action::MulliganAgain => self.mulligan_again(seat),
