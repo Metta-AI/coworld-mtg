@@ -52,8 +52,8 @@ pub struct GameSetup {
 }
 ```
 
-On `Game::new(setup)`: assign `CardId`s deck-order-then-seat-order, shuffle each library (seat 0 first), set life,
-deal 7 cards each, enter mulligan flow. Emits setup events (see Events).
+On `Game::new(setup)`: assign `CardId`s from a seeded random permutation over all deck cards, shuffle each library
+(seat 0 first), set life, deal 7 cards each, enter mulligan flow. Emits setup events (see Events).
 
 ## Turn-taking: the `Expectation` state machine
 
@@ -98,6 +98,8 @@ pub enum Action {
     // zone & card manipulation (any window you hold)
     Draw { count: u32 },                                  // from own library top to own hand
     MoveCards { moves: Vec<CardMove> },                   // see below
+    MoveTopOfLibrary { count: u32, to_seat: SeatId, to_zone: ZoneKind,
+                       position: MovePosition, face_down: bool },
     SetCardAttr { card: CardId, attr: CardAttr },         // Tapped(bool), FaceDown(bool), Attacking(bool),
                                                           //   PtOverride(Option<String>), Annotation(String)
     CreateToken { spec: CardSpec, x: i16, y: i16 },       // enters own battlefield, is_token = true
@@ -131,10 +133,13 @@ zones, plus cards it controls on any battlefield. Moving opponent-owned cards ou
 rejected (`NotYourCard`) — with one exception: cards the actor owns that sit in an opponent zone may be reclaimed.
 Tokens that leave the battlefield cease to exist (event `TokenRemoved` instead of a zone entry). `Draw` from an
 empty library immediately ends the game (loss for the drawer, `EndReason::DrewFromEmptyLibrary`). Hidden-zone
-index information: `MoveCards` targeting a library card requires the card be at a *known* position (top/bottom by
-zone+position addressing is allowed via a separate mechanism: moving from library is only legal for `Top`/`Bottom`
-positions or after a `Reveal`—keep it simple: library cards can only be moved by the owner and only from
-Top/Bottom/`Index(i)`; identity is only disclosed per redaction rules).
+identity integrity: actions that address a card by `CardId` are rejected with `HiddenZoneAddressing` when that card
+is currently in any library. This applies to `MoveCards`, `SetCardAttr`, `AddCounter { target: Card }`, and `Point`
+(`from` and `to`). Use `MoveTopOfLibrary` to move cards from the actor's own library by position without naming
+hidden identities. It takes up to `count` cards from the top in library order and applies the same destination
+insertion semantics as `MoveCards`; if `count` exceeds the library size, it moves all remaining cards and does not
+end the game. A zero count is invalid. For `MovePosition::Battlefield { x, y }`, every moved card uses the supplied
+coordinate. `Draw` remains the only draw action.
 
 Life reaching ≤ 0 (via `AddCounter` on "life"): game ends, loser is the seat whose life dropped, unless both ≤ 0 in
 the same action (draw). `turn_cap` reached: when `NextTurn` would begin turn `turn_cap + 1`, instead the game ends —
@@ -148,6 +153,9 @@ Every accepted action produces one or more `LoggedEvent { seq, turn, phase, acto
 `Passed`, `PhaseChanged`, `TurnChanged`, `MulliganResolved`, plus lifecycle: `GameStarted { setup-summary }`,
 `HandDealt`, `WindowOpened { expectation }`, `GameEnded { outcome } }`). Design for the wire: these become the
 protocol's observation deltas verbatim.
+
+`CardMoveEvent` includes `was_face_down: bool`, the card's face-down state before the move. `AttrSet` also includes
+`was_face_down: bool`, the card's face-down state before the attribute change.
 
 ### Redaction
 
@@ -194,8 +202,8 @@ impl Game {
 ```
 
 `ActionError` (thiserror): `NotYourWindow`, `InvalidInWindow`, `NotYourCard`, `UnknownCard`, `WrongZone`,
-`BadMulligan`, `GameIsOver`, `InvalidArgument(String)`. Every rejection carries enough context to be relayed to an
-LLM as a corrective message.
+`HiddenZoneAddressing`, `BadMulligan`, `GameIsOver`, `InvalidArgument(String)`. Every rejection carries enough
+context to be relayed to an LLM as a corrective message.
 
 ## Tests (acceptance for M1)
 
@@ -241,3 +249,27 @@ crates/tabletop-core/
     ├── provenance.rs
     └── props.rs        # proptest determinism/redaction/termination
 ```
+
+## Implementation decisions
+
+- `Game::new` treats `starting_life <= 0`, `turn_cap == 0`, and `reaction_depth_cap == 0` as requests for the M1
+  defaults: 20 life, 25 turns, and reaction depth 4.
+- Main-window game actions keep priority with the active player; only `Pass`, `NextPhase`, and `NextTurn` open a
+  reaction window.
+- `Say` is legal for the expected actor in live windows and for either seat after `GameOver`; every other post-game
+  action is rejected with `GameIsOver`.
+- A multi-card `Draw` from a short library logs any successfully drawn cards, then ends the game on the first failed
+  draw.
+- `CardId`s for deck cards are assigned from a seeded random permutation before library shuffles, so ids carry no
+  decklist-position information. Token ids continue from the deck-card id range.
+- `MoveCards`, `SetCardAttr`, card `AddCounter`, and `Point` reject cards currently in any library with
+  `HiddenZoneAddressing`. `MoveTopOfLibrary` is the positional mechanism for moving cards out of the actor's own
+  library.
+- `MoveTopOfLibrary` emits `CardsMoved`; each move has `from = { actor, Library }` and `was_face_down = true`. A
+  face-up destination in a public zone discloses identity to public perspectives; hidden or face-down destinations
+  remain anonymous except to seats that can see the destination.
+- Redacted move and attribute events decide card identity visibility from both the pre-action state and post-action
+  state. Identity is known to a perspective if either state is visible under that perspective's normal zone and
+  face-down rules, so public cards remain identified in the event that moves or turns them hidden.
+- `MulliganAgain` emits `Shuffled`, `HandDealt`, `MulliganResolved { kept: false }`, and the next
+  `WindowOpened`.
