@@ -215,6 +215,39 @@ fn turn_cap_uses_life_comparison() {
 }
 
 #[test]
+fn clock_flag_ends_game_for_opponent() {
+    let (mut game, _) = Game::new(setup(141, 10, 5));
+    keep_both(&mut game);
+
+    game.flag(SeatId(0));
+
+    let outcome = game.outcome().unwrap();
+    assert_eq!(outcome.winner, Some(SeatId(1)));
+    assert_eq!(outcome.reason, EndReason::ClockFlag);
+}
+
+#[test]
+fn clock_flag_does_not_replace_existing_outcome() {
+    let (mut game, _) = Game::new(setup(142, 10, 5));
+    keep_both(&mut game);
+    game.submit(
+        SeatId(0),
+        Action::AddCounter {
+            target: CounterTarget::Player { seat: SeatId(1) },
+            name: "life".to_owned(),
+            delta: -20,
+        },
+    )
+    .unwrap();
+
+    game.flag(SeatId(0));
+
+    let outcome = game.outcome().unwrap();
+    assert_eq!(outcome.winner, Some(SeatId(0)));
+    assert_eq!(outcome.reason, EndReason::LifeZero);
+}
+
+#[test]
 fn library_cards_cannot_be_moved_by_id() {
     let (mut game, card) = put_first_hand_card_on_library(15);
 
