@@ -6,8 +6,9 @@ pub mod wire;
 
 use anyhow::{anyhow, Context, Result};
 use axum::extract::ws::{close_code, CloseFrame, Message, WebSocket, WebSocketUpgrade};
-use axum::extract::{Query, State};
-use axum::response::{Html, IntoResponse};
+use axum::extract::{Path as AxumPath, Query, State};
+use axum::http::{header, StatusCode};
+use axum::response::{Html, IntoResponse, Response};
 use axum::routing::get;
 use axum::Router;
 use config::EpisodeConfig;
@@ -15,6 +16,7 @@ use decks::load_deck;
 use futures::{FutureExt, Sink, SinkExt, StreamExt};
 use std::collections::BTreeMap;
 use std::future::{Future, IntoFuture};
+use std::path::{Component, Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use tabletop_core::{
@@ -129,9 +131,7 @@ async fn run_match_server(shutdown: impl Future<Output = ()> + Send + 'static) -
     };
     let app = Router::new()
         .route("/healthz", get(healthz))
-        .route("/client/player", get(client_page))
-        .route("/client/global", get(client_page))
-        .route("/client/replay", get(client_page))
+        .route("/client/{*path}", get(client_asset))
         .route("/player", get(player_ws))
         .route("/global", get(global_ws))
         .with_state(state);
@@ -168,7 +168,7 @@ async fn run_replay_server(
     let listener = TcpListener::bind(format!("{host}:{port}")).await?;
     let app = Router::new()
         .route("/healthz", get(healthz))
-        .route("/client/replay", get(client_page))
+        .route("/client/{*path}", get(client_asset))
         .route("/replay", get(replay_ws))
         .with_state(ReplayState { replay });
     axum::serve(listener, app)
@@ -182,12 +182,80 @@ async fn healthz() -> &'static str {
     "ok"
 }
 
-async fn client_page(Query(params): Query<BTreeMap<String, String>>) -> Html<String> {
+async fn client_asset(
+    AxumPath(path): AxumPath<String>,
+    Query(params): Query<BTreeMap<String, String>>,
+) -> Response {
+    let dist = web_dist_dir();
+    if dist.is_dir() {
+        return match resolve_client_asset(&dist, &path) {
+            Some(file) => match tokio::fs::read(&file).await {
+                Ok(bytes) => ([(header::CONTENT_TYPE, content_type(&file))], bytes).into_response(),
+                Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+                    (StatusCode::NOT_FOUND, "not found").into_response()
+                }
+                Err(_) => {
+                    (StatusCode::INTERNAL_SERVER_ERROR, "failed to read asset").into_response()
+                }
+            },
+            None => (StatusCode::NOT_FOUND, "not found").into_response(),
+        };
+    }
+    if matches!(path.as_str(), "player" | "global" | "replay") {
+        return client_placeholder(params).into_response();
+    }
+    (StatusCode::NOT_FOUND, "not found").into_response()
+}
+
+fn client_placeholder(params: BTreeMap<String, String>) -> Html<String> {
     let body = serde_json::to_string_pretty(&params).unwrap_or_else(|_| "{}".to_owned());
     Html(format!(
         "<!doctype html><html><body><pre>{}</pre></body></html>",
         escape_html(&body)
     ))
+}
+
+fn web_dist_dir() -> PathBuf {
+    std::env::var_os("COGAME_WEB_DIST")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from("web/dist"))
+}
+
+fn resolve_client_asset(dist: &Path, path: &str) -> Option<PathBuf> {
+    let relative = match path {
+        "player" | "global" | "replay" => PathBuf::from(format!("{path}.html")),
+        _ => safe_relative_path(path)?,
+    };
+    Some(dist.join(relative))
+}
+
+fn safe_relative_path(path: &str) -> Option<PathBuf> {
+    let mut out = PathBuf::new();
+    for component in Path::new(path).components() {
+        match component {
+            Component::Normal(part) => out.push(part),
+            _ => return None,
+        }
+    }
+    if out.as_os_str().is_empty() {
+        None
+    } else {
+        Some(out)
+    }
+}
+
+fn content_type(path: &Path) -> &'static str {
+    match path.extension().and_then(|extension| extension.to_str()) {
+        Some("html") => "text/html; charset=utf-8",
+        Some("js") => "text/javascript; charset=utf-8",
+        Some("css") => "text/css; charset=utf-8",
+        Some("json") => "application/json; charset=utf-8",
+        Some("svg") => "image/svg+xml",
+        Some("png") => "image/png",
+        Some("ico") => "image/x-icon",
+        Some("map") => "application/json; charset=utf-8",
+        _ => "application/octet-stream",
+    }
 }
 
 async fn player_ws(
@@ -811,6 +879,7 @@ impl MatchRunner {
             game_number: current.game_number,
             expectation: translate_expectation(current.game.expectation(), current.slot_of_seat0),
             clock_ms_remaining: current.clocks_ms[slot],
+            clocks_ms: current.clocks_ms,
             decision_cap_ms: duration_ms(self.config.decision_cap_s),
         };
         send_json(&connection.tx, &frame);
@@ -826,6 +895,7 @@ impl MatchRunner {
         let frame = GlobalFrame::Window {
             game_number: current.game_number,
             expectation: translate_expectation(current.game.expectation(), current.slot_of_seat0),
+            clocks_ms: current.clocks_ms,
         };
         send_json(&connection.tx, &frame);
     }

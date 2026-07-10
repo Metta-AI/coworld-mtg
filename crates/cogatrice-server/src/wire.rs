@@ -77,6 +77,7 @@ pub enum PlayerFrame {
         game_number: u32,
         expectation: Expectation,
         clock_ms_remaining: u64,
+        clocks_ms: [u64; 2],
         decision_cap_ms: u64,
     },
     Ack {
@@ -116,6 +117,7 @@ pub enum GlobalFrame {
     Window {
         game_number: u32,
         expectation: Expectation,
+        clocks_ms: [u64; 2],
     },
     GameEnd {
         game_number: u32,

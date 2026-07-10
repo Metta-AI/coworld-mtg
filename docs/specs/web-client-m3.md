@@ -78,3 +78,24 @@ Empty states ("waiting for opponent…", "connecting…") for every pane. No spi
 - Automated (light): vitest unit tests for the event→log-sentence renderer and the snapshot→table-model mapper;
   Playwright smoke test: page connects to a live local server, mulligan modal appears, keep resolves, a land can
   be played, phase advances — against a goldfish opponent (reuse the M2 harness).
+
+## Implementation decisions
+
+- The npm package lives at the repository root so `npm test` and `npm run build` work from the same directory as the
+  Rust commands, while all Vite entrypoints and TypeScript source stay under `web/`.
+- The TypeScript protocol helpers use the serde shapes emitted by `tabletop-core` for externally tagged enums such as
+  `CardRef` and `MovePosition`.
+- Auto-placement uses battlefield row `0` for lands and row `1` for nonlands; rendering groups battlefield cards by
+  card type so older/goldfish placements still display in the expected rows.
+- A pointer action needs a source card the acting player can touch, so the UI starts pointing from one of your own
+  battlefield cards and then lets the next battlefield click choose the target.
+- `Untap all` is sent as one `move_cards` action that preserves battlefield positions while setting `tapped: false`,
+  because the protocol has no multi-card `set_card_attr` action.
+- The live client keeps the full received event backlog for the log pane, but table state only applies logged events
+  with `seq > snapshot.seq`; a post-snapshot reconnect backlog must not mutate counts or zones a second time.
+- Hand, battlefield, and mulligan modal cards share the same text card frame. The title and mana cost stay fixed at
+  the top, while type/oracle/details are clipped first when a battlefield row is short.
+- Player logs use second person only for the viewer's own seat; all other seats use display names, and global/replay
+  logs are always display-name third person. Window/pass/phase/turn rows stay visible with procedural dimming.
+- `window` frames carry `clocks_ms: [u64; 2]` in slot order. The browser caches last-known values for both seats and
+  keeps `clock_ms_remaining` as a compatibility fallback for the acting player's clock.

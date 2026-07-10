@@ -28,6 +28,7 @@ All enum-ish payloads use `snake_case` tagged objects, exactly as produced by `t
  "game_number": 1,
  "expectation": { /* Expectation */ },
  "clock_ms_remaining": 312000,           // your chess clock for this game
+ "clocks_ms": [312000, 298500],          // both chess clocks, slot-indexed
  "decision_cap_ms": 30000}               // per-decision cap; exceeding it auto-passes/auto-keeps
 
 {"type": "ack",    "cmd_id": 17, "seq": 142}            // action accepted; seq of its first event
@@ -65,8 +66,8 @@ frame. The full action vocabulary and semantics live in the tabletop-core spec; 
 ## Server → global messages
 
 Same `hello` (without decklist/slot), `snapshot`/`events` (Global perspective: public information only),
-`window` (whose turn, no clocks detail), `game_end`, `match_end`. Global connections send nothing; anything
-received is ignored.
+`window` (whose turn plus `clocks_ms`, no acting-player-only `clock_ms_remaining`), `game_end`, `match_end`.
+Global connections send nothing; anything received is ignored.
 
 ## Replay mode
 
