@@ -1,6 +1,6 @@
 use anyhow::{anyhow, Result};
+use phase_bridge::{CardSpec, DeckList};
 use serde::Deserialize;
-use tabletop_core::{CardSpec, DeckList};
 
 #[derive(Deserialize)]
 struct DeckFile {

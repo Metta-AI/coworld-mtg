@@ -15,10 +15,6 @@ pub struct EpisodeConfig {
     pub decks: Vec<String>,
     #[serde(default = "default_games_to_win")]
     pub games_to_win: u32,
-    #[serde(default = "default_starting_life")]
-    pub starting_life: i32,
-    #[serde(default = "default_turn_cap")]
-    pub turn_cap: u32,
     #[serde(default = "default_clock_s")]
     pub clock_s: f64,
     #[serde(default = "default_decision_cap_s")]
@@ -38,8 +34,6 @@ pub struct PublicEpisodeConfig {
     pub seed: u64,
     pub decks: [String; 2],
     pub games_to_win: u32,
-    pub starting_life: i32,
-    pub turn_cap: u32,
     pub clock_s: f64,
     pub decision_cap_s: f64,
     pub player_connect_timeout_s: f64,
@@ -60,8 +54,6 @@ impl EpisodeConfig {
             seed: self.seed,
             decks: [self.decks[0].clone(), self.decks[1].clone()],
             games_to_win: self.games_to_win,
-            starting_life: self.starting_life,
-            turn_cap: self.turn_cap,
             clock_s: self.clock_s,
             decision_cap_s: self.decision_cap_s,
             player_connect_timeout_s: self.player_connect_timeout_s,
@@ -86,12 +78,6 @@ impl EpisodeConfig {
         self.decks.truncate(2);
         if self.games_to_win == 0 {
             self.games_to_win = default_games_to_win();
-        }
-        if self.starting_life <= 0 {
-            self.starting_life = default_starting_life();
-        }
-        if self.turn_cap == 0 {
-            self.turn_cap = default_turn_cap();
         }
         if self.clock_s <= 0.0 {
             self.clock_s = default_clock_s();
@@ -152,14 +138,6 @@ fn default_seed() -> u64 {
 
 fn default_games_to_win() -> u32 {
     1
-}
-
-fn default_starting_life() -> i32 {
-    20
-}
-
-fn default_turn_cap() -> u32 {
-    25
 }
 
 fn default_clock_s() -> f64 {

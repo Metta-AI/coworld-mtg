@@ -11,6 +11,6 @@ clap.workspace = true
 futures.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-tabletop-core = { path = "../../tabletop-core" }
+phase-bridge = { path = "../../phase-bridge" }
 tokio.workspace = true
 tokio-tungstenite.workspace = true
