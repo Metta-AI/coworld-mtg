@@ -1,0 +1,5 @@
+# Matches the toolchain pinned by Phase v0.20.0. Phase uses nightly Cargo's
+# codegen-backend profile support and the `if_let_guard` language feature.
+[toolchain]
+channel = "nightly-2026-04-19"
+components = ["rustfmt", "clippy"]

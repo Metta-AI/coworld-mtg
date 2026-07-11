@@ -1,0 +1,15 @@
+[package]
+name = "phase-bridge"
+version = "0.1.0"
+edition.workspace = true
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+phase-engine = { package = "engine", git = "https://github.com/phase-rs/phase.git", rev = "f6fd1fca5c581bcd127d5b18742623e1298ae3c7" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
