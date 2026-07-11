@@ -1,0 +1,43 @@
+FROM docker.io/library/node:22-bookworm-slim AS web-builder
+
+WORKDIR /build
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY web ./web
+RUN npm run build
+
+FROM docker.io/library/rust:1.91-bookworm AS rust-builder
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV RUSTUP_TOOLCHAIN=1.91.0 \
+    RUSTC_BOOTSTRAP=1 \
+    RUSTFLAGS=-Zcrate-attr=feature(if_let_guard) \
+    CARGO_INCREMENTAL=0
+
+WORKDIR /build
+COPY Cargo.toml Cargo.lock ./
+COPY crates ./crates
+COPY decks ./decks
+RUN cargo build --locked --release -p cogatrice-server -p goldfish
+
+FROM docker.io/library/debian:bookworm-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=rust-builder /build/target/release/cogatrice-server /app/cogatrice-server
+COPY --from=rust-builder /build/target/release/goldfish /app/goldfish
+COPY --from=web-builder /build/web/dist /app/web/dist
+
+ENV COGAME_HOST=0.0.0.0 \
+    COGAME_PORT=8080 \
+    COGAME_WEB_DIST=/app/web/dist
+
+EXPOSE 8080
+CMD ["/app/cogatrice-server"]
+
