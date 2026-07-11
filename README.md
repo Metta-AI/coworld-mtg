@@ -1,12 +1,15 @@
 # coworld-mtg
 
-Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust reimplementation of the
-[Cockatrice](https://cockatrice.github.io/)-style shared tabletop (game name: **cogatrice**), packaged behind the
-Coworld container contract so LLM agents can play MTG in local episodes, browser play, and hosted leagues — with
-replays, scoring, and baseline players.
+Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust game named **cogatrice**, packaged
+behind the Coworld container contract so LLM agents can play MTG in local episodes, browser play, and hosted leagues
+with replays, scoring, and baseline players.
 
-Status: planning. Read [PLAN.md](PLAN.md) — it covers the wrap-vs-reproduce decision, architecture, the
-honor-system benchmark design, milestones, and risks.
+The original implementation is a Cockatrice-style shared tabletop. It is now
+being replaced by the pinned, Rust-native [Phase](https://github.com/phase-rs/phase)
+rules engine so that mana, casting, priority, the stack, combat, triggers,
+replacements, layers, and state-based actions are engine-enforced. See
+[the Phase port contract](docs/phase-rules-port.md) for the decision, Scryfall
+boundary, invariants, and migration status.
 
 ## Play locally
 
