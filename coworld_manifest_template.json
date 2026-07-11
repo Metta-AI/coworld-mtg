@@ -1,0 +1,165 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Metta-AI/coworld/main/src/coworld/coworld_manifest_schema.json",
+  "game": {
+    "name": "cogatrice",
+    "description": "Two-player Magic: The Gathering powered by the Phase rules engine, with enforced mana, timing, priority, stack, combat, hidden information, scoring, and replay.",
+    "owner": "nishu.builder@gmail.com",
+    "runnable": {
+      "type": "game",
+      "image": "{{COGATRICE_IMAGE}}",
+      "run": ["/app/cogatrice-server"],
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/13f8bd664a8caa5b09e5b104b9424fcbfba2f7bc"
+    },
+    "config_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tokens", "players"],
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "players": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name"],
+            "properties": {"name": {"type": "string", "minLength": 1}}
+          }
+        },
+        "seed": {"type": "integer", "minimum": 0},
+        "decks": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "string", "enum": ["red_rush", "green_stompy"]}
+        },
+        "games_to_win": {"type": "integer", "minimum": 1, "maximum": 5},
+        "clock_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 3600},
+        "decision_cap_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 600},
+        "player_connect_timeout_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 600}
+      }
+    },
+    "results_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scores", "games", "seed", "policy_names"],
+      "properties": {
+        "scores": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "number", "minimum": 0}
+        },
+        "games": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["game_number", "winner_slot", "reason", "turns", "final_life", "seed"],
+            "properties": {
+              "game_number": {"type": "integer", "minimum": 1},
+              "winner_slot": {"type": ["integer", "null"], "minimum": 0, "maximum": 1},
+              "reason": {"type": "string"},
+              "turns": {"type": "integer", "minimum": 0},
+              "final_life": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {"type": "integer"}
+              },
+              "seed": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
+        "seed": {"type": "integer", "minimum": 0},
+        "policy_names": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "protocols": {
+      "player": {
+        "type": "uri",
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/13f8bd664a8caa5b09e5b104b9424fcbfba2f7bc/docs/protocol.md"
+      },
+      "global": {
+        "type": "uri",
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/13f8bd664a8caa5b09e5b104b9424fcbfba2f7bc/docs/protocol.md"
+      }
+    },
+    "docs": {
+      "readme": {
+        "type": "uri",
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/13f8bd664a8caa5b09e5b104b9424fcbfba2f7bc/README.md"
+      },
+      "pages": [
+        {
+          "id": "rules.md",
+          "title": "Cogatrice rules",
+          "content": {
+            "type": "text",
+            "value": "Cogatrice is a two-player Magic duel using bundled 40-card Red Rush and Green Stompy decks. The pinned Phase engine is authoritative for draws, mana, casting, timing, targets, priority, the stack, combat, triggers, state-based actions, and game outcomes. Players may submit only exact actions offered by Phase for their private view. Hidden hands and libraries remain redacted from opponents and spectators. A match ends when one player reaches the configured number of game wins; clocks and explicit concessions are enforced by the host."
+          }
+        }
+      ]
+    }
+  },
+  "player": [
+    {
+      "id": "cogatrice-goldfish",
+      "name": "Cogatrice Phase Goldfish",
+      "type": "player",
+      "image": "{{COGATRICE_IMAGE}}",
+      "run": ["/app/goldfish"],
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/13f8bd664a8caa5b09e5b104b9424fcbfba2f7bc",
+      "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
+    }
+  ],
+  "commissioner": [],
+  "reporter": [],
+  "grader": [],
+  "diagnoser": [],
+  "optimizer": [],
+  "variants": [
+    {
+      "id": "red-vs-green",
+      "name": "Red Rush vs Green Stompy",
+      "description": "A best-of-one Phase-enforced duel with the bundled mono-red and mono-green decks.",
+      "game_config": {
+        "players": [{"name": "Red mage"}, {"name": "Green mage"}],
+        "seed": 4242,
+        "decks": ["red_rush", "green_stompy"],
+        "games_to_win": 1,
+        "clock_s": 360,
+        "decision_cap_s": 30,
+        "player_connect_timeout_s": 60
+      }
+    }
+  ],
+  "certification": {
+    "players": [
+      {"player_id": "cogatrice-goldfish"},
+      {"player_id": "cogatrice-goldfish"}
+    ],
+    "game_config": {
+      "players": [{"name": "Red goldfish"}, {"name": "Green goldfish"}],
+      "seed": 4242,
+      "decks": ["red_rush", "green_stompy"],
+      "games_to_win": 1,
+      "clock_s": 120,
+      "decision_cap_s": 5,
+      "player_connect_timeout_s": 30
+    }
+  }
+}
