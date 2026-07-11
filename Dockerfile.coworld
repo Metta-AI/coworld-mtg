@@ -12,8 +12,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends git ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-ENV RUSTUP_TOOLCHAIN=1.91.0 \
-    RUSTC_BOOTSTRAP=1 \
+ENV RUSTC_BOOTSTRAP=1 \
     RUSTFLAGS=-Zcrate-attr=feature(if_let_guard) \
     CARGO_INCREMENTAL=0
 
@@ -29,7 +28,7 @@ RUN git init /phase \
 COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates
 COPY decks ./decks
-RUN cargo build --locked --release -p cogatrice-server -p goldfish
+RUN cargo build --release -p cogatrice-server -p goldfish
 
 FROM docker.io/library/debian:bookworm-slim
 
