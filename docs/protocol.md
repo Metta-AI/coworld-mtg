@@ -1,77 +1,118 @@
-# cogatrice wire protocol
+# Cogatrice Phase protocol
 
-JSON text frames over WebSocket. Two routes, served by the game container on `COGAME_HOST:COGAME_PORT`:
+Cogatrice uses JSON text frames over WebSocket:
 
-- `/player?slot=<0|1>&token=<token>` — one connection per seat. Slot and token must match the episode config;
-  a second connection for the same slot replaces the first (the old socket is closed).
-- `/global` — read-only public-information stream, any number of connections.
+- `/player?slot=<0|1>&token=<token>` is an authenticated player connection.
+- `/global` is a read-only, non-seat spectator connection.
+- `/replay` is an omniscient stream available when `COGAME_LOAD_REPLAY_URI` is set.
 
-All enum-ish payloads use `snake_case` tagged objects, exactly as produced by `tabletop-core`'s serde derives.
-`Action`, `Event`, `Expectation`, `Snapshot`, `CardRef` etc. below refer to those shapes (see
-`crates/tabletop-core`; docs/specs/tabletop-core-m1.md is the semantic reference).
+Phase is the sole rules authority. A client never sends `draw`, `move_cards`,
+`tap`, `next_phase`, or a handwritten combat command. It chooses one complete
+`GameAction` value from its latest `state.legal_actions` or
+`state.legal_actions_by_object` collection and echoes that value unchanged.
 
-## Server → player messages
+## Player frames
 
-```jsonc
-{"type": "hello",
- "slot": 0,
- "seat_name": "goldfish-0",
- "match": {"games_to_win": 2, "game_number": 1, "wins": [0, 0]},
- "config": { /* public episode config: starting_life, turn_cap, clock_s, decision_cap_s, ... */ },
- "decklist": { /* your own DeckList, card specs included */ }}
-
-{"type": "snapshot", "game_number": 1, "state": { /* Snapshot redacted to your seat */ }}
-
-{"type": "events", "game_number": 1, "events": [ /* LoggedEvent[] redacted to your seat */ ]}
-
-{"type": "window",                       // sent whenever it becomes YOUR turn to act
- "game_number": 1,
- "expectation": { /* Expectation */ },
- "clock_ms_remaining": 312000,           // your chess clock for this game
- "clocks_ms": [312000, 298500],          // both chess clocks, slot-indexed
- "decision_cap_ms": 30000}               // per-decision cap; exceeding it auto-passes/auto-keeps
-
-{"type": "ack",    "cmd_id": 17, "seq": 142}            // action accepted; seq of its first event
-{"type": "reject", "cmd_id": 17, "error": {"kind": "not_your_window", "detail": "..."}}
-
-{"type": "game_end",  "game_number": 1, "outcome": { /* GameOutcome */ }, "wins": [1, 0]}
-{"type": "match_end", "scores": [2.0, 1.0], "games": [ /* per-game outcome summaries */ ]}
-```
-
-Notes:
-- On connect (and reconnect) the server sends `hello`, then `snapshot`, then resumes `events` deltas. A player can
-  always act correctly from the latest `snapshot` + subsequent `events` — no replaying of missed deltas is needed.
-- `events` frames are also how you observe the opponent. Every accepted action (yours and theirs) appears exactly
-  once, in `seq` order.
-- `window` is authoritative for turn-taking: act only after a `window` naming your seat. Acting out of window gets
-  a `reject` with `not_your_window` (harmless, but wasteful).
-- Timeouts: if your decision cap or game clock expires, the server acts for you (mulligan → keep-with-first-N-cards
-  bottomed; reaction window → pass; main window → next_phase/next_turn progression; clock flag → game loss) and
-  logs a `Said` event from the server noting the timeout.
-
-## Player → server messages
+On connection:
 
 ```jsonc
-{"cmd_id": 17, "action": {"type": "draw", "count": 1}}
-{"cmd_id": 18, "action": {"type": "move_cards", "moves": [{"card": 12, "to_seat": 0, "to_zone": "battlefield",
-                          "position": {"type": "battlefield", "x": 3, "y": 1}, "face_down": null, "tapped": null}]}}
-{"cmd_id": 19, "action": {"type": "say", "text": "casting Goblin Raider, 2 mountains tapped"}}
-{"cmd_id": 20, "action": {"type": "pass"}}
+{
+  "type": "hello",
+  "slot": 0,
+  "seat": 1,
+  "seat_name": "human-0",
+  "player_names": ["opponent-1", "human-0"],
+  "match": {"games_to_win": 1, "game_number": 1, "wins": [0, 0]},
+  "config": {/* public Coworld config */},
+  "decklist": {/* this slot's bundled deck */}
+}
 ```
 
-`cmd_id` is a client-chosen number echoed in `ack`/`reject`; use monotonically increasing values. One action per
-frame. The full action vocabulary and semantics live in the tabletop-core spec; the wire shape is
-`{"cmd_id": n, "action": <Action>}`.
+`slot` is stable across the match and is used for scoring. `seat` is Phase's
+player ID for the current game; seats rotate between games.
 
-## Server → global messages
+Every initial state, accepted action, timeout, and reconnect produces a complete
+decision snapshot:
 
-Same `hello` (without decklist/slot), `snapshot`/`events` (Global perspective: public information only),
-`window` (whose turn plus `clocks_ms`, no acting-player-only `clock_ms_remaining`), `game_end`, `match_end`.
-Global connections send nothing; anything received is ignored.
+```jsonc
+{
+  "type": "state",
+  "game_number": 1,
+  "state": {
+    "turn": 3,
+    "phase": "PreCombatMain",
+    "active_player": 0,
+    "priority_player": 0,
+    "waiting_for": {"type": "Priority", "data": {"player": 0}},
+    "players": [/* life, mana pool, visible hand/graveyard, library count */],
+    "battlefield": [/* engine-derived cards */],
+    "stack": [/* spells and abilities */],
+    "exile": [],
+    "combat": null,
+    "legal_actions": [
+      {"type": "PassPriority"},
+      {"type": "PlayLand", "data": {"object_id": 12, "card_id": 12}}
+    ],
+    "spell_costs": {/* object id -> effective Phase cost */},
+    "legal_actions_by_object": {/* object id -> exact actions */}
+  },
+  "events": [/* viewer-filtered Phase GameEvent values */],
+  "clocks_ms": [354000, 349000],
+  "decision_cap_ms": 30000
+}
+```
 
-## Replay mode
+The state is already filtered by Phase. A player sees their own hand, hidden
+placeholders for the opponent's hand, and hidden libraries. The spectator sees
+hidden placeholders for both hands. Clients must not derive hidden identity or
+rules legality from object IDs.
 
-In replay mode (`COGAME_LOAD_REPLAY_URI` set) the server serves `/replay`: on connect it sends the recorded
-episode as `{"type": "replay_meta", ...}` followed by the full-perspective (unredacted) event stream in batches
-with original relative timing compressed to a fixed playback rate, looping back to the start when it reaches the
-end. `/client/replay` renders this stream and autoplays.
+To act, copy an offered action exactly:
+
+```jsonc
+{
+  "cmd_id": 17,
+  "action": {"type": "PlayLand", "data": {"object_id": 12, "card_id": 12}}
+}
+```
+
+The server responds with:
+
+```jsonc
+{"type": "ack", "cmd_id": 17, "turn": 3}
+{"type": "reject", "cmd_id": 18, "error": {"kind": "illegal_action", "detail": "..."}}
+```
+
+`Concede` is the sole action not enumerated by Phase and is always available:
+
+```jsonc
+{"cmd_id": 19, "action": {"type": "Concede", "data": {"player_id": 0}}}
+```
+
+The `player_id` must equal the current `hello.seat`. The host rejects spoofed
+concessions and every non-concession action absent from the latest Phase legal
+set.
+
+Games and matches end with `game_end` and `match_end`. `winner_slot` uses stable
+Coworld slot identity, not the rotating Phase seat.
+
+## Simultaneous decisions and timeouts
+
+London mulligans and other simultaneous Phase prompts can give both seats legal
+actions in the same authoritative state. Either player may answer first. Each
+accepted answer produces a new complete snapshot for both seats.
+
+At a decision timeout, the host submits an action from that seat's current legal
+set, preferring keep/pass/empty combat declarations. A depleted game clock
+submits a real Phase concession and records `clock_flag` as the host end reason.
+
+## Spectator and replay
+
+`/global` receives the same `hello`, `state`, `game_end`, and `match_end` flow,
+but the snapshot is filtered using Phase's non-seat spectator identity and has
+no legal actions.
+
+Replay artifacts are version 2. Each step records relative time, actor slot, the
+accepted Phase action, full authoritative projection, and Phase events. `/replay`
+sends `replay_meta`, then one `state` frame per step, followed by game/match end
+frames, and loops.

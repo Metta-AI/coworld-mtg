@@ -4,12 +4,12 @@ Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust
 behind the Coworld container contract so LLM agents can play MTG in local episodes, browser play, and hosted leagues
 with replays, scoring, and baseline players.
 
-The original implementation is a Cockatrice-style shared tabletop. It is now
-being replaced by the pinned, Rust-native [Phase](https://github.com/phase-rs/phase)
+The original Cockatrice-style shared tabletop has been removed in favor of the
+pinned, Rust-native [Phase](https://github.com/phase-rs/phase)
 rules engine so that mana, casting, priority, the stack, combat, triggers,
 replacements, layers, and state-based actions are engine-enforced. See
 [the Phase port contract](docs/phase-rules-port.md) for the decision, Scryfall
-boundary, invariants, and migration status.
+boundary and invariants.
 
 ## Play locally
 
@@ -23,12 +23,10 @@ mkdir -p tmp/local-play
 cat > tmp/local-play/config.json <<'JSON'
 {
   "tokens": ["tokA", "tokB"],
-  "players": [{"name": "browser-0"}, {"name": "goldfish-1"}],
+  "players": [{"name": "browser-0"}, {"name": "browser-1"}],
   "seed": 4242,
   "decks": ["red_rush", "green_stompy"],
   "games_to_win": 1,
-  "starting_life": 20,
-  "turn_cap": 25,
   "clock_s": 360,
   "decision_cap_s": 30,
   "player_connect_timeout_s": 60
@@ -44,10 +42,14 @@ COGAME_WEB_DIST="$PWD/web/dist" \
 cargo run -p cogatrice-server
 ```
 
-In a second terminal:
+Open these URLs in separate browser profiles (for example, a normal and an
+incognito window) to control both seats:
+
+- `http://127.0.0.1:8080/client/player?slot=0&token=tokA`
+- `http://127.0.0.1:8080/client/player?slot=1&token=tokB`
+
+To play against the baseline instead, leave the second browser closed and run:
 
 ```sh
 cargo run -p goldfish -- --url 'ws://127.0.0.1:8080/player?slot=1&token=tokB'
 ```
-
-Open `http://127.0.0.1:8080/client/player?slot=0&token=tokA` in a browser.

@@ -74,27 +74,27 @@ Required invariants:
 - An engine `GameOver` state determines the result. Clock forfeits and explicit
   concessions are host-level terminal inputs and must be recorded distinctly.
 
-## Migration sequence
+## Completed migration
 
-1. Keep `phase-bridge` small and prove deck resolution, redaction, mulligans,
+1. `phase-bridge` proves deck resolution, redaction, mulligans,
    legal actions, submission, deterministic state serialization, and outcomes.
-2. Replace the player protocol's free-form tabletop `Action` with Phase
+2. The player protocol uses Phase
    `GameAction`; send viewer-filtered state, legal actions, effective spell
    costs, and per-object action groups in every decision snapshot.
-3. Render engine zones, mana pools, the stack, priority, pending prompts, and
-   legal action controls. Add Scryfall art by Oracle ID without putting card
-   logic in TypeScript.
-4. Record initial state plus accepted actions and reconstruct replays through
-   Phase. Do not replay old `move_cards` event streams as if they were turns.
-5. Update scripted and LLM players to select from the supplied legal action
+3. The browser renders engine zones, mana pools, the stack, priority, pending
+   prompts, legal action controls, and name-resolved Scryfall art for the
+   bundled decks without putting card logic in TypeScript.
+4. Replays record full authoritative projections, accepted Phase actions, and
+   engine events. Old `move_cards` streams are no longer supported.
+5. Scripted players select from the supplied legal action
    list. A policy may rank actions but may not invent one.
-6. Remove the legacy tabletop authority once Coworld results, local two-human
-   play, replays, and hidden-information tests pass through Phase end to end.
+6. The legacy tabletop authority and free-form protocol have been removed.
 
-## Current proof
+## Current validation
 
 The adapter test uses a compact fixture derived from the pinned Phase export.
 Both bundled 40-card decks resolve completely, receive seven-card hidden hands,
 enter Phase's simultaneous London mulligan state, and submit exact legal keep
-actions. This proves the native engine/data boundary; it does not yet mean the
-legacy browser/server protocol has been migrated.
+actions. Real WebSocket episodes additionally exercise Phase state/action
+transport, hidden-information checks, scoring, timeout concessions, and replay
+looping.

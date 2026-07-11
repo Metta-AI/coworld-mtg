@@ -1,587 +1,329 @@
+import "./styles.css";
 import {
-  allKnownBattlefieldCards,
-  cardById,
-  isLand,
-  nextBattlefieldPosition,
-  snapshotToTableModel,
-  type ClockState
-} from "./model";
-import {
-  type Action,
-  battlefieldPosition,
-  type CardId,
-  type CardMove,
   type CardView,
-  type LoggedEvent,
+  type GameAction,
   type SeatId,
   type ServerFrame,
-  type Snapshot
+  type ViewerSnapshot
 } from "./protocol";
-import { renderTable, type UiCommand, type UiState } from "./renderer";
-import { applyLoggedEvents, snapshotFromEvents } from "./state";
 
-interface LiveAppState {
-  mode: "player" | "global";
+interface AppState {
+  mode: "player" | "global" | "replay";
   root: HTMLElement;
   socket: WebSocket | null;
-  snapshot: Snapshot | null;
-  logs: LoggedEvent[];
-  viewerSlot: SeatId | null;
+  viewerSeat: SeatId | null;
+  playerNames: [string, string];
+  snapshot: ViewerSnapshot | null;
+  events: unknown[];
+  clocks: [number | null, number | null];
   nextCmdId: number;
   pendingCmdId: number | null;
-  clocks: [ClockState, ClockState];
-  ui: UiState;
-}
-
-interface ReplayAppState {
-  root: HTMLElement;
-  socket: WebSocket | null;
-  buffers: Map<number, LoggedEvent[]>;
-  snapshot: Snapshot | null;
-  logs: LoggedEvent[];
-  loopComplete: boolean;
-  renderIndex: number;
-  timer: number | null;
-  ui: UiState;
+  message: string;
 }
 
 export function startLiveApp(mode: "player" | "global"): void {
-  const root = requiredRoot();
-  const state: LiveAppState = {
-    mode,
-    root,
-    socket: null,
-    snapshot: null,
-    logs: [],
-    viewerSlot: mode === "player" ? querySeat() : null,
-    nextCmdId: 1,
-    pendingCmdId: null,
-    clocks: [{ ms: null }, { ms: null }],
-    ui: emptyUiState()
-  };
-  renderLive(state);
-  connectLive(state);
+  const state = initialState(mode);
+  connect(state, mode === "player" ? playerUrl() : wsUrl("/global"));
+  render(state);
 }
 
 export function startReplayApp(): void {
-  const root = requiredRoot();
-  const state: ReplayAppState = {
+  const state = initialState("replay");
+  connect(state, wsUrl("/replay"));
+  render(state);
+}
+
+function initialState(mode: AppState["mode"]): AppState {
+  const root = document.querySelector<HTMLElement>("#app");
+  if (!root) throw new Error("missing #app");
+  return {
+    mode,
     root,
     socket: null,
-    buffers: new Map(),
+    viewerSeat: null,
+    playerNames: ["Player 1", "Player 2"],
     snapshot: null,
-    logs: [],
-    loopComplete: false,
-    renderIndex: 0,
-    timer: null,
-    ui: {
-      ...emptyUiState(),
-      replay: { playing: true, speed: 1, games: [], currentGame: null }
-    }
+    events: [],
+    clocks: [null, null],
+    nextCmdId: 1,
+    pendingCmdId: null,
+    message: "Connecting to Phase..."
   };
-  renderReplay(state);
-  connectReplay(state);
-  startReplayTimer(state);
 }
 
-function connectLive(state: LiveAppState): void {
-  const url =
-    state.mode === "player"
-      ? wsUrl("/player", { slot: String(state.viewerSlot ?? 0), token: new URLSearchParams(location.search).get("token") ?? "" })
-      : wsUrl("/global");
-  state.socket = new WebSocket(url);
-  state.socket.addEventListener("open", () => {
-    state.ui.toast = null;
-    renderLive(state);
+function connect(state: AppState, url: string): void {
+  const socket = new WebSocket(url);
+  state.socket = socket;
+  socket.addEventListener("open", () => {
+    state.message = "Connected";
+    render(state);
   });
-  state.socket.addEventListener("message", (message) => {
-    handleLiveFrame(state, JSON.parse(String(message.data)) as ServerFrame);
+  socket.addEventListener("message", (message) => {
+    handleFrame(state, JSON.parse(String(message.data)) as ServerFrame);
   });
-  state.socket.addEventListener("close", () => {
-    showToast(state.ui, "Connection closed");
+  socket.addEventListener("close", () => {
+    state.message = "Connection closed";
     state.pendingCmdId = null;
-    renderLive(state);
+    render(state);
   });
-  state.socket.addEventListener("error", () => {
-    showToast(state.ui, "Connection error");
-    renderLive(state);
-  });
-}
-
-function connectReplay(state: ReplayAppState): void {
-  state.socket = new WebSocket(wsUrl("/replay"));
-  state.socket.addEventListener("message", (message) => {
-    handleReplayFrame(state, JSON.parse(String(message.data)) as ServerFrame);
-  });
-  state.socket.addEventListener("close", () => {
-    showToast(state.ui, "Replay stream closed");
-    renderReplay(state);
-  });
-  state.socket.addEventListener("error", () => {
-    showToast(state.ui, "Replay stream error");
-    renderReplay(state);
+  socket.addEventListener("error", () => {
+    state.message = "Connection error";
+    render(state);
   });
 }
 
-function handleLiveFrame(state: LiveAppState, frame: ServerFrame): void {
+function handleFrame(state: AppState, frame: ServerFrame): void {
   switch (frame.type) {
     case "hello":
-      if (state.mode === "player" && frame.slot !== undefined) {
-        state.viewerSlot = frame.slot;
-      }
+      state.viewerSeat = frame.seat ?? null;
+      state.playerNames = frame.player_names;
+      state.message = `Game ${frame.match.game_number}`;
       break;
-    case "snapshot":
-      state.snapshot = frame.state;
-      break;
-    case "events":
-      state.logs.push(...frame.events);
-      if (state.snapshot) {
-        state.snapshot = applyLoggedEvents(state.snapshot, frame.events);
+    case "state": {
+      const snapshot = frame.state ?? frame.step?.state;
+      const events = frame.events ?? frame.step?.events ?? [];
+      if (snapshot) state.snapshot = snapshot;
+      // Live state is broadcast only after the server accepts and applies an
+      // action. It intentionally arrives before the corresponding ack, so it
+      // is sufficient proof that the pending command no longer needs to lock
+      // the newly rendered legal actions.
+      if (frame.state) state.pendingCmdId = null;
+      state.events.push(...events);
+      if (frame.step?.action) {
+        state.events.push({ type: "Action", data: frame.step.action });
       }
+      if (frame.clocks_ms) state.clocks = frame.clocks_ms;
       break;
-    case "window":
-      if (state.snapshot) {
-        state.snapshot.expectation = frame.expectation;
-      }
-      if (frame.clocks_ms) {
-        state.clocks = [{ ms: frame.clocks_ms[0] }, { ms: frame.clocks_ms[1] }];
-      } else if (state.viewerSlot !== null && frame.clock_ms_remaining !== undefined) {
-        state.clocks[state.viewerSlot] = { ms: frame.clock_ms_remaining };
-      }
-      break;
+    }
     case "ack":
-      if (state.pendingCmdId === frame.cmd_id) {
-        state.pendingCmdId = null;
-      }
+      if (state.pendingCmdId === frame.cmd_id) state.pendingCmdId = null;
       break;
     case "reject":
-      if (state.pendingCmdId === frame.cmd_id) {
-        state.pendingCmdId = null;
-      }
-      showToast(state.ui, `${frame.error.kind}: ${frame.error.detail}`);
+      if (state.pendingCmdId === frame.cmd_id) state.pendingCmdId = null;
+      state.message = `${frame.error.kind}: ${frame.error.detail}`;
       break;
     case "game_end":
-      if (state.snapshot) {
-        state.snapshot.expectation = { type: "game_over", outcome: frame.outcome };
-      }
+      state.message = frame.outcome.winner_slot === null
+        ? `Draw: ${frame.outcome.reason}`
+        : `Slot ${frame.outcome.winner_slot + 1} wins: ${frame.outcome.reason}`;
       break;
     case "match_end":
-      showToast(state.ui, `Match ended ${frame.scores[0]}-${frame.scores[1]}`);
+      state.message = `Match ended ${frame.scores[0]}–${frame.scores[1]}`;
       break;
     case "replay_meta":
+      state.playerNames = [frame.config.players[0]?.name ?? "Player 1", frame.config.players[1]?.name ?? "Player 2"];
+      state.message = `Replay: ${frame.games.length} game(s)`;
       break;
   }
-  renderLive(state);
+  render(state);
 }
 
-function handleReplayFrame(state: ReplayAppState, frame: ServerFrame): void {
-  if (frame.type === "replay_meta") {
-    const games = frame.games.map((game) => game.game_number);
-    state.ui.replay = {
-      playing: true,
-      speed: 1,
-      games,
-      currentGame: games[0] ?? null
-    };
-    renderReplay(state);
-    return;
-  }
-  if (frame.type === "events") {
-    if (state.loopComplete) {
-      state.buffers.clear();
-      state.renderIndex = 0;
-      state.loopComplete = false;
-    }
-    const current = state.buffers.get(frame.game_number) ?? [];
-    current.push(...frame.events);
-    state.buffers.set(frame.game_number, current);
-    if (state.ui.replay && state.ui.replay.currentGame === null) {
-      state.ui.replay.currentGame = frame.game_number;
-    }
-    renderReplay(state);
-    return;
-  }
-  if (frame.type === "match_end") {
-    state.loopComplete = true;
-  }
-}
-
-function handleLiveCommand(state: LiveAppState, command: UiCommand): void {
-  switch (command.type) {
-    case "open_hand":
-      state.ui.popover = { kind: "hand", cardId: command.cardId };
-      renderLive(state);
-      break;
-    case "open_battlefield":
-      if (state.ui.pointFrom !== null && state.ui.pointFrom !== command.cardId) {
-        sendAction(state, { type: "point", from: state.ui.pointFrom, to: command.cardId });
-        state.ui.pointFrom = null;
-      } else {
-        state.ui.popover = { kind: "battlefield", cardId: command.cardId };
-        renderLive(state);
-      }
-      break;
-    case "close_popover":
-      state.ui.popover = null;
-      renderLive(state);
-      break;
-    case "hand_action":
-      handleHandAction(state, command.cardId, command.action);
-      break;
-    case "battlefield_action":
-      handleBattlefieldAction(state, command.cardId, command.action);
-      break;
-    case "counter":
-      state.ui.popover = null;
-      sendAction(state, { type: "add_counter", target: { type: "card", card: command.cardId }, name: command.name, delta: command.delta });
-      break;
-    case "annotation":
-      state.ui.popover = null;
-      sendAction(state, { type: "set_card_attr", card: command.cardId, attr: { type: "annotation", value: command.value } });
-      break;
-    case "life":
-      sendAction(state, { type: "add_counter", target: { type: "player", seat: command.seat }, name: "life", delta: command.delta });
-      break;
-    case "library":
-      handleLibraryAction(state, command.action);
-      break;
-    case "action_bar":
-      handleActionBar(state, command.action);
-      break;
-    case "chat":
-      sendAction(state, { type: "say", text: command.text });
-      break;
-    case "mulligan_toggle":
-      toggleMulliganCard(state, command.cardId);
-      break;
-    case "mulligan_keep":
-      sendAction(state, { type: "mulligan_keep", bottom: state.ui.mulliganBottom });
-      state.ui.mulliganBottom = [];
-      break;
-    case "mulligan_again":
-      sendAction(state, { type: "mulligan_again" });
-      state.ui.mulliganBottom = [];
-      break;
-    case "replay":
-      break;
-  }
-}
-
-function handleReplayCommand(state: ReplayAppState, command: UiCommand): void {
-  if (command.type !== "replay" || !state.ui.replay) {
-    return;
-  }
-  if (command.action === "toggle") {
-    state.ui.replay.playing = !state.ui.replay.playing;
-  } else if (command.action === "speed" && command.speed) {
-    state.ui.replay.speed = command.speed;
-  } else if (command.action === "seek" && command.game !== undefined) {
-    state.ui.replay.currentGame = command.game;
-    state.renderIndex = 0;
-    updateReplaySnapshot(state);
-  }
-  renderReplay(state);
-}
-
-function handleHandAction(state: LiveAppState, id: CardId, action: Extract<UiCommand, { type: "hand_action" }>["action"]): void {
+function render(state: AppState): void {
   const snapshot = state.snapshot;
-  const slot = state.viewerSlot;
-  if (!snapshot || slot === null) {
+  if (!snapshot) {
+    state.root.innerHTML = `<main class="loading"><h1>Cogatrice</h1><p>${escapeHtml(state.message)}</p></main>`;
     return;
   }
-  const card = findCardView(snapshot, id);
-  state.ui.popover = null;
-  switch (action) {
-    case "play":
-      sendAction(state, moveCard(id, slot, "battlefield", battlefieldFor(snapshot, slot, card), false, false));
-      break;
-    case "play_face_down":
-      sendAction(state, moveCard(id, slot, "battlefield", battlefieldFor(snapshot, slot, null), true, false));
-      break;
-    case "discard":
-      sendAction(state, moveCard(id, slot, "graveyard", "bottom", null, null));
-      break;
-    case "reveal":
-      sendAction(state, { type: "reveal", cards: [id], to: "all" });
-      break;
-    case "library_top":
-      sendAction(state, moveCard(id, slot, "library", "top", null, null));
-      break;
-    case "library_bottom":
-      sendAction(state, moveCard(id, slot, "library", "bottom", null, null));
-      break;
-  }
-}
-
-function handleBattlefieldAction(
-  state: LiveAppState,
-  id: CardId,
-  action: Extract<UiCommand, { type: "battlefield_action" }>["action"]
-): void {
-  const snapshot = state.snapshot;
-  const slot = state.viewerSlot;
-  if (!snapshot || slot === null) {
-    return;
-  }
-  const card = findCardView(snapshot, id);
-  switch (action) {
-    case "tap":
-      state.ui.popover = null;
-      sendAction(state, { type: "set_card_attr", card: id, attr: { type: "tapped", value: !(card?.tapped ?? false) } });
-      break;
-    case "attack":
-      state.ui.popover = null;
-      sendAction(state, { type: "set_card_attr", card: id, attr: { type: "attacking", value: !(card?.attacking ?? false) } });
-      break;
-    case "graveyard":
-      state.ui.popover = null;
-      sendAction(state, moveCard(id, slot, "graveyard", "bottom", null, null));
-      break;
-    case "exile":
-      state.ui.popover = null;
-      sendAction(state, moveCard(id, slot, "exile", "bottom", null, null));
-      break;
-    case "hand":
-      state.ui.popover = null;
-      sendAction(state, moveCard(id, slot, "hand", "bottom", null, null));
-      break;
-    case "point_start":
-      state.ui.pointFrom = id;
-      state.ui.popover = null;
-      showToast(state.ui, "Click a battlefield card to complete the pointer");
-      renderLive(state);
-      break;
-    case "point_clear":
-      state.ui.popover = null;
-      sendAction(state, { type: "point", from: id, to: null });
-      break;
-    case "point_here":
-      if (state.ui.pointFrom !== null) {
-        state.ui.popover = null;
-        sendAction(state, { type: "point", from: state.ui.pointFrom, to: id });
-        state.ui.pointFrom = null;
-      }
-      break;
-  }
-}
-
-function handleLibraryAction(state: LiveAppState, action: Extract<UiCommand, { type: "library" }>["action"]): void {
-  const slot = state.viewerSlot;
-  if (slot === null) {
-    return;
-  }
-  if (action === "draw") {
-    sendAction(state, { type: "draw", count: 1 });
-  } else if (action === "mill") {
-    sendAction(state, {
-      type: "move_top_of_library",
-      count: 1,
-      to_seat: slot,
-      to_zone: "graveyard",
-      position: "bottom",
-      face_down: false
+  const bottom = state.viewerSeat ?? 0;
+  const top = bottom === 0 ? 1 : 0;
+  const actions = allActions(snapshot);
+  state.root.innerHTML = `
+    <div class="app-shell">
+      <header>
+        <div><h1>Cogatrice</h1><span>Phase rules engine</span></div>
+        <strong>Turn ${snapshot.turn} · ${phaseLabel(snapshot.phase)} · ${escapeHtml(state.playerNames[snapshot.priority_player])} has priority</strong>
+        <span>${escapeHtml(state.message)}</span>
+      </header>
+      <main class="game-table">
+        ${playerHtml(snapshot, top, state.playerNames[top], state.clocks[top], false)}
+        ${zoneHtml("Opponent battlefield", snapshot.battlefield.filter(card => card.controller === top), snapshot)}
+        ${stackHtml(snapshot)}
+        ${zoneHtml("Your battlefield", snapshot.battlefield.filter(card => card.controller === bottom), snapshot)}
+        ${playerHtml(snapshot, bottom, state.playerNames[bottom], state.clocks[bottom], state.mode === "player")}
+        ${state.mode === "player" ? zoneHtml("Your hand", snapshot.players[bottom].hand, snapshot) : ""}
+      </main>
+      <aside>
+        <section class="prompt">
+          <h2>Pending decision</h2>
+          <p>${escapeHtml(promptLabel(snapshot.waiting_for))}</p>
+        </section>
+        ${state.mode === "player" ? actionPanel(actions, snapshot, state.pendingCmdId !== null) : ""}
+        <section class="event-log"><h2>Phase events</h2>${state.events.slice(-80).reverse().map(eventHtml).join("")}</section>
+      </aside>
+    </div>`;
+  state.root.querySelectorAll<HTMLButtonElement>("[data-action-index]").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.actionIndex);
+      const action = actions[index];
+      if (action) sendAction(state, action);
     });
-  } else {
-    sendAction(state, { type: "shuffle" });
-  }
+  });
+  state.root.querySelector<HTMLButtonElement>("[data-concede]")?.addEventListener("click", () => {
+    if (state.viewerSeat !== null) {
+      sendAction(state, { type: "Concede", data: { player_id: state.viewerSeat } });
+    }
+  });
 }
 
-function handleActionBar(state: LiveAppState, action: Extract<UiCommand, { type: "action_bar" }>["action"]): void {
-  switch (action) {
-    case "draw":
-      sendAction(state, { type: "draw", count: 1 });
-      break;
-    case "untap_all":
-      sendUntapAll(state);
-      break;
-    case "next_phase":
-      sendAction(state, { type: "next_phase" });
-      break;
-    case "next_turn":
-      sendAction(state, { type: "next_turn" });
-      break;
-    case "pass":
-      sendAction(state, { type: "pass" });
-      break;
-    case "concede":
-      sendAction(state, { type: "concede" });
-      break;
+export function allActions(snapshot: ViewerSnapshot): GameAction[] {
+  const seen = new Set<string>();
+  const output: GameAction[] = [];
+  for (const action of [
+    ...snapshot.legal_actions,
+    ...Object.values(snapshot.legal_actions_by_object).flat()
+  ]) {
+    const key = JSON.stringify(action);
+    if (!seen.has(key)) {
+      seen.add(key);
+      output.push(action);
+    }
   }
+  return output;
 }
 
-function sendUntapAll(state: LiveAppState): void {
-  const snapshot = state.snapshot;
-  const slot = state.viewerSlot;
-  if (!snapshot || slot === null) {
-    return;
-  }
-  const moves = allKnownBattlefieldCards(snapshot, slot)
-    .filter((card) => card.tapped)
-    .map((card, index): CardMove => ({
-      card: card.id,
-      to_seat: slot,
-      to_zone: "battlefield",
-      position: battlefieldPosition(card.x ?? index, card.y ?? (isLand(card) ? 0 : 1)),
-      face_down: null,
-      tapped: false
-    }));
-  if (moves.length === 0) {
-    showToast(state.ui, "No tapped cards to untap");
-    renderLive(state);
-    return;
-  }
-  sendAction(state, { type: "move_cards", moves });
-}
-
-function toggleMulliganCard(state: LiveAppState, id: CardId): void {
-  const current = state.ui.mulliganBottom;
-  const index = current.indexOf(id);
-  if (index >= 0) {
-    current.splice(index, 1);
-  } else {
-    current.push(id);
-  }
-  renderLive(state);
-}
-
-function sendAction(state: LiveAppState, action: Action): void {
-  if (state.pendingCmdId !== null) {
-    showToast(state.ui, "Waiting for previous action");
-    renderLive(state);
-    return;
-  }
-  if (!state.socket || state.socket.readyState !== WebSocket.OPEN) {
-    showToast(state.ui, "Socket is not connected");
-    renderLive(state);
-    return;
-  }
+function sendAction(state: AppState, action: GameAction): void {
+  if (!state.socket || state.socket.readyState !== WebSocket.OPEN || state.pendingCmdId !== null) return;
   const cmdId = state.nextCmdId++;
   state.pendingCmdId = cmdId;
   state.socket.send(JSON.stringify({ cmd_id: cmdId, action }));
-  renderLive(state);
+  render(state);
 }
 
-function moveCard(
-  id: CardId,
+function playerHtml(
+  snapshot: ViewerSnapshot,
   seat: SeatId,
-  toZone: CardMove["to_zone"],
-  position: CardMove["position"],
-  faceDown: boolean | null,
-  tapped: boolean | null
-): Action {
-  return {
-    type: "move_cards",
-    moves: [
-      {
-        card: id,
-        to_seat: seat,
-        to_zone: toZone,
-        position,
-        face_down: faceDown,
-        tapped
-      }
-    ]
-  };
+  name: string,
+  clock: number | null,
+  own: boolean
+): string {
+  const player = snapshot.players[seat];
+  const mana = Array.isArray(player.mana_pool.mana)
+    ? player.mana_pool.mana.map(unit => unit.color).join(" ")
+    : "";
+  return `<section class="player ${snapshot.active_player === seat ? "active" : ""}">
+    <div><strong>${escapeHtml(own ? `${name} (you)` : name)}</strong><span>seat ${seat + 1}</span></div>
+    <b>${player.life} life</b>
+    <span>${player.poison} poison · ${player.energy} energy</span>
+    <span>hand ${player.hand.length} · library ${player.library_count} · graveyard ${player.graveyard.length}</span>
+    <span>mana ${escapeHtml(mana || "empty")}</span>
+    <span>${clock === null ? "" : clockText(clock)}</span>
+  </section>`;
 }
 
-function battlefieldFor(snapshot: Snapshot, seat: SeatId, card: CardView | null): CardMove["position"] {
-  const position = nextBattlefieldPosition(snapshot, seat, card);
-  return battlefieldPosition(position.x, position.y);
+function zoneHtml(label: string, cards: CardView[], snapshot: ViewerSnapshot): string {
+  return `<section class="zone"><h2>${escapeHtml(label)}</h2><div class="cards">${
+    cards.length ? cards.map(card => cardHtml(card, snapshot)).join("") : `<span class="empty">Empty</span>`
+  }</div></section>`;
 }
 
-function findCardView(snapshot: Snapshot, id: CardId): CardView | null {
-  const model = cardById(snapshot, id);
-  return model?.view ?? null;
+function cardHtml(card: CardView, snapshot: ViewerSnapshot): string {
+  const effective = snapshot.spell_costs[String(card.object_id)] ?? card.mana_cost;
+  const pt = card.power === null ? "" : `<b>${card.power}/${card.toughness ?? 0}</b>`;
+  const image = card.face_down || card.name === "Hidden Card"
+    ? ""
+    : `<img loading="lazy" src="https://api.scryfall.com/cards/named?format=image&version=normal&exact=${encodeURIComponent(card.name)}" alt="" />`;
+  return `<article class="card ${card.tapped ? "tapped" : ""} ${card.attacking ? "attacking" : ""}">
+    ${image}<div class="card-copy"><strong>${escapeHtml(card.face_down ? "Hidden card" : card.name)}</strong>
+    <span>${escapeHtml(card.type_line)}</span><span>${escapeHtml(manaCost(effective))}</span>
+    <p>${escapeHtml(card.oracle_text)}</p>${pt}</div>
+  </article>`;
 }
 
-function renderLive(state: LiveAppState): void {
-  const model = snapshotToTableModel(state.snapshot, {
-    mode: state.mode,
-    viewerSlot: state.viewerSlot,
-    awaitingAck: state.pendingCmdId !== null,
-    clocks: state.clocks
-  });
-  renderTable(state.root, model, state.logs, state.ui, (command) => handleLiveCommand(state, command));
+function stackHtml(snapshot: ViewerSnapshot): string {
+  return `<section class="stack"><h2>Stack</h2>${snapshot.stack.length
+    ? snapshot.stack.slice().reverse().map(entry => `<div>${escapeHtml(entry.source?.name ?? `Ability ${entry.id}`)} · ${escapeHtml(JSON.stringify(entry.kind))}</div>`).join("")
+    : `<span class="empty">Empty</span>`}</section>`;
 }
 
-function renderReplay(state: ReplayAppState): void {
-  const model = snapshotToTableModel(state.snapshot, {
-    mode: "replay",
-    viewerSlot: null,
-    awaitingAck: false,
-    clocks: [{ ms: null }, { ms: null }]
-  });
-  renderTable(state.root, model, state.logs, state.ui, (command) => handleReplayCommand(state, command));
+function actionPanel(actions: GameAction[], snapshot: ViewerSnapshot, disabled: boolean): string {
+  return `<section class="actions"><h2>Legal actions</h2><div>${actions.map((action, index) =>
+    `<button data-action-index="${index}" ${disabled ? "disabled" : ""}>${escapeHtml(actionLabel(action, snapshot))}</button>`
+  ).join("")}</div><button class="concede" data-concede ${disabled ? "disabled" : ""}>Concede</button></section>`;
 }
 
-function startReplayTimer(state: ReplayAppState): void {
-  state.timer = window.setInterval(() => {
-    if (!state.ui.replay?.playing) {
-      return;
-    }
-    const game = state.ui.replay.currentGame;
-    if (game === null) {
-      return;
-    }
-    const events = state.buffers.get(game) ?? [];
-    const step = state.ui.replay.speed;
-    if (state.renderIndex < events.length) {
-      state.renderIndex = Math.min(events.length, state.renderIndex + step);
-      updateReplaySnapshot(state);
-      renderReplay(state);
-    }
-  }, 400);
-}
-
-function updateReplaySnapshot(state: ReplayAppState): void {
-  const game = state.ui.replay?.currentGame;
-  if (game === null || game === undefined) {
-    return;
+export function actionLabel(action: GameAction, snapshot: ViewerSnapshot): string {
+  const data = action.data ?? {};
+  const sourceId = Number(data.object_id ?? data.source_id ?? -1);
+  const source = findCard(snapshot, sourceId);
+  switch (action.type) {
+    case "PassPriority": return "Pass priority";
+    case "PlayLand": return `Play ${source?.name ?? "land"}`;
+    case "CastSpell": return `Cast ${source?.name ?? "spell"}`;
+    case "ActivateAbility": return `Activate ${source?.name ?? "ability"}`;
+    case "MulliganDecision": return `Mulligan: ${nestedType(data.choice) ?? "decide"}`;
+    case "DeclareAttackers": return `Attack with ${arrayLength(data.attacks)} creature(s)`;
+    case "DeclareBlockers": return `Block with ${arrayLength(data.assignments)} creature(s)`;
+    case "SelectCards": return `Select ${arrayLength(data.cards)} card(s)`;
+    case "ChooseTarget": return `Choose target ${shortJson(data.target)}`;
+    case "Concede": return "Concede";
+    default: return `${splitWords(action.type)} ${shortJson(data)}`.trim();
   }
-  const events = (state.buffers.get(game) ?? []).slice(0, state.renderIndex);
-  state.logs = events;
-  state.snapshot = snapshotFromEvents(events);
 }
 
-function emptyUiState(): UiState {
-  return {
-    popover: null,
-    pointFrom: null,
-    mulliganBottom: [],
-    toast: null
-  };
+function findCard(snapshot: ViewerSnapshot, id: number): CardView | undefined {
+  return [...snapshot.battlefield, ...snapshot.exile, ...snapshot.players.flatMap(player => [...player.hand, ...player.graveyard])]
+    .find(card => card.object_id === id);
 }
 
-function showToast(ui: UiState, text: string): void {
-  ui.toast = text;
-  window.setTimeout(() => {
-    if (ui.toast === text) {
-      ui.toast = null;
-      requiredRoot().dispatchEvent(new CustomEvent("toast-expired"));
-    }
-  }, 3500);
+function eventHtml(event: unknown): string {
+  const value = event as { type?: string; data?: unknown };
+  return `<div><b>${escapeHtml(splitWords(value.type ?? "Event"))}</b><span>${escapeHtml(shortJson(value.data))}</span></div>`;
 }
 
-function requiredRoot(): HTMLElement {
-  const root = document.querySelector<HTMLElement>("#app");
-  if (!root) {
-    throw new Error("missing #app");
-  }
-  return root;
+function promptLabel(waiting: ViewerSnapshot["waiting_for"]): string {
+  return `${splitWords(waiting.type ?? "Waiting")} ${shortJson(waiting.data)}`.trim();
 }
 
-function querySeat(): SeatId {
-  return new URLSearchParams(location.search).get("slot") === "1" ? 1 : 0;
+function manaCost(cost: { type: string; shards?: string[]; generic?: number }): string {
+  if (cost.type === "NoCost") return "";
+  const generic = cost.generic ? `{${cost.generic}}` : "";
+  return generic + (cost.shards ?? []).map(shard => `{${manaShard(shard)}}`).join("");
+}
+
+function manaShard(shard: string): string {
+  return shard.replace("Phyrexian", "P/").replace("Two", "2/").replace("Colorless", "C/")
+    .replace("White", "W").replace("Blue", "U").replace("Black", "B").replace("Red", "R").replace("Green", "G");
+}
+
+function nestedType(value: unknown): string | null {
+  return typeof value === "object" && value !== null && "type" in value ? String((value as { type: unknown }).type) : null;
+}
+
+function arrayLength(value: unknown): number {
+  return Array.isArray(value) ? value.length : 0;
+}
+
+function splitWords(text: string): string {
+  return text.replace(/([a-z])([A-Z])/g, "$1 $2");
+}
+
+function shortJson(value: unknown): string {
+  if (value === undefined || value === null) return "";
+  const text = typeof value === "string" ? value : JSON.stringify(value);
+  return text.length > 140 ? `${text.slice(0, 137)}…` : text;
+}
+
+function phaseLabel(phase: string): string {
+  return splitWords(phase);
+}
+
+function clockText(ms: number): string {
+  const seconds = Math.max(0, Math.floor(ms / 1000));
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function playerUrl(): string {
+  const params = new URLSearchParams(location.search);
+  return wsUrl("/player", { slot: params.get("slot") ?? "0", token: params.get("token") ?? "" });
 }
 
 function wsUrl(path: string, params: Record<string, string> = {}): string {
-  const query = new URLSearchParams(location.search);
-  const server = query.get("server");
-  const base = server ? new URL(server, location.href) : new URL(location.href);
-  const protocol = base.protocol === "https:" || base.protocol === "wss:" ? "wss:" : "ws:";
-  const ws = new URL(`${protocol}//${base.host}${path}`);
-  for (const [key, value] of Object.entries(params)) {
-    ws.searchParams.set(key, value);
-  }
-  return ws.toString();
+  const url = new URL(path, location.href);
+  url.protocol = location.protocol === "https:" ? "wss:" : "ws:";
+  for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+  return url.toString();
+}
+
+function escapeHtml(value: string): string {
+  return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 }

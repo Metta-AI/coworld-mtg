@@ -1,6 +1,5 @@
 mod config;
 mod decks;
-mod translate;
 mod uri;
 pub mod wire;
 
@@ -14,21 +13,19 @@ use axum::Router;
 use config::EpisodeConfig;
 use decks::load_deck;
 use futures::{FutureExt, Sink, SinkExt, StreamExt};
+use phase_bridge::{DeckList, GameAction, GameEvent, PhaseGame, PhaseRuntime};
 use std::collections::BTreeMap;
 use std::future::{Future, IntoFuture};
 use std::path::{Component, Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
-use tabletop_core::{
-    Action, CardRef, DeckList, Event, Expectation, Game, GameOutcome, GameSetup, LoggedEvent,
-    Perspective, PlayerSetup, SeatId, Seq,
-};
 use tokio::net::TcpListener;
 use tokio::sync::{mpsc, oneshot};
 use tokio::time::{sleep, Duration, Instant};
 use wire::{
-    action_error_kind, reject_error, GameSummary, GlobalFrame, MatchState, PlayerCommand,
-    PlayerFrame, Replay, ReplayEvent, ReplayFrame, ReplayGame, ReplayGameSummary, Results,
+    reject_error, seat_to_slot, slot_to_seat, GameOutcome, GameSummary, GlobalFrame, MatchState,
+    PlayerCommand, PlayerFrame, Replay, ReplayFrame, ReplayGame, ReplayGameSummary, ReplayStep,
+    Results,
 };
 
 #[derive(Clone)]
@@ -81,26 +78,11 @@ struct Connection {
     tx: mpsc::UnboundedSender<SocketOut>,
 }
 
-#[derive(Clone)]
 struct CurrentContext<'a> {
-    game: &'a Game,
+    game: &'a PhaseGame,
     game_number: u32,
     slot_of_seat0: usize,
     clocks_ms: [u64; 2],
-}
-
-#[derive(Clone, Copy)]
-struct LiveParams {
-    game_number: u32,
-    slot_of_seat0: usize,
-    clocks_ms: [u64; 2],
-    started: Instant,
-}
-
-struct LiveGame<'a> {
-    game: &'a mut Game,
-    replay_events: &'a mut Vec<ReplayEvent>,
-    params: LiveParams,
 }
 
 pub async fn run() -> Result<()> {
@@ -121,6 +103,7 @@ async fn run_match_server(shutdown: impl Future<Output = ()> + Send + 'static) -
         load_deck(&config.decks[0]).context("failed to load slot 0 deck")?,
         load_deck(&config.decks[1]).context("failed to load slot 1 deck")?,
     ]);
+    let runtime = PhaseRuntime::bundled().context("failed to load bundled Phase card data")?;
     let (host, port) = config::host_port_from_env();
     let listener = TcpListener::bind(format!("{host}:{port}")).await?;
     let (cmd_tx, cmd_rx) = mpsc::unbounded_channel();
@@ -140,7 +123,7 @@ async fn run_match_server(shutdown: impl Future<Output = ()> + Send + 'static) -
         stop_rx.await.ok();
     });
     let server_task = tokio::spawn(server.into_future());
-    let mut runner = MatchRunner::new(config, decks, cmd_rx);
+    let mut runner = MatchRunner::new(config, decks, runtime, cmd_rx);
     let mut match_task = tokio::spawn(async move { runner.run().await });
 
     let result = tokio::select! {
@@ -237,11 +220,7 @@ fn safe_relative_path(path: &str) -> Option<PathBuf> {
             _ => return None,
         }
     }
-    if out.as_os_str().is_empty() {
-        None
-    } else {
-        Some(out)
-    }
+    (!out.as_os_str().is_empty()).then_some(out)
 }
 
 fn content_type(path: &Path) -> &'static str {
@@ -249,11 +228,10 @@ fn content_type(path: &Path) -> &'static str {
         Some("html") => "text/html; charset=utf-8",
         Some("js") => "text/javascript; charset=utf-8",
         Some("css") => "text/css; charset=utf-8",
-        Some("json") => "application/json; charset=utf-8",
+        Some("json") | Some("map") => "application/json; charset=utf-8",
         Some("svg") => "image/svg+xml",
         Some("png") => "image/png",
         Some("ico") => "image/x-icon",
-        Some("map") => "application/json; charset=utf-8",
         _ => "application/octet-stream",
     }
 }
@@ -263,7 +241,9 @@ async fn player_ws(
     Query(params): Query<BTreeMap<String, String>>,
     ws: WebSocketUpgrade,
 ) -> impl IntoResponse {
-    let slot = params.get("slot").and_then(|value| value.parse::<usize>().ok());
+    let slot = params
+        .get("slot")
+        .and_then(|value| value.parse::<usize>().ok());
     let token = params.get("token").cloned().unwrap_or_default();
     match slot {
         Some(slot) if slot < 2 && token == state.config.tokens[slot] => {
@@ -335,32 +315,26 @@ async fn socket_loop(
     let (mut sender, mut receiver) = socket.split();
     loop {
         tokio::select! {
-            outgoing = rx.recv() => {
-                match outgoing {
-                    Some(SocketOut::Text(text)) => {
-                        if sender.send(Message::Text(text.into())).await.is_err() {
-                            break;
-                        }
-                    }
-                    Some(SocketOut::Close) => {
-                        sender.send(Message::Close(Some(CloseFrame {
-                            code: close_code::NORMAL,
-                            reason: "replaced".into(),
-                        }))).await.ok();
-                        break;
-                    }
-                    None => break,
+            outgoing = rx.recv() => match outgoing {
+                Some(SocketOut::Text(text)) => {
+                    if sender.send(Message::Text(text.into())).await.is_err() { break; }
                 }
-            }
-            incoming = receiver.next() => {
-                match incoming {
-                    Some(Ok(Message::Text(text))) => {
-                        cmd_tx.send(text_command(text.to_string())).ok();
-                    }
-                    Some(Ok(Message::Close(_))) | None => break,
-                    Some(Ok(_)) => {}
-                    Some(Err(_)) => break,
+                Some(SocketOut::Close) => {
+                    sender.send(Message::Close(Some(CloseFrame {
+                        code: close_code::NORMAL,
+                        reason: "replaced".into(),
+                    }))).await.ok();
+                    break;
                 }
+                None => break,
+            },
+            incoming = receiver.next() => match incoming {
+                Some(Ok(Message::Text(text))) => {
+                    cmd_tx.send(text_command(text.to_string())).ok();
+                }
+                Some(Ok(Message::Close(_))) | None => break,
+                Some(Ok(_)) => {}
+                Some(Err(_)) => break,
             }
         }
     }
@@ -370,13 +344,13 @@ async fn socket_loop(
 async fn replay_socket(socket: WebSocket, state: ReplayState) {
     let (mut sender, mut receiver) = socket.split();
     let replay = state.replay;
-    let summaries: Vec<_> = replay
+    let summaries = replay
         .games
         .iter()
         .map(|game| ReplayGameSummary {
             game_number: game.game_number,
             slot_of_seat0: game.slot_of_seat0,
-            events: game.events.len(),
+            steps: game.steps.len(),
         })
         .collect();
     let meta = ReplayFrame::ReplayMeta {
@@ -389,39 +363,64 @@ async fn replay_socket(socket: WebSocket, state: ReplayState) {
     }
     loop {
         for game in &replay.games {
-            for chunk in game.events.chunks(10) {
-                let frame = ReplayFrame::Events {
+            let mut prior_ms = 0;
+            for step in &game.steps {
+                let delay = step.wall_ms.saturating_sub(prior_ms).min(50);
+                if delay > 0 {
+                    sleep(Duration::from_millis(delay)).await;
+                }
+                prior_ms = step.wall_ms;
+                let frame = ReplayFrame::State {
                     game_number: game.game_number,
-                    events: chunk.iter().map(|event| event.event.clone()).collect(),
+                    step: Box::new(step.clone()),
                 };
                 if send_ws_json(&mut sender, &frame).await.is_err() {
                     return;
                 }
-                sleep(Duration::from_millis(100)).await;
             }
-            let Some(outcome) = game.events.iter().rev().find_map(|event| match &event.event.event {
-                Event::GameEnded { outcome } => Some(outcome.clone()),
-                _ => None,
-            }) else {
-                continue;
-            };
-            let frame = ReplayFrame::GameEnd {
-                game_number: game.game_number,
-                outcome,
-                wins: replay.results.scores,
-            };
-            if send_ws_json(&mut sender, &frame).await.is_err() {
-                return;
+            if let Some(summary) = replay
+                .results
+                .games
+                .iter()
+                .find(|summary| summary.game_number == game.game_number)
+            {
+                let outcome = GameOutcome {
+                    winner_slot: summary.winner_slot,
+                    final_life: summary.final_life,
+                    turns: summary.turns,
+                    reason: summary.reason.clone(),
+                };
+                if send_ws_json(
+                    &mut sender,
+                    &ReplayFrame::GameEnd {
+                        game_number: game.game_number,
+                        outcome,
+                        wins: replay.results.scores,
+                    },
+                )
+                .await
+                .is_err()
+                {
+                    return;
+                }
             }
         }
-        let frame = ReplayFrame::MatchEnd {
-            scores: replay.results.scores,
-            games: replay.results.games.clone(),
-        };
-        if send_ws_json(&mut sender, &frame).await.is_err() {
+        if send_ws_json(
+            &mut sender,
+            &ReplayFrame::MatchEnd {
+                scores: replay.results.scores,
+                games: replay.results.games.clone(),
+            },
+        )
+        .await
+        .is_err()
+        {
             return;
         }
-        if matches!(receiver.next().now_or_never(), Some(Some(Ok(Message::Close(_)))) | Some(None)) {
+        if matches!(
+            receiver.next().now_or_never(),
+            Some(Some(Ok(Message::Close(_)))) | Some(None)
+        ) {
             return;
         }
     }
@@ -442,6 +441,7 @@ where
 struct MatchRunner {
     config: Arc<EpisodeConfig>,
     decks: Arc<[DeckList; 2]>,
+    runtime: PhaseRuntime,
     cmd_rx: mpsc::UnboundedReceiver<ServerCommand>,
     players: [Option<Connection>; 2],
     globals: BTreeMap<u64, Connection>,
@@ -454,11 +454,13 @@ impl MatchRunner {
     fn new(
         config: Arc<EpisodeConfig>,
         decks: Arc<[DeckList; 2]>,
+        runtime: PhaseRuntime,
         cmd_rx: mpsc::UnboundedReceiver<ServerCommand>,
     ) -> Self {
         Self {
             config,
             decks,
+            runtime,
             cmd_rx,
             players: [None, None],
             globals: BTreeMap::new(),
@@ -471,11 +473,9 @@ impl MatchRunner {
     async fn run(&mut self) -> Result<()> {
         self.wait_for_players().await;
         if !self.both_players_connected() {
-            self.finish_connect_timeout().await?;
-            return Ok(());
+            return self.finish_connect_timeout().await;
         }
-        let max_games = self.max_games();
-        for game_index in 0..max_games {
+        for game_index in 0..self.max_games() {
             let game_number = game_index + 1;
             self.play_game(game_number).await?;
             if self.match_is_over(game_number) {
@@ -486,17 +486,14 @@ impl MatchRunner {
     }
 
     async fn wait_for_players(&mut self) {
-        let timeout = seconds_duration(self.config.player_connect_timeout_s);
-        let timer = sleep(timeout);
+        let timer = sleep(seconds_duration(self.config.player_connect_timeout_s));
         tokio::pin!(timer);
         while !self.both_players_connected() {
             tokio::select! {
                 _ = &mut timer => break,
                 command = self.cmd_rx.recv() => {
-                    let Some(command) = command else {
-                        break;
-                    };
-                    self.handle_command(command, None);
+                    let Some(command) = command else { break };
+                    self.handle_connection_command(command, None);
                 }
             }
         }
@@ -514,172 +511,200 @@ impl MatchRunner {
     async fn play_game(&mut self, game_number: u32) -> Result<()> {
         let slot_of_seat0 = ((game_number - 1) % 2) as usize;
         let seed = self.config.seed + u64::from(game_number - 1);
-        let (mut game, initial_events) = Game::new(self.game_setup(seed, slot_of_seat0));
-        let mut clocks_ms = [duration_ms(self.config.clock_s), duration_ms(self.config.clock_s)];
-        let mut replay_events = Vec::new();
+        let deck_names = [
+            self.decks[slot_of_seat0]
+                .cards
+                .iter()
+                .map(|card| card.name.clone())
+                .collect(),
+            self.decks[1 - slot_of_seat0]
+                .cards
+                .iter()
+                .map(|card| card.name.clone())
+                .collect(),
+        ];
+        let (mut game, initial) = self.runtime.new_limited_game(deck_names, seed)?;
+        let mut clocks_ms = [
+            duration_ms(self.config.clock_s),
+            duration_ms(self.config.clock_s),
+        ];
         let started = Instant::now();
-        self.send_game_start(&game, &initial_events, game_number, slot_of_seat0, clocks_ms);
-        self.record_events(
-            &mut replay_events,
-            &initial_events,
-            started,
+        let mut steps = vec![ReplayStep {
+            wall_ms: 0,
+            actor_slot: None,
+            action: None,
+            state: game.full_snapshot(),
+            events: initial.events.clone(),
+        }];
+        self.send_game_start(
+            &game,
+            &initial.events,
+            game_number,
             slot_of_seat0,
+            clocks_ms,
         );
+        let mut end_reason = "phase_game_over".to_owned();
 
         while game.outcome().is_none() {
-            let expected_seat = expected_seat(game.expectation())
-                .ok_or_else(|| anyhow!("game missing expected actor"))?;
-            let expected_slot = translate::seat_to_slot(expected_seat, slot_of_seat0);
-            let start = Instant::now();
-            let wait_ms = clocks_ms[expected_slot].min(duration_ms(self.config.decision_cap_s));
+            let pending = game.pending_seats();
+            let timeout_seat = *pending
+                .first()
+                .ok_or_else(|| anyhow!("Phase game has no pending actor and is not over"))?;
+            let timeout_slot = seat_to_slot(timeout_seat, slot_of_seat0);
+            let wait_ms = clocks_ms[timeout_slot].min(duration_ms(self.config.decision_cap_s));
+            let wait_started = Instant::now();
             tokio::select! {
                 _ = sleep(Duration::from_millis(wait_ms)) => {
-                    subtract_elapsed(&mut clocks_ms[expected_slot], start.elapsed());
-                    if clocks_ms[expected_slot] == 0 {
-                        let first = game.log().len();
-                        game.system_say(expected_seat, "clock expired".to_owned());
-                        game.flag(expected_seat);
-                        let events = game.log()[first..].to_vec();
-                        self.record_events(&mut replay_events, &events, started, slot_of_seat0);
-                        self.broadcast_events(game_number, &events, slot_of_seat0);
-                        break;
-                    }
-                    let events = apply_default(&mut game, expected_seat);
-                    self.record_events(&mut replay_events, &events, started, slot_of_seat0);
-                    self.broadcast_events(game_number, &events, slot_of_seat0);
-                    self.send_window_if_opened(&game, &events, game_number, slot_of_seat0, clocks_ms);
-                }
-                command = self.cmd_rx.recv() => {
-                    subtract_elapsed(&mut clocks_ms[expected_slot], start.elapsed());
-                    let Some(command) = command else {
-                        break;
+                    subtract_elapsed(&mut clocks_ms[timeout_slot], wait_started.elapsed());
+                    let (action, result) = if clocks_ms[timeout_slot] == 0 {
+                        end_reason = "clock_flag".to_owned();
+                        let action = concede_action(timeout_seat);
+                        let result = game.concede(timeout_seat)?;
+                        (action, result)
+                    } else {
+                        let action = default_action(&game, timeout_seat)
+                            .ok_or_else(|| anyhow!("Phase supplied no timeout action"))?;
+                        let result = game.submit(timeout_seat, action.clone())?;
+                        (action, result)
                     };
-                    let params = LiveParams {
+                    self.record_and_broadcast(
+                        &game,
+                        &mut steps,
                         game_number,
                         slot_of_seat0,
                         clocks_ms,
                         started,
-                    };
-                    let mut live = LiveGame {
-                        game: &mut game,
-                        replay_events: &mut replay_events,
-                        params,
-                    };
-                    self.handle_live_command(command, &mut live);
+                        timeout_slot,
+                        action,
+                        result.events,
+                    );
+                }
+                command = self.cmd_rx.recv() => {
+                    let Some(command) = command else { break };
+                    match command {
+                        ServerCommand::PlayerMessage { slot, id, text } => {
+                            if !self.player_id_matches(slot, id) { continue; }
+                            let cmd_id = command_id(&text);
+                            let command = match serde_json::from_str::<PlayerCommand>(&text) {
+                                Ok(command) => command,
+                                Err(error) => {
+                                    self.send_reject(slot, cmd_id, "bad_request", error.to_string());
+                                    continue;
+                                }
+                            };
+                            let seat = slot_to_seat(slot, slot_of_seat0);
+                            if !pending.contains(&seat)
+                                && !is_self_concede(&command.action, seat)
+                            {
+                                self.send_reject(
+                                    slot,
+                                    command.cmd_id,
+                                    "not_your_decision",
+                                    "Phase has no current legal action for this seat",
+                                );
+                                continue;
+                            }
+                            subtract_elapsed(&mut clocks_ms[slot], wait_started.elapsed());
+                            let action = command.action;
+                            match game.submit(seat, action.clone()) {
+                                Ok(result) => {
+                                    let events = result.events;
+                                    self.record_and_broadcast(
+                                        &game,
+                                        &mut steps,
+                                        game_number,
+                                        slot_of_seat0,
+                                        clocks_ms,
+                                        started,
+                                        slot,
+                                        action,
+                                        events,
+                                    );
+                                    self.send_ack(slot, command.cmd_id, game.state().turn_number);
+                                }
+                                Err(error) => {
+                                    self.send_reject(
+                                        slot,
+                                        command.cmd_id,
+                                        "illegal_action",
+                                        error.to_string(),
+                                    );
+                                }
+                            }
+                        }
+                        other => {
+                            let current = CurrentContext {
+                                game: &game,
+                                game_number,
+                                slot_of_seat0,
+                                clocks_ms,
+                            };
+                            self.handle_connection_command(other, Some(&current));
+                        }
+                    }
                 }
             }
         }
 
-        let outcome = game
+        let phase_outcome = game
             .outcome()
-            .cloned()
-            .ok_or_else(|| anyhow!("game ended without an outcome"))?;
-        let summary = self.game_summary(game_number, seed, &outcome, slot_of_seat0);
+            .ok_or_else(|| anyhow!("game ended without a Phase outcome"))?;
+        let outcome = GameOutcome::from_phase(phase_outcome, slot_of_seat0, &end_reason);
+        let summary = GameSummary {
+            game_number,
+            winner_slot: outcome.winner_slot,
+            reason: outcome.reason.clone(),
+            turns: outcome.turns,
+            final_life: outcome.final_life,
+            seed,
+        };
         self.apply_game_score(&summary);
-        self.broadcast_game_end(game_number, outcome, slot_of_seat0);
+        self.broadcast_game_end(game_number, outcome, self.wins);
         self.summaries.push(summary);
         self.replay_games.push(ReplayGame {
             game_number,
             slot_of_seat0,
-            events: replay_events,
+            steps,
         });
         Ok(())
     }
 
-    fn handle_live_command(
+    #[allow(clippy::too_many_arguments)]
+    fn record_and_broadcast(
+        &self,
+        game: &PhaseGame,
+        steps: &mut Vec<ReplayStep>,
+        game_number: u32,
+        slot_of_seat0: usize,
+        clocks_ms: [u64; 2],
+        started: Instant,
+        actor_slot: usize,
+        action: GameAction,
+        events: Vec<GameEvent>,
+    ) {
+        steps.push(ReplayStep {
+            wall_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
+            actor_slot: Some(actor_slot as u8),
+            action: Some(action),
+            state: game.full_snapshot(),
+            events: events.clone(),
+        });
+        self.broadcast_state(game, &events, game_number, slot_of_seat0, clocks_ms);
+    }
+
+    fn handle_connection_command(
         &mut self,
         command: ServerCommand,
-        live: &mut LiveGame<'_>,
+        current: Option<&CurrentContext<'_>>,
     ) {
-        match command {
-            ServerCommand::PlayerMessage { slot, id, text } => {
-                if !self.player_id_matches(slot, id) {
-                    return;
-                }
-                self.handle_player_text(slot, text, live);
-            }
-            other => {
-                let current = CurrentContext {
-                    game: live.game,
-                    game_number: live.params.game_number,
-                    slot_of_seat0: live.params.slot_of_seat0,
-                    clocks_ms: live.params.clocks_ms,
-                };
-                self.handle_command(other, Some(current));
-            }
-        }
-    }
-
-    fn handle_player_text(&mut self, slot: usize, text: String, live: &mut LiveGame<'_>) {
-        let cmd_id = command_id(&text);
-        let command = match serde_json::from_str::<PlayerCommand>(&text) {
-            Ok(command) => command,
-            Err(error) => {
-                self.send_reject(slot, cmd_id, "bad_request", error.to_string());
-                return;
-            }
-        };
-        let Some(expected_seat) = expected_seat(live.game.expectation()) else {
-            self.send_reject(slot, command.cmd_id, "game_is_over", "game is over");
-            return;
-        };
-        let expected_slot = translate::seat_to_slot(expected_seat, live.params.slot_of_seat0);
-        if slot != expected_slot {
-            self.send_reject(
-                slot,
-                command.cmd_id,
-                "not_your_window",
-                "that slot does not hold the current window",
-            );
-            return;
-        }
-        let action = translate::action_to_core(command.action, live.params.slot_of_seat0);
-        let first = live.game.log().len();
-        match live.game.submit(expected_seat, action) {
-            Ok(events) => {
-                let seq = events
-                    .first()
-                    .map(|event| event.seq)
-                    .unwrap_or_else(|| Seq(live.game.snapshot(Perspective::Full).seq.0 + 1));
-                self.record_events(
-                    live.replay_events,
-                    &events,
-                    live.params.started,
-                    live.params.slot_of_seat0,
-                );
-                self.broadcast_events(
-                    live.params.game_number,
-                    &events,
-                    live.params.slot_of_seat0,
-                );
-                self.send_ack(slot, command.cmd_id, seq);
-                self.send_window_if_opened(
-                    live.game,
-                    &events,
-                    live.params.game_number,
-                    live.params.slot_of_seat0,
-                    live.params.clocks_ms,
-                );
-            }
-            Err(error) => {
-                let detail = error.to_string();
-                let kind = action_error_kind(&error);
-                self.send_reject(slot, command.cmd_id, kind, detail);
-                debug_assert_eq!(first, live.game.log().len());
-            }
-        }
-    }
-
-    fn handle_command(&mut self, command: ServerCommand, current: Option<CurrentContext<'_>>) {
         match command {
             ServerCommand::PlayerConnected { slot, id, tx } => {
                 if let Some(old) = self.players[slot].replace(Connection { id, tx }) {
                     old.tx.send(SocketOut::Close).ok();
                 }
-                self.send_hello(slot, current.as_ref());
+                self.send_hello(slot, current);
                 if let Some(current) = current {
-                    self.send_snapshot_to_slot(slot, &current);
-                    self.send_window_to_slot_if_current(slot, &current);
+                    self.send_state_to_slot(slot, current, &[]);
                 }
             }
             ServerCommand::PlayerDisconnected { slot, id } => {
@@ -689,112 +714,56 @@ impl MatchRunner {
             }
             ServerCommand::GlobalConnected { id, tx } => {
                 self.globals.insert(id, Connection { id, tx });
-                self.send_global_hello(id, current.as_ref());
+                self.send_global_hello(id, current);
                 if let Some(current) = current {
-                    self.send_snapshot_to_global(id, &current);
-                    self.send_window_to_global_if_current(id, &current);
+                    self.send_state_to_global(id, current, &[]);
                 }
             }
             ServerCommand::GlobalDisconnected { id } => {
                 self.globals.remove(&id);
             }
-            ServerCommand::PlayerMessage { slot, text, .. } => {
-                self.send_reject(slot, command_id(&text), "not_your_window", "match has not started");
-            }
+            ServerCommand::PlayerMessage { slot, text, .. } => self.send_reject(
+                slot,
+                command_id(&text),
+                "not_started",
+                "match has not started",
+            ),
             ServerCommand::Ignore => {}
         }
     }
 
     fn send_game_start(
         &self,
-        game: &Game,
-        events: &[LoggedEvent],
+        game: &PhaseGame,
+        events: &[GameEvent],
         game_number: u32,
         slot_of_seat0: usize,
         clocks_ms: [u64; 2],
     ) {
+        let current = CurrentContext {
+            game,
+            game_number,
+            slot_of_seat0,
+            clocks_ms,
+        };
         for slot in 0..2 {
-            if self.players[slot].is_some() {
-                self.send_hello(
-                    slot,
-                    Some(&CurrentContext {
-                        game,
-                        game_number,
-                        slot_of_seat0,
-                        clocks_ms,
-                    }),
-                );
-                let current = CurrentContext {
-                    game,
-                    game_number,
-                    slot_of_seat0,
-                    clocks_ms,
-                };
-                self.send_snapshot_to_slot(slot, &current);
-            }
+            self.send_hello(slot, Some(&current));
+            self.send_state_to_slot(slot, &current, events);
         }
         for id in self.globals.keys().copied().collect::<Vec<_>>() {
-            let current = CurrentContext {
-                game,
-                game_number,
-                slot_of_seat0,
-                clocks_ms,
-            };
             self.send_global_hello(id, Some(&current));
-            self.send_snapshot_to_global(id, &current);
-        }
-        self.broadcast_events(game_number, events, slot_of_seat0);
-        let current = CurrentContext {
-            game,
-            game_number,
-            slot_of_seat0,
-            clocks_ms,
-        };
-        for slot in 0..2 {
-            self.send_window_to_slot_if_current(slot, &current);
-        }
-        for id in self.globals.keys().copied().collect::<Vec<_>>() {
-            self.send_window_to_global_if_current(id, &current);
+            self.send_state_to_global(id, &current, events);
         }
     }
 
-    fn broadcast_events(&self, game_number: u32, events: &[LoggedEvent], slot_of_seat0: usize) {
-        for slot in 0..2 {
-            let Some(connection) = &self.players[slot] else {
-                continue;
-            };
-            let redacted = redact_events(events, translate::perspective_for_slot(slot, slot_of_seat0));
-            let frame = PlayerFrame::Events {
-                game_number,
-                events: translate::events_to_slots(redacted, slot_of_seat0),
-            };
-            send_json(&connection.tx, &frame);
-        }
-        let redacted = redact_events(events, Perspective::Global);
-        let events = translate::events_to_slots(redacted, slot_of_seat0);
-        for connection in self.globals.values() {
-            let frame = GlobalFrame::Events {
-                game_number,
-                events: events.clone(),
-            };
-            send_json(&connection.tx, &frame);
-        }
-    }
-
-    fn send_window_if_opened(
+    fn broadcast_state(
         &self,
-        game: &Game,
-        events: &[LoggedEvent],
+        game: &PhaseGame,
+        events: &[GameEvent],
         game_number: u32,
         slot_of_seat0: usize,
         clocks_ms: [u64; 2],
     ) {
-        if !events
-            .iter()
-            .any(|event| matches!(event.event, Event::WindowOpened { .. }))
-        {
-            return;
-        }
         let current = CurrentContext {
             game,
             game_number,
@@ -802,10 +771,10 @@ impl MatchRunner {
             clocks_ms,
         };
         for slot in 0..2 {
-            self.send_window_to_slot_if_current(slot, &current);
+            self.send_state_to_slot(slot, &current, events);
         }
         for id in self.globals.keys().copied().collect::<Vec<_>>() {
-            self.send_window_to_global_if_current(id, &current);
+            self.send_state_to_global(id, &current, events);
         }
     }
 
@@ -813,160 +782,142 @@ impl MatchRunner {
         let Some(connection) = &self.players[slot] else {
             return;
         };
-        let frame = PlayerFrame::Hello {
-            slot,
-            seat_name: self.config.players[slot].name.clone(),
-            r#match: self.match_state(current.map(|ctx| ctx.game_number).unwrap_or(1)),
-            config: self.config.public(),
-            decklist: self.decks[slot].clone(),
-        };
-        send_json(&connection.tx, &frame);
+        let slot_of_seat0 = current.map(|ctx| ctx.slot_of_seat0).unwrap_or(0);
+        let seat = slot_to_seat(slot, slot_of_seat0);
+        send_json(
+            &connection.tx,
+            &PlayerFrame::Hello {
+                slot,
+                seat,
+                seat_name: self.config.players[slot].name.clone(),
+                player_names: self.player_names_by_seat(slot_of_seat0),
+                r#match: self.match_state(current.map(|ctx| ctx.game_number).unwrap_or(1)),
+                config: Box::new(self.config.public()),
+                decklist: self.decks[slot].clone(),
+            },
+        );
     }
 
     fn send_global_hello(&self, id: u64, current: Option<&CurrentContext<'_>>) {
         let Some(connection) = self.globals.get(&id) else {
             return;
         };
-        let frame = GlobalFrame::Hello {
-            r#match: self.match_state(current.map(|ctx| ctx.game_number).unwrap_or(1)),
-            config: self.config.public(),
-        };
-        send_json(&connection.tx, &frame);
+        let slot_of_seat0 = current.map(|ctx| ctx.slot_of_seat0).unwrap_or(0);
+        send_json(
+            &connection.tx,
+            &GlobalFrame::Hello {
+                player_names: self.player_names_by_seat(slot_of_seat0),
+                r#match: self.match_state(current.map(|ctx| ctx.game_number).unwrap_or(1)),
+                config: self.config.public(),
+            },
+        );
     }
 
-    fn send_snapshot_to_slot(&self, slot: usize, current: &CurrentContext<'_>) {
+    fn send_state_to_slot(&self, slot: usize, current: &CurrentContext<'_>, events: &[GameEvent]) {
         let Some(connection) = &self.players[slot] else {
             return;
         };
-        let perspective = translate::perspective_for_slot(slot, current.slot_of_seat0);
-        let state = translate::snapshot_to_slots(
-            current.game.snapshot(perspective),
-            current.slot_of_seat0,
+        let seat = slot_to_seat(slot, current.slot_of_seat0);
+        send_json(
+            &connection.tx,
+            &PlayerFrame::State {
+                game_number: current.game_number,
+                state: Box::new(current.game.viewer_snapshot(seat)),
+                events: current.game.filter_events(events, seat),
+                clocks_ms: current.clocks_ms,
+                decision_cap_ms: duration_ms(self.config.decision_cap_s),
+            },
         );
-        let frame = PlayerFrame::Snapshot {
-            game_number: current.game_number,
-            state: Box::new(state),
-        };
-        send_json(&connection.tx, &frame);
     }
 
-    fn send_snapshot_to_global(&self, id: u64, current: &CurrentContext<'_>) {
+    fn send_state_to_global(&self, id: u64, current: &CurrentContext<'_>, events: &[GameEvent]) {
         let Some(connection) = self.globals.get(&id) else {
             return;
         };
-        let state = translate::snapshot_to_slots(
-            current.game.snapshot(Perspective::Global),
-            current.slot_of_seat0,
+        send_json(
+            &connection.tx,
+            &GlobalFrame::State {
+                game_number: current.game_number,
+                state: Box::new(current.game.spectator_snapshot()),
+                events: current
+                    .game
+                    .filter_events(events, phase_bridge::SPECTATOR_ID),
+                clocks_ms: current.clocks_ms,
+            },
         );
-        let frame = GlobalFrame::Snapshot {
-            game_number: current.game_number,
-            state: Box::new(state),
-        };
-        send_json(&connection.tx, &frame);
     }
 
-    fn send_window_to_slot_if_current(&self, slot: usize, current: &CurrentContext<'_>) {
-        let Some(seat) = expected_seat(current.game.expectation()) else {
-            return;
-        };
-        if translate::seat_to_slot(seat, current.slot_of_seat0) != slot {
-            return;
+    fn send_ack(&self, slot: usize, cmd_id: u64, turn: u32) {
+        if let Some(connection) = &self.players[slot] {
+            send_json(&connection.tx, &PlayerFrame::Ack { cmd_id, turn });
         }
-        let Some(connection) = &self.players[slot] else {
-            return;
-        };
-        let frame = PlayerFrame::Window {
-            game_number: current.game_number,
-            expectation: translate_expectation(current.game.expectation(), current.slot_of_seat0),
-            clock_ms_remaining: current.clocks_ms[slot],
-            clocks_ms: current.clocks_ms,
-            decision_cap_ms: duration_ms(self.config.decision_cap_s),
-        };
-        send_json(&connection.tx, &frame);
     }
 
-    fn send_window_to_global_if_current(&self, id: u64, current: &CurrentContext<'_>) {
-        if expected_seat(current.game.expectation()).is_none() {
-            return;
+    fn send_reject(&self, slot: usize, cmd_id: u64, kind: &str, detail: impl Into<String>) {
+        if let Some(connection) = self.players.get(slot).and_then(Option::as_ref) {
+            send_json(
+                &connection.tx,
+                &PlayerFrame::Reject {
+                    cmd_id,
+                    error: reject_error(kind, detail),
+                },
+            );
         }
-        let Some(connection) = self.globals.get(&id) else {
-            return;
-        };
-        let frame = GlobalFrame::Window {
-            game_number: current.game_number,
-            expectation: translate_expectation(current.game.expectation(), current.slot_of_seat0),
-            clocks_ms: current.clocks_ms,
-        };
-        send_json(&connection.tx, &frame);
     }
 
-    fn send_ack(&self, slot: usize, cmd_id: u64, seq: Seq) {
-        let Some(connection) = &self.players[slot] else {
-            return;
-        };
-        send_json(&connection.tx, &PlayerFrame::Ack { cmd_id, seq });
-    }
-
-    fn send_reject(
-        &self,
-        slot: usize,
-        cmd_id: u64,
-        kind: impl Into<String>,
-        detail: impl Into<String>,
-    ) {
-        let Some(connection) = &self.players[slot] else {
-            return;
-        };
-        let frame = PlayerFrame::Reject {
-            cmd_id,
-            error: reject_error(kind, detail),
-        };
-        send_json(&connection.tx, &frame);
-    }
-
-    fn broadcast_game_end(
-        &self,
-        game_number: u32,
-        outcome: GameOutcome,
-        slot_of_seat0: usize,
-    ) {
-        let outcome = translate::outcome_to_slots(outcome, slot_of_seat0);
+    fn broadcast_game_end(&self, game_number: u32, outcome: GameOutcome, wins: [f64; 2]) {
         for connection in self.players.iter().flatten() {
-            let frame = PlayerFrame::GameEnd {
-                game_number,
-                outcome: outcome.clone(),
-                wins: self.wins,
-            };
-            send_json(&connection.tx, &frame);
+            send_json(
+                &connection.tx,
+                &PlayerFrame::GameEnd {
+                    game_number,
+                    outcome: outcome.clone(),
+                    wins,
+                },
+            );
         }
         for connection in self.globals.values() {
-            let frame = GlobalFrame::GameEnd {
-                game_number,
-                outcome: outcome.clone(),
-                wins: self.wins,
-            };
-            send_json(&connection.tx, &frame);
+            send_json(
+                &connection.tx,
+                &GlobalFrame::GameEnd {
+                    game_number,
+                    outcome: outcome.clone(),
+                    wins,
+                },
+            );
         }
     }
 
     async fn finish_match(&mut self) -> Result<()> {
-        let results = self.results();
+        let results = Results {
+            scores: self.wins,
+            games: self.summaries.clone(),
+            seed: self.config.seed,
+            policy_names: [
+                self.config.players[0].name.clone(),
+                self.config.players[1].name.clone(),
+            ],
+        };
         for connection in self.players.iter().flatten() {
-            let frame = PlayerFrame::MatchEnd {
-                scores: results.scores,
-                games: results.games.clone(),
-            };
-            send_json(&connection.tx, &frame);
+            send_json(
+                &connection.tx,
+                &PlayerFrame::MatchEnd {
+                    scores: results.scores,
+                    games: results.games.clone(),
+                },
+            );
         }
         for connection in self.globals.values() {
-            let frame = GlobalFrame::MatchEnd {
-                scores: results.scores,
-                games: results.games.clone(),
-            };
-            send_json(&connection.tx, &frame);
+            send_json(
+                &connection.tx,
+                &GlobalFrame::MatchEnd {
+                    scores: results.scores,
+                    games: results.games.clone(),
+                },
+            );
         }
         let replay = Replay {
-            version: 1,
+            version: 2,
             config: self.config.public(),
             games: self.replay_games.clone(),
             results: results.clone(),
@@ -979,54 +930,19 @@ impl MatchRunner {
         Ok(())
     }
 
-    fn record_events(
-        &self,
-        replay_events: &mut Vec<ReplayEvent>,
-        events: &[LoggedEvent],
-        started: Instant,
-        slot_of_seat0: usize,
-    ) {
-        let wall_ms = started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64;
-        let full = translate::events_to_slots(events.to_vec(), slot_of_seat0);
-        replay_events.extend(full.into_iter().map(|event| ReplayEvent { wall_ms, event }));
-    }
-
-    fn game_setup(&self, seed: u64, slot_of_seat0: usize) -> GameSetup {
-        let slot_of_seat1 = 1 - slot_of_seat0;
-        GameSetup {
-            seed,
-            players: [
-                PlayerSetup {
-                    name: self.config.players[slot_of_seat0].name.clone(),
-                    deck: self.decks[slot_of_seat0].clone(),
-                },
-                PlayerSetup {
-                    name: self.config.players[slot_of_seat1].name.clone(),
-                    deck: self.decks[slot_of_seat1].clone(),
-                },
-            ],
-            starting_life: self.config.starting_life,
-            turn_cap: self.config.turn_cap,
-            reaction_depth_cap: 4,
-        }
-    }
-
-    fn game_summary(
-        &self,
-        game_number: u32,
-        seed: u64,
-        outcome: &GameOutcome,
-        slot_of_seat0: usize,
-    ) -> GameSummary {
-        let outcome = translate::outcome_to_slots(outcome.clone(), slot_of_seat0);
-        GameSummary {
-            game_number,
-            winner_slot: outcome.winner.map(|seat| seat.0),
-            reason: outcome.reason,
-            turns: outcome.turns,
-            final_life: outcome.final_life,
-            seed,
-        }
+    fn log_summary(&self, results: &Results) -> String {
+        let games = results
+            .games
+            .iter()
+            .map(|game| {
+                format!(
+                    "game {} winner={:?} reason={} turns={} life={:?}",
+                    game.game_number, game.winner_slot, game.reason, game.turns, game.final_life
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        format!("scores={:?}\n{games}\n", results.scores)
     }
 
     fn apply_game_score(&mut self, summary: &GameSummary) {
@@ -1039,33 +955,19 @@ impl MatchRunner {
         }
     }
 
+    fn player_names_by_seat(&self, slot_of_seat0: usize) -> [String; 2] {
+        [
+            self.config.players[slot_of_seat0].name.clone(),
+            self.config.players[1 - slot_of_seat0].name.clone(),
+        ]
+    }
+
     fn match_state(&self, game_number: u32) -> MatchState {
         MatchState {
             games_to_win: self.config.games_to_win,
             game_number,
             wins: self.wins,
         }
-    }
-
-    fn results(&self) -> Results {
-        Results {
-            scores: self.wins,
-            games: self.summaries.clone(),
-            seed: self.config.seed,
-            policy_names: [
-                self.config.players[0].name.clone(),
-                self.config.players[1].name.clone(),
-            ],
-        }
-    }
-
-    fn log_summary(&self, results: &Results) -> String {
-        format!(
-            "seed={} scores={:?} games={}\n",
-            results.seed,
-            results.scores,
-            results.games.len()
-        )
     }
 
     fn both_players_connected(&self) -> bool {
@@ -1093,88 +995,59 @@ impl MatchRunner {
     }
 }
 
+fn default_action(game: &PhaseGame, seat: u8) -> Option<GameAction> {
+    let actions = game.legal_actions(seat).0;
+    for preferred in [
+        "MulliganDecision",
+        "PassPriority",
+        "DeclareAttackers",
+        "DeclareBlockers",
+    ] {
+        if let Some(action) = actions.iter().find(|action| {
+            let value = serde_json::to_value(action).ok();
+            value
+                .as_ref()
+                .and_then(|value| value.get("type"))
+                .and_then(serde_json::Value::as_str)
+                == Some(preferred)
+                && (preferred != "MulliganDecision"
+                    || value
+                        .as_ref()
+                        .and_then(|value| value.get("data"))
+                        .and_then(|value| value.get("choice"))
+                        .and_then(|value| value.get("type"))
+                        .and_then(serde_json::Value::as_str)
+                        == Some("Keep"))
+        }) {
+            return Some(action.clone());
+        }
+    }
+    actions.into_iter().next()
+}
+
+fn concede_action(seat: u8) -> GameAction {
+    serde_json::from_value(serde_json::json!({
+        "type": "Concede",
+        "data": { "player_id": seat }
+    }))
+    .expect("Phase Concede wire shape")
+}
+
+fn is_self_concede(action: &GameAction, seat: u8) -> bool {
+    serde_json::to_value(action).is_ok_and(|value| {
+        value.get("type").and_then(serde_json::Value::as_str) == Some("Concede")
+            && value
+                .get("data")
+                .and_then(|value| value.get("player_id"))
+                .and_then(serde_json::Value::as_u64)
+                == Some(u64::from(seat))
+    })
+}
+
 fn send_json<T: serde::Serialize>(tx: &mpsc::UnboundedSender<SocketOut>, value: &T) {
     if let Ok(text) = serde_json::to_string(value) {
         tx.send(SocketOut::Text(text)).ok();
     }
-}
-
-fn redact_events(events: &[LoggedEvent], perspective: Perspective) -> Vec<LoggedEvent> {
-    events
-        .iter()
-        .filter_map(|event| event.redact(perspective))
-        .collect()
-}
-
-fn translate_expectation(expectation: &Expectation, slot_of_seat0: usize) -> Expectation {
-    let snapshot = tabletop_core::Snapshot {
-        seq: Seq(0),
-        turn: 0,
-        phase: tabletop_core::Phase::Untap,
-        active: SeatId(0),
-        expectation: expectation.clone(),
-        players: [
-            empty_player_snapshot(SeatId(0)),
-            empty_player_snapshot(SeatId(1)),
-        ],
-    };
-    translate::snapshot_to_slots(snapshot, slot_of_seat0).expectation
-}
-
-fn empty_player_snapshot(seat: SeatId) -> tabletop_core::PlayerSnapshot {
-    tabletop_core::PlayerSnapshot {
-        seat,
-        name: String::new(),
-        counters: BTreeMap::new(),
-        mulligan_count: 0,
-        library_count: 0,
-        hand: Vec::new(),
-        battlefield: Vec::new(),
-        graveyard: Vec::new(),
-        exile: Vec::new(),
-        arrows: Vec::new(),
-    }
-}
-
-fn expected_seat(expectation: &Expectation) -> Option<SeatId> {
-    match expectation {
-        Expectation::Mulligan { seat, .. }
-        | Expectation::MainWindow { seat }
-        | Expectation::ReactionWindow { seat, .. } => Some(*seat),
-        Expectation::GameOver { .. } => None,
-    }
-}
-
-fn apply_default(game: &mut Game, seat: SeatId) -> Vec<LoggedEvent> {
-    let action = match game.expectation().clone() {
-        Expectation::Mulligan { must_bottom, .. } => {
-            let mut hand: Vec<_> = game.snapshot(Perspective::Seat(seat)).players[seat.index()]
-                .hand
-                .iter()
-                .filter_map(|card| match card {
-                    CardRef::Known(view) => Some(view.id),
-                    CardRef::Hidden { .. } => None,
-                })
-                .collect();
-            hand.sort();
-            Action::MulliganKeep {
-                bottom: hand.into_iter().take(usize::from(must_bottom)).collect(),
-            }
-        }
-        Expectation::ReactionWindow { .. } => Action::Pass,
-        Expectation::MainWindow { .. } => {
-            if game.snapshot(Perspective::Full).phase == tabletop_core::Phase::End {
-                Action::NextTurn
-            } else {
-                Action::NextPhase
-            }
-        }
-        Expectation::GameOver { .. } => return Vec::new(),
-    };
-    let first = game.log().len();
-    game.system_say(seat, "decision timeout; applying default action".to_owned());
-    game.submit(seat, action).ok();
-    game.log()[first..].to_vec()
 }
 
 fn command_id(text: &str) -> u64 {
