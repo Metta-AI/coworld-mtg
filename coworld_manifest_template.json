@@ -8,7 +8,7 @@
       "type": "game",
       "image": "{{COGATRICE_IMAGE}}",
       "run": ["/app/cogatrice-server"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/3589f6b9b6aa6441254a29312a48fae52ac5eb71"
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1fb7391660a83b4f1b1ac402706ea0adcaa6eeed"
     },
     "config_schema": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -91,17 +91,17 @@
     "protocols": {
       "player": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/3589f6b9b6aa6441254a29312a48fae52ac5eb71/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1fb7391660a83b4f1b1ac402706ea0adcaa6eeed/docs/protocol.md"
       },
       "global": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/3589f6b9b6aa6441254a29312a48fae52ac5eb71/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1fb7391660a83b4f1b1ac402706ea0adcaa6eeed/docs/protocol.md"
       }
     },
     "docs": {
       "readme": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/3589f6b9b6aa6441254a29312a48fae52ac5eb71/README.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1fb7391660a83b4f1b1ac402706ea0adcaa6eeed/README.md"
       },
       "pages": [
         {
@@ -122,7 +122,7 @@
       "type": "player",
       "image": "{{COGATRICE_IMAGE}}",
       "run": ["/app/goldfish"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/3589f6b9b6aa6441254a29312a48fae52ac5eb71",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1fb7391660a83b4f1b1ac402706ea0adcaa6eeed",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
     }
   ],
