@@ -145,7 +145,7 @@ async fn run_replay_server(
     replay_uri: String,
     shutdown: impl Future<Output = ()> + Send + 'static,
 ) -> Result<()> {
-    let text = uri::read_to_string(&replay_uri).await?;
+    let text = uri::read_replay_to_string(&replay_uri).await?;
     let replay = Arc::new(serde_json::from_str::<Replay>(&text)?);
     let (host, port) = config::host_port_from_env();
     let listener = TcpListener::bind(format!("{host}:{port}")).await?;

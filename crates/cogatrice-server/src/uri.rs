@@ -1,19 +1,44 @@
 use anyhow::{Context, Result};
+use flate2::read::{GzDecoder, ZlibDecoder};
+use std::io::Read;
 use std::path::{Path, PathBuf};
 
 pub async fn read_to_string(uri: &str) -> Result<String> {
+    Ok(String::from_utf8(read_bytes(uri).await?)?)
+}
+
+pub async fn read_replay_to_string(uri: &str) -> Result<String> {
+    let bytes = decode_replay(uri, read_bytes(uri).await?)?;
+    Ok(String::from_utf8(bytes)?)
+}
+
+async fn read_bytes(uri: &str) -> Result<Vec<u8>> {
     if is_http(uri) {
         return Ok(reqwest::get(uri)
             .await
             .with_context(|| format!("GET {uri} failed"))?
             .error_for_status()
             .with_context(|| format!("GET {uri} returned an error status"))?
-            .text()
-            .await?);
+            .bytes()
+            .await?
+            .to_vec());
     }
-    tokio::fs::read_to_string(path_for_uri(uri))
+    tokio::fs::read(path_for_uri(uri))
         .await
         .with_context(|| format!("failed to read {uri}"))
+}
+
+fn decode_replay(uri: &str, bytes: Vec<u8>) -> Result<Vec<u8>> {
+    let mut decoded = Vec::new();
+    if uri.ends_with(".z") {
+        ZlibDecoder::new(bytes.as_slice()).read_to_end(&mut decoded)?;
+        return Ok(decoded);
+    }
+    if uri.ends_with(".gz") {
+        GzDecoder::new(bytes.as_slice()).read_to_end(&mut decoded)?;
+        return Ok(decoded);
+    }
+    Ok(bytes)
 }
 
 pub async fn write_bytes(uri: &str, bytes: Vec<u8>) -> Result<()> {
@@ -56,4 +81,22 @@ fn path_for_uri(uri: &str) -> PathBuf {
         return Path::new(rest).to_path_buf();
     }
     Path::new(uri).to_path_buf()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use flate2::{write::ZlibEncoder, Compression};
+    use std::io::Write;
+
+    #[test]
+    fn decodes_coworld_zlib_replays() {
+        let mut encoder = ZlibEncoder::new(Vec::new(), Compression::default());
+        encoder.write_all(br#"{"version":2}"#).unwrap();
+        let compressed = encoder.finish().unwrap();
+        assert_eq!(
+            decode_replay("replay.z", compressed).unwrap(),
+            br#"{"version":2}"#
+        );
+    }
 }
