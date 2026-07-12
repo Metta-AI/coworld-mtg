@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { actionLabel, allActions } from "./app";
+import {
+  actionLabel,
+  allActions,
+  matchingAttackAction,
+  matchingBlockAction,
+  matchingSelectCardsAction,
+  shouldBufferReplayFrame
+} from "./app";
 import type { ViewerSnapshot } from "./protocol";
 
 describe("Phase action presentation", () => {
@@ -14,6 +21,35 @@ describe("Phase action presentation", () => {
   it("labels actions with visible card names", () => {
     const snapshot = fixture();
     expect(actionLabel({ type: "PlayLand", data: { object_id: 7 } }, snapshot)).toBe("Play Mountain");
+  });
+
+  it("matches the exact Phase attacker declaration selected on the battlefield", () => {
+    const none = { type: "DeclareAttackers", data: { attacks: [] } };
+    const two = {
+      type: "DeclareAttackers",
+      data: { attacks: [[12, { type: "Player", data: 1 }], [8, { type: "Player", data: 1 }]] }
+    };
+    expect(matchingAttackAction([none, two], new Set([8, 12]))).toEqual(two);
+    expect(matchingAttackAction([none, two], new Set())).toEqual(none);
+  });
+
+  it("matches blocker-to-attacker assignments independent of selection order", () => {
+    const none = { type: "DeclareBlockers", data: { assignments: [] } };
+    const blocks = { type: "DeclareBlockers", data: { assignments: [[3, 9], [4, 8]] } };
+    expect(matchingBlockAction([none, blocks], new Map([[4, 8], [3, 9]]))).toEqual(blocks);
+    expect(matchingBlockAction([none, blocks], new Map())).toEqual(none);
+  });
+
+  it("matches an exact Phase card-selection combination", () => {
+    const one = { type: "SelectCards", data: { cards: [4] } };
+    const two = { type: "SelectCards", data: { cards: [9, 4] } };
+    expect(matchingSelectCardsAction([one, two], new Set([4, 9]))).toEqual(two);
+  });
+
+  it("stops buffering when a looping replay reaches its authoritative step count", () => {
+    expect(shouldBufferReplayFrame(280, 281)).toBe(true);
+    expect(shouldBufferReplayFrame(281, 281)).toBe(false);
+    expect(shouldBufferReplayFrame(10, 0)).toBe(true);
   });
 });
 
