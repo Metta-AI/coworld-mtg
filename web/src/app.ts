@@ -210,7 +210,7 @@ function render(state: AppState): void {
       <header class="arena-header">
         <div class="wordmark"><span class="brand-mark">C</span><strong>COGATRICE</strong></div>
         <div class="turn-status">
-          <span>TURN ${snapshot.turn}</span>
+          <span>TURN ${snapshot.turn} · ${escapeHtml(activeTurnLabel(snapshot, state.playerNames, bottom))}</span>
           <strong>${escapeHtml(phaseLabel(snapshot.phase))}</strong>
           <span>${escapeHtml(priorityText(snapshot, state.playerNames, bottom))}</span>
         </div>
@@ -526,7 +526,7 @@ function focusPanel(card: CardView, actions: GameAction[], snapshot: ViewerSnaps
     <div class="focus-card">${cardDetailHtml(card, snapshot)}</div>
     <div class="focus-actions"><span>AVAILABLE ACTIONS</span>${actions.length
       ? actions.map(action => `<button data-action-index="${allActions(snapshot).findIndex(candidate => sameAction(candidate, action))}" ${disabled ? "disabled" : ""}>${escapeHtml(actionLabel(action, snapshot))}</button>`).join("")
-      : `<p>No action is available for this card right now.</p>`}</div>
+      : `<p>${escapeHtml(unavailableCardMessage(card, snapshot))}</p>`}</div>
   </section>`;
 }
 
@@ -832,8 +832,31 @@ function decisionPrompt(
   if (targeting) return { eyebrow: "TARGET", title: "Choose a target", detail: "Select a highlighted card or player" };
   if (selectingCards) return { eyebrow: "CARDS", title: "Choose cards", detail: `${state.selectedObjects.size} selected · choose a highlighted card` };
   const waiting = nestedType(snapshot.waiting_for) ?? "Priority";
-  if (waiting === "Priority") return { eyebrow: phaseLabel(snapshot.phase).toUpperCase(), title: "You have priority", detail: "Play a card or pass to continue" };
+  if (waiting === "Priority") {
+    if (state.viewerSeat !== null && snapshot.active_player !== state.viewerSeat) {
+      const canRespond = allActions(snapshot).some(action => action.type !== "PassPriority");
+      return {
+        eyebrow: phaseLabel(snapshot.phase).toUpperCase(),
+        title: `${state.playerNames[snapshot.active_player]}'s turn`,
+        detail: canRespond ? "Respond or pass priority" : "No response is available · pass priority to continue"
+      };
+    }
+    return { eyebrow: phaseLabel(snapshot.phase).toUpperCase(), title: "You have priority", detail: "Play a card or pass to continue" };
+  }
   return { eyebrow: "DECISION", title: splitWords(waiting), detail: waitingDetail(snapshot.waiting_for.data) };
+}
+
+export function activeTurnLabel(snapshot: ViewerSnapshot, names: [string, string], viewer: SeatId): string {
+  return snapshot.active_player === viewer ? "Your turn" : `${names[snapshot.active_player]}'s turn`;
+}
+
+export function unavailableCardMessage(card: CardView, snapshot: ViewerSnapshot): string {
+  if (!isLand(card)) return "No action is available for this card right now.";
+  if (snapshot.active_player !== card.controller) return "Lands can only be played during your turn.";
+  if (snapshot.phase !== "PreCombatMain" && snapshot.phase !== "PostCombatMain") {
+    return "Lands can only be played during your main phase.";
+  }
+  return "This land cannot be played right now.";
 }
 
 function priorityText(snapshot: ViewerSnapshot, names: [string, string], viewer: SeatId): string {

@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
+  activeTurnLabel,
   actionLabel,
   allActions,
   matchingAttackAction,
   matchingBlockAction,
   matchingSelectCardsAction,
-  shouldBufferReplayFrame
+  shouldBufferReplayFrame,
+  unavailableCardMessage
 } from "./app";
 import type { ViewerSnapshot } from "./protocol";
 
@@ -50,6 +52,24 @@ describe("Phase action presentation", () => {
     expect(shouldBufferReplayFrame(280, 281)).toBe(true);
     expect(shouldBufferReplayFrame(281, 281)).toBe(false);
     expect(shouldBufferReplayFrame(10, 0)).toBe(true);
+  });
+
+  it("makes the active turn explicit even when the viewer has priority", () => {
+    const snapshot = fixture();
+    snapshot.active_player = 1;
+    snapshot.priority_player = 0;
+    expect(activeTurnLabel(snapshot, ["Alice", "Bob"], 0)).toBe("Bob's turn");
+  });
+
+  it("explains why a land has no action outside its controller's turn", () => {
+    const snapshot = fixture();
+    const mountain = snapshot.players[0].hand[0];
+    snapshot.active_player = 1;
+    expect(unavailableCardMessage(mountain, snapshot)).toBe("Lands can only be played during your turn.");
+
+    snapshot.active_player = 0;
+    snapshot.phase = "Upkeep";
+    expect(unavailableCardMessage(mountain, snapshot)).toBe("Lands can only be played during your main phase.");
   });
 });
 
