@@ -18,6 +18,10 @@ campaign still requires immutable full Phase, MTGJSON, Scryfall, and 17Lands
 snapshots supplied by the operator; the repository does not silently select or
 download mutable “latest” data.
 
+The current SOS production-fidelity campaign status and its prioritized engine
+follow-ups are recorded in
+[the campaign next-steps plan](mtg-fidelity-campaign-next-steps.md).
+
 ## Decision
 
 Build a reproducible improvement harness around Phase rather than adding Magic
