@@ -17,13 +17,13 @@ ENV RUSTC_BOOTSTRAP=1 \
     CARGO_INCREMENTAL=0
 
 WORKDIR /build
-ARG PHASE_REVISION=f6fd1fca5c581bcd127d5b18742623e1298ae3c7
+ARG PHASE_REVISION=3391a770ef35d4fa7717e7343841fd6e6ca4aec6
 RUN git init /phase \
-    && git -C /phase remote add origin https://github.com/phase-rs/phase.git \
+    && git -C /phase remote add origin https://github.com/nishu-builder/phase.git \
     && git -C /phase fetch --depth 1 origin "${PHASE_REVISION}" \
     && git -C /phase checkout --detach FETCH_HEAD \
     && mkdir -p /build/.cargo \
-    && printf '[patch."https://github.com/phase-rs/phase.git"]\nengine = { path = "/phase/crates/engine" }\n' \
+    && printf '[patch."https://github.com/nishu-builder/phase.git"]\nengine = { path = "/phase/crates/engine" }\n' \
         > /build/.cargo/config.toml
 COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates

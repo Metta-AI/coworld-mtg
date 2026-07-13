@@ -2,14 +2,17 @@
 
 ## Decision
 
-Cogatrice will use the open-source [Phase](https://github.com/phase-rs/phase)
-engine as its rules authority. The previous `tabletop-core` model is a useful
+Cogatrice uses the open-source Phase engine as its rules authority. Production
+builds pin the maintained [nishu-builder fork](https://github.com/nishu-builder/phase),
+while [phase-rs/phase](https://github.com/phase-rs/phase) remains the upstream
+project. The previous `tabletop-core` model is a useful
 Cockatrice-style event table, but it cannot become real Magic by incrementally
 adding checks: priority, casting, costs, continuous effects, layers, state-based
 actions, triggers, replacement effects, and combat all depend on one another.
 
-The Phase engine subtree is pinned to release `v0.20.0`, commit
-`f6fd1fca5c581bcd127d5b18742623e1298ae3c7`, under its MIT/Apache-2.0 license.
+The Phase engine dependency is pinned to fork commit
+`3391a770ef35d4fa7717e7343841fd6e6ca4aec6`, under Phase's MIT/Apache-2.0
+license.
 `crates/phase-bridge` is the only Cogatrice layer allowed to invoke it. Host,
 replay, browser, and policy code consume viewer-filtered state and exact legal
 `GameAction` values; they must not reproduce legality.
@@ -31,7 +34,7 @@ state and reducer APIs, supports native and WASM clients, and already models:
 
 This is still an open-source rules implementation, not a claim of perfect
 coverage. Unsupported cards and parser gaps must be surfaced at deck-import
-time and tracked against the pinned upstream revision. They must never silently
+time and tracked against the pinned Phase revision. They must never silently
 fall back to honor-system play.
 
 ## Scryfall boundary

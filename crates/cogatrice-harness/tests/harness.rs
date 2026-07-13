@@ -134,8 +134,13 @@ async fn shard_replays_checkpoints_resumes_and_aggregates() {
         signature: "offered_action_rejected".to_owned(),
         detail: "fixture rejection".to_owned(),
         attempted_seat: Some(attempted.seat),
-        attempted_action: Some(attempted.action.clone()),
+        attempted_action: Some(Box::new(attempted.action.clone())),
     };
+    let rejected_json = serde_json::to_value(&rejected).unwrap();
+    assert_eq!(
+        rejected_json["terminal"]["attempted_action"],
+        serde_json::to_value(&attempted.action).unwrap()
+    );
     fs::write(&trace_path, serde_json::to_vec_pretty(&rejected).unwrap()).unwrap();
     let error = replay_trace_file(&options.manifest_uri, &trace_path)
         .await
@@ -146,7 +151,7 @@ async fn shard_replays_checkpoints_resumes_and_aggregates() {
         signature: "offered_action_rejected".to_owned(),
         detail: "fixture rejection".to_owned(),
         attempted_seat: Some(1 - attempted.seat),
-        attempted_action: Some(attempted.action),
+        attempted_action: Some(Box::new(attempted.action)),
     };
     fs::write(&trace_path, serde_json::to_vec_pretty(&rejected).unwrap()).unwrap();
     let error = replay_trace_file(&options.manifest_uri, &trace_path)

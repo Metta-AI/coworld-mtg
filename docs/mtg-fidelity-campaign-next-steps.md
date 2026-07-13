@@ -14,11 +14,25 @@ The local Phase improvement chain validated by the campaign is:
    transactional mana-pool failure handling;
 4. `a0f0e759a` — deterministic blocker prompt ordering across all producers.
 
+The chain is published on `nishu-builder/phase` and merged into that fork's
+`main` at `3391a770ef35d4fa7717e7343841fd6e6ca4aec6`. Coworld pins that exact
+revision; upstream synchronization must preserve a content-addressed revision
+rather than following a mutable branch.
+
 The post-review production shard `shard-008-reviewed-phase-payment-fixes`
 completed four seeds to the 500-action budget: four attempted, four
 action-budget exhausted, zero hard failures, and 2,000 actions. Trace replay,
 checkpoint suffix restoration, hidden-information checks, zone invariants, and
-finding aggregation were clean.
+finding aggregation were clean. That historical shard used the reviewed local
+Phase patch overlay while retaining the sealed corpus rules boundary at
+`f6fd1fca5c581bcd127d5b18742623e1298ae3c7`.
+
+The production dependency now moves the rules boundary to `3391a770e`. The
+existing harness correctly rejects the old manifest against that binary. Do
+not relabel or edit the old corpus to bypass the guard. Before claiming a
+production shard for the fork-main pin, record a new immutable corpus and
+manifest under a new campaign identity, then run a newly named shard and
+scoreboard against that exact manifest.
 
 ## Priority 1: transactional generic tap costs
 
@@ -75,11 +89,16 @@ and equivalent discard, exile, and tap resource cases.
 
 ## Campaign continuation
 
+First establish a new immutable corpus whose manifest records Phase
+`3391a770ef35d4fa7717e7343841fd6e6ca4aec6`; preserve the existing SOS corpus as
+historical evidence. Record the new manifest ID and all input hashes before
+running any shard.
+
 After each owning Phase fix:
 
 1. run formatting, authority checks, focused regressions, workspace clippy, and
    the full proptest-enabled engine suite through `cargo nextest`;
-2. run Coworld `cogatrice-harness` tests against its pinned upstream Phase
+2. run Coworld `cogatrice-harness` tests against its pinned Phase fork
    revision;
 3. rebuild the release harness against the candidate Phase checkout;
 4. write a uniquely named shard and scoreboard without overwriting prior

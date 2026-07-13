@@ -82,7 +82,7 @@ pub enum GameTerminal {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         attempted_seat: Option<u8>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        attempted_action: Option<GameAction>,
+        attempted_action: Option<Box<GameAction>>,
     },
 }
 

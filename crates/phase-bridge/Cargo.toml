@@ -6,7 +6,7 @@ license = "MIT OR Apache-2.0"
 publish = false
 
 [dependencies]
-phase-engine = { package = "engine", git = "https://github.com/phase-rs/phase.git", rev = "f6fd1fca5c581bcd127d5b18742623e1298ae3c7" }
+phase-engine = { package = "engine", git = "https://github.com/nishu-builder/phase.git", rev = "3391a770ef35d4fa7717e7343841fd6e6ca4aec6" }
 rand-chacha-phase = { package = "rand_chacha", version = "0.9", features = ["serde"] }
 serde.workspace = true
 serde_json.workspace = true

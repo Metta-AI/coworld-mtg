@@ -266,7 +266,7 @@ fn run_game(
                     signature: "offered_action_rejected".to_owned(),
                     detail: error.to_string(),
                     attempted_seat: Some(*seat),
-                    attempted_action: Some(action),
+                    attempted_action: Some(Box::new(action)),
                 };
                 return Ok(trace);
             }
@@ -275,7 +275,7 @@ fn run_game(
                     signature: "phase_panic".to_owned(),
                     detail: panic_detail(payload),
                     attempted_seat: Some(*seat),
-                    attempted_action: Some(action),
+                    attempted_action: Some(Box::new(action)),
                 };
                 return Ok(trace);
             }
@@ -513,10 +513,12 @@ fn verify_trace(
             attempted_seat: Some(seat),
             attempted_action: Some(action),
         } => {
-            if !ordered_legal_actions(&game, *seat).contains(action) {
+            if !ordered_legal_actions(&game, *seat).contains(action.as_ref()) {
                 bail!("recorded failed action is no longer offered");
             }
-            let reproduced = catch_unwind(AssertUnwindSafe(|| game.submit(*seat, action.clone())));
+            let reproduced = catch_unwind(AssertUnwindSafe(|| {
+                game.submit(*seat, action.as_ref().clone())
+            }));
             match signature.as_str() {
                 "offered_action_rejected" => match reproduced {
                     Ok(Err(error)) if error.to_string() == *detail => {}

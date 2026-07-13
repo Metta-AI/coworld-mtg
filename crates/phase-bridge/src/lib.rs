@@ -31,8 +31,8 @@ pub use phase_engine::types::events::GameEvent;
 pub use phase_engine::types::game_state::{ActionResult, GameState, StackEntryKind};
 pub use phase_engine::types::zones::Zone;
 
-/// The exact upstream Phase revision used by this adapter.
-pub const PHASE_REVISION: &str = "f6fd1fca5c581bcd127d5b18742623e1298ae3c7";
+/// The exact Phase fork revision used by this adapter.
+pub const PHASE_REVISION: &str = "3391a770ef35d4fa7717e7343841fd6e6ca4aec6";
 
 pub const SPECTATOR_ID: u8 = u8::MAX;
 
