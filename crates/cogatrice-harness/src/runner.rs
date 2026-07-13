@@ -7,11 +7,11 @@ use crate::model::{
 use anyhow::{bail, Context, Result};
 use flate2::write::GzEncoder;
 use flate2::Compression;
-use phase_bridge::{GameAction, PhaseGame, PhaseRuntime, SPECTATOR_ID};
+use phase_bridge::{GameAction, PhaseGame, PhaseRuntime, StackEntryKind, Zone, SPECTATOR_ID};
 use rand::{Rng, SeedableRng};
 use rand_chacha::ChaCha8Rng;
 use serde::Deserialize;
-use std::collections::BTreeSet;
+use std::collections::BTreeMap;
 use std::fs::{self, File, OpenOptions};
 use std::io::Write;
 use std::panic::{catch_unwind, AssertUnwindSafe};
@@ -126,11 +126,13 @@ pub async fn run_shard(options: &RunOptions) -> Result<RunResult> {
             ),
         };
 
-        if !matches!(trace.terminal, GameTerminal::HardFailure { .. }) {
+        if !trace.initial_state_hash.is_empty() {
             if let Err(error) = verify_trace(&runtime, &trace, true) {
                 trace.terminal = GameTerminal::HardFailure {
                     signature: "deterministic_replay_mismatch".to_owned(),
                     detail: error.to_string(),
+                    attempted_seat: None,
+                    attempted_action: None,
                 };
             }
         }
@@ -150,7 +152,9 @@ pub async fn run_shard(options: &RunOptions) -> Result<RunResult> {
         match &trace.terminal {
             GameTerminal::GameOver { .. } => counts.completed += 1,
             GameTerminal::ActionBudgetExhausted { .. } => counts.action_budget_exhausted += 1,
-            GameTerminal::HardFailure { signature, detail } => {
+            GameTerminal::HardFailure {
+                signature, detail, ..
+            } => {
                 counts.hard_failures += 1;
                 let finding = Finding {
                     manifest_id: manifest.manifest_id.clone(),
@@ -248,6 +252,8 @@ fn run_game(
                 detail: format!(
                     "Phase is not game-over but offers no legal action at transition {index}"
                 ),
+                attempted_seat: None,
+                attempted_action: None,
             };
             return Ok(trace);
         }
@@ -259,6 +265,8 @@ fn run_game(
                 trace.terminal = GameTerminal::HardFailure {
                     signature: "offered_action_rejected".to_owned(),
                     detail: error.to_string(),
+                    attempted_seat: Some(*seat),
+                    attempted_action: Some(action),
                 };
                 return Ok(trace);
             }
@@ -266,11 +274,13 @@ fn run_game(
                 trace.terminal = GameTerminal::HardFailure {
                     signature: "phase_panic".to_owned(),
                     detail: panic_detail(payload),
+                    attempted_seat: Some(*seat),
+                    attempted_action: Some(action),
                 };
                 return Ok(trace);
             }
         };
-        validate_invariants(&game)?;
+        let invariant_failure = validate_invariants(&game).err();
         let checkpoint = if checkpoint_every > 0 && (index + 1) % checkpoint_every == 0 {
             Some(game.checkpoint_json()?)
         } else {
@@ -284,6 +294,16 @@ fn run_game(
             state_hash: game_state_hash(&game)?,
             checkpoint,
         });
+        if let Some(error) = invariant_failure {
+            let detail = error.to_string();
+            trace.terminal = GameTerminal::HardFailure {
+                signature: invariant_failure_signature(&detail).to_owned(),
+                detail,
+                attempted_seat: None,
+                attempted_action: None,
+            };
+            return Ok(trace);
+        }
     }
 
     trace.terminal = game
@@ -339,10 +359,10 @@ fn validate_invariants(game: &PhaseGame) -> Result<()> {
     }
 
     let state = game.state();
-    let mut zone_ids = BTreeSet::new();
-    let mut check = |id: u64, zone: &str| -> Result<()> {
-        if !zone_ids.insert(id) {
-            bail!("zone_invariant: object {id} appears in multiple zone lists ({zone})");
+    let mut zone_ids = BTreeMap::new();
+    let mut check = |id: u64, zone: &'static str| -> Result<()> {
+        if let Some(first_zone) = zone_ids.insert(id, zone) {
+            bail!("zone_invariant: object {id} appears in both {first_zone} and {zone}");
         }
         if !state.objects.keys().any(|object_id| object_id.0 == id) {
             bail!("zone_invariant: zone {zone} references absent object {id}");
@@ -370,9 +390,26 @@ fn validate_invariants(game: &PhaseGame) -> Result<()> {
         check(id.0, "battlefield")?;
     }
     for entry in &state.stack {
-        // Spell entries are zone objects; ability entries may use an ID that
-        // intentionally has no corresponding card object.
-        if state.objects.keys().any(|object_id| *object_id == entry.id) {
+        // Only committed spell entries are zone objects. During CR 601.2
+        // announcement Phase intentionally pushes the stack entry before
+        // finalizing targets and costs, and keeps the card in its origin zone
+        // so cancellation can rewind the transaction. Ability entry IDs occupy
+        // a separate identity role and may numerically collide with a card.
+        let object_on_stack = state
+            .objects
+            .get(&entry.id)
+            .is_some_and(|object| object.zone == Zone::Stack);
+        let pending_cast_object = state
+            .waiting_for
+            .pending_cast_ref()
+            .or(state.pending_cast.as_deref())
+            .map(|pending| pending.object_id.0);
+        if stack_entry_requires_unique_zone(
+            entry.id.0,
+            &entry.kind,
+            pending_cast_object,
+            object_on_stack,
+        ) {
             check(entry.id.0, "stack")?;
         }
     }
@@ -383,6 +420,26 @@ fn validate_invariants(game: &PhaseGame) -> Result<()> {
         check(id.0, "command_zone")?;
     }
     Ok(())
+}
+
+fn stack_entry_requires_unique_zone(
+    entry_id: u64,
+    kind: &StackEntryKind,
+    pending_cast_object: Option<u64>,
+    object_on_stack: bool,
+) -> bool {
+    matches!(kind, StackEntryKind::Spell { .. })
+        && (pending_cast_object != Some(entry_id) || object_on_stack)
+}
+
+fn invariant_failure_signature(detail: &str) -> &str {
+    if detail.starts_with("zone_invariant:") {
+        "zone_invariant"
+    } else if detail.starts_with("hidden_information_leak:") {
+        "hidden_information_leak"
+    } else {
+        "invariant_failure"
+    }
 }
 
 fn verify_trace(
@@ -402,7 +459,8 @@ fn verify_trace(
         );
     }
     validate_invariants(&game)?;
-    for transition in &trace.transitions {
+    let mut reproduced_invariant_failure = None;
+    for (position, transition) in trace.transitions.iter().enumerate() {
         let applied = game.submit(transition.seat, transition.action.clone())?;
         let actual = game_state_hash(&game)?;
         if actual != transition.state_hash {
@@ -415,19 +473,103 @@ fn verify_trace(
         if canonical_hash(&applied.events)? != canonical_hash(&transition.events)? {
             bail!("event stream mismatch at transition {}", transition.index);
         }
-        validate_invariants(&game)?;
+        if let Err(error) = validate_invariants(&game) {
+            let detail = error.to_string();
+            let signature = invariant_failure_signature(&detail);
+            let is_recorded_terminal = position + 1 == trace.transitions.len()
+                && matches!(
+                    &trace.terminal,
+                    GameTerminal::HardFailure {
+                        signature: expected,
+                        detail: expected_detail,
+                        attempted_action: None,
+                        ..
+                    } if expected == signature && expected_detail == &detail
+                );
+            if !is_recorded_terminal {
+                bail!(
+                    "unexpected invariant failure at transition {}: {detail}",
+                    transition.index
+                );
+            }
+            reproduced_invariant_failure = Some(signature.to_owned());
+            break;
+        }
     }
     match &trace.terminal {
-        GameTerminal::GameOver { outcome } if game.outcome().as_ref() != Some(outcome) => {
-            bail!("terminal outcome mismatch")
+        GameTerminal::GameOver { outcome } => {
+            if game.outcome().as_ref() != Some(outcome) {
+                bail!("terminal outcome mismatch");
+            }
         }
-        GameTerminal::HardFailure { signature, .. }
-            if signature == "deadlock_no_legal_actions"
-                && (game.outcome().is_some() || !game.pending_seats().is_empty()) =>
-        {
-            bail!("recorded deadlock does not reproduce")
+        GameTerminal::ActionBudgetExhausted { actions } => {
+            if game.outcome().is_some() || trace.transitions.len() as u64 != *actions {
+                bail!("recorded action-budget exhaustion does not reproduce");
+            }
         }
-        _ => {}
+        GameTerminal::HardFailure {
+            signature,
+            detail,
+            attempted_seat: Some(seat),
+            attempted_action: Some(action),
+        } => {
+            if !ordered_legal_actions(&game, *seat).contains(action) {
+                bail!("recorded failed action is no longer offered");
+            }
+            let reproduced = catch_unwind(AssertUnwindSafe(|| game.submit(*seat, action.clone())));
+            match signature.as_str() {
+                "offered_action_rejected" => match reproduced {
+                    Ok(Err(error)) if error.to_string() == *detail => {}
+                    Ok(Err(error)) => {
+                        bail!("recorded rejection detail changed: expected {detail}, got {error}")
+                    }
+                    Ok(Ok(_)) => bail!("recorded rejected action is now accepted"),
+                    Err(_) => bail!("recorded rejected action now panics"),
+                },
+                "phase_panic" => match reproduced {
+                    Err(payload) => {
+                        let actual = panic_detail(payload);
+                        if actual != *detail {
+                            bail!("recorded panic detail changed: expected {detail}, got {actual}");
+                        }
+                    }
+                    Ok(Ok(_)) => bail!("recorded panic action is now accepted"),
+                    Ok(Err(_)) => bail!("recorded panic action now returns an error"),
+                },
+                _ => {
+                    bail!("hard failure {signature} has an unexpected attempted action")
+                }
+            }
+        }
+        GameTerminal::HardFailure {
+            signature,
+            attempted_seat,
+            attempted_action,
+            ..
+        } => {
+            if attempted_seat.is_some() != attempted_action.is_some() {
+                bail!("hard failure attempted seat/action must be recorded together");
+            }
+            match signature.as_str() {
+                "deadlock_no_legal_actions" => {
+                    let has_legal_action = [0, 1]
+                        .into_iter()
+                        .any(|seat| !ordered_legal_actions(&game, seat).is_empty());
+                    if game.outcome().is_some() || has_legal_action {
+                        bail!("recorded deadlock does not reproduce");
+                    }
+                }
+                "zone_invariant" | "hidden_information_leak" | "invariant_failure" => {
+                    if reproduced_invariant_failure.as_deref() != Some(signature.as_str()) {
+                        bail!("recorded invariant failure does not reproduce");
+                    }
+                }
+                "offered_action_rejected" | "phase_panic" => {
+                    bail!("recorded action failure lacks attempted seat/action")
+                }
+                _ => bail!("hard failure {signature} has no replay verifier"),
+            }
+        }
     }
 
     if verify_checkpoint_suffix {
@@ -577,6 +719,8 @@ fn failure_trace(
         terminal: GameTerminal::HardFailure {
             signature: signature.to_owned(),
             detail,
+            attempted_seat: None,
+            attempted_action: None,
         },
     }
 }
@@ -589,7 +733,8 @@ fn classify_failure(signature: &str) -> FindingClassification {
         "phase_panic"
         | "deadlock_no_legal_actions"
         | "pending_seat_without_action"
-        | "offered_action_rejected" => FindingClassification::PhaseDefect,
+        | "offered_action_rejected"
+        | "zone_invariant" => FindingClassification::PhaseDefect,
         _ => FindingClassification::Inconclusive,
     }
 }
@@ -637,4 +782,52 @@ async fn read_trace_resource(uri: &str) -> Result<Vec<GameTrace>> {
         .filter(|line| !line.is_empty())
         .map(|line| Ok(serde_json::from_slice(line)?))
         .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json::json;
+
+    #[test]
+    fn only_committed_spell_stack_entries_require_a_unique_zone() {
+        let spell: StackEntryKind = serde_json::from_value(json!({
+            "type": "Spell",
+            "data": { "card_id": 7 }
+        }))
+        .expect("spell stack entry should deserialize");
+        let keyword_ability: StackEntryKind = serde_json::from_value(json!({
+            "type": "KeywordAction",
+            "data": {
+                "action": {
+                    "type": "Equip",
+                    "data": { "equipment_id": 7, "target_creature_id": 8 }
+                }
+            }
+        }))
+        .expect("keyword ability stack entry should deserialize");
+
+        assert!(stack_entry_requires_unique_zone(7, &spell, None, true));
+        assert!(stack_entry_requires_unique_zone(7, &spell, Some(7), true));
+        assert!(!stack_entry_requires_unique_zone(7, &spell, Some(7), false));
+        assert!(stack_entry_requires_unique_zone(7, &spell, Some(8), false));
+        assert!(!stack_entry_requires_unique_zone(
+            7,
+            &keyword_ability,
+            None,
+            false
+        ));
+    }
+
+    #[test]
+    fn invariant_failures_keep_stable_ownership_signatures() {
+        assert_eq!(
+            invariant_failure_signature("zone_invariant: object 39 appears in both hand and stack"),
+            "zone_invariant"
+        );
+        assert_eq!(
+            classify_failure("zone_invariant"),
+            FindingClassification::PhaseDefect
+        );
+    }
 }

@@ -1,6 +1,6 @@
 use cogatrice_harness::{
     aggregate_results, materialize_corpus, mine_17lands, replay_trace_file, run_shard,
-    AggregateOptions, GameTrace, MaterializeOptions, RunOptions,
+    AggregateOptions, GameTerminal, GameTrace, MaterializeOptions, RunOptions,
 };
 use flate2::read::MultiGzDecoder;
 use serde_json::json;
@@ -127,6 +127,32 @@ async fn shard_replays_checkpoints_resumes_and_aggregates() {
     replay_trace_file(&options.manifest_uri, &trace_path)
         .await
         .unwrap();
+
+    let mut rejected = trace.clone();
+    let attempted = rejected.transitions.pop().unwrap();
+    rejected.terminal = GameTerminal::HardFailure {
+        signature: "offered_action_rejected".to_owned(),
+        detail: "fixture rejection".to_owned(),
+        attempted_seat: Some(attempted.seat),
+        attempted_action: Some(attempted.action.clone()),
+    };
+    fs::write(&trace_path, serde_json::to_vec_pretty(&rejected).unwrap()).unwrap();
+    let error = replay_trace_file(&options.manifest_uri, &trace_path)
+        .await
+        .unwrap_err();
+    assert!(error.to_string().contains("now accepted"));
+
+    rejected.terminal = GameTerminal::HardFailure {
+        signature: "offered_action_rejected".to_owned(),
+        detail: "fixture rejection".to_owned(),
+        attempted_seat: Some(1 - attempted.seat),
+        attempted_action: Some(attempted.action),
+    };
+    fs::write(&trace_path, serde_json::to_vec_pretty(&rejected).unwrap()).unwrap();
+    let error = replay_trace_file(&options.manifest_uri, &trace_path)
+        .await
+        .unwrap_err();
+    assert!(error.to_string().contains("no longer offered"));
 
     let mut resume = options.clone();
     resume.resume = true;

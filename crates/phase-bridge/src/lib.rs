@@ -28,7 +28,8 @@ use thiserror::Error;
 
 pub use phase_engine::types::actions::GameAction;
 pub use phase_engine::types::events::GameEvent;
-pub use phase_engine::types::game_state::{ActionResult, GameState};
+pub use phase_engine::types::game_state::{ActionResult, GameState, StackEntryKind};
+pub use phase_engine::types::zones::Zone;
 
 /// The exact upstream Phase revision used by this adapter.
 pub const PHASE_REVISION: &str = "f6fd1fca5c581bcd127d5b18742623e1298ae3c7";

@@ -67,12 +67,23 @@ pub struct GameTrace {
     pub terminal: GameTerminal,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(tag = "status", rename_all = "snake_case")]
 pub enum GameTerminal {
-    GameOver { outcome: PhaseOutcome },
-    ActionBudgetExhausted { actions: u64 },
-    HardFailure { signature: String, detail: String },
+    GameOver {
+        outcome: PhaseOutcome,
+    },
+    ActionBudgetExhausted {
+        actions: u64,
+    },
+    HardFailure {
+        signature: String,
+        detail: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        attempted_seat: Option<u8>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        attempted_action: Option<GameAction>,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
