@@ -11,7 +11,8 @@ use phase_engine::game::deck_loading::{
 };
 use phase_engine::game::engine::{apply, start_game};
 use phase_engine::game::{
-    filter_events_for_viewer, filter_state_for_viewer, load_and_hydrate_decks,
+    filter_events_for_viewer, filter_state_for_viewer, finalize_public_state,
+    load_and_hydrate_decks, rehydrate_game_from_card_db,
 };
 use phase_engine::types::card_type::CoreType;
 use phase_engine::types::format::FormatConfig;
@@ -58,6 +59,8 @@ pub enum BridgeError {
     UnknownCards { seat: usize, names: Vec<String> },
     #[error("Phase rejected the action: {0}")]
     Action(String),
+    #[error("invalid Phase checkpoint: {0}")]
+    Checkpoint(String),
 }
 
 /// Immutable card corpus plus helpers for creating independent games.
@@ -85,6 +88,41 @@ impl PhaseRuntime {
 
     pub fn card_count(&self) -> usize {
         self.cards.card_count()
+    }
+
+    /// Restore an authoritative game checkpoint produced by [`PhaseGame::checkpoint_json`].
+    ///
+    /// The immutable card database is deliberately supplied by the runtime rather than
+    /// embedded in every checkpoint. Callers must pair checkpoints with the same corpus
+    /// manifest that created them.
+    pub fn restore_game(&self, checkpoint_json: &str) -> Result<PhaseGame, BridgeError> {
+        let state = std::thread::scope(|scope| {
+            std::thread::Builder::new()
+                .name("phase-checkpoint-restore".to_owned())
+                .stack_size(32 * 1024 * 1024)
+                .spawn_scoped(scope, || {
+                    let checkpoint: PhaseCheckpoint = serde_json::from_str(checkpoint_json)
+                        .map_err(|error| BridgeError::Checkpoint(error.to_string()))?;
+                    if checkpoint.schema != "phase-bridge-checkpoint-v1" {
+                        return Err(BridgeError::Checkpoint(format!(
+                            "unsupported schema {}",
+                            checkpoint.schema
+                        )));
+                    }
+                    let mut state = checkpoint.state;
+                    state.rng = checkpoint.rng;
+                    rehydrate_game_from_card_db(&mut state, &self.cards);
+                    finalize_public_state(&mut state);
+                    Ok(state)
+                })
+                .map_err(|error| BridgeError::Checkpoint(error.to_string()))?
+                .join()
+                .map_err(|_| BridgeError::Checkpoint("restore worker panicked".to_owned()))?
+        })?;
+        Ok(PhaseGame {
+            state,
+            cards: self.cards.clone(),
+        })
     }
 
     /// Start a two-player 40-card Limited game from exact English card names.
@@ -142,6 +180,26 @@ pub struct PhaseGame {
 impl PhaseGame {
     pub fn state(&self) -> &GameState {
         &self.state
+    }
+
+    /// Serialize the complete authoritative Phase state for deterministic replay.
+    pub fn checkpoint_json(&self) -> Result<String, BridgeError> {
+        std::thread::scope(|scope| {
+            std::thread::Builder::new()
+                .name("phase-checkpoint-serialize".to_owned())
+                .stack_size(32 * 1024 * 1024)
+                .spawn_scoped(scope, || {
+                    serde_json::to_string(&PhaseCheckpointRef {
+                        schema: "phase-bridge-checkpoint-v1",
+                        state: &self.state,
+                        rng: &self.state.rng,
+                    })
+                })
+                .map_err(|error| BridgeError::Checkpoint(error.to_string()))?
+                .join()
+                .map_err(|_| BridgeError::Checkpoint("serialization worker panicked".to_owned()))?
+                .map_err(|error| BridgeError::Checkpoint(error.to_string()))
+        })
     }
 
     pub fn viewer_state(&self, seat: u8) -> GameState {
@@ -229,6 +287,20 @@ impl PhaseGame {
             },
         )
     }
+}
+
+#[derive(Serialize)]
+struct PhaseCheckpointRef<'a> {
+    schema: &'static str,
+    state: &'a GameState,
+    rng: &'a rand_chacha_phase::ChaCha20Rng,
+}
+
+#[derive(Deserialize)]
+struct PhaseCheckpoint {
+    schema: String,
+    state: GameState,
+    rng: rand_chacha_phase::ChaCha20Rng,
 }
 
 fn action_is_offered(
@@ -521,5 +593,21 @@ mod tests {
 
         let error = game.submit(0, GameAction::PassPriority).unwrap_err();
         assert!(error.to_string().contains("legal-action set"));
+    }
+
+    #[test]
+    fn checkpoint_restore_preserves_authoritative_state() {
+        let runtime = PhaseRuntime::bundled().unwrap();
+        let decks = [
+            deck(include_str!("../../../decks/red_rush.json")),
+            deck(include_str!("../../../decks/green_stompy.json")),
+        ];
+        let (game, _) = runtime.new_limited_game(decks, 99).unwrap();
+        let checkpoint = game.checkpoint_json().unwrap();
+        let restored = runtime.restore_game(&checkpoint).unwrap();
+        let before: serde_json::Value = serde_json::from_str(&checkpoint).unwrap();
+        let after: serde_json::Value =
+            serde_json::from_str(&restored.checkpoint_json().unwrap()).unwrap();
+        assert_eq!(before, after);
     }
 }

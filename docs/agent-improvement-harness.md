@@ -1,5 +1,23 @@
 # MTG fidelity agent-improvement harness
 
+## Implementation
+
+The reusable local/offline foundation described here is implemented in
+`crates/cogatrice-harness`. It provides content-addressed corpus
+materialization, Scryfall identity/text/face/layout/legality validation,
+17Lands soft-signal mining, exact-legal-action seed shards, authoritative event
+traces, stable state hashes that include the RNG stream, serialized
+checkpoints, checkpoint-suffix replay, hidden-information and zone invariants,
+resume, bounded trace artifacts, normalized findings, prefix minimization, and
+scoreboard aggregation. `scripts/run-harness-worker.sh` is the non-interactive
+worker entry point.
+
+Exact commands and artifact schemas are in
+[the operations guide](agent-improvement-harness-operations.md). A production
+campaign still requires immutable full Phase, MTGJSON, Scryfall, and 17Lands
+snapshots supplied by the operator; the repository does not silently select or
+download mutable “latest” data.
+
 ## Decision
 
 Build a reproducible improvement harness around Phase rather than adding Magic

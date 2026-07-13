@@ -11,6 +11,18 @@ replacements, layers, and state-based actions are engine-enforced. See
 [the Phase port contract](docs/phase-rules-port.md) for the decision, Scryfall
 boundary and invariants.
 
+## Fidelity harness
+
+`cogatrice-harness` runs seeded games directly against `phase-bridge`, records
+exact actions, authoritative events, canonical state hashes, and RNG-preserving
+checkpoints, then replays every trace as a hard determinism gate. It also
+materializes hash-verified Phase/Scryfall/MTGJSON/17Lands artifacts, mines
+17Lands only into soft workload signals, resumes deterministic seed shards, and
+deduplicates findings into a scoreboard.
+
+See [the harness operations guide](docs/agent-improvement-harness-operations.md)
+for corpus, worker, replay, minimization, and aggregation commands.
+
 ## Play locally
 
 From the repo root:
