@@ -31,9 +31,31 @@ interface AppState {
   replayTotalSteps: number;
   replayPlaying: boolean;
   replayTimer: number | null;
+  fullControl: boolean;
+  holdFullControl: boolean;
+  autoPassTimer: number | null;
+  stackCollapsed: boolean;
+  damageCues: DamageCue[];
+  nextDamageCueId: number;
+  blockPulseUntil: number;
 }
 
 type StateFrame = Extract<ServerFrame, { type: "state" }>;
+
+interface Point {
+  x: number;
+  y: number;
+}
+
+interface DamageCue {
+  id: number;
+  sourceId: number;
+  target: { type: "Object" | "Player"; id: number };
+  amount: number;
+  isCombat: boolean;
+  sourcePoint?: Point;
+  targetPoint?: Point;
+}
 
 const PHASES = [
   ["Untap", "Untap"],
@@ -51,6 +73,7 @@ const PHASES = [
 export function startLiveApp(mode: "player" | "global"): void {
   const state = initialState(mode);
   connect(state, mode === "player" ? playerUrl() : wsUrl("/global"));
+  if (mode === "player") bindKeyboardControls(state);
   render(state);
 }
 
@@ -86,7 +109,14 @@ function initialState(mode: AppState["mode"]): AppState {
     replayIndex: -1,
     replayTotalSteps: 0,
     replayPlaying: true,
-    replayTimer: null
+    replayTimer: null,
+    fullControl: false,
+    holdFullControl: false,
+    autoPassTimer: null,
+    stackCollapsed: false,
+    damageCues: [],
+    nextDamageCueId: 1,
+    blockPulseUntil: 0
   };
 }
 
@@ -128,6 +158,8 @@ function handleFrame(state: AppState, frame: ServerFrame): void {
       }
       const snapshot = frame.state ?? frame.step?.state;
       const events = frame.events ?? frame.step?.events ?? [];
+      queueDamageCues(state, events);
+      queueBlockPulse(state, events);
       if (snapshot) {
         const nextKey = snapshotDecisionKey(snapshot);
         if (nextKey !== state.decisionKey) {
@@ -139,7 +171,6 @@ function handleFrame(state: AppState, frame: ServerFrame): void {
         }
         state.snapshot = snapshot;
       }
-      if (frame.state) state.pendingCmdId = null;
       state.events.push(...events);
       if (frame.step?.action) state.events.push({ type: "Action", data: frame.step.action });
       if (frame.clocks_ms) state.clocks = frame.clocks_ms;
@@ -171,6 +202,7 @@ function handleFrame(state: AppState, frame: ServerFrame): void {
       break;
   }
   render(state);
+  scheduleRecommendedPass(state);
 }
 
 function render(state: AppState): void {
@@ -222,15 +254,15 @@ function render(state: AppState): void {
           ${playerBadge(snapshot, top, state.playerNames[top], state.clocks[top], false, targetPlayerIds.has(top))}
           ${hiddenHandHtml(snapshot.players[top].hand.length)}
           ${pileHtml("Library", snapshot.players[top].library_count, "library", top)}
-          ${pileHtml("Graveyard", snapshot.players[top].graveyard.length, "graveyard", top, true)}
-          ${pileHtml("Exile", exileForSeat(snapshot, top).length, "exile", top, true)}
+          ${pileHtml("Graveyard", snapshot.players[top].graveyard.length, "graveyard", top, snapshot.players[top].graveyard.at(-1))}
+          ${pileHtml("Exile", exileForSeat(snapshot, top).length, "exile", top, exileForSeat(snapshot, top).at(-1))}
         </section>
 
         ${battlefieldHtml(snapshot, top, "Opponent battlefield", combatSelected, interactiveCombatObjects, state)}
 
         <section class="table-center">
-          ${stackHtml(snapshot, targetObjectIds)}
-          ${phaseRail(snapshot.phase)}
+          ${stackHtml(snapshot, targetObjectIds, state.stackCollapsed)}
+          ${phaseRail(snapshot, state)}
           <div class="priority-orb ${snapshot.priority_player === bottom ? "yours" : "theirs"}" title="Priority"></div>
         </section>
 
@@ -239,12 +271,16 @@ function render(state: AppState): void {
         <section class="player-end your-end" aria-label="You">
           ${playerBadge(snapshot, bottom, state.playerNames[bottom], state.clocks[bottom], state.mode === "player", targetPlayerIds.has(bottom))}
           ${pileHtml("Library", snapshot.players[bottom].library_count, "library", bottom)}
-          ${pileHtml("Graveyard", snapshot.players[bottom].graveyard.length, "graveyard", bottom, true)}
-          ${pileHtml("Exile", exileForSeat(snapshot, bottom).length, "exile", bottom, true)}
+          ${pileHtml("Graveyard", snapshot.players[bottom].graveyard.length, "graveyard", bottom, snapshot.players[bottom].graveyard.at(-1))}
+          ${pileHtml("Exile", exileForSeat(snapshot, bottom).length, "exile", bottom, exileForSeat(snapshot, bottom).at(-1))}
         </section>
 
         ${state.mode === "player" ? handHtml(snapshot, bottom, state, interactiveCombatObjects) : ""}
       </main>
+
+      <svg class="combat-overlay" data-combat-overlay aria-hidden="true"></svg>
+      <div class="damage-effects" data-damage-effects aria-live="polite"></div>
+      ${combatSummaryHtml(snapshot, state)}
 
       ${state.mode === "player" ? (mulliganPending ? "" : actionDock(actions, snapshot, state)) : state.mode === "replay" ? replayControls(state) : spectatorBadge(state.mode)}
       ${focused ? focusPanel(focused, objectActions(snapshot, focused.object_id), snapshot, state.pendingCmdId !== null) : ""}
@@ -264,6 +300,10 @@ function render(state: AppState): void {
     targetPlayerIds,
     selectableCardIds
   );
+  window.requestAnimationFrame(() => {
+    drawCombatOverlay(state);
+    drawDamageEffects(state);
+  });
 }
 
 function bindInteractions(
@@ -302,12 +342,20 @@ function bindInteractions(
         state.blockAssignments.set(state.focusedBlockerId, objectId);
         state.focusedBlockerId = null;
       } else {
+        const objectChoices = objectActions(snapshot, objectId);
+        if (objectChoices.length === 1 && objectChoices[0]?.type === "TapLandForMana") {
+          sendAction(state, objectChoices[0]);
+          return;
+        }
         state.focusedObjectId = state.focusedObjectId === objectId ? null : objectId;
         state.openZone = null;
       }
       render(state);
     });
-    element.addEventListener("mouseenter", () => showPreview(state.root, findCard(snapshot, objectId)));
+    element.addEventListener("mouseenter", () => showPreview(
+      state.root,
+      findCard(snapshot, objectId) ?? snapshot.stack.find(entry => entry.id === objectId)?.source ?? undefined
+    ));
     element.addEventListener("mouseleave", () => showPreview(state.root));
     element.addEventListener("keydown", event => {
       if (event.key === "Enter" || event.key === " ") {
@@ -369,8 +417,37 @@ function bindInteractions(
         state.openZone = { seat, kind };
         state.focusedObjectId = null;
         render(state);
+        window.requestAnimationFrame(() => state.root.querySelector<HTMLButtonElement>(".zone-viewer [data-zone-close]")?.focus());
       }
     });
+  });
+  state.root.querySelectorAll<HTMLButtonElement>("[data-phase-stop]").forEach(button => {
+    button.addEventListener("click", () => {
+      const phase = button.dataset.phaseStop;
+      const scope = button.dataset.stopScope as "OwnTurn" | "OpponentsTurns" | undefined;
+      if (!phase || !scope) return;
+      const stops = togglePhaseStop(snapshot.phase_stops, phase, scope);
+      sendAction(state, { type: "SetPhaseStops", data: { stops } });
+    });
+  });
+  state.root.querySelector<HTMLButtonElement>("[data-full-control]")?.addEventListener("click", () => {
+    setFullControl(state, !state.holdFullControl, true);
+  });
+  state.root.querySelector<HTMLButtonElement>("[data-pass-turn]")?.addEventListener("click", () => {
+    sendAction(state, {
+      type: "SetAutoPass",
+      data: { mode: { type: "UntilTurnBoundary", until: "EndOfCurrentTurn" } }
+    });
+  });
+  state.root.querySelector<HTMLButtonElement>("[data-resolve-all]")?.addEventListener("click", () => {
+    sendAction(state, { type: "SetAutoPass", data: { mode: { type: "UntilStackEmpty" } } });
+  });
+  state.root.querySelector<HTMLButtonElement>("[data-cancel-auto-pass]")?.addEventListener("click", () => {
+    sendAction(state, { type: "CancelAutoPass" });
+  });
+  state.root.querySelector<HTMLButtonElement>("[data-stack-toggle]")?.addEventListener("click", () => {
+    state.stackCollapsed = !state.stackCollapsed;
+    render(state);
   });
   state.root.querySelectorAll<HTMLElement>("[data-zone-close]").forEach(element => {
     element.addEventListener("click", event => {
@@ -434,6 +511,134 @@ function sendAction(state: AppState, action: GameAction): void {
   state.blockAssignments.clear();
   state.socket.send(JSON.stringify({ cmd_id: cmdId, action }));
   render(state);
+}
+
+function scheduleRecommendedPass(state: AppState): void {
+  clearRecommendedPass(state);
+  const snapshot = state.snapshot;
+  if (
+    state.mode !== "player"
+    || !snapshot
+    || state.viewerSeat === null
+    || snapshot.priority_player !== state.viewerSeat
+    || nestedType(snapshot.waiting_for) !== "Priority"
+    || !snapshot.auto_pass_recommended
+    || snapshot.auto_pass_mode !== null
+    || phaseStopApplies(snapshot, state.viewerSeat)
+    || state.fullControl
+    || state.pendingCmdId !== null
+  ) return;
+  const pass = allActions(snapshot).find(action => action.type === "PassPriority");
+  if (!pass) return;
+  const decisionKey = state.decisionKey;
+  state.autoPassTimer = window.setTimeout(() => {
+    state.autoPassTimer = null;
+    if (
+      state.snapshot === snapshot
+      && state.decisionKey === decisionKey
+      && state.pendingCmdId === null
+      && !state.fullControl
+    ) sendAction(state, pass);
+  }, 180);
+}
+
+function clearRecommendedPass(state: AppState): void {
+  if (state.autoPassTimer !== null) window.clearTimeout(state.autoPassTimer);
+  state.autoPassTimer = null;
+}
+
+export function togglePhaseStop(
+  stops: ViewerSnapshot["phase_stops"],
+  phase: string,
+  scope: "OwnTurn" | "OpponentsTurns"
+): ViewerSnapshot["phase_stops"] {
+  const otherScope = scope === "OwnTurn" ? "OpponentsTurns" : "OwnTurn";
+  const withoutPhase = stops.filter(stop => stop.phase !== phase);
+  const hasAll = stops.some(stop => stop.phase === phase && stop.scope === "AllTurns");
+  const hasScope = stops.some(stop => stop.phase === phase && stop.scope === scope);
+  const hasOther = stops.some(stop => stop.phase === phase && stop.scope === otherScope);
+  if (hasAll) return [...withoutPhase, { phase, scope: otherScope }];
+  if (hasScope) return hasOther ? [...withoutPhase, { phase, scope: otherScope }] : withoutPhase;
+  if (hasOther) return [...withoutPhase, { phase, scope: "AllTurns" }];
+  return [...stops, { phase, scope }];
+}
+
+function hasPhaseStop(
+  stops: ViewerSnapshot["phase_stops"],
+  phase: string,
+  scope: "OwnTurn" | "OpponentsTurns"
+): boolean {
+  return stops.some(stop => stop.phase === phase && (stop.scope === scope || stop.scope === "AllTurns"));
+}
+
+function phaseStopApplies(snapshot: ViewerSnapshot, viewer: SeatId): boolean {
+  return snapshot.phase_stops.some(stop => stop.phase === snapshot.phase && (
+    stop.scope === "AllTurns"
+    || (stop.scope === "OwnTurn" && snapshot.active_player === viewer)
+    || (stop.scope === "OpponentsTurns" && snapshot.active_player !== viewer)
+  ));
+}
+
+function bindKeyboardControls(state: AppState): void {
+  window.addEventListener("keydown", event => {
+    if (event.repeat || isTypingTarget(event.target)) return;
+    if (event.key === "Escape" && state.openZone) {
+      event.preventDefault();
+      state.openZone = null;
+      render(state);
+      return;
+    }
+    if (event.key === "Control") {
+      event.preventDefault();
+      if (event.shiftKey) setFullControl(state, !state.holdFullControl, true);
+      else setFullControl(state, true, false);
+      return;
+    }
+    if (event.code === "Space") {
+      const pass = state.snapshot && allActions(state.snapshot).find(action => action.type === "PassPriority");
+      if (pass) {
+        event.preventDefault();
+        sendAction(state, pass);
+      }
+      return;
+    }
+    if (
+      event.key === "Enter"
+      && !event.shiftKey
+      && state.snapshot
+      && state.viewerSeat !== null
+      && state.snapshot.priority_player === state.viewerSeat
+      && nestedType(state.snapshot.waiting_for) === "Priority"
+    ) {
+      event.preventDefault();
+      sendAction(state, {
+        type: "SetAutoPass",
+        data: { mode: { type: "UntilTurnBoundary", until: "EndOfCurrentTurn" } }
+      });
+    }
+  });
+  window.addEventListener("keyup", event => {
+    if (event.key === "Control" && !state.holdFullControl) setFullControl(state, false, false);
+  });
+  window.addEventListener("blur", () => {
+    if (!state.holdFullControl) setFullControl(state, false, false);
+  });
+}
+
+function setFullControl(state: AppState, enabled: boolean, held: boolean): void {
+  state.holdFullControl = held ? enabled : state.holdFullControl;
+  state.fullControl = enabled || state.holdFullControl;
+  clearRecommendedPass(state);
+  if (state.fullControl && state.snapshot?.auto_pass_mode) {
+    sendAction(state, { type: "CancelAutoPass" });
+    return;
+  }
+  render(state);
+  scheduleRecommendedPass(state);
+}
+
+function isTypingTarget(target: EventTarget | null): boolean {
+  return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement;
 }
 
 function playerBadge(
@@ -500,10 +705,13 @@ interface CardOptions {
 
 function cardHtml(card: CardView, snapshot: ViewerSnapshot, options: CardOptions = {}): string {
   const effective = snapshot.spell_costs[String(card.object_id)] ?? card.mana_cost;
+  const blocked = card.blocked;
   const classes = [
     "game-card",
     card.tapped ? "tapped" : "",
     card.attacking ? "attacking" : "",
+    blocked ? "blocked" : "",
+    card.blocking.length ? "blocking" : "",
     options.selected ? "selected" : "",
     options.actionable ? "actionable" : "",
     options.compact ? "compact" : "",
@@ -516,7 +724,7 @@ function cardHtml(card: CardView, snapshot: ViewerSnapshot, options: CardOptions
   const pt = card.power === null ? "" : `<b class="pt">${card.power}/${card.toughness ?? 0}</b>`;
   return `<article class="${classes}" data-object-id="${card.object_id}" ${style} tabindex="0" aria-label="${escapeHtml(card.name)}">
     ${image}<div class="fallback-face"><strong>${escapeHtml(card.face_down ? "Hidden card" : card.name)}</strong><span>${escapeHtml(manaCost(effective))}</span><small>${escapeHtml(card.type_line)}</small>${pt}</div>
-    ${counterHtml(card.counters)}${card.tapped ? `<span class="status-chip">TAPPED</span>` : ""}${card.attacking ? `<span class="status-chip attack-chip">ATTACKING</span>` : ""}
+    ${counterHtml(card.counters)}${card.tapped ? `<span class="status-chip">TAPPED</span>` : ""}${card.attacking ? `<span class="status-chip attack-chip">${blocked ? "BLOCKED" : "ATTACKING"}</span>` : ""}${card.blocking.length ? `<span class="status-chip block-chip">BLOCKING</span>` : ""}
   </article>`;
 }
 
@@ -542,12 +750,17 @@ function actionDock(actions: GameAction[], snapshot: ViewerSnapshot, state: AppS
   const blockerActions = actions.filter(action => action.type === "DeclareBlockers");
   const targetActions = actions.filter(action => action.type === "ChooseTarget");
   const selectActions = actions.filter(action => action.type === "SelectCards");
-  const matchingAttack = matchingAttackAction(actions, state.selectedObjects);
+  const matchingAttacks = matchingAttackActions(actions, state.selectedObjects);
   const matchingBlocks = matchingBlockAction(actions, state.blockAssignments);
   const matchingCards = matchingSelectCardsAction(actions, state.selectedObjects);
   const pass = actions.find(action => action.type === "PassPriority");
+  const canSetAutoPass = state.viewerSeat !== null
+    && snapshot.priority_player === state.viewerSeat
+    && nestedType(snapshot.waiting_for) === "Priority"
+    && !disabled;
   const globals = actions.filter(action => ![
-    "PassPriority", "PlayLand", "CastSpell", "ActivateAbility", "MulliganDecision", "DeclareAttackers", "DeclareBlockers", "SelectCards"
+    "PassPriority", "PlayLand", "CastSpell", "ActivateAbility", "MulliganDecision", "DeclareAttackers", "DeclareBlockers", "SelectCards",
+    "TapLandForMana", "UntapLandForMana", "SpendPoolMana", "UnspendPoolMana"
   ].includes(action.type) && !(action.type === "ChooseTarget" && action.data?.target !== null));
   const prompt = decisionPrompt(
     snapshot,
@@ -559,9 +772,18 @@ function actionDock(actions: GameAction[], snapshot: ViewerSnapshot, state: AppS
     state
   );
   return `<section class="action-dock" aria-label="Turn actions">
+    <div class="priority-controls" aria-label="Priority controls">
+      <button class="control-toggle ${state.fullControl ? "active" : ""}" data-full-control aria-pressed="${state.fullControl}" title="Full Control (Ctrl)">Full Control</button>
+      ${snapshot.auto_pass_mode
+        ? `<button class="control-toggle active" data-cancel-auto-pass title="Cancel automatic passing">Cancel Auto-Pass</button>`
+        : canSetAutoPass ? `<button class="control-toggle" data-pass-turn title="Pass until Phase finds a response or stop (Enter)">Pass Until Response</button>` : ""}
+      ${snapshot.stack.length && !snapshot.auto_pass_mode && canSetAutoPass ? `<button class="control-toggle" data-resolve-all title="Pass until this stack resolves">Resolve All</button>` : ""}
+    </div>
     <div class="decision-copy"><span>${escapeHtml(prompt.eyebrow)}</span><strong>${escapeHtml(prompt.title)}</strong><small>${escapeHtml(prompt.detail)}</small></div>
     <div class="decision-actions">
-      ${attackActions.length ? `<button class="secondary-action" data-clear-selection ${disabled ? "disabled" : ""}>Reset</button><button class="primary-action combat-action" data-confirm-attack ${!matchingAttack || disabled ? "disabled" : ""}>${state.selectedObjects.size ? `Attack (${state.selectedObjects.size})` : "No attacks"}</button>` : ""}
+      ${attackActions.length ? `<button class="secondary-action" data-clear-selection ${disabled ? "disabled" : ""}>Reset</button>${matchingAttacks.length > 1
+        ? matchingAttacks.map(action => `<button class="primary-action combat-action" data-action-index="${actions.indexOf(action)}" ${disabled ? "disabled" : ""}>${escapeHtml(attackChoiceLabel(action, snapshot, state.playerNames))}</button>`).join("")
+        : `<button class="primary-action combat-action" data-confirm-attack ${!matchingAttacks.length || disabled ? "disabled" : ""}>${state.selectedObjects.size ? `Attack (${state.selectedObjects.size})` : "No attacks"}</button>`}` : ""}
       ${blockerActions.length ? `<button class="secondary-action" data-clear-selection ${disabled ? "disabled" : ""}>Reset</button><button class="primary-action combat-action" data-confirm-blocks ${!matchingBlocks || disabled ? "disabled" : ""}>${state.blockAssignments.size ? `Block (${state.blockAssignments.size})` : "No blocks"}</button>` : ""}
       ${selectActions.length ? `<button class="secondary-action" data-clear-selection ${disabled ? "disabled" : ""}>Reset</button><button class="primary-action" data-confirm-cards ${!matchingCards || disabled ? "disabled" : ""}>Confirm (${state.selectedObjects.size})</button>` : ""}
       ${globals.map(action => `<button class="choice-action" data-action-index="${actions.indexOf(action)}" ${disabled ? "disabled" : ""}>${escapeHtml(actionLabel(action, snapshot))}</button>`).join("")}
@@ -584,29 +806,49 @@ function mulliganOverlay(actions: GameAction[], snapshot: ViewerSnapshot, disabl
   </section></div>`;
 }
 
-function stackHtml(snapshot: ViewerSnapshot, targetObjectIds: Set<number>): string {
-  if (!snapshot.stack.length) return `<div class="stack-zone empty-stack"><span>STACK</span></div>`;
-  return `<section class="stack-zone"><span>STACK</span><div>${snapshot.stack.slice().reverse().map(entry => {
-    const objectId = entry.source?.object_id ?? entry.source_id;
-    const targetable = targetObjectIds.has(objectId);
-    return `<article class="${targetable ? "targetable" : ""}" data-object-id="${objectId}" tabindex="0"><strong>${escapeHtml(entry.source?.name ?? `Ability ${entry.id}`)}</strong><small>${escapeHtml(splitWords(nestedType(entry.kind) ?? "On the stack"))}</small></article>`;
-  }).join("")}</div></section>`;
+function stackHtml(snapshot: ViewerSnapshot, targetObjectIds: Set<number>, collapsed: boolean): string {
+  if (!snapshot.stack.length) return "";
+  const entries = snapshot.stack.slice().reverse();
+  return `<section class="stack-zone ${collapsed ? "collapsed" : ""}" aria-label="Stack">
+    <header><span>STACK · ${entries.length}</span><button data-stack-toggle aria-label="${collapsed ? "Expand" : "Collapse"} stack">${collapsed ? "+" : "−"}</button></header>
+    <div class="stack-cards">${entries.map((entry, index) => {
+      const targetable = targetObjectIds.has(entry.id);
+      const name = entry.source?.name ?? `Ability ${entry.id}`;
+      const art = entry.source && !entry.source.face_down ? `<img src="${artUrl(entry.source)}" alt="" />` : `<div class="card-back"><span>C</span></div>`;
+      return `<article class="stack-card ${index === 0 ? "top" : ""} ${targetable ? "targetable" : ""}" data-object-id="${entry.id}" data-source-object-id="${entry.source_id}" tabindex="0" style="--stack-index:${index}" aria-label="${escapeHtml(name)} on the stack">
+        ${art}<div class="stack-card-copy"><strong>${escapeHtml(name)}</strong><small>${escapeHtml(index === 0 ? "Next to resolve" : splitWords(nestedType(entry.kind) ?? "On the stack"))}</small></div>
+      </article>`;
+    }).join("")}</div>
+  </section>`;
 }
 
-function phaseRail(current: string): string {
+function phaseRail(snapshot: ViewerSnapshot, state: AppState): string {
   let matchedCurrent = false;
+  const interactive = state.mode === "player";
   return `<nav class="phase-rail" aria-label="Turn phases">${PHASES.map(([phase, label]) => {
-    const active = phase === current && (!matchedCurrent || phase !== "PostCombatMain");
+    const active = phase === snapshot.phase && (!matchedCurrent || phase !== "PostCombatMain");
     if (active) matchedCurrent = true;
-    return `<span class="${active ? "current" : ""}" title="${label}">${label.slice(0, 1)}</span>`;
+    const own = hasPhaseStop(snapshot.phase_stops, phase, "OwnTurn");
+    const opponent = hasPhaseStop(snapshot.phase_stops, phase, "OpponentsTurns");
+    return `<div class="phase-step ${active ? "current" : ""}" title="${label}">
+      <span>${label.slice(0, 1)}</span>
+      ${interactive && phase !== "Untap" ? `<button class="stop own-stop ${own ? "set" : ""}" data-phase-stop="${phase}" data-stop-scope="OwnTurn" aria-pressed="${own}" aria-label="${own ? "Remove" : "Set"} ${label} stop on your turn"></button>
+      <button class="stop opponent-stop ${opponent ? "set" : ""}" data-phase-stop="${phase}" data-stop-scope="OpponentsTurns" aria-pressed="${opponent}" aria-label="${opponent ? "Remove" : "Set"} ${label} stop on opponent turns"></button>` : ""}
+    </div>`;
   }).join("")}</nav>`;
 }
 
-function pileHtml(label: string, count: number, kind: string, seat: SeatId, browseable = false): string {
+function pileHtml(label: string, count: number, kind: string, seat: SeatId, topCard?: CardView): string {
+  const browseable = kind !== "library";
   const attributes = browseable
     ? `data-zone-open="${kind}" data-seat="${seat}" aria-label="View ${label}: ${count} cards"`
     : `disabled aria-label="${label}: ${count} cards"`;
-  return `<button class="card-pile ${kind} ${browseable ? "browseable" : ""}" title="${label}: ${count}" ${attributes}><span>${count}</span><small>${label}</small></button>`;
+  const face = kind === "library"
+    ? `<div class="pile-card-back"><i>C</i></div>`
+    : topCard && !topCard.face_down && topCard.name !== "Hidden Card"
+      ? `<img src="${artUrl(topCard)}" alt="" />`
+      : `<div class="pile-empty"></div>`;
+  return `<button class="card-pile ${kind} ${browseable ? "browseable" : ""}" title="${label}: ${count}" ${attributes}>${face}<span class="pile-count">${count}</span><small>${label}</small></button>`;
 }
 
 function zoneViewer(snapshot: ViewerSnapshot, zone: { seat: SeatId; kind: "graveyard" | "exile" }): string {
@@ -620,6 +862,134 @@ function zoneViewer(snapshot: ViewerSnapshot, zone: { seat: SeatId; kind: "grave
 
 function exileForSeat(snapshot: ViewerSnapshot, seat: SeatId): CardView[] {
   return snapshot.exile.filter(card => card.owner === seat);
+}
+
+function queueDamageCues(state: AppState, events: unknown[]): void {
+  for (const event of events) {
+    const value = event as { type?: string; data?: Record<string, unknown> };
+    if (value.type !== "DamageDealt" || !value.data) continue;
+    const sourceId = Number(value.data.source_id);
+    const amount = Number(value.data.amount);
+    const target = damageTarget(value.data.target);
+    if (!Number.isFinite(sourceId) || !Number.isFinite(amount) || !target) continue;
+    const cue: DamageCue = {
+      id: state.nextDamageCueId++,
+      sourceId,
+      target,
+      amount,
+      isCombat: value.data.is_combat === true,
+      sourcePoint: anchorPoint(state.root, "object", sourceId),
+      targetPoint: anchorPoint(state.root, target.type.toLowerCase(), target.id)
+    };
+    state.damageCues.push(cue);
+    window.setTimeout(() => {
+      state.damageCues = state.damageCues.filter(candidate => candidate.id !== cue.id);
+      drawDamageEffects(state);
+    }, 900);
+  }
+}
+
+function queueBlockPulse(state: AppState, events: unknown[]): void {
+  if (!events.some(event => (event as { type?: string }).type === "BlockersDeclared")) return;
+  state.blockPulseUntil = Date.now() + 700;
+  window.setTimeout(() => drawCombatOverlay(state), 700);
+}
+
+function damageTarget(value: unknown): DamageCue["target"] | null {
+  if (!value || typeof value !== "object") return null;
+  const target = value as Record<string, unknown>;
+  if (Number.isFinite(Number(target.Object))) return { type: "Object", id: Number(target.Object) };
+  if (Number.isFinite(Number(target.Player))) return { type: "Player", id: Number(target.Player) };
+  if (target.type === "Object" && Number.isFinite(Number(target.data))) return { type: "Object", id: Number(target.data) };
+  if (target.type === "Player" && Number.isFinite(Number(target.data))) return { type: "Player", id: Number(target.data) };
+  return null;
+}
+
+function anchorPoint(root: HTMLElement, kind: string, id: number): Point | undefined {
+  const selector = kind === "player"
+    ? `.player-badge[data-player-id="${id}"]`
+    : `.battlefield [data-object-id="${id}"]`;
+  const element = root.querySelector<HTMLElement>(selector)
+    ?? (kind === "object"
+      ? root.querySelector<HTMLElement>(`.stack-card[data-source-object-id="${id}"], .stack-card[data-object-id="${id}"]`)
+      : null);
+  if (!element) return undefined;
+  const rootRect = root.getBoundingClientRect();
+  const rect = element.getBoundingClientRect();
+  return { x: rect.left - rootRect.left + rect.width / 2, y: rect.top - rootRect.top + rect.height / 2 };
+}
+
+function drawCombatOverlay(state: AppState): void {
+  const overlay = state.root.querySelector<SVGSVGElement>("[data-combat-overlay]");
+  const snapshot = state.snapshot;
+  if (!overlay || !snapshot) return;
+  overlay.setAttribute("viewBox", `0 0 ${state.root.clientWidth} ${state.root.clientHeight}`);
+  const lines: string[] = [];
+  for (const attacker of snapshot.combat?.attackers ?? []) {
+    const source = anchorPoint(state.root, "object", attacker.object_id);
+    const target = attacker.attack_target.type === "Player"
+      ? anchorPoint(state.root, "player", attacker.attack_target.data)
+      : anchorPoint(state.root, "object", attacker.attack_target.data);
+    if (source && target) lines.push(combatLine(source, target, "attack-link"));
+  }
+  for (const blocker of snapshot.battlefield) {
+    for (const attackerId of blocker.blocking) {
+      const source = anchorPoint(state.root, "object", blocker.object_id);
+      const target = anchorPoint(state.root, "object", attackerId);
+      if (source && target) lines.push(combatLine(
+        source,
+        target,
+        `block-link ${Date.now() < state.blockPulseUntil ? "declared" : ""}`
+      ));
+    }
+  }
+  for (const [blockerId, attackerId] of state.blockAssignments) {
+    const source = anchorPoint(state.root, "object", blockerId);
+    const target = anchorPoint(state.root, "object", attackerId);
+    if (source && target) lines.push(combatLine(source, target, "block-link draft"));
+  }
+  overlay.innerHTML = `<defs>
+    <marker id="attack-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z"></path></marker>
+    <marker id="block-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z"></path></marker>
+  </defs>${lines.join("")}`;
+}
+
+function combatLine(source: Point, target: Point, classes: string): string {
+  return `<line class="${classes}" x1="${source.x}" y1="${source.y}" x2="${target.x}" y2="${target.y}"></line>`;
+}
+
+function drawDamageEffects(state: AppState): void {
+  const container = state.root.querySelector<HTMLElement>("[data-damage-effects]");
+  if (!container) return;
+  container.innerHTML = state.damageCues.map(cue => {
+    const source = anchorPoint(state.root, "object", cue.sourceId) ?? cue.sourcePoint;
+    const target = anchorPoint(state.root, cue.target.type.toLowerCase(), cue.target.id) ?? cue.targetPoint;
+    if (!source || !target) return "";
+    const dx = target.x - source.x;
+    const dy = target.y - source.y;
+    const distance = Math.hypot(dx, dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    return `<div class="damage-beam ${cue.isCombat ? "combat" : ""}" style="left:${source.x}px;top:${source.y}px;width:${distance}px;--angle:${angle}deg"></div>
+      <div class="damage-burst ${cue.isCombat ? "combat" : ""}" style="left:${target.x}px;top:${target.y}px" role="status" aria-label="${cue.amount} damage">−${cue.amount}</div>`;
+  }).join("");
+}
+
+function combatSummaryHtml(snapshot: ViewerSnapshot, state: AppState): string {
+  const summaries: string[] = [];
+  for (const blocker of snapshot.battlefield) {
+    for (const attackerId of blocker.blocking) {
+      const attacker = findCard(snapshot, attackerId);
+      summaries.push(`${blocker.name} blocks ${attacker?.name ?? `attacker ${attackerId}`}`);
+    }
+  }
+  for (const [blockerId, attackerId] of state.blockAssignments) {
+    const blocker = findCard(snapshot, blockerId);
+    const attacker = findCard(snapshot, attackerId);
+    summaries.push(`${blocker?.name ?? `Creature ${blockerId}`} will block ${attacker?.name ?? `attacker ${attackerId}`}`);
+  }
+  return summaries.length
+    ? `<div class="sr-only" aria-live="polite">${summaries.map(escapeHtml).join(". ")}</div>`
+    : "";
 }
 
 function counterHtml(counters: unknown): string {
@@ -677,6 +1047,7 @@ function showReplayStep(state: AppState, index: number): void {
   const bounded = Math.max(0, Math.min(index, state.replayFrames.length - 1));
   const frame = state.replayFrames[bounded];
   if (!frame?.step) return;
+  queueDamageCues(state, frame.step.events);
   state.replayIndex = bounded;
   state.snapshot = frame.step.state;
   state.events = state.replayFrames.slice(0, bounded + 1).flatMap(candidate => {
@@ -724,9 +1095,17 @@ function actionSourceId(action: GameAction): number {
 }
 
 function attackObjectIds(action: GameAction): number[] {
+  return attackEntries(action).map(([objectId]) => objectId);
+}
+
+function attackEntries(action: GameAction): Array<[number, unknown]> {
   const attacks = action.data?.attacks;
   if (!Array.isArray(attacks)) return [];
-  return attacks.map(entry => Array.isArray(entry) ? Number(entry[0]) : Number((entry as { object_id?: unknown }).object_id)).filter(Number.isFinite);
+  return attacks.map(entry => {
+    if (Array.isArray(entry)) return [Number(entry[0]), entry[1]] as [number, unknown];
+    const value = entry as { object_id?: unknown; target?: unknown; attack_target?: unknown };
+    return [Number(value.object_id), value.target ?? value.attack_target] as [number, unknown];
+  }).filter(([objectId]) => Number.isFinite(objectId));
 }
 
 function blockAssignments(action: GameAction): Array<[number, number]> {
@@ -761,8 +1140,39 @@ function selectCardIds(action: GameAction): number[] {
 }
 
 export function matchingAttackAction(actions: GameAction[], selected: Set<number>): GameAction | undefined {
+  return matchingAttackActions(actions, selected)[0];
+}
+
+export function matchingAttackActions(actions: GameAction[], selected: Set<number>): GameAction[] {
   const wanted = [...selected].sort((a, b) => a - b).join(",");
-  return actions.find(action => action.type === "DeclareAttackers" && attackObjectIds(action).sort((a, b) => a - b).join(",") === wanted);
+  return actions.filter(action => action.type === "DeclareAttackers" && attackObjectIds(action).sort((a, b) => a - b).join(",") === wanted);
+}
+
+function attackChoiceLabel(action: GameAction, snapshot: ViewerSnapshot, names: [string, string]): string {
+  const entries = attackEntries(action);
+  if (!entries.length) return "No attacks";
+  const labels = [...new Set(entries.map(([, target]) => attackTargetLabel(target, snapshot, names)))];
+  if (labels.length === 1) return `Attack ${labels[0]}`;
+  return entries.map(([objectId, target]) => {
+    const attacker = findCard(snapshot, objectId)?.name ?? `Creature ${objectId}`;
+    return `${attacker} → ${attackTargetLabel(target, snapshot, names)}`;
+  }).join("; ");
+}
+
+function attackTargetLabel(target: unknown, snapshot: ViewerSnapshot, names: [string, string]): string {
+  if (!target || typeof target !== "object") return "opponent";
+  const value = target as Record<string, unknown>;
+  const type = String(value.type ?? Object.keys(value)[0] ?? "");
+  const data = value.data ?? value[type];
+  if (type === "Player") {
+    const seat = Number(typeof data === "object" && data !== null && "0" in data ? (data as Record<string, unknown>)["0"] : data);
+    return seat === 0 || seat === 1 ? names[seat] : "player";
+  }
+  if (type === "Planeswalker" || type === "Battle") {
+    const objectId = Number(data);
+    return findCard(snapshot, objectId)?.name ?? `${type.toLowerCase()} ${objectId}`;
+  }
+  return "opponent";
 }
 
 export function matchingBlockAction(actions: GameAction[], selected: Map<number, number>): GameAction | undefined {
@@ -798,6 +1208,13 @@ export function actionLabel(action: GameAction, snapshot: ViewerSnapshot): strin
     case "PlayLand": return `Play ${source?.name ?? "land"}`;
     case "CastSpell": return `Cast ${source?.name ?? "spell"}`;
     case "ActivateAbility": return `Activate ${source?.name ?? "ability"}`;
+    case "TapLandForMana": return `Tap ${source?.name ?? "land"} for mana`;
+    case "UntapLandForMana": return `Undo mana from ${source?.name ?? "land"}`;
+    case "SpendPoolMana": return "Use this mana";
+    case "UnspendPoolMana": return "Use different mana";
+    case "SetAutoPass": return "Pass automatically";
+    case "CancelAutoPass": return "Cancel automatic passing";
+    case "SetPhaseStops": return "Update phase stops";
     case "MulliganDecision": return `Mulligan: ${nestedType(data.choice) ?? "decide"}`;
     case "DeclareAttackers": return `Attack with ${attackObjectIds(action).length} creature(s)`;
     case "DeclareBlockers": return `Block with ${blockAssignments(action).length} creature(s)`;

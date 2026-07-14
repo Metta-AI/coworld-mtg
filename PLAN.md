@@ -24,19 +24,25 @@ The live wire format is in [docs/protocol.md](docs/protocol.md).
    export and Scryfall bulk metadata cache suitable for arbitrary deck import.
 2. Add a deck-import endpoint keyed by Scryfall Oracle ID, with explicit errors
    for cards Phase cannot resolve or parse.
-3. Improve action presentation for target selection, modal spells, mana pinning,
-   damage assignment, and uncommon interactive prompts without duplicating
-   engine legality in TypeScript.
-4. Add Phase AI difficulty variants and LLM policies that rank the same exact
+3. Complete the Arena-style interaction surface for modal spells, mana pinning,
+   multi-target arrows, damage assignment, priority yields, and uncommon
+   interactive prompts without duplicating engine legality in TypeScript.
+4. Add deterministic browser fixtures for multi-block combat, first/double
+   strike damage, deep stacks, face-down exile, mobile Full Control, and reduced
+   motion; keep screenshot baselines alongside behavioral assertions.
+5. Prepare the two maintained-fork Phase commits as small upstream pull requests
+   that independently satisfy `phase-rs/phase` contribution and test rules.
+6. Expand hosted smoke beyond two goldfish players to include reconnect, replay,
+   clock, preference, and browser-client episodes within Coworld limits.
+7. Add Phase AI difficulty variants and LLM policies that rank the same exact
    legal-action surface.
-5. Package, certify, upload, and run hosted episodes inside Coworld resource and
-   deadline limits.
 
 ## Non-negotiable invariants
 
 - Phase owns every Magic state transition.
-- A non-concession command must be present in the submitting viewer's current
-  exact legal-action set.
+- Gameplay commands must be present in the submitting viewer's current exact
+  legal-action set. Only Phase's narrowly allowlisted actor-scoped preference
+  actions may bypass prompt membership.
 - Player/spectator projections never expose hidden hands, libraries, or RNG.
 - Replays store Phase actions, events, and authoritative state—not inferred
   tabletop moves.

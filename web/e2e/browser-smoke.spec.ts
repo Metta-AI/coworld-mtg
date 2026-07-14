@@ -33,6 +33,18 @@ test("two browser seats can play a land, auto-pay for a spell, and declare an at
     await page.getByRole("button", { name: "Keep", exact: true }).click();
     await opponent.getByRole("button", { name: "Keep", exact: true }).click();
 
+    await expect(page.getByRole("button", { name: "Full Control", exact: true })).toBeVisible();
+    const upkeepStop = page.getByRole("button", { name: "Set Upkeep stop on opponent turns" });
+    await upkeepStop.click();
+    await expect(page.getByRole("button", { name: "Remove Upkeep stop on opponent turns" })).toBeVisible();
+    await page.getByRole("button", { name: "Remove Upkeep stop on opponent turns" }).click();
+    await expect(page.getByRole("button", { name: "Set Upkeep stop on opponent turns" })).toBeVisible();
+    await expect(page.getByRole("button", { name: /object_id|Tap Land For Mana/i })).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Full Control", exact: true }).click();
+    await opponent.getByRole("button", { name: "Full Control", exact: true }).click();
+    await expect(page.getByRole("button", { name: "Full Control", exact: true })).toHaveAttribute("aria-pressed", "true");
+
     const firstCard = page.getByRole("region", { name: "Your hand" }).locator("article.game-card").first();
     await firstCard.hover();
     await expect(page.locator(".card-preview.visible")).toBeVisible();
@@ -69,6 +81,10 @@ test("two browser seats can play a land, auto-pay for a spell, and declare an at
     const cast = await tryCastSpell(pages);
     expect(cast, "a one-mana creature should be castable after the legal land play").not.toBeNull();
     await expect(cast!.page.locator(".stack-zone").getByText(cast!.cardName, { exact: true })).toBeVisible({ timeout: 20_000 });
+    await expect(cast!.page.locator(".stack-card.top")).toContainText("Next to resolve");
+
+    await page.getByRole("button", { name: "Full Control", exact: true }).click();
+    await opponent.getByRole("button", { name: "Full Control", exact: true }).click();
 
     const creature = cast!.page.getByRole("region", { name: "Your battlefield" }).locator(`article:has(img[alt="${cast!.cardName}"])`);
     for (let step = 0; step < 12 && !await creature.isVisible().catch(() => false); step += 1) {
@@ -206,7 +222,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
       2
     )
   );
-  const env = {
+  const env: NodeJS.ProcessEnv = {
     ...process.env,
     COGAME_HOST: "127.0.0.1",
     COGAME_PORT: String(port),
@@ -237,6 +253,10 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
 function rustEnv(): NodeJS.ProcessEnv {
   return {
     ...process.env,
+    PATH: `/tmp/coworld-rustup-cargo/bin:${process.env.PATH ?? ""}`,
+    CARGO_HOME: `${process.env.HOME}/.cargo`,
+    RUSTUP_HOME: "/tmp/coworld-rustup",
+    RUSTUP_TOOLCHAIN: "nightly-2026-04-19",
     RUSTC_BOOTSTRAP: "1",
     RUSTFLAGS: "-Zcrate-attr=feature(if_let_guard)",
     CARGO_INCREMENTAL: "0",

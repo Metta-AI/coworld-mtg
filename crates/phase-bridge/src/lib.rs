@@ -4,8 +4,9 @@
 //! reproduce Magic rules; it translates deck/configuration input and exposes
 //! Phase's exact legal actions and viewer-filtered state to the host.
 
-use phase_engine::ai_support::{legal_actions_for_viewer, LegalActionsFull};
+use phase_engine::ai_support::{auto_pass_recommended, legal_actions_for_viewer, LegalActionsFull};
 use phase_engine::database::CardDatabase;
+use phase_engine::game::combat::AttackTarget;
 use phase_engine::game::deck_loading::{
     resolve_deck_list, DeckList as PhaseDeckList, PlayerDeckList,
 };
@@ -16,9 +17,10 @@ use phase_engine::game::{
 };
 use phase_engine::types::card_type::CoreType;
 use phase_engine::types::format::FormatConfig;
-use phase_engine::types::game_state::WaitingFor;
+use phase_engine::types::game_state::{AutoPassMode, WaitingFor};
 use phase_engine::types::identifiers::ObjectId;
 use phase_engine::types::mana::{ManaCost, ManaPool};
+use phase_engine::types::phase::PhaseStop;
 use phase_engine::types::player::PlayerId;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -210,12 +212,30 @@ impl PhaseGame {
     pub fn viewer_snapshot(&self, seat: u8) -> ViewerSnapshot {
         let filtered = self.viewer_state(seat);
         let (legal_actions, spell_costs, legal_actions_by_object) = self.legal_actions(seat);
+        let player = PlayerId(seat);
+        let can_pass = legal_actions
+            .iter()
+            .any(|action| matches!(action, GameAction::PassPriority));
+        let recommended_auto_pass = can_pass && auto_pass_recommended(&self.state, &legal_actions);
+        let auto_pass_mode = self.state.auto_pass.get(&player).copied();
+        let phase_stops = self
+            .state
+            .phase_stops
+            .get(&player)
+            .cloned()
+            .unwrap_or_default();
         ViewerSnapshot::from_state(
             &filtered,
             &self.cards,
             legal_actions,
             spell_costs,
             legal_actions_by_object,
+            ViewerPreferences {
+                player: (usize::from(seat) < self.state.players.len()).then_some(seat),
+                auto_pass_recommended: recommended_auto_pass,
+                auto_pass_mode,
+                phase_stops,
+            },
         )
     }
 
@@ -230,6 +250,29 @@ impl PhaseGame {
             Vec::new(),
             Default::default(),
             Default::default(),
+            ViewerPreferences::default(),
+        )
+    }
+
+    pub fn full_snapshot_for(&self, seat: u8) -> ViewerSnapshot {
+        let player = PlayerId(seat);
+        ViewerSnapshot::from_state(
+            &self.state,
+            &self.cards,
+            Vec::new(),
+            Default::default(),
+            Default::default(),
+            ViewerPreferences {
+                player: Some(seat),
+                auto_pass_recommended: false,
+                auto_pass_mode: self.state.auto_pass.get(&player).copied(),
+                phase_stops: self
+                    .state
+                    .phase_stops
+                    .get(&player)
+                    .cloned()
+                    .unwrap_or_default(),
+            },
         )
     }
 
@@ -271,7 +314,7 @@ impl PhaseGame {
         );
         let (flat, _, by_object) = self.legal_actions(seat);
         let is_offered = action_is_offered(&action, &flat, &by_object);
-        if !is_concede && !is_offered {
+        if !is_concede && !is_preference_action(&action) && !is_offered {
             return Err(BridgeError::Action(
                 "action is not in this viewer's current Phase legal-action set".to_owned(),
             ));
@@ -312,6 +355,15 @@ fn action_is_offered(
     flat.contains(action) || by_object.values().any(|actions| actions.contains(action))
 }
 
+fn is_preference_action(action: &GameAction) -> bool {
+    matches!(
+        action,
+        GameAction::SetAutoPass { .. }
+            | GameAction::CancelAutoPass
+            | GameAction::SetPhaseStops { .. }
+    )
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PhaseOutcome {
     pub winner: Option<u8>,
@@ -330,7 +382,15 @@ pub struct ViewerSnapshot {
     pub battlefield: Vec<CardView>,
     pub stack: Vec<StackView>,
     pub exile: Vec<CardView>,
-    pub combat: Option<Value>,
+    pub combat: Option<CombatView>,
+    #[serde(default)]
+    pub preference_player: Option<u8>,
+    #[serde(default)]
+    pub auto_pass_recommended: bool,
+    #[serde(default)]
+    pub auto_pass_mode: Option<AutoPassMode>,
+    #[serde(default)]
+    pub phase_stops: Vec<PhaseStop>,
     pub legal_actions: Vec<GameAction>,
     pub spell_costs: BTreeMap<String, ManaCost>,
     pub legal_actions_by_object: BTreeMap<String, Vec<GameAction>>,
@@ -364,6 +424,8 @@ pub struct CardView {
     pub tapped: bool,
     pub face_down: bool,
     pub attacking: bool,
+    #[serde(default)]
+    pub blocked: bool,
     pub blocking: Vec<u64>,
     pub counters: Value,
     pub scryfall_oracle_id: Option<String>,
@@ -378,6 +440,53 @@ pub struct StackView {
     pub kind: Value,
 }
 
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct CombatView {
+    pub attackers: Vec<CombatAttackerView>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct CombatAttackerView {
+    pub object_id: u64,
+    pub defending_player: u8,
+    #[serde(default)]
+    pub attack_target: AttackTargetView,
+    #[serde(default)]
+    pub blocked: bool,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(tag = "type", content = "data")]
+pub enum AttackTargetView {
+    Player(u8),
+    Planeswalker(u64),
+    Battle(u64),
+}
+
+impl Default for AttackTargetView {
+    fn default() -> Self {
+        Self::Player(0)
+    }
+}
+
+impl From<AttackTarget> for AttackTargetView {
+    fn from(target: AttackTarget) -> Self {
+        match target {
+            AttackTarget::Player(player) => Self::Player(player.0),
+            AttackTarget::Planeswalker(object) => Self::Planeswalker(object.0),
+            AttackTarget::Battle(object) => Self::Battle(object.0),
+        }
+    }
+}
+
+#[derive(Default)]
+struct ViewerPreferences {
+    player: Option<u8>,
+    auto_pass_recommended: bool,
+    auto_pass_mode: Option<AutoPassMode>,
+    phase_stops: Vec<PhaseStop>,
+}
+
 impl ViewerSnapshot {
     fn from_state(
         state: &GameState,
@@ -385,6 +494,7 @@ impl ViewerSnapshot {
         legal_actions: Vec<GameAction>,
         spell_costs: std::collections::HashMap<ObjectId, ManaCost>,
         legal_actions_by_object: std::collections::HashMap<ObjectId, Vec<GameAction>>,
+        preferences: ViewerPreferences,
     ) -> Self {
         let card = |id: ObjectId| card_view(state, cards, id);
         Self {
@@ -424,10 +534,22 @@ impl ViewerSnapshot {
                 })
                 .collect(),
             exile: state.exile.iter().filter_map(|id| card(*id)).collect(),
-            combat: state
-                .combat
-                .as_ref()
-                .and_then(|combat| serde_json::to_value(combat).ok()),
+            combat: state.combat.as_ref().map(|combat| CombatView {
+                attackers: combat
+                    .attackers
+                    .iter()
+                    .map(|attacker| CombatAttackerView {
+                        object_id: attacker.object_id.0,
+                        defending_player: attacker.defending_player.0,
+                        attack_target: attacker.attack_target.into(),
+                        blocked: attacker.blocked,
+                    })
+                    .collect(),
+            }),
+            preference_player: preferences.player,
+            auto_pass_recommended: preferences.auto_pass_recommended,
+            auto_pass_mode: preferences.auto_pass_mode,
+            phase_stops: preferences.phase_stops,
             legal_actions,
             spell_costs: spell_costs
                 .into_iter()
@@ -448,6 +570,12 @@ fn card_view(state: &GameState, cards: &CardDatabase, id: ObjectId) -> Option<Ca
         .combat
         .as_ref()
         .is_some_and(|combat| combat.attackers.iter().any(|entry| entry.object_id == id));
+    let blocked = state.combat.as_ref().is_some_and(|combat| {
+        combat
+            .attackers
+            .iter()
+            .any(|entry| entry.object_id == id && entry.blocked)
+    });
     let blocking = state
         .combat
         .as_ref()
@@ -472,6 +600,7 @@ fn card_view(state: &GameState, cards: &CardDatabase, id: ObjectId) -> Option<Ca
         tapped: object.tapped,
         face_down: object.face_down,
         attacking,
+        blocked,
         blocking,
         counters: serde_json::to_value(&object.counters).unwrap_or(Value::Null),
         scryfall_oracle_id: object
@@ -526,6 +655,96 @@ mod tests {
         let action = GameAction::PassPriority;
         let grouped = std::collections::HashMap::from([(ObjectId(9), vec![action.clone()])]);
         assert!(action_is_offered(&action, &[], &grouped));
+    }
+
+    #[test]
+    fn preference_actions_delegate_to_phase_without_appearing_in_the_prompt() {
+        assert!(is_preference_action(&GameAction::CancelAutoPass));
+        assert!(!is_preference_action(&GameAction::PassPriority));
+    }
+
+    #[test]
+    fn phase_stops_are_actor_scoped_and_legal_outside_the_current_prompt() {
+        use phase_engine::types::phase::{Phase, PhaseStopScope};
+
+        let runtime = PhaseRuntime::bundled().unwrap();
+        let decks = [
+            deck(include_str!("../../../decks/red_rush.json")),
+            deck(include_str!("../../../decks/green_stompy.json")),
+        ];
+        let (mut game, _) = runtime.new_limited_game(decks, 11).unwrap();
+        let keep = game
+            .legal_actions(1)
+            .0
+            .into_iter()
+            .find(|action| {
+                matches!(
+                    action,
+                    GameAction::MulliganDecision {
+                        choice: phase_engine::types::actions::MulliganChoice::Keep
+                    }
+                )
+            })
+            .unwrap();
+        game.submit(1, keep).unwrap();
+        assert!(!game.pending_seats().contains(&1));
+        let stop = PhaseStop {
+            phase: Phase::Upkeep,
+            scope: PhaseStopScope::OwnTurn,
+        };
+
+        game.submit(1, GameAction::SetPhaseStops { stops: vec![stop] })
+            .unwrap();
+
+        assert_eq!(game.viewer_snapshot(1).phase_stops, vec![stop]);
+        assert!(game.viewer_snapshot(0).phase_stops.is_empty());
+        assert!(!game.viewer_snapshot(1).auto_pass_recommended);
+        let replay = game.full_snapshot_for(1);
+        assert_eq!(replay.preference_player, Some(1));
+        assert_eq!(replay.phase_stops, vec![stop]);
+    }
+
+    #[test]
+    fn set_auto_pass_still_requires_a_priority_prompt() {
+        use phase_engine::types::game_state::AutoPassRequest;
+
+        let runtime = PhaseRuntime::bundled().unwrap();
+        let decks = [
+            deck(include_str!("../../../decks/red_rush.json")),
+            deck(include_str!("../../../decks/green_stompy.json")),
+        ];
+        let (mut game, _) = runtime.new_limited_game(decks, 12).unwrap();
+        let error = game
+            .submit(
+                0,
+                GameAction::SetAutoPass {
+                    mode: AutoPassRequest::UntilStackEmpty,
+                },
+            )
+            .unwrap_err();
+        assert!(error.to_string().contains("Phase rejected"));
+    }
+
+    #[test]
+    fn viewer_snapshot_defaults_preserve_old_replays() {
+        let runtime = PhaseRuntime::bundled().unwrap();
+        let decks = [
+            deck(include_str!("../../../decks/red_rush.json")),
+            deck(include_str!("../../../decks/green_stompy.json")),
+        ];
+        let (game, _) = runtime.new_limited_game(decks, 13).unwrap();
+        let mut value = serde_json::to_value(game.full_snapshot()).unwrap();
+        let object = value.as_object_mut().unwrap();
+        object.remove("preference_player");
+        object.remove("auto_pass_recommended");
+        object.remove("auto_pass_mode");
+        object.remove("phase_stops");
+
+        let restored: ViewerSnapshot = serde_json::from_value(value).unwrap();
+        assert!(restored.preference_player.is_none());
+        assert!(!restored.auto_pass_recommended);
+        assert!(restored.auto_pass_mode.is_none());
+        assert!(restored.phase_stops.is_empty());
     }
 
     #[test]

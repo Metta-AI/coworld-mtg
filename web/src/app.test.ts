@@ -4,9 +4,11 @@ import {
   actionLabel,
   allActions,
   matchingAttackAction,
+  matchingAttackActions,
   matchingBlockAction,
   matchingSelectCardsAction,
   shouldBufferReplayFrame,
+  togglePhaseStop,
   unavailableCardMessage
 } from "./app";
 import type { ViewerSnapshot } from "./protocol";
@@ -25,6 +27,27 @@ describe("Phase action presentation", () => {
     expect(actionLabel({ type: "PlayLand", data: { object_id: 7 } }, snapshot)).toBe("Play Mountain");
   });
 
+  it("never leaks raw object IDs through mana action labels", () => {
+    const snapshot = fixture();
+    const label = actionLabel({ type: "TapLandForMana", data: { object_id: 7 } }, snapshot);
+    expect(label).toBe("Tap Mountain for mana");
+    expect(label).not.toContain("7");
+    expect(label).not.toContain("object_id");
+  });
+
+  it("toggles own-turn and opponent-turn stops independently", () => {
+    const own = togglePhaseStop([], "Upkeep", "OwnTurn");
+    expect(own).toEqual([{ phase: "Upkeep", scope: "OwnTurn" }]);
+    const both = togglePhaseStop(own, "Upkeep", "OpponentsTurns");
+    expect(both).toEqual([{ phase: "Upkeep", scope: "AllTurns" }]);
+    expect(togglePhaseStop(both, "Upkeep", "OwnTurn")).toEqual([
+      { phase: "Upkeep", scope: "OpponentsTurns" }
+    ]);
+    expect(togglePhaseStop([{ phase: "Draw", scope: "AllTurns" }], "Draw", "OwnTurn")).toEqual([
+      { phase: "Draw", scope: "OpponentsTurns" }
+    ]);
+  });
+
   it("matches the exact Phase attacker declaration selected on the battlefield", () => {
     const none = { type: "DeclareAttackers", data: { attacks: [] } };
     const two = {
@@ -33,6 +56,12 @@ describe("Phase action presentation", () => {
     };
     expect(matchingAttackAction([none, two], new Set([8, 12]))).toEqual(two);
     expect(matchingAttackAction([none, two], new Set())).toEqual(none);
+  });
+
+  it("preserves every exact Phase attack-target choice for selected attackers", () => {
+    const player = { type: "DeclareAttackers", data: { attacks: [[12, { type: "Player", data: 1 }]] } };
+    const planeswalker = { type: "DeclareAttackers", data: { attacks: [[12, { type: "Planeswalker", data: 44 }]] } };
+    expect(matchingAttackActions([player, planeswalker], new Set([12]))).toEqual([player, planeswalker]);
   });
 
   it("matches blocker-to-attacker assignments independent of selection order", () => {
@@ -89,6 +118,7 @@ function fixture(): ViewerSnapshot {
     tapped: false,
     face_down: false,
     attacking: false,
+    blocked: false,
     blocking: [],
     counters: {},
     scryfall_oracle_id: null
@@ -107,6 +137,10 @@ function fixture(): ViewerSnapshot {
     stack: [],
     exile: [],
     combat: null,
+    preference_player: 0,
+    auto_pass_recommended: false,
+    auto_pass_mode: null,
+    phase_stops: [],
     legal_actions: [],
     spell_costs: {},
     legal_actions_by_object: {}

@@ -544,18 +544,31 @@ impl MatchRunner {
             clocks_ms,
         );
         let mut end_reason = "phase_game_over".to_owned();
+        let mut decision_clocks: [Option<Instant>; 2] = [None, None];
 
         while game.outcome().is_none() {
             let pending = game.pending_seats();
-            let timeout_seat = *pending
-                .first()
-                .ok_or_else(|| anyhow!("Phase game has no pending actor and is not over"))?;
+            sync_decision_clocks(&mut decision_clocks, &pending, Instant::now());
+            let timeout_seat = next_timeout_seat(
+                &pending,
+                &decision_clocks,
+                clocks_ms,
+                slot_of_seat0,
+                duration_ms(self.config.decision_cap_s),
+                Instant::now(),
+            )
+            .ok_or_else(|| anyhow!("Phase game has no pending actor and is not over"))?;
             let timeout_slot = seat_to_slot(timeout_seat, slot_of_seat0);
-            let wait_ms = clocks_ms[timeout_slot].min(duration_ms(self.config.decision_cap_s));
-            let wait_started = Instant::now();
+            let wait_started =
+                decision_clocks[usize::from(timeout_seat)].expect("decision clock initialized");
+            let elapsed_ms = wait_started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64;
+            let wait_ms = clocks_ms[timeout_slot]
+                .min(duration_ms(self.config.decision_cap_s))
+                .saturating_sub(elapsed_ms);
             tokio::select! {
                 _ = sleep(Duration::from_millis(wait_ms)) => {
                     subtract_elapsed(&mut clocks_ms[timeout_slot], wait_started.elapsed());
+                    decision_clocks[usize::from(timeout_seat)] = None;
                     let (action, result) = if clocks_ms[timeout_slot] == 0 {
                         end_reason = "clock_flag".to_owned();
                         let action = concede_action(timeout_seat);
@@ -593,8 +606,10 @@ impl MatchRunner {
                                 }
                             };
                             let seat = slot_to_seat(slot, slot_of_seat0);
+                            let clock_neutral = is_clock_neutral_preference(&command.action);
                             if !pending.contains(&seat)
                                 && !is_self_concede(&command.action, seat)
+                                && !clock_neutral
                             {
                                 self.send_reject(
                                     slot,
@@ -604,10 +619,19 @@ impl MatchRunner {
                                 );
                                 continue;
                             }
-                            subtract_elapsed(&mut clocks_ms[slot], wait_started.elapsed());
                             let action = command.action;
                             match game.submit(seat, action.clone()) {
                                 Ok(result) => {
+                                    if !clock_neutral {
+                                        if let Some(actor_started) =
+                                            take_decision_clock(&mut decision_clocks, seat)
+                                        {
+                                            subtract_elapsed(
+                                                &mut clocks_ms[slot],
+                                                actor_started.elapsed(),
+                                            );
+                                        }
+                                    }
                                     let events = result.events;
                                     self.record_and_broadcast(
                                         &game,
@@ -686,7 +710,7 @@ impl MatchRunner {
             wall_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
             actor_slot: Some(actor_slot as u8),
             action: Some(action),
-            state: game.full_snapshot(),
+            state: game.full_snapshot_for(slot_to_seat(actor_slot, slot_of_seat0)),
             events: events.clone(),
         });
         self.broadcast_state(game, &events, game_number, slot_of_seat0, clocks_ms);
@@ -1044,6 +1068,47 @@ fn is_self_concede(action: &GameAction, seat: u8) -> bool {
     })
 }
 
+fn is_clock_neutral_preference(action: &GameAction) -> bool {
+    matches!(
+        action,
+        GameAction::CancelAutoPass | GameAction::SetPhaseStops { .. }
+    )
+}
+
+fn sync_decision_clocks(clocks: &mut [Option<Instant>; 2], pending: &[u8], now: Instant) {
+    for seat in 0..2_u8 {
+        if pending.contains(&seat) {
+            clocks[usize::from(seat)].get_or_insert(now);
+        } else {
+            clocks[usize::from(seat)] = None;
+        }
+    }
+}
+
+fn take_decision_clock(clocks: &mut [Option<Instant>; 2], seat: u8) -> Option<Instant> {
+    clocks.get_mut(usize::from(seat)).and_then(Option::take)
+}
+
+fn next_timeout_seat(
+    pending: &[u8],
+    decision_clocks: &[Option<Instant>; 2],
+    clocks_ms: [u64; 2],
+    slot_of_seat0: usize,
+    decision_cap_ms: u64,
+    now: Instant,
+) -> Option<u8> {
+    pending.iter().copied().min_by_key(|seat| {
+        let slot = seat_to_slot(*seat, slot_of_seat0);
+        let elapsed_ms = decision_clocks[usize::from(*seat)]
+            .map(|started| now.saturating_duration_since(started).as_millis())
+            .unwrap_or(0)
+            .min(u128::from(u64::MAX)) as u64;
+        clocks_ms[slot]
+            .min(decision_cap_ms)
+            .saturating_sub(elapsed_ms)
+    })
+}
+
 fn send_json<T: serde::Serialize>(tx: &mpsc::UnboundedSender<SocketOut>, value: &T) {
     if let Ok(text) = serde_json::to_string(value) {
         tx.send(SocketOut::Text(text)).ok();
@@ -1078,4 +1143,48 @@ fn escape_html(text: &str) -> String {
         .replace('<', "&lt;")
         .replace('>', "&gt;")
         .replace('"', "&quot;")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn simultaneous_decisions_keep_independent_clocks() {
+        let started = Instant::now();
+        let mut clocks = [None, None];
+        sync_decision_clocks(&mut clocks, &[0, 1], started);
+
+        assert_eq!(take_decision_clock(&mut clocks, 1), Some(started));
+        assert_eq!(clocks[0], Some(started));
+        assert_eq!(clocks[1], None);
+
+        sync_decision_clocks(&mut clocks, &[0], started + Duration::from_secs(1));
+        assert_eq!(clocks[0], Some(started));
+        assert_eq!(clocks[1], None);
+    }
+
+    #[test]
+    fn simultaneous_timeout_uses_the_earliest_effective_deadline() {
+        let started = Instant::now();
+        let decision_clocks = [Some(started), Some(started)];
+        let seat = next_timeout_seat(
+            &[0, 1],
+            &decision_clocks,
+            [30_000, 2_000],
+            0,
+            10_000,
+            started + Duration::from_millis(500),
+        );
+        assert_eq!(seat, Some(1));
+    }
+
+    #[test]
+    fn only_nonadvancing_preferences_are_clock_neutral() {
+        assert!(is_clock_neutral_preference(&GameAction::CancelAutoPass));
+        assert!(is_clock_neutral_preference(&GameAction::SetPhaseStops {
+            stops: Vec::new(),
+        }));
+        assert!(!is_clock_neutral_preference(&GameAction::PassPriority));
+    }
 }

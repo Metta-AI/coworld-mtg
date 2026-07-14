@@ -8,11 +8,13 @@
   "scripts": {
     "dev": "vite --config web/vite.config.ts --host 127.0.0.1",
     "build": "vite build --config web/vite.config.ts",
+    "typecheck": "tsc --noEmit -p web/tsconfig.json",
     "test": "vitest run --config web/vite.config.ts",
     "test:e2e": "npm run build && playwright test -c web/playwright.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
+    "@types/node": "^26.1.1",
     "typescript": "^5.8.3",
     "vite": "^7.0.4",
     "vitest": "^3.2.4"

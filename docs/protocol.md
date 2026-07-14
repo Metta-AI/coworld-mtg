@@ -7,9 +7,11 @@ Cogatrice uses JSON text frames over WebSocket:
 - `/replay` is an omniscient stream available when `COGAME_LOAD_REPLAY_URI` is set.
 
 Phase is the sole rules authority. A client never sends `draw`, `move_cards`,
-`tap`, `next_phase`, or a handwritten combat command. It chooses one complete
-`GameAction` value from its latest `state.legal_actions` or
-`state.legal_actions_by_object` collection and echoes that value unchanged.
+`tap`, `next_phase`, or a handwritten combat command. Gameplay choices copy one
+complete `GameAction` value from the latest `state.legal_actions` or
+`state.legal_actions_by_object` collection. The only non-gameplay exceptions
+are Phase's actor-scoped `SetAutoPass`, `CancelAutoPass`, and `SetPhaseStops`
+preference actions described below.
 
 ## Player frames
 
@@ -49,6 +51,12 @@ decision snapshot:
     "stack": [/* spells and abilities */],
     "exile": [],
     "combat": null,
+    "preference_player": 0,
+    "auto_pass_recommended": false,
+    "auto_pass_mode": null,
+    "phase_stops": [
+      {"phase": "Upkeep", "scope": "OpponentsTurns"}
+    ],
     "legal_actions": [
       {"type": "PassPriority"},
       {"type": "PlayLand", "data": {"object_id": 12, "card_id": 12}}
@@ -66,6 +74,12 @@ The state is already filtered by Phase. A player sees their own hand, hidden
 placeholders for the opponent's hand, and hidden libraries. The spectator sees
 hidden placeholders for both hands. Clients must not derive hidden identity or
 rules legality from object IDs.
+
+`auto_pass_recommended` is true only for the viewer who currently has an
+offered `PassPriority` action, and only when Phase's rules-aware presentation
+policy recommends passing. `auto_pass_mode` and `phase_stops` contain only the
+requesting player's preferences; `preference_player` identifies that Phase
+seat, and these fields never expose an opponent's settings.
 
 To act, copy an offered action exactly:
 
@@ -90,8 +104,23 @@ The server responds with:
 ```
 
 The `player_id` must equal the current `hello.seat`. The host rejects spoofed
-concessions and every non-concession action absent from the latest Phase legal
-set.
+concessions and every gameplay action absent from the latest Phase legal set.
+
+Phase also accepts three exact preference actions:
+
+```jsonc
+{"cmd_id": 20, "action": {"type": "SetAutoPass", "data": {"mode": {"type": "UntilStackEmpty"}}}}
+{"cmd_id": 21, "action": {"type": "CancelAutoPass"}}
+{"cmd_id": 22, "action": {"type": "SetPhaseStops", "data": {"stops": [{"phase": "Upkeep", "scope": "OwnTurn"}]}}}
+```
+
+`SetAutoPass` still requires the sender's current priority prompt and consumes
+that priority decision. `CancelAutoPass` and `SetPhaseStops` are pure,
+actor-scoped preferences: either seat may send them in any prompt, they do not
+advance the game, reset a decision deadline, or consume game clock. The bridge
+allowlists only these concrete variants; it does not provide a generic bypass
+for invented actions. Replays retain these actions and attribute the projected
+preference state to its Phase player with `preference_player`.
 
 Games and matches end with `game_end` and `match_end`. `winner_slot` uses stable
 Coworld slot identity, not the rotating Phase seat.
@@ -100,7 +129,9 @@ Coworld slot identity, not the rotating Phase seat.
 
 London mulligans and other simultaneous Phase prompts can give both seats legal
 actions in the same authoritative state. Either player may answer first. Each
-accepted answer produces a new complete snapshot for both seats.
+accepted answer produces a new complete snapshot for both seats. The host keeps
+an independent decision start for each pending seat, so one player's answer or
+preference update cannot charge or reset the other player's clock.
 
 At a decision timeout, the host submits an action from that seat's current legal
 set, preferring keep/pass/empty combat declarations. A depleted game clock

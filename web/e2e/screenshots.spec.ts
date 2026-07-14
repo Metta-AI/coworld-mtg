@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { spawn, execFileSync, type ChildProcess } from "node:child_process";
+import { spawn, execFileSync } from "node:child_process";
 import { mkdtempSync, writeFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -17,6 +17,10 @@ test.beforeAll(() => {
     stdio: "inherit",
     env: {
       ...process.env,
+      PATH: `/tmp/coworld-rustup-cargo/bin:${process.env.PATH ?? ""}`,
+      CARGO_HOME: `${process.env.HOME}/.cargo`,
+      RUSTUP_HOME: "/tmp/coworld-rustup",
+      RUSTUP_TOOLCHAIN: "nightly-2026-04-19",
       RUSTC_BOOTSTRAP: "1",
       RUSTFLAGS: "-Zcrate-attr=feature(if_let_guard)",
       CARGO_INCREMENTAL: "0",
@@ -71,7 +75,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
       player_connect_timeout_s: 30
     })
   );
-  const env = {
+  const env: NodeJS.ProcessEnv = {
     ...process.env,
     COGAME_HOST: "127.0.0.1",
     COGAME_PORT: String(port),

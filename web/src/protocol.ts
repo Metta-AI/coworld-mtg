@@ -27,6 +27,7 @@ export interface CardView {
   tapped: boolean;
   face_down: boolean;
   attacking: boolean;
+  blocked: boolean;
   blocking: number[];
   counters: unknown;
   scryfall_oracle_id: string | null;
@@ -51,6 +52,17 @@ export interface StackView {
   kind: unknown;
 }
 
+export interface CombatView {
+  attackers: Array<{
+    object_id: number;
+    defending_player: SeatId;
+    attack_target:
+      | { type: "Player"; data: SeatId }
+      | { type: "Planeswalker" | "Battle"; data: number };
+    blocked: boolean;
+  }>;
+}
+
 export interface ViewerSnapshot {
   turn: number;
   phase: string;
@@ -61,7 +73,11 @@ export interface ViewerSnapshot {
   battlefield: CardView[];
   stack: StackView[];
   exile: CardView[];
-  combat: unknown;
+  combat: CombatView | null;
+  preference_player: SeatId | null;
+  auto_pass_recommended: boolean;
+  auto_pass_mode: { type: string; until?: string; initial_stack_len?: number } | null;
+  phase_stops: Array<{ phase: string; scope: "AllTurns" | "OwnTurn" | "OpponentsTurns" }>;
   legal_actions: GameAction[];
   spell_costs: Record<string, ManaCost>;
   legal_actions_by_object: Record<string, GameAction[]>;
