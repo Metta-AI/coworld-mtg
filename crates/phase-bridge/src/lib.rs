@@ -10,6 +10,7 @@ use phase_engine::game::combat::AttackTarget;
 use phase_engine::game::deck_loading::{
     resolve_deck_list, DeckList as PhaseDeckList, PlayerDeckList,
 };
+use phase_engine::game::derived_views::ClientGameStateRef;
 use phase_engine::game::engine::{apply, start_game};
 use phase_engine::game::{
     filter_events_for_viewer, filter_state_for_viewer, finalize_public_state,
@@ -210,6 +211,16 @@ impl PhaseGame {
     }
 
     pub fn viewer_snapshot(&self, seat: u8) -> ViewerSnapshot {
+        self.viewer_snapshot_impl(seat, false)
+    }
+
+    /// Build the richer Phase React client payload. Agent connections use the
+    /// compact snapshot above and avoid serializing full display state.
+    pub fn phase_client_snapshot(&self, seat: u8) -> ViewerSnapshot {
+        self.viewer_snapshot_impl(seat, true)
+    }
+
+    fn viewer_snapshot_impl(&self, seat: u8, include_phase_client: bool) -> ViewerSnapshot {
         let filtered = self.viewer_state(seat);
         let (legal_actions, spell_costs, legal_actions_by_object) = self.legal_actions(seat);
         let player = PlayerId(seat);
@@ -236,11 +247,16 @@ impl PhaseGame {
                 auto_pass_mode,
                 phase_stops,
             },
+            include_phase_client,
         )
     }
 
     pub fn spectator_snapshot(&self) -> ViewerSnapshot {
         self.viewer_snapshot(SPECTATOR_ID)
+    }
+
+    pub fn phase_client_spectator_snapshot(&self) -> ViewerSnapshot {
+        self.phase_client_snapshot(SPECTATOR_ID)
     }
 
     pub fn full_snapshot(&self) -> ViewerSnapshot {
@@ -251,10 +267,22 @@ impl PhaseGame {
             Default::default(),
             Default::default(),
             ViewerPreferences::default(),
+            false,
         )
     }
 
     pub fn full_snapshot_for(&self, seat: u8) -> ViewerSnapshot {
+        self.full_snapshot_for_impl(seat, false)
+    }
+
+    /// Build an omniscient replay snapshot in the Phase React client's native
+    /// state shape. This is recorded once per replay step; it is never sent to
+    /// scripted player connections.
+    pub fn phase_client_replay_snapshot_for(&self, seat: u8) -> ViewerSnapshot {
+        self.full_snapshot_for_impl(seat, true)
+    }
+
+    fn full_snapshot_for_impl(&self, seat: u8, include_phase_client: bool) -> ViewerSnapshot {
         let player = PlayerId(seat);
         ViewerSnapshot::from_state(
             &self.state,
@@ -273,6 +301,7 @@ impl PhaseGame {
                     .cloned()
                     .unwrap_or_default(),
             },
+            include_phase_client,
         )
     }
 
@@ -394,6 +423,27 @@ pub struct ViewerSnapshot {
     pub legal_actions: Vec<GameAction>,
     pub spell_costs: BTreeMap<String, ManaCost>,
     pub legal_actions_by_object: BTreeMap<String, Vec<GameAction>>,
+    /// Phase's native client boundary, populated only for live sockets that
+    /// explicitly negotiate the richer browser payload. Optional so agents and
+    /// version-2 Coworld replays retain the compact projection above.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub phase_client: Option<PhaseClientSnapshot>,
+}
+
+/// Atomic state/action payload consumed by Phase's `EngineAdapter` client
+/// boundary. The state has already passed through Phase viewer filtering; the
+/// browser must render it directly and submit only actions carried beside it.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct PhaseClientSnapshot {
+    /// Display-only serialized Phase state. Keep this opaque on the Coworld
+    /// side: it is preserved in replays but must never be rehydrated as the
+    /// authoritative engine checkpoint.
+    pub state: Value,
+    pub derived: Value,
+    pub legal_actions: Vec<GameAction>,
+    pub auto_pass_recommended: bool,
+    pub spell_costs: BTreeMap<String, ManaCost>,
+    pub legal_actions_by_object: BTreeMap<String, Vec<GameAction>>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -495,8 +545,27 @@ impl ViewerSnapshot {
         spell_costs: std::collections::HashMap<ObjectId, ManaCost>,
         legal_actions_by_object: std::collections::HashMap<ObjectId, Vec<GameAction>>,
         preferences: ViewerPreferences,
+        include_phase_client: bool,
     ) -> Self {
         let card = |id: ObjectId| card_view(state, cards, id);
+        let phase_client = include_phase_client.then(|| {
+            let client_state = ClientGameStateRef::wrap(state, preferences.player.map(PlayerId));
+            PhaseClientSnapshot {
+                state: serde_json::to_value(state).expect("Phase client state must serialize"),
+                derived: serde_json::to_value(client_state.derived)
+                    .expect("Phase derived views must serialize"),
+                legal_actions: legal_actions.clone(),
+                auto_pass_recommended: preferences.auto_pass_recommended,
+                spell_costs: spell_costs
+                    .iter()
+                    .map(|(id, cost)| (id.0.to_string(), cost.clone()))
+                    .collect(),
+                legal_actions_by_object: legal_actions_by_object
+                    .iter()
+                    .map(|(id, actions)| (id.0.to_string(), actions.clone()))
+                    .collect(),
+            }
+        });
         Self {
             turn: state.turn_number,
             phase: format!("{:?}", state.phase),
@@ -559,6 +628,7 @@ impl ViewerSnapshot {
                 .into_iter()
                 .map(|(id, actions)| (id.0.to_string(), actions))
                 .collect(),
+            phase_client,
         }
     }
 }
@@ -739,12 +809,14 @@ mod tests {
         object.remove("auto_pass_recommended");
         object.remove("auto_pass_mode");
         object.remove("phase_stops");
+        object.remove("phase_client");
 
         let restored: ViewerSnapshot = serde_json::from_value(value).unwrap();
         assert!(restored.preference_player.is_none());
         assert!(!restored.auto_pass_recommended);
         assert!(restored.auto_pass_mode.is_none());
         assert!(restored.phase_stops.is_empty());
+        assert!(restored.phase_client.is_none());
     }
 
     #[test]
@@ -794,7 +866,15 @@ mod tests {
         ];
         let (mut game, _) = runtime.new_limited_game(decks, 7).unwrap();
 
-        let player = game.viewer_snapshot(0);
+        let player = game.phase_client_snapshot(0);
+        let player_phase = player.phase_client.as_ref().unwrap();
+        assert_eq!(player_phase.state["rng_seed"], 0);
+        assert_eq!(player_phase.state["rng_word_pos"], 0);
+        assert_eq!(player_phase.legal_actions, player.legal_actions);
+        assert_eq!(
+            player_phase.auto_pass_recommended,
+            player.auto_pass_recommended
+        );
         assert!(player.players[0]
             .hand
             .iter()
@@ -804,7 +884,10 @@ mod tests {
             .iter()
             .all(|card| card.name == "Hidden Card" && card.face_down));
 
-        let spectator = game.spectator_snapshot();
+        let spectator = game.phase_client_spectator_snapshot();
+        let spectator_phase = spectator.phase_client.as_ref().unwrap();
+        assert_eq!(spectator_phase.state["rng_seed"], 0);
+        assert!(spectator_phase.legal_actions.is_empty());
         assert!(spectator
             .players
             .iter()

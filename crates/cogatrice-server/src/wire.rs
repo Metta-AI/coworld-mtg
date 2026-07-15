@@ -1,5 +1,6 @@
 use phase_bridge::{DeckList, GameAction, GameEvent, PhaseOutcome, ViewerSnapshot};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 use crate::config::PublicEpisodeConfig;
 
@@ -56,6 +57,20 @@ pub struct ReplayStep {
     pub action: Option<GameAction>,
     pub state: ViewerSnapshot,
     pub events: Vec<GameEvent>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub phase_client_delta: Option<PhaseClientDelta>,
+}
+
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct PhaseClientDelta {
+    pub ops: Vec<PhaseClientDeltaOp>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(tag = "op", rename_all = "snake_case")]
+pub enum PhaseClientDeltaOp {
+    Set { path: Vec<String>, value: Value },
+    Remove { path: Vec<String> },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]

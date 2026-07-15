@@ -1,10 +1,36 @@
+ARG PHASE_REVISION=3391a770ef35d4fa7717e7343841fd6e6ca4aec6
+
 FROM docker.io/library/node:22-bookworm-slim AS web-builder
 
 WORKDIR /build
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY web ./web
-RUN npm run build
+RUN npm run build:legacy
+
+FROM docker.io/library/node:22-bookworm-slim AS phase-web-builder
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG PHASE_REVISION
+RUN git init /phase \
+    && git -C /phase remote add origin https://github.com/nishu-builder/phase.git \
+    && git -C /phase fetch --depth 1 origin "${PHASE_REVISION}" \
+    && git -C /phase checkout --detach FETCH_HEAD \
+    && test "$(git -C /phase rev-parse HEAD)" = "${PHASE_REVISION}"
+
+WORKDIR /phase/client
+RUN corepack pnpm@10.28.2 install --frozen-lockfile
+COPY phase-client /overlay
+RUN mkdir -p src/coworld \
+    && cp -R /overlay/src/. src/coworld/ \
+    && cp /overlay/player.html ./player.html \
+    && cp /overlay/global.html ./global.html \
+    && cp /overlay/replay.html ./replay.html \
+    && cp /overlay/vite.config.ts ./coworld.vite.config.ts \
+    && PHASE_REVISION="${PHASE_REVISION}" corepack pnpm@10.28.2 exec vite build --config coworld.vite.config.ts
 
 FROM docker.io/library/rust:1.91-bookworm AS rust-builder
 
@@ -17,7 +43,7 @@ ENV RUSTC_BOOTSTRAP=1 \
     CARGO_INCREMENTAL=0
 
 WORKDIR /build
-ARG PHASE_REVISION=3391a770ef35d4fa7717e7343841fd6e6ca4aec6
+ARG PHASE_REVISION
 RUN git init /phase \
     && git -C /phase remote add origin https://github.com/nishu-builder/phase.git \
     && git -C /phase fetch --depth 1 origin "${PHASE_REVISION}" \
@@ -28,6 +54,7 @@ RUN git init /phase \
 COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates
 COPY decks ./decks
+RUN test "$(sed -n 's/^pub const PHASE_REVISION: &str = "\([0-9a-f]*\)";.*/\1/p' crates/phase-bridge/src/lib.rs)" = "${PHASE_REVISION}"
 RUN --mount=type=cache,id=cogatrice-cargo-registry,target=/usr/local/cargo/registry \
     --mount=type=cache,id=cogatrice-target,target=/build/target \
     cargo build --release -p cogatrice-server -p goldfish \
@@ -44,6 +71,8 @@ WORKDIR /app
 COPY --from=rust-builder /out/cogatrice-server /app/cogatrice-server
 COPY --from=rust-builder /out/goldfish /app/goldfish
 COPY --from=web-builder /build/web/dist /app/web/dist
+RUN cp /app/web/dist/replay.html /app/web/dist/legacy-replay.html
+COPY --from=phase-web-builder /phase/client/coworld-dist /app/web/dist
 
 ENV COGAME_HOST=0.0.0.0 \
     COGAME_PORT=8080 \

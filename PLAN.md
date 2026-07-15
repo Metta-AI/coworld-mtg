@@ -12,8 +12,9 @@ Cockatrice-style honor-system prototype has been retired. The Rust-native
   results, replay persistence, and viewer fan-out. It contains no Magic rules.
 - `goldfish` ranks the legal actions supplied by Phase. It contains no manual
   mana, draw, timing, or combat implementation.
-- `web` renders visible Phase zones, mana, stack, combat state, prompts, events,
-  and exact legal action controls. Scryfall supplies card imagery.
+- The pinned Phase React client renders the game. Coworld supplies only a thin
+  WebSocket/replay adapter and series chrome; the old `web` renderer is retained
+  solely for version-2 replay compatibility.
 
 The mechanics and data contract is in [docs/phase-rules-port.md](docs/phase-rules-port.md).
 The live wire format is in [docs/protocol.md](docs/protocol.md).
@@ -24,17 +25,14 @@ The live wire format is in [docs/protocol.md](docs/protocol.md).
    export and Scryfall bulk metadata cache suitable for arbitrary deck import.
 2. Add a deck-import endpoint keyed by Scryfall Oracle ID, with explicit errors
    for cards Phase cannot resolve or parse.
-3. Complete the Arena-style interaction surface for modal spells, mana pinning,
-   multi-target arrows, damage assignment, priority yields, and uncommon
-   interactive prompts without duplicating engine legality in TypeScript.
-4. Add deterministic browser fixtures for multi-block combat, first/double
+3. Add deterministic browser fixtures for multi-block combat, first/double
    strike damage, deep stacks, face-down exile, mobile Full Control, and reduced
    motion; keep screenshot baselines alongside behavioral assertions.
-5. Prepare the two maintained-fork Phase commits as small upstream pull requests
+4. Prepare the maintained-fork Phase commits as small upstream pull requests
    that independently satisfy `phase-rs/phase` contribution and test rules.
-6. Expand hosted smoke beyond two goldfish players to include reconnect, replay,
+5. Expand hosted smoke beyond two goldfish players to include reconnect, replay,
    clock, preference, and browser-client episodes within Coworld limits.
-7. Add Phase AI difficulty variants and LLM policies that rank the same exact
+6. Add Phase AI difficulty variants and LLM policies that rank the same exact
    legal-action surface.
 
 ## Non-negotiable invariants

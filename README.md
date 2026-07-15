@@ -11,6 +11,12 @@ replacements, layers, and state-based actions are engine-enforced. See
 [the Phase port contract](docs/phase-rules-port.md) for the decision, Scryfall
 boundary and invariants.
 
+Browser player, spectator, and current replay routes use the React client from
+that same pinned Phase revision. This repository adds only a thin Coworld
+transport/replay adapter and series chrome; the former local renderer is built
+only to keep version-2 Coworld replays readable. See the
+[client migration spec](docs/specs/0001-phase-client-for-coworld.md).
+
 ## Fidelity harness
 
 `cogatrice-harness` runs seeded games directly against `phase-bridge`, records

@@ -62,7 +62,15 @@ decision snapshot:
       {"type": "PlayLand", "data": {"object_id": 12, "card_id": 12}}
     ],
     "spell_costs": {/* object id -> effective Phase cost */},
-    "legal_actions_by_object": {/* object id -> exact actions */}
+    "legal_actions_by_object": {/* object id -> exact actions */},
+    "phase_client": {
+      "state": {/* Phase viewer-filtered GameState */},
+      "derived": {/* Phase engine-authored presentation views */},
+      "legal_actions": [/* same exact actions as above */],
+      "auto_pass_recommended": false,
+      "spell_costs": {/* object id -> effective Phase cost */},
+      "legal_actions_by_object": {/* object id -> exact actions */}
+    }
   },
   "events": [/* viewer-filtered Phase GameEvent values */],
   "clocks_ms": [354000, 349000],
@@ -80,6 +88,20 @@ offered `PassPriority` action, and only when Phase's rules-aware presentation
 policy recommends passing. `auto_pass_mode` and `phase_stops` contain only the
 requesting player's preferences; `preference_player` identifies that Phase
 seat, and these fields never expose an opponent's settings.
+
+`phase_client` is the atomic Phase-native state/action pair used by the Phase
+React client. It is present only when a live player or global socket
+connects with `client=phase`; scripted agents and the legacy browser retain the
+smaller compact payload. It is optional on input so version-2 replays remain
+readable. During the compatibility window the compact fields and
+`phase_client` describe the same engine revision; clients must never combine
+state from one frame with legal actions from another.
+
+Version-3 replay files store a full `phase_client` value on the first step and
+`phase_client_delta` operations on later steps. `/replay` applies those deltas
+server-side and emits complete Phase snapshots, so the browser never reruns the
+engine. Version-2 files omit both fields and `/client/replay` selects the bundled
+legacy compact viewer for them. The replay WebSocket remains read-only.
 
 To act, copy an offered action exactly:
 
@@ -143,7 +165,10 @@ submits a real Phase concession and records `clock_flag` as the host end reason.
 but the snapshot is filtered using Phase's non-seat spectator identity and has
 no legal actions.
 
-Replay artifacts are version 2. Each step records relative time, actor slot, the
-accepted Phase action, full authoritative projection, and Phase events. `/replay`
-sends `replay_meta`, then one `state` frame per step, followed by game/match end
-frames, and loops.
+New replay artifacts are version 3. Each step records relative time, actor slot,
+the accepted Phase action, authoritative compact projection, Phase events, and
+either the initial Phase client snapshot or a delta from the prior step.
+`/replay` sends `replay_meta`, then reconstructed full `state` frames, followed
+by game/match end frames. The Phase replay adapter buffers the first stream and
+provides local play, pause, and seek controls. Version-2 replay loading remains
+supported as described above.

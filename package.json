@@ -7,7 +7,9 @@
   },
   "scripts": {
     "dev": "vite --config web/vite.config.ts --host 127.0.0.1",
-    "build": "vite build --config web/vite.config.ts",
+    "build": "npm run build:legacy && npm run build:phase",
+    "build:legacy": "vite build --config web/vite.config.ts",
+    "build:phase": "bash scripts/build-phase-client.sh",
     "typecheck": "tsc --noEmit -p web/tsconfig.json",
     "test": "vitest run --config web/vite.config.ts",
     "test:e2e": "npm run build && playwright test -c web/playwright.config.ts"

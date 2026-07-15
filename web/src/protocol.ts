@@ -81,6 +81,15 @@ export interface ViewerSnapshot {
   legal_actions: GameAction[];
   spell_costs: Record<string, ManaCost>;
   legal_actions_by_object: Record<string, GameAction[]>;
+  /** Negotiated Phase React client payload. The legacy renderer ignores it. */
+  phase_client?: {
+    state: unknown;
+    derived: unknown;
+    legal_actions: GameAction[];
+    auto_pass_recommended: boolean;
+    spell_costs: Record<string, ManaCost>;
+    legal_actions_by_object: Record<string, GameAction[]>;
+  };
 }
 
 export interface PublicConfig {

@@ -14,6 +14,7 @@ use config::EpisodeConfig;
 use decks::load_deck;
 use futures::{FutureExt, Sink, SinkExt, StreamExt};
 use phase_bridge::{DeckList, GameAction, GameEvent, PhaseGame, PhaseRuntime};
+use serde_json::Value;
 use std::collections::BTreeMap;
 use std::future::{Future, IntoFuture};
 use std::path::{Component, Path, PathBuf};
@@ -24,8 +25,8 @@ use tokio::sync::{mpsc, oneshot};
 use tokio::time::{sleep, Duration, Instant};
 use wire::{
     reject_error, seat_to_slot, slot_to_seat, GameOutcome, GameSummary, GlobalFrame, MatchState,
-    PlayerCommand, PlayerFrame, Replay, ReplayFrame, ReplayGame, ReplayGameSummary, ReplayStep,
-    Results,
+    PhaseClientDelta, PhaseClientDeltaOp, PlayerCommand, PlayerFrame, Replay, ReplayFrame,
+    ReplayGame, ReplayGameSummary, ReplayStep, Results,
 };
 
 #[derive(Clone)]
@@ -52,6 +53,7 @@ enum ServerCommand {
         slot: usize,
         id: u64,
         tx: mpsc::UnboundedSender<SocketOut>,
+        phase_client: bool,
     },
     PlayerMessage {
         slot: usize,
@@ -65,6 +67,7 @@ enum ServerCommand {
     GlobalConnected {
         id: u64,
         tx: mpsc::UnboundedSender<SocketOut>,
+        phase_client: bool,
     },
     GlobalDisconnected {
         id: u64,
@@ -76,6 +79,7 @@ enum ServerCommand {
 struct Connection {
     id: u64,
     tx: mpsc::UnboundedSender<SocketOut>,
+    phase_client: bool,
 }
 
 struct CurrentContext<'a> {
@@ -151,6 +155,7 @@ async fn run_replay_server(
     let listener = TcpListener::bind(format!("{host}:{port}")).await?;
     let app = Router::new()
         .route("/healthz", get(healthz))
+        .route("/client/replay", get(replay_client_asset))
         .route("/client/{*path}", get(client_asset))
         .route("/replay", get(replay_ws))
         .with_state(ReplayState { replay });
@@ -159,6 +164,32 @@ async fn run_replay_server(
         .into_future()
         .await?;
     Ok(())
+}
+
+async fn replay_client_asset(State(state): State<ReplayState>) -> Response {
+    let has_phase_snapshots = state
+        .replay
+        .games
+        .first()
+        .and_then(|game| game.steps.first())
+        .is_some_and(|step| step.state.phase_client.is_some());
+    let filename = if has_phase_snapshots {
+        "replay.html"
+    } else {
+        "legacy-replay.html"
+    };
+    let dist = web_dist_dir();
+    if !dist.is_dir() {
+        return client_placeholder(BTreeMap::new()).into_response();
+    }
+    let file = dist.join(filename);
+    match tokio::fs::read(&file).await {
+        Ok(bytes) => ([(header::CONTENT_TYPE, content_type(&file))], bytes).into_response(),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+            (StatusCode::NOT_FOUND, "not found").into_response()
+        }
+        Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "failed to read asset").into_response(),
+    }
 }
 
 async fn healthz() -> &'static str {
@@ -245,16 +276,22 @@ async fn player_ws(
         .get("slot")
         .and_then(|value| value.parse::<usize>().ok());
     let token = params.get("token").cloned().unwrap_or_default();
+    let phase_client = requests_phase_client(&params);
     match slot {
         Some(slot) if slot < 2 && token == state.config.tokens[slot] => {
-            ws.on_upgrade(move |socket| player_socket(socket, state, slot))
+            ws.on_upgrade(move |socket| player_socket(socket, state, slot, phase_client))
         }
         _ => ws.on_upgrade(policy_violation),
     }
 }
 
-async fn global_ws(State(state): State<AppState>, ws: WebSocketUpgrade) -> impl IntoResponse {
-    ws.on_upgrade(move |socket| global_socket(socket, state))
+async fn global_ws(
+    State(state): State<AppState>,
+    Query(params): Query<BTreeMap<String, String>>,
+    ws: WebSocketUpgrade,
+) -> impl IntoResponse {
+    let phase_client = requests_phase_client(&params);
+    ws.on_upgrade(move |socket| global_socket(socket, state, phase_client))
 }
 
 async fn replay_ws(State(state): State<ReplayState>, ws: WebSocketUpgrade) -> impl IntoResponse {
@@ -271,12 +308,21 @@ async fn policy_violation(mut socket: WebSocket) {
         .ok();
 }
 
-async fn player_socket(socket: WebSocket, state: AppState, slot: usize) {
+fn requests_phase_client(params: &BTreeMap<String, String>) -> bool {
+    params.get("client").is_some_and(|value| value == "phase")
+}
+
+async fn player_socket(socket: WebSocket, state: AppState, slot: usize, phase_client: bool) {
     let id = state.next_conn_id.fetch_add(1, Ordering::Relaxed);
     let (tx, rx) = mpsc::unbounded_channel();
     state
         .cmd_tx
-        .send(ServerCommand::PlayerConnected { slot, id, tx })
+        .send(ServerCommand::PlayerConnected {
+            slot,
+            id,
+            tx,
+            phase_client,
+        })
         .ok();
     socket_loop(
         socket,
@@ -288,12 +334,16 @@ async fn player_socket(socket: WebSocket, state: AppState, slot: usize) {
     .await;
 }
 
-async fn global_socket(socket: WebSocket, state: AppState) {
+async fn global_socket(socket: WebSocket, state: AppState, phase_client: bool) {
     let id = state.next_conn_id.fetch_add(1, Ordering::Relaxed);
     let (tx, rx) = mpsc::unbounded_channel();
     state
         .cmd_tx
-        .send(ServerCommand::GlobalConnected { id, tx })
+        .send(ServerCommand::GlobalConnected {
+            id,
+            tx,
+            phase_client,
+        })
         .ok();
     socket_loop(
         socket,
@@ -363,6 +413,7 @@ async fn replay_socket(socket: WebSocket, state: ReplayState) {
     }
     loop {
         for game in &replay.games {
+            let mut phase_client = None;
             let mut prior_ms = 0;
             for step in &game.steps {
                 let delay = step.wall_ms.saturating_sub(prior_ms).min(50);
@@ -370,9 +421,18 @@ async fn replay_socket(socket: WebSocket, state: ReplayState) {
                     sleep(Duration::from_millis(delay)).await;
                 }
                 prior_ms = step.wall_ms;
+                let mut step = step.clone();
+                if let Some(snapshot) = &step.state.phase_client {
+                    phase_client = serde_json::to_value(snapshot).ok();
+                } else if let (Some(current), Some(delta)) =
+                    (phase_client.as_mut(), step.phase_client_delta.as_ref())
+                {
+                    apply_phase_delta(current, delta);
+                    step.state.phase_client = serde_json::from_value(current.clone()).ok();
+                }
                 let frame = ReplayFrame::State {
                     game_number: game.game_number,
-                    step: Box::new(step.clone()),
+                    step: Box::new(step),
                 };
                 if send_ws_json(&mut sender, &frame).await.is_err() {
                     return;
@@ -529,12 +589,20 @@ impl MatchRunner {
             duration_ms(self.config.clock_s),
         ];
         let started = Instant::now();
+        let initial_state = game.phase_client_replay_snapshot_for(0);
+        let mut replay_phase_client = serde_json::to_value(
+            initial_state
+                .phase_client
+                .as_ref()
+                .ok_or_else(|| anyhow!("Phase replay snapshot omitted Phase client state"))?,
+        )?;
         let mut steps = vec![ReplayStep {
             wall_ms: 0,
             actor_slot: None,
             action: None,
-            state: game.full_snapshot(),
+            state: initial_state,
             events: initial.events.clone(),
+            phase_client_delta: None,
         }];
         self.send_game_start(
             &game,
@@ -583,6 +651,7 @@ impl MatchRunner {
                     self.record_and_broadcast(
                         &game,
                         &mut steps,
+                        &mut replay_phase_client,
                         game_number,
                         slot_of_seat0,
                         clocks_ms,
@@ -590,7 +659,7 @@ impl MatchRunner {
                         timeout_slot,
                         action,
                         result.events,
-                    );
+                    )?;
                 }
                 command = self.cmd_rx.recv() => {
                     let Some(command) = command else { break };
@@ -636,6 +705,7 @@ impl MatchRunner {
                                     self.record_and_broadcast(
                                         &game,
                                         &mut steps,
+                                        &mut replay_phase_client,
                                         game_number,
                                         slot_of_seat0,
                                         clocks_ms,
@@ -643,7 +713,7 @@ impl MatchRunner {
                                         slot,
                                         action,
                                         events,
-                                    );
+                                    )?;
                                     self.send_ack(slot, command.cmd_id, game.state().turn_number);
                                 }
                                 Err(error) => {
@@ -698,6 +768,7 @@ impl MatchRunner {
         &self,
         game: &PhaseGame,
         steps: &mut Vec<ReplayStep>,
+        replay_phase_client: &mut Value,
         game_number: u32,
         slot_of_seat0: usize,
         clocks_ms: [u64; 2],
@@ -705,15 +776,27 @@ impl MatchRunner {
         actor_slot: usize,
         action: GameAction,
         events: Vec<GameEvent>,
-    ) {
+    ) -> Result<()> {
+        let mut state =
+            game.phase_client_replay_snapshot_for(slot_to_seat(actor_slot, slot_of_seat0));
+        let current = serde_json::to_value(
+            state
+                .phase_client
+                .take()
+                .ok_or_else(|| anyhow!("Phase replay snapshot omitted Phase client state"))?,
+        )?;
+        let phase_client_delta = phase_delta(replay_phase_client, &current);
+        *replay_phase_client = current;
         steps.push(ReplayStep {
             wall_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
             actor_slot: Some(actor_slot as u8),
             action: Some(action),
-            state: game.full_snapshot_for(slot_to_seat(actor_slot, slot_of_seat0)),
+            state,
             events: events.clone(),
+            phase_client_delta: Some(phase_client_delta),
         });
         self.broadcast_state(game, &events, game_number, slot_of_seat0, clocks_ms);
+        Ok(())
     }
 
     fn handle_connection_command(
@@ -722,8 +805,17 @@ impl MatchRunner {
         current: Option<&CurrentContext<'_>>,
     ) {
         match command {
-            ServerCommand::PlayerConnected { slot, id, tx } => {
-                if let Some(old) = self.players[slot].replace(Connection { id, tx }) {
+            ServerCommand::PlayerConnected {
+                slot,
+                id,
+                tx,
+                phase_client,
+            } => {
+                if let Some(old) = self.players[slot].replace(Connection {
+                    id,
+                    tx,
+                    phase_client,
+                }) {
                     old.tx.send(SocketOut::Close).ok();
                 }
                 self.send_hello(slot, current);
@@ -736,8 +828,19 @@ impl MatchRunner {
                     self.players[slot] = None;
                 }
             }
-            ServerCommand::GlobalConnected { id, tx } => {
-                self.globals.insert(id, Connection { id, tx });
+            ServerCommand::GlobalConnected {
+                id,
+                tx,
+                phase_client,
+            } => {
+                self.globals.insert(
+                    id,
+                    Connection {
+                        id,
+                        tx,
+                        phase_client,
+                    },
+                );
                 self.send_global_hello(id, current);
                 if let Some(current) = current {
                     self.send_state_to_global(id, current, &[]);
@@ -842,11 +945,16 @@ impl MatchRunner {
             return;
         };
         let seat = slot_to_seat(slot, current.slot_of_seat0);
+        let state = if connection.phase_client {
+            current.game.phase_client_snapshot(seat)
+        } else {
+            current.game.viewer_snapshot(seat)
+        };
         send_json(
             &connection.tx,
             &PlayerFrame::State {
                 game_number: current.game_number,
-                state: Box::new(current.game.viewer_snapshot(seat)),
+                state: Box::new(state),
                 events: current.game.filter_events(events, seat),
                 clocks_ms: current.clocks_ms,
                 decision_cap_ms: duration_ms(self.config.decision_cap_s),
@@ -858,11 +966,16 @@ impl MatchRunner {
         let Some(connection) = self.globals.get(&id) else {
             return;
         };
+        let state = if connection.phase_client {
+            current.game.phase_client_spectator_snapshot()
+        } else {
+            current.game.spectator_snapshot()
+        };
         send_json(
             &connection.tx,
             &GlobalFrame::State {
                 game_number: current.game_number,
-                state: Box::new(current.game.spectator_snapshot()),
+                state: Box::new(state),
                 events: current
                     .game
                     .filter_events(events, phase_bridge::SPECTATOR_ID),
@@ -941,7 +1054,7 @@ impl MatchRunner {
             );
         }
         let replay = Replay {
-            version: 2,
+            version: 3,
             config: self.config.public(),
             games: self.replay_games.clone(),
             results: results.clone(),
@@ -1115,6 +1228,89 @@ fn send_json<T: serde::Serialize>(tx: &mpsc::UnboundedSender<SocketOut>, value: 
     }
 }
 
+fn phase_delta(previous: &Value, current: &Value) -> PhaseClientDelta {
+    fn walk(
+        path: &mut Vec<String>,
+        previous: &Value,
+        current: &Value,
+        ops: &mut Vec<PhaseClientDeltaOp>,
+    ) {
+        if previous == current {
+            return;
+        }
+        if let (Some(before), Some(after)) = (previous.as_object(), current.as_object()) {
+            for key in before.keys().filter(|key| !after.contains_key(*key)) {
+                path.push(key.clone());
+                ops.push(PhaseClientDeltaOp::Remove { path: path.clone() });
+                path.pop();
+            }
+            for (key, value) in after {
+                path.push(key.clone());
+                match before.get(key) {
+                    Some(old) => walk(path, old, value, ops),
+                    None => ops.push(PhaseClientDeltaOp::Set {
+                        path: path.clone(),
+                        value: value.clone(),
+                    }),
+                }
+                path.pop();
+            }
+        } else {
+            ops.push(PhaseClientDeltaOp::Set {
+                path: path.clone(),
+                value: current.clone(),
+            });
+        }
+    }
+
+    let mut ops = Vec::new();
+    walk(&mut Vec::new(), previous, current, &mut ops);
+    PhaseClientDelta { ops }
+}
+
+fn apply_phase_delta(target: &mut Value, delta: &PhaseClientDelta) {
+    fn set_path(target: &mut Value, path: &[String], value: Value) {
+        if path.is_empty() {
+            *target = value;
+            return;
+        }
+        if !target.is_object() {
+            *target = Value::Object(Default::default());
+        }
+        let object = target.as_object_mut().expect("object created above");
+        if path.len() == 1 {
+            object.insert(path[0].clone(), value);
+        } else {
+            set_path(
+                object
+                    .entry(path[0].clone())
+                    .or_insert_with(|| Value::Object(Default::default())),
+                &path[1..],
+                value,
+            );
+        }
+    }
+
+    fn remove_path(target: &mut Value, path: &[String]) {
+        let Some(object) = target.as_object_mut() else {
+            return;
+        };
+        if path.len() == 1 {
+            object.remove(&path[0]);
+        } else if let Some(child) = object.get_mut(&path[0]) {
+            remove_path(child, &path[1..]);
+        }
+    }
+
+    for op in &delta.ops {
+        match op {
+            PhaseClientDeltaOp::Set { path, value } => set_path(target, path, value.clone()),
+            PhaseClientDeltaOp::Remove { path } if !path.is_empty() => remove_path(target, path),
+            PhaseClientDeltaOp::Remove { .. } => *target = Value::Null,
+        }
+    }
+}
+
 fn command_id(text: &str) -> u64 {
     serde_json::from_str::<serde_json::Value>(text)
         .ok()
@@ -1148,6 +1344,19 @@ fn escape_html(text: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn phase_client_payload_requires_explicit_capability() {
+        assert!(!requests_phase_client(&BTreeMap::new()));
+        assert!(!requests_phase_client(&BTreeMap::from([(
+            "client".to_owned(),
+            "legacy".to_owned(),
+        )])));
+        assert!(requests_phase_client(&BTreeMap::from([(
+            "client".to_owned(),
+            "phase".to_owned(),
+        )])));
+    }
 
     #[test]
     fn simultaneous_decisions_keep_independent_clocks() {
@@ -1186,5 +1395,21 @@ mod tests {
             stops: Vec::new(),
         }));
         assert!(!is_clock_neutral_preference(&GameAction::PassPriority));
+    }
+
+    #[test]
+    fn phase_replay_delta_round_trips_nested_state() {
+        let previous = serde_json::json!({
+            "state": {"objects": {"1": {"name": "Bear", "tapped": false}}, "gone": 1},
+            "legal_actions": []
+        });
+        let current = serde_json::json!({
+            "state": {"objects": {"1": {"name": "Bear", "tapped": true}, "2": null}},
+            "legal_actions": [{"type": "PassPriority"}]
+        });
+        let delta = phase_delta(&previous, &current);
+        let mut restored = previous;
+        apply_phase_delta(&mut restored, &delta);
+        assert_eq!(restored, current);
     }
 }

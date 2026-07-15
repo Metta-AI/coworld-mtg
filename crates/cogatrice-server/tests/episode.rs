@@ -27,10 +27,16 @@ async fn goldfish_match_writes_results_and_replay() {
 
     let replay: Replay =
         serde_json::from_str(&tokio::fs::read_to_string(&outcome.replay).await.unwrap()).unwrap();
-    assert_eq!(replay.version, 2);
+    assert_eq!(replay.version, 3);
     assert_eq!(replay.games.len(), 1);
     assert!(!replay.games[0].steps.is_empty());
     assert!(replay.games[0].steps[0].action.is_none());
+    assert!(replay.games[0].steps[0].state.phase_client.is_some());
+    assert!(replay.games[0]
+        .steps
+        .iter()
+        .skip(1)
+        .all(|step| step.state.phase_client.is_none() && step.phase_client_delta.is_some()));
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]

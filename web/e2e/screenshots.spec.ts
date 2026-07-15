@@ -35,15 +35,18 @@ test("capture player and global views", async ({ page, context }) => {
   try {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(`http://127.0.0.1:${harness.port}/client/player?slot=0&token=tokA`);
-    await expect(page.getByRole("button", { name: "Keep", exact: true })).toBeVisible({ timeout: 20_000 });
+    const continueButton = page.getByRole("button", { name: "Tap to continue", exact: true });
+    await expect(continueButton).toBeVisible({ timeout: 20_000 });
+    await continueButton.click();
+    await expect(page.getByRole("button", { name: "Keep Hand", exact: true })).toBeVisible({ timeout: 20_000 });
     await page.screenshot({ path: join(shots, "1-mulligan.png") });
 
-    await page.getByRole("button", { name: "Keep", exact: true }).click();
-    await expect(page.getByRole("region", { name: "Turn actions" })).toBeVisible({ timeout: 20_000 });
+    await page.getByRole("button", { name: "Keep Hand", exact: true }).click();
+    await expect(page.getByRole("button", { name: "Game menu" })).toBeVisible({ timeout: 20_000 });
     await page.screenshot({ path: join(shots, "2-table-main1.png") });
 
     await page.setViewportSize({ width: 390, height: 844 });
-    await expect(page.getByRole("region", { name: "Your hand" })).toBeVisible();
+    await expect(page.getByRole("button", { name: /View full hand/ })).toBeVisible();
     await page.screenshot({ path: join(shots, "3-table-mobile.png") });
 
     const globalPage = await context.newPage();
