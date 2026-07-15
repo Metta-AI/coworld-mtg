@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/Metta-AI/coworld/main/src/coworld/coworld_manifest_schema.json",
   "game": {
     "name": "coworld-mtg",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Two-player Magic: The Gathering powered by the Phase rules engine, with enforced mana, timing, priority, stack, combat, hidden information, scoring, and replay.",
     "owner": "nishu.builder@gmail.com",
     "config_schema": {
@@ -167,27 +167,27 @@
     },
     "runnable": {
       "type": "game",
-      "image": "coworld-mtg:coworld-6324f6c9321f",
+      "image": "coworld-mtg:coworld-5aa98c420488",
       "run": [
         "/app/cogatrice-server"
       ],
       "env": {},
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/fd2851addda86a7fa9566a241fbc17a843b5cace"
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/53209de7416e8c6b18a5355917c2ec3a35ec7882"
     },
     "protocols": {
       "player": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/fd2851addda86a7fa9566a241fbc17a843b5cace/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/53209de7416e8c6b18a5355917c2ec3a35ec7882/docs/protocol.md"
       },
       "global": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/fd2851addda86a7fa9566a241fbc17a843b5cace/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/53209de7416e8c6b18a5355917c2ec3a35ec7882/docs/protocol.md"
       }
     },
     "docs": {
       "readme": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/fd2851addda86a7fa9566a241fbc17a843b5cace/README.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/53209de7416e8c6b18a5355917c2ec3a35ec7882/README.md"
       },
       "pages": [
         {
@@ -204,12 +204,12 @@
   "player": [
     {
       "type": "player",
-      "image": "coworld-mtg:coworld-6324f6c9321f",
+      "image": "coworld-mtg:coworld-5aa98c420488",
       "run": [
         "/app/goldfish"
       ],
       "env": {},
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/fd2851addda86a7fa9566a241fbc17a843b5cace",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/53209de7416e8c6b18a5355917c2ec3a35ec7882",
       "id": "coworld-mtg-goldfish",
       "name": "Coworld MTG Phase Goldfish",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
