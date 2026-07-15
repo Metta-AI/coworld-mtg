@@ -40,6 +40,7 @@ const state = {
 } as unknown as GameState;
 
 const pass = { type: "PassPriority" } as GameAction;
+const concede = { type: "Concede", data: { player_id: 0 } } as GameAction;
 
 function phaseStateFrame() {
   return {
@@ -48,7 +49,7 @@ function phaseStateFrame() {
       phase_client: {
         state,
         derived: {},
-        legal_actions: [pass],
+        legal_actions: [pass, concede],
         auto_pass_recommended: false,
         spell_costs: {},
         legal_actions_by_object: {},
@@ -80,13 +81,16 @@ describe("Coworld Phase adapter", () => {
     await initialized;
 
     expect((await adapter.getState()).turn_number).toBe(1);
-    expect((await adapter.getLegalActions()).actions).toEqual([pass]);
+    expect((await adapter.getLegalActions()).actions).toEqual([pass, concede]);
 
     const submitted = adapter.submitAction(pass, 0);
     expect(JSON.parse(socket.send.mock.calls[0][0])).toEqual({ cmd_id: 1, action: pass });
     socket.frame(phaseStateFrame());
     socket.frame({ type: "ack", cmd_id: 1, turn: 1 });
     await expect(submitted).resolves.toEqual({ events: [] });
+
+    adapter.sendConcede();
+    expect(JSON.parse(socket.send.mock.calls[1][0])).toEqual({ cmd_id: 2, action: concede });
   });
 
   it("uses the read-only replay socket and accepts nested replay steps", async () => {

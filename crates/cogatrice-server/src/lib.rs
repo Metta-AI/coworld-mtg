@@ -12,7 +12,7 @@ use axum::routing::get;
 use axum::Router;
 use config::EpisodeConfig;
 use decks::load_deck;
-use futures::{FutureExt, Sink, SinkExt, StreamExt};
+use futures::{Sink, SinkExt, StreamExt};
 use phase_bridge::{DeckList, GameAction, GameEvent, PhaseGame, PhaseRuntime};
 use serde_json::Value;
 use std::collections::BTreeMap;
@@ -411,76 +411,73 @@ async fn replay_socket(socket: WebSocket, state: ReplayState) {
     if send_ws_json(&mut sender, &meta).await.is_err() {
         return;
     }
-    loop {
-        for game in &replay.games {
-            let mut phase_client = None;
-            let mut prior_ms = 0;
-            for step in &game.steps {
-                let delay = step.wall_ms.saturating_sub(prior_ms).min(50);
-                if delay > 0 {
-                    sleep(Duration::from_millis(delay)).await;
-                }
-                prior_ms = step.wall_ms;
-                let mut step = step.clone();
-                if let Some(snapshot) = &step.state.phase_client {
-                    phase_client = serde_json::to_value(snapshot).ok();
-                } else if let (Some(current), Some(delta)) =
-                    (phase_client.as_mut(), step.phase_client_delta.as_ref())
-                {
-                    apply_phase_delta(current, delta);
-                    step.state.phase_client = serde_json::from_value(current.clone()).ok();
-                }
-                let frame = ReplayFrame::State {
-                    game_number: game.game_number,
-                    step: Box::new(step),
-                };
-                if send_ws_json(&mut sender, &frame).await.is_err() {
-                    return;
-                }
+    for game in &replay.games {
+        let mut phase_client = None;
+        let mut prior_ms = 0;
+        for step in &game.steps {
+            let delay = step.wall_ms.saturating_sub(prior_ms).min(50);
+            if delay > 0 {
+                sleep(Duration::from_millis(delay)).await;
             }
-            if let Some(summary) = replay
-                .results
-                .games
-                .iter()
-                .find(|summary| summary.game_number == game.game_number)
+            prior_ms = step.wall_ms;
+            let mut step = step.clone();
+            if let Some(snapshot) = &step.state.phase_client {
+                phase_client = serde_json::to_value(snapshot).ok();
+            } else if let (Some(current), Some(delta)) =
+                (phase_client.as_mut(), step.phase_client_delta.as_ref())
             {
-                let outcome = GameOutcome {
-                    winner_slot: summary.winner_slot,
-                    final_life: summary.final_life,
-                    turns: summary.turns,
-                    reason: summary.reason.clone(),
-                };
-                if send_ws_json(
-                    &mut sender,
-                    &ReplayFrame::GameEnd {
-                        game_number: game.game_number,
-                        outcome,
-                        wins: replay.results.scores,
-                    },
-                )
-                .await
-                .is_err()
-                {
-                    return;
-                }
+                apply_phase_delta(current, delta);
+                step.state.phase_client = serde_json::from_value(current.clone()).ok();
+            }
+            let frame = ReplayFrame::State {
+                game_number: game.game_number,
+                step: Box::new(step),
+            };
+            if send_ws_json(&mut sender, &frame).await.is_err() {
+                return;
             }
         }
-        if send_ws_json(
-            &mut sender,
-            &ReplayFrame::MatchEnd {
-                scores: replay.results.scores,
-                games: replay.results.games.clone(),
-            },
-        )
-        .await
-        .is_err()
+        if let Some(summary) = replay
+            .results
+            .games
+            .iter()
+            .find(|summary| summary.game_number == game.game_number)
         {
-            return;
+            let outcome = GameOutcome {
+                winner_slot: summary.winner_slot,
+                final_life: summary.final_life,
+                turns: summary.turns,
+                reason: summary.reason.clone(),
+            };
+            if send_ws_json(
+                &mut sender,
+                &ReplayFrame::GameEnd {
+                    game_number: game.game_number,
+                    outcome,
+                    wins: replay.results.scores,
+                },
+            )
+            .await
+            .is_err()
+            {
+                return;
+            }
         }
-        if matches!(
-            receiver.next().now_or_never(),
-            Some(Some(Ok(Message::Close(_)))) | Some(None)
-        ) {
+    }
+    if send_ws_json(
+        &mut sender,
+        &ReplayFrame::MatchEnd {
+            scores: replay.results.scores,
+            games: replay.results.games.clone(),
+        },
+    )
+    .await
+    .is_err()
+    {
+        return;
+    }
+    while let Some(message) = receiver.next().await {
+        if matches!(message, Ok(Message::Close(_)) | Err(_)) {
             return;
         }
     }

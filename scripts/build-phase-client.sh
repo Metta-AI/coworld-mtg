@@ -29,6 +29,8 @@ cp "$ROOT/phase-client/replay.html" "$CHECKOUT/client/replay.html"
 cp "$ROOT/phase-client/vite.config.ts" "$CHECKOUT/client/coworld.vite.config.ts"
 
 corepack pnpm@10.28.2 --dir "$CHECKOUT/client" install --frozen-lockfile
+corepack pnpm@10.28.2 --dir "$CHECKOUT/client" exec vitest run \
+  src/coworld/coworld-ws-adapter.test.ts
 PHASE_REVISION="$PHASE_REVISION" corepack pnpm@10.28.2 --dir "$CHECKOUT/client" exec vite build --config coworld.vite.config.ts
 
 mkdir -p "$ROOT/web/dist"

@@ -550,11 +550,26 @@ impl ViewerSnapshot {
         let card = |id: ObjectId| card_view(state, cards, id);
         let phase_client = include_phase_client.then(|| {
             let client_state = ClientGameStateRef::wrap(state, preferences.player.map(PlayerId));
+            let mut client_legal_actions = legal_actions.clone();
+            if let Some(player) = preferences.player {
+                if !matches!(state.waiting_for, WaitingFor::GameOver { .. }) {
+                    // Concession is legal at any time, but Phase intentionally keeps it
+                    // outside the current WaitingFor prompt. Include the exact action in
+                    // the browser payload so Coworld's client never has to manufacture
+                    // an engine action locally.
+                    let concession = GameAction::Concede {
+                        player_id: PlayerId(player),
+                    };
+                    if !client_legal_actions.contains(&concession) {
+                        client_legal_actions.push(concession);
+                    }
+                }
+            }
             PhaseClientSnapshot {
                 state: serde_json::to_value(state).expect("Phase client state must serialize"),
                 derived: serde_json::to_value(client_state.derived)
                     .expect("Phase derived views must serialize"),
-                legal_actions: legal_actions.clone(),
+                legal_actions: client_legal_actions,
                 auto_pass_recommended: preferences.auto_pass_recommended,
                 spell_costs: spell_costs
                     .iter()
@@ -868,9 +883,13 @@ mod tests {
 
         let player = game.phase_client_snapshot(0);
         let player_phase = player.phase_client.as_ref().unwrap();
+        let mut expected_phase_actions = player.legal_actions.clone();
+        expected_phase_actions.push(GameAction::Concede {
+            player_id: PlayerId(0),
+        });
         assert_eq!(player_phase.state["rng_seed"], 0);
         assert_eq!(player_phase.state["rng_word_pos"], 0);
-        assert_eq!(player_phase.legal_actions, player.legal_actions);
+        assert_eq!(player_phase.legal_actions, expected_phase_actions);
         assert_eq!(
             player_phase.auto_pass_recommended,
             player.auto_pass_recommended
@@ -896,6 +915,15 @@ mod tests {
 
         let error = game.submit(0, GameAction::PassPriority).unwrap_err();
         assert!(error.to_string().contains("legal-action set"));
+
+        game.concede(0).unwrap();
+        let finished = game.phase_client_snapshot(0);
+        assert!(!finished
+            .phase_client
+            .unwrap()
+            .legal_actions
+            .iter()
+            .any(|action| matches!(action, GameAction::Concede { .. })));
     }
 
     #[test]

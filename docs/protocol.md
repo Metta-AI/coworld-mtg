@@ -96,6 +96,9 @@ smaller compact payload. It is optional on input so version-2 replays remain
 readable. During the compatibility window the compact fields and
 `phase_client` describe the same engine revision; clients must never combine
 state from one frame with legal actions from another.
+Player payloads include the viewer's exact `Concede` action while a game is in
+progress, even though concession sits outside Phase's current prompt. Coworld's
+adapter forwards that action rather than constructing one in the browser.
 
 Version-3 replay files store a full `phase_client` value on the first step and
 `phase_client_delta` operations on later steps. `/replay` applies those deltas

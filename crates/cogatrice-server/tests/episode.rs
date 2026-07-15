@@ -40,7 +40,7 @@ async fn goldfish_match_writes_results_and_replay() {
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn replay_mode_serves_recorded_loop() {
+async fn replay_mode_serves_a_finite_recording() {
     let _guard = env_lock().lock().await;
     let outcome = run_completed_match("replay_source", 5.0, 1.0, false).await;
     let port = free_port();
@@ -66,15 +66,15 @@ async fn replay_mode_serves_recorded_loop() {
     let mut saw_match_end = false;
     for _ in 0..4096 {
         let kind = next_type(&mut read).await;
-        if saw_match_end {
-            assert_eq!(kind, "state");
-            break;
-        }
         if kind == "match_end" {
             saw_match_end = true;
+            break;
         }
     }
     assert!(saw_match_end);
+    assert!(timeout(Duration::from_millis(100), read.next())
+        .await
+        .is_err());
 
     shutdown_tx.send(()).ok();
     timeout(Duration::from_secs(5), server)

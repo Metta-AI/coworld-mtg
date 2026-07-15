@@ -280,12 +280,16 @@ export class WebSocketAdapter implements EngineAdapter {
   }
 
   sendConcede(): void {
-    if (this._playerId !== null) {
-      void this.submitAction(
-        { type: "Concede", data: { player_id: this._playerId } } as GameAction,
-        this._playerId,
-      ).catch(() => {});
+    if (this._playerId === null || !this.snapshot) return;
+    const action = this.snapshot.legalResult.actions.find(
+      (candidate) =>
+        candidate.type === "Concede" && candidate.data.player_id === this._playerId,
+    );
+    if (!action) {
+      this.emit({ type: "error", message: "Coworld server omitted the legal concession action" });
+      return;
     }
+    void this.submitAction(action, this._playerId).catch(() => {});
   }
 
   sendEmote(_emote: string): void {}

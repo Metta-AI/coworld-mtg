@@ -188,3 +188,5 @@ current Phase seat as the Phase client's local player id.
 - [x] Build the Phase client and Rust engine from the same revision.
 - [x] Make Phase the default player/global UI and add snapshot-based replay.
 - [x] Retain the bespoke client only as the version-2 replay compatibility viewer.
+- [x] Gate the pinned overlay build on adapter contract tests, forward the
+      server-authored concession action, and terminate replay snapshot streams.
