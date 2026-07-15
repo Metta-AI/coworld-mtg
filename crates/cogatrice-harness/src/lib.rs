@@ -1,4 +1,4 @@
-//! Reproducible, direct-to-Phase fidelity harness for Cogatrice.
+//! Reproducible, direct-to-Phase fidelity harness for Coworld MTG.
 //!
 //! This crate owns orchestration, artifacts, replay, and invariants. It never
 //! interprets card text or implements a Magic rule; every submitted action is

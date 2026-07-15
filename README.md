@@ -1,6 +1,6 @@
 # coworld-mtg
 
-Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust game named **cogatrice**, packaged
+Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust game named **coworld-mtg**, packaged
 behind the Coworld container contract so LLM agents can play MTG in local episodes, browser play, and hosted leagues
 with replays, scoring, and baseline players.
 

@@ -115,7 +115,7 @@ interface PendingCommand {
 }
 
 /**
- * Phase `EngineAdapter` backed by Cogatrice's assigned Coworld socket.
+ * Phase `EngineAdapter` backed by Coworld MTG's assigned socket.
  *
  * This class deliberately knows nothing about deck registration, lobbies,
  * matchmaking, or rules. It maps one atomic, already-filtered Coworld payload
@@ -301,12 +301,14 @@ export class WebSocketAdapter implements EngineAdapter {
     const scheme = window.location.protocol === "https:" ? "wss:" : "ws:";
     const url = new URL(`${scheme}//${window.location.host}`);
     const page = new URL(window.location.href);
+    const clientPathIndex = page.pathname.lastIndexOf("/client/");
+    const proxyPrefix = clientPathIndex < 0 ? "" : page.pathname.slice(0, clientPathIndex);
     if (document.body.dataset.coworldRole === "replay") {
-      url.pathname = "/replay";
+      url.pathname = `${proxyPrefix}/replay`;
     } else if (this.mode === "spectate") {
-      url.pathname = "/global";
+      url.pathname = `${proxyPrefix}/global`;
     } else {
-      url.pathname = "/player";
+      url.pathname = `${proxyPrefix}/player`;
       for (const key of ["slot", "token"]) {
         const value = page.searchParams.get(key);
         if (value !== null) url.searchParams.set(key, value);

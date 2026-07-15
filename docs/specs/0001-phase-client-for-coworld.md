@@ -4,9 +4,9 @@
 
 ## Summary
 
-Replace Cogatrice's bespoke battlefield renderer with the Phase React client while
+Replace Coworld MTG's bespoke battlefield renderer with the Phase React client while
 retaining Coworld as the authoritative episode host. A small `CoworldAdapter`
-will implement Phase's existing `EngineAdapter` interface over Cogatrice's
+will implement Phase's existing `EngineAdapter` interface over Coworld MTG's
 authenticated WebSocket and replay protocols. The game server will send Phase's
 viewer-filtered `GameState`, engine-authored derived views, and exact legal
 actions as one atomic snapshot. Coworld-only chrome will display match score,

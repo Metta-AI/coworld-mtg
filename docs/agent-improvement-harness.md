@@ -25,7 +25,7 @@ follow-ups are recorded in
 ## Decision
 
 Build a reproducible improvement harness around Phase rather than adding Magic
-rules to Cogatrice. Phase remains the only executable rules authority. The
+rules to Coworld MTG. Phase remains the only executable rules authority. The
 harness supplies it with a production-sized card corpus, exercises it with
 deterministic and realistic workloads, minimizes failures, and gives coding
 agents enough evidence to make narrowly scoped fixes with permanent regression
@@ -45,7 +45,7 @@ The four inputs have deliberately different roles:
   deterministic rules oracle.
 
 This preserves the boundary in [the Phase port contract](phase-rules-port.md):
-Cogatrice hosts games and exposes exact legal actions, while rules changes are
+Coworld MTG hosts games and exposes exact legal actions, while rules changes are
 made and tested in Phase.
 
 ## Why 17Lands is a workload, not an oracle
@@ -159,7 +159,7 @@ Each improvement attempt follows the same closed loop:
 1. Select a failure or high-value coverage gap.
 2. Minimize it to the smallest corpus, decks, seed, state, and action trace that
    still demonstrates the problem.
-3. Classify it as a Cogatrice integration defect, a Phase defect, a data defect,
+3. Classify it as a Coworld MTG integration defect, a Phase defect, a data defect,
    or an inconclusive observational anomaly.
 4. For a Phase defect, locate the relevant Comprehensive Rules sections and at
    least two analogous Phase implementations.

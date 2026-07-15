@@ -1,6 +1,6 @@
 services:
-  cogatrice:
-    image: cogatrice-phase:latest
+  coworld-mtg:
+    image: coworld-mtg:latest
     platform: linux/amd64
     build:
       context: .

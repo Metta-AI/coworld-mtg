@@ -22,7 +22,7 @@ runtime downloads.
 
 Inputs can be local paths, `file://` URIs, or immutable HTTP(S) URLs. Remote
 inputs require an expected SHA-256 value. The Phase input is the full generated
-card export, not Cogatrice's compact test fixture.
+card export, not Coworld MTG's compact test fixture.
 
 ```sh
 cargo run --locked -p cogatrice-harness -- materialize \

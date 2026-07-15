@@ -2,7 +2,7 @@
 
 ## Decision
 
-Cogatrice uses the open-source Phase engine as its rules authority. Production
+Coworld MTG uses the open-source Phase engine as its rules authority. Production
 builds pin the maintained [nishu-builder fork](https://github.com/nishu-builder/phase),
 while [phase-rs/phase](https://github.com/phase-rs/phase) remains the upstream
 project. The previous `tabletop-core` model is a useful
@@ -13,7 +13,7 @@ actions, triggers, replacement effects, and combat all depend on one another.
 The Phase engine dependency is pinned to fork commit
 `3391a770ef35d4fa7717e7343841fd6e6ca4aec6`, under Phase's MIT/Apache-2.0
 license.
-`crates/phase-bridge` is the only Cogatrice layer allowed to invoke it. Host,
+`crates/phase-bridge` is the only Coworld MTG layer allowed to invoke it. Host,
 replay, browser, and policy code consume viewer-filtered state and exact legal
 `GameAction` values; they must not reproduce legality.
 

@@ -13,7 +13,16 @@ static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn goldfish_match_writes_results_and_replay() {
     let _guard = env_lock().lock().await;
-    let outcome = run_completed_match("e2e", 5.0, 1.0, false).await;
+    let outcome = run_completed_match(
+        "e2e",
+        5.0,
+        1.0,
+        false,
+        ["red_rush", "green_stompy"],
+        1,
+        false,
+    )
+    .await;
 
     assert_reports(&outcome.reports);
     let results: Results =
@@ -42,7 +51,16 @@ async fn goldfish_match_writes_results_and_replay() {
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn replay_mode_serves_a_finite_recording() {
     let _guard = env_lock().lock().await;
-    let outcome = run_completed_match("replay_source", 5.0, 1.0, false).await;
+    let outcome = run_completed_match(
+        "replay_source",
+        5.0,
+        1.0,
+        false,
+        ["red_rush", "green_stompy"],
+        1,
+        false,
+    )
+    .await;
     let port = free_port();
     set_common_env(port);
     std::env::set_var("COGAME_LOAD_REPLAY_URI", &outcome.replay);
@@ -88,11 +106,59 @@ async fn replay_mode_serves_a_finite_recording() {
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn mute_player_times_out_but_match_finishes() {
     let _guard = env_lock().lock().await;
-    let outcome = run_completed_match("timeout", 1.0, 0.05, true).await;
+    let outcome = run_completed_match(
+        "timeout",
+        1.0,
+        0.05,
+        true,
+        ["red_rush", "green_stompy"],
+        1,
+        false,
+    )
+    .await;
     let results: Results =
         serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap()).unwrap();
     assert_eq!(results.scores[0] + results.scores[1], 1.0);
     assert!(!results.games.is_empty());
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn color_swap_series_exchanges_decks_between_players() {
+    let _guard = env_lock().lock().await;
+    let outcome = run_completed_match(
+        "color_swap",
+        10.0,
+        1.0,
+        false,
+        ["red_rush", "green_stompy"],
+        2,
+        true,
+    )
+    .await;
+
+    let results: Results =
+        serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap()).unwrap();
+    assert!(results.games.len() >= 2);
+    assert_eq!(
+        outcome.reports[0]
+            .hellos
+            .iter()
+            .skip(1)
+            .take(2)
+            .map(|hello| hello.deck_name.as_str())
+            .collect::<Vec<_>>(),
+        ["Red Rush", "Green Stompy"]
+    );
+    assert_eq!(
+        outcome.reports[1]
+            .hellos
+            .iter()
+            .skip(1)
+            .take(2)
+            .map(|hello| hello.deck_name.as_str())
+            .collect::<Vec<_>>(),
+        ["Green Stompy", "Red Rush"]
+    );
 }
 
 struct MatchOutcome {
@@ -106,13 +172,24 @@ async fn run_completed_match(
     clock_s: f64,
     decision_cap_s: f64,
     mute_slot_1: bool,
+    decks: [&str; 2],
+    games_to_win: u32,
+    swap_decks_each_game: bool,
 ) -> MatchOutcome {
     let root = temp_root(name);
     let config = root.join("config.json");
     let results = root.join("results.json");
     let replay = root.join("replay.json");
     let log = root.join("log.txt");
-    write_config(&config, clock_s, decision_cap_s).await;
+    write_config(
+        &config,
+        clock_s,
+        decision_cap_s,
+        decks,
+        games_to_win,
+        swap_decks_each_game,
+    )
+    .await;
     let port = free_port();
     set_common_env(port);
     std::env::set_var("COGAME_CONFIG_URI", &config);
@@ -134,12 +211,12 @@ async fn run_completed_match(
     } else {
         tokio::spawn(async move { goldfish::run_url(&slot1).await })
     };
-    let report0 = timeout(Duration::from_secs(20), player0)
+    let report0 = timeout(Duration::from_secs(60), player0)
         .await
         .unwrap()
         .unwrap()
         .unwrap();
-    let report1 = timeout(Duration::from_secs(20), player1)
+    let report1 = timeout(Duration::from_secs(60), player1)
         .await
         .unwrap()
         .unwrap()
@@ -158,13 +235,21 @@ async fn run_completed_match(
     }
 }
 
-async fn write_config(path: &Path, clock_s: f64, decision_cap_s: f64) {
+async fn write_config(
+    path: &Path,
+    clock_s: f64,
+    decision_cap_s: f64,
+    decks: [&str; 2],
+    games_to_win: u32,
+    swap_decks_each_game: bool,
+) {
     let config = json!({
         "tokens": ["tokA", "tokB"],
         "players": [{"name": "goldfish-0"}, {"name": "goldfish-1"}],
         "seed": 4242,
-        "decks": ["red_rush", "green_stompy"],
-        "games_to_win": 1,
+        "decks": decks,
+        "games_to_win": games_to_win,
+        "swap_decks_each_game": swap_decks_each_game,
         "clock_s": clock_s,
         "decision_cap_s": decision_cap_s,
         "player_connect_timeout_s": 5.0

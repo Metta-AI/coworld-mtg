@@ -47,7 +47,7 @@ const defines = Object.fromEntries(
 );
 
 export default defineConfig({
-  base: "/client/",
+  base: "./",
   publicDir: false,
   define: {
     ...defines,

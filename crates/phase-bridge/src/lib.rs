@@ -85,7 +85,7 @@ impl PhaseRuntime {
         })
     }
 
-    /// Compact Phase export containing every card in Cogatrice's bundled decks.
+    /// Compact Phase export containing every card in Coworld MTG's bundled decks.
     pub fn bundled() -> Result<Self, BridgeError> {
         Self::from_card_data_json(include_str!("../tests/fixtures/card-data.json"))
     }
@@ -852,7 +852,7 @@ mod tests {
 
         // Phase models CR 103.5 as simultaneous decisions. Each seat receives
         // only its own exact legal action values from the same authoritative
-        // state; Cogatrice does not synthesize a generic "keep" command.
+        // state; Coworld MTG does not synthesize a generic "keep" command.
         for seat in [0, 1] {
             let (actions, _, _) = game.legal_actions(seat);
             let keep = actions

@@ -15,6 +15,8 @@ pub struct EpisodeConfig {
     pub decks: Vec<String>,
     #[serde(default = "default_games_to_win")]
     pub games_to_win: u32,
+    #[serde(default)]
+    pub swap_decks_each_game: bool,
     #[serde(default = "default_clock_s")]
     pub clock_s: f64,
     #[serde(default = "default_decision_cap_s")]
@@ -34,6 +36,7 @@ pub struct PublicEpisodeConfig {
     pub seed: u64,
     pub decks: [String; 2],
     pub games_to_win: u32,
+    pub swap_decks_each_game: bool,
     pub clock_s: f64,
     pub decision_cap_s: f64,
     pub player_connect_timeout_s: f64,
@@ -54,6 +57,7 @@ impl EpisodeConfig {
             seed: self.seed,
             decks: [self.decks[0].clone(), self.decks[1].clone()],
             games_to_win: self.games_to_win,
+            swap_decks_each_game: self.swap_decks_each_game,
             clock_s: self.clock_s,
             decision_cap_s: self.decision_cap_s,
             player_connect_timeout_s: self.player_connect_timeout_s,

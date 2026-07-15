@@ -1,6 +1,6 @@
-# Cogatrice Phase protocol
+# Coworld MTG Phase protocol
 
-Cogatrice uses JSON text frames over WebSocket:
+Coworld MTG uses JSON text frames over WebSocket:
 
 - `/player?slot=<0|1>&token=<token>` is an authenticated player connection.
 - `/global` is a read-only, non-seat spectator connection.
@@ -31,7 +31,10 @@ On connection:
 ```
 
 `slot` is stable across the match and is used for scoring. `seat` is Phase's
-player ID for the current game; seats rotate between games.
+player ID for the current game; seats rotate between games. When the public
+config has `swap_decks_each_game: true`, even-numbered games also exchange the
+two deck assignments between stable slots, so each player pilots both decks in
+a multi-game color-swap series.
 
 Every initial state, accepted action, timeout, and reconnect produces a complete
 decision snapshot:

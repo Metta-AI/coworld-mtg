@@ -569,12 +569,12 @@ impl MatchRunner {
         let slot_of_seat0 = ((game_number - 1) % 2) as usize;
         let seed = self.config.seed + u64::from(game_number - 1);
         let deck_names = [
-            self.decks[slot_of_seat0]
+            self.decks[self.deck_index_for_slot(slot_of_seat0, game_number)]
                 .cards
                 .iter()
                 .map(|card| card.name.clone())
                 .collect(),
-            self.decks[1 - slot_of_seat0]
+            self.decks[self.deck_index_for_slot(1 - slot_of_seat0, game_number)]
                 .cards
                 .iter()
                 .map(|card| card.name.clone())
@@ -907,6 +907,7 @@ impl MatchRunner {
             return;
         };
         let slot_of_seat0 = current.map(|ctx| ctx.slot_of_seat0).unwrap_or(0);
+        let game_number = current.map(|ctx| ctx.game_number).unwrap_or(1);
         let seat = slot_to_seat(slot, slot_of_seat0);
         send_json(
             &connection.tx,
@@ -915,11 +916,19 @@ impl MatchRunner {
                 seat,
                 seat_name: self.config.players[slot].name.clone(),
                 player_names: self.player_names_by_seat(slot_of_seat0),
-                r#match: self.match_state(current.map(|ctx| ctx.game_number).unwrap_or(1)),
+                r#match: self.match_state(game_number),
                 config: Box::new(self.config.public()),
-                decklist: self.decks[slot].clone(),
+                decklist: self.decks[self.deck_index_for_slot(slot, game_number)].clone(),
             },
         );
+    }
+
+    fn deck_index_for_slot(&self, slot: usize, game_number: u32) -> usize {
+        if self.config.swap_decks_each_game && game_number % 2 == 0 {
+            1 - slot
+        } else {
+            slot
+        }
     }
 
     fn send_global_hello(&self, id: u64, current: Option<&CurrentContext<'_>>) {

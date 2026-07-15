@@ -95,13 +95,20 @@ describe("Coworld Phase adapter", () => {
 
   it("uses the read-only replay socket and accepts nested replay steps", async () => {
     document.body.dataset.coworldRole = "replay";
+    window.history.replaceState(
+      {},
+      "",
+      "/api/observatory/v2/coworlds/replays/session/proxy/client/replay",
+    );
     const adapter = new WebSocketAdapter("ignored", "spectate", {
       main_deck: [],
       sideboard: [],
     });
     const initialized = adapter.initialize();
     const socket = MockWebSocket.last;
-    expect(new URL(socket.url).pathname).toBe("/replay");
+    expect(new URL(socket.url).pathname).toBe(
+      "/api/observatory/v2/coworlds/replays/session/proxy/replay",
+    );
 
     const frame = phaseStateFrame();
     socket.frame({ type: "state", step: { state: frame.state, events: [] } });

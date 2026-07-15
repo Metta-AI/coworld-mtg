@@ -1,12 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/Metta-AI/coworld/main/src/coworld/coworld_manifest_schema.json",
   "game": {
-    "name": "cogatrice",
+    "name": "coworld-mtg",
     "description": "Two-player Magic: The Gathering powered by the Phase rules engine, with enforced mana, timing, priority, stack, combat, hidden information, scoring, and replay.",
     "owner": "nishu.builder@gmail.com",
     "runnable": {
       "type": "game",
-      "image": "{{COGATRICE_IMAGE}}",
+      "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/cogatrice-server"],
       "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/4aca186fac2cadcc5646522a5d085da3fb16613c"
     },
@@ -41,6 +41,7 @@
           "items": {"type": "string", "enum": ["red_rush", "green_stompy"]}
         },
         "games_to_win": {"type": "integer", "minimum": 1, "maximum": 5},
+        "swap_decks_each_game": {"type": "boolean"},
         "clock_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 3600},
         "decision_cap_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 600},
         "player_connect_timeout_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 600}
@@ -106,10 +107,10 @@
       "pages": [
         {
           "id": "rules.md",
-          "title": "Cogatrice rules",
+          "title": "Coworld MTG rules",
           "content": {
             "type": "text",
-            "value": "Cogatrice is a two-player Magic duel using bundled 40-card Red Rush and Green Stompy decks. The pinned Phase engine is authoritative for draws, mana, casting, timing, targets, priority, the stack, combat, triggers, state-based actions, and game outcomes. Players may submit only exact actions offered by Phase for their private view. Hidden hands and libraries remain redacted from opponents and spectators. A match ends when one player reaches the configured number of game wins; clocks and explicit concessions are enforced by the host."
+            "value": "Coworld MTG is a two-player Magic duel with balanced mirrored matches and a color-swapping Red Rush versus Green Stompy series. The pinned Phase engine is authoritative for draws, mana, casting, timing, targets, priority, the stack, combat, triggers, state-based actions, and game outcomes. Players may submit only exact actions offered by Phase for their private view. Hidden hands and libraries remain redacted from opponents and spectators. Multi-game matches alternate seats, and color-swap variants also exchange decks between players after each game. Clocks and explicit concessions are enforced by the host."
           }
         }
       ]
@@ -117,10 +118,10 @@
   },
   "player": [
     {
-      "id": "cogatrice-goldfish",
-      "name": "Cogatrice Phase Goldfish",
+      "id": "coworld-mtg-goldfish",
+      "name": "Coworld MTG Phase Goldfish",
       "type": "player",
-      "image": "{{COGATRICE_IMAGE}}",
+      "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/goldfish"],
       "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/4aca186fac2cadcc5646522a5d085da3fb16613c",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
@@ -131,7 +132,7 @@
       "id": "default-commissioner",
       "name": "Default Commissioner",
       "type": "commissioner",
-      "description": "Reusable config-driven commissioner for recurring Cogatrice league rounds.",
+      "description": "Reusable config-driven commissioner for recurring Coworld MTG league rounds.",
       "source_url": "https://github.com/Metta-AI/coworld-tools/tree/c00fabe82cbecc57a3dad4e78626890e2a10d992/commissioners/commissioners/ruleset_strategy_commissioner",
       "image": "{{COMMISSIONER_IMAGE}}"
     }
@@ -142,15 +143,46 @@
   "optimizer": [],
   "variants": [
     {
-      "id": "red-vs-green",
-      "name": "Red Rush vs Green Stompy",
-      "description": "A best-of-one Phase-enforced duel with the bundled mono-red and mono-green decks.",
+      "id": "color-swap-showdown",
+      "name": "Color-Swap Showdown",
+      "description": "A first-to-two series where players alternate seats and exchange Red Rush and Green Stompy after every game.",
       "game_config": {
-        "players": [{"name": "Red mage"}, {"name": "Green mage"}],
+        "players": [{"name": "Challenger A"}, {"name": "Challenger B"}],
         "seed": 4242,
         "decks": ["red_rush", "green_stompy"],
-        "games_to_win": 1,
-        "clock_s": 360,
+        "games_to_win": 2,
+        "swap_decks_each_game": true,
+        "clock_s": 480,
+        "decision_cap_s": 30,
+        "player_connect_timeout_s": 60
+      }
+    },
+    {
+      "id": "red-mirror-blitz",
+      "name": "Red Mirror Blitz",
+      "description": "A symmetric first-to-two Red Rush mirror with shorter clocks and fast tactical races.",
+      "game_config": {
+        "players": [{"name": "Ember A"}, {"name": "Ember B"}],
+        "seed": 9001,
+        "decks": ["red_rush", "red_rush"],
+        "games_to_win": 2,
+        "swap_decks_each_game": false,
+        "clock_s": 240,
+        "decision_cap_s": 20,
+        "player_connect_timeout_s": 60
+      }
+    },
+    {
+      "id": "green-mirror-boardcraft",
+      "name": "Green Mirror Boardcraft",
+      "description": "A symmetric first-to-two Green Stompy mirror focused on creature sequencing, attacks, and blocks.",
+      "game_config": {
+        "players": [{"name": "Grove A"}, {"name": "Grove B"}],
+        "seed": 1337,
+        "decks": ["green_stompy", "green_stompy"],
+        "games_to_win": 2,
+        "swap_decks_each_game": false,
+        "clock_s": 480,
         "decision_cap_s": 30,
         "player_connect_timeout_s": 60
       }
@@ -158,14 +190,15 @@
   ],
   "certification": {
     "players": [
-      {"player_id": "cogatrice-goldfish"},
-      {"player_id": "cogatrice-goldfish"}
+      {"player_id": "coworld-mtg-goldfish"},
+      {"player_id": "coworld-mtg-goldfish"}
     ],
     "game_config": {
-      "players": [{"name": "Red goldfish"}, {"name": "Green goldfish"}],
+      "players": [{"name": "Red goldfish A"}, {"name": "Red goldfish B"}],
       "seed": 4242,
-      "decks": ["red_rush", "green_stompy"],
+      "decks": ["red_rush", "red_rush"],
       "games_to_win": 1,
+      "swap_decks_each_game": false,
       "clock_s": 120,
       "decision_cap_s": 5,
       "player_connect_timeout_s": 30

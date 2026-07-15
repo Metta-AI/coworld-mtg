@@ -208,7 +208,7 @@ function handleFrame(state: AppState, frame: ServerFrame): void {
 function render(state: AppState): void {
   const snapshot = state.snapshot;
   if (!snapshot) {
-    state.root.innerHTML = `<main class="loading"><div class="brand-mark">C</div><h1>Cogatrice</h1><p>${escapeHtml(state.message)}</p></main>`;
+    state.root.innerHTML = `<main class="loading"><div class="brand-mark">M</div><h1>Coworld MTG</h1><p>${escapeHtml(state.message)}</p></main>`;
     return;
   }
 
