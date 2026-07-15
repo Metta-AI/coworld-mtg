@@ -14,10 +14,13 @@ The local Phase improvement chain validated by the campaign is:
    transactional mana-pool failure handling;
 4. `a0f0e759a` — deterministic blocker prompt ordering across all producers.
 
-The chain is published on `nishu-builder/phase` and merged into that fork's
-`main` at `3391a770ef35d4fa7717e7343841fd6e6ca4aec6`. Coworld pins that exact
-revision; upstream synchronization must preserve a content-addressed revision
-rather than following a mutable branch.
+The chain is published on `nishu-builder/phase`. Follow-up owner fixes for
+viewer-scoped simultaneous decisions, deterministic batched-trigger
+serialization, mandatory additional-cost castability, and Arena priority
+controls are merged into that fork's `main` at
+`2dec6c88915db4697706234a7ba2fcedd97b1689`. Coworld pins that exact revision;
+upstream synchronization must preserve a content-addressed revision rather
+than following a mutable branch.
 
 The post-review production shard `shard-008-reviewed-phase-payment-fixes`
 completed four seeds to the 500-action budget: four attempted, four
@@ -27,7 +30,7 @@ finding aggregation were clean. That historical shard used the reviewed local
 Phase patch overlay while retaining the sealed corpus rules boundary at
 `f6fd1fca5c581bcd127d5b18742623e1298ae3c7`.
 
-The production dependency now moves the rules boundary to `3391a770e`. The
+The production dependency now moves the rules boundary to `2dec6c889`. The
 existing harness correctly rejects the old manifest against that binary. Do
 not relabel or edit the old corpus to bypass the guard. Before claiming a
 production shard for the fork-main pin, record a new immutable corpus and
@@ -90,7 +93,7 @@ and equivalent discard, exile, and tap resource cases.
 ## Campaign continuation
 
 First establish a new immutable corpus whose manifest records Phase
-`3391a770ef35d4fa7717e7343841fd6e6ca4aec6`; preserve the existing SOS corpus as
+`2dec6c88915db4697706234a7ba2fcedd97b1689`; preserve the existing SOS corpus as
 historical evidence. Record the new manifest ID and all input hashes before
 running any shard.
 

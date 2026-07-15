@@ -33,7 +33,6 @@ pub struct PlayerConfig {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PublicEpisodeConfig {
     pub players: [PlayerConfig; 2],
-    pub seed: u64,
     pub decks: [String; 2],
     pub games_to_win: u32,
     pub swap_decks_each_game: bool,
@@ -54,7 +53,6 @@ impl EpisodeConfig {
     pub fn public(&self) -> PublicEpisodeConfig {
         PublicEpisodeConfig {
             players: [self.players[0].clone(), self.players[1].clone()],
-            seed: self.seed,
             decks: [self.decks[0].clone(), self.decks[1].clone()],
             games_to_win: self.games_to_win,
             swap_decks_each_game: self.swap_decks_each_game,
@@ -133,11 +131,17 @@ fn default_players() -> Vec<PlayerConfig> {
 }
 
 fn default_decks() -> Vec<String> {
-    vec!["red_rush".to_owned(), "green_stompy".to_owned()]
+    vec![
+        "lorehold_excavation".to_owned(),
+        "fractal_convergence".to_owned(),
+    ]
 }
 
 fn default_seed() -> u64 {
-    42
+    // Seed selection is the sole entropy boundary. Phase receives this value
+    // once and derives opening-library shuffles and every later random outcome
+    // from its serialized ChaCha20 stream.
+    rand::random()
 }
 
 fn default_games_to_win() -> u32 {
@@ -154,4 +158,41 @@ fn default_decision_cap_s() -> f64 {
 
 fn default_player_connect_timeout_s() -> f64 {
     60.0
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json::json;
+
+    #[test]
+    fn omitted_seed_is_fresh_while_an_explicit_seed_is_preserved() {
+        let config = || {
+            serde_json::from_value::<EpisodeConfig>(json!({
+                "tokens": ["a", "b"]
+            }))
+            .unwrap()
+            .normalized()
+            .unwrap()
+        };
+
+        let first = config();
+        let second = config();
+        assert_ne!(first.seed, second.seed);
+        assert_eq!(first.decks, ["lorehold_excavation", "fractal_convergence"]);
+        assert_eq!(first.games_to_win, 1);
+
+        let explicit = serde_json::from_value::<EpisodeConfig>(json!({
+            "tokens": ["a", "b"],
+            "seed": 4242
+        }))
+        .unwrap()
+        .normalized()
+        .unwrap();
+        assert_eq!(explicit.seed, 4242);
+        assert!(serde_json::to_value(explicit.public())
+            .unwrap()
+            .get("seed")
+            .is_none());
+    }
 }

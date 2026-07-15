@@ -71,7 +71,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
         tokens: ["tokA", "tokB"],
         players: [{ name: "browser-0" }, { name: "browser-1" }],
         seed: 5151,
-        decks: ["red_rush", "green_stompy"],
+        decks: ["lorehold_excavation", "fractal_convergence"],
         games_to_win: 1,
         clock_s: 300,
         decision_cap_s: 60,

@@ -43,7 +43,7 @@ cat > tmp/local-play/config.json <<'JSON'
   "tokens": ["tokA", "tokB"],
   "players": [{"name": "browser-0"}, {"name": "browser-1"}],
   "seed": 4242,
-  "decks": ["red_rush", "green_stompy"],
+  "decks": ["lorehold_excavation", "fractal_convergence"],
   "games_to_win": 1,
   "clock_s": 360,
   "decision_cap_s": 30,
@@ -71,3 +71,11 @@ To play against the baseline instead, leave the second browser closed and run:
 ```sh
 cargo run -p goldfish -- --url 'ws://127.0.0.1:8080/player?slot=1&token=tokB'
 ```
+
+The bundled decks are real 40-card `SOS.PremierDraft` lists captured from MTG
+Arena play data by 17Lands. Published play consists of two single-game variants
+with deck assignments reversed, so each challenger pilots Lorehold Excavation
+and Fractal Convergence once. Published variants omit `seed`, which generates a
+fresh root seed when the episode config is loaded. Supply `seed` explicitly, as
+in the local example above, to reproduce the exact initial library orders and
+all later random outcomes.

@@ -35,7 +35,7 @@ pub use phase_engine::types::game_state::{ActionResult, GameState, StackEntryKin
 pub use phase_engine::types::zones::Zone;
 
 /// The exact Phase fork revision used by this adapter.
-pub const PHASE_REVISION: &str = "3391a770ef35d4fa7717e7343841fd6e6ca4aec6";
+pub const PHASE_REVISION: &str = "2dec6c88915db4697706234a7ba2fcedd97b1689";
 
 pub const SPECTATOR_ID: u8 = u8::MAX;
 
@@ -87,7 +87,7 @@ impl PhaseRuntime {
 
     /// Compact Phase export containing every card in Coworld MTG's bundled decks.
     pub fn bundled() -> Result<Self, BridgeError> {
-        Self::from_card_data_json(include_str!("../tests/fixtures/card-data.json"))
+        Self::from_card_data_json(include_str!("../data/card-data.json"))
     }
 
     pub fn card_count(&self) -> usize {
@@ -228,7 +228,11 @@ impl PhaseGame {
             .iter()
             .any(|action| matches!(action, GameAction::PassPriority));
         let recommended_auto_pass = can_pass && auto_pass_recommended(&self.state, &legal_actions);
-        let auto_pass_mode = self.state.auto_pass.get(&player).copied();
+        let auto_pass_mode = self
+            .state
+            .auto_pass
+            .get(&player)
+            .map(|session| session.mode.clone());
         let phase_stops = self
             .state
             .phase_stops
@@ -293,7 +297,11 @@ impl PhaseGame {
             ViewerPreferences {
                 player: Some(seat),
                 auto_pass_recommended: false,
-                auto_pass_mode: self.state.auto_pass.get(&player).copied(),
+                auto_pass_mode: self
+                    .state
+                    .auto_pass
+                    .get(&player)
+                    .map(|session| session.mode.clone()),
                 phase_stops: self
                     .state
                     .phase_stops
@@ -729,6 +737,18 @@ mod tests {
             .collect()
     }
 
+    fn initial_card_orders(game: &PhaseGame) -> [Vec<ObjectId>; 2] {
+        std::array::from_fn(|seat| {
+            let player = &game.state().players[seat];
+            player
+                .hand
+                .iter()
+                .chain(player.library.iter())
+                .copied()
+                .collect()
+        })
+    }
+
     #[test]
     fn pins_a_reviewable_upstream_revision() {
         assert_eq!(PHASE_REVISION.len(), 40);
@@ -750,12 +770,12 @@ mod tests {
 
     #[test]
     fn phase_stops_are_actor_scoped_and_legal_outside_the_current_prompt() {
-        use phase_engine::types::phase::{Phase, PhaseStopScope};
+        use phase_engine::types::phase::{Phase, PhaseStopRetention, PhaseStopScope};
 
         let runtime = PhaseRuntime::bundled().unwrap();
         let decks = [
-            deck(include_str!("../../../decks/red_rush.json")),
-            deck(include_str!("../../../decks/green_stompy.json")),
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
         ];
         let (mut game, _) = runtime.new_limited_game(decks, 11).unwrap();
         let keep = game
@@ -776,6 +796,7 @@ mod tests {
         let stop = PhaseStop {
             phase: Phase::Upkeep,
             scope: PhaseStopScope::OwnTurn,
+            retention: PhaseStopRetention::Persistent,
         };
 
         game.submit(1, GameAction::SetPhaseStops { stops: vec![stop] })
@@ -795,8 +816,8 @@ mod tests {
 
         let runtime = PhaseRuntime::bundled().unwrap();
         let decks = [
-            deck(include_str!("../../../decks/red_rush.json")),
-            deck(include_str!("../../../decks/green_stompy.json")),
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
         ];
         let (mut game, _) = runtime.new_limited_game(decks, 12).unwrap();
         let error = game
@@ -814,8 +835,8 @@ mod tests {
     fn viewer_snapshot_defaults_preserve_old_replays() {
         let runtime = PhaseRuntime::bundled().unwrap();
         let decks = [
-            deck(include_str!("../../../decks/red_rush.json")),
-            deck(include_str!("../../../decks/green_stompy.json")),
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
         ];
         let (game, _) = runtime.new_limited_game(decks, 13).unwrap();
         let mut value = serde_json::to_value(game.full_snapshot()).unwrap();
@@ -837,13 +858,12 @@ mod tests {
     #[test]
     fn bundled_decks_enter_phase_mulligan_with_exact_legal_actions() {
         let runtime =
-            PhaseRuntime::from_card_data_json(include_str!("../tests/fixtures/card-data.json"))
-                .unwrap();
-        assert_eq!(runtime.card_count(), 15);
+            PhaseRuntime::from_card_data_json(include_str!("../data/card-data.json")).unwrap();
+        assert_eq!(runtime.card_count(), 46);
 
         let decks = [
-            deck(include_str!("../../../decks/red_rush.json")),
-            deck(include_str!("../../../decks/green_stompy.json")),
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
         ];
         let (mut game, initial) = runtime.new_limited_game(decks, 4242).unwrap();
         assert!(!initial.events.is_empty());
@@ -873,11 +893,31 @@ mod tests {
     }
 
     #[test]
+    fn root_seed_reproduces_and_varies_initial_card_order() {
+        let runtime = PhaseRuntime::bundled().unwrap();
+        let decks = [
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
+        ];
+
+        let (first, _) = runtime.new_limited_game(decks.clone(), 7_001).unwrap();
+        let (replay, _) = runtime.new_limited_game(decks.clone(), 7_001).unwrap();
+        let (different, _) = runtime.new_limited_game(decks, 7_002).unwrap();
+
+        assert_eq!(first.state().rng_seed, 7_001);
+        assert_eq!(replay.state().rng_seed, 7_001);
+        assert_eq!(different.state().rng_seed, 7_002);
+        assert_eq!(initial_card_orders(&first), initial_card_orders(&replay));
+        assert_ne!(initial_card_orders(&first), initial_card_orders(&different));
+        assert!(first.state().rng.get_word_pos() > 0);
+    }
+
+    #[test]
     fn viewer_projection_redacts_hidden_cards_and_rejects_invented_actions() {
         let runtime = PhaseRuntime::bundled().unwrap();
         let decks = [
-            deck(include_str!("../../../decks/red_rush.json")),
-            deck(include_str!("../../../decks/green_stompy.json")),
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
         ];
         let (mut game, _) = runtime.new_limited_game(decks, 7).unwrap();
 
@@ -930,8 +970,8 @@ mod tests {
     fn checkpoint_restore_preserves_authoritative_state() {
         let runtime = PhaseRuntime::bundled().unwrap();
         let decks = [
-            deck(include_str!("../../../decks/red_rush.json")),
-            deck(include_str!("../../../decks/green_stompy.json")),
+            deck(include_str!("../../../decks/lorehold_excavation.json")),
+            deck(include_str!("../../../decks/fractal_convergence.json")),
         ];
         let (game, _) = runtime.new_limited_game(decks, 99).unwrap();
         let checkpoint = game.checkpoint_json().unwrap();

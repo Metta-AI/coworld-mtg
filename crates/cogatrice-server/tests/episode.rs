@@ -1,6 +1,7 @@
 use cogatrice_server::wire::{Replay, Results};
 use futures::StreamExt;
 use serde_json::{json, Value};
+use std::future::Future;
 use std::path::{Path, PathBuf};
 use std::sync::OnceLock;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -9,156 +10,175 @@ use tokio::time::{sleep, timeout, Duration};
 use tokio_tungstenite::tungstenite::Message;
 
 static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
+const WORKER_STACK_SIZE: usize = 4 * 1024 * 1024;
 
-#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn goldfish_match_writes_results_and_replay() {
-    let _guard = env_lock().lock().await;
-    let outcome = run_completed_match(
-        "e2e",
-        5.0,
-        1.0,
-        false,
-        ["red_rush", "green_stompy"],
-        1,
-        false,
-    )
-    .await;
+#[test]
+fn goldfish_match_writes_results_and_replay() {
+    run_episode_test(async {
+        let _guard = env_lock().lock().await;
+        let outcome = run_completed_match(
+            "e2e",
+            5.0,
+            1.0,
+            false,
+            ["lorehold_excavation", "fractal_convergence"],
+            1,
+            false,
+        )
+        .await;
 
-    assert_reports(&outcome.reports);
-    let results: Results =
-        serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap()).unwrap();
-    assert_eq!(results.scores[0] + results.scores[1], 1.0);
-    assert_eq!(results.games.len(), 1);
-    assert!(matches!(
-        results.games[0].reason.as_str(),
-        "phase_game_over" | "clock_flag"
-    ));
+        assert_reports(&outcome.reports);
+        assert_eq!(
+            outcome.reports[0].hellos[0].deck_name,
+            "Lorehold Excavation"
+        );
+        assert_eq!(
+            outcome.reports[1].hellos[0].deck_name,
+            "Fractal Convergence"
+        );
+        let results: Results =
+            serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap())
+                .unwrap();
+        assert_eq!(results.scores[0] + results.scores[1], 1.0);
+        assert_eq!(results.games.len(), 1);
+        assert!(matches!(
+            results.games[0].reason.as_str(),
+            "phase_game_over" | "clock_flag"
+        ));
 
-    let replay: Replay =
-        serde_json::from_str(&tokio::fs::read_to_string(&outcome.replay).await.unwrap()).unwrap();
-    assert_eq!(replay.version, 3);
-    assert_eq!(replay.games.len(), 1);
-    assert!(!replay.games[0].steps.is_empty());
-    assert!(replay.games[0].steps[0].action.is_none());
-    assert!(replay.games[0].steps[0].state.phase_client.is_some());
-    assert!(replay.games[0]
-        .steps
-        .iter()
-        .skip(1)
-        .all(|step| step.state.phase_client.is_none() && step.phase_client_delta.is_some()));
+        let replay: Replay =
+            serde_json::from_str(&tokio::fs::read_to_string(&outcome.replay).await.unwrap())
+                .unwrap();
+        assert_eq!(replay.version, 3);
+        assert_eq!(replay.games.len(), 1);
+        assert!(!replay.games[0].steps.is_empty());
+        assert!(replay.games[0].steps[0].action.is_none());
+        assert!(replay.games[0].steps[0].state.phase_client.is_some());
+        assert!(replay.games[0]
+            .steps
+            .iter()
+            .skip(1)
+            .all(|step| step.state.phase_client.is_none() && step.phase_client_delta.is_some()));
+    });
 }
 
-#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn replay_mode_serves_a_finite_recording() {
-    let _guard = env_lock().lock().await;
-    let outcome = run_completed_match(
-        "replay_source",
-        5.0,
-        1.0,
-        false,
-        ["red_rush", "green_stompy"],
-        1,
-        false,
-    )
-    .await;
-    let port = free_port();
-    set_common_env(port);
-    std::env::set_var("COGAME_LOAD_REPLAY_URI", &outcome.replay);
-    let (shutdown_tx, shutdown_rx) = oneshot::channel();
-    let server = tokio::spawn(cogatrice_server::run_until_shutdown(async {
-        shutdown_rx.await.ok();
-    }));
-    wait_healthz(port).await;
+#[test]
+fn replay_mode_serves_a_finite_recording() {
+    run_episode_test(async {
+        let _guard = env_lock().lock().await;
+        let outcome = run_completed_match(
+            "replay_source",
+            5.0,
+            1.0,
+            false,
+            ["lorehold_excavation", "fractal_convergence"],
+            1,
+            false,
+        )
+        .await;
+        let port = free_port();
+        set_common_env(port);
+        std::env::set_var("COGAME_LOAD_REPLAY_URI", &outcome.replay);
+        let (shutdown_tx, shutdown_rx) = oneshot::channel();
+        let server = tokio::spawn(cogatrice_server::run_until_shutdown(async {
+            shutdown_rx.await.ok();
+        }));
+        wait_healthz(port).await;
 
-    let page = reqwest::get(format!("http://127.0.0.1:{port}/client/replay"))
-        .await
-        .unwrap();
-    assert!(page.status().is_success());
+        let page = reqwest::get(format!("http://127.0.0.1:{port}/client/replay"))
+            .await
+            .unwrap();
+        assert!(page.status().is_success());
 
-    let (socket, _) = tokio_tungstenite::connect_async(format!("ws://127.0.0.1:{port}/replay"))
-        .await
-        .unwrap();
-    let (_, mut read) = socket.split();
-    assert_eq!(next_type(&mut read).await, "replay_meta");
-    assert_eq!(next_type(&mut read).await, "state");
-    let mut saw_match_end = false;
-    for _ in 0..4096 {
-        let kind = next_type(&mut read).await;
-        if kind == "match_end" {
-            saw_match_end = true;
-            break;
+        let (socket, _) = tokio_tungstenite::connect_async(format!("ws://127.0.0.1:{port}/replay"))
+            .await
+            .unwrap();
+        let (_, mut read) = socket.split();
+        assert_eq!(next_type(&mut read).await, "replay_meta");
+        assert_eq!(next_type(&mut read).await, "state");
+        let mut saw_match_end = false;
+        for _ in 0..4096 {
+            let kind = next_type(&mut read).await;
+            if kind == "match_end" {
+                saw_match_end = true;
+                break;
+            }
         }
-    }
-    assert!(saw_match_end);
-    assert!(timeout(Duration::from_millis(100), read.next())
-        .await
-        .is_err());
+        assert!(saw_match_end);
+        assert!(timeout(Duration::from_millis(100), read.next())
+            .await
+            .is_err());
 
-    shutdown_tx.send(()).ok();
-    timeout(Duration::from_secs(5), server)
-        .await
-        .unwrap()
-        .unwrap()
-        .unwrap();
-    std::env::remove_var("COGAME_LOAD_REPLAY_URI");
+        shutdown_tx.send(()).ok();
+        timeout(Duration::from_secs(5), server)
+            .await
+            .unwrap()
+            .unwrap()
+            .unwrap();
+        std::env::remove_var("COGAME_LOAD_REPLAY_URI");
+    });
 }
 
-#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn mute_player_times_out_but_match_finishes() {
-    let _guard = env_lock().lock().await;
-    let outcome = run_completed_match(
-        "timeout",
-        1.0,
-        0.05,
-        true,
-        ["red_rush", "green_stompy"],
-        1,
-        false,
-    )
-    .await;
-    let results: Results =
-        serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap()).unwrap();
-    assert_eq!(results.scores[0] + results.scores[1], 1.0);
-    assert!(!results.games.is_empty());
+#[test]
+fn mute_player_times_out_but_match_finishes() {
+    run_episode_test(async {
+        let _guard = env_lock().lock().await;
+        let outcome = run_completed_match(
+            "timeout",
+            1.0,
+            0.05,
+            true,
+            ["lorehold_excavation", "fractal_convergence"],
+            1,
+            false,
+        )
+        .await;
+        let results: Results =
+            serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap())
+                .unwrap();
+        assert_eq!(results.scores[0] + results.scores[1], 1.0);
+        assert!(!results.games.is_empty());
+    });
 }
 
-#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn color_swap_series_exchanges_decks_between_players() {
-    let _guard = env_lock().lock().await;
-    let outcome = run_completed_match(
-        "color_swap",
-        10.0,
-        1.0,
-        false,
-        ["red_rush", "green_stompy"],
-        2,
-        true,
-    )
-    .await;
+#[test]
+fn reversed_single_game_matchup_exchanges_decks_between_players() {
+    run_episode_test(async {
+        let _guard = env_lock().lock().await;
+        let outcome = run_completed_match(
+            "reversed_single_game",
+            10.0,
+            1.0,
+            false,
+            ["fractal_convergence", "lorehold_excavation"],
+            1,
+            false,
+        )
+        .await;
 
-    let results: Results =
-        serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap()).unwrap();
-    assert!(results.games.len() >= 2);
-    assert_eq!(
-        outcome.reports[0]
-            .hellos
-            .iter()
-            .skip(1)
-            .take(2)
-            .map(|hello| hello.deck_name.as_str())
-            .collect::<Vec<_>>(),
-        ["Red Rush", "Green Stompy"]
-    );
-    assert_eq!(
-        outcome.reports[1]
-            .hellos
-            .iter()
-            .skip(1)
-            .take(2)
-            .map(|hello| hello.deck_name.as_str())
-            .collect::<Vec<_>>(),
-        ["Green Stompy", "Red Rush"]
-    );
+        let results: Results =
+            serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap())
+                .unwrap();
+        assert_eq!(results.games.len(), 1);
+        assert_eq!(
+            outcome.reports[0].hellos[0].deck_name,
+            "Fractal Convergence"
+        );
+        assert_eq!(
+            outcome.reports[1].hellos[0].deck_name,
+            "Lorehold Excavation"
+        );
+    });
+}
+
+fn run_episode_test(test: impl Future<Output = ()>) {
+    tokio::runtime::Builder::new_multi_thread()
+        .worker_threads(2)
+        .thread_stack_size(WORKER_STACK_SIZE)
+        .enable_all()
+        .build()
+        .unwrap()
+        .block_on(test);
 }
 
 struct MatchOutcome {

@@ -18,7 +18,7 @@ fn repo_path(path: &str) -> PathBuf {
 fn materialize_options(temp: &TempDir, output_name: &str) -> MaterializeOptions {
     MaterializeOptions {
         set: "FIXTURE".to_owned(),
-        phase_card_data: repo_path("crates/phase-bridge/tests/fixtures/card-data.json")
+        phase_card_data: repo_path("crates/phase-bridge/data/card-data.json")
             .to_string_lossy()
             .into_owned(),
         phase_sha256: None,
@@ -39,10 +39,7 @@ fn materialize_options(temp: &TempDir, output_name: &str) -> MaterializeOptions 
 async fn corpus_manifest_is_content_addressed_and_cross_checks_scryfall() {
     let temp = TempDir::new().unwrap();
     let phase: serde_json::Value = serde_json::from_slice(
-        &fs::read(repo_path(
-            "crates/phase-bridge/tests/fixtures/card-data.json",
-        ))
-        .unwrap(),
+        &fs::read(repo_path("crates/phase-bridge/data/card-data.json")).unwrap(),
     )
     .unwrap();
     let mountain = &phase["mountain"];
@@ -64,14 +61,14 @@ async fn corpus_manifest_is_content_addressed_and_cross_checks_scryfall() {
     first_options.scryfall = Some(scryfall_path.to_string_lossy().into_owned());
     first_options.scryfall_snapshot = Some("fixture-2026-07-13".to_owned());
     let first = materialize_corpus(&first_options).await.unwrap();
-    assert_eq!(first.validation.phase_cards, 15);
+    assert_eq!(first.validation.phase_cards, 46);
     assert_eq!(first.validation.matched_oracle_ids, 1);
     assert_eq!(first.validation.matched_faces, 1);
     assert_eq!(first.validation.scryfall_layouts["normal"], 1);
     assert!(first.validation.name_mismatches.is_empty());
     assert!(first.validation.oracle_text_mismatches.is_empty());
     assert!(first.validation.legality_mismatches.is_empty());
-    assert_eq!(first.validation.missing_scryfall_oracle_ids.len(), 14);
+    assert_eq!(first.validation.missing_scryfall_oracle_ids.len(), 45);
 
     let mut second_options = first_options.clone();
     second_options.output_dir = temp.path().join("corpus-b");
@@ -90,8 +87,8 @@ async fn shard_replays_checkpoints_resumes_and_aggregates() {
     let options = RunOptions {
         manifest_uri: manifest_path.to_string_lossy().into_owned(),
         deck_paths: [
-            repo_path("decks/red_rush.json"),
-            repo_path("decks/green_stompy.json"),
+            repo_path("decks/lorehold_excavation.json"),
+            repo_path("decks/fractal_convergence.json"),
         ],
         output_dir: run_dir.clone(),
         run_id: "fixture-0-1".to_owned(),

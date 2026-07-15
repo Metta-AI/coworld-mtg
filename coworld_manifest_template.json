@@ -33,12 +33,19 @@
             "properties": {"name": {"type": "string", "minLength": 1}}
           }
         },
-        "seed": {"type": "integer", "minimum": 0},
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optional reproducibility seed. Omit it to generate a fresh root seed for the episode."
+        },
         "decks": {
           "type": "array",
           "minItems": 2,
           "maxItems": 2,
-          "items": {"type": "string", "enum": ["red_rush", "green_stompy"]}
+          "items": {
+            "type": "string",
+            "enum": ["lorehold_excavation", "fractal_convergence"]
+          }
         },
         "games_to_win": {"type": "integer", "minimum": 1, "maximum": 5},
         "swap_decks_each_game": {"type": "boolean"},
@@ -110,7 +117,7 @@
           "title": "Coworld MTG rules",
           "content": {
             "type": "text",
-            "value": "Coworld MTG is a two-player Magic duel with balanced mirrored matches and a color-swapping Red Rush versus Green Stompy series. The pinned Phase engine is authoritative for draws, mana, casting, timing, targets, priority, the stack, combat, triggers, state-based actions, and game outcomes. Players may submit only exact actions offered by Phase for their private view. Hidden hands and libraries remain redacted from opponents and spectators. Multi-game matches alternate seats, and color-swap variants also exchange decks between players after each game. Clocks and explicit concessions are enforced by the host."
+            "value": "Coworld MTG is a two-player Magic duel using two real 40-card Secrets of Strixhaven Premier Draft decks captured from MTG Arena play data: Lorehold Excavation and Fractal Convergence. Each published variant is one game, with a companion variant that reverses deck assignments so each challenger pilots each deck once. A fresh root seed is generated for every episode unless one is explicitly supplied; Phase derives the initial library shuffles and every later random outcome from that single serialized ChaCha20 stream. The pinned Phase engine is authoritative for draws, mana, casting, timing, targets, priority, the stack, combat, triggers, state-based actions, and game outcomes. Hidden hands, libraries, and RNG state remain redacted from players and spectators. Clocks and explicit concessions are enforced by the host."
           }
         }
       ]
@@ -143,44 +150,27 @@
   "optimizer": [],
   "variants": [
     {
-      "id": "color-swap-showdown",
-      "name": "Color-Swap Showdown",
-      "description": "A first-to-two series where players alternate seats and exchange Red Rush and Green Stompy after every game.",
+      "id": "lorehold-vs-fractals",
+      "name": "Lorehold vs Fractals",
+      "description": "One Secrets of Strixhaven Premier Draft game with a fresh private seed: Challenger A pilots Lorehold Excavation and Challenger B pilots Fractal Convergence.",
       "game_config": {
         "players": [{"name": "Challenger A"}, {"name": "Challenger B"}],
-        "seed": 4242,
-        "decks": ["red_rush", "green_stompy"],
-        "games_to_win": 2,
-        "swap_decks_each_game": true,
+        "decks": ["lorehold_excavation", "fractal_convergence"],
+        "games_to_win": 1,
+        "swap_decks_each_game": false,
         "clock_s": 480,
         "decision_cap_s": 30,
         "player_connect_timeout_s": 60
       }
     },
     {
-      "id": "red-mirror-blitz",
-      "name": "Red Mirror Blitz",
-      "description": "A symmetric first-to-two Red Rush mirror with shorter clocks and fast tactical races.",
+      "id": "fractals-vs-lorehold",
+      "name": "Fractals vs Lorehold",
+      "description": "The companion single game with deck assignments reversed: Challenger A pilots Fractal Convergence and Challenger B pilots Lorehold Excavation.",
       "game_config": {
-        "players": [{"name": "Ember A"}, {"name": "Ember B"}],
-        "seed": 9001,
-        "decks": ["red_rush", "red_rush"],
-        "games_to_win": 2,
-        "swap_decks_each_game": false,
-        "clock_s": 240,
-        "decision_cap_s": 20,
-        "player_connect_timeout_s": 60
-      }
-    },
-    {
-      "id": "green-mirror-boardcraft",
-      "name": "Green Mirror Boardcraft",
-      "description": "A symmetric first-to-two Green Stompy mirror focused on creature sequencing, attacks, and blocks.",
-      "game_config": {
-        "players": [{"name": "Grove A"}, {"name": "Grove B"}],
-        "seed": 1337,
-        "decks": ["green_stompy", "green_stompy"],
-        "games_to_win": 2,
+        "players": [{"name": "Challenger A"}, {"name": "Challenger B"}],
+        "decks": ["fractal_convergence", "lorehold_excavation"],
+        "games_to_win": 1,
         "swap_decks_each_game": false,
         "clock_s": 480,
         "decision_cap_s": 30,
@@ -194,9 +184,9 @@
       {"player_id": "coworld-mtg-goldfish"}
     ],
     "game_config": {
-      "players": [{"name": "Red goldfish A"}, {"name": "Red goldfish B"}],
+      "players": [{"name": "Lorehold goldfish"}, {"name": "Fractal goldfish"}],
       "seed": 4242,
-      "decks": ["red_rush", "red_rush"],
+      "decks": ["lorehold_excavation", "fractal_convergence"],
       "games_to_win": 1,
       "swap_decks_each_game": false,
       "clock_s": 120,

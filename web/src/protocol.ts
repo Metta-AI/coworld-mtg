@@ -94,7 +94,6 @@ export interface ViewerSnapshot {
 
 export interface PublicConfig {
   players: Array<{ name: string }>;
-  seed: number;
   decks: string[];
   games_to_win: number;
   clock_s: number;

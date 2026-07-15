@@ -270,6 +270,7 @@ dependencies = [
  "futures",
  "goldfish",
  "phase-bridge",
+ "rand 0.8.7",
  "reqwest",
  "serde",
  "serde_json",
@@ -373,7 +374,7 @@ dependencies = [
 [[package]]
 name = "engine"
 version = "0.24.0"
-source = "git+https://github.com/nishu-builder/phase.git?rev=3391a770ef35d4fa7717e7343841fd6e6ca4aec6#3391a770ef35d4fa7717e7343841fd6e6ca4aec6"
+source = "git+https://github.com/nishu-builder/phase.git?rev=2dec6c88915db4697706234a7ba2fcedd97b1689#2dec6c88915db4697706234a7ba2fcedd97b1689"
 dependencies = [
  "im",
  "indexmap",

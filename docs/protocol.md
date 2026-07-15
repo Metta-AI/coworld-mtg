@@ -13,6 +13,15 @@ complete `GameAction` value from the latest `state.legal_actions` or
 are Phase's actor-scoped `SetAutoPass`, `CancelAutoPass`, and `SetPhaseStops`
 preference actions described below.
 
+`seed` is the episode's root seed. If the commissioner omits it, the host
+generates a fresh `u64` once while loading the private config. Phase seeds one
+serialized ChaCha20 stream from that value before loading the decks; initial
+library shuffles, starting-player selection, mulligan reshuffles, random
+choices, and all later shuffles consume that same stream. The live public
+config omits the seed so fixed decklists cannot turn it into hidden-library
+information. Results and replay metadata record the resolved seed after play;
+supplying that seed and the same actions reproduces the episode exactly.
+
 ## Player frames
 
 On connection:

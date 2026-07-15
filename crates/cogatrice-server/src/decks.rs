@@ -16,8 +16,8 @@ struct DeckEntry {
 
 pub fn load_deck(id: &str) -> Result<DeckList> {
     let text = match id {
-        "red_rush" => include_str!("../../../decks/red_rush.json"),
-        "green_stompy" => include_str!("../../../decks/green_stompy.json"),
+        "lorehold_excavation" => include_str!("../../../decks/lorehold_excavation.json"),
+        "fractal_convergence" => include_str!("../../../decks/fractal_convergence.json"),
         _ => return Err(anyhow!("unknown deck id {id}")),
     };
     parse_deck(text)

@@ -11,7 +11,7 @@ adding checks: priority, casting, costs, continuous effects, layers, state-based
 actions, triggers, replacement effects, and combat all depend on one another.
 
 The Phase engine dependency is pinned to fork commit
-`3391a770ef35d4fa7717e7343841fd6e6ca4aec6`, under Phase's MIT/Apache-2.0
+`2dec6c88915db4697706234a7ba2fcedd97b1689`, under Phase's MIT/Apache-2.0
 license.
 `crates/phase-bridge` is the only Coworld MTG layer allowed to invoke it. Host,
 replay, browser, and policy code consume viewer-filtered state and exact legal

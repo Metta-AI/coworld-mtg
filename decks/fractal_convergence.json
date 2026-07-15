@@ -1,0 +1,286 @@
+{
+  "name": "Fractal Convergence",
+  "source": {
+    "provider": "17Lands",
+    "dataset": "SOS.PremierDraft",
+    "draft_id": "de44e65fde86403ab55b592ea913e8bf",
+    "main_colors": "UBG"
+  },
+  "cards": [
+    {
+      "count": 1,
+      "spec": {
+        "name": "Bitter Triumph",
+        "type_line": "Instant",
+        "mana_cost": "{1}{B}",
+        "power_toughness": null,
+        "oracle_text": "As an additional cost to cast this spell, discard a card or pay 3 life.\nDestroy target creature or planeswalker.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Burrog Barrage",
+        "type_line": "Instant",
+        "mana_cost": "{1}{G}",
+        "power_toughness": null,
+        "oracle_text": "Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn. Then it deals damage equal to its power to up to one target creature an opponent controls.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Cuboid Colony",
+        "type_line": "Creature — Insect",
+        "mana_cost": "{G}{U}",
+        "power_toughness": "1/1",
+        "oracle_text": "Flash\nFlying, trample\nIncrement (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Emeritus of Abundance",
+        "type_line": "Creature — Elf Druid",
+        "mana_cost": "{2}{G}",
+        "power_toughness": "3/4",
+        "oracle_text": "Vigilance\nThis creature enters prepared.\nWhenever this creature attacks, if you control eight or more lands, this creature becomes prepared.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Essence Scatter",
+        "type_line": "Instant",
+        "mana_cost": "{1}{U}",
+        "power_toughness": null,
+        "oracle_text": "Counter target creature spell.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 6,
+      "spec": {
+        "name": "Forest",
+        "type_line": "Basic Land — Forest",
+        "mana_cost": null,
+        "power_toughness": null,
+        "oracle_text": "({T}: Add {G}.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 2,
+      "spec": {
+        "name": "Fractal Mascot",
+        "type_line": "Creature — Fractal Elk",
+        "mana_cost": "{4}{G}{U}",
+        "power_toughness": "6/6",
+        "oracle_text": "Trample\nWhen this creature enters, tap target creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Grapple with Death",
+        "type_line": "Sorcery",
+        "mana_cost": "{1}{B}{G}",
+        "power_toughness": null,
+        "oracle_text": "Destroy target artifact or creature. You gain 1 life.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Homesickness",
+        "type_line": "Instant",
+        "mana_cost": "{4}{U}{U}",
+        "power_toughness": null,
+        "oracle_text": "Target player draws two cards. Tap up to two target creatures. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 7,
+      "spec": {
+        "name": "Island",
+        "type_line": "Basic Land — Island",
+        "mana_cost": null,
+        "power_toughness": null,
+        "oracle_text": "({T}: Add {U}.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Matterbending Mage",
+        "type_line": "Creature — Human Wizard",
+        "mana_cost": "{2}{U}",
+        "power_toughness": "2/2",
+        "oracle_text": "When this creature enters, return up to one other target creature to its owner's hand.\nWhenever you cast a spell with {X} in its mana cost, this creature can't be blocked this turn.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Mind Roots",
+        "type_line": "Sorcery",
+        "mana_cost": "{1}{B}{G}",
+        "power_toughness": null,
+        "oracle_text": "Target player discards two cards. Put up to one land card discarded this way onto the battlefield tapped under your control.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Mind into Matter",
+        "type_line": "Sorcery",
+        "mana_cost": "{X}{G}{U}",
+        "power_toughness": null,
+        "oracle_text": "Draw X cards. Then you may put a permanent card with mana value X or less from your hand onto the battlefield tapped.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Noxious Newt",
+        "type_line": "Creature — Salamander",
+        "mana_cost": "{1}{G}",
+        "power_toughness": "1/2",
+        "oracle_text": "Deathtouch\n{T}: Add {G}.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Paradox Surveyor",
+        "type_line": "Creature — Elf Druid",
+        "mana_cost": "{G}{GreenBlue}{U}",
+        "power_toughness": "3/3",
+        "oracle_text": "Reach\nWhen this creature enters, look at the top five cards of your library. You may reveal a land card or a card with {X} in its mana cost from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Potioner's Trove",
+        "type_line": "Artifact",
+        "mana_cost": "{3}",
+        "power_toughness": null,
+        "oracle_text": "{T}: Add one mana of any color.\n{T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell this turn.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 2,
+      "spec": {
+        "name": "Pterafractyl",
+        "type_line": "Creature — Dinosaur Fractal",
+        "mana_cost": "{X}{G}{U}",
+        "power_toughness": "1/0",
+        "oracle_text": "Flying\nThis creature enters with X +1/+1 counters on it.\nWhen this creature enters, you gain 2 life.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Rancorous Archaic",
+        "type_line": "Creature — Avatar",
+        "mana_cost": "{5}",
+        "power_toughness": "2/2",
+        "oracle_text": "Trample, reach\nConverge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Shared Roots",
+        "type_line": "Sorcery — Lesson",
+        "mana_cost": "{1}{G}",
+        "power_toughness": null,
+        "oracle_text": "Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Stock Up",
+        "type_line": "Sorcery",
+        "mana_cost": "{2}{U}",
+        "power_toughness": null,
+        "oracle_text": "Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Sundering Archaic",
+        "type_line": "Creature — Avatar",
+        "mana_cost": "{6}",
+        "power_toughness": "3/3",
+        "oracle_text": "Converge — When this creature enters, exile target nonland permanent an opponent controls with mana value less than or equal to the number of colors of mana spent to cast this creature.\n{2}: Put target card from a graveyard on the bottom of its owner's library.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 3,
+      "spec": {
+        "name": "Swamp",
+        "type_line": "Basic Land — Swamp",
+        "mana_cost": null,
+        "power_toughness": null,
+        "oracle_text": "({T}: Add {B}.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Titan's Grave",
+        "type_line": "Land",
+        "mana_cost": null,
+        "power_toughness": null,
+        "oracle_text": "This land enters tapped.\n{T}: Add {B} or {G}.\n{2}{B}{G}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Topiary Lecturer",
+        "type_line": "Creature — Elf Druid",
+        "mana_cost": "{2}{G}",
+        "power_toughness": "1/2",
+        "oracle_text": "Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)\n{T}: Add an amount of {G} equal to this creature's power.",
+        "art_id": null
+      }
+    },
+    {
+      "count": 1,
+      "spec": {
+        "name": "Wander Off",
+        "type_line": "Instant",
+        "mana_cost": "{3}{B}",
+        "power_toughness": null,
+        "oracle_text": "Exile target creature.",
+        "art_id": null
+      }
+    }
+  ]
+}

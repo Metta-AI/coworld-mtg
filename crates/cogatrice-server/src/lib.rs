@@ -924,7 +924,7 @@ impl MatchRunner {
     }
 
     fn deck_index_for_slot(&self, slot: usize, game_number: u32) -> usize {
-        if self.config.swap_decks_each_game && game_number % 2 == 0 {
+        if self.config.swap_decks_each_game && game_number.is_multiple_of(2) {
             1 - slot
         } else {
             slot
