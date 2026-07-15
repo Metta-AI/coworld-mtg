@@ -84,6 +84,7 @@ interface PhaseClientPayload {
 
 interface StateFrame {
   type: "state";
+  game_number?: number;
   state?: {
     phase_client?: PhaseClientPayload;
   };
@@ -92,7 +93,59 @@ interface StateFrame {
   step?: {
     state?: { phase_client?: PhaseClientPayload };
     events?: GameEvent[];
+    wall_ms?: number;
+    actor_slot?: number | null;
+    action?: GameAction | null;
   };
+}
+
+interface ReplayMetaFrame {
+  type: "replay_meta";
+  games?: Array<{ game_number: number; steps: number }>;
+}
+
+interface ReplayFrameData {
+  snapshot: EngineSnapshot;
+  events: GameEvent[];
+  gameNumber: number;
+  wallMs: number | null;
+  actorSlot: number | null;
+  action: GameAction | null;
+}
+
+interface ReplayGameSegment {
+  gameNumber: number;
+  startIndex: number;
+  stepCount: number;
+}
+
+export interface CoworldReplayState {
+  index: number;
+  count: number;
+  playing: boolean;
+  complete: boolean;
+  rate: number;
+  gameIndex: number;
+  gameCount: number;
+  gameNumber: number;
+  gameStepIndex: number;
+  gameStepCount: number;
+  turnIndex: number;
+  turnCount: number;
+  turnNumber: number;
+  actionLabel: string;
+}
+
+export interface CoworldReplayController {
+  play: () => void;
+  pause: () => void;
+  seek: (index: number) => void;
+  step: (offset: number) => void;
+  seekTurn: (index: number) => void;
+  stepTurn: (offset: number) => void;
+  seekGame: (index: number) => void;
+  stepGame: (offset: number) => void;
+  setRate: (rate: number) => void;
 }
 
 interface HelloFrame {
@@ -134,11 +187,14 @@ export class WebSocketAdapter implements EngineAdapter {
   private disposed = false;
   private _playerId: PlayerId | null = null;
   private playerSlot: number | null = null;
-  private replayFrames: Array<{ snapshot: EngineSnapshot; events: GameEvent[] }> = [];
+  private replayFrames: ReplayFrameData[] = [];
+  private replayGames: ReplayGameSegment[] = [];
   private replayIndex = 0;
   private replayComplete = false;
-  private replayPlaying = true;
+  private replayPlaying = false;
+  private replayRate = 1;
   private replayTimer: number | null = null;
+  private replayKeyHandler: ((event: KeyboardEvent) => void) | null = null;
 
   constructor(
     _serverUrl: string,
@@ -268,7 +324,8 @@ export class WebSocketAdapter implements EngineAdapter {
     this.socket = null;
     this.listeners = [];
     this.snapshot = null;
-    if (this.replayTimer !== null) window.clearInterval(this.replayTimer);
+    if (this.replayTimer !== null) window.clearTimeout(this.replayTimer);
+    if (this.replayKeyHandler) window.removeEventListener("keydown", this.replayKeyHandler, true);
   }
 
   estimateBracket(_deck: BracketDeckRequest): Promise<BracketEstimate | null> {
@@ -322,6 +379,9 @@ export class WebSocketAdapter implements EngineAdapter {
     if (raw === null || typeof raw !== "object" || !("type" in raw)) return;
     const frame = raw as { type: string; [key: string]: unknown };
     switch (frame.type) {
+      case "replay_meta":
+        this.handleReplayMeta(frame as unknown as ReplayMetaFrame);
+        break;
       case "hello":
         this.handleHello(frame as unknown as HelloFrame);
         break;
@@ -336,11 +396,13 @@ export class WebSocketAdapter implements EngineAdapter {
         break;
       case "game_end": {
         const outcome = frame.outcome as { winner_slot?: number | null; reason?: string } | undefined;
-        this.emit({
-          type: "gameOver",
-          winner: this.winnerSeat(outcome?.winner_slot),
-          reason: outcome?.reason ?? "game_end",
-        });
+        if (!this.isReplay()) {
+          this.emit({
+            type: "gameOver",
+            winner: this.winnerSeat(outcome?.winner_slot),
+            reason: outcome?.reason ?? "game_end",
+          });
+        }
         if (Array.isArray(frame.wins)) this.publishStatus({ wins: frame.wins as [number, number] });
         break;
       }
@@ -386,6 +448,20 @@ export class WebSocketAdapter implements EngineAdapter {
     });
   }
 
+  private handleReplayMeta(frame: ReplayMetaFrame): void {
+    let startIndex = 0;
+    this.replayGames = (frame.games ?? []).map((game) => {
+      const segment = {
+        gameNumber: game.game_number,
+        startIndex,
+        stepCount: game.steps,
+      };
+      startIndex += game.steps;
+      return segment;
+    });
+    this.publishReplay();
+  }
+
   private handleState(frame: StateFrame): void {
     if (this.isReplay() && this.replayComplete) return;
     const phase = frame.state?.phase_client ?? frame.step?.state?.phase_client;
@@ -404,12 +480,24 @@ export class WebSocketAdapter implements EngineAdapter {
       },
       seq: nextSnapshotSeq(),
     };
-    this.snapshot = snapshot;
     const events = frame.events ?? frame.step?.events ?? [];
     if (this.isReplay() && !this.replayComplete) {
-      this.replayFrames.push({ snapshot, events });
-      this.replayIndex = this.replayFrames.length - 1;
+      const firstFrame = this.replayFrames.length === 0;
+      this.replayFrames.push({
+        snapshot,
+        events,
+        gameNumber: frame.game_number ?? this.gameNumberForIndex(this.replayFrames.length),
+        wallMs: frame.step?.wall_ms ?? null,
+        actorSlot: frame.step?.actor_slot ?? null,
+        action: frame.step?.action ?? null,
+      });
+      if (firstFrame) {
+        this.snapshot = snapshot;
+        this.replayIndex = 0;
+      }
       this.publishReplay();
+    } else {
+      this.snapshot = snapshot;
     }
 
     if (frame.clocks_ms && this._playerId !== null && this.mode !== "spectate") {
@@ -427,13 +515,17 @@ export class WebSocketAdapter implements EngineAdapter {
     }
 
     if (this.initResolve) {
-      this.initialEvents = events;
+      // Replay frames should be inert until the transport advances them. In
+      // particular, presenting the first frame's StartingPlayerContest during
+      // initialization leaves Phase's tap-to-continue overlay covering the
+      // whole replay before playback has even begun.
+      this.initialEvents = this.isReplay() ? [] : events;
       this.initResolve();
       this.initResolve = null;
       this.initReject = null;
     } else if (this.pending) {
       this.pending.events = events;
-    } else if (!this.isReplay() || this.replayPlaying) {
+    } else if (!this.isReplay()) {
       this.emit({ type: "stateChanged", snapshot, events });
     }
   }
@@ -499,68 +591,206 @@ export class WebSocketAdapter implements EngineAdapter {
 
   private installReplayController(): void {
     const host = window as unknown as {
-      __coworldReplay?: {
-        play: () => void;
-        pause: () => void;
-        seek: (index: number) => void;
-      };
+      __coworldReplay?: CoworldReplayController;
     };
     host.__coworldReplay = {
       play: () => this.playReplay(),
       pause: () => this.pauseReplay(),
       seek: (index) => this.seekReplay(index),
+      step: (offset) => this.seekReplay(this.replayIndex + offset),
+      seekTurn: (index) => this.seekReplayTurn(index),
+      stepTurn: (offset) => this.seekReplayTurn(this.replayPosition().turnIndex + offset),
+      seekGame: (index) => this.seekReplayGame(index),
+      stepGame: (offset) => this.seekReplayGame(this.replayPosition().gameIndex + offset),
+      setRate: (rate) => this.setReplayRate(rate),
     };
+    this.replayKeyHandler = (event) => this.handleReplayKey(event);
+    window.addEventListener("keydown", this.replayKeyHandler, true);
     this.publishReplay();
   }
 
   private playReplay(): void {
-    if (!this.replayComplete || this.replayFrames.length === 0) {
-      this.replayPlaying = true;
-      this.publishReplay();
-      return;
-    }
+    if (!this.replayComplete || this.replayFrames.length === 0) return;
     if (this.replayTimer !== null) return;
+    if (this.replayIndex >= this.replayFrames.length - 1) this.showReplayFrame(0, false);
     this.replayPlaying = true;
-    this.replayTimer = window.setInterval(() => {
-      this.replayIndex = (this.replayIndex + 1) % this.replayFrames.length;
-      const frame = this.replayFrames[this.replayIndex];
-      this.snapshot = frame.snapshot;
-      this.emit({ type: "stateChanged", snapshot: frame.snapshot, events: frame.events });
-      this.publishReplay();
-    }, 250);
     this.publishReplay();
+    this.scheduleReplayAdvance();
   }
 
   private pauseReplay(): void {
     this.replayPlaying = false;
-    if (this.replayTimer !== null) window.clearInterval(this.replayTimer);
+    if (this.replayTimer !== null) window.clearTimeout(this.replayTimer);
     this.replayTimer = null;
     this.publishReplay();
   }
 
   private seekReplay(index: number): void {
     if (this.replayFrames.length === 0) return;
+    this.pauseReplay();
+    this.showReplayFrame(index, false);
+  }
+
+  private showReplayFrame(index: number, includeEvents: boolean): void {
     this.replayIndex = Math.max(0, Math.min(Math.round(index), this.replayFrames.length - 1));
     const frame = this.replayFrames[this.replayIndex];
     this.snapshot = frame.snapshot;
-    this.emit({ type: "stateChanged", snapshot: frame.snapshot, events: [] });
+    this.emit({ type: "stateChanged", snapshot: frame.snapshot, events: includeEvents ? frame.events : [] });
     this.publishReplay();
+  }
+
+  private scheduleReplayAdvance(): void {
+    if (!this.replayPlaying || this.replayIndex >= this.replayFrames.length - 1) {
+      this.pauseReplay();
+      return;
+    }
+    this.replayTimer = window.setTimeout(() => {
+      this.replayTimer = null;
+      this.showReplayFrame(this.replayIndex + 1, true);
+      this.scheduleReplayAdvance();
+    }, this.replayDelay());
+  }
+
+  private replayDelay(): number {
+    const current = this.replayFrames[this.replayIndex];
+    const next = this.replayFrames[this.replayIndex + 1];
+    if (!current || !next) return 650 / this.replayRate;
+    if (current.gameNumber !== next.gameNumber) return 1200 / this.replayRate;
+    const elapsed =
+      current.wallMs === null || next.wallMs === null ? 650 : next.wallMs - current.wallMs;
+    return Math.max(400, Math.min(elapsed, 1400)) / this.replayRate;
+  }
+
+  private setReplayRate(rate: number): void {
+    if (![0.5, 1, 2, 4].includes(rate)) return;
+    this.replayRate = rate;
+    if (this.replayPlaying) {
+      if (this.replayTimer !== null) window.clearTimeout(this.replayTimer);
+      this.replayTimer = null;
+      this.scheduleReplayAdvance();
+    }
+    this.publishReplay();
+  }
+
+  private seekReplayGame(gameIndex: number): void {
+    const games = this.availableReplayGames();
+    if (games.length === 0) return;
+    const target = games[Math.max(0, Math.min(Math.round(gameIndex), games.length - 1))];
+    this.seekReplay(target.startIndex);
+  }
+
+  private seekReplayTurn(turnIndex: number): void {
+    const position = this.replayPosition();
+    const turns = this.turnStarts(position.gameNumber);
+    if (turns.length === 0) return;
+    const target = turns[Math.max(0, Math.min(Math.round(turnIndex), turns.length - 1))];
+    this.seekReplay(target.index);
+  }
+
+  private handleReplayKey(event: KeyboardEvent): void {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const target = event.target as HTMLElement | null;
+    if (
+      target &&
+      (target.isContentEditable || ["INPUT", "SELECT", "TEXTAREA", "BUTTON"].includes(target.tagName))
+    ) {
+      return;
+    }
+    if (event.code === "Space") {
+      event.preventDefault();
+      event.stopPropagation();
+      this.replayPlaying ? this.pauseReplay() : this.playReplay();
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      event.stopPropagation();
+      const offset = event.key === "ArrowLeft" ? -1 : 1;
+      if (event.shiftKey) this.seekReplayTurn(this.replayPosition().turnIndex + offset);
+      else this.seekReplay(this.replayIndex + offset);
+    } else if (event.key === "PageUp" || event.key === "PageDown") {
+      event.preventDefault();
+      event.stopPropagation();
+      this.seekReplayGame(this.replayPosition().gameIndex + (event.key === "PageUp" ? -1 : 1));
+    }
+  }
+
+  private availableReplayGames(): ReplayGameSegment[] {
+    if (this.replayGames.length > 0) return this.replayGames;
+    const games: ReplayGameSegment[] = [];
+    for (const [index, frame] of this.replayFrames.entries()) {
+      const current = games[games.length - 1];
+      if (!current || current.gameNumber !== frame.gameNumber) {
+        games.push({ gameNumber: frame.gameNumber, startIndex: index, stepCount: 1 });
+      } else {
+        current.stepCount += 1;
+      }
+    }
+    return games;
+  }
+
+  private gameNumberForIndex(index: number): number {
+    const game = this.replayGames.find(
+      (candidate) => index >= candidate.startIndex && index < candidate.startIndex + candidate.stepCount,
+    );
+    return game?.gameNumber ?? this.replayFrames[this.replayFrames.length - 1]?.gameNumber ?? 1;
+  }
+
+  private turnStarts(gameNumber: number): Array<{ index: number; number: number }> {
+    const turns: Array<{ index: number; number: number }> = [];
+    for (const [index, frame] of this.replayFrames.entries()) {
+      if (frame.gameNumber !== gameNumber) continue;
+      const number = frame.snapshot.state.turn_number;
+      if (turns[turns.length - 1]?.number !== number) turns.push({ index, number });
+    }
+    return turns;
+  }
+
+  private replayPosition(): Omit<CoworldReplayState, "playing" | "complete" | "rate" | "actionLabel"> {
+    const games = this.availableReplayGames();
+    const frame = this.replayFrames[this.replayIndex];
+    const gameIndex = Math.max(
+      0,
+      games.findIndex(
+        (game) =>
+          this.replayIndex >= game.startIndex && this.replayIndex < game.startIndex + game.stepCount,
+      ),
+    );
+    const game = games[gameIndex] ?? { gameNumber: 1, startIndex: 0, stepCount: 0 };
+    const turns = this.turnStarts(game.gameNumber);
+    const turnNumber = frame?.snapshot.state.turn_number ?? turns[0]?.number ?? 0;
+    const turnIndex = Math.max(0, turns.findIndex((turn) => turn.number === turnNumber));
+    return {
+      index: this.replayIndex,
+      count: this.replayFrames.length,
+      gameIndex,
+      gameCount: games.length,
+      gameNumber: game.gameNumber,
+      gameStepIndex: Math.max(0, this.replayIndex - game.startIndex),
+      gameStepCount: game.stepCount,
+      turnIndex,
+      turnCount: turns.length,
+      turnNumber,
+    };
+  }
+
+  private replayActionLabel(): string {
+    const frame = this.replayFrames[this.replayIndex];
+    if (!frame?.action) {
+      return this.replayPosition().gameStepIndex === 0 ? "Game start" : "State update";
+    }
+    const action = frame.action.type.replace(/([a-z0-9])([A-Z])/g, "$1 $2");
+    return frame.actorSlot === null ? action : `Player ${frame.actorSlot + 1} · ${action}`;
   }
 
   private publishReplay(): void {
     const host = window as unknown as {
-      __coworldReplayState?: {
-        index: number;
-        count: number;
-        playing: boolean;
-        complete: boolean;
-      };
+      __coworldReplayState?: CoworldReplayState;
     };
     host.__coworldReplayState = {
-      index: this.replayIndex,
-      count: this.replayFrames.length,
+      ...this.replayPosition(),
       playing: this.replayPlaying,
       complete: this.replayComplete,
+      rate: this.replayRate,
+      actionLabel: this.replayActionLabel(),
     };
     window.dispatchEvent(new Event("coworld-replay-status"));
   }

@@ -184,6 +184,9 @@ New replay artifacts are version 3. Each step records relative time, actor slot,
 the accepted Phase action, authoritative compact projection, Phase events, and
 either the initial Phase client snapshot or a delta from the prior step.
 `/replay` sends `replay_meta`, then reconstructed full `state` frames, followed
-by game/match end frames. The Phase replay adapter buffers the first stream and
-provides local play, pause, and seek controls. Version-2 replay loading remains
-supported as described above.
+by game/match end frames. The Phase replay adapter buffers the finite stream
+without advancing the board, then provides local playback that starts at the
+first event and stops at the last. The replay dock exposes separate event,
+turn, and game timelines, recorded-time playback at 0.5x/1x/2x/4x, and keyboard
+transport (Space, Left/Right, Shift+Left/Right, and Page Up/Page Down).
+Version-2 replay loading remains supported as described above.

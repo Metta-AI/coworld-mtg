@@ -1,7 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { GameAction, GameState } from "../adapter/types";
-import { WebSocketAdapter } from "./coworld-ws-adapter";
+import {
+  type CoworldReplayController,
+  type CoworldReplayState,
+  WebSocketAdapter,
+} from "./coworld-ws-adapter";
 
 class MockWebSocket {
   static OPEN = 1;
@@ -42,12 +46,12 @@ const state = {
 const pass = { type: "PassPriority" } as GameAction;
 const concede = { type: "Concede", data: { player_id: 0 } } as GameAction;
 
-function phaseStateFrame() {
+function phaseStateFrame(turnNumber = 1) {
   return {
     type: "state",
     state: {
       phase_client: {
-        state,
+        state: { ...state, turn_number: turnNumber },
         derived: {},
         legal_actions: [pass, concede],
         auto_pass_recommended: false,
@@ -62,8 +66,11 @@ function phaseStateFrame() {
 
 describe("Coworld Phase adapter", () => {
   beforeEach(() => {
+    vi.useRealTimers();
     document.body.dataset.coworldRole = "player";
     window.history.replaceState({}, "", "/client/player?slot=1&token=secret");
+    delete (window as ReplayWindow).__coworldReplay;
+    delete (window as ReplayWindow).__coworldReplayState;
   });
 
   it("negotiates rich state and sends Phase actions unchanged", async () => {
@@ -93,7 +100,8 @@ describe("Coworld Phase adapter", () => {
     expect(JSON.parse(socket.send.mock.calls[1][0])).toEqual({ cmd_id: 2, action: concede });
   });
 
-  it("uses the read-only replay socket and accepts nested replay steps", async () => {
+  it("buffers replay steps at the start and navigates by event, turn, game, and keyboard", async () => {
+    vi.useFakeTimers();
     document.body.dataset.coworldRole = "replay";
     window.history.replaceState(
       {},
@@ -110,9 +118,101 @@ describe("Coworld Phase adapter", () => {
       "/api/observatory/v2/coworlds/replays/session/proxy/replay",
     );
 
-    const frame = phaseStateFrame();
-    socket.frame({ type: "state", step: { state: frame.state, events: [] } });
+    socket.frame({
+      type: "replay_meta",
+      games: [
+        { game_number: 1, steps: 3 },
+        { game_number: 2, steps: 2 },
+      ],
+    });
+    replayFrame(socket, 1, 1, 0, null);
     await initialized;
+    replayFrame(socket, 1, 1, 500, pass);
+    replayFrame(socket, 1, 2, 1_000, pass);
+    replayFrame(socket, 2, 1, 0, null);
+    replayFrame(socket, 2, 2, 500, pass);
+    socket.frame({ type: "match_end", scores: [1, 1], games: [] });
+
     await expect(adapter.submitAction(pass, 0)).rejects.toThrow("Spectators cannot submit actions");
+
+    const controller = (window as ReplayWindow).__coworldReplay!;
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({
+      index: 0,
+      count: 5,
+      playing: false,
+      complete: true,
+      gameIndex: 0,
+      gameCount: 2,
+      turnIndex: 0,
+      turnCount: 2,
+      actionLabel: "Game start",
+    });
+    expect((await adapter.getState()).turn_number).toBe(1);
+
+    controller.seek(2);
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({
+      index: 2,
+      gameIndex: 0,
+      turnIndex: 1,
+      turnNumber: 2,
+    });
+    controller.seekGame(1);
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({ index: 3, gameIndex: 1 });
+    controller.stepGame(-1);
+    controller.seekTurn(1);
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({ index: 2, turnIndex: 1 });
+
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft" }));
+    expect((window as ReplayWindow).__coworldReplayState?.index).toBe(1);
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", shiftKey: true }));
+    expect((window as ReplayWindow).__coworldReplayState?.index).toBe(2);
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "PageDown" }));
+    expect((window as ReplayWindow).__coworldReplayState?.index).toBe(3);
+    expect((window as ReplayWindow).__coworldReplayState?.actionLabel).toBe("Game start");
+    window.dispatchEvent(new KeyboardEvent("keydown", { code: "Space", cancelable: true }));
+    expect((window as ReplayWindow).__coworldReplayState?.playing).toBe(true);
+    window.dispatchEvent(new KeyboardEvent("keydown", { code: "Space", cancelable: true }));
+    expect((window as ReplayWindow).__coworldReplayState?.playing).toBe(false);
+
+    controller.seek(0);
+    controller.setRate(2);
+    controller.play();
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({ playing: true, rate: 2 });
+    await vi.advanceTimersByTimeAsync(250);
+    expect((window as ReplayWindow).__coworldReplayState?.index).toBe(1);
+
+    controller.seek(4);
+    controller.play();
+    expect((window as ReplayWindow).__coworldReplayState?.index).toBe(0);
+    await vi.runAllTimersAsync();
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({ index: 4, playing: false });
+
+    adapter.dispose();
   });
 });
+
+type ReplayWindow = Window & {
+  __coworldReplay?: CoworldReplayController;
+  __coworldReplayState?: CoworldReplayState;
+};
+
+function replayFrame(
+  socket: MockWebSocket,
+  gameNumber: number,
+  turnNumber: number,
+  wallMs: number,
+  action: GameAction | null,
+) {
+  const frame = phaseStateFrame(turnNumber);
+  socket.frame({
+    type: "state",
+    game_number: gameNumber,
+    step: {
+      state: frame.state,
+      events: [],
+      wall_ms: wallMs,
+      actor_slot: action ? 0 : null,
+      action,
+    },
+  });
+}
