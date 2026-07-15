@@ -212,7 +212,16 @@
     }
   ],
   "reporter": [],
-  "commissioner": [],
+  "commissioner": [
+    {
+      "id": "default-commissioner",
+      "name": "Default Commissioner",
+      "type": "commissioner",
+      "description": "Reusable config-driven commissioner for recurring Cogatrice league rounds.",
+      "source_url": "https://github.com/Metta-AI/coworld-tools/tree/c00fabe82cbecc57a3dad4e78626890e2a10d992/commissioners/commissioners/ruleset_strategy_commissioner",
+      "image": "ghcr.io/metta-ai/commissioners-default:latest"
+    }
+  ],
   "grader": [],
   "diagnoser": [],
   "optimizer": [],
