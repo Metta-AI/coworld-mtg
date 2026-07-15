@@ -8,7 +8,7 @@
       "type": "game",
       "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/cogatrice-server"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/4aca186fac2cadcc5646522a5d085da3fb16613c"
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/34fb551a17a27baff527747d7a9bd568a11c1861"
     },
     "config_schema": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -123,7 +123,7 @@
       "type": "player",
       "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/goldfish"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/4aca186fac2cadcc5646522a5d085da3fb16613c",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/34fb551a17a27baff527747d7a9bd568a11c1861",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
     }
   ],
