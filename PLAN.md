@@ -1,7 +1,7 @@
 # Coworld MTG roadmap
 
 Coworld MTG is Magic: The Gathering packaged as a Coworld. The original
-Cockatrice-style honor-system prototype has been retired. The Rust-native
+The honor-system tabletop prototype has been retired. The Rust-native
 [Phase](https://github.com/phase-rs/phase) engine is the sole game authority.
 
 ## Shipped architecture

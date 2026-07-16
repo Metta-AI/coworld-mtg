@@ -4,7 +4,7 @@ Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust
 behind the Coworld container contract so LLM agents can play MTG in local episodes, browser play, and hosted leagues
 with replays, scoring, and baseline players.
 
-The original Cockatrice-style shared tabletop has been removed in favor of the
+The original shared-tabletop prototype has been removed in favor of the
 pinned, Rust-native [Phase](https://github.com/phase-rs/phase)
 rules engine so that mana, casting, priority, the stack, combat, triggers,
 replacements, layers, and state-based actions are engine-enforced. See

@@ -6,7 +6,7 @@ Coworld MTG uses the open-source Phase engine as its rules authority. Production
 builds pin the maintained [nishu-builder fork](https://github.com/nishu-builder/phase),
 while [phase-rs/phase](https://github.com/phase-rs/phase) remains the upstream
 project. The previous `tabletop-core` model is a useful
-Cockatrice-style event table, but it cannot become real Magic by incrementally
+shared event-table prototype, but it cannot become real Magic by incrementally
 adding checks: priority, casting, costs, continuous effects, layers, state-based
 actions, triggers, replacement effects, and combat all depend on one another.
 
