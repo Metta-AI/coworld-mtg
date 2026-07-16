@@ -112,6 +112,8 @@ describe("Coworld Phase adapter", () => {
       main_deck: [],
       sideboard: [],
     });
+    const emitted: Array<{ type: string; [key: string]: unknown }> = [];
+    adapter.onEvent((event) => emitted.push(event as unknown as { type: string; [key: string]: unknown }));
     const initialized = adapter.initialize();
     const socket = MockWebSocket.last;
     expect(new URL(socket.url).pathname).toBe(
@@ -120,9 +122,10 @@ describe("Coworld Phase adapter", () => {
 
     socket.frame({
       type: "replay_meta",
+      results: { policy_names: ["Nissa", "Chandra"] },
       games: [
-        { game_number: 1, steps: 3 },
-        { game_number: 2, steps: 2 },
+        { game_number: 1, slot_of_seat0: 0, steps: 3 },
+        { game_number: 2, slot_of_seat0: 1, steps: 2 },
       ],
     });
     replayFrame(socket, 1, 1, 0, null);
@@ -138,6 +141,14 @@ describe("Coworld Phase adapter", () => {
     const controller = (window as ReplayWindow).__coworldReplay!;
     expect((window as ReplayWindow).__coworldReplayState).toMatchObject({
       index: 0,
+      count: 2,
+      showPriorityPasses: false,
+      playerNames: ["Nissa", "Chandra"],
+      selectedPlayerSlot: 0,
+    });
+    controller.setShowPriorityPasses(true);
+    expect((window as ReplayWindow).__coworldReplayState).toMatchObject({
+      index: 0,
       count: 5,
       playing: false,
       complete: true,
@@ -150,14 +161,29 @@ describe("Coworld Phase adapter", () => {
     expect((await adapter.getState()).turn_number).toBe(1);
 
     controller.seek(2);
+    const forwardSeq = lastStateChangedSeq(emitted);
     expect((window as ReplayWindow).__coworldReplayState).toMatchObject({
       index: 2,
       gameIndex: 0,
       turnIndex: 1,
       turnNumber: 2,
     });
+    controller.seek(0);
+    expect(lastStateChangedSeq(emitted)).toBeGreaterThan(forwardSeq);
+    expect((await adapter.getState()).turn_number).toBe(1);
+    controller.seek(2);
+
+    controller.setPerspective(1);
+    expect(lastIdentity(emitted)).toMatchObject({
+      playerId: 1,
+      playerNames: { 0: "Nissa", 1: "Chandra" },
+    });
     controller.seekGame(1);
     expect((window as ReplayWindow).__coworldReplayState).toMatchObject({ index: 3, gameIndex: 1 });
+    expect(lastIdentity(emitted)).toMatchObject({
+      playerId: 0,
+      playerNames: { 0: "Chandra", 1: "Nissa" },
+    });
     controller.stepGame(-1);
     controller.seekTurn(1);
     expect((window as ReplayWindow).__coworldReplayState).toMatchObject({ index: 2, turnIndex: 1 });
@@ -215,4 +241,15 @@ function replayFrame(
       action,
     },
   });
+}
+
+function lastStateChangedSeq(events: Array<{ type: string; [key: string]: unknown }>): number {
+  const event = events.filter((candidate) => candidate.type === "stateChanged").at(-1) as {
+    snapshot: { seq: number };
+  };
+  return event.snapshot.seq;
+}
+
+function lastIdentity(events: Array<{ type: string; [key: string]: unknown }>) {
+  return events.filter((candidate) => candidate.type === "playerIdentity").at(-1);
 }

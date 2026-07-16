@@ -1,0 +1,50 @@
+diff --git a/client/src/components/hud/PlayerHud.tsx b/client/src/components/hud/PlayerHud.tsx
+index 77c4ee9..2b40da5 100644
+--- a/client/src/components/hud/PlayerHud.tsx
++++ b/client/src/components/hud/PlayerHud.tsx
+@@ -78,6 +78,7 @@ export function PlayerHud() {
+   const hudTone = isValidTarget ? "cyan" : isMyTurn ? "emerald" : "neutral";
+   const seatColor = useSeatColor(playerId);
+   const avatarUrl = useMultiplayerStore((s) => s.playerAvatars.get(playerId) ?? null);
++  const replayPlayerName = useMultiplayerStore((s) => s.playerNames.get(playerId) ?? null);
+ 
+   return (
+     <div
+@@ -89,7 +90,11 @@ export function PlayerHud() {
+     >
+       <PhaseIndicatorLeft />
+       <HudPlate
+-        label={getPlayerDisplayName(playerId, playerId)}
++        label={
++          document.body.dataset.coworldRole === "replay" && replayPlayerName
++            ? replayPlayerName
++            : getPlayerDisplayName(playerId, playerId)
++        }
+         tone={hudTone}
+         active={isMyTurn}
+         seatColor={seatColor}
+diff --git a/client/src/hooks/usePlayerId.ts b/client/src/hooks/usePlayerId.ts
+index 7ce82cc..aa9e9d1 100644
+--- a/client/src/hooks/usePlayerId.ts
++++ b/client/src/hooks/usePlayerId.ts
+@@ -5,6 +5,9 @@ import { useMultiplayerStore } from "../stores/multiplayerStore";
+ 
+ function currentLocalPlayerId(): PlayerId {
+   const gameMode = useGameStore.getState().gameMode;
++  if (document.body.dataset.coworldRole === "replay") {
++    return useMultiplayerStore.getState().activePlayerId ?? PLAYER_ID;
++  }
+   if (gameMode === "spectate") {
+     return SPECTATOR_PLAYER_ID;
+   }
+@@ -20,6 +23,10 @@ export function usePlayerId(): PlayerId {
+   const gameMode = useGameStore((s) => s.gameMode);
+   const activePlayerId = useMultiplayerStore((s) => s.activePlayerId);
+ 
++  if (document.body.dataset.coworldRole === "replay") {
++    return activePlayerId ?? PLAYER_ID;
++  }
++
+   if (gameMode && (gameMode === "online" || gameMode === "p2p-host" || gameMode === "p2p-join")) {
+     return activePlayerId ?? PLAYER_ID;
+   }

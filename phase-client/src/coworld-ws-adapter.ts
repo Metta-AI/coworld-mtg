@@ -101,7 +101,8 @@ interface StateFrame {
 
 interface ReplayMetaFrame {
   type: "replay_meta";
-  games?: Array<{ game_number: number; steps: number }>;
+  results?: { policy_names?: [string, string] };
+  games?: Array<{ game_number: number; slot_of_seat0?: number; steps: number }>;
 }
 
 interface ReplayFrameData {
@@ -117,6 +118,26 @@ interface ReplayGameSegment {
   gameNumber: number;
   startIndex: number;
   stepCount: number;
+  slotOfSeat0: number;
+}
+
+export interface CoworldReplayLogEntry {
+  eventIndex: number;
+  gameNumber: number;
+  turnNumber: number;
+  actorName: string | null;
+  actionLabel: string;
+  life: [number, number];
+}
+
+export interface CoworldReplayTurnMarker {
+  eventIndex: number;
+  timelinePosition: number;
+  gameNumber: number;
+  turnNumber: number;
+  activePlayerSlot: number;
+  activePlayerName: string;
+  life: [number, number];
 }
 
 export interface CoworldReplayState {
@@ -134,6 +155,12 @@ export interface CoworldReplayState {
   turnCount: number;
   turnNumber: number;
   actionLabel: string;
+  playerNames: [string, string];
+  selectedPlayerSlot: number;
+  seatPlayerSlots: [number, number];
+  showPriorityPasses: boolean;
+  logEntries: CoworldReplayLogEntry[];
+  turnMarkers: CoworldReplayTurnMarker[];
 }
 
 export interface CoworldReplayController {
@@ -146,6 +173,8 @@ export interface CoworldReplayController {
   seekGame: (index: number) => void;
   stepGame: (offset: number) => void;
   setRate: (rate: number) => void;
+  setPerspective: (playerSlot: number) => void;
+  setShowPriorityPasses: (show: boolean) => void;
 }
 
 interface HelloFrame {
@@ -193,6 +222,9 @@ export class WebSocketAdapter implements EngineAdapter {
   private replayComplete = false;
   private replayPlaying = false;
   private replayRate = 1;
+  private replayPlayerNames: [string, string] = ["Player 1", "Player 2"];
+  private replayPerspectiveSlot = 0;
+  private replayShowPriorityPasses = false;
   private replayTimer: number | null = null;
   private replayKeyHandler: ((event: KeyboardEvent) => void) | null = null;
 
@@ -450,15 +482,20 @@ export class WebSocketAdapter implements EngineAdapter {
 
   private handleReplayMeta(frame: ReplayMetaFrame): void {
     let startIndex = 0;
+    if (frame.results?.policy_names?.length === 2) {
+      this.replayPlayerNames = [...frame.results.policy_names];
+    }
     this.replayGames = (frame.games ?? []).map((game) => {
       const segment = {
         gameNumber: game.game_number,
         startIndex,
         stepCount: game.steps,
+        slotOfSeat0: game.slot_of_seat0 === 1 ? 1 : 0,
       };
       startIndex += game.steps;
       return segment;
     });
+    this.emitReplayIdentity();
     this.publishReplay();
   }
 
@@ -492,8 +529,9 @@ export class WebSocketAdapter implements EngineAdapter {
         action: frame.step?.action ?? null,
       });
       if (firstFrame) {
-        this.snapshot = snapshot;
         this.replayIndex = 0;
+        this.snapshot = this.replaySnapshotForDisplay(snapshot);
+        this.emitReplayIdentity();
       }
       this.publishReplay();
     } else {
@@ -597,12 +635,14 @@ export class WebSocketAdapter implements EngineAdapter {
       play: () => this.playReplay(),
       pause: () => this.pauseReplay(),
       seek: (index) => this.seekReplay(index),
-      step: (offset) => this.seekReplay(this.replayIndex + offset),
+      step: (offset) => this.seekReplay(this.visibleReplayIndex() + offset),
       seekTurn: (index) => this.seekReplayTurn(index),
       stepTurn: (offset) => this.seekReplayTurn(this.replayPosition().turnIndex + offset),
       seekGame: (index) => this.seekReplayGame(index),
       stepGame: (offset) => this.seekReplayGame(this.replayPosition().gameIndex + offset),
       setRate: (rate) => this.setReplayRate(rate),
+      setPerspective: (playerSlot) => this.setReplayPerspective(playerSlot),
+      setShowPriorityPasses: (show) => this.setReplayShowPriorityPasses(show),
     };
     this.replayKeyHandler = (event) => this.handleReplayKey(event);
     window.addEventListener("keydown", this.replayKeyHandler, true);
@@ -610,9 +650,10 @@ export class WebSocketAdapter implements EngineAdapter {
   }
 
   private playReplay(): void {
-    if (!this.replayComplete || this.replayFrames.length === 0) return;
+    const visible = this.visibleReplayIndices();
+    if (!this.replayComplete || visible.length === 0) return;
     if (this.replayTimer !== null) return;
-    if (this.replayIndex >= this.replayFrames.length - 1) this.showReplayFrame(0, false);
+    if (this.visibleReplayIndex() >= visible.length - 1) this.showReplayFrame(visible[0], false);
     this.replayPlaying = true;
     this.publishReplay();
     this.scheduleReplayAdvance();
@@ -626,34 +667,41 @@ export class WebSocketAdapter implements EngineAdapter {
   }
 
   private seekReplay(index: number): void {
-    if (this.replayFrames.length === 0) return;
+    const visible = this.visibleReplayIndices();
+    if (visible.length === 0) return;
     this.pauseReplay();
-    this.showReplayFrame(index, false);
+    const target = visible[Math.max(0, Math.min(Math.round(index), visible.length - 1))];
+    this.showReplayFrame(target, false);
   }
 
   private showReplayFrame(index: number, includeEvents: boolean): void {
     this.replayIndex = Math.max(0, Math.min(Math.round(index), this.replayFrames.length - 1));
     const frame = this.replayFrames[this.replayIndex];
-    this.snapshot = frame.snapshot;
-    this.emit({ type: "stateChanged", snapshot: frame.snapshot, events: includeEvents ? frame.events : [] });
+    const snapshot = this.replaySnapshotForDisplay(frame.snapshot);
+    this.snapshot = snapshot;
+    this.emitReplayIdentity();
+    this.emit({ type: "stateChanged", snapshot, events: includeEvents ? frame.events : [] });
     this.publishReplay();
   }
 
   private scheduleReplayAdvance(): void {
-    if (!this.replayPlaying || this.replayIndex >= this.replayFrames.length - 1) {
+    const visible = this.visibleReplayIndices();
+    const visibleIndex = this.visibleReplayIndex();
+    if (!this.replayPlaying || visibleIndex >= visible.length - 1) {
       this.pauseReplay();
       return;
     }
+    const nextIndex = visible[visibleIndex + 1];
     this.replayTimer = window.setTimeout(() => {
       this.replayTimer = null;
-      this.showReplayFrame(this.replayIndex + 1, true);
+      this.showReplayFrame(nextIndex, true);
       this.scheduleReplayAdvance();
-    }, this.replayDelay());
+    }, this.replayDelay(nextIndex));
   }
 
-  private replayDelay(): number {
+  private replayDelay(nextIndex: number): number {
     const current = this.replayFrames[this.replayIndex];
-    const next = this.replayFrames[this.replayIndex + 1];
+    const next = this.replayFrames[nextIndex];
     if (!current || !next) return 650 / this.replayRate;
     if (current.gameNumber !== next.gameNumber) return 1200 / this.replayRate;
     const elapsed =
@@ -684,7 +732,8 @@ export class WebSocketAdapter implements EngineAdapter {
     const turns = this.turnStarts(position.gameNumber);
     if (turns.length === 0) return;
     const target = turns[Math.max(0, Math.min(Math.round(turnIndex), turns.length - 1))];
-    this.seekReplay(target.index);
+    this.pauseReplay();
+    this.showReplayFrame(target.index, false);
   }
 
   private handleReplayKey(event: KeyboardEvent): void {
@@ -705,7 +754,7 @@ export class WebSocketAdapter implements EngineAdapter {
       event.stopPropagation();
       const offset = event.key === "ArrowLeft" ? -1 : 1;
       if (event.shiftKey) this.seekReplayTurn(this.replayPosition().turnIndex + offset);
-      else this.seekReplay(this.replayIndex + offset);
+      else this.seekReplay(this.visibleReplayIndex() + offset);
     } else if (event.key === "PageUp" || event.key === "PageDown") {
       event.preventDefault();
       event.stopPropagation();
@@ -719,7 +768,7 @@ export class WebSocketAdapter implements EngineAdapter {
     for (const [index, frame] of this.replayFrames.entries()) {
       const current = games[games.length - 1];
       if (!current || current.gameNumber !== frame.gameNumber) {
-        games.push({ gameNumber: frame.gameNumber, startIndex: index, stepCount: 1 });
+        games.push({ gameNumber: frame.gameNumber, startIndex: index, stepCount: 1, slotOfSeat0: 0 });
       } else {
         current.stepCount += 1;
       }
@@ -739,12 +788,26 @@ export class WebSocketAdapter implements EngineAdapter {
     for (const [index, frame] of this.replayFrames.entries()) {
       if (frame.gameNumber !== gameNumber) continue;
       const number = frame.snapshot.state.turn_number;
-      if (turns[turns.length - 1]?.number !== number) turns.push({ index, number });
+      if (turns[turns.length - 1]?.number !== number) {
+        turns.push({ index, number });
+      }
     }
     return turns;
   }
 
-  private replayPosition(): Omit<CoworldReplayState, "playing" | "complete" | "rate" | "actionLabel"> {
+  private replayPosition(): Omit<
+    CoworldReplayState,
+    | "playing"
+    | "complete"
+    | "rate"
+    | "actionLabel"
+    | "playerNames"
+    | "selectedPlayerSlot"
+    | "seatPlayerSlots"
+    | "showPriorityPasses"
+    | "logEntries"
+    | "turnMarkers"
+  > {
     const games = this.availableReplayGames();
     const frame = this.replayFrames[this.replayIndex];
     const gameIndex = Math.max(
@@ -754,18 +817,27 @@ export class WebSocketAdapter implements EngineAdapter {
           this.replayIndex >= game.startIndex && this.replayIndex < game.startIndex + game.stepCount,
       ),
     );
-    const game = games[gameIndex] ?? { gameNumber: 1, startIndex: 0, stepCount: 0 };
+    const game = games[gameIndex] ?? {
+      gameNumber: 1,
+      startIndex: 0,
+      stepCount: 0,
+      slotOfSeat0: 0,
+    };
     const turns = this.turnStarts(game.gameNumber);
     const turnNumber = frame?.snapshot.state.turn_number ?? turns[0]?.number ?? 0;
     const turnIndex = Math.max(0, turns.findIndex((turn) => turn.number === turnNumber));
+    const visible = this.visibleReplayIndices();
+    const gameVisible = visible.filter(
+      (index) => index >= game.startIndex && index < game.startIndex + game.stepCount,
+    );
     return {
-      index: this.replayIndex,
-      count: this.replayFrames.length,
+      index: this.visibleReplayIndex(),
+      count: visible.length,
       gameIndex,
       gameCount: games.length,
       gameNumber: game.gameNumber,
-      gameStepIndex: Math.max(0, this.replayIndex - game.startIndex),
-      gameStepCount: game.stepCount,
+      gameStepIndex: Math.max(0, gameVisible.indexOf(this.replayIndex)),
+      gameStepCount: gameVisible.length,
       turnIndex,
       turnCount: turns.length,
       turnNumber,
@@ -777,8 +849,199 @@ export class WebSocketAdapter implements EngineAdapter {
     if (!frame?.action) {
       return this.replayPosition().gameStepIndex === 0 ? "Game start" : "State update";
     }
-    const action = frame.action.type.replace(/([a-z0-9])([A-Z])/g, "$1 $2");
-    return frame.actorSlot === null ? action : `Player ${frame.actorSlot + 1} · ${action}`;
+    if (frame.action.type === "PassPriority" && !this.replayShowPriorityPasses) {
+      return `${this.replayPlayerNames[this.activePlayerSlot(frame, this.replayIndex)]} · Turn start`;
+    }
+    const action = this.actionName(frame.action, frame, this.replayIndex);
+    return frame.actorSlot === null
+      ? action
+      : `${this.replayPlayerNames[frame.actorSlot] ?? `Player ${frame.actorSlot + 1}`} · ${action}`;
+  }
+
+  private actionName(action: GameAction, frame?: ReplayFrameData, rawIndex = this.replayIndex): string {
+    const data = "data" in action && action.data && typeof action.data === "object"
+      ? (action.data as Record<string, unknown>)
+      : null;
+    if (action.type === "MulliganDecision") {
+      const choice = data?.choice as { type?: string } | undefined;
+      return choice?.type === "Keep" ? "Keep opening hand" : "Mulligan";
+    }
+    const label = action.type.replace(/([a-z0-9])([A-Z])/g, "$1 $2");
+    const objectId = data?.object_id ?? data?.source_id ?? data?.card_id;
+    if (frame && (typeof objectId === "number" || typeof objectId === "string")) {
+      const object = frame.snapshot.state.objects[String(objectId)];
+      if (object?.name) return `${label} · ${object.name}`;
+    }
+    if (action.type === "DeclareAttackers" && Array.isArray(data?.attacks)) {
+      const count = data.attacks.length;
+      return `${label} · ${count} attacker${count === 1 ? "" : "s"}`;
+    }
+    if (action.type === "ChooseTarget" && frame) {
+      const target = data?.target as { Player?: number; Object?: number } | undefined;
+      if (target && typeof target.Player === "number") {
+        const game = this.replayGameForRawIndex(rawIndex);
+        const slot = target.Player === 0 ? game.slotOfSeat0 : 1 - game.slotOfSeat0;
+        return `${label} · ${this.replayPlayerNames[slot]}`;
+      }
+      if (target && typeof target.Object === "number") {
+        const targetObject = frame.snapshot.state.objects[String(target.Object)];
+        if (targetObject?.name) return `${label} · ${targetObject.name}`;
+      }
+    }
+    return label;
+  }
+
+  private activePlayerSlot(frame: ReplayFrameData, rawIndex: number): number {
+    const game = this.replayGameForRawIndex(rawIndex);
+    return frame.snapshot.state.active_player === 0 ? game.slotOfSeat0 : 1 - game.slotOfSeat0;
+  }
+
+  private visibleReplayIndices(): number[] {
+    const visible: number[] = [];
+    for (const [index, frame] of this.replayFrames.entries()) {
+      if (this.replayShowPriorityPasses || frame.action?.type !== "PassPriority") visible.push(index);
+    }
+    return visible;
+  }
+
+  private visibleReplayIndex(): number {
+    const visible = this.visibleReplayIndices();
+    const exact = visible.indexOf(this.replayIndex);
+    if (exact >= 0) return exact;
+    const prior = visible.findLastIndex((index) => index <= this.replayIndex);
+    return Math.max(0, prior);
+  }
+
+  private nearestVisibleIndex(index: number): number {
+    const visible = this.visibleReplayIndices();
+    return (
+      visible.find((candidate) => candidate >= index) ??
+      visible[visible.length - 1] ??
+      Math.max(0, Math.min(index, this.replayFrames.length - 1))
+    );
+  }
+
+  private replayGameForRawIndex(index: number): ReplayGameSegment {
+    return (
+      this.availableReplayGames().find(
+        (game) => index >= game.startIndex && index < game.startIndex + game.stepCount,
+      ) ?? { gameNumber: 1, startIndex: 0, stepCount: this.replayFrames.length, slotOfSeat0: 0 }
+    );
+  }
+
+  private seatPlayerSlots(): [number, number] {
+    const slotOfSeat0 = this.replayGameForRawIndex(this.replayIndex).slotOfSeat0;
+    return [slotOfSeat0, 1 - slotOfSeat0];
+  }
+
+  private emitReplayIdentity(): void {
+    if (!this.isReplay()) return;
+    const seatPlayerSlots = this.seatPlayerSlots();
+    const seat = (seatPlayerSlots[0] === this.replayPerspectiveSlot ? 0 : 1) as PlayerId;
+    const playerNames = {
+      0: this.replayPlayerNames[seatPlayerSlots[0]],
+      1: this.replayPlayerNames[seatPlayerSlots[1]],
+    };
+    this._playerId = seat;
+    this.emit({
+      type: "playerIdentity",
+      playerId: seat,
+      opponentName: playerNames[1 - seat] ?? null,
+      playerNames,
+    });
+  }
+
+  private setReplayPerspective(playerSlot: number): void {
+    const slot = Math.round(playerSlot);
+    if (slot !== 0 && slot !== 1) return;
+    this.replayPerspectiveSlot = slot;
+    this.emitReplayIdentity();
+    if (this.replayFrames.length > 0) this.showReplayFrame(this.replayIndex, false);
+    else this.publishReplay();
+  }
+
+  private setReplayShowPriorityPasses(show: boolean): void {
+    if (show === this.replayShowPriorityPasses) return;
+    this.pauseReplay();
+    this.replayShowPriorityPasses = show;
+    if (!show && this.replayFrames[this.replayIndex]?.action?.type === "PassPriority") {
+      this.replayIndex = this.nearestVisibleIndex(this.replayIndex);
+      this.showReplayFrame(this.replayIndex, false);
+      return;
+    }
+    this.publishReplay();
+  }
+
+  private replaySnapshotForDisplay(source: EngineSnapshot): EngineSnapshot {
+    const waitingFor = source.state.waiting_for.type === "Priority"
+      ? source.state.waiting_for
+      : ({
+          type: "Priority",
+          data: { player: source.state.priority_player },
+        } as GameState["waiting_for"]);
+    return {
+      ...source,
+      state: { ...source.state, waiting_for: waitingFor },
+      legalResult: {
+        ...source.legalResult,
+        actions: [],
+        autoPassRecommended: false,
+      },
+      // Phase commits snapshots monotonically. A seek is a new presentation
+      // of an old engine state, so it needs a fresh display sequence number.
+      seq: nextSnapshotSeq(),
+    };
+  }
+
+  private lifeByPlayerSlot(frame: ReplayFrameData, rawIndex: number): [number, number] {
+    const result: [number, number] = [0, 0];
+    const seatPlayerSlots = this.replayGameForRawIndex(rawIndex).slotOfSeat0 === 0
+      ? ([0, 1] as const)
+      : ([1, 0] as const);
+    for (const seat of [0, 1] as const) {
+      result[seatPlayerSlots[seat]] = frame.snapshot.state.players[seat]?.life ?? 0;
+    }
+    return result;
+  }
+
+  private replayLogEntries(): CoworldReplayLogEntry[] {
+    const visible = this.visibleReplayIndices();
+    return visible.map((rawIndex, eventIndex) => {
+      const frame = this.replayFrames[rawIndex];
+      return {
+        eventIndex,
+        gameNumber: frame.gameNumber,
+        turnNumber: frame.snapshot.state.turn_number,
+        actorName: frame.actorSlot === null ? null : this.replayPlayerNames[frame.actorSlot],
+        actionLabel: frame.action ? this.actionName(frame.action, frame, rawIndex) : "Game start",
+        life: this.lifeByPlayerSlot(frame, rawIndex),
+      };
+    });
+  }
+
+  private replayTurnMarkers(): CoworldReplayTurnMarker[] {
+    const visible = this.visibleReplayIndices();
+    const markers: CoworldReplayTurnMarker[] = [];
+    let priorKey = "";
+    for (const [rawIndex, frame] of this.replayFrames.entries()) {
+      const key = `${frame.gameNumber}:${frame.snapshot.state.turn_number}`;
+      if (key === priorKey) continue;
+      priorKey = key;
+      const nextVisible = visible.findIndex((candidate) => candidate >= rawIndex);
+      const eventIndex = nextVisible >= 0 ? nextVisible : Math.max(0, visible.length - 1);
+      const activePlayerSlot = this.activePlayerSlot(frame, rawIndex);
+      markers.push({
+        eventIndex,
+        timelinePosition:
+          this.replayFrames.length <= 1 ? 0 : rawIndex / (this.replayFrames.length - 1),
+        gameNumber: frame.gameNumber,
+        turnNumber: frame.snapshot.state.turn_number,
+        activePlayerSlot,
+        activePlayerName: this.replayPlayerNames[activePlayerSlot],
+        life: this.lifeByPlayerSlot(frame, rawIndex),
+      });
+    }
+    return markers;
   }
 
   private publishReplay(): void {
@@ -791,6 +1054,12 @@ export class WebSocketAdapter implements EngineAdapter {
       complete: this.replayComplete,
       rate: this.replayRate,
       actionLabel: this.replayActionLabel(),
+      playerNames: [...this.replayPlayerNames],
+      selectedPlayerSlot: this.replayPerspectiveSlot,
+      seatPlayerSlots: this.seatPlayerSlots(),
+      showPriorityPasses: this.replayShowPriorityPasses,
+      logEntries: this.replayLogEntries(),
+      turnMarkers: this.replayTurnMarkers(),
     };
     window.dispatchEvent(new Event("coworld-replay-status"));
   }

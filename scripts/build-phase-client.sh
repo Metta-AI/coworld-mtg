@@ -28,6 +28,12 @@ cp "$ROOT/phase-client/global.html" "$CHECKOUT/client/global.html"
 cp "$ROOT/phase-client/replay.html" "$CHECKOUT/client/replay.html"
 cp "$ROOT/phase-client/vite.config.ts" "$CHECKOUT/client/coworld.vite.config.ts"
 
+PHASE_PATCH="$ROOT/phase-client/replay-player-names.patch"
+if ! git -C "$CHECKOUT" apply --reverse --check "$PHASE_PATCH" >/dev/null 2>&1; then
+  git -C "$CHECKOUT" apply --check "$PHASE_PATCH"
+  git -C "$CHECKOUT" apply "$PHASE_PATCH"
+fi
+
 corepack pnpm@10.28.2 --dir "$CHECKOUT/client" install --frozen-lockfile
 corepack pnpm@10.28.2 --dir "$CHECKOUT/client" exec vitest run \
   src/coworld/coworld-ws-adapter.test.ts \
