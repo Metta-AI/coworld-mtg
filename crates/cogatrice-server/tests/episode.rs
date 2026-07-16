@@ -1,3 +1,5 @@
+#![cfg(feature = "private-corpus-tests")]
+
 use cogatrice_server::wire::{Replay, Results};
 use futures::StreamExt;
 use serde_json::{json, Value};
@@ -341,6 +343,10 @@ async fn wait_healthz(port: u16) {
 fn set_common_env(port: u16) {
     std::env::set_var("COGAME_HOST", "127.0.0.1");
     std::env::set_var("COGAME_PORT", port.to_string());
+    std::env::set_var(
+        "COGAME_CORPUS_DIR",
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("../../.private/corpus"),
+    );
 }
 
 fn free_port() -> u16 {

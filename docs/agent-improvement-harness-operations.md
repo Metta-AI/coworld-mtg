@@ -14,6 +14,13 @@ rustup show
 cargo build --locked -p cogatrice-harness
 ```
 
+The production card export and deck lists are private artifacts. Authorized local runs first materialize the pinned
+compact runtime corpus:
+
+```sh
+scripts/fetch-corpus.sh
+```
+
 Cloud images should run that build while constructing the image. Runner
 workers can then set `CARGO_NET_OFFLINE=true`; corpus inputs are the only
 runtime downloads.
@@ -66,8 +73,8 @@ ranking is input for deck/scenario selection and investigation only.
 ```sh
 cargo run --locked -p cogatrice-harness -- run \
   --manifest-uri artifacts/corpus/manifest.json \
-  --deck-a decks/a.json \
-  --deck-b decks/b.json \
+  --deck-a .private/corpus/decks/a.json \
+  --deck-b .private/corpus/decks/b.json \
   --run-id campaign-shard-000 \
   --seed-start 0 \
   --seed-count 10000 \

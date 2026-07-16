@@ -1,3 +1,5 @@
+#![cfg(feature = "private-corpus-tests")]
+
 use cogatrice_harness::{
     aggregate_results, materialize_corpus, mine_17lands, replay_trace_file, run_shard,
     AggregateOptions, GameTerminal, GameTrace, MaterializeOptions, RunOptions,
@@ -18,7 +20,7 @@ fn repo_path(path: &str) -> PathBuf {
 fn materialize_options(temp: &TempDir, output_name: &str) -> MaterializeOptions {
     MaterializeOptions {
         set: "FIXTURE".to_owned(),
-        phase_card_data: repo_path("crates/phase-bridge/data/card-data.json")
+        phase_card_data: repo_path(".private/corpus/phase-card-data.json")
             .to_string_lossy()
             .into_owned(),
         phase_sha256: None,
@@ -39,7 +41,7 @@ fn materialize_options(temp: &TempDir, output_name: &str) -> MaterializeOptions 
 async fn corpus_manifest_is_content_addressed_and_cross_checks_scryfall() {
     let temp = TempDir::new().unwrap();
     let phase: serde_json::Value = serde_json::from_slice(
-        &fs::read(repo_path("crates/phase-bridge/data/card-data.json")).unwrap(),
+        &fs::read(repo_path(".private/corpus/phase-card-data.json")).unwrap(),
     )
     .unwrap();
     let mountain = &phase["mountain"];
@@ -87,8 +89,8 @@ async fn shard_replays_checkpoints_resumes_and_aggregates() {
     let options = RunOptions {
         manifest_uri: manifest_path.to_string_lossy().into_owned(),
         deck_paths: [
-            repo_path("decks/lorehold_excavation.json"),
-            repo_path("decks/fractal_convergence.json"),
+            repo_path(".private/corpus/decks/lorehold_excavation.json"),
+            repo_path(".private/corpus/decks/fractal_convergence.json"),
         ],
         output_dir: run_dir.clone(),
         run_id: "fixture-0-1".to_owned(),

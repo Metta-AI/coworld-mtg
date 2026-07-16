@@ -3,4 +3,6 @@ node_modules
 target
 test-results
 tmp
-
+.private/*
+!.private/corpus
+!.private/corpus/**

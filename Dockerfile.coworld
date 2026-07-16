@@ -63,7 +63,7 @@ RUN git init /phase \
         > /build/.cargo/config.toml
 COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates
-COPY decks ./decks
+COPY .private/corpus /build/corpus
 RUN test "$(sed -n 's/^pub const PHASE_REVISION: &str = "\([0-9a-f]*\)";.*/\1/p' crates/phase-bridge/src/lib.rs)" = "${PHASE_REVISION}"
 RUN --mount=type=cache,id=cogatrice-cargo-registry,target=/usr/local/cargo/registry \
     --mount=type=cache,id=cogatrice-target,target=/build/target \
@@ -83,12 +83,14 @@ RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.l
 WORKDIR /app
 COPY --from=rust-builder /out/cogatrice-server /app/cogatrice-server
 COPY --from=rust-builder /out/goldfish /app/goldfish
+COPY --from=rust-builder /build/corpus /app/corpus
 COPY --from=web-builder /build/web/dist /app/web/dist
 RUN cp /app/web/dist/replay.html /app/web/dist/legacy-replay.html
 COPY --from=phase-web-builder /phase/client/coworld-dist /app/web/dist
 
 ENV COGAME_HOST=0.0.0.0 \
     COGAME_PORT=8080 \
+    COGAME_CORPUS_DIR=/app/corpus \
     COGAME_WEB_DIST=/app/web/dist
 
 EXPOSE 8080

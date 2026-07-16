@@ -29,6 +29,19 @@ deduplicates findings into a scoreboard.
 See [the harness operations guide](docs/agent-improvement-harness-operations.md)
 for corpus, worker, replay, minimization, and aggregation commands.
 
+## Private runtime corpus
+
+The generated Phase card database and 17Lands-derived deck lists are not distributed in this public repository.
+Authorized Softmax builds fetch the content-addressed private corpus pinned by `corpus.lock.json`:
+
+```sh
+scripts/fetch-corpus.sh
+```
+
+This materializes `.private/corpus`, verifies the archive and every contained file by SHA-256, and leaves all corpus
+content gitignored. Docker builds require that materialized directory. Public source builds remain available without
+it; run tests requiring real card data with `cargo test --workspace --features private-corpus-tests`.
+
 ## Play locally
 
 From the repo root:
@@ -36,6 +49,7 @@ From the repo root:
 ```sh
 npm install
 npm run build
+scripts/fetch-corpus.sh
 cargo build -p cogatrice-server -p goldfish
 mkdir -p tmp/local-play
 cat > tmp/local-play/config.json <<'JSON'
@@ -52,6 +66,7 @@ cat > tmp/local-play/config.json <<'JSON'
 JSON
 COGAME_HOST=127.0.0.1 \
 COGAME_PORT=8080 \
+COGAME_CORPUS_DIR="$PWD/.private/corpus" \
 COGAME_CONFIG_URI=tmp/local-play/config.json \
 COGAME_RESULTS_URI=tmp/local-play/results.json \
 COGAME_SAVE_REPLAY_URI=tmp/local-play/replay.json \
@@ -72,10 +87,11 @@ To play against the baseline instead, leave the second browser closed and run:
 cargo run -p goldfish -- --url 'ws://127.0.0.1:8080/player?slot=1&token=tokB'
 ```
 
-The bundled decks are real 40-card `SOS.PremierDraft` lists captured from MTG
-Arena play data by 17Lands. Published play consists of two single-game variants
-with deck assignments reversed, so each challenger pilots Lorehold Excavation
-and Fractal Convergence once. Published variants omit `seed`, which generates a
-fresh root seed when the episode config is loaded. Supply `seed` explicitly, as
+The supplied decks are real 40-card `SOS.PremierDraft` lists captured from MTG
+Arena play data by 17Lands and supplied through the private runtime corpus.
+Published play consists of two single-game variants with deck assignments
+reversed, so each challenger pilots Lorehold Excavation and Fractal Convergence
+once. Published variants omit `seed`, which generates a fresh root seed when
+the episode config is loaded. Supply `seed` explicitly, as
 in the local example above, to reproduce the exact initial library orders and
 all later random outcomes.

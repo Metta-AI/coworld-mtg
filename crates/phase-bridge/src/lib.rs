@@ -85,11 +85,6 @@ impl PhaseRuntime {
         })
     }
 
-    /// Compact Phase export containing every card in Coworld MTG's bundled decks.
-    pub fn bundled() -> Result<Self, BridgeError> {
-        Self::from_card_data_json(include_str!("../data/card-data.json"))
-    }
-
     pub fn card_count(&self) -> usize {
         self.cards.card_count()
     }
@@ -723,6 +718,18 @@ fn type_line(object: &phase_engine::game::game_object::GameObject) -> String {
 mod tests {
     use super::*;
 
+    #[cfg(feature = "private-corpus-tests")]
+    fn private_file(path: &str) -> String {
+        std::fs::read_to_string(
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+                .join("../..")
+                .join(".private/corpus")
+                .join(path),
+        )
+        .expect("run scripts/fetch-corpus.sh before private corpus tests")
+    }
+
+    #[cfg(feature = "private-corpus-tests")]
     fn deck(json: &str) -> Vec<String> {
         let value: serde_json::Value = serde_json::from_str(json).unwrap();
         value["cards"]
@@ -737,6 +744,20 @@ mod tests {
             .collect()
     }
 
+    #[cfg(feature = "private-corpus-tests")]
+    fn private_runtime() -> PhaseRuntime {
+        PhaseRuntime::from_card_data_json(&private_file("phase-card-data.json")).unwrap()
+    }
+
+    #[cfg(feature = "private-corpus-tests")]
+    fn private_decks() -> [Vec<String>; 2] {
+        [
+            deck(&private_file("decks/lorehold_excavation.json")),
+            deck(&private_file("decks/fractal_convergence.json")),
+        ]
+    }
+
+    #[cfg(feature = "private-corpus-tests")]
     fn initial_card_orders(game: &PhaseGame) -> [Vec<ObjectId>; 2] {
         std::array::from_fn(|seat| {
             let player = &game.state().players[seat];
@@ -769,14 +790,12 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "private-corpus-tests")]
     fn phase_stops_are_actor_scoped_and_legal_outside_the_current_prompt() {
         use phase_engine::types::phase::{Phase, PhaseStopRetention, PhaseStopScope};
 
-        let runtime = PhaseRuntime::bundled().unwrap();
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let runtime = private_runtime();
+        let decks = private_decks();
         let (mut game, _) = runtime.new_limited_game(decks, 11).unwrap();
         let keep = game
             .legal_actions(1)
@@ -811,14 +830,12 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "private-corpus-tests")]
     fn set_auto_pass_still_requires_a_priority_prompt() {
         use phase_engine::types::game_state::AutoPassRequest;
 
-        let runtime = PhaseRuntime::bundled().unwrap();
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let runtime = private_runtime();
+        let decks = private_decks();
         let (mut game, _) = runtime.new_limited_game(decks, 12).unwrap();
         let error = game
             .submit(
@@ -832,12 +849,10 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "private-corpus-tests")]
     fn viewer_snapshot_defaults_preserve_old_replays() {
-        let runtime = PhaseRuntime::bundled().unwrap();
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let runtime = private_runtime();
+        let decks = private_decks();
         let (game, _) = runtime.new_limited_game(decks, 13).unwrap();
         let mut value = serde_json::to_value(game.full_snapshot()).unwrap();
         let object = value.as_object_mut().unwrap();
@@ -856,15 +871,12 @@ mod tests {
     }
 
     #[test]
-    fn bundled_decks_enter_phase_mulligan_with_exact_legal_actions() {
-        let runtime =
-            PhaseRuntime::from_card_data_json(include_str!("../data/card-data.json")).unwrap();
+    #[cfg(feature = "private-corpus-tests")]
+    fn private_decks_enter_phase_mulligan_with_exact_legal_actions() {
+        let runtime = private_runtime();
         assert_eq!(runtime.card_count(), 46);
 
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let decks = private_decks();
         let (mut game, initial) = runtime.new_limited_game(decks, 4242).unwrap();
         assert!(!initial.events.is_empty());
         assert_eq!(game.state().players[0].hand.len(), 7);
@@ -893,12 +905,10 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "private-corpus-tests")]
     fn root_seed_reproduces_and_varies_initial_card_order() {
-        let runtime = PhaseRuntime::bundled().unwrap();
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let runtime = private_runtime();
+        let decks = private_decks();
 
         let (first, _) = runtime.new_limited_game(decks.clone(), 7_001).unwrap();
         let (replay, _) = runtime.new_limited_game(decks.clone(), 7_001).unwrap();
@@ -913,12 +923,10 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "private-corpus-tests")]
     fn viewer_projection_redacts_hidden_cards_and_rejects_invented_actions() {
-        let runtime = PhaseRuntime::bundled().unwrap();
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let runtime = private_runtime();
+        let decks = private_decks();
         let (mut game, _) = runtime.new_limited_game(decks, 7).unwrap();
 
         let player = game.phase_client_snapshot(0);
@@ -967,12 +975,10 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "private-corpus-tests")]
     fn checkpoint_restore_preserves_authoritative_state() {
-        let runtime = PhaseRuntime::bundled().unwrap();
-        let decks = [
-            deck(include_str!("../../../decks/lorehold_excavation.json")),
-            deck(include_str!("../../../decks/fractal_convergence.json")),
-        ];
+        let runtime = private_runtime();
+        let decks = private_decks();
         let (game, _) = runtime.new_limited_game(decks, 99).unwrap();
         let checkpoint = game.checkpoint_json().unwrap();
         let restored = runtime.restore_game(&checkpoint).unwrap();

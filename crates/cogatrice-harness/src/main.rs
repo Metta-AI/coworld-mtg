@@ -67,9 +67,9 @@ struct MaterializeArgs {
 struct RunArgs {
     #[arg(long)]
     manifest_uri: String,
-    #[arg(long, default_value = "decks/lorehold_excavation.json")]
+    #[arg(long, default_value = ".private/corpus/decks/lorehold_excavation.json")]
     deck_a: PathBuf,
-    #[arg(long, default_value = "decks/fractal_convergence.json")]
+    #[arg(long, default_value = ".private/corpus/decks/fractal_convergence.json")]
     deck_b: PathBuf,
     #[arg(long)]
     output_dir: PathBuf,
@@ -141,9 +141,9 @@ struct ImproveArgs {
     checkpoint_uri: PathBuf,
     #[arg(long)]
     run_id: Option<String>,
-    #[arg(long, default_value = "decks/lorehold_excavation.json")]
+    #[arg(long, default_value = ".private/corpus/decks/lorehold_excavation.json")]
     deck_a: PathBuf,
-    #[arg(long, default_value = "decks/fractal_convergence.json")]
+    #[arg(long, default_value = ".private/corpus/decks/fractal_convergence.json")]
     deck_b: PathBuf,
     #[arg(long, default_value_t = 2_000)]
     action_budget: u64,

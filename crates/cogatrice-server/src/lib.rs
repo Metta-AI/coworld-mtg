@@ -1,5 +1,5 @@
 mod config;
-mod decks;
+mod corpus;
 mod uri;
 pub mod wire;
 
@@ -11,7 +11,7 @@ use axum::response::{Html, IntoResponse, Response};
 use axum::routing::get;
 use axum::Router;
 use config::EpisodeConfig;
-use decks::load_deck;
+use corpus::Corpus;
 use futures::{Sink, SinkExt, StreamExt};
 use phase_bridge::{DeckList, GameAction, GameEvent, PhaseGame, PhaseRuntime};
 use serde_json::Value;
@@ -103,11 +103,18 @@ pub async fn run_until_shutdown(shutdown: impl Future<Output = ()> + Send + 'sta
 
 async fn run_match_server(shutdown: impl Future<Output = ()> + Send + 'static) -> Result<()> {
     let config = Arc::new(EpisodeConfig::from_env().await?);
+    let corpus = Corpus::from_env()?;
     let decks = Arc::new([
-        load_deck(&config.decks[0]).context("failed to load slot 0 deck")?,
-        load_deck(&config.decks[1]).context("failed to load slot 1 deck")?,
+        corpus
+            .load_deck(&config.decks[0])
+            .context("failed to load slot 0 deck")?,
+        corpus
+            .load_deck(&config.decks[1])
+            .context("failed to load slot 1 deck")?,
     ]);
-    let runtime = PhaseRuntime::bundled().context("failed to load bundled Phase card data")?;
+    let runtime = corpus
+        .phase_runtime()
+        .context("failed to load private Phase card data")?;
     let (host, port) = config::host_port_from_env();
     let listener = TcpListener::bind(format!("{host}:{port}")).await?;
     let (cmd_tx, cmd_rx) = mpsc::unbounded_channel();
