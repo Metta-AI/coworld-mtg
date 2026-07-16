@@ -34,6 +34,11 @@
             "properties": {"name": {"type": "string", "minLength": 1}}
           }
         },
+        "num_agents": {
+          "type": "integer",
+          "const": 2,
+          "description": "Fixed player count used by league commissioners when scheduling episodes."
+        },
         "seed": {
           "type": "integer",
           "minimum": 0,
@@ -155,6 +160,7 @@
       "name": "Lorehold vs Fractals",
       "description": "One Secrets of Strixhaven Premier Draft game with a fresh private seed: Challenger A pilots Lorehold Excavation and Challenger B pilots Fractal Convergence.",
       "game_config": {
+        "num_agents": 2,
         "players": [{"name": "Challenger A"}, {"name": "Challenger B"}],
         "decks": ["lorehold_excavation", "fractal_convergence"],
         "games_to_win": 1,
@@ -169,6 +175,7 @@
       "name": "Fractals vs Lorehold",
       "description": "The companion single game with deck assignments reversed: Challenger A pilots Fractal Convergence and Challenger B pilots Lorehold Excavation.",
       "game_config": {
+        "num_agents": 2,
         "players": [{"name": "Challenger A"}, {"name": "Challenger B"}],
         "decks": ["fractal_convergence", "lorehold_excavation"],
         "games_to_win": 1,
@@ -185,6 +192,7 @@
       {"player_id": "coworld-mtg-goldfish"}
     ],
     "game_config": {
+      "num_agents": 2,
       "players": [{"name": "Lorehold goldfish"}, {"name": "Fractal goldfish"}],
       "seed": 4242,
       "decks": ["lorehold_excavation", "fractal_convergence"],

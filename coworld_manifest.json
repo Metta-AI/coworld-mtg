@@ -41,6 +41,11 @@
             }
           }
         },
+        "num_agents": {
+          "type": "integer",
+          "const": 2,
+          "description": "Fixed player count used by league commissioners when scheduling episodes."
+        },
         "seed": {
           "type": "integer",
           "minimum": 0,
@@ -236,6 +241,7 @@
       "id": "lorehold-vs-fractals",
       "name": "Lorehold vs Fractals",
       "game_config": {
+        "num_agents": 2,
         "players": [
           {
             "name": "Challenger A"
@@ -260,6 +266,7 @@
       "id": "fractals-vs-lorehold",
       "name": "Fractals vs Lorehold",
       "game_config": {
+        "num_agents": 2,
         "players": [
           {
             "name": "Challenger A"
@@ -283,6 +290,7 @@
   ],
   "certification": {
     "game_config": {
+      "num_agents": 2,
       "players": [
         {
           "name": "Lorehold goldfish"
