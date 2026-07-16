@@ -730,7 +730,7 @@ fn failure_trace(
 fn classify_failure(signature: &str) -> FindingClassification {
     match signature {
         "runner_error" | "hidden_information_leak" | "deterministic_replay_mismatch" => {
-            FindingClassification::CogatriceIntegrationDefect
+            FindingClassification::CoworldIntegrationDefect
         }
         "phase_panic"
         | "deadlock_no_legal_actions"

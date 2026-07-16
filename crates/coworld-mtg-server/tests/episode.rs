@@ -1,6 +1,6 @@
 #![cfg(feature = "private-corpus-tests")]
 
-use cogatrice_server::wire::{Replay, Results};
+use coworld_mtg_server::wire::{Replay, Results};
 use futures::StreamExt;
 use serde_json::{json, Value};
 use std::future::Future;
@@ -82,7 +82,7 @@ fn replay_mode_serves_a_finite_recording() {
         set_common_env(port);
         std::env::set_var("COGAME_LOAD_REPLAY_URI", &outcome.replay);
         let (shutdown_tx, shutdown_rx) = oneshot::channel();
-        let server = tokio::spawn(cogatrice_server::run_until_shutdown(async {
+        let server = tokio::spawn(coworld_mtg_server::run_until_shutdown(async {
             shutdown_rx.await.ok();
         }));
         wait_healthz(port).await;
@@ -220,7 +220,9 @@ async fn run_completed_match(
     std::env::set_var("COGAME_LOG_URI", &log);
     std::env::remove_var("COGAME_LOAD_REPLAY_URI");
 
-    let server = tokio::spawn(cogatrice_server::run_until_shutdown(std::future::pending()));
+    let server = tokio::spawn(coworld_mtg_server::run_until_shutdown(
+        std::future::pending(),
+    ));
     wait_healthz(port).await;
     let slot0 = format!("ws://127.0.0.1:{port}/player?slot=0&token=tokA");
     let slot1 = format!("ws://127.0.0.1:{port}/player?slot=1&token=tokB");
@@ -363,7 +365,7 @@ fn temp_root(name: &str) -> PathBuf {
         .unwrap()
         .as_nanos();
     let root = std::env::temp_dir().join(format!(
-        "cogatrice-m2-{name}-{}-{nonce}",
+        "coworld-mtg-episode-{name}-{}-{nonce}",
         std::process::id()
     ));
     std::fs::create_dir_all(&root).unwrap();

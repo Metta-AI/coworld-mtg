@@ -5,5 +5,5 @@ fn main() -> anyhow::Result<()> {
         .thread_stack_size(WORKER_STACK_SIZE)
         .enable_all()
         .build()?
-        .block_on(cogatrice_server::run())
+        .block_on(coworld_mtg_server::run())
 }

@@ -8,7 +8,7 @@ Cockatrice-style honor-system prototype has been retired. The Rust-native
 
 - `phase-bridge` pins Phase, loads the card export, resolves bundled decks,
   produces per-viewer projections, and accepts exact legal `GameAction` values.
-- `cogatrice-server` owns Coworld authentication, clocks, match scoring,
+- `coworld-mtg-server` owns Coworld authentication, clocks, match scoring,
   results, replay persistence, and viewer fan-out. It contains no Magic rules.
 - `goldfish` ranks the legal actions supplied by Phase. It contains no manual
   mana, draw, timing, or combat implementation.

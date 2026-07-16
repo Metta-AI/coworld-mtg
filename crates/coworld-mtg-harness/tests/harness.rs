@@ -1,6 +1,6 @@
 #![cfg(feature = "private-corpus-tests")]
 
-use cogatrice_harness::{
+use coworld_mtg_harness::{
     aggregate_results, materialize_corpus, mine_17lands, replay_trace_file, run_shard,
     AggregateOptions, GameTerminal, GameTrace, MaterializeOptions, RunOptions,
 };

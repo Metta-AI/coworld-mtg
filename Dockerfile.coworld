@@ -65,11 +65,11 @@ COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates
 COPY .private/corpus /build/corpus
 RUN test "$(sed -n 's/^pub const PHASE_REVISION: &str = "\([0-9a-f]*\)";.*/\1/p' crates/phase-bridge/src/lib.rs)" = "${PHASE_REVISION}"
-RUN --mount=type=cache,id=cogatrice-cargo-registry,target=/usr/local/cargo/registry \
-    --mount=type=cache,id=cogatrice-target,target=/build/target \
-    CARGO_BUILD_JOBS=2 cargo build --release -p cogatrice-server -p goldfish \
+RUN --mount=type=cache,id=coworld-mtg-cargo-registry,target=/usr/local/cargo/registry \
+    --mount=type=cache,id=coworld-mtg-target,target=/build/target \
+    CARGO_BUILD_JOBS=2 cargo build --release -p coworld-mtg-server -p goldfish \
     && mkdir -p /out \
-    && cp /build/target/release/cogatrice-server /build/target/release/goldfish /out/
+    && cp /build/target/release/coworld-mtg-server /build/target/release/goldfish /out/
 
 FROM docker.io/library/debian:bookworm-slim
 
@@ -81,7 +81,7 @@ RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.l
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY --from=rust-builder /out/cogatrice-server /app/cogatrice-server
+COPY --from=rust-builder /out/coworld-mtg-server /app/coworld-mtg-server
 COPY --from=rust-builder /out/goldfish /app/goldfish
 COPY --from=rust-builder /build/corpus /app/corpus
 COPY --from=web-builder /build/web/dist /app/web/dist
@@ -94,4 +94,4 @@ ENV COGAME_HOST=0.0.0.0 \
     COGAME_WEB_DIST=/app/web/dist
 
 EXPOSE 8080
-CMD ["/app/cogatrice-server"]
+CMD ["/app/coworld-mtg-server"]

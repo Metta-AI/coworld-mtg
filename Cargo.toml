@@ -1,8 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-    "crates/cogatrice-harness",
-    "crates/cogatrice-server",
+    "crates/coworld-mtg-harness",
+    "crates/coworld-mtg-server",
     "crates/phase-bridge",
     "crates/players/goldfish",
 ]

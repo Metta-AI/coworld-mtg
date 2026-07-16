@@ -1,6 +1,6 @@
 use anyhow::{bail, Result};
 use clap::{Args, Parser, Subcommand};
-use cogatrice_harness::{
+use coworld_mtg_harness::{
     aggregate_results, load_manifest, materialize_corpus, mine_17lands, minimize_trace,
     replay_trace_file, run_shard, AggregateOptions, MaterializeOptions, RunOptions,
 };
@@ -8,7 +8,7 @@ use phase_bridge::PHASE_REVISION;
 use std::path::PathBuf;
 
 #[derive(Parser)]
-#[command(name = "cogatrice-harness")]
+#[command(name = "coworld-mtg-harness")]
 #[command(about = "Reproducible direct-to-Phase MTG fidelity harness")]
 struct Cli {
     #[command(subcommand)]

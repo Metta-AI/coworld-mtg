@@ -3,7 +3,7 @@
 ## Implementation
 
 The reusable local/offline foundation described here is implemented in
-`crates/cogatrice-harness`. It provides content-addressed corpus
+`crates/coworld-mtg-harness`. It provides content-addressed corpus
 materialization, Scryfall identity/text/face/layout/legality validation,
 17Lands soft-signal mining, exact-legal-action seed shards, authoritative event
 traces, stable state hashes that include the RNG stream, serialized
@@ -288,7 +288,7 @@ The exact binary and flags can evolve, but the workflow should converge on a
 single resumable command such as:
 
 ```sh
-cargo run -p cogatrice-harness -- improve \
+cargo run -p coworld-mtg-harness -- improve \
   --set SOS \
   --phase-rev <commit> \
   --manifest-uri <immutable-manifest-uri> \

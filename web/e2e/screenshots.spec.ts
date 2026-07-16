@@ -8,11 +8,11 @@ import net from "node:net";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const binSuffix = process.platform === "win32" ? ".exe" : "";
-const shots = process.env.SHOT_DIR ?? mkdtempSync(join(tmpdir(), "cogatrice-shots-"));
+const shots = process.env.SHOT_DIR ?? mkdtempSync(join(tmpdir(), "coworld-mtg-shots-"));
 
 test.beforeAll(() => {
   mkdirSync(shots, { recursive: true });
-  execFileSync("cargo", ["build", "--quiet", "-p", "cogatrice-server", "-p", "goldfish"], {
+  execFileSync("cargo", ["build", "--quiet", "-p", "coworld-mtg-server", "-p", "goldfish"], {
     cwd: repoRoot,
     stdio: "inherit",
     env: {
@@ -63,7 +63,7 @@ test("capture player and global views", async ({ page, context }) => {
 
 async function startHarness(): Promise<{ port: number; stop: () => Promise<void> }> {
   const port = await freePort();
-  const root = mkdtempSync(join(tmpdir(), "cogatrice-shot-harness-"));
+  const root = mkdtempSync(join(tmpdir(), "coworld-mtg-shot-harness-"));
   const config = join(root, "config.json");
   writeFileSync(
     config,
@@ -82,13 +82,14 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
     ...process.env,
     COGAME_HOST: "127.0.0.1",
     COGAME_PORT: String(port),
+    COGAME_CORPUS_DIR: join(repoRoot, ".private", "corpus"),
     COGAME_CONFIG_URI: config,
     COGAME_RESULTS_URI: join(root, "results.json"),
     COGAME_SAVE_REPLAY_URI: join(root, "replay.json"),
     COGAME_WEB_DIST: join(repoRoot, "web", "dist")
   };
   delete env.COGAME_LOAD_REPLAY_URI;
-  const server = spawn(join(repoRoot, "target", "debug", `cogatrice-server${binSuffix}`), {
+  const server = spawn(join(repoRoot, "target", "debug", `coworld-mtg-server${binSuffix}`), {
     cwd: repoRoot,
     env,
     stdio: ["ignore", "ignore", "ignore"]

@@ -240,7 +240,7 @@ function render(state: AppState): void {
   state.root.innerHTML = `
     <div class="arena-shell ${state.pendingCmdId !== null ? "is-pending" : ""}">
       <header class="arena-header">
-        <div class="wordmark"><span class="brand-mark">C</span><strong>COGATRICE</strong></div>
+        <div class="wordmark"><span class="brand-mark">C</span><strong>COWORLD MTG</strong></div>
         <div class="turn-status">
           <span>TURN ${snapshot.turn} · ${escapeHtml(activeTurnLabel(snapshot, state.playerNames, bottom))}</span>
           <strong>${escapeHtml(phaseLabel(snapshot.phase))}</strong>

@@ -36,4 +36,4 @@ if [ "${HARNESS_RESUME:-false}" = "true" ]; then
   set -- "$@" --resume
 fi
 
-exec cargo run --locked -p cogatrice-harness -- "$@"
+exec cargo run --locked -p coworld-mtg-harness -- "$@"

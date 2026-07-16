@@ -101,7 +101,7 @@ After each owning Phase fix:
 
 1. run formatting, authority checks, focused regressions, workspace clippy, and
    the full proptest-enabled engine suite through `cargo nextest`;
-2. run Coworld `cogatrice-harness` tests against its pinned Phase fork
+2. run Coworld `coworld-mtg-harness` tests against its pinned Phase fork
    revision;
 3. rebuild the release harness against the candidate Phase checkout;
 4. write a uniquely named shard and scoreboard without overwriting prior

@@ -11,7 +11,7 @@ a machine with rustup, setup and compilation are non-interactive:
 
 ```sh
 rustup show
-cargo build --locked -p cogatrice-harness
+cargo build --locked -p coworld-mtg-harness
 ```
 
 The production card export and deck lists are private artifacts. Authorized local runs first materialize the pinned
@@ -32,7 +32,7 @@ inputs require an expected SHA-256 value. The Phase input is the full generated
 card export, not Coworld MTG's compact test fixture.
 
 ```sh
-cargo run --locked -p cogatrice-harness -- materialize \
+cargo run --locked -p coworld-mtg-harness -- materialize \
   --set <set-code> \
   --phase-card-data <phase-card-export> \
   --phase-card-data-sha256 <sha256> \
@@ -60,7 +60,7 @@ This command ranks card and event frequency and summarizes turn, damage, mana,
 and game-length columns from a 17Lands CSV or CSV gzip snapshot:
 
 ```sh
-cargo run --locked -p cogatrice-harness -- mine17lands \
+cargo run --locked -p coworld-mtg-harness -- mine17lands \
   --manifest-uri artifacts/corpus/manifest.json \
   --output artifacts/soft-signals.json
 ```
@@ -71,7 +71,7 @@ ranking is input for deck/scenario selection and investigation only.
 ## Run or resume a shard
 
 ```sh
-cargo run --locked -p cogatrice-harness -- run \
+cargo run --locked -p coworld-mtg-harness -- run \
   --manifest-uri artifacts/corpus/manifest.json \
   --deck-a .private/corpus/decks/a.json \
   --deck-b .private/corpus/decks/b.json \
@@ -120,16 +120,16 @@ before replay or minimization:
 ```sh
 gzip -dc artifacts/runs/shard-000/traces.jsonl.gz | sed -n '1p' > trace.json
 
-cargo run --locked -p cogatrice-harness -- replay \
+cargo run --locked -p coworld-mtg-harness -- replay \
   --manifest-uri artifacts/corpus/manifest.json \
   --trace trace.json
 
-cargo run --locked -p cogatrice-harness -- minimize \
+cargo run --locked -p coworld-mtg-harness -- minimize \
   --manifest-uri artifacts/corpus/manifest.json \
   --trace trace.json \
   --output minimized.json
 
-cargo run --locked -p cogatrice-harness -- aggregate \
+cargo run --locked -p coworld-mtg-harness -- aggregate \
   --run-dir artifacts/runs/shard-000 \
   --run-dir artifacts/runs/shard-001 \
   --output artifacts/scoreboard.json

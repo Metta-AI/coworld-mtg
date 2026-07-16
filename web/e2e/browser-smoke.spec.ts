@@ -10,7 +10,7 @@ const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const binSuffix = process.platform === "win32" ? ".exe" : "";
 
 test.beforeAll(() => {
-  execFileSync("cargo", ["build", "--quiet", "-p", "cogatrice-server"], {
+  execFileSync("cargo", ["build", "--quiet", "-p", "coworld-mtg-server"], {
     cwd: repoRoot,
     stdio: "inherit",
     env: rustEnv()
@@ -62,7 +62,7 @@ async function dismissOpeningRoll(page: Page): Promise<void> {
 
 async function startHarness(): Promise<{ port: number; stop: () => Promise<void> }> {
   const port = await freePort();
-  const root = mkdtempSync(join(tmpdir(), "cogatrice-browser-"));
+  const root = mkdtempSync(join(tmpdir(), "coworld-mtg-browser-"));
   const config = join(root, "config.json");
   writeFileSync(
     config,
@@ -85,6 +85,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
     ...process.env,
     COGAME_HOST: "127.0.0.1",
     COGAME_PORT: String(port),
+    COGAME_CORPUS_DIR: join(repoRoot, ".private", "corpus"),
     COGAME_CONFIG_URI: config,
     COGAME_RESULTS_URI: join(root, "results.json"),
     COGAME_SAVE_REPLAY_URI: join(root, "replay.json"),
@@ -93,7 +94,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
   };
   delete env.COGAME_LOAD_REPLAY_URI;
 
-  const server = spawn(join(repoRoot, "target", "debug", `cogatrice-server${binSuffix}`), {
+  const server = spawn(join(repoRoot, "target", "debug", `coworld-mtg-server${binSuffix}`), {
     cwd: repoRoot,
     env,
     stdio: ["ignore", "pipe", "pipe"]

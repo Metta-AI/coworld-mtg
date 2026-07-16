@@ -3,11 +3,11 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::BTreeMap;
 
-pub const MANIFEST_SCHEMA: &str = "cogatrice-corpus-v1";
-pub const TRACE_SCHEMA: &str = "cogatrice-trace-v1";
-pub const RESULT_SCHEMA: &str = "cogatrice-result-v1";
-pub const SCOREBOARD_SCHEMA: &str = "cogatrice-scoreboard-v1";
-pub const SOFT_SIGNAL_SCHEMA: &str = "cogatrice-17lands-soft-signals-v1";
+pub const MANIFEST_SCHEMA: &str = "coworld-mtg-harness-corpus-v1";
+pub const TRACE_SCHEMA: &str = "coworld-mtg-trace-v1";
+pub const RESULT_SCHEMA: &str = "coworld-mtg-result-v1";
+pub const SCOREBOARD_SCHEMA: &str = "coworld-mtg-scoreboard-v1";
+pub const SOFT_SIGNAL_SCHEMA: &str = "coworld-mtg-17lands-soft-signals-v1";
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Artifact {
@@ -100,7 +100,7 @@ pub struct Finding {
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "snake_case")]
 pub enum FindingClassification {
-    CogatriceIntegrationDefect,
+    CoworldIntegrationDefect,
     PhaseDefect,
     DataDefect,
     ObservationalAnomaly,

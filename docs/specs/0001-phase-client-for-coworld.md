@@ -70,7 +70,7 @@ components:
 
 ## Non-Goals
 
-- Replacing `cogatrice-server` with `phase-server`.
+- Replacing `coworld-mtg-server` with `phase-server`.
 - Running an authoritative Phase WASM engine in the browser.
 - Adopting Phase's lobby, accounts, deck storage, matchmaking, or local AI flow.
 - Reconstructing Coworld replays by rerunning actions against a newer engine.
@@ -85,7 +85,7 @@ components:
 | --- | --- |
 | Phase engine | Rules, redaction, derived presentation views, events, legal actions |
 | `phase-bridge` | Pinned engine, deck hydration, atomic viewer snapshot construction |
-| `cogatrice-server` | Slot auth, clocks, scoring, replay recording, Coworld files and routes |
+| `coworld-mtg-server` | Slot auth, clocks, scoring, replay recording, Coworld files and routes |
 | Phase client | Board, hand, zones, stack, combat, prompts, targeting, mana and animations |
 | Coworld adapter/chrome | Protocol translation, identity, clock/score display, terminal episode UI |
 

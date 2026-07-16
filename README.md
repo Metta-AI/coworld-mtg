@@ -19,7 +19,7 @@ only to keep version-2 Coworld replays readable. See the
 
 ## Fidelity harness
 
-`cogatrice-harness` runs seeded games directly against `phase-bridge`, records
+`coworld-mtg-harness` runs seeded games directly against `phase-bridge`, records
 exact actions, authoritative events, canonical state hashes, and RNG-preserving
 checkpoints, then replays every trace as a hard determinism gate. It also
 materializes hash-verified Phase/Scryfall/MTGJSON/17Lands artifacts, mines
@@ -50,7 +50,7 @@ From the repo root:
 npm install
 npm run build
 scripts/fetch-corpus.sh
-cargo build -p cogatrice-server -p goldfish
+cargo build -p coworld-mtg-server -p goldfish
 mkdir -p tmp/local-play
 cat > tmp/local-play/config.json <<'JSON'
 {
@@ -72,7 +72,7 @@ COGAME_RESULTS_URI=tmp/local-play/results.json \
 COGAME_SAVE_REPLAY_URI=tmp/local-play/replay.json \
 COGAME_LOG_URI=tmp/local-play/log.txt \
 COGAME_WEB_DIST="$PWD/web/dist" \
-cargo run -p cogatrice-server
+cargo run -p coworld-mtg-server
 ```
 
 Open these URLs in separate browser profiles (for example, a normal and an
