@@ -6,5 +6,5 @@ services:
       context: .
       dockerfile: Dockerfile.coworld
   commissioner:
-    image: ghcr.io/metta-ai/commissioners-default:latest
+    image: ghcr.io/metta-ai/commissioners-default@sha256:75d77cf97479317c88988104b553ce746718138608ea00fcc14398d95e8d9b8f
     platform: linux/amd64

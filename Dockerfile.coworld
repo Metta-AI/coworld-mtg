@@ -10,8 +10,14 @@ RUN npm run build:legacy
 
 FROM docker.io/library/node:22-bookworm-slim AS phase-web-builder
 
-RUN apt-get update \
+# The release builder's network permits HTTPS but not Debian's default HTTP mirror.
+# Package signatures are still verified; TLS verification is relaxed only long
+# enough to bootstrap the CA bundle in the slim image.
+RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list.d/debian.sources \
+    && printf 'Acquire::ForceIPv4 "true";\nAcquire::https::Verify-Peer "false";\n' > /etc/apt/apt.conf.d/99bootstrap \
+    && apt-get update \
     && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -f /etc/apt/apt.conf.d/99bootstrap \
     && rm -rf /var/lib/apt/lists/*
 
 ARG PHASE_REVISION
@@ -34,8 +40,11 @@ RUN mkdir -p src/coworld \
 
 FROM docker.io/library/rust:1.91-bookworm AS rust-builder
 
-RUN apt-get update \
+RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list.d/debian.sources \
+    && printf 'Acquire::ForceIPv4 "true";\nAcquire::https::Verify-Peer "false";\n' > /etc/apt/apt.conf.d/99bootstrap \
+    && apt-get update \
     && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -f /etc/apt/apt.conf.d/99bootstrap \
     && rm -rf /var/lib/apt/lists/*
 
 ENV RUSTC_BOOTSTRAP=1 \
@@ -57,14 +66,17 @@ COPY decks ./decks
 RUN test "$(sed -n 's/^pub const PHASE_REVISION: &str = "\([0-9a-f]*\)";.*/\1/p' crates/phase-bridge/src/lib.rs)" = "${PHASE_REVISION}"
 RUN --mount=type=cache,id=cogatrice-cargo-registry,target=/usr/local/cargo/registry \
     --mount=type=cache,id=cogatrice-target,target=/build/target \
-    cargo build --release -p cogatrice-server -p goldfish \
+    CARGO_BUILD_JOBS=2 cargo build --release -p cogatrice-server -p goldfish \
     && mkdir -p /out \
     && cp /build/target/release/cogatrice-server /build/target/release/goldfish /out/
 
 FROM docker.io/library/debian:bookworm-slim
 
-RUN apt-get update \
+RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list.d/debian.sources \
+    && printf 'Acquire::ForceIPv4 "true";\nAcquire::https::Verify-Peer "false";\n' > /etc/apt/apt.conf.d/99bootstrap \
+    && apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -f /etc/apt/apt.conf.d/99bootstrap \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
