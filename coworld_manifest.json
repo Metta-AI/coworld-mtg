@@ -1,8 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/Metta-AI/coworld/main/src/coworld/coworld_manifest_schema.json",
+  "tags": [
+    "card-game",
+    "strategy",
+    "magic-the-gathering"
+  ],
   "game": {
     "name": "coworld-mtg",
-    "version": "0.1.2",
+    "version": "0.1.7",
     "description": "Two-player Magic: The Gathering powered by the Phase rules engine, with enforced mana, timing, priority, stack, combat, hidden information, scoring, and replay.",
     "owner": "nishu.builder@gmail.com",
     "config_schema": {
@@ -172,27 +177,27 @@
     },
     "runnable": {
       "type": "game",
-      "image": "coworld-mtg:coworld-5aa98c420488",
+      "image": "coworld-mtg:coworld-168a0228835c",
       "run": [
         "/app/cogatrice-server"
       ],
       "env": {},
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/53209de7416e8c6b18a5355917c2ec3a35ec7882"
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c"
     },
     "protocols": {
       "player": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/53209de7416e8c6b18a5355917c2ec3a35ec7882/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/docs/protocol.md"
       },
       "global": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/53209de7416e8c6b18a5355917c2ec3a35ec7882/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/docs/protocol.md"
       }
     },
     "docs": {
       "readme": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/53209de7416e8c6b18a5355917c2ec3a35ec7882/README.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/README.md"
       },
       "pages": [
         {
@@ -209,12 +214,12 @@
   "player": [
     {
       "type": "player",
-      "image": "coworld-mtg:coworld-5aa98c420488",
+      "image": "coworld-mtg:coworld-168a0228835c",
       "run": [
         "/app/goldfish"
       ],
       "env": {},
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/53209de7416e8c6b18a5355917c2ec3a35ec7882",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c",
       "id": "coworld-mtg-goldfish",
       "name": "Coworld MTG Phase Goldfish",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
@@ -224,13 +229,13 @@
   "commissioner": [
     {
       "type": "commissioner",
-      "image": "ghcr.io/metta-ai/commissioners-default@sha256:75d77cf97479317c88988104b553ce746718138608ea00fcc14398d95e8d9b8f",
+      "image": "coworld-mtg-commissioner:coworld-bbf510cda4c9",
       "run": [],
       "env": {},
-      "source_url": "https://github.com/Metta-AI/coworld-tools/tree/c00fabe82cbecc57a3dad4e78626890e2a10d992/commissioners/commissioners/ruleset_strategy_commissioner",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c",
       "id": "default-commissioner",
       "name": "Default Commissioner",
-      "description": "Reusable config-driven commissioner for recurring Coworld MTG league rounds."
+      "description": "Coworld MTG commissioner with rolling pairings and eight appearances per entrant each round."
     }
   ],
   "grader": [],
