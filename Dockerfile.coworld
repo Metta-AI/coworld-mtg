@@ -30,7 +30,8 @@ RUN git init /phase \
 WORKDIR /phase/client
 RUN corepack pnpm@10.28.2 install --frozen-lockfile
 COPY phase-client /overlay
-RUN mkdir -p src/coworld \
+RUN git -C /phase apply /overlay/replay-player-names.patch \
+    && mkdir -p src/coworld \
     && cp -R /overlay/src/. src/coworld/ \
     && cp /overlay/player.html ./player.html \
     && cp /overlay/global.html ./global.html \

@@ -2,15 +2,26 @@ diff --git a/client/src/components/hud/PlayerHud.tsx b/client/src/components/hud
 index 77c4ee9..2b40da5 100644
 --- a/client/src/components/hud/PlayerHud.tsx
 +++ b/client/src/components/hud/PlayerHud.tsx
-@@ -78,6 +78,7 @@ export function PlayerHud() {
+@@ -78,6 +78,18 @@ export function PlayerHud() {
    const hudTone = isValidTarget ? "cyan" : isMyTurn ? "emerald" : "neutral";
    const seatColor = useSeatColor(playerId);
    const avatarUrl = useMultiplayerStore((s) => s.playerAvatars.get(playerId) ?? null);
-+  const replayPlayerName = useMultiplayerStore((s) => s.playerNames.get(playerId) ?? null);
++  const storedReplayPlayerName = useMultiplayerStore((s) => s.playerNames.get(playerId) ?? null);
++  const replayState = (window as unknown as {
++    __coworldReplayState?: {
++      playerNames?: [string, string];
++      seatPlayerSlots?: [number, number];
++    };
++  }).__coworldReplayState;
++  const replayPlayerSlot = replayState?.seatPlayerSlots?.[playerId];
++  const replayPlayerName =
++    (replayPlayerSlot === 0 || replayPlayerSlot === 1
++      ? replayState?.playerNames?.[replayPlayerSlot]
++      : null) ?? storedReplayPlayerName;
  
    return (
      <div
-@@ -89,7 +90,11 @@ export function PlayerHud() {
+@@ -89,7 +101,11 @@ export function PlayerHud() {
      >
        <PhaseIndicatorLeft />
        <HudPlate
