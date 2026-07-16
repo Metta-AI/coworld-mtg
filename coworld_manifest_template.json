@@ -9,7 +9,7 @@
       "type": "game",
       "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/cogatrice-server"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/74632e7d6cab9a6475c1391d5065c7d3295dcaea"
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c"
     },
     "config_schema": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -105,17 +105,17 @@
     "protocols": {
       "player": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/74632e7d6cab9a6475c1391d5065c7d3295dcaea/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/docs/protocol.md"
       },
       "global": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/74632e7d6cab9a6475c1391d5065c7d3295dcaea/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/docs/protocol.md"
       }
     },
     "docs": {
       "readme": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/74632e7d6cab9a6475c1391d5065c7d3295dcaea/README.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/README.md"
       },
       "pages": [
         {
@@ -136,7 +136,7 @@
       "type": "player",
       "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/goldfish"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/74632e7d6cab9a6475c1391d5065c7d3295dcaea",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
     }
   ],
@@ -145,8 +145,8 @@
       "id": "default-commissioner",
       "name": "Default Commissioner",
       "type": "commissioner",
-      "description": "Reusable config-driven commissioner for recurring Coworld MTG league rounds.",
-      "source_url": "https://github.com/Metta-AI/coworld-tools/tree/c00fabe82cbecc57a3dad4e78626890e2a10d992/commissioners/commissioners/ruleset_strategy_commissioner",
+      "description": "Coworld MTG commissioner with rolling pairings and eight appearances per entrant each round.",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c",
       "image": "{{COMMISSIONER_IMAGE}}"
     }
   ],
