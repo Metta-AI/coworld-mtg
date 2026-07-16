@@ -101,8 +101,29 @@ interface StateFrame {
 
 interface ReplayMetaFrame {
   type: "replay_meta";
-  results?: { policy_names?: [string, string] };
-  games?: Array<{ game_number: number; slot_of_seat0?: number; steps: number }>;
+  config?: { clock_s?: number };
+  results?: {
+    policy_names?: [string, string];
+    games?: ReplayOutcomeFrame[];
+  };
+  games?: Array<{
+    game_number: number;
+    slot_of_seat0?: number;
+    steps: number;
+    connection_events?: ReplayConnectionEvent[];
+  }>;
+}
+
+interface ReplayOutcomeFrame {
+  game_number: number;
+  winner_slot: number | null;
+  reason: string;
+}
+
+interface ReplayConnectionEvent {
+  wall_ms: number;
+  slot: number;
+  connected: boolean;
 }
 
 interface ReplayFrameData {
@@ -119,15 +140,28 @@ interface ReplayGameSegment {
   startIndex: number;
   stepCount: number;
   slotOfSeat0: number;
+  connectionEvents: ReplayConnectionEvent[];
 }
 
 export interface CoworldReplayLogEntry {
+  id: string;
   eventIndex: number;
   gameNumber: number;
   turnNumber: number;
   actorName: string | null;
   actionLabel: string;
   life: [number, number];
+}
+
+export interface CoworldReplayOutcome {
+  gameNumber: number;
+  winnerSlot: number | null;
+  winnerName: string | null;
+  loserSlot: number | null;
+  loserName: string | null;
+  reason: string;
+  headline: string;
+  detail: string;
 }
 
 export interface CoworldReplayTurnMarker {
@@ -161,6 +195,7 @@ export interface CoworldReplayState {
   showPriorityPasses: boolean;
   logEntries: CoworldReplayLogEntry[];
   turnMarkers: CoworldReplayTurnMarker[];
+  outcome: CoworldReplayOutcome | null;
 }
 
 export interface CoworldReplayController {
@@ -223,6 +258,8 @@ export class WebSocketAdapter implements EngineAdapter {
   private replayPlaying = false;
   private replayRate = 1;
   private replayPlayerNames: [string, string] = ["Player 1", "Player 2"];
+  private replayOutcomes = new Map<number, ReplayOutcomeFrame>();
+  private replayClockSeconds: number | null = null;
   private replayPerspectiveSlot = 0;
   private replayShowPriorityPasses = false;
   private replayTimer: number | null = null;
@@ -485,12 +522,17 @@ export class WebSocketAdapter implements EngineAdapter {
     if (frame.results?.policy_names?.length === 2) {
       this.replayPlayerNames = [...frame.results.policy_names];
     }
+    this.replayClockSeconds = typeof frame.config?.clock_s === "number" ? frame.config.clock_s : null;
+    this.replayOutcomes = new Map(
+      (frame.results?.games ?? []).map((outcome) => [outcome.game_number, outcome]),
+    );
     this.replayGames = (frame.games ?? []).map((game) => {
       const segment = {
         gameNumber: game.game_number,
         startIndex,
         stepCount: game.steps,
         slotOfSeat0: game.slot_of_seat0 === 1 ? 1 : 0,
+        connectionEvents: game.connection_events ?? [],
       };
       startIndex += game.steps;
       return segment;
@@ -768,7 +810,13 @@ export class WebSocketAdapter implements EngineAdapter {
     for (const [index, frame] of this.replayFrames.entries()) {
       const current = games[games.length - 1];
       if (!current || current.gameNumber !== frame.gameNumber) {
-        games.push({ gameNumber: frame.gameNumber, startIndex: index, stepCount: 1, slotOfSeat0: 0 });
+        games.push({
+          gameNumber: frame.gameNumber,
+          startIndex: index,
+          stepCount: 1,
+          slotOfSeat0: 0,
+          connectionEvents: [],
+        });
       } else {
         current.stepCount += 1;
       }
@@ -807,6 +855,7 @@ export class WebSocketAdapter implements EngineAdapter {
     | "showPriorityPasses"
     | "logEntries"
     | "turnMarkers"
+    | "outcome"
   > {
     const games = this.availableReplayGames();
     const frame = this.replayFrames[this.replayIndex];
@@ -822,6 +871,7 @@ export class WebSocketAdapter implements EngineAdapter {
       startIndex: 0,
       stepCount: 0,
       slotOfSeat0: 0,
+      connectionEvents: [],
     };
     const turns = this.turnStarts(game.gameNumber);
     const turnNumber = frame?.snapshot.state.turn_number ?? turns[0]?.number ?? 0;
@@ -848,6 +898,13 @@ export class WebSocketAdapter implements EngineAdapter {
     const frame = this.replayFrames[this.replayIndex];
     if (!frame?.action) {
       return this.replayPosition().gameStepIndex === 0 ? "Game start" : "State update";
+    }
+    const terminalLabel = this.terminalActionLabel(this.replayIndex);
+    if (terminalLabel) {
+      const actor = frame.actorSlot === null
+        ? null
+        : this.replayPlayerNames[frame.actorSlot] ?? `Player ${frame.actorSlot + 1}`;
+      return actor ? `${actor} · ${terminalLabel}` : terminalLabel;
     }
     if (frame.action.type === "PassPriority" && !this.replayShowPriorityPasses) {
       return `${this.replayPlayerNames[this.activePlayerSlot(frame, this.replayIndex)]} · Turn start`;
@@ -925,7 +982,13 @@ export class WebSocketAdapter implements EngineAdapter {
     return (
       this.availableReplayGames().find(
         (game) => index >= game.startIndex && index < game.startIndex + game.stepCount,
-      ) ?? { gameNumber: 1, startIndex: 0, stepCount: this.replayFrames.length, slotOfSeat0: 0 }
+      ) ?? {
+        gameNumber: 1,
+        startIndex: 0,
+        stepCount: this.replayFrames.length,
+        slotOfSeat0: 0,
+        connectionEvents: [],
+      }
     );
   }
 
@@ -1006,17 +1069,98 @@ export class WebSocketAdapter implements EngineAdapter {
 
   private replayLogEntries(): CoworldReplayLogEntry[] {
     const visible = this.visibleReplayIndices();
-    return visible.map((rawIndex, eventIndex) => {
+    const entries = visible.map((rawIndex, eventIndex) => {
       const frame = this.replayFrames[rawIndex];
       return {
+        id: `action-${rawIndex}`,
         eventIndex,
         gameNumber: frame.gameNumber,
         turnNumber: frame.snapshot.state.turn_number,
         actorName: frame.actorSlot === null ? null : this.replayPlayerNames[frame.actorSlot],
-        actionLabel: frame.action ? this.actionName(frame.action, frame, rawIndex) : "Game start",
+        actionLabel: this.terminalActionLabel(rawIndex)
+          ?? (frame.action ? this.actionName(frame.action, frame, rawIndex) : "Game start"),
         life: this.lifeByPlayerSlot(frame, rawIndex),
       };
     });
+    for (const game of this.availableReplayGames()) {
+      for (const [connectionIndex, event] of game.connectionEvents.entries()) {
+        const rawIndex = this.replayFrames.findIndex(
+          (frame, index) =>
+            frame.gameNumber === game.gameNumber
+            && index >= game.startIndex
+            && frame.wallMs !== null
+            && frame.wallMs >= event.wall_ms,
+        );
+        const fallbackRawIndex = game.startIndex + Math.max(0, game.stepCount - 1);
+        const targetRawIndex = rawIndex >= 0 ? rawIndex : fallbackRawIndex;
+        const visibleIndex = visible.findIndex((index) => index >= targetRawIndex);
+        const eventIndex = visibleIndex >= 0 ? visibleIndex : Math.max(0, visible.length - 1);
+        const frame = this.replayFrames[targetRawIndex];
+        if (!frame) continue;
+        entries.push({
+          id: `connection-${game.gameNumber}-${connectionIndex}`,
+          eventIndex,
+          gameNumber: game.gameNumber,
+          turnNumber: frame.snapshot.state.turn_number,
+          actorName: this.replayPlayerNames[event.slot] ?? `Player ${event.slot + 1}`,
+          actionLabel: event.connected ? "Reconnected" : "Disconnected",
+          life: this.lifeByPlayerSlot(frame, targetRawIndex),
+        });
+      }
+    }
+    return entries.sort((left, right) => left.eventIndex - right.eventIndex || left.id.localeCompare(right.id));
+  }
+
+  private terminalActionLabel(rawIndex: number): string | null {
+    const frame = this.replayFrames[rawIndex];
+    if (!frame) return null;
+    const game = this.replayGameForRawIndex(rawIndex);
+    const lastVisible = this.visibleReplayIndices().filter(
+      (index) => index >= game.startIndex && index < game.startIndex + game.stepCount,
+    ).at(-1);
+    const outcome = this.replayOutcomes.get(game.gameNumber);
+    return rawIndex === lastVisible && outcome?.reason === "clock_flag" ? "Clock expired" : null;
+  }
+
+  private currentReplayOutcome(): CoworldReplayOutcome | null {
+    if (!this.replayComplete) return null;
+    const game = this.replayGameForRawIndex(this.replayIndex);
+    const lastVisible = this.visibleReplayIndices().filter(
+      (index) => index >= game.startIndex && index < game.startIndex + game.stepCount,
+    ).at(-1);
+    if (this.replayIndex !== lastVisible) return null;
+    const outcome = this.replayOutcomes.get(game.gameNumber);
+    if (!outcome) return null;
+    const winnerSlot = outcome.winner_slot === 0 || outcome.winner_slot === 1
+      ? outcome.winner_slot
+      : null;
+    const loserSlot = winnerSlot === null ? null : 1 - winnerSlot;
+    const winnerName = winnerSlot === null ? null : this.replayPlayerNames[winnerSlot];
+    const loserName = loserSlot === null ? null : this.replayPlayerNames[loserSlot];
+    const disconnected = loserSlot !== null && game.connectionEvents.some(
+      (event) => event.slot === loserSlot && !event.connected,
+    );
+    const clock = this.replayClockSeconds === null
+      ? "available time"
+      : `${Math.floor(this.replayClockSeconds / 60)}:${String(Math.round(this.replayClockSeconds % 60)).padStart(2, "0")} clock`;
+    let headline = winnerName ? `${winnerName} wins` : "Game drawn";
+    let detail = `Game ended: ${outcome.reason.replaceAll("_", " ")}.`;
+    if (outcome.reason === "clock_flag" && loserName) {
+      headline = `${winnerName ?? "Opponent"} wins on time`;
+      detail = disconnected
+        ? `${loserName} disconnected and did not return before their ${clock} expired.`
+        : `${loserName}'s ${clock} expired. No disconnect was recorded.`;
+    }
+    return {
+      gameNumber: game.gameNumber,
+      winnerSlot,
+      winnerName,
+      loserSlot,
+      loserName,
+      reason: outcome.reason,
+      headline,
+      detail,
+    };
   }
 
   private replayTurnMarkers(): CoworldReplayTurnMarker[] {
@@ -1060,6 +1204,7 @@ export class WebSocketAdapter implements EngineAdapter {
       showPriorityPasses: this.replayShowPriorityPasses,
       logEntries: this.replayLogEntries(),
       turnMarkers: this.replayTurnMarkers(),
+      outcome: this.currentReplayOutcome(),
     };
     window.dispatchEvent(new Event("coworld-replay-status"));
   }

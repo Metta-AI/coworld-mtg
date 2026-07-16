@@ -122,16 +122,25 @@ describe("Coworld Phase adapter", () => {
 
     socket.frame({
       type: "replay_meta",
-      results: { policy_names: ["Nissa", "Chandra"] },
+      config: { clock_s: 480 },
+      results: {
+        policy_names: ["Nissa", "Chandra"],
+        games: [{ game_number: 1, winner_slot: 0, reason: "clock_flag" }],
+      },
       games: [
-        { game_number: 1, slot_of_seat0: 0, steps: 3 },
+        {
+          game_number: 1,
+          slot_of_seat0: 0,
+          steps: 3,
+          connection_events: [{ wall_ms: 750, slot: 1, connected: false }],
+        },
         { game_number: 2, slot_of_seat0: 1, steps: 2 },
       ],
     });
     replayFrame(socket, 1, 1, 0, null);
     await initialized;
     replayFrame(socket, 1, 1, 500, pass);
-    replayFrame(socket, 1, 2, 1_000, pass);
+    replayFrame(socket, 1, 2, 1_000, pass, 1);
     replayFrame(socket, 2, 1, 0, null);
     replayFrame(socket, 2, 2, 500, pass);
     socket.frame({ type: "match_end", scores: [1, 1], games: [] });
@@ -167,7 +176,18 @@ describe("Coworld Phase adapter", () => {
       gameIndex: 0,
       turnIndex: 1,
       turnNumber: 2,
+      actionLabel: "Chandra · Clock expired",
+      outcome: {
+        headline: "Nissa wins on time",
+        detail: "Chandra disconnected and did not return before their 8:00 clock expired.",
+      },
     });
+    expect((window as ReplayWindow).__coworldReplayState?.logEntries).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ actorName: "Chandra", actionLabel: "Disconnected" }),
+        expect.objectContaining({ actionLabel: "Clock expired" }),
+      ]),
+    );
     controller.seek(0);
     expect(lastStateChangedSeq(emitted)).toBeGreaterThan(forwardSeq);
     expect((await adapter.getState()).turn_number).toBe(1);
@@ -228,6 +248,7 @@ function replayFrame(
   turnNumber: number,
   wallMs: number,
   action: GameAction | null,
+  actorSlot = 0,
 ) {
   const frame = phaseStateFrame(turnNumber);
   socket.frame({
@@ -237,7 +258,7 @@ function replayFrame(
       state: frame.state,
       events: [],
       wall_ms: wallMs,
-      actor_slot: action ? 0 : null,
+      actor_slot: action ? actorSlot : null,
       action,
     },
   });

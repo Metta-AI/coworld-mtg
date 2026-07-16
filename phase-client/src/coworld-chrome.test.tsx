@@ -37,6 +37,8 @@ describe("Coworld replay chrome", () => {
     render(<CoworldChrome />);
 
     expect(screen.getByText("Game 1/2 · Turn 2 · Nissa · Cast Spell")).toBeVisible();
+    expect(screen.getByText("Nissa wins on time")).toBeVisible();
+    expect(screen.getByText(/Chandra's 8:00 clock expired/)).toBeVisible();
     expect(screen.getByLabelText("Event position")).toHaveAttribute("max", "4");
     expect(screen.getByLabelText("Turn position")).toHaveAttribute("max", "2");
     expect(screen.getByLabelText("Game position")).toHaveAttribute("max", "1");
@@ -106,12 +108,22 @@ function replayState(): CoworldReplayState {
     seatPlayerSlots: [0, 1],
     showPriorityPasses: false,
     logEntries: [
-      { eventIndex: 0, gameNumber: 1, turnNumber: 1, actorName: null, actionLabel: "Game start", life: [20, 20] },
-      { eventIndex: 2, gameNumber: 1, turnNumber: 2, actorName: "Nissa", actionLabel: "Cast Spell", life: [18, 16] },
+      { id: "action-0", eventIndex: 0, gameNumber: 1, turnNumber: 1, actorName: null, actionLabel: "Game start", life: [20, 20] },
+      { id: "action-2", eventIndex: 2, gameNumber: 1, turnNumber: 2, actorName: "Nissa", actionLabel: "Cast Spell", life: [18, 16] },
     ],
     turnMarkers: [
       { eventIndex: 0, timelinePosition: 0, gameNumber: 1, turnNumber: 1, activePlayerSlot: 0, activePlayerName: "Nissa", life: [20, 20] },
       { eventIndex: 2, timelinePosition: 0.5, gameNumber: 1, turnNumber: 2, activePlayerSlot: 1, activePlayerName: "Chandra", life: [18, 16] },
     ],
+    outcome: {
+      gameNumber: 1,
+      winnerSlot: 0,
+      winnerName: "Nissa",
+      loserSlot: 1,
+      loserName: "Chandra",
+      reason: "clock_flag",
+      headline: "Nissa wins on time",
+      detail: "Chandra's 8:00 clock expired. No disconnect was recorded.",
+    },
   };
 }

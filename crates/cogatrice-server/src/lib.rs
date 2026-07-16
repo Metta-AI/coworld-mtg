@@ -25,8 +25,8 @@ use tokio::sync::{mpsc, oneshot};
 use tokio::time::{sleep, Duration, Instant};
 use wire::{
     reject_error, seat_to_slot, slot_to_seat, GameOutcome, GameSummary, GlobalFrame, MatchState,
-    PhaseClientDelta, PhaseClientDeltaOp, PlayerCommand, PlayerFrame, Replay, ReplayFrame,
-    ReplayGame, ReplayGameSummary, ReplayStep, Results,
+    PhaseClientDelta, PhaseClientDeltaOp, PlayerCommand, PlayerFrame, Replay,
+    ReplayConnectionEvent, ReplayFrame, ReplayGame, ReplayGameSummary, ReplayStep, Results,
 };
 
 #[derive(Clone)]
@@ -401,6 +401,7 @@ async fn replay_socket(socket: WebSocket, state: ReplayState) {
             game_number: game.game_number,
             slot_of_seat0: game.slot_of_seat0,
             steps: game.steps.len(),
+            connection_events: game.connection_events.clone(),
         })
         .collect();
     let meta = ReplayFrame::ReplayMeta {
@@ -601,6 +602,7 @@ impl MatchRunner {
             events: initial.events.clone(),
             phase_client_delta: None,
         }];
+        let mut connection_events = Vec::new();
         self.send_game_start(
             &game,
             &initial.events,
@@ -724,6 +726,9 @@ impl MatchRunner {
                             }
                         }
                         other => {
+                            if let Some(event) = self.replay_connection_event(&other, started) {
+                                connection_events.push(event);
+                            }
                             let current = CurrentContext {
                                 game: &game,
                                 game_number,
@@ -756,8 +761,30 @@ impl MatchRunner {
             game_number,
             slot_of_seat0,
             steps,
+            connection_events,
         });
         Ok(())
+    }
+
+    fn replay_connection_event(
+        &self,
+        command: &ServerCommand,
+        started: Instant,
+    ) -> Option<ReplayConnectionEvent> {
+        let (slot, connected) = match command {
+            ServerCommand::PlayerConnected { slot, .. } => (*slot, true),
+            ServerCommand::PlayerDisconnected { slot, id }
+                if self.player_id_matches(*slot, *id) =>
+            {
+                (*slot, false)
+            }
+            _ => return None,
+        };
+        Some(ReplayConnectionEvent {
+            wall_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
+            slot: slot as u8,
+            connected,
+        })
     }
 
     #[allow(clippy::too_many_arguments)]

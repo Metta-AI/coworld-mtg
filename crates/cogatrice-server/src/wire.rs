@@ -48,6 +48,15 @@ pub struct ReplayGame {
     pub game_number: u32,
     pub slot_of_seat0: usize,
     pub steps: Vec<ReplayStep>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub connection_events: Vec<ReplayConnectionEvent>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct ReplayConnectionEvent {
+    pub wall_ms: u64,
+    pub slot: u8,
+    pub connected: bool,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -194,6 +203,7 @@ pub struct ReplayGameSummary {
     pub game_number: u32,
     pub slot_of_seat0: usize,
     pub steps: usize,
+    pub connection_events: Vec<ReplayConnectionEvent>,
 }
 
 pub fn reject_error(kind: impl Into<String>, detail: impl Into<String>) -> RejectError {
