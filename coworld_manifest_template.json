@@ -9,7 +9,7 @@
       "type": "game",
       "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/cogatrice-server"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c"
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/7545450a1f115df8f3360442947d2a5b12ed73bc"
     },
     "config_schema": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -105,17 +105,17 @@
     "protocols": {
       "player": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/7545450a1f115df8f3360442947d2a5b12ed73bc/docs/protocol.md"
       },
       "global": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/docs/protocol.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/7545450a1f115df8f3360442947d2a5b12ed73bc/docs/protocol.md"
       }
     },
     "docs": {
       "readme": {
         "type": "uri",
-        "value": "https://github.com/Metta-AI/coworld-mtg/blob/1add8e5e3736de799353f3f114425c3a9d42064c/README.md"
+        "value": "https://github.com/Metta-AI/coworld-mtg/blob/7545450a1f115df8f3360442947d2a5b12ed73bc/README.md"
       },
       "pages": [
         {
@@ -136,7 +136,7 @@
       "type": "player",
       "image": "{{COWORLD_MTG_IMAGE}}",
       "run": ["/app/goldfish"],
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/7545450a1f115df8f3360442947d2a5b12ed73bc",
       "description": "A deterministic baseline that ranks and submits only the exact legal actions supplied by Phase."
     }
   ],
@@ -146,7 +146,7 @@
       "name": "Default Commissioner",
       "type": "commissioner",
       "description": "Coworld MTG commissioner with rolling pairings and eight appearances per entrant each round.",
-      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/1add8e5e3736de799353f3f114425c3a9d42064c",
+      "source_url": "https://github.com/Metta-AI/coworld-mtg/tree/7545450a1f115df8f3360442947d2a5b12ed73bc",
       "image": "{{COMMISSIONER_IMAGE}}"
     }
   ],
