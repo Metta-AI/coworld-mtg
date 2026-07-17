@@ -1,7 +1,7 @@
 # Coworld MTG roadmap
 
 Coworld MTG is Magic: The Gathering packaged as a Coworld. The original
-The honor-system tabletop prototype has been retired. The Rust-native
+honor-system tabletop prototype has been retired. The Rust-native
 [Phase](https://github.com/phase-rs/phase) engine is the sole game authority.
 
 ## Shipped architecture
@@ -21,18 +21,16 @@ The live wire format is in [docs/protocol.md](docs/protocol.md).
 
 ## Next milestones
 
-1. Replace the compact bundled-card fixture with a content-addressed Phase card
-   export and Scryfall bulk metadata cache suitable for arbitrary deck import.
-2. Add a deck-import endpoint keyed by Scryfall Oracle ID, with explicit errors
+1. Add a deck-import endpoint keyed by Scryfall Oracle ID, with explicit errors
    for cards Phase cannot resolve or parse.
-3. Add deterministic browser fixtures for multi-block combat, first/double
+2. Add deterministic browser fixtures for multi-block combat, first/double
    strike damage, deep stacks, face-down exile, mobile Full Control, and reduced
    motion; keep screenshot baselines alongside behavioral assertions.
-4. Prepare the maintained-fork Phase commits as small upstream pull requests
+3. Prepare the maintained-fork Phase commits as small upstream pull requests
    that independently satisfy `phase-rs/phase` contribution and test rules.
-5. Expand hosted smoke beyond two goldfish players to include reconnect, replay,
+4. Expand hosted smoke beyond two goldfish players to include reconnect, replay,
    clock, preference, and browser-client episodes within Coworld limits.
-6. Add Phase AI difficulty variants and LLM policies that rank the same exact
+5. Add Phase AI difficulty variants and LLM policies that rank the same exact
    legal-action surface.
 
 ## Non-negotiable invariants

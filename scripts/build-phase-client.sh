@@ -29,15 +29,21 @@ cp "$ROOT/phase-client/replay.html" "$CHECKOUT/client/replay.html"
 cp "$ROOT/phase-client/vite.config.ts" "$CHECKOUT/client/coworld.vite.config.ts"
 
 PHASE_PATCH="$ROOT/phase-client/replay-player-names.patch"
-if ! git -C "$CHECKOUT" apply --reverse --check "$PHASE_PATCH" >/dev/null 2>&1; then
-  git -C "$CHECKOUT" apply --check "$PHASE_PATCH"
-  git -C "$CHECKOUT" apply "$PHASE_PATCH"
-fi
+git -C "$CHECKOUT" restore --source=HEAD -- \
+  client/src/components/hud/PlayerHud.tsx \
+  client/src/hooks/usePlayerId.ts
+git -C "$CHECKOUT" apply --check "$PHASE_PATCH"
+git -C "$CHECKOUT" apply "$PHASE_PATCH"
 
 corepack pnpm@10.28.2 --dir "$CHECKOUT/client" install --frozen-lockfile
-corepack pnpm@10.28.2 --dir "$CHECKOUT/client" exec vitest run \
-  src/coworld/coworld-ws-adapter.test.ts \
-  src/coworld/coworld-chrome.test.tsx
+if [[ ${PHASE_CLIENT_SKIP_TESTS:-0} != 1 ]]; then
+  corepack pnpm@10.28.2 --dir "$CHECKOUT/client" exec vitest run \
+    src/coworld/coworld-ws-adapter.test.ts \
+    src/coworld/coworld-chrome.test.tsx
+fi
+if [[ ${PHASE_CLIENT_TEST_ONLY:-0} == 1 ]]; then
+  exit 0
+fi
 PHASE_REVISION="$PHASE_REVISION" corepack pnpm@10.28.2 --dir "$CHECKOUT/client" exec vite build --config coworld.vite.config.ts
 
 mkdir -p "$ROOT/web/dist"

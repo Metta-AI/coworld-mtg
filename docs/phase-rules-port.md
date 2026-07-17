@@ -17,6 +17,14 @@ license.
 replay, browser, and policy code consume viewer-filtered state and exact legal
 `GameAction` values; they must not reproduce legality.
 
+`phase-source.json` is the canonical source decision. Builds always resolve its
+repository to an immutable commit; they never follow a mutable branch. The
+maintained fork remains selected while it contains Coworld-required behavior
+that is not proven by upstream regression tests. Switching to `phase-rs/phase`
+requires every retained fork regression to pass at an upstream `main` commit,
+after which the repository and SHA move together and `scripts/check-phase-pin.py`
+verifies every build surface.
+
 ## Why Phase
 
 The alternatives evaluated were Forge and XMage. Both are established Magic

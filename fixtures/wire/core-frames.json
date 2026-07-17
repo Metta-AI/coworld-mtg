@@ -1,0 +1,40 @@
+[
+  {
+    "type": "ack",
+    "cmd_id": 7,
+    "turn": 3
+  },
+  {
+    "type": "reject",
+    "cmd_id": 8,
+    "error": {
+      "kind": "stale_action",
+      "detail": "action is no longer legal"
+    }
+  },
+  {
+    "type": "game_end",
+    "game_number": 2,
+    "outcome": {
+      "winner_slot": 1,
+      "final_life": [0, 12],
+      "turns": 9,
+      "reason": "game"
+    },
+    "wins": [0.0, 1.0]
+  },
+  {
+    "type": "match_end",
+    "scores": [0.0, 1.0],
+    "games": [
+      {
+        "game_number": 2,
+        "winner_slot": 1,
+        "reason": "game",
+        "turns": 9,
+        "final_life": [0, 12],
+        "seed": 4242
+      }
+    ]
+  }
+]

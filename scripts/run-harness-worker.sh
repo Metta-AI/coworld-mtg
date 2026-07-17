@@ -36,4 +36,4 @@ if [ "${HARNESS_RESUME:-false}" = "true" ]; then
   set -- "$@" --resume
 fi
 
-exec cargo run --locked -p coworld-mtg-harness -- "$@"
+exec "$ROOT/scripts/cargo.sh" run --locked -p coworld-mtg-harness -- "$@"

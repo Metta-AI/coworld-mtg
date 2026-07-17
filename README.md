@@ -17,6 +17,23 @@ transport/replay adapter and series chrome; the former local renderer is built
 only to keep version-2 Coworld replays readable. See the
 [client migration spec](docs/specs/0001-phase-client-for-coworld.md).
 
+The tracked `web/` application is frozen compatibility code for version-2
+replays. New player, spectator, and replay work belongs in `phase-client/`.
+
+## Development checks
+
+Rust commands should run through `scripts/cargo.sh`; it selects the toolchain
+in `rust-toolchain.toml` even when another `cargo` or `rustc` appears earlier on
+`PATH`. Run the complete local/CI gate with:
+
+```sh
+scripts/check.sh
+```
+
+Generated Rust and frontend output can consume many gigabytes. Preview guarded
+cleanup with `scripts/clean-generated.sh --all`; add `--execute` only after
+reviewing the resolved paths and sizes it prints.
+
 ## Fidelity harness
 
 `coworld-mtg-harness` runs seeded games directly against `phase-bridge`, records
@@ -40,7 +57,8 @@ scripts/fetch-corpus.sh
 
 This materializes `.private/corpus`, verifies the archive and every contained file by SHA-256, and leaves all corpus
 content gitignored. Docker builds require that materialized directory. Public source builds remain available without
-it; run tests requiring real card data with `cargo test --workspace --features private-corpus-tests`.
+it; run tests requiring real card data with
+`scripts/cargo.sh test --workspace --features private-corpus-tests`.
 
 ## Play locally
 
@@ -50,7 +68,7 @@ From the repo root:
 npm install
 npm run build
 scripts/fetch-corpus.sh
-cargo build -p coworld-mtg-server -p goldfish
+scripts/cargo.sh build -p coworld-mtg-server -p goldfish
 mkdir -p tmp/local-play
 cat > tmp/local-play/config.json <<'JSON'
 {
@@ -72,7 +90,7 @@ COGAME_RESULTS_URI=tmp/local-play/results.json \
 COGAME_SAVE_REPLAY_URI=tmp/local-play/replay.json \
 COGAME_LOG_URI=tmp/local-play/log.txt \
 COGAME_WEB_DIST="$PWD/web/dist" \
-cargo run -p coworld-mtg-server
+scripts/cargo.sh run -p coworld-mtg-server
 ```
 
 Open these URLs in separate browser profiles (for example, a normal and an
@@ -84,7 +102,7 @@ incognito window) to control both seats:
 To play against the baseline instead, leave the second browser closed and run:
 
 ```sh
-cargo run -p goldfish -- --url 'ws://127.0.0.1:8080/player?slot=1&token=tokB'
+scripts/cargo.sh run -p goldfish -- --url 'ws://127.0.0.1:8080/player?slot=1&token=tokB'
 ```
 
 The supplied decks are real 40-card `SOS.PremierDraft` lists captured from MTG

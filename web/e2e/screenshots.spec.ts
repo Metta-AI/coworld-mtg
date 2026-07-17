@@ -12,17 +12,11 @@ const shots = process.env.SHOT_DIR ?? mkdtempSync(join(tmpdir(), "coworld-mtg-sh
 
 test.beforeAll(() => {
   mkdirSync(shots, { recursive: true });
-  execFileSync("cargo", ["build", "--quiet", "-p", "coworld-mtg-server", "-p", "goldfish"], {
+  execFileSync(join(repoRoot, "scripts", "cargo.sh"), ["build", "--quiet", "-p", "coworld-mtg-server", "-p", "goldfish"], {
     cwd: repoRoot,
     stdio: "inherit",
     env: {
       ...process.env,
-      PATH: `/tmp/coworld-rustup-cargo/bin:${process.env.PATH ?? ""}`,
-      CARGO_HOME: `${process.env.HOME}/.cargo`,
-      RUSTUP_HOME: "/tmp/coworld-rustup",
-      RUSTUP_TOOLCHAIN: "nightly-2026-04-19",
-      RUSTC_BOOTSTRAP: "1",
-      RUSTFLAGS: "-Zcrate-attr=feature(if_let_guard)",
       CARGO_INCREMENTAL: "0",
       CARGO_PROFILE_DEV_DEBUG: "0"
     }
