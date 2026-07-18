@@ -6,6 +6,7 @@
 
 mod aggregate;
 mod corpus;
+mod invariants;
 mod io;
 mod model;
 mod runner;

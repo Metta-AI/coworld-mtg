@@ -228,3 +228,48 @@ pub fn slot_to_seat(slot: usize, slot_of_seat0: usize) -> u8 {
         1
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn core_frames_match_the_shared_browser_fixture() {
+        let outcome = GameOutcome {
+            winner_slot: Some(1),
+            final_life: [0, 12],
+            turns: 9,
+            reason: "game".to_owned(),
+        };
+        let game = GameSummary {
+            game_number: 2,
+            winner_slot: Some(1),
+            reason: "game".to_owned(),
+            turns: 9,
+            final_life: [0, 12],
+            seed: 4242,
+        };
+        let frames = vec![
+            serde_json::to_value(PlayerFrame::Ack { cmd_id: 7, turn: 3 }).unwrap(),
+            serde_json::to_value(PlayerFrame::Reject {
+                cmd_id: 8,
+                error: reject_error("stale_action", "action is no longer legal"),
+            })
+            .unwrap(),
+            serde_json::to_value(PlayerFrame::GameEnd {
+                game_number: 2,
+                outcome: outcome.clone(),
+                wins: [0.0, 1.0],
+            })
+            .unwrap(),
+            serde_json::to_value(PlayerFrame::MatchEnd {
+                scores: [0.0, 1.0],
+                games: vec![game],
+            })
+            .unwrap(),
+        ];
+        let fixture: serde_json::Value =
+            serde_json::from_str(include_str!("../../../fixtures/wire/core-frames.json")).unwrap();
+        assert_eq!(serde_json::Value::Array(frames), fixture);
+    }
+}

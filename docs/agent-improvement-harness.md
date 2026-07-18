@@ -288,7 +288,7 @@ The exact binary and flags can evolve, but the workflow should converge on a
 single resumable command such as:
 
 ```sh
-cargo run -p coworld-mtg-harness -- improve \
+scripts/cargo.sh run -p coworld-mtg-harness -- improve \
   --set SOS \
   --phase-rev <commit> \
   --manifest-uri <immutable-manifest-uri> \

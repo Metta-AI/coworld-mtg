@@ -1,23 +1,25 @@
+mod assets;
 mod config;
 mod corpus;
+mod phase_delta;
 mod uri;
 pub mod wire;
 
 use anyhow::{anyhow, Context, Result};
+use assets::{client_asset, replay_client_asset};
 use axum::extract::ws::{close_code, CloseFrame, Message, WebSocket, WebSocketUpgrade};
-use axum::extract::{Path as AxumPath, Query, State};
-use axum::http::{header, StatusCode};
-use axum::response::{Html, IntoResponse, Response};
+use axum::extract::{Query, State};
+use axum::response::IntoResponse;
 use axum::routing::get;
 use axum::Router;
 use config::EpisodeConfig;
 use corpus::Corpus;
 use futures::{Sink, SinkExt, StreamExt};
 use phase_bridge::{DeckList, GameAction, GameEvent, PhaseGame, PhaseRuntime};
+use phase_delta::{apply_phase_delta, phase_delta};
 use serde_json::Value;
 use std::collections::BTreeMap;
 use std::future::{Future, IntoFuture};
-use std::path::{Component, Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use tokio::net::TcpListener;
@@ -25,8 +27,8 @@ use tokio::sync::{mpsc, oneshot};
 use tokio::time::{sleep, Duration, Instant};
 use wire::{
     reject_error, seat_to_slot, slot_to_seat, GameOutcome, GameSummary, GlobalFrame, MatchState,
-    PhaseClientDelta, PhaseClientDeltaOp, PlayerCommand, PlayerFrame, Replay,
-    ReplayConnectionEvent, ReplayFrame, ReplayGame, ReplayGameSummary, ReplayStep, Results,
+    PlayerCommand, PlayerFrame, Replay, ReplayConnectionEvent, ReplayFrame, ReplayGame,
+    ReplayGameSummary, ReplayStep, Results,
 };
 
 #[derive(Clone)]
@@ -37,7 +39,7 @@ struct AppState {
 }
 
 #[derive(Clone)]
-struct ReplayState {
+pub(crate) struct ReplayState {
     replay: Arc<Replay>,
 }
 
@@ -173,105 +175,8 @@ async fn run_replay_server(
     Ok(())
 }
 
-async fn replay_client_asset(State(state): State<ReplayState>) -> Response {
-    let has_phase_snapshots = state
-        .replay
-        .games
-        .first()
-        .and_then(|game| game.steps.first())
-        .is_some_and(|step| step.state.phase_client.is_some());
-    let filename = if has_phase_snapshots {
-        "replay.html"
-    } else {
-        "legacy-replay.html"
-    };
-    let dist = web_dist_dir();
-    if !dist.is_dir() {
-        return client_placeholder(BTreeMap::new()).into_response();
-    }
-    let file = dist.join(filename);
-    match tokio::fs::read(&file).await {
-        Ok(bytes) => ([(header::CONTENT_TYPE, content_type(&file))], bytes).into_response(),
-        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
-            (StatusCode::NOT_FOUND, "not found").into_response()
-        }
-        Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "failed to read asset").into_response(),
-    }
-}
-
 async fn healthz() -> &'static str {
     "ok"
-}
-
-async fn client_asset(
-    AxumPath(path): AxumPath<String>,
-    Query(params): Query<BTreeMap<String, String>>,
-) -> Response {
-    let dist = web_dist_dir();
-    if dist.is_dir() {
-        return match resolve_client_asset(&dist, &path) {
-            Some(file) => match tokio::fs::read(&file).await {
-                Ok(bytes) => ([(header::CONTENT_TYPE, content_type(&file))], bytes).into_response(),
-                Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
-                    (StatusCode::NOT_FOUND, "not found").into_response()
-                }
-                Err(_) => {
-                    (StatusCode::INTERNAL_SERVER_ERROR, "failed to read asset").into_response()
-                }
-            },
-            None => (StatusCode::NOT_FOUND, "not found").into_response(),
-        };
-    }
-    if matches!(path.as_str(), "player" | "global" | "replay") {
-        return client_placeholder(params).into_response();
-    }
-    (StatusCode::NOT_FOUND, "not found").into_response()
-}
-
-fn client_placeholder(params: BTreeMap<String, String>) -> Html<String> {
-    let body = serde_json::to_string_pretty(&params).unwrap_or_else(|_| "{}".to_owned());
-    Html(format!(
-        "<!doctype html><html><body><pre>{}</pre></body></html>",
-        escape_html(&body)
-    ))
-}
-
-fn web_dist_dir() -> PathBuf {
-    std::env::var_os("COGAME_WEB_DIST")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| PathBuf::from("web/dist"))
-}
-
-fn resolve_client_asset(dist: &Path, path: &str) -> Option<PathBuf> {
-    let relative = match path {
-        "player" | "global" | "replay" => PathBuf::from(format!("{path}.html")),
-        _ => safe_relative_path(path)?,
-    };
-    Some(dist.join(relative))
-}
-
-fn safe_relative_path(path: &str) -> Option<PathBuf> {
-    let mut out = PathBuf::new();
-    for component in Path::new(path).components() {
-        match component {
-            Component::Normal(part) => out.push(part),
-            _ => return None,
-        }
-    }
-    (!out.as_os_str().is_empty()).then_some(out)
-}
-
-fn content_type(path: &Path) -> &'static str {
-    match path.extension().and_then(|extension| extension.to_str()) {
-        Some("html") => "text/html; charset=utf-8",
-        Some("js") => "text/javascript; charset=utf-8",
-        Some("css") => "text/css; charset=utf-8",
-        Some("json") | Some("map") => "application/json; charset=utf-8",
-        Some("svg") => "image/svg+xml",
-        Some("png") => "image/png",
-        Some("ico") => "image/x-icon",
-        _ => "application/octet-stream",
-    }
 }
 
 async fn player_ws(
@@ -1268,89 +1173,6 @@ fn send_json<T: serde::Serialize>(tx: &mpsc::UnboundedSender<SocketOut>, value: 
     }
 }
 
-fn phase_delta(previous: &Value, current: &Value) -> PhaseClientDelta {
-    fn walk(
-        path: &mut Vec<String>,
-        previous: &Value,
-        current: &Value,
-        ops: &mut Vec<PhaseClientDeltaOp>,
-    ) {
-        if previous == current {
-            return;
-        }
-        if let (Some(before), Some(after)) = (previous.as_object(), current.as_object()) {
-            for key in before.keys().filter(|key| !after.contains_key(*key)) {
-                path.push(key.clone());
-                ops.push(PhaseClientDeltaOp::Remove { path: path.clone() });
-                path.pop();
-            }
-            for (key, value) in after {
-                path.push(key.clone());
-                match before.get(key) {
-                    Some(old) => walk(path, old, value, ops),
-                    None => ops.push(PhaseClientDeltaOp::Set {
-                        path: path.clone(),
-                        value: value.clone(),
-                    }),
-                }
-                path.pop();
-            }
-        } else {
-            ops.push(PhaseClientDeltaOp::Set {
-                path: path.clone(),
-                value: current.clone(),
-            });
-        }
-    }
-
-    let mut ops = Vec::new();
-    walk(&mut Vec::new(), previous, current, &mut ops);
-    PhaseClientDelta { ops }
-}
-
-fn apply_phase_delta(target: &mut Value, delta: &PhaseClientDelta) {
-    fn set_path(target: &mut Value, path: &[String], value: Value) {
-        if path.is_empty() {
-            *target = value;
-            return;
-        }
-        if !target.is_object() {
-            *target = Value::Object(Default::default());
-        }
-        let object = target.as_object_mut().expect("object created above");
-        if path.len() == 1 {
-            object.insert(path[0].clone(), value);
-        } else {
-            set_path(
-                object
-                    .entry(path[0].clone())
-                    .or_insert_with(|| Value::Object(Default::default())),
-                &path[1..],
-                value,
-            );
-        }
-    }
-
-    fn remove_path(target: &mut Value, path: &[String]) {
-        let Some(object) = target.as_object_mut() else {
-            return;
-        };
-        if path.len() == 1 {
-            object.remove(&path[0]);
-        } else if let Some(child) = object.get_mut(&path[0]) {
-            remove_path(child, &path[1..]);
-        }
-    }
-
-    for op in &delta.ops {
-        match op {
-            PhaseClientDeltaOp::Set { path, value } => set_path(target, path, value.clone()),
-            PhaseClientDeltaOp::Remove { path } if !path.is_empty() => remove_path(target, path),
-            PhaseClientDeltaOp::Remove { .. } => *target = Value::Null,
-        }
-    }
-}
-
 fn command_id(text: &str) -> u64 {
     serde_json::from_str::<serde_json::Value>(text)
         .ok()
@@ -1372,13 +1194,6 @@ fn duration_ms(seconds: f64) -> u64 {
 fn subtract_elapsed(remaining_ms: &mut u64, elapsed: Duration) {
     let elapsed_ms = elapsed.as_millis().min(u128::from(u64::MAX)) as u64;
     *remaining_ms = remaining_ms.saturating_sub(elapsed_ms);
-}
-
-fn escape_html(text: &str) -> String {
-    text.replace('&', "&amp;")
-        .replace('<', "&lt;")
-        .replace('>', "&gt;")
-        .replace('"', "&quot;")
 }
 
 #[cfg(test)]
@@ -1435,21 +1250,5 @@ mod tests {
             stops: Vec::new(),
         }));
         assert!(!is_clock_neutral_preference(&GameAction::PassPriority));
-    }
-
-    #[test]
-    fn phase_replay_delta_round_trips_nested_state() {
-        let previous = serde_json::json!({
-            "state": {"objects": {"1": {"name": "Bear", "tapped": false}}, "gone": 1},
-            "legal_actions": []
-        });
-        let current = serde_json::json!({
-            "state": {"objects": {"1": {"name": "Bear", "tapped": true}, "2": null}},
-            "legal_actions": [{"type": "PassPriority"}]
-        });
-        let delta = phase_delta(&previous, &current);
-        let mut restored = previous;
-        apply_phase_delta(&mut restored, &delta);
-        assert_eq!(restored, current);
     }
 }

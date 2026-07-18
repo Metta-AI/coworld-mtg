@@ -10,7 +10,7 @@ const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const binSuffix = process.platform === "win32" ? ".exe" : "";
 
 test.beforeAll(() => {
-  execFileSync("cargo", ["build", "--quiet", "-p", "coworld-mtg-server"], {
+  execFileSync(join(repoRoot, "scripts", "cargo.sh"), ["build", "--quiet", "-p", "coworld-mtg-server"], {
     cwd: repoRoot,
     stdio: "inherit",
     env: rustEnv()
@@ -113,12 +113,6 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
 function rustEnv(): NodeJS.ProcessEnv {
   return {
     ...process.env,
-    PATH: `/tmp/coworld-rustup-cargo/bin:${process.env.PATH ?? ""}`,
-    CARGO_HOME: `${process.env.HOME}/.cargo`,
-    RUSTUP_HOME: "/tmp/coworld-rustup",
-    RUSTUP_TOOLCHAIN: "nightly-2026-04-19",
-    RUSTC_BOOTSTRAP: "1",
-    RUSTFLAGS: "-Zcrate-attr=feature(if_let_guard)",
     CARGO_INCREMENTAL: "0",
     CARGO_PROFILE_DEV_DEBUG: "0"
   };

@@ -48,8 +48,8 @@ RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.l
     && rm -f /etc/apt/apt.conf.d/99bootstrap \
     && rm -rf /var/lib/apt/lists/*
 
-ENV RUSTC_BOOTSTRAP=1 \
-    RUSTFLAGS=-Zcrate-attr=feature(if_let_guard) \
+RUN rustup toolchain install nightly-2026-04-19 --profile minimal
+ENV RUSTUP_TOOLCHAIN=nightly-2026-04-19 \
     CARGO_INCREMENTAL=0
 
 WORKDIR /build
