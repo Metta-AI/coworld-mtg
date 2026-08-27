@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 SCHEMA = "coworld-mtg-corpus-v1"
-PHASE_REVISION = "2dec6c88915db4697706234a7ba2fcedd97b1689"
+PHASE_REVISION = "6160cbf6385897a3036f7d715e2175e55dab147e"
 CORPUS_FILES = (
     "phase-card-data.json",
     "decks/fractal_convergence.json",

@@ -18,7 +18,9 @@ The chain is published on `nishu-builder/phase`. Follow-up owner fixes for
 viewer-scoped simultaneous decisions, deterministic batched-trigger
 serialization, mandatory additional-cost castability, and Arena priority
 controls are merged into that fork's `main` at
-`2dec6c88915db4697706234a7ba2fcedd97b1689`. Coworld pins that exact revision;
+`2dec6c88915db4697706234a7ba2fcedd97b1689`. The targeted-spell affordability
+and interactive mana-payment consistency fix is published at
+`6160cbf6385897a3036f7d715e2175e55dab147e`. Coworld pins that exact revision;
 upstream synchronization must preserve a content-addressed revision rather
 than following a mutable branch.
 
@@ -30,12 +32,14 @@ finding aggregation were clean. That historical shard used the reviewed local
 Phase patch overlay while retaining the sealed corpus rules boundary at
 `f6fd1fca5c581bcd127d5b18742623e1298ae3c7`.
 
-The production dependency now moves the rules boundary to `2dec6c889`. The
+The production dependency now moves the rules boundary to `6160cbf63`. The
 existing harness correctly rejects the old manifest against that binary. Do
-not relabel or edit the old corpus to bypass the guard. Before claiming a
-production shard for the fork-main pin, record a new immutable corpus and
-manifest under a new campaign identity, then run a newly named shard and
-scoreboard against that exact manifest.
+not relabel or edit the old corpus to bypass the guard. The replacement runtime
+corpus is content-addressed at
+`3dfec529d003e373bc7fc78437f86d5ddf97aeb6a219ad44f50891f879035965` and keeps
+the prior card and deck payload hashes while recording the new rules boundary.
+Run a newly named shard and scoreboard against that exact manifest before
+claiming a production campaign result for the fork pin.
 
 ## Priority 1: transactional generic tap costs
 
@@ -92,10 +96,9 @@ and equivalent discard, exile, and tap resource cases.
 
 ## Campaign continuation
 
-First establish a new immutable corpus whose manifest records Phase
-`2dec6c88915db4697706234a7ba2fcedd97b1689`; preserve the existing SOS corpus as
-historical evidence. Record the new manifest ID and all input hashes before
-running any shard.
+Use the immutable corpus in `corpus.lock.json`, whose manifest records Phase
+`6160cbf6385897a3036f7d715e2175e55dab147e`; preserve the existing SOS corpus as
+historical evidence and do not overwrite prior shard outputs.
 
 After each owning Phase fix:
 
