@@ -173,6 +173,30 @@ fn reversed_single_game_matchup_exchanges_decks_between_players() {
     });
 }
 
+#[test]
+fn shared_resource_cast_regression_seed_finishes() {
+    run_episode_test(async {
+        let _guard = env_lock().lock().await;
+        let outcome = run_completed_match_with_seed(
+            "shared_resource_cast_regression",
+            10.0,
+            1.0,
+            false,
+            ["lorehold_excavation", "fractal_convergence"],
+            1,
+            false,
+            318,
+        )
+        .await;
+        let results: Results =
+            serde_json::from_str(&tokio::fs::read_to_string(&outcome.results).await.unwrap())
+                .unwrap();
+
+        assert_eq!(results.games.len(), 1);
+        assert_eq!(results.games[0].reason, "phase_game_over");
+    });
+}
+
 fn run_episode_test(test: impl Future<Output = ()>) {
     tokio::runtime::Builder::new_multi_thread()
         .worker_threads(2)
@@ -198,6 +222,30 @@ async fn run_completed_match(
     games_to_win: u32,
     swap_decks_each_game: bool,
 ) -> MatchOutcome {
+    run_completed_match_with_seed(
+        name,
+        clock_s,
+        decision_cap_s,
+        mute_slot_1,
+        decks,
+        games_to_win,
+        swap_decks_each_game,
+        4242,
+    )
+    .await
+}
+
+#[allow(clippy::too_many_arguments)]
+async fn run_completed_match_with_seed(
+    name: &str,
+    clock_s: f64,
+    decision_cap_s: f64,
+    mute_slot_1: bool,
+    decks: [&str; 2],
+    games_to_win: u32,
+    swap_decks_each_game: bool,
+    seed: u64,
+) -> MatchOutcome {
     let root = temp_root(name);
     let config = root.join("config.json");
     let results = root.join("results.json");
@@ -210,6 +258,7 @@ async fn run_completed_match(
         decks,
         games_to_win,
         swap_decks_each_game,
+        seed,
     )
     .await;
     let port = free_port();
@@ -266,11 +315,12 @@ async fn write_config(
     decks: [&str; 2],
     games_to_win: u32,
     swap_decks_each_game: bool,
+    seed: u64,
 ) {
     let config = json!({
         "tokens": ["tokA", "tokB"],
         "players": [{"name": "goldfish-0"}, {"name": "goldfish-1"}],
-        "seed": 4242,
+        "seed": seed,
         "decks": decks,
         "games_to_win": games_to_win,
         "swap_decks_each_game": swap_decks_each_game,

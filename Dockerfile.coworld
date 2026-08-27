@@ -1,4 +1,4 @@
-ARG PHASE_REVISION=6160cbf6385897a3036f7d715e2175e55dab147e
+ARG PHASE_REVISION=b5f468588240df079cad95b94467038ffa6d0282
 
 FROM docker.io/library/node:22-bookworm-slim AS web-builder
 
