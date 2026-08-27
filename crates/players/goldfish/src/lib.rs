@@ -86,6 +86,8 @@ pub async fn run_url(url: &str) -> Result<GoldfishReport> {
 struct Bot {
     seat: Option<u8>,
     latest: Option<ViewerSnapshot>,
+    active_cast: Option<GameAction>,
+    cancelled_cast: Option<GameAction>,
     next_cmd_id: u64,
     awaiting_ack: bool,
     done: bool,
@@ -125,6 +127,8 @@ impl Bot {
             }
             ServerFrame::GameEnd => {
                 self.latest = None;
+                self.active_cast = None;
+                self.cancelled_cast = None;
                 self.awaiting_ack = false;
             }
             ServerFrame::MatchEnd { scores } => {
@@ -135,14 +139,27 @@ impl Bot {
         Ok(self.plan())
     }
 
-    fn plan(&self) -> Option<GameAction> {
+    fn plan(&mut self) -> Option<GameAction> {
         if self.awaiting_ack {
             return None;
         }
-        choose_action(&self.latest.as_ref()?.legal_actions)
+        let actions = &self.latest.as_ref()?.legal_actions;
+        let action = match self.cancelled_cast.as_ref() {
+            Some(cancelled_cast) => choose_action_except(actions, Some(cancelled_cast)),
+            None => choose_action(actions),
+        };
+        if action.is_some() {
+            self.cancelled_cast = None;
+        }
+        action
     }
 
     fn command_text(&mut self, action: GameAction) -> Result<String> {
+        if matches!(action, GameAction::CastSpell { .. }) {
+            self.active_cast = Some(action.clone());
+        } else if action == GameAction::CancelCast {
+            self.cancelled_cast = self.active_cast.take();
+        }
         let cmd_id = self.next_cmd_id;
         self.next_cmd_id += 1;
         self.awaiting_ack = true;
@@ -151,8 +168,16 @@ impl Bot {
 }
 
 fn choose_action(actions: &[GameAction]) -> Option<GameAction> {
+    choose_action_except(actions, None)
+}
+
+fn choose_action_except(
+    actions: &[GameAction],
+    suppressed: Option<&GameAction>,
+) -> Option<GameAction> {
     let mut candidates = actions
         .iter()
+        .filter(|action| Some(*action) != suppressed)
         .filter_map(|action| {
             serde_json::to_value(action)
                 .ok()
@@ -244,5 +269,18 @@ mod tests {
         ];
         let chosen = serde_json::to_value(choose_action(&actions).unwrap()).unwrap();
         assert_eq!(chosen["data"]["attacks"].as_array().unwrap().len(), 1);
+    }
+
+    #[test]
+    fn does_not_immediately_retry_a_cancelled_cast() {
+        let cast: GameAction = serde_json::from_value(serde_json::json!({
+            "type": "CastSpell",
+            "data": { "object_id": 34, "card_id": 1, "targets": [] }
+        }))
+        .unwrap();
+        let pass = GameAction::PassPriority;
+        let chosen = choose_action_except(&[cast.clone(), pass.clone()], Some(&cast)).unwrap();
+
+        assert_eq!(chosen, pass);
     }
 }

@@ -18,8 +18,10 @@ use futures::{Sink, SinkExt, StreamExt};
 use phase_bridge::{DeckList, GameAction, GameEvent, PhaseGame, PhaseRuntime};
 use phase_delta::{apply_phase_delta, phase_delta};
 use serde_json::Value;
-use std::collections::BTreeMap;
+use sha2::{Digest, Sha256};
+use std::collections::{BTreeMap, HashMap};
 use std::future::{Future, IntoFuture};
+use std::io::Write;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use tokio::net::TcpListener;
@@ -89,6 +91,40 @@ struct CurrentContext<'a> {
     game_number: u32,
     slot_of_seat0: usize,
     clocks_ms: [u64; 2],
+}
+
+const STATE_ACTION_REPEAT_LIMIT: u16 = 16;
+
+#[derive(Default)]
+struct StateActionCycleGuard {
+    observations: HashMap<[u8; 32], u16>,
+}
+
+impl StateActionCycleGuard {
+    fn observe(&mut self, actor_slot: usize, action: &GameAction, state: &Value) -> Result<bool> {
+        let mut hasher = Sha256::new();
+        serde_json::to_writer(
+            DigestWriter(&mut hasher),
+            &(actor_slot as u8, action, state),
+        )?;
+        let digest: [u8; 32] = hasher.finalize().into();
+        let count = self.observations.entry(digest).or_default();
+        *count = count.saturating_add(1);
+        Ok(*count >= STATE_ACTION_REPEAT_LIMIT)
+    }
+}
+
+struct DigestWriter<'a>(&'a mut Sha256);
+
+impl Write for DigestWriter<'_> {
+    fn write(&mut self, buffer: &[u8]) -> std::io::Result<usize> {
+        Digest::update(self.0, buffer);
+        Ok(buffer.len())
+    }
+
+    fn flush(&mut self) -> std::io::Result<()> {
+        Ok(())
+    }
 }
 
 pub async fn run() -> Result<()> {
@@ -524,6 +560,7 @@ impl MatchRunner {
         );
         let mut end_reason = "phase_game_over".to_owned();
         let mut decision_clocks: [Option<Instant>; 2] = [None, None];
+        let mut state_action_cycle_guard = StateActionCycleGuard::default();
 
         while game.outcome().is_none() {
             let pending = game.pending_seats();
@@ -585,7 +622,7 @@ impl MatchRunner {
                             }
                         }
                     };
-                    self.record_and_broadcast(
+                    let repeated_state_action = self.record_and_broadcast(
                         &game,
                         &mut steps,
                         &mut replay_phase_client,
@@ -596,7 +633,31 @@ impl MatchRunner {
                         timeout_slot,
                         action,
                         result.events,
+                        Some(&mut state_action_cycle_guard),
                     )?;
+                    if repeated_state_action && game.outcome().is_none() {
+                        end_reason = "state_action_cycle".to_owned();
+                        tracing::warn!(
+                            seat = timeout_seat,
+                            repeat_limit = STATE_ACTION_REPEAT_LIMIT,
+                            "detected a repeated Phase state/action cycle; conceding the acting seat"
+                        );
+                        let action = concede_action(timeout_seat);
+                        let result = game.concede(timeout_seat)?;
+                        self.record_and_broadcast(
+                            &game,
+                            &mut steps,
+                            &mut replay_phase_client,
+                            game_number,
+                            slot_of_seat0,
+                            clocks_ms,
+                            started,
+                            timeout_slot,
+                            action,
+                            result.events,
+                            None,
+                        )?;
+                    }
                 }
                 command = self.cmd_rx.recv() => {
                     let Some(command) = command else { break };
@@ -639,7 +700,7 @@ impl MatchRunner {
                                         }
                                     }
                                     let events = result.events;
-                                    self.record_and_broadcast(
+                                    let repeated_state_action = self.record_and_broadcast(
                                         &game,
                                         &mut steps,
                                         &mut replay_phase_client,
@@ -650,7 +711,31 @@ impl MatchRunner {
                                         slot,
                                         action,
                                         events,
+                                        (!clock_neutral).then_some(&mut state_action_cycle_guard),
                                     )?;
+                                    if repeated_state_action && game.outcome().is_none() {
+                                        end_reason = "state_action_cycle".to_owned();
+                                        tracing::warn!(
+                                            seat,
+                                            repeat_limit = STATE_ACTION_REPEAT_LIMIT,
+                                            "detected a repeated Phase state/action cycle; conceding the acting seat"
+                                        );
+                                        let action = concede_action(seat);
+                                        let result = game.concede(seat)?;
+                                        self.record_and_broadcast(
+                                            &game,
+                                            &mut steps,
+                                            &mut replay_phase_client,
+                                            game_number,
+                                            slot_of_seat0,
+                                            clocks_ms,
+                                            started,
+                                            slot,
+                                            action,
+                                            result.events,
+                                            None,
+                                        )?;
+                                    }
                                     self.send_ack(slot, command.cmd_id, game.state().turn_number);
                                 }
                                 Err(error) => {
@@ -738,7 +823,8 @@ impl MatchRunner {
         actor_slot: usize,
         action: GameAction,
         events: Vec<GameEvent>,
-    ) -> Result<()> {
+        cycle_guard: Option<&mut StateActionCycleGuard>,
+    ) -> Result<bool> {
         let mut state =
             game.phase_client_replay_snapshot_for(slot_to_seat(actor_slot, slot_of_seat0));
         let current = serde_json::to_value(
@@ -747,6 +833,10 @@ impl MatchRunner {
                 .take()
                 .ok_or_else(|| anyhow!("Phase replay snapshot omitted Phase client state"))?,
         )?;
+        let repeated_state_action = match cycle_guard {
+            Some(guard) => guard.observe(actor_slot, &action, &current)?,
+            None => false,
+        };
         let phase_client_delta = phase_delta(replay_phase_client, &current);
         *replay_phase_client = current;
         steps.push(ReplayStep {
@@ -758,7 +848,7 @@ impl MatchRunner {
             phase_client_delta: Some(phase_client_delta),
         });
         self.broadcast_state(game, &events, game_number, slot_of_seat0, clocks_ms);
-        Ok(())
+        Ok(repeated_state_action)
     }
 
     fn handle_connection_command(
@@ -1340,5 +1430,37 @@ mod tests {
         ]);
 
         assert_eq!(action, Some(GameAction::CancelCast));
+    }
+
+    #[test]
+    fn repeated_identical_state_and_action_reaches_cycle_limit() {
+        let mut guard = StateActionCycleGuard::default();
+        let action = GameAction::PassPriority;
+        let state = serde_json::json!({ "turn": 3, "priority": 0 });
+
+        for _ in 1..STATE_ACTION_REPEAT_LIMIT {
+            assert!(!guard.observe(0, &action, &state).unwrap());
+        }
+        assert!(guard.observe(0, &action, &state).unwrap());
+    }
+
+    #[test]
+    fn cycle_guard_distinguishes_actor_action_and_state() {
+        let mut guard = StateActionCycleGuard::default();
+        let pass = GameAction::PassPriority;
+        let cancel = GameAction::CancelCast;
+
+        assert!(!guard
+            .observe(0, &pass, &serde_json::json!({ "turn": 1 }))
+            .unwrap());
+        assert!(!guard
+            .observe(1, &pass, &serde_json::json!({ "turn": 1 }))
+            .unwrap());
+        assert!(!guard
+            .observe(0, &cancel, &serde_json::json!({ "turn": 1 }))
+            .unwrap());
+        assert!(!guard
+            .observe(0, &pass, &serde_json::json!({ "turn": 2 }))
+            .unwrap());
     }
 }

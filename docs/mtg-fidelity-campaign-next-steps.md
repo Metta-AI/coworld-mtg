@@ -19,8 +19,9 @@ viewer-scoped simultaneous decisions, deterministic batched-trigger
 serialization, mandatory additional-cost castability, and Arena priority
 controls are merged into that fork's `main` at
 `2dec6c88915db4697706234a7ba2fcedd97b1689`. The targeted-spell affordability
-and interactive mana-payment consistency fix is published at
-`6160cbf6385897a3036f7d715e2175e55dab147e`. Coworld pins that exact revision;
+and interactive mana-payment consistency fix is followed by shared-resource
+additional-cost preview correctness at
+`b5f468588240df079cad95b94467038ffa6d0282`. Coworld pins that exact revision;
 upstream synchronization must preserve a content-addressed revision rather
 than following a mutable branch.
 
@@ -32,11 +33,11 @@ finding aggregation were clean. That historical shard used the reviewed local
 Phase patch overlay while retaining the sealed corpus rules boundary at
 `f6fd1fca5c581bcd127d5b18742623e1298ae3c7`.
 
-The production dependency now moves the rules boundary to `6160cbf63`. The
+The production dependency now moves the rules boundary to `b5f468588`. The
 existing harness correctly rejects the old manifest against that binary. Do
 not relabel or edit the old corpus to bypass the guard. The replacement runtime
 corpus is content-addressed at
-`3dfec529d003e373bc7fc78437f86d5ddf97aeb6a219ad44f50891f879035965` and keeps
+`a12f8a218f7be72299280042cf5b1ac13d532aeeb9eb1bd8f927045ef332ef5c` and keeps
 the prior card and deck payload hashes while recording the new rules boundary.
 Run a newly named shard and scoreboard against that exact manifest before
 claiming a production campaign result for the fork pin.
@@ -97,7 +98,7 @@ and equivalent discard, exile, and tap resource cases.
 ## Campaign continuation
 
 Use the immutable corpus in `corpus.lock.json`, whose manifest records Phase
-`6160cbf6385897a3036f7d715e2175e55dab147e`; preserve the existing SOS corpus as
+`b5f468588240df079cad95b94467038ffa6d0282`; preserve the existing SOS corpus as
 historical evidence and do not overwrite prior shard outputs.
 
 After each owning Phase fix:
