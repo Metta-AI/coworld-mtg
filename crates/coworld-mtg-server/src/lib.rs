@@ -554,10 +554,36 @@ impl MatchRunner {
                         let result = game.concede(timeout_seat)?;
                         (action, result)
                     } else {
-                        let action = default_action(&game, timeout_seat)
-                            .ok_or_else(|| anyhow!("Phase supplied no timeout action"))?;
-                        let result = game.submit(timeout_seat, action.clone())?;
-                        (action, result)
+                        match default_action(&game, timeout_seat) {
+                            Some(action) => {
+                                let submitted = game.submit(timeout_seat, action.clone());
+                                let resolution = resolve_timeout_submission(
+                                    timeout_seat,
+                                    action,
+                                    submitted,
+                                    || game.concede(timeout_seat),
+                                )?;
+                                if let Some(error) = resolution.rejection {
+                                    end_reason = "timeout_action_rejected".to_owned();
+                                    tracing::warn!(
+                                        seat = timeout_seat,
+                                        error = %error,
+                                        "Phase rejected its advertised timeout action; conceding the timed-out seat"
+                                    );
+                                }
+                                (resolution.action, resolution.result)
+                            }
+                            None => {
+                                end_reason = "timeout_action_unavailable".to_owned();
+                                tracing::warn!(
+                                    seat = timeout_seat,
+                                    "Phase supplied no timeout action; conceding the timed-out seat"
+                                );
+                                let action = concede_action(timeout_seat);
+                                let result = game.concede(timeout_seat)?;
+                                (action, result)
+                            }
+                        }
                     };
                     self.record_and_broadcast(
                         &game,
@@ -1078,9 +1104,13 @@ impl MatchRunner {
 }
 
 fn default_action(game: &PhaseGame, seat: u8) -> Option<GameAction> {
-    let actions = game.legal_actions(seat).0;
+    choose_default_action(game.legal_actions(seat).0)
+}
+
+fn choose_default_action(actions: Vec<GameAction>) -> Option<GameAction> {
     for preferred in [
         "MulliganDecision",
+        "CancelCast",
         "PassPriority",
         "DeclareAttackers",
         "DeclareBlockers",
@@ -1105,6 +1135,32 @@ fn default_action(game: &PhaseGame, seat: u8) -> Option<GameAction> {
         }
     }
     actions.into_iter().next()
+}
+
+struct TimeoutActionResolution<T, E> {
+    action: GameAction,
+    result: T,
+    rejection: Option<E>,
+}
+
+fn resolve_timeout_submission<T, E>(
+    seat: u8,
+    attempted_action: GameAction,
+    submission: std::result::Result<T, E>,
+    concede: impl FnOnce() -> std::result::Result<T, E>,
+) -> std::result::Result<TimeoutActionResolution<T, E>, E> {
+    match submission {
+        Ok(result) => Ok(TimeoutActionResolution {
+            action: attempted_action,
+            result,
+            rejection: None,
+        }),
+        Err(rejection) => Ok(TimeoutActionResolution {
+            action: concede_action(seat),
+            result: concede()?,
+            rejection: Some(rejection),
+        }),
+    }
 }
 
 fn concede_action(seat: u8) -> GameAction {
@@ -1250,5 +1306,39 @@ mod tests {
             stops: Vec::new(),
         }));
         assert!(!is_clock_neutral_preference(&GameAction::PassPriority));
+    }
+
+    #[test]
+    fn rejected_timeout_action_concedes_instead_of_aborting_the_episode() {
+        let attempted = GameAction::PassPriority;
+        let resolution =
+            resolve_timeout_submission(1, attempted, Err("rejected"), || Ok(7)).unwrap();
+
+        assert_eq!(resolution.action, concede_action(1));
+        assert_eq!(resolution.result, 7);
+        assert_eq!(resolution.rejection, Some("rejected"));
+    }
+
+    #[test]
+    fn accepted_timeout_action_does_not_concede() {
+        let attempted = GameAction::PassPriority;
+        let resolution = resolve_timeout_submission(0, attempted.clone(), Ok(7), || {
+            panic!("accepted timeout action must not concede")
+        })
+        .unwrap();
+
+        assert_eq!(resolution.action, attempted);
+        assert_eq!(resolution.result, 7);
+        assert_eq!(resolution.rejection, None::<&str>);
+    }
+
+    #[test]
+    fn timeout_cancels_an_incomplete_cast_before_choosing_a_target() {
+        let action = choose_default_action(vec![
+            GameAction::ChooseTarget { target: None },
+            GameAction::CancelCast,
+        ]);
+
+        assert_eq!(action, Some(GameAction::CancelCast));
     }
 }
