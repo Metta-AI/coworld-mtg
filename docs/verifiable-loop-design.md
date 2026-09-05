@@ -5,10 +5,12 @@ in [the verifiable case guide](verifiable-cases.md), with generated schemas and
 diagrams. The account of `main` below describes the inspected starting commit
 `cd4720d26b951b050aba327182e595d811e9acb2`, before these changes.
 
-Design notes, 2026-09-04. Based on the pasted voice conversation, the Codex task
-“Draft verifiable AI software blog,” current source, the semantic-generators
-branch, and saved campaign artifacts. This is an inspection and proposal; no
-new campaign or engine validation was run.
+Historical design notes, 2026-09-04. Based on the pasted voice conversation,
+the Codex task “Draft verifiable AI software blog,” source at the starting
+commit, the semantic-generators branch, and saved campaign artifacts. This
+inspection preceded the new implementation and experiments. The
+[Hushbringer case study](case-study-hushbringer.md) records the subsequent
+runtime findings and their effect on the repair.
 
 The useful next step is to make the conversion from evidence to a checked
 repair a durable part of the repository. The system should retain both the

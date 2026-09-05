@@ -99,3 +99,4 @@ ninth completed full plan-review round. The
 evidence. A fresh executor was dispatched with exclusive source ownership
 and a separate mutation checkout. Runtime proof and independent implementation
 review remain required before acceptance.
+A [typed input audit](hushbringer-v9-acceptance-inputs-audit.json) recomputed all ten case identities with the preserved checker and matched the original acceptance plan exactly. Source JSON omits some default values, so a raw JSON hash is not the typed case identity. This audit records input preservation, not acceptance.

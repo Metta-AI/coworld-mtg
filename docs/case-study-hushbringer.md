@@ -64,6 +64,26 @@ starting the next. A snapshot needs both a time and a well-defined event. A
 flat collection of objects cannot recover the decision that grouped them.
 The case's expectation stayed fixed while the repair obligation grew.
 
+The rules expectations differ at the event boundary:
+
+```mermaid
+flowchart LR
+    subgraph together[Wrath: one simultaneous event]
+        A[Hushbringer and Traveler present] --> B[Both die]
+        B --> C[Look back: Hushbringer present]
+        C --> D[No Spirit]
+    end
+    subgraph separate[Two separate sacrifice costs]
+        E[Hushbringer and Traveler present] --> F[First cost: Hushbringer dies]
+        F --> G[Second cost: Traveler dies]
+        G --> H[Look back: Hushbringer absent]
+        H --> I[One Spirit]
+    end
+```
+
+These are the expected outcomes used to judge the repair. The diagram does
+not certify a candidate; the runtime evidence must establish each result.
+
 The build workflow needed a correction too. Sharing a Cargo output directory
 between the original and modified engine checkouts caused a test compile to
 see an older engine type. The [build-isolation record](../cases/process/hushbringer-simultaneous-death/build-isolation/README.md)
