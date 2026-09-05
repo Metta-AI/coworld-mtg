@@ -1,0 +1,730 @@
+[
+  {
+    "name": "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+    "line": 143,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+    "line": 147,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "oracle_wrath_without_hush_creates_exactly_one_spirit",
+    "line": 151,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "sequential_destroy_instructions_bind_separate_before_worlds",
+    "line": 292,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "two_target_destroy_owns_one_event_in_both_target_orders",
+    "line": 321,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "from_anywhere_and_dies_observers_choose_different_worlds",
+    "line": 348,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "ordinary_ambiguous_origins_preserve_live_collection_compatibility",
+    "line": 400,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "clause_local_disjunction_registers_once_for_eligible_sibling",
+    "line": 453,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "co_departed_observer_and_self_trigger_both_use_before_suppression",
+    "line": 488,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener",
+    "line": 550,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "delayed_same_occurrence_tries_eligible_alternative_exactly_once",
+    "line": 631,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "ambiguous_registered_delayed_matchers_preserve_ungated_compatibility",
+    "line": 677,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "completed_keep_sacrifice_sweeps_share_one_boundary_across_choice_routes",
+    "line": 750,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "remaining_complete_producers_capture_each_actual_group",
+    "line": 852,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "natural_effect_zone_choice_finalizes_before_chained_hush_departure",
+    "line": 905,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "multi_object_spell_sacrifice_cost_preserves_commit_and_suppression",
+    "line": 938,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "augment_subject_preserves_the_sba_owner_and_co_departed_observer_payoff",
+    "line": 966,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "haunt_payoff_uses_the_linked_subject_death_before_world",
+    "line": 1050,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "delayed_native_sacrifice_and_exile_alternatives_remain_eligible",
+    "line": 1123,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "delayed_reflexive_suppression_discards_unmatched_listener",
+    "line": 1177,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "legacy_direct_delayed_no_hush_positive_controls",
+    "line": 1294,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "legacy_direct_delayed_surviving_hush_bypass_compatibility",
+    "line": 1298,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_legacy_direct_delayed_should_be_suppressed",
+    "line": 1303,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "not_equals_battlefield_rejects_death_but_allows_real_library_graveyard_move",
+    "line": 1308,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "inherited_sacrifice_no_hush_and_single_slot_controls",
+    "line": 1387,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_inherited_target_sacrifice_should_group_both_departures",
+    "line": 1396,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "aggregate_payment_no_hush_and_surviving_hush_single_payment_controls",
+    "line": 1529,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_aggregate_payment_should_group_completed_selection",
+    "line": 1539,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_aggregate_payment_should_group_completed_selection_reversed",
+    "line": 1544,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "passed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_aggregate_paid_continuation_should_resume_sequential_sibling",
+    "line": 1549,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "self_from_anywhere_exception_functions_in_destination_with_hush_surviving",
+    "line": 1554,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "stripped_or_phased_suppressor_allows_the_same_reached_death",
+    "line": 1582,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "granted_suppression_and_granted_death_trigger_use_effective_abilities",
+    "line": 1626,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "single_departure_after_world_observes_ability_removal_source_leaving",
+    "line": 1680,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "destroy_guard_regeneration_and_indestructible_preserve_actual_departures_only",
+    "line": 1778,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_cast_created_regeneration_shield_should_survive_to_destroy",
+    "line": 1788,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed",
+    "line": 1793,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush",
+    "line": 1798,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed",
+    "line": 1803,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "seeded_regeneration_guard_preserves_actual_departures_only",
+    "line": 1808,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "paused_choice_state_roundtrip_and_following_action_have_no_stale_scope",
+    "line": 1896,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "unattach_fallback_and_native_cause_remain_distinct",
+    "line": 1937,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "repeated_object_id_retains_distinct_incarnation_and_event_suppression",
+    "line": 2000,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "delayed_cleanup_retains_persistent_and_expires_this_turn_listeners",
+    "line": 2079,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "distinct_controller_delayed_listeners_keep_creation_source_and_controller",
+    "line": 2144,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "first_departing_granter_preserves_later_member_types_and_trigger",
+    "line": 2205,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "controller_relative_and_conditional_suppression_bind_before_departure",
+    "line": 2267,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "successive_sba_iterations_bind_new_world_after_suppressor_dies",
+    "line": 2308,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "change_zone_choice_uses_selected_objects_and_finalizes_before_continuation",
+    "line": 2376,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "resumed_change_zone_tail_suppression_uses_authoritative_records",
+    "line": 2527,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "resumed_change_zone_no_hush_duplicate_payoff_compatibility",
+    "line": 2533,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "unpaused_change_zone_no_hush_payoff_remains_exactly_one",
+    "line": 2540,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_resumed_change_zone_no_hush_should_pay_once",
+    "line": 2547,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_resumed_change_zone_no_hush_should_pay_once_reversed",
+    "line": 2552,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "cross_pause_batch_preserves_completed_segment_compatibility_and_no_hush_twin",
+    "line": 2589,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_cross_pause_batch_should_share_full_group_suppression",
+    "line": 2595,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "devour_child_sacrifice_is_independent_of_parent_co_entry",
+    "line": 2600,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "destroy_self_reference_and_partial_illegality_preserve_existing_guards",
+    "line": 2674,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "empty_sweep_and_zero_choice_do_not_leak_into_later_death",
+    "line": 2714,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "chosen_spell_and_activation_cost_rejection_preserves_state_for_valid_retry",
+    "line": 2757,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "library_position_choice_and_targeted_leaf_preserve_non_death_events",
+    "line": 2840,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "unpaused_bounce_batch_and_selected_bounce_share_actual_departure_group",
+    "line": 2929,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "effect_zone_choice_pay_cost_uses_selected_group_before_continuation",
+    "line": 2998,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "chosen_sacrifice_closes_before_later_hush_departure_instruction",
+    "line": 3067,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "separate_spell_sacrifice_cost_components_bind_separate_worlds",
+    "line": 3197,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds",
+    "line": 3201,
+    "ignored_default": false,
+    "active": "failed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "separate_deferred_spell_sacrifice_cost_components_hush_first",
+    "line": 3207,
+    "ignored_default": false,
+    "active": "failed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "separate_deferred_spell_sacrifice_cost_components_traveler_first",
+    "line": 3211,
+    "ignored_default": false,
+    "active": "failed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "separate_deferred_spell_sacrifice_cost_components_no_hush_reversed",
+    "line": 3215,
+    "ignored_default": false,
+    "active": "failed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins",
+    "line": 3220,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_inherited_target_sacrifice_should_group_both_departures_reversed",
+    "line": 3310,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "passed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_legacy_when_dies_should_be_suppressed",
+    "line": 3315,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_legacy_when_leaves_filtered_should_be_suppressed",
+    "line": 3320,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_legacy_when_dies_or_exiled_should_be_suppressed",
+    "line": 3325,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_legacy_when_enters_should_be_suppressed",
+    "line": 3330,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "legacy_direct_delayed_identity_and_nondeath_siblings_preserve_lifetime",
+    "line": 3335,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "ambiguous_delayed_primary_alternative_co_death_and_identity_compatibility",
+    "line": 3506,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "known_gap_ambiguous_registered_delayed_should_be_suppressed",
+    "line": 3522,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_restricted_registered_delayed_should_be_suppressed",
+    "line": 3527,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "ambiguous_reflexive_compatibility_and_empty_creation_disposal",
+    "line": 3531,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "dedicated_mill_exile_and_torpor_only_etb_controls_remain_positive",
+    "line": 3576,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat",
+    "line": 3667,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "attachment_relative_suppression_binds_live_relation_before_departure",
+    "line": 3723,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "two_suppression_controllers_and_between_event_control_rebind_are_distinct",
+    "line": 3757,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "inherited_sacrifice_current_controller_and_unauthorized_nonanaphoric_siblings",
+    "line": 3840,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "real_mutate_cast_departure_preserves_component_routing_and_normal_group_controls",
+    "line": 4030,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "known_gap_merged_intrinsic_flush_should_preserve_later_member_world",
+    "line": 4039,
+    "ignored_default": true,
+    "active": "ignored",
+    "active_desired_run": "failed",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "merged_intrinsic_flush_limit_has_a_subject_first_positive_twin",
+    "line": 4043,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  },
+  {
+    "name": "standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice",
+    "line": 4048,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "passed"
+  },
+  {
+    "name": "hand_library_choice_preserves_selected_cards_and_nondeath_payoff",
+    "line": 4097,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "not run; corrected after baseline overlay"
+  },
+  {
+    "name": "opponent_scoped_keep_sweep_preserves_owner_and_out_of_scope_board",
+    "line": 4176,
+    "ignored_default": false,
+    "active": "passed",
+    "active_desired_run": "not selected",
+    "baseline_prior_overlay": "failed"
+  }
+]

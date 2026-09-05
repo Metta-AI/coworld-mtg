@@ -167,7 +167,7 @@ pub async fn run_shard(options: &RunOptions) -> Result<RunResult> {
                 };
                 serde_json::to_writer(&mut finding_writer, &finding)?;
                 finding_writer.write_all(b"\n")?;
-                let minimized_dir = options.output_dir.join("minimized");
+                let minimized_dir = options.output_dir.join("failures");
                 fs::create_dir_all(&minimized_dir)?;
                 write_json_atomic(
                     &minimized_dir.join(format!("seed-{next_seed}.json")),
@@ -507,24 +507,47 @@ pub async fn minimize_trace(manifest_uri: &str, input: &Path, output: &Path) -> 
     let manifest = load_manifest(manifest_uri).await?;
     let runtime = load_phase_runtime(manifest_uri, &manifest).await?;
     let mut trace: GameTrace = serde_json::from_slice(&fs::read(input)?)?;
-    if verify_trace(&runtime, &trace, true).is_ok() {
-        bail!("trace currently passes all hard gates and has no reproducible failure to minimize");
+    if trace.manifest_id != manifest.manifest_id {
+        bail!("trace manifest does not match supplied corpus manifest");
     }
-
-    let (mut game, _) = runtime.new_limited_game(trace.decks.clone(), trace.seed)?;
-    let mut keep = trace.transitions.len();
-    for (index, transition) in trace.transitions.iter().enumerate() {
-        match game.submit(transition.seat, transition.action.clone()) {
-            Ok(_) if game_state_hash(&game)? == transition.state_hash => {}
-            _ => {
-                keep = index + 1;
-                break;
-            }
+    let predicate = assess_trace(&runtime, &trace);
+    if predicate == crate::ReplayAssessment::VerifiedExecution {
+        bail!("trace has no reproduced failure or evidence divergence to reduce");
+    }
+    // A bounded prefix reducer. General setup/operation reduction lives in `case reduce`.
+    // Never mistake a stale terminal count or an unrelated replay error for the same defect.
+    for keep in 0..trace.transitions.len().min(64) {
+        let mut candidate = trace.clone();
+        candidate.transitions.truncate(keep);
+        if !matches!(candidate.terminal, GameTerminal::HardFailure { .. }) {
+            candidate.terminal = GameTerminal::ActionBudgetExhausted {
+                actions: keep as u64,
+            };
+        }
+        if assess_trace(&runtime, &candidate) == predicate {
+            trace = candidate;
+            break;
         }
     }
-    trace.transitions.truncate(keep);
     write_json_atomic(output, &trace)?;
     Ok(trace)
+}
+
+fn assess_trace(runtime: &PhaseRuntime, trace: &GameTrace) -> crate::ReplayAssessment {
+    match verify_trace(runtime, trace, true) {
+        Ok(()) => match &trace.terminal {
+            GameTerminal::HardFailure {
+                signature, detail, ..
+            } => crate::ReplayAssessment::ReproducedFailure {
+                signature: signature.clone(),
+                detail: detail.clone(),
+            },
+            _ => crate::ReplayAssessment::VerifiedExecution,
+        },
+        Err(error) => crate::ReplayAssessment::EvidenceDivergence {
+            detail: error.to_string(),
+        },
+    }
 }
 
 fn load_deck(path: &Path) -> Result<Vec<String>> {

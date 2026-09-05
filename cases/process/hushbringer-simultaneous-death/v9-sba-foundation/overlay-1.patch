@@ -1,0 +1,265 @@
+--- a/crates/engine/tests/integration/trigger_suppression_event_timing.rs
++++ b/crates/engine/tests/integration/trigger_suppression_event_timing.rs
+@@ -5611,3 +5611,262 @@
+     assert_eq!(r.state().objects[&spell].zone, Zone::Graveyard);
+     assert_eq!(spirits(r.state()), 0);
+ }
++
++// Supplemental SBA fixtures: typed board setup, then only public actions.
++// These cases test the observer payoff as well as emitted-record ownership.
++#[derive(Clone, Copy, Debug)]
++enum SbaHandoffFixture {
++    ZeroToughness,
++    LethalDamage,
++    UnattachedAura,
++    RoleUniqueness,
++    WorldRule,
++    ZeroLoyalty,
++    ZeroDefense,
++    SagaSacrifice,
++}
++
++fn sba_member_handoff_fixture(kind: SbaHandoffFixture) {
++    use engine::types::ability::{ChosenAttribute, CounterTriggerFilter};
++    use engine::types::card_type::Supertype;
++    for subject_departs in [true, false] {
++        for observer_departs in [true, false] {
++            for reverse in [false, true] {
++                let mut s = scenario();
++                let early = reverse.then(|| s.add_vanilla(P0, 1, 1));
++                let subject = match kind {
++                    SbaHandoffFixture::ZeroToughness => {
++                        s.add_vanilla(P0, 1, i32::from(!subject_departs))
++                    }
++                    SbaHandoffFixture::LethalDamage => s
++                        .add_creature(P0, "Test lethal handoff subject", 1, 1)
++                        .with_damage_marked(u32::from(subject_departs))
++                        .id(),
++                    _ => s
++                        .add_creature(P0, "Test noncreature handoff subject", 1, 1)
++                        .as_enchantment()
++                        .id(),
++                };
++                let observer = early.unwrap_or_else(|| s.add_vanilla(P0, 1, 1));
++                let host = matches!(
++                    kind,
++                    SbaHandoffFixture::UnattachedAura | SbaHandoffFixture::RoleUniqueness
++                )
++                .then(|| s.add_vanilla(P0, 4, 4));
++                let newer = (subject_departs
++                    && matches!(
++                        kind,
++                        SbaHandoffFixture::RoleUniqueness | SbaHandoffFixture::WorldRule
++                    ))
++                .then(|| {
++                    s.add_creature(P0, "Test surviving newer permanent", 1, 1)
++                        .as_enchantment()
++                        .id()
++                });
++                let mut r = s.build();
++                let trigger = death_trigger(
++                    vec![OriginConstraint::Equals(Zone::Battlefield)],
++                    specific(subject),
++                )
++                .execute(gain(1));
++                {
++                    let obj = r.state_mut().objects.get_mut(&observer).unwrap();
++                    obj.trigger_definitions = vec![trigger.clone()].into();
++                    obj.base_trigger_definitions = std::sync::Arc::new(vec![trigger]);
++                    obj.damage_marked = u32::from(observer_departs);
++                }
++                engine::game::trigger_index::reindex_object_triggers(r.state_mut(), observer);
++                match kind {
++                    SbaHandoffFixture::ZeroToughness | SbaHandoffFixture::LethalDamage => {}
++                    SbaHandoffFixture::UnattachedAura | SbaHandoffFixture::RoleUniqueness => {
++                        let role = matches!(kind, SbaHandoffFixture::RoleUniqueness);
++                        for (ordinal, id) in std::iter::once(subject).chain(newer).enumerate() {
++                            let obj = r.state_mut().objects.get_mut(&id).unwrap();
++                            obj.card_types.subtypes = if role {
++                                vec!["Aura".into(), "Role".into()]
++                            } else {
++                                vec!["Aura".into()]
++                            };
++                            obj.base_card_types = obj.card_types.clone();
++                            obj.timestamp = 100 + ordinal as u64;
++                            if role || !subject_departs {
++                                obj.attached_to = Some(host.unwrap().into());
++                                r.state_mut()
++                                    .objects
++                                    .get_mut(&host.unwrap())
++                                    .unwrap()
++                                    .attachments
++                                    .push(id);
++                            }
++                        }
++                    }
++                    SbaHandoffFixture::WorldRule => {
++                        for (ordinal, id) in std::iter::once(subject).chain(newer).enumerate() {
++                            let obj = r.state_mut().objects.get_mut(&id).unwrap();
++                            obj.card_types.supertypes.push(Supertype::World);
++                            obj.base_card_types = obj.card_types.clone();
++                            obj.timestamp = 100 + ordinal as u64;
++                        }
++                    }
++                    SbaHandoffFixture::ZeroLoyalty => {
++                        let obj = r.state_mut().objects.get_mut(&subject).unwrap();
++                        obj.card_types.core_types = vec![CoreType::Planeswalker];
++                        obj.base_card_types = obj.card_types.clone();
++                        obj.base_loyalty = Some(3);
++                        obj.loyalty = Some(if subject_departs { 0 } else { 3 });
++                        obj.counters
++                            .insert(CounterType::Loyalty, if subject_departs { 0 } else { 3 });
++                    }
++                    SbaHandoffFixture::ZeroDefense => {
++                        let obj = r.state_mut().objects.get_mut(&subject).unwrap();
++                        obj.card_types.core_types = vec![CoreType::Battle];
++                        obj.base_card_types = obj.card_types.clone();
++                        obj.base_defense = Some(3);
++                        obj.defense = Some(if subject_departs { 0 } else { 3 });
++                        obj.counters
++                            .insert(CounterType::Defense, if subject_departs { 0 } else { 3 });
++                        obj.chosen_attributes.push(ChosenAttribute::Player(P0));
++                    }
++                    SbaHandoffFixture::SagaSacrifice => {
++                        let chapter = TriggerDefinition::new(TriggerMode::CounterAdded)
++                            .counter_filter(CounterTriggerFilter {
++                                counter_type: CounterType::Lore,
++                                threshold: Some(3),
++                            })
++                            .execute(gain(0));
++                        let obj = r.state_mut().objects.get_mut(&subject).unwrap();
++                        obj.card_types.subtypes = vec!["Saga".into()];
++                        obj.base_card_types = obj.card_types.clone();
++                        obj.trigger_definitions = vec![chapter.clone()].into();
++                        obj.base_trigger_definitions = std::sync::Arc::new(vec![chapter]);
++                        obj.counters
++                            .insert(CounterType::Lore, if subject_departs { 3 } else { 2 });
++                        engine::game::trigger_index::reindex_object_triggers(
++                            r.state_mut(),
++                            subject,
++                        );
++                    }
++                }
++                engine::game::layers::flush_layers(r.state_mut());
++                assert_eq!(r.state().objects[&subject].zone, Zone::Battlefield);
++                assert_eq!(r.state().objects[&observer].zone, Zone::Battlefield);
++                assert!(r.state().stack.is_empty());
++                assert!(matches!(r.state().waiting_for, WaitingFor::Priority { .. }));
++                let mut events = r.act(GameAction::PassPriority).unwrap().events;
++                events.extend(settle(&mut r));
++                assert_eq!(
++                    r.state().objects[&subject].zone,
++                    if subject_departs {
++                        Zone::Graveyard
++                    } else {
++                        Zone::Battlefield
++                    },
++                    "subject reaches {kind:?}, doomed={subject_departs}"
++                );
++                assert_eq!(
++                    r.state().objects[&observer].zone,
++                    if observer_departs {
++                        Zone::Graveyard
++                    } else {
++                        Zone::Battlefield
++                    }
++                );
++                if let Some(id) = host {
++                    assert_eq!(r.state().objects[&id].zone, Zone::Battlefield);
++                }
++                if let Some(id) = newer {
++                    assert_eq!(r.state().objects[&id].zone, Zone::Battlefield);
++                }
++                // CR 704.3 + CR 603.10a: one SBA event includes the observer and
++                // the selected subject even when separate sub-checks move them.
++                assert_eq!(
++                    r.life(P0),
++                    20 + i32::from(subject_departs),
++                    "co-dying observer payoff for {kind:?}; observer_departs={observer_departs}, reverse={reverse}"
++                );
++                let records = |id| {
++                    events
++                        .iter()
++                        .filter_map(|event| match event {
++                            GameEvent::ZoneChanged {
++                                object_id,
++                                from: Some(Zone::Battlefield),
++                                to: Zone::Graveyard,
++                                record,
++                                ..
++                            } if *object_id == id => Some(record.as_ref()),
++                            _ => None,
++                        })
++                        .collect::<Vec<_>>()
++                };
++                let subject_records = records(subject);
++                let observer_records = records(observer);
++                assert_eq!(subject_records.len(), usize::from(subject_departs));
++                assert_eq!(observer_records.len(), usize::from(observer_departs));
++                if subject_departs {
++                    assert_snapshot(subject_records[0], false, false);
++                    assert_eq!(
++                        subject_records[0].co_departed,
++                        if observer_departs {
++                            vec![observer]
++                        } else {
++                            vec![]
++                        }
++                    );
++                }
++                if observer_departs {
++                    assert_snapshot(observer_records[0], false, false);
++                    assert_eq!(
++                        observer_records[0].co_departed,
++                        if subject_departs {
++                            vec![subject]
++                        } else {
++                            vec![]
++                        }
++                    );
++                }
++                if subject_departs && observer_departs {
++                    assert_ne!(
++                        subject_records[0].turn_zone_change_index,
++                        observer_records[0].turn_zone_change_index
++                    );
++                }
++                assert!(r.state().stack.is_empty());
++                assert!(matches!(r.state().waiting_for, WaitingFor::Priority { .. }));
++            }
++        }
++    }
++}
++
++#[test]
++fn sba_member_handoff_zero_toughness_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::ZeroToughness);
++}
++#[test]
++fn sba_member_handoff_lethal_damage_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::LethalDamage);
++}
++#[test]
++fn sba_member_handoff_unattached_aura_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::UnattachedAura);
++}
++#[test]
++fn sba_member_handoff_role_uniqueness_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::RoleUniqueness);
++}
++#[test]
++fn sba_member_handoff_world_rule_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::WorldRule);
++}
++#[test]
++fn sba_member_handoff_zero_loyalty_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::ZeroLoyalty);
++}
++#[test]
++fn sba_member_handoff_zero_defense_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::ZeroDefense);
++}
++#[test]
++fn sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff() {
++    sba_member_handoff_fixture(SbaHandoffFixture::SagaSacrifice);
++}

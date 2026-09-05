@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -930,9 +930,7 @@
+     to: Zone,
+     events: &mut Vec<GameEvent>,
+ ) {
+-    with_departure_leaf(state, events, object_id, to, |state, events, binding| {
+-        move_to_zone_inner(state, object_id, to, events, binding);
+-    });
++    move_to_zone_inner(state, object_id, to, events, None);
+ }
+ 
+ fn move_to_zone_inner(

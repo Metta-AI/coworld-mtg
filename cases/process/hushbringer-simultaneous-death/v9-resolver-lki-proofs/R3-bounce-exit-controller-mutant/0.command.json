@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "-p",
+    "engine",
+    "--message-format=json",
+    "--lib",
+    "game::effects::tests::bounce_followup_draws_when_caster_controlled_parent_target",
+    "--",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3",
+  "env": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+    "RUST_TEST_THREADS": "1"
+  },
+  "source_manifest_sha256": "d667c425a996d5f6ee1be01b74fb05358bfd1fbc5d14ede631b2057d6095cd52",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+  "utc_start": "2026-09-05T18:33:38.372564+00:00"
+}

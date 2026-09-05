@@ -1,0 +1,11 @@
+sequenceDiagram
+    Author->>Coordinator: CaseSpec
+    Coordinator->>PhaseWorker: ExecutionRequest
+    PhaseWorker->>Coordinator: ExecutionEvidence
+    Coordinator->>EvidenceStore: EvaluationReceipt
+    Reducer->>EvidenceStore: ReductionReceipt
+    Operator->>Coordinator: AcceptancePlan
+    Reviewer->>Coordinator: ReviewRecord
+    Coordinator->>EvidenceStore: AcceptanceDecision
+    Builder->>Coordinator: BuildRecord
+    Coordinator->>CaseLibrary: CaseAttribution

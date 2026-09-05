@@ -1,0 +1,205 @@
+{
+  "source_archive_sha256": "68b2c4d89fe25d95e0565fce21ad5ead9c53bc768144e77e6eac915887b8d4fe",
+  "command": [
+    "cargo",
+    "test",
+    "-p",
+    "engine",
+    "--message-format=json",
+    "--test",
+    "integration",
+    "trigger_suppression_event_timing",
+    "--",
+    "--nocapture"
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations/target",
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "started": "2026-09-05T18:05:55.648632+00:00",
+  "exit": 0,
+  "log_sha256": "c09569226644c3cfe1d54ffcb25e1a44a973c24827246acf549df59c8c416d4d",
+  "artifacts": [
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "custom-build"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "build-script-build",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/build.rs",
+        "edition": "2021",
+        "doc": false,
+        "doctest": false,
+        "test": false
+      },
+      "fresh": true,
+      "executable": null,
+      "executable_sha256": null
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "engine",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/lib.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "fresh": false,
+      "executable": null,
+      "executable_sha256": null
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "parser-gap-analyzer",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/parser_gap_analyzer.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": false,
+        "test": false
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/parser-gap-analyzer",
+      "executable_sha256": "92b8968402d1ba33f356480eaccab41398cfe14b2ff0e403dc5dbc4bc991ea1a"
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "set-check",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/set_check.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/set-check",
+      "executable_sha256": "3862007630f4bd35e6d187d25992303c8664fe12211b997d40ae01ddab748a21"
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "tokens-gen",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/tokens_gen.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": false,
+        "test": false
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/tokens-gen",
+      "executable_sha256": "16bc3e222421fa807fd0994cffc1cd0693c86147e3afc1028321a90829109f16"
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "coverage-report",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/coverage_report.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": false,
+        "test": false
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/coverage-report",
+      "executable_sha256": "0689f561114afe31f9e80502266b57b8b9d2de77ae2037dd226c822f9c78bce8"
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "card-data-validate",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/card_data_validate.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": false,
+        "test": false
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/card-data-validate",
+      "executable_sha256": "4626945abd5f1682fbc4566a305c3b204282c1f177f7ffffedfa0a968212bc7b"
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "coverage-parse-diff",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/coverage_parse_diff.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/coverage-parse-diff",
+      "executable_sha256": "9c6119e50cdd9174f2d6f0233b75a6a41c6ae9a8a0f372820d03b59ef1572a6f"
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "test"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "integration",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/tests/integration/main.rs",
+        "edition": "2021",
+        "doc": false,
+        "doctest": false,
+        "test": true
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+      "executable_sha256": "0b2b6413c1ffd832d5afaafab9d516b099489fe8adcfdd7686581e38d3e47dd0"
+    }
+  ],
+  "changed_during_run": [],
+  "finished": "2026-09-05T18:06:35.586291+00:00"
+}

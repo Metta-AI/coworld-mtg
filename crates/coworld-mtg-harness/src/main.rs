@@ -17,6 +17,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Typed, reproducible scenario and repair evaluation loop.
+    Case(coworld_mtg_harness::cases::CaseArgs),
     /// Materialize and cross-check an immutable corpus manifest.
     Materialize(MaterializeArgs),
     /// Run a deterministic, resumable legal-action shard.
@@ -159,6 +161,7 @@ struct ImproveArgs {
 async fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Command::Case(args) => coworld_mtg_harness::cases::dispatch(args)?,
         Command::Materialize(args) => {
             let manifest = materialize_corpus(&MaterializeOptions {
                 set: args.set,

@@ -1,0 +1,37 @@
+{
+  "id": "destroy-resolve",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::attachment_relative_suppression_binds_live_relation_before_departure' (3269712) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::chosen_sacrifice_closes_before_later_hush_departure_instruction' (3269715) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::destroy_self_reference_and_partial_illegality_preserve_existing_guards' (3269883) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::first_departing_granter_preserves_later_member_types_and_trigger' (3269893) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::empty_sweep_and_zero_choice_do_not_leak_into_later_death' (3269891) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::granted_suppression_and_granted_death_trigger_use_effective_abilities' (3269895) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat' (3269892) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::merged_intrinsic_flush_limit_has_a_subject_first_positive_twin' (3269909) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4011:5:",
+    "thread 'trigger_suppression_event_timing::paused_choice_state_roundtrip_and_following_action_have_no_stale_scope' (3269991) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::haunt_payoff_uses_the_linked_subject_death_before_world' (3269897) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::real_mutate_cast_departure_preserves_component_routing_and_normal_group_controls' (3270029) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4011:5:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_redirect_only_preserves_original_incarnation' (3270048) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_no_replacement_borrows_outer_owner' (3270047) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure' (3270060) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure_reversed' (3270061) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::seeded_regeneration_guard_preserves_actual_departures_only' (3270065) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resumed_change_zone_tail_suppression_uses_authoritative_records' (3270064) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility' (3269977) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resumed_change_zone_no_hush_duplicate_payoff_compatibility' (3270063) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::single_departure_after_world_observes_ability_removal_source_leaving' (3270114) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::sequential_destroy_instructions_bind_separate_before_worlds' (3270110) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:309:9:",
+    "thread 'trigger_suppression_event_timing::two_target_destroy_owns_one_event_in_both_target_orders' (3270119) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:339:13:",
+    "thread 'trigger_suppression_event_timing::two_suppression_controllers_and_between_event_control_rebind_are_distinct' (3270118) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::unpaused_change_zone_no_hush_payoff_remains_exactly_one' (3270123) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 67 passed; 24 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.59s"
+  ],
+  "finished": "2026-09-05T18:08:19.100889+00:00"
+}

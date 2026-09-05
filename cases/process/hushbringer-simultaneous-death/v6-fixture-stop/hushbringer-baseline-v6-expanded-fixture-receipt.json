@@ -1,0 +1,6 @@
+{
+  "active_test_sha256": "02173f4932e98a745e6fb5950b665aa3532e5361cfd271782602fcfec71c312e",
+  "baseline_test_sha256": "ff07d4b130b01271b2bd1b5fdf4756fc0eb8013b9899c650125ba72383f0062d",
+  "transformation": "Only assert_snapshot becomes a documented no-op and field-presence guards become true because baseline has no event snapshot field. All payoff/zone/ordering/lifetime assertions remain unchanged. Baseline receipt does not claim snapshot-field validation.",
+  "initial_test_preserved": "/home/ubuntu/coworld-migration-20260904/hushbringer-baseline-v6-initial-test-module.rs"
+}

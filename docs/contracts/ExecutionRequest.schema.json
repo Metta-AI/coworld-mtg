@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutionRequest",
+  "type": "object",
+  "properties": {
+    "corpus_path": {
+      "type": "string"
+    },
+    "corpus_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "protocol": {
+      "$ref": "#/$defs/ProtocolVersion"
+    },
+    "scenario": {
+      "$ref": "#/$defs/Scenario"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "corpus_path",
+    "corpus_sha256",
+    "scenario"
+  ],
+  "$defs": {
+    "CardZone": {
+      "type": "string",
+      "enum": [
+        "hand",
+        "library",
+        "battlefield",
+        "graveyard",
+        "exile",
+        "stack",
+        "command"
+      ]
+    },
+    "CastFinish": {
+      "type": "string",
+      "enum": [
+        "commit",
+        "resolve"
+      ]
+    },
+    "Mana": {
+      "type": "string",
+      "enum": [
+        "white",
+        "blue",
+        "black",
+        "red",
+        "green",
+        "colorless"
+      ]
+    },
+    "Operation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "card": {
+              "type": "string"
+            },
+            "finish": {
+              "$ref": "#/$defs/CastFinish"
+            },
+            "kind": {
+              "type": "string",
+              "const": "cast"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Target"
+              }
+            },
+            "x": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "default": null,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "card",
+            "targets",
+            "finish"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "pass_priority"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "resolve_stack"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    "PlacedCard": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/$defs/Seat"
+        },
+        "plus_one_counters": {
+          "type": "integer",
+          "format": "uint32",
+          "default": 0,
+          "minimum": 0
+        },
+        "tapped": {
+          "type": "boolean",
+          "default": false
+        },
+        "zone": {
+          "$ref": "#/$defs/CardZone"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "name",
+        "owner",
+        "zone"
+      ]
+    },
+    "ProtocolVersion": {
+      "type": "string",
+      "enum": [
+        "coworld-improvement-v1"
+      ]
+    },
+    "Scenario": {
+      "type": "object",
+      "properties": {
+        "cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlacedCard"
+          }
+        },
+        "life": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "mana": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/Mana"
+            }
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Operation"
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "seed",
+        "life",
+        "mana",
+        "cards",
+        "operations"
+      ]
+    },
+    "Seat": {
+      "type": "string",
+      "enum": [
+        "player",
+        "opponent"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "player"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "object"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "label"
+          ]
+        }
+      ]
+    }
+  }
+}

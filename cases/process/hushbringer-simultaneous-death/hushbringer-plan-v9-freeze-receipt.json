@@ -1,0 +1,62 @@
+{
+  "status": "frozen_full_plan_for_fresh_full_review_not_implementation_approval",
+  "created_utc": "2026-09-05T16:58:59.352381+00:00",
+  "plan": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-v9.md",
+  "plan_sha256": "1e2c3adde42263f56fc9a25c7745854f4a5426ae4d2c25eda36f4f6fb0c3613f",
+  "plan_bytes": 197388,
+  "plan_lines": 752,
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "all_remote_actions_via": "ssh nishadsingh-box-4",
+  "planner_engine_or_test_source_edits": false,
+  "planner_builds_or_tests": false,
+  "planner_commits_pushes_or_child_agents": false,
+  "input_sha256": {
+    "hushbringer-plan-v8.md": "a9a0b06254700faab85996d1ddfbbbbceabc2a57a35034f89a0531f7ffe179be",
+    "hushbringer-plan-review-v8.md": "bf09a3332792afc1667b74e17d11c41aa7f78c5bca30097be39916a4381bc8e0",
+    "hushbringer-implementation-tests-v7.md": "52456b23142de241fdb299e43d691f3dcb63127a43a51a2f09d5929ed309d71a",
+    "hushbringer-implementation-production-v6.md": "350f5acc8fd75ec3069d971cc075546f3f3f172eaef03957529809bb32710604",
+    "hushbringer-tests-v7-final-partial-receipt.json": "0e0b00af0cb605871bbed6d864d000135c6b6aaaeebb70e545058bd3b330ce0e",
+    "hushbringer-production-final-partial-receipt-v7.json": "032dc925ab0487e3e14c90c1e2aa93711d634f5f3498fa74d5ffff7d5db47d07",
+    "hushbringer-production-final-partial-source-v7.json": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+    "hushbringer-plan-v9-oracle-evidence.json": "646cc7112d1117ba0dc0a1170476685db02d2f74888bce0e170bcec114ae65a3",
+    "hushbringer-root-baseline-components-v7-receipt.json": "1be63a03cf2f6feddf01b73077e0dfdf56cba1e2de3a63acd98a21db6cdfa9c5",
+    "hushbringer-root-baseline-components-v7-components.log": "5d5d8007cbcc4e5b04f57cecb826cb5e5de4e6c485379667f72db3ac272ce850",
+    "hushbringer-root-baseline-library-v7-receipt.json": "7c4fbd545b6ec439a3046a4e5e8f40ee2a2234374270eff6681d4554292e6ec0",
+    "hushbringer-root-baseline-oversimplify-v7-receipt.json": "3bc057fc3cbbcc5f33ef3da7f614a0afba1bf3d16dabf90ff48bfabeaed12fd4",
+    "hushbringer-root-full-engine-v7-receipt.json": "66cf3b1921cdc5392caec88c05c48aefad632f250b920a05ce8c20b059d9b1c0",
+    "hushbringer-root-integration-v7-receipt.json": "cc558a89f34735d327e548e92d4d8ad15a2c1ad89d864089e13ce8d93690aed6"
+  },
+  "complete_joint_archive": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-final-joint-source.tar.gz",
+    "sha256": "e252079cbab8be1d0f1ffdf0c06856e59c4bef1afbf613ce1d7de84128dc1622"
+  },
+  "source_preservation": {
+    "manifest_sha256": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+    "files_checked": 2051,
+    "changed_or_missing": []
+  },
+  "v8_table_preservation": {
+    "old_rows": 125,
+    "new_rows": 151,
+    "missing_old_rows": []
+  },
+  "dispositions": {
+    "R1": "Authorized actions bypass only component layout validation after actor authorization; existing permission gates and payment refusal preserved.",
+    "R2": "Concrete same-bound-object/incarnation redirect-to-same-zone then terminal SelfRef sacrifice path; actual parent peer and child None assertions fail wrapper-only mutation.",
+    "R3": "Four named old tests retain original expectations using registered P/T/control effects; exact test-only Oversimplify scope, public companions and four old-seam mutations required."
+  },
+  "actual_unresolved_design_decisions": [],
+  "remaining_execution_gates": [
+    "fresh independent full v9 plan review",
+    "retained deferred component implementation and R1 correction",
+    "all R2/R3 reaching fixtures and original production overlays",
+    "complete retained active and desired matrices including tracked-set producer/empty-choice and OneOf shape guard",
+    "all isolated seam mutations including Augment and added mid-leaf flush plus R1/R2/R3",
+    "full Phase format/check/library/integration and required suites",
+    "independent implementation review",
+    "root clean candidate build/commit and frozen worker acceptance twice"
+  ],
+  "acceptance_claimed": false,
+  "production_pin_modified": false
+}

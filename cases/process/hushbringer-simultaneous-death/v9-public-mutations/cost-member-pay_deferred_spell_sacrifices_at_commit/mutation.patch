@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -1862,15 +1862,9 @@
+             |state, events, owner| {
+                 for selection in component {
+                     let id = selection.object_id;
+-                    match crate::game::zones::with_departure_member(
+-                        state,
+-                        events,
+-                        owner,
+-                        id,
+-                        |state, events| {
++                    match (|| {
+                             super::sacrifice::sacrifice_permanent(state, id, player, events)
+-                        },
+-                    )
++                        })()
+                     .map_err(|e| EngineError::InvalidAction(format!("{e}")))?
+                     {
+                         super::sacrifice::SacrificeOutcome::Complete => {}

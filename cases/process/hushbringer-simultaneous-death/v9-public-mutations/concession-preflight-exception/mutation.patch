@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/engine.rs
++++ b/crates/engine/src/game/engine.rs
+@@ -248,7 +248,6 @@
+         && !matches!(
+             action,
+             GameAction::CancelCast
+-                | GameAction::Concede { .. }
+                 | GameAction::Debug(_)
+                 | GameAction::GrantDebugPermission { .. }
+                 | GameAction::RevokeDebugPermission { .. }

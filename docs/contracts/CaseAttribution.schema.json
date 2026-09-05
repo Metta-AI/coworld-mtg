@@ -1,0 +1,1278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CaseAttribution",
+  "type": "object",
+  "properties": {
+    "acceptance": {
+      "$ref": "#/$defs/AcceptanceDecision"
+    },
+    "baseline": {
+      "$ref": "#/$defs/EvaluationReceipt"
+    },
+    "baseline_execution": {
+      "$ref": "#/$defs/ExecutionEvidence"
+    },
+    "candidate": {
+      "$ref": "#/$defs/EvaluationReceipt"
+    },
+    "candidate_execution": {
+      "$ref": "#/$defs/ExecutionEvidence"
+    },
+    "case": {
+      "$ref": "#/$defs/CaseSpec"
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AttributedGate"
+      }
+    },
+    "plan": {
+      "$ref": "#/$defs/AcceptancePlan"
+    },
+    "protocol": {
+      "$ref": "#/$defs/ProtocolVersion"
+    },
+    "repair": {
+      "$ref": "#/$defs/RepairProvenance"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewRecord"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "case",
+    "plan",
+    "baseline",
+    "candidate",
+    "baseline_execution",
+    "candidate_execution",
+    "gates",
+    "repair",
+    "review",
+    "acceptance"
+  ],
+  "$defs": {
+    "AcceptanceDecision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "baseline_receipt_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "candidate_receipt_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "gate_receipt_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "accepted"
+            },
+            "plan_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "review_id": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "plan_id",
+            "baseline_receipt_id",
+            "candidate_receipt_id",
+            "gate_receipt_ids",
+            "review_id"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "rejected"
+            },
+            "reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reasons"
+          ]
+        }
+      ]
+    },
+    "AcceptancePlan": {
+      "description": "Freeze this plan before repair. Hold-outs are separately selected cases, not a pass count.",
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "holdout_case_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sha256"
+          }
+        },
+        "regression_case_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sha256"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "regression_case_ids",
+        "holdout_case_ids"
+      ]
+    },
+    "Assertion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "predicate": {
+          "$ref": "#/$defs/Predicate"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "predicate"
+      ]
+    },
+    "AttributedGate": {
+      "type": "object",
+      "properties": {
+        "case": {
+          "$ref": "#/$defs/CaseSpec"
+        },
+        "receipt": {
+          "$ref": "#/$defs/EvaluationReceipt"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "case",
+        "receipt"
+      ]
+    },
+    "CardZone": {
+      "type": "string",
+      "enum": [
+        "hand",
+        "library",
+        "battlefield",
+        "graveyard",
+        "exile",
+        "stack",
+        "command"
+      ]
+    },
+    "CaseOrigin": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "authored"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "artifacts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            },
+            "explanation": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "evidence"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "artifacts",
+            "explanation"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "derived"
+            },
+            "parent_case_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "transformation": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "parent_case_id",
+            "transformation"
+          ]
+        }
+      ]
+    },
+    "CaseSpec": {
+      "type": "object",
+      "properties": {
+        "assertions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Assertion"
+          }
+        },
+        "author": {
+          "type": "string"
+        },
+        "guards": {
+          "description": "Establish that the intended behavior was reached before judging its result.",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Assertion"
+          }
+        },
+        "justification": {
+          "$ref": "#/$defs/Justification"
+        },
+        "origin": {
+          "$ref": "#/$defs/CaseOrigin"
+        },
+        "scenario": {
+          "$ref": "#/$defs/Scenario"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "author",
+        "justification",
+        "scenario",
+        "assertions"
+      ]
+    },
+    "CastFinish": {
+      "type": "string",
+      "enum": [
+        "commit",
+        "resolve"
+      ]
+    },
+    "CheckResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "satisfied"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assertion_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "violated"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "assertion_ids"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "inconclusive"
+            },
+            "reason": {
+              "$ref": "#/$defs/IncompleteReason"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reason"
+          ]
+        }
+      ]
+    },
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "statement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "reference",
+        "statement"
+      ]
+    },
+    "EvaluationReceipt": {
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "checker_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "corpus_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "evidence_sha256": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sha256"
+          }
+        },
+        "protocol": {
+          "$ref": "#/$defs/ProtocolVersion"
+        },
+        "repeatability": {
+          "$ref": "#/$defs/Repeatability"
+        },
+        "result": {
+          "$ref": "#/$defs/CheckResult"
+        },
+        "worker_sha256": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "case_id",
+        "corpus_sha256",
+        "worker_sha256",
+        "checker_sha256",
+        "evidence_sha256",
+        "repeatability",
+        "result"
+      ]
+    },
+    "ExecutionEvidence": {
+      "type": "object",
+      "properties": {
+        "binary_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "declared_phase_revision": {
+          "description": "Workspace declaration only; overrides are identified by the binary and build record.",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/ExecutionOutcome"
+        },
+        "protocol": {
+          "$ref": "#/$defs/ProtocolVersion"
+        },
+        "request_id": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "request_id",
+        "binary_sha256",
+        "declared_phase_revision",
+        "outcome"
+      ]
+    },
+    "ExecutionOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "completed"
+            },
+            "observation": {
+              "$ref": "#/$defs/Observation"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/StepEvidence"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "observation",
+            "steps"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "inconclusive"
+            },
+            "reason": {
+              "$ref": "#/$defs/IncompleteReason"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reason"
+          ]
+        }
+      ]
+    },
+    "IncompleteReason": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "unresolved_card"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "name"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "invalid_scenario"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "driver_failed"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "worker_budget"
+            },
+            "seconds": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seconds"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "worker_failed"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "invalid_evidence"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "repeated_execution_diverged"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "guard_not_reached"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assertion_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "missing_observation"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "assertion_id"
+          ]
+        }
+      ]
+    },
+    "Justification": {
+      "description": "Observation-only cases cannot enter the acceptance gate.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "citations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Citation"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "rules"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "citations"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "invariant"
+            },
+            "specification": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "specification"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assumptions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "observation"
+            },
+            "source_sha256": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "source_sha256",
+            "assumptions"
+          ]
+        }
+      ]
+    },
+    "Mana": {
+      "type": "string",
+      "enum": [
+        "white",
+        "blue",
+        "black",
+        "red",
+        "green",
+        "colorless"
+      ]
+    },
+    "ObjectObservation": {
+      "type": "object",
+      "properties": {
+        "cast_spell_offered_to": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Seat"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "object_id": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "owner": {
+          "$ref": "#/$defs/Seat"
+        },
+        "plus_one_counters": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "prepared": {
+          "type": "boolean"
+        },
+        "tapped": {
+          "type": "boolean"
+        },
+        "zone": {
+          "$ref": "#/$defs/CardZone"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "object_id",
+        "name",
+        "owner",
+        "zone",
+        "tapped",
+        "plus_one_counters",
+        "prepared",
+        "cast_spell_offered_to"
+      ]
+    },
+    "Observation": {
+      "type": "object",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0
+          }
+        },
+        "life": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "objects": {
+          "description": "Includes tokens and copies, sorted by engine object ID. JSON object keys remain strings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ObjectObservation"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "life",
+        "objects",
+        "labels"
+      ]
+    },
+    "Operation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "card": {
+              "type": "string"
+            },
+            "finish": {
+              "$ref": "#/$defs/CastFinish"
+            },
+            "kind": {
+              "type": "string",
+              "const": "cast"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Target"
+              }
+            },
+            "x": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "default": null,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "card",
+            "targets",
+            "finish"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "pass_priority"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "resolve_stack"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    "PlacedCard": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/$defs/Seat"
+        },
+        "plus_one_counters": {
+          "type": "integer",
+          "format": "uint32",
+          "default": 0,
+          "minimum": 0
+        },
+        "tapped": {
+          "type": "boolean",
+          "default": false
+        },
+        "zone": {
+          "$ref": "#/$defs/CardZone"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "name",
+        "owner",
+        "zone"
+      ]
+    },
+    "Predicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "kind": {
+              "type": "string",
+              "const": "life"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "$ref": "#/$defs/CardZone"
+            },
+            "kind": {
+              "type": "string",
+              "const": "zone"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "const": "tapped"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "kind": {
+              "type": "string",
+              "const": "plus_one_counters"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "const": "prepared"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "const": "offered_cast_spell"
+            },
+            "object": {
+              "type": "string"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "seat",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "kind": {
+              "type": "string",
+              "const": "zone_count"
+            },
+            "name": {
+              "type": "string"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            },
+            "zone": {
+              "$ref": "#/$defs/CardZone"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat",
+            "zone",
+            "name",
+            "equals"
+          ]
+        }
+      ]
+    },
+    "ProtocolVersion": {
+      "type": "string",
+      "enum": [
+        "coworld-improvement-v1"
+      ]
+    },
+    "RepairProvenance": {
+      "type": "object",
+      "properties": {
+        "base_revision": {
+          "type": "string"
+        },
+        "baseline_build_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "candidate_build_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "patch_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "base_revision",
+        "revision",
+        "patch_sha256",
+        "baseline_build_sha256",
+        "candidate_build_sha256"
+      ]
+    },
+    "Repeatability": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "diverged",
+        "inconclusive"
+      ]
+    },
+    "ReviewDecision": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "reject"
+      ]
+    },
+    "ReviewRecord": {
+      "description": "A review attestation, not a cryptographic identity claim. The operator owns reviewer trust.",
+      "type": "object",
+      "properties": {
+        "baseline_receipt_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "candidate_receipt_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "decision": {
+          "$ref": "#/$defs/ReviewDecision"
+        },
+        "plan_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "reviewer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "plan_id",
+        "baseline_receipt_id",
+        "candidate_receipt_id",
+        "reviewer",
+        "rationale",
+        "decision"
+      ]
+    },
+    "Scenario": {
+      "type": "object",
+      "properties": {
+        "cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlacedCard"
+          }
+        },
+        "life": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "mana": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/Mana"
+            }
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Operation"
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "seed",
+        "life",
+        "mana",
+        "cards",
+        "operations"
+      ]
+    },
+    "Seat": {
+      "type": "string",
+      "enum": [
+        "player",
+        "opponent"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "StepEvidence": {
+      "type": "object",
+      "properties": {
+        "operation_index": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "state_sha256": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "operation_index",
+        "state_sha256"
+      ]
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "player"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "object"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "label"
+          ]
+        }
+      ]
+    }
+  }
+}

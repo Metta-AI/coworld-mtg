@@ -1,0 +1,16 @@
+--- a/crates/engine/src/game/filter.rs
++++ b/crates/engine/src/game/filter.rs
+@@ -1494,11 +1494,11 @@
+         });
+         if still_on_battlefield {
+             matches_target_filter(state, *object_id, filter, ctx)
+-        } else if let Some(lki) = state.lki_cache.get(object_id) {
++        } else if let Some(_lki) = state.lki_cache.get(object_id) {
+             // CR 608.2h: the entrant has left the battlefield — evaluate against
+             // its exit-time LKI (the most-recently-existed battlefield
+             // characteristics, snapshotted before the base revert).
+-            matches_target_filter_on_lki_snapshot(state, *object_id, lki, filter, ctx)
++            matches_target_filter(state, *object_id, filter, ctx)
+         } else {
+             // No exit LKI cached (defensive — a battlefield exit always caches
+             // one). Use the zone-change record rather than the reverted live

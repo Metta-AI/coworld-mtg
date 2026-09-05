@@ -1,0 +1,59 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "partial-test-executor-handoff",
+  "description": "Incomplete validation, not acceptance. See report for pending gates and exact historical source retention limit.",
+  "artifacts": [
+    {
+      "path": "hushbringer-implementation-tests-v6.md",
+      "sha256": "580d2faeac2681c7cfe37573912177b040a3c0b1e0f97b40bec9321c55b1ae50"
+    },
+    {
+      "path": "hushbringer-tests-v6-final-partial-receipt.json",
+      "sha256": "0bb932d04feada0c1a0aa5e770489afa8a208c0f6dc5027fb025665c044335e4"
+    },
+    {
+      "path": "hushbringer-tests-v6-final-partial-module.rs",
+      "sha256": "eeaf1a4c2802cd1747d7482a4c47897a724e358f873f1a1d22da6615de87cebe"
+    },
+    {
+      "path": "hushbringer-tests-v6-final-partial-main.rs",
+      "sha256": "3c9de72738baaf5c2f4009a282f309776661182bc806b2be3483b212a3208438"
+    },
+    {
+      "path": "hushbringer-baseline-v6.log",
+      "sha256": "3bc666ab3b9ce2b75e8034363d5b92b7d2f977b65a03bb12a1de0a1a00ed12d9"
+    },
+    {
+      "path": "hushbringer-active-tests-v6-attempt-4.log",
+      "sha256": "dd0bb6077008a61d45665c467b9a8cdbdb84730af80231e2f3e8b1328a67a119"
+    },
+    {
+      "path": "hushbringer-baseline-expanded-v6-attempt-1.log",
+      "sha256": "c0131a1d848a11e19685b1e696b3b661c84f823b17464ff6d9537a8634e36884"
+    },
+    {
+      "path": "hushbringer-independent-cost-v6.log",
+      "sha256": "2a9dfae4d000597f4df8bfab9122e7e359c5dd99ebff43477bb140bf6e30f351"
+    },
+    {
+      "path": "hushbringer-independent-cost-v6-attempt-2.log",
+      "sha256": "e4ac2df2eb02be23cb626c69e9ac9b863f08d4d7c65e5e8be48f4801ac43c6dd"
+    },
+    {
+      "path": "hushbringer-independent-library-v6.log",
+      "sha256": "fca5b94f8b6bacc90babc5769d4159eda0c006d6a0ce3659fbdac0f0ff47aaf3"
+    },
+    {
+      "path": "hushbringer-production-private-v6.log",
+      "sha256": "8539289917eb12886b59b4f80f30b1191f60f46e82e519cdfb6723e95cd36e82"
+    },
+    {
+      "path": "hushbringer-production-serde-v6.log",
+      "sha256": "993f3dbc1439def20053b84d7eeb5445cdf51bf9e2c41d333981b6493a60f3a5"
+    },
+    {
+      "path": "hushbringer-tests-cr-audit-v6.txt",
+      "sha256": "00f3c2fed80f6fdecda3834a0136f621d0275d222705b41b49498b4dbc037730"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+--- a/crates/engine/src/game/effects/change_zone.rs
++++ b/crates/engine/src/game/effects/change_zone.rs
+@@ -1571,12 +1571,7 @@
+                 // control" effects.
+                 // CR 122.1 + CR 122.1h: each object enters with the resolved counters
+                 // (e.g. a finality counter on Shilgengar's mass return).
+-                match crate::game::zones::with_departure_member(
+-                    state,
+-                    events,
+-                    owner,
+-                    obj_id,
+-                    |state, events| {
++                match (|| {
+                         execute_zone_move(
+                             state,
+                             obj_id,
+@@ -1594,8 +1589,7 @@
+                             None,
+                             events,
+                         )
+-                    },
+-                ) {
++                    })() {
+                     ZoneMoveResult::Done => {
+                         moved_count += 1;
+                         // CR 400.7 + CR 608.2c: Track hand-origin exiles separately so

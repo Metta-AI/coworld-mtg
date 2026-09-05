@@ -1,0 +1,19 @@
+{
+  "id": "component-serde-drop",
+  "file": "crates/engine/src/types/game_state.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "old": "    #[serde(default, skip_serializing_if = \"Option::is_none\")]\n    pub component: Option<DeferredSacrificeComponentId>,",
+      "new": "    #[serde(skip)]\n    pub component: Option<DeferredSacrificeComponentId>,"
+    }
+  ],
+  "tests": [
+    "deferred_components_identical_filters_serde_and_both_finalizers",
+    "deferred_components_mixed_cardinalities_keep_exact_peers"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "destroy-resolve_all",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::co_departed_observer_and_self_trigger_both_use_before_suppression' (3279369) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::clause_local_disjunction_registers_once_for_eligible_sibling' (3279368) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::controller_relative_and_conditional_suppression_bind_before_departure' (3279372) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2300:13:",
+    "thread 'trigger_suppression_event_timing::delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener' (3279385) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::delayed_same_occurrence_tries_eligible_alternative_exactly_once' (3279388) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::from_anywhere_and_dies_observers_choose_different_worlds' (3279399) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death' (3279430) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:135:5:",
+    "thread 'trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death' (3279431) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:135:5:",
+    "thread 'trigger_suppression_event_timing::haunt_payoff_uses_the_linked_subject_death_before_world' (3279402) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+    "thread 'trigger_suppression_event_timing::repeated_object_id_retains_distinct_incarnation_and_event_suppression' (3279442) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::unattach_fallback_and_native_cause_remain_distinct' (3279463) panicked at crates/engine/src/game/scenario.rs:3353:9:"
+  ],
+  "summary": [
+    "test result: FAILED. 80 passed; 11 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.52s"
+  ],
+  "finished": "2026-09-05T18:10:03.030759+00:00"
+}

@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/engine.rs
++++ b/crates/engine/src/game/engine.rs
+@@ -254,7 +254,6 @@
+                 | GameAction::RevokeDebugPermission { .. }
+         )
+     {
+-        super::casting_costs::validate_pending_deferred_sacrifice_components(state)?;
+     }
+     // Snapshot the stopped priority decision before dispatch. A one-shot stop
+     // is consumed only after this exact authenticated in-band rules action

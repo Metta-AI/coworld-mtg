@@ -1,0 +1,90 @@
+{
+  "utc": "2026-09-05T02:24:56.079442+00:00",
+  "status": "bounded stop; introduced deferred Composite Hush-first payoff regression; no compatibility waiver",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "baseline_production_diff_empty": true,
+  "active_attempt4": {
+    "passed": 66,
+    "failed": 5,
+    "ignored": 20,
+    "extra_failure": "exploratory BF library choice fixture failed prompt assertion; corrected separately, final run pending"
+  },
+  "baseline_cost": {
+    "passed": 1,
+    "failed": 4,
+    "ignored": 0,
+    "cargo_summary": "finished test profile and complete failed test result persisted; SSH process returned255 Broken pipe after test completion, not trustworthy as Cargo exit code"
+  },
+  "baseline_full_include_ignored": {
+    "passed": 28,
+    "failed": 63,
+    "ignored": 0,
+    "command_exit": 101
+  },
+  "tuples": [
+    {
+      "mana": "deferred generic1",
+      "hush": false,
+      "traveler_first": false,
+      "desired_spirits": 1,
+      "baseline_spirits": 1,
+      "active_spirits": 1,
+      "desired_peers": "empty per component",
+      "baseline_peers": "each lists other component",
+      "active_peers": "each lists other component"
+    },
+    {
+      "mana": "deferred generic1",
+      "hush": false,
+      "traveler_first": true,
+      "desired_spirits": 1,
+      "baseline_spirits": 1,
+      "active_spirits": 1,
+      "desired_peers": "empty per component",
+      "baseline_peers": "each lists other component",
+      "active_peers": "each lists other component"
+    },
+    {
+      "mana": "deferred generic1",
+      "hush": true,
+      "traveler_first": false,
+      "desired_spirits": 1,
+      "baseline_spirits": 1,
+      "active_spirits": 0,
+      "desired_peers": "empty per component",
+      "baseline_peers": "each lists other component",
+      "active_peers": "each lists other component"
+    },
+    {
+      "mana": "deferred generic1",
+      "hush": true,
+      "traveler_first": true,
+      "desired_spirits": 0,
+      "baseline_spirits": 1,
+      "active_spirits": 0,
+      "desired_peers": "empty per component",
+      "baseline_peers": "each lists other component",
+      "active_peers": "each lists other component"
+    }
+  ],
+  "immediate_controls": "all four tuples pass baseline and active: no peers; Hush-first1, Traveler-first0, noHush1; victims/spell Graveyard and life22",
+  "source_archive_retention": "exact full source archive + per-file manifest + exact module + combined tracked diff retained for every v7 material compile/runtime attempt; no relabeling of v6 retention gap",
+  "artifacts_sha256": {
+    "hushbringer-v7-active-attempt-4/cargo.log": "e000c3d4b480b399fcc8e621385b56e45a9128fb2a338484c9cd1c34dd780b74",
+    "hushbringer-v7-active-attempt-4/combined.patch": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+    "hushbringer-v7-active-attempt-4/manifest.json": "cd3d072982a4ee5a74cc00abab1442efeee4e4dcea1f5447483292ed1aa30d25",
+    "hushbringer-v7-active-attempt-4/receipt.json": "001d04ee1d115c02a99c43dbb18e2d6bcb12e47e54ecf224aaae5ee414349165",
+    "hushbringer-v7-active-attempt-4/source.tar.gz": "765dcac3526bf4c59ac4f96de52e20886c28d71ce2cbcead96ecefe806fb41ee",
+    "hushbringer-v7-active-attempt-4/test-module.rs": "b4210811323eb15c76478db70bd974198d706ff356ee7e3d8efafca64736acd7",
+    "hushbringer-v7-baseline-attempt-1/cargo.log": "24563877abe35aeb1922a44a9fafbd7270484950782a8a5fc478126cb10ba75f",
+    "hushbringer-v7-baseline-attempt-1/combined.patch": "e44d8a99833a4b075a5568f45c66d6239554ec17b2abcfdd55b149661724c4c0",
+    "hushbringer-v7-baseline-attempt-1/full-include-ignored.log": "b3bbfbd0aa5b664ac6f5ba6183c744a65123da4a2540edadcd1224f6032babf1",
+    "hushbringer-v7-baseline-attempt-1/manifest.json": "35730986ac723b9ce4afc097f417a6bc8e3821d7cf921e1c6bf6a9a012097625",
+    "hushbringer-v7-baseline-attempt-1/receipt.json": "907286dc2fd7e403b5dfe984c7a0f274f50c9cac37ec602ba7ec99324b839040",
+    "hushbringer-v7-baseline-attempt-1/source.tar.gz": "214f864066635552ed4727cc4819eb7904fdfa3d78fc2311bd4b20590b5c25f1",
+    "hushbringer-v7-baseline-attempt-1/test-module.rs": "253b5d67f8f16804cd995d783e358cacb1543a57d9d6f096f4f51655fb4c054d",
+    "hushbringer-plan-v7.md": "e94553af94d7cc577cd548fc914fc560b16d0d2fb29c247371b5c9b3da411d27",
+    "hushbringer-plan-review-v7.md": "39d108c7271c75afbdef69bb7c417e6dbd01a4a66d7d4f1a98ba0a16d1f847d3",
+    "hushbringer-v7-baseline-overlay-transform.json": "aef0de5ef23fd980c8bf03594bc2be458d30e9d1b7cb3cf9f1abe34cb53d5753"
+  }
+}

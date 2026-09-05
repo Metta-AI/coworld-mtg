@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "cargo",
+    "fmt",
+    "--all",
+    "--check"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3",
+  "env": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+    "RUST_TEST_THREADS": "1"
+  },
+  "source_manifest_sha256": "d667c425a996d5f6ee1be01b74fb05358bfd1fbc5d14ede631b2057d6095cd52",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+  "utc_start": "2026-09-05T18:33:24.536719+00:00"
+}

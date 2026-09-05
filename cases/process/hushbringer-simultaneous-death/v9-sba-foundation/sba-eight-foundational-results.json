@@ -1,0 +1,1061 @@
+{
+  "utc": "2026-09-05T19:02:10.037445+00:00",
+  "scope": "Foundational frozen v9 production plus original isolated overlay-1, eight exact physical SBA member-wrapper mutations",
+  "rows": [
+    {
+      "id": "sba-check_zero_toughness",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/outcome.json",
+      "outcome_sha256": "2d963156ebf1a1f84427d24a3dfbc557faef81ced5e035bcce8675fdffa928f2",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "8220e8eaf068459dc24fcef935eb828a9bbb96b993524c3b74f8e636e4e7ddaf"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "67a39337cee2d6ea79556a95189530b760bdecc5e749afc6ed9eb97f6ae63f17"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "4d5c0f4877600df2a56f89d7e3a128cd6aec88098e6a37a8e5ca624616b03608"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "126e751fe8bd2c2bb18fcf4d97aedc99f7ca27f1d75f622438bde397464ea97e"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "848d90a07adb0c5e3ceeed6dbf25508c3c1f85863dfd24df2b71402509a3ab83"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "67a39337cee2d6ea79556a95189530b760bdecc5e749afc6ed9eb97f6ae63f17"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "126e751fe8bd2c2bb18fcf4d97aedc99f7ca27f1d75f622438bde397464ea97e",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "fresh Cargo compilation"
+    },
+    {
+      "id": "sba-check_lethal_damage",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/outcome.json",
+      "outcome_sha256": "37b46d745b1529e50c4ab74c0c33cbebf99b5737b1db70aedcd4952c64df6107",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "3b88953efcb3c966a8953e5ccd9d7d86394dd71b5c2daf94e9474e53e7854337"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "12d38c0c06b164d3de61dd97720e48507474fa2d04df949c473d9957d9a3d4c1"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "776b100969de8540d8ed2159f659bc463879fdc6dd6c5b18d83456768b3610fe"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "f8750af4be9fe0c1a175e63b94ec03bc38f927823fe7453d17e56c52d4181681"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "561f90c3b556b29a2176d9b448ece4aa7cc3ff4e314eba39550fc19cced8444a"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "12d38c0c06b164d3de61dd97720e48507474fa2d04df949c473d9957d9a3d4c1"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "f8750af4be9fe0c1a175e63b94ec03bc38f927823fe7453d17e56c52d4181681",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "fresh Cargo compilation"
+    },
+    {
+      "id": "sba-check_unattached_auras",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/outcome.json",
+      "outcome_sha256": "ff87dea75c808993549232c0f2a33de9b6543e103852b726f98d92aafe847a64",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "3a64b9b26c9a407dd09c62cff378e1595e25af01c00596844db7e8b22ba2a000"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "00ef65b52bde85a5ac7f019c9ff1b801c47b03b28d3b07fbfc6424fdfbbc0da2"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "3f6596b6e11924045e563fa2e9e9bdafebcba58c988a67e1ff5bd4cbe084e5ad"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "425a91194d14006abf247966fd3e266ef7c3ccc627467ab36dbf906d205fc19e"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "10f776fd74a0379fc6bda65a305d6911bb565d8b1ade5ae94659846c5576911b"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "00ef65b52bde85a5ac7f019c9ff1b801c47b03b28d3b07fbfc6424fdfbbc0da2"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "425a91194d14006abf247966fd3e266ef7c3ccc627467ab36dbf906d205fc19e",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "fresh Cargo compilation"
+    },
+    {
+      "id": "sba-check_role_uniqueness",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/outcome.json",
+      "outcome_sha256": "bfe4adc2270c6aa5e088cd030c0f8bbb3e7f41ab770478892ec49d05be2d166d",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "a6a63f4b1399129e33e76983803431be8eb75ff60db9286ae913ec5c9a420748"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "77c0a72065fc9a4fa623c039b37e3a48a8119967445da2e39e43888944ae9ae6"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "df2428f656853ac1ab7f40c9123d64ea4141e2f1888c379de0a07bba1098dc93"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "03ae6829c4a072e6a94804df633da63a9236fab0f8e7d1dc81c407f4274d0b6e"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "41813c13ef1b978ff291c5b024bd1ae2fff04a9dc38dbffeac372cd258b8c19a"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "77c0a72065fc9a4fa623c039b37e3a48a8119967445da2e39e43888944ae9ae6"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "03ae6829c4a072e6a94804df633da63a9236fab0f8e7d1dc81c407f4274d0b6e",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "fresh Cargo compilation"
+    },
+    {
+      "id": "sba-check_world_rule",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/outcome.json",
+      "outcome_sha256": "3fdf54718813c5dad93358e9efcc46486caca001796fbe4a6dfddb9f3ea84ad8",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "7c2ae108ba7399eb406c30577484bda22d2013e6922a1ba062b645201a39035a"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "ead48d4cd5e08075ee51cde2c8993db5424f66e5a8a906617b5b5e4859974923"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "661f7b9a565df6dd0b170ad7b2d37285ecadc30e0318cd46b801b93758121b15"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "86a8169811837176a09c137e6791b625e6305790fec19581d49e994f2ed0ca7a"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "9a8571f95baf2d4195ae7ea627bb5b489f31b42d48cedf392a1446d10bbfe11e"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "ead48d4cd5e08075ee51cde2c8993db5424f66e5a8a906617b5b5e4859974923"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "86a8169811837176a09c137e6791b625e6305790fec19581d49e994f2ed0ca7a",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "fresh Cargo compilation"
+    },
+    {
+      "id": "sba-check_zero_loyalty",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/outcome.json",
+      "outcome_sha256": "4785277fc79e8051ae5943308918b243d8ea82486222306487566ad4c8ef2c88",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "c2674f7f2ce85ca91acc8c27d23eb177b6eada0cab1c77ff2ab884b48c282ed4"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "4650b1d2e147365d5b7e81a7e0c0ddbb1a53ef27069513312c748cc0922584ea"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "cb8717a6f0efed905e952fe8d1d9cf02a514128deae3efe7f40050936572dcca"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "cfad6f7eaf3f7a7f9d4c2dbc04d3a3080d8d0da4d42e2e5fce8378b0c2bc84fd"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "143a318f88a244fc21e66008b93328a6d69efddccc8569ad0bbdea9a2c6a57a4"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "4650b1d2e147365d5b7e81a7e0c0ddbb1a53ef27069513312c748cc0922584ea"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "cfad6f7eaf3f7a7f9d4c2dbc04d3a3080d8d0da4d42e2e5fce8378b0c2bc84fd",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "fresh Cargo compilation"
+    },
+    {
+      "id": "sba-check_zero_defense",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/outcome.json",
+      "outcome_sha256": "68c194e46693105d5c72b4c0b164c6e57a12ad0dce2eb250e40d26b036f0790a",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "ec48f480ff710517558cb479a43b66899514a3c83eee0a695a55ad2b38febbf5"
+          },
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+              "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "ec610dc114c065c9d4860ca091daf1cab7b2af9f0605516c7be920ccee352e05"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "213d74c4b34d2414c845fd65c705020e21002e474c4a04b6141b4796e315c78b"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "bba9fdc40dc59d6cf62e4f17ef50e6d165cf20e645bb86bbabe12342b1edb9c2"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "453978564620f7aa007dd722155276dc03abcfa9e5e148a8c860f3e309d0e177"
+          },
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+              "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "ec610dc114c065c9d4860ca091daf1cab7b2af9f0605516c7be920ccee352e05"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "bba9fdc40dc59d6cf62e4f17ef50e6d165cf20e645bb86bbabe12342b1edb9c2",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "reused_canonical_executable_no_compile"
+    },
+    {
+      "id": "sba-check_saga_sacrifice",
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/outcome.json",
+      "outcome_sha256": "a7ea3260d86035c7499c1e9e879d64cf4fa828bb5ec5b19e2429e21af213c550",
+      "phases": {
+        "baseline": [
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "ac5436779514c995c1bf984773219ce0c5a2882ec473403ed0195cda15932f43"
+          },
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+              "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "840e3eaac37317cd4a94b0807619b129d9646b0a6dceccb924321bc96f38cb4e"
+          }
+        ],
+        "mutant": [
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "93accd1df2a4d70abb91523945f0975f2abb2488d9cddd3273f5e936cb34ece7"
+          },
+          {
+            "command": [
+              "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+              "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 101,
+            "log_sha256": "de684f88e78d96bcd69402f8eda1d6fc7ed825134a56ea8a6836a617dcb3052f"
+          }
+        ],
+        "restored": [
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+              "game::sba::tests",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "02565705359a28fc345281d547e430d3e43189ac3645f7093f8c4b0fe34d9b3d"
+          },
+          {
+            "command": [
+              "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+              "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+              "--nocapture"
+            ],
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "exit": 0,
+            "log_sha256": "840e3eaac37317cd4a94b0807619b129d9646b0a6dceccb924321bc96f38cb4e"
+          }
+        ]
+      },
+      "mutant_failure_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/public/command.log",
+      "mutant_failure_log_sha256": "de684f88e78d96bcd69402f8eda1d6fc7ed825134a56ea8a6836a617dcb3052f",
+      "actual_failed_tuple": {
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "baseline_restored_tuples": "All eight tuples are looped inside this one named test invocation; all pass. They are not independent test invocations.",
+      "restoration_mode": "reused_canonical_executable_no_compile"
+    }
+  ],
+  "source_overlay": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/proposals/overlay-1.json",
+  "source_overlay_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "qualifications": [
+    "No public zero-choice battle-protector claim.",
+    "Mutant stops at first false-order co-dying payoff assertion; reversed mutant/control loops after that panic were not executed.",
+    "V10 requires independent tuple invocations, additional explicit branch/incarnation/post-action probes, and exported mutant records. These original overlay-1 receipts do not certify those expanded fixtures or future active-source adoption."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "independent-debug-preflight-exceptions",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_invalid_checkpoints_preserve_independent_preferences_and_debug_gates' (3409168) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4924:9:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.44s"
+  ],
+  "finished": "2026-09-05T19:02:02.046703+00:00"
+}

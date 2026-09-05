@@ -1,0 +1,16 @@
+{
+  "id": "after-world-flush",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins' (3372229) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:276:5:",
+    "thread 'trigger_suppression_event_timing::standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice' (3372280) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:276:5:",
+    "thread 'trigger_suppression_event_timing::single_departure_after_world_observes_ability_removal_source_leaving' (3372279) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:276:5:"
+  ],
+  "summary": [
+    "test result: FAILED. 88 passed; 3 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.38s"
+  ],
+  "finished": "2026-09-05T18:48:04.784972+00:00"
+}

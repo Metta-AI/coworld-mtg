@@ -1,0 +1,17 @@
+{
+  "id": "components-filter-grouping",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_identical_filters_serde_and_both_finalizers' (3359754) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4574:21:",
+    "thread 'trigger_suppression_event_timing::deferred_components_mixed_cardinalities_keep_exact_peers' (3359759) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4638:29:",
+    "thread 'trigger_suppression_event_timing::deferred_components_legacy_and_malformed_refuse_then_cancel_reannounce' (3359758) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4738:9:",
+    "thread 'trigger_suppression_event_timing::deferred_components_surviving_suppressor_and_failed_mana_retry_keep_provenance' (3359761) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5574:13:"
+  ],
+  "summary": [
+    "test result: FAILED. 87 passed; 4 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.04s"
+  ],
+  "finished": "2026-09-05T18:42:52.760482+00:00"
+}

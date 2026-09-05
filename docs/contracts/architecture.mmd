@@ -1,0 +1,11 @@
+flowchart LR
+    Author -->|CaseSpec| Coordinator
+    Coordinator -->|ExecutionRequest| PhaseWorker
+    PhaseWorker -->|ExecutionEvidence| Coordinator
+    Coordinator -->|EvaluationReceipt| EvidenceStore
+    Reducer -->|ReductionReceipt| EvidenceStore
+    Operator -->|AcceptancePlan| Coordinator
+    Reviewer -->|ReviewRecord| Coordinator
+    Coordinator -->|AcceptanceDecision| EvidenceStore
+    Builder -->|BuildRecord| Coordinator
+    Coordinator -->|CaseAttribution| CaseLibrary

@@ -1,0 +1,19 @@
+{
+  "id": "concession-preflight-exception",
+  "file": "crates/engine/src/game/engine.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "apply_action_boundary_with_stack_limit",
+      "old": "                | GameAction::Concede { .. }\n",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "deferred_components_invalid_checkpoints_preserve_concession_and_actor_authority"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReviewRecord",
+  "description": "A review attestation, not a cryptographic identity claim. The operator owns reviewer trust.",
+  "type": "object",
+  "properties": {
+    "baseline_receipt_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "candidate_receipt_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "decision": {
+      "$ref": "#/$defs/ReviewDecision"
+    },
+    "plan_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "reviewer": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "plan_id",
+    "baseline_receipt_id",
+    "candidate_receipt_id",
+    "reviewer",
+    "rationale",
+    "decision"
+  ],
+  "$defs": {
+    "ReviewDecision": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "reject"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

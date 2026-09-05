@@ -1,0 +1,19 @@
+{
+  "id": "component-binding-distinct-invocation",
+  "file": "crates/engine/src/game/casting_costs.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "handle_sacrifice_for_cost",
+      "old": "u64::try_from(pending.deferred_sacrificed_permanents.len())",
+      "new": "u64::try_from(0_usize)"
+    }
+  ],
+  "tests": [
+    "deferred_components_identical_filters_serde_and_both_finalizers"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

@@ -1,0 +1,29 @@
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-hushbringer-baseline-tests/crates/engine)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 34.11s
+     Running tests/integration/main.rs (/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/integration-7bdd4945820186df)
+
+running 3 tests
+
+thread 'trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death' (3055470) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:83:5:
+assertion `left == right` failed: simultaneous-death-suppressed; hush_first=true
+  left: 1
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit ... ok
+test trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death ... FAILED
+
+thread 'trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death' (3055471) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:83:5:
+assertion `left == right` failed: simultaneous-death-suppressed; hush_first=false
+  left: 1
+ right: 0
+test trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death ... FAILED
+
+failures:
+
+failures:
+    trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death
+    trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death
+
+test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 2978 filtered out; finished in 0.16s
+
+error: test failed, to rerun pass `-p engine --test integration`

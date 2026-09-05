@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -801,7 +801,6 @@
+         {
+             state.departure_suppression_scope.boundary_flushes.1 += 1;
+         }
+-        super::layers::flush_layers(state);
+         super::trigger_suppression::active_suppress_trigger_statics(state)
+     });
+     let group: Vec<ObjectId> = frame.emitted.iter().map(|key| key.object_id).collect();

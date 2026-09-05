@@ -1,0 +1,11 @@
+--- a/crates/engine/src/types/game_state.rs
++++ b/crates/engine/src/types/game_state.rs
+@@ -2306,7 +2306,7 @@
+ pub struct DeferredSacrificeSelection {
+     pub object_id: ObjectId,
+     pub filter: TargetFilter,
+-    #[serde(default, skip_serializing_if = "Option::is_none")]
++    #[serde(skip)]
+     pub component: Option<DeferredSacrificeComponentId>,
+ }
+ 

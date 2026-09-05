@@ -1,0 +1,40 @@
+{
+  "utc": "2026-09-05T16:35:30.024230+00:00",
+  "head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "production_diff_empty": true,
+  "target": "/home/ubuntu/repos/phase-hushbringer-baseline-tests/target",
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::triggers::tests::zone_change_object_condition_",
+        "--",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "command_exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-root-baseline-library-v7-lki.log",
+      "log_sha256": "8752d54cea4477f7c8b8552a16ba71b0b421754c595d6b439521fd2978a8fb40"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::effects::tests::bounce_followup_draws_when_caster_controlled_parent_target",
+        "--",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "command_exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-root-baseline-library-v7-bounce.log",
+      "log_sha256": "964638b7149ed36d9b57e21e14db4f7b00e64caa2c32bfe328cc7e601c532104"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "title": "Young Pyromancer keeps the token from a countered spell",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/tdc/95/young-pyromancer",
+        "reference": "Ruling 2021-03-19; CR 603.2",
+        "statement": "The cast-triggered ability survives the countering of the spell that triggered it."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "red"
+      ],
+      [
+        "blue",
+        "blue"
+      ]
+    ],
+    "cards": [
+      {
+        "label": "pyromancer",
+        "name": "Young Pyromancer",
+        "owner": "player",
+        "zone": "battlefield"
+      },
+      {
+        "label": "shock",
+        "name": "Shock",
+        "owner": "player",
+        "zone": "hand"
+      },
+      {
+        "label": "counter",
+        "name": "Counterspell",
+        "owner": "opponent",
+        "zone": "hand"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "shock",
+        "targets": [
+          {
+            "kind": "player",
+            "seat": "opponent"
+          }
+        ],
+        "finish": "commit"
+      },
+      {
+        "kind": "pass_priority"
+      },
+      {
+        "kind": "cast",
+        "card": "counter",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "shock"
+          }
+        ],
+        "finish": "resolve"
+      },
+      {
+        "kind": "resolve_stack"
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "counter-finished",
+      "predicate": {
+        "kind": "zone",
+        "object": "counter",
+        "equals": "graveyard"
+      }
+    },
+    {
+      "id": "shock-countered",
+      "predicate": {
+        "kind": "zone",
+        "object": "shock",
+        "equals": "graveyard"
+      }
+    },
+    {
+      "id": "shock-did-not-resolve",
+      "predicate": {
+        "kind": "life",
+        "seat": "opponent",
+        "equals": 20
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "cast-trigger-survives",
+      "predicate": {
+        "kind": "zone_count",
+        "seat": "player",
+        "zone": "battlefield",
+        "name": "Elemental",
+        "equals": 1
+      }
+    }
+  ]
+}

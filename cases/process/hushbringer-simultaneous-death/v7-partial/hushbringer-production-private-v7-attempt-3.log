@@ -1,0 +1,14 @@
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-verifiable-loop/crates/engine)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 53.98s
+     Running unittests src/lib.rs (target/debug/deps/engine-444923dba8f143d6)
+
+running 6 tests
+test game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members ... ok
+test game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences ... ok
+test game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return ... ok
+test game::zones::tests::departure_scope_standalone_after_world_is_final_at_each_leaf_return ... ok
+test game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip ... ok
+test game::zones::tests::departure_scope_natural_replacement_pause_and_resume_restore_empty_stacks ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 16578 filtered out; finished in 0.01s
+

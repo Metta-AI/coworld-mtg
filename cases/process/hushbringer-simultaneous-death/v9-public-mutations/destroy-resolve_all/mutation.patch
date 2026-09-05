@@ -1,0 +1,26 @@
+--- a/crates/engine/src/game/effects/destroy.rs
++++ b/crates/engine/src/game/effects/destroy.rs
+@@ -367,12 +367,7 @@
+         &matching,
+         |state, events, owner| {
+             for &obj_id in &matching {
+-                let paused = crate::game::zones::with_departure_member(
+-                    state,
+-                    events,
+-                    owner,
+-                    obj_id,
+-                    |state, events| {
++                let paused = (|| {
+                         let proposed = ProposedEvent::Destroy {
+                             object_id: obj_id,
+                             source: Some(ability.source_id),
+@@ -394,8 +389,7 @@
+                             }
+                         }
+                         false
+-                    },
+-                );
++                    })();
+                 if paused {
+                     return true;
+                 }

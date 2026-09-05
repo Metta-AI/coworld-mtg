@@ -1,0 +1,40 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "build-isolation-correction",
+  "description": "Phase checks exposed stale artifact reuse across active/baseline checkouts sharing a target. The worker builder now uses a distinct output/target per invocation. Both comparison workers must be rebuilt with this same revised builder; original checker/case/corpus/plan stay unchanged. This record is not acceptance.",
+  "artifacts": [
+    {
+      "path": "builder-after.py",
+      "sha256": "6a96deecaf9ad7355731d698678675b22e12f4b3e1a5b5dcc2ec9d59ab40ebb7"
+    },
+    {
+      "path": "builder-before.py",
+      "sha256": "1e9b0a93760089fe52d7751fce331d4b7a553110b09f8cc366d132285269ee63"
+    },
+    {
+      "path": "stale-artifact-compile.log",
+      "sha256": "54ca94d1d6265872fb5f966d54bdd763740d2c4f1da2ee0d366bff7ffe59278a"
+    },
+    {
+      "path": "isolated-baseline-build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "isolated-baseline-build.json",
+      "sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff"
+    },
+    {
+      "path": "isolated-baseline-campaign.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "isolated-baseline-campaign.log",
+      "sha256": "919b7b8a5de30701c4dfaca4d0257a365f6a28001a2f03d0cb955d889a261a80"
+    },
+    {
+      "path": "isolated-baseline-verification.json",
+      "sha256": "a2011cdc41661dc41c46f2aca9ea0e61a025217ac5b9a17bcacd96f712eadbd2"
+    }
+  ],
+  "verification": "The rebuilt baseline completed successfully; the preserved checker verified all ten receipts, with nine satisfied and the unchanged target violated. Campaign exit1 is the expected retained violation, not a build failure."
+}

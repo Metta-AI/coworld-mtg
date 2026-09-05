@@ -1,0 +1,19 @@
+--- a/crates/engine/src/game/filter.rs
++++ b/crates/engine/src/game/filter.rs
+@@ -1486,12 +1486,10 @@
+         // a different object for this trigger and routes to the original exit LKI
+         // below. `entered_incarnation == None` (legacy/defensive records) falls
+         // back to the zone-only check.
+-        let still_on_battlefield = state.objects.get(object_id).is_some_and(|obj| {
+-            obj.zone == Zone::Battlefield
+-                && record
+-                    .entered_incarnation
+-                    .is_none_or(|inc| obj.incarnation == inc)
+-        });
++        let still_on_battlefield = state
++            .objects
++            .get(object_id)
++            .is_some_and(|obj| obj.zone == Zone::Battlefield);
+         if still_on_battlefield {
+             matches_target_filter(state, *object_id, filter, ctx)
+         } else if let Some(lki) = state.lki_cache.get(object_id) {

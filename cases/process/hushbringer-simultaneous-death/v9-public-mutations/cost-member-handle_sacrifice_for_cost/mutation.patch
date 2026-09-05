@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -2080,15 +2080,9 @@
+         |state, events, owner| {
+             // Sacrifice each chosen permanent
+             for &id in chosen {
+-                crate::game::zones::with_departure_member(
+-                    state,
+-                    events,
+-                    owner,
+-                    id,
+-                    |state, events| {
++                (|| {
+                         super::sacrifice::sacrifice_permanent(state, id, player, events)
+-                    },
+-                )
++                    })()
+                 .map_err(|e| EngineError::InvalidAction(format!("{e}")))?;
+             }
+ 

@@ -1,0 +1,17 @@
+--- a/crates/engine/src/game/augment.rs
++++ b/crates/engine/src/game/augment.rs
+@@ -200,13 +200,7 @@
+         // graveyard zone change, so it must use the same replacement-aware
+         // authority as the other SBA moves. A parked CR 616 choice is resumed
+         // by the SBA fixpoint after the player chooses.
+-        let paused = crate::game::zones::with_departure_member(
+-            state,
+-            events,
+-            owner,
+-            object_id,
+-            |state, events| move_to_graveyard_via_pipeline(state, object_id, events),
+-        );
++        let paused = (|| move_to_graveyard_via_pipeline(state, object_id, events))();
+         if paused {
+             return;
+         }

@@ -1,0 +1,1146 @@
+{
+  "rows": [
+    {
+      "id": "augment-handoff",
+      "file": "crates/engine/src/game/augment.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_standalone_augment_permanents",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "augment_subject_preserves_the_sba_owner_and_co_departed_observer_payoff"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "destroy-resolve",
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "resolve",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "two_target_destroy_owns_one_event_in_both_target_orders"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "destroy-resolve_all",
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "resolve_all",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "keep-sweep",
+      "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "sacrifice_unchosen",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "completed_keep_sacrifice_sweeps_share_one_boundary_across_choice_routes"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "change-zone-resolve",
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "resolve",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "remaining_complete_producers_capture_each_actual_group"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "change-zone-resolve_all",
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "resolve_all",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "remaining_complete_producers_capture_each_actual_group"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "shared-batch-delivery",
+      "file": "crates/engine/src/game/zone_pipeline.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "deliver_batch",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "unpaused_bounce_batch_and_selected_bounce_share_actual_departure_group"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "resumed-change-zone",
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "drain_pending_change_zone_iteration",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "resumed_change_zone_tail_suppression_uses_authoritative_records"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "all-eligible-sacrifice",
+      "file": "crates/engine/src/game/effects/sacrifice.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "resolve",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "remaining_complete_producers_capture_each_actual_group"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "player-scope-sacrifice",
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "perform_player_scope_sacrifices",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "remaining_complete_producers_capture_each_actual_group"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "choice-sacrifice",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "handle_resolution_choice",
+          "marker": "super::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "natural_effect_zone_choice_finalizes_before_chained_hush_departure"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "choice-change-bounce",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "handle_resolution_choice",
+          "marker": "super::zones::with_departure_member",
+          "index": 1
+        }
+      ],
+      "tests": [
+        "change_zone_choice_uses_selected_objects_and_finalizes_before_continuation"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "choice-pay-cost",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "handle_resolution_choice",
+          "marker": "super::zones::with_departure_member",
+          "index": 5
+        }
+      ],
+      "tests": [
+        "effect_zone_choice_pay_cost_uses_selected_group_before_continuation"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "cost-member-handle_sacrifice_for_cost",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "handle_sacrifice_for_cost",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "multi_object_spell_sacrifice_cost_preserves_commit_and_suppression"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "cost-member-pay_deferred_spell_sacrifices_at_commit",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "pay_deferred_spell_sacrifices_at_commit",
+          "marker": "crate::game::zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "deferred_components_mixed_cardinalities_keep_exact_peers"
+      ],
+      "kind": "public",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_zero_toughness",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_zero_toughness",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_lethal_damage",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_lethal_damage",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_unattached_auras",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_unattached_auras",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_role_uniqueness",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_role_uniqueness",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_world_rule",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_world_rule",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_zero_loyalty",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_zero_loyalty",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_zero_defense",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_zero_defense",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_battle_protector",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_battle_protector",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "sba-check_saga_sacrifice",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_saga_sacrifice",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        "game::sba::tests"
+      ],
+      "kind": "sba-library",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "components-whole-queue",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "pay_deferred_spell_sacrifices_at_commit",
+          "old": ".chunk_by(|a, b| a.component == b.component)",
+          "new": ".chunk_by(|_, _| true)"
+        }
+      ],
+      "tests": [
+        "deferred_components_identical_filters_serde_and_both_finalizers",
+        "deferred_components_mixed_cardinalities_keep_exact_peers"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "components-singleton",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "pay_deferred_spell_sacrifices_at_commit",
+          "old": ".chunk_by(|a, b| a.component == b.component)",
+          "new": ".chunks(1)"
+        }
+      ],
+      "tests": [
+        "deferred_components_identical_filters_serde_and_both_finalizers",
+        "deferred_components_mixed_cardinalities_keep_exact_peers"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "components-filter-grouping",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "pay_deferred_spell_sacrifices_at_commit",
+          "old": ".chunk_by(|a, b| a.component == b.component)",
+          "new": ".chunk_by(|a, b| a.filter == b.filter)"
+        }
+      ],
+      "tests": [
+        "deferred_components_identical_filters_serde_and_both_finalizers",
+        "deferred_components_mixed_cardinalities_keep_exact_peers"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "component-guard-normal-finalizer",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "finalize_mana_payment",
+          "old": "    if let Some(pending) = state.pending_cast.as_ref() {\n        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n    }\n\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt"
+      ],
+      "kind": "component-library",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "component-guard-phyrexian-finalizer",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "finalize_mana_payment_with_phyrexian_choices",
+          "old": "    if let Some(pending) = state.pending_cast.as_ref() {\n        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n    }\n\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "deferred_component_phyrexian_finalizer_guard_precedes_payment"
+      ],
+      "kind": "component-library",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "component-guard-append",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "handle_sacrifice_for_cost",
+          "old": "    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection"
+      ],
+      "kind": "component-library",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "owner-finalization",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_suppression",
+          "old": "    finish_departure_suppression(state, events, frame);\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "repeated_object_id_retains_distinct_incarnation_and_event_suppression"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "after-world-flush",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "finish_departure_suppression",
+          "old": "        super::layers::flush_layers(state);\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins",
+        "standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "haunt-adapter",
+      "file": "crates/engine/src/game/haunt.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "match_haunted_creature_dies",
+          "old": "        && !super::trigger_suppression::death_suppressed_before(state, record)\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "haunt_payoff_uses_the_linked_subject_death_before_world"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "unattach-adapter",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "match_unattach",
+          "old": "                && (*to != Zone::Graveyard\n                    || !super::trigger_suppression::death_suppressed_before(state, record))",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "unattach_fallback_and_native_cause_remain_distinct"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "component-binding-distinct-invocation",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "handle_sacrifice_for_cost",
+          "old": "u64::try_from(pending.deferred_sacrificed_permanents.len())",
+          "new": "u64::try_from(0_usize)"
+        }
+      ],
+      "tests": [
+        "deferred_components_identical_filters_serde_and_both_finalizers"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "component-serde-drop",
+      "file": "crates/engine/src/types/game_state.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "old": "    #[serde(default, skip_serializing_if = \"Option::is_none\")]\n    pub component: Option<DeferredSacrificeComponentId>,",
+          "new": "    #[serde(skip)]\n    pub component: Option<DeferredSacrificeComponentId>,"
+        }
+      ],
+      "tests": [
+        "deferred_components_identical_filters_serde_and_both_finalizers",
+        "deferred_components_mixed_cardinalities_keep_exact_peers"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "inline-migration-preflight",
+      "file": "crates/engine/src/game/engine.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "apply_action_boundary_with_stack_limit",
+          "old": "        super::casting_costs::validate_pending_deferred_sacrifice_components(state)?;\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "deferred_components_inline_legacy_rejects_before_discard"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "concession-preflight-exception",
+      "file": "crates/engine/src/game/engine.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "apply_action_boundary_with_stack_limit",
+          "old": "                | GameAction::Concede { .. }\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "deferred_components_invalid_checkpoints_preserve_concession_and_actor_authority"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "independent-debug-preflight-exceptions",
+      "file": "crates/engine/src/game/engine.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "apply_action_boundary_with_stack_limit",
+          "old": "                | GameAction::Debug(_)\n                | GameAction::GrantDebugPermission { .. }\n                | GameAction::RevokeDebugPermission { .. }\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "deferred_components_invalid_checkpoints_preserve_independent_preferences_and_debug_gates"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "normal-leaf-authority",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "move_to_zone",
+          "old": "    with_departure_leaf(state, events, object_id, to, |state, events, binding| {\n        move_to_zone_inner(state, object_id, to, events, binding);\n    });",
+          "new": "    move_to_zone_inner(state, object_id, to, events, None);"
+        }
+      ],
+      "tests": [
+        "standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "library-leaf-authority",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "move_to_library_at_index",
+          "old": "    with_departure_leaf(\n        state,\n        events,\n        object_id,\n        Zone::Library,\n        |state, events, binding| {\n            move_to_library_at_index_inner(state, object_id, index, events, binding);\n        },\n    );",
+          "new": "    move_to_library_at_index_inner(state, object_id, index, events, None);"
+        }
+      ],
+      "tests": [
+        "dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins",
+        "library_position_choice_and_targeted_leaf_preserve_non_death_events"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "added-mid-leaf-flush",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "move_to_zone_inner",
+          "old": "    // CR 111.8: A token that has left the battlefield can't move to another zone",
+          "new": "    super::layers::flush_layers(state);\n    // CR 111.8: A token that has left the battlefield can't move to another zone"
+        }
+      ],
+      "tests": [
+        "first_departing_granter_preserves_later_member_types_and_trigger"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "before-clause-gate",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "zone_change_clause_matches",
+          "old": "            OriginConstraint::Equals(Zone::Battlefield) => {\n                super::trigger_suppression::death_suppressed_before(state, record)\n            }",
+          "new": "            OriginConstraint::Equals(Zone::Battlefield) => false,"
+        }
+      ],
+      "tests": [
+        "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "any-clause-after-to-before",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "zone_change_clause_matches",
+          "old": "!self_arrival && super::trigger_suppression::death_suppressed_after(state, record)",
+          "new": "!self_arrival && super::trigger_suppression::death_suppressed_before(state, record)"
+        }
+      ],
+      "tests": [
+        "from_anywhere_and_dies_observers_choose_different_worlds",
+        "delayed_same_occurrence_tries_eligible_alternative_exactly_once"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "ambiguous-origin-before-misclassification",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "zone_change_clause_matches",
+          "old": "                legacy_death_suppressors.is_some_and(|active| {\n                    super::trigger_suppression::legacy_death_suppressed(state, record, active)\n                })",
+          "new": "                super::trigger_suppression::death_suppressed_before(state, record)"
+        }
+      ],
+      "tests": [
+        "ordinary_ambiguous_origins_preserve_live_collection_compatibility",
+        "ambiguous_delayed_primary_alternative_co_death_and_identity_compatibility"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "ambiguous-origin-after-approximation",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "zone_change_clause_matches",
+          "old": "                legacy_death_suppressors.is_some_and(|active| {\n                    super::trigger_suppression::legacy_death_suppressed(state, record, active)\n                })",
+          "new": "                super::trigger_suppression::death_suppressed_after(state, record)"
+        }
+      ],
+      "tests": [
+        "ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "delayed-ambiguous-live-gate",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "match_changes_zone",
+          "old": "match_changes_zone_with_context(event, trigger, source_id, state, None)",
+          "new": "match_changes_zone_with_context(event, trigger, source_id, state, Some(&super::trigger_suppression::active_suppress_trigger_statics(state)))"
+        }
+      ],
+      "tests": [
+        "ambiguous_registered_delayed_matchers_preserve_ungated_compatibility",
+        "ambiguous_delayed_primary_alternative_co_death_and_identity_compatibility"
+      ],
+      "kind": "public",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "record-snapshot-serde-drop",
+      "file": "crates/engine/src/types/game_state.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "old": "    #[serde(default, skip_serializing_if = \"Option::is_none\")]\n    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,",
+          "new": "    #[serde(skip)]\n    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,"
+        }
+      ],
+      "tests": [
+        "zone_change_suppression_preserves_missing_empty_and_captured_history"
+      ],
+      "kind": "schema-library",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "owner-allocator-reset",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_suppression",
+          "old": "    reset_departure_allocator(state);\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "departure_scope_"
+      ],
+      "kind": "scope-library",
+      "description": null,
+      "status": "planned; no mutation executed",
+      "transformation_dry_run": "source pattern matched"
+    },
+    {
+      "id": "ordinary-adapter",
+      "file": "crates/engine/src/game/triggers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "collect_matching_triggers_inner",
+          "old": "super::trigger_matchers::match_for_ordinary_collection(\n                matcher,\n                event,\n                trig_def,\n                obj_id,\n                state,\n                active_suppress_triggers,\n            )",
+          "new": "matcher(event, trig_def, obj_id, state)"
+        }
+      ],
+      "tests": [
+        "ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+      ],
+      "kind": "public",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "batched-adapter",
+      "file": "crates/engine/src/game/triggers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "matching_batched_trigger_events",
+          "old": "super::trigger_matchers::match_for_ordinary_collection(\n                matcher,\n                candidate,\n                trig_def,\n                obj_id,\n                state,\n                active_suppress_triggers,\n            )",
+          "new": "matcher(candidate, trig_def, obj_id, state)"
+        }
+      ],
+      "tests": [
+        "ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+      ],
+      "kind": "public",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "ordinary-global-death-gate",
+      "file": "crates/engine/src/game/triggers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "collect_pending_triggers",
+          "old": "etb_event_is_suppressed_cached(state, event, &active_suppress_triggers)",
+          "new": "super::trigger_suppression::event_is_suppressed_by_static_triggers_cached(state, event, &active_suppress_triggers)"
+        }
+      ],
+      "tests": [
+        "self_from_anywhere_exception_functions_in_destination_with_hush_surviving",
+        "clause_local_disjunction_registers_once_for_eligible_sibling"
+      ],
+      "kind": "public",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "batched-global-death-gate",
+      "file": "crates/engine/src/game/triggers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "matching_batched_trigger_events",
+          "old": "etb_event_is_suppressed_cached(state, candidate, active_suppress_triggers)",
+          "new": "super::trigger_suppression::event_is_suppressed_by_static_triggers_cached(state, candidate, active_suppress_triggers)"
+        }
+      ],
+      "tests": [
+        "self_from_anywhere_exception_functions_in_destination_with_hush_surviving",
+        "clause_local_disjunction_registers_once_for_eligible_sibling"
+      ],
+      "kind": "public",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "self-arrival-exception",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "zone_change_clause_matches",
+          "old": "!self_arrival && super::trigger_suppression::death_suppressed_after(state, record)",
+          "new": "super::trigger_suppression::death_suppressed_after(state, record)"
+        }
+      ],
+      "tests": [
+        "self_from_anywhere_exception_functions_in_destination_with_hush_surviving"
+      ],
+      "kind": "public",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "before-live-subject-authority",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "outcomes_for_live_subject",
+          "old": "super::filter::matches_target_filter(state, object_id, &suppressor.source_filter, &ctx)",
+          "new": "super::filter::matches_target_filter_on_zone_change_record(state, &state.objects[&object_id].snapshot_for_zone_change(object_id, Some(Zone::Battlefield), Zone::Graveyard), &suppressor.source_filter, &ctx)"
+        }
+      ],
+      "tests": [
+        "attachment_relative_suppression_binds_live_relation_before_departure",
+        "enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat"
+      ],
+      "kind": "public",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "scope-before-flush",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_suppression",
+          "old": "        super::layers::flush_layers(state);\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "departure_scope_"
+      ],
+      "kind": "scope-library",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "scope-capturing-ancestor-policy",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_suppression",
+          "old": "    let can_capture = !subjects.is_empty()\n        && !state\n            .departure_suppression_scope\n            .frames\n            .iter()\n            .any(|frame| frame.capture.is_some());",
+          "new": "    let can_capture = !subjects.is_empty();"
+        }
+      ],
+      "tests": [
+        "departure_scope_"
+      ],
+      "kind": "scope-library",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "leaf-top-barrier",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_leaf",
+          "old": "        .member_bindings\n        .last()\n        .copied()\n        .flatten()\n        .filter(|binding| Some(binding.subject) == subject);",
+          "new": "        .member_bindings\n        .iter()\n        .rev()\n        .find_map(|entry| *entry)\n        .filter(|binding| Some(binding.subject) == subject);"
+        }
+      ],
+      "tests": [
+        "departure_scope_"
+      ],
+      "kind": "scope-library",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "leaf-consumes-member",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_leaf",
+          "old": "        without_departure_member(state, events, |state, events| {\n            body(state, events, Some(binding))\n        });",
+          "new": "        body(state, events, Some(binding));"
+        }
+      ],
+      "tests": [
+        "departure_scope_"
+      ],
+      "kind": "scope-library",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "member-error-closure-pop",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_binding",
+          "old": "    state\n        .departure_suppression_scope\n        .member_bindings\n        .truncate(depth);\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        "departure_scope_"
+      ],
+      "kind": "scope-library",
+      "status": "planned; no mutation executed",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    }
+  ],
+  "note": "Initial concrete dry-run-matched inventory. R2/fourR3 belong to proposed independent subset. Add exact leaf, shared matcher, provenance binding/serde/preflight/Concede and lexical lifecycle variants before completing all obligations. Unkilled mutation is not evidence of a pass; it requires a meaningful reaching discriminator or source-proven reviewed classification."
+}

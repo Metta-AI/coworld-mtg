@@ -1,0 +1,19 @@
+{
+  "id": "independent-debug-preflight-exceptions",
+  "file": "crates/engine/src/game/engine.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "apply_action_boundary_with_stack_limit",
+      "old": "                | GameAction::Debug(_)\n                | GameAction::GrantDebugPermission { .. }\n                | GameAction::RevokeDebugPermission { .. }\n",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "deferred_components_invalid_checkpoints_preserve_independent_preferences_and_debug_gates"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "concession-preflight-exception",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_invalid_checkpoints_preserve_concession_and_actor_authority' (3403910) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4817:14:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.55s"
+  ],
+  "finished": "2026-09-05T19:00:24.937740+00:00"
+}

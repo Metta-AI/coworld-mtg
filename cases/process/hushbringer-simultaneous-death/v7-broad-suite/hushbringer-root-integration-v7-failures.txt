@@ -1,0 +1,48 @@
+
+failures:
+
+---- oversimplify_per_player_fractal::oversimplify_per_player_fractal_counters_match_exiled_power stdout ----
+
+thread 'oversimplify_per_player_fractal::oversimplify_per_player_fractal_counters_match_exiled_power' (3179523) panicked at crates/engine/tests/integration/oversimplify_per_player_fractal.rs:217:5:
+assertion `left == right` failed: P0's Fractal must enter with 5 +1/+1 counters (4+1 power exiled — the stolen 2/2 must NOT count for P0 since P1 controlled it at exile), got 7
+  left: 7
+ right: 5
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds stdout ----
+COST_COMPONENT_PROOF deferred=true with_hush=false traveler_first=false spirits=1 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds' (3180354) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+
+---- trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first stdout ----
+COST_COMPONENT_PROOF deferred=true with_hush=true traveler_first=false spirits=0 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":["EntersBattlefield","Dies"]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first' (3180355) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3174:5:
+assertion `left == right` failed
+  left: 0
+ right: 1
+
+---- trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed stdout ----
+COST_COMPONENT_PROOF deferred=true with_hush=false traveler_first=true spirits=1 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed' (3180356) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+
+---- trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first stdout ----
+COST_COMPONENT_PROOF deferred=true with_hush=true traveler_first=true spirits=0 expected=0 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":["EntersBattlefield","Dies"]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first' (3180357) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+
+
+failures:
+    oversimplify_per_player_fractal::oversimplify_per_player_fractal_counters_match_exiled_power
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first
+
+test result: FAILED. 3042 passed; 5 failed; 22 ignored; 0 measured; 0 filtered out; finished in 73.33s
+
+error: test failed, to rerun pass `-p engine --test integration`

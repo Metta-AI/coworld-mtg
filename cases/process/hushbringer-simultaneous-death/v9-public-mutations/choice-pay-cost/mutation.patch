@@ -1,0 +1,14 @@
+--- a/crates/engine/src/game/engine_resolution_choices.rs
++++ b/crates/engine/src/game/engine_resolution_choices.rs
+@@ -3719,9 +3719,9 @@
+                         &chosen_ids,
+                         |state, events, owner| {
+                             for (i, card_id) in chosen_ids.iter().enumerate() {
+-                                match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move(
++                                match (|| effects::change_zone::process_one_zone_move(
+                             state, &ctx, *card_id, events,
+-                        )) {
++                        ))() {
+                             effects::change_zone::ZoneMoveResult::Done => {
+                                 // CR 118.3: Populate the exile-link index map for cost-payment exile
+                                 if dest_zone == Zone::Exile {

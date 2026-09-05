@@ -1,0 +1,6 @@
+{
+  "exit": 127,
+  "reason": "SSH non-login PATH did not contain rustc; runner was written but no build started",
+  "correction": "export PATH=/home/ubuntu/.cargo/bin:$PATH in supervisor launch",
+  "test_evidence": false
+}

@@ -1,0 +1,68 @@
+   Compiling serde_core v1.0.228
+   Compiling libc v0.2.186
+   Compiling cfg-if v1.0.4
+   Compiling rustix v1.1.4
+   Compiling equivalent v1.0.2
+   Compiling getrandom v0.4.2
+   Compiling once_cell v1.21.4
+   Compiling hashbrown v0.17.1
+   Compiling serde v1.0.228
+   Compiling indexmap v2.14.0
+   Compiling zerocopy v0.8.48
+   Compiling getrandom v0.3.4
+   Compiling bitflags v2.11.1
+   Compiling typenum v1.20.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling bitmaps v2.1.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_core v0.9.5
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling winnow v0.7.15
+   Compiling memchr v2.8.0
+   Compiling toml_write v0.1.2
+   Compiling fastrand v2.4.1
+   Compiling rand_core v0.6.4
+   Compiling rand_xoshiro v0.6.0
+   Compiling toml_edit v0.22.27
+   Compiling tempfile v3.27.0
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-hushbringer-baseline-tests/crates/engine)
+   Compiling rand_chacha v0.9.0
+   Compiling sized-chunks v0.6.5
+   Compiling tracing-core v0.1.36
+   Compiling zmij v1.0.21
+   Compiling console v0.16.3
+   Compiling pin-project-lite v0.2.17
+   Compiling diff v0.1.13
+   Compiling fixedbitset v0.4.2
+   Compiling itoa v1.0.18
+   Compiling yansi v1.0.1
+   Compiling similar v2.7.0
+   Compiling pretty_assertions v1.4.1
+   Compiling serde_json v1.0.149
+   Compiling insta v1.47.2
+   Compiling petgraph v0.6.5
+   Compiling tracing v0.1.44
+   Compiling thiserror v2.0.18
+   Compiling toml v0.8.23
+   Compiling im v15.1.0
+   Compiling rand v0.9.4
+   Compiling strum v0.27.2
+   Compiling nom v8.0.0
+   Compiling smallvec v1.15.1
+   Compiling assert_matches v1.5.0
+   Compiling rustc-hash v2.1.2
+   Compiling web-time v1.1.0
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3m 58s
+     Running unittests src/lib.rs (target/debug/deps/engine-444923dba8f143d6)
+
+running 6 tests
+test game::triggers::tests::zone_change_object_condition_checks_entering_object_not_trigger_source ... ok
+test game::triggers::tests::zone_change_object_condition_checks_dead_object_snapshot ... ok
+test game::triggers::tests::zone_change_object_condition_checks_entering_token_identity ... ok
+test game::triggers::tests::zone_change_object_condition_entering_greater_pt_than_source ... ok
+test game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield ... ok
+test game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 16571 filtered out; finished in 0.01s
+

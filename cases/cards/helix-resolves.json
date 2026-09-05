@@ -1,0 +1,77 @@
+{
+  "title": "Lightning Helix gains life when its target remains legal",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/mkm/218/lightning-helix",
+        "reference": "Ruling 2024-02-02; CR 608.2b",
+        "statement": "If the only target becomes illegal, neither damage nor life gain occurs. With a legal target, both instructions occur."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "red",
+        "white"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "helix",
+        "name": "Lightning Helix",
+        "owner": "player",
+        "zone": "hand"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "helix",
+        "targets": [
+          {
+            "kind": "player",
+            "seat": "opponent"
+          }
+        ],
+        "finish": "resolve"
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "spell-resolved",
+      "predicate": {
+        "kind": "zone",
+        "object": "helix",
+        "equals": "graveyard"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "caster-gains-three",
+      "predicate": {
+        "kind": "life",
+        "seat": "player",
+        "equals": 23
+      }
+    },
+    {
+      "id": "target-takes-three",
+      "predicate": {
+        "kind": "life",
+        "seat": "opponent",
+        "equals": 17
+      }
+    }
+  ]
+}

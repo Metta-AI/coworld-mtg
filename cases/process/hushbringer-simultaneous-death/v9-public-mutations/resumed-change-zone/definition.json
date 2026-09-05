@@ -1,0 +1,19 @@
+{
+  "id": "resumed-change-zone",
+  "file": "crates/engine/src/game/effects/mod.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "drain_pending_change_zone_iteration",
+      "marker": "crate::game::zones::with_departure_member",
+      "index": 0
+    }
+  ],
+  "tests": [
+    "resumed_change_zone_tail_suppression_uses_authoritative_records"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

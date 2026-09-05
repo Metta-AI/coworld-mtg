@@ -1,0 +1,44 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.11s
+     Running tests/integration/main.rs (target/debug/deps/integration-7bdd4945820186df)
+
+running 5 tests
+COST_COMPONENT_PROOF deferred=true with_hush=true traveler_first=false spirits=1 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=true with_hush=false traveler_first=false spirits=1 expected=1 h_peers=[ObjectId
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first' (3187506) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3169:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+(note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2)] t_peers=[ObjectId(1)] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds' (3187505) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3169:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first ... FAILED
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds ... FAILED
+COST_COMPONENT_PROOF deferred=true with_hush=false traveler_first=true spirits=1 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed' (3187507) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3169:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed ... FAILED
+COST_COMPONENT_PROOF deferred=true with_hush=true traveler_first=true spirits=1 expected=0 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first' (3187508) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3164:5:
+assertion `left == right` failed
+  left: 1
+ right: 0
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first ... FAILED
+COST_COMPONENT_PROOF deferred=false with_hush=false traveler_first=false spirits=1 expected=1 h_peers=[] t_peers=[] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=false with_hush=false traveler_first=true spirits=1 expected=1 h_peers=[] t_peers=[] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=false with_hush=true traveler_first=false spirits=1 expected=1 h_peers=[] t_peers=[] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=false with_hush=true traveler_first=true spirits=0 expected=0 h_peers=[] t_peers=[] t_snapshot=null life=22 zones=[Graveyard, Graveyard, Graveyard]
+test trigger_suppression_event_timing::separate_spell_sacrifice_cost_components_bind_separate_worlds ... ok
+
+failures:
+
+failures:
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first
+
+test result: FAILED. 1 passed; 4 failed; 0 ignored; 0 measured; 3064 filtered out; finished in 0.24s
+
+error: test failed, to rerun pass `-p engine --test integration`

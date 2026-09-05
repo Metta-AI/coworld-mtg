@@ -1,0 +1,19 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -1439,15 +1439,7 @@
+     index: Option<usize>,
+     events: &mut Vec<GameEvent>,
+ ) {
+-    with_departure_leaf(
+-        state,
+-        events,
+-        object_id,
+-        Zone::Library,
+-        |state, events, binding| {
+-            move_to_library_at_index_inner(state, object_id, index, events, binding);
+-        },
+-    );
++    move_to_library_at_index_inner(state, object_id, index, events, None);
+ }
+ 
+ fn move_to_library_at_index_inner(

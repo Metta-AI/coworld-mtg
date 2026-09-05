@@ -1,0 +1,608 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CaseSpec",
+  "type": "object",
+  "properties": {
+    "assertions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Assertion"
+      }
+    },
+    "author": {
+      "type": "string"
+    },
+    "guards": {
+      "description": "Establish that the intended behavior was reached before judging its result.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Assertion"
+      }
+    },
+    "justification": {
+      "$ref": "#/$defs/Justification"
+    },
+    "origin": {
+      "$ref": "#/$defs/CaseOrigin"
+    },
+    "scenario": {
+      "$ref": "#/$defs/Scenario"
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "author",
+    "justification",
+    "scenario",
+    "assertions"
+  ],
+  "$defs": {
+    "Assertion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "predicate": {
+          "$ref": "#/$defs/Predicate"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "predicate"
+      ]
+    },
+    "CardZone": {
+      "type": "string",
+      "enum": [
+        "hand",
+        "library",
+        "battlefield",
+        "graveyard",
+        "exile",
+        "stack",
+        "command"
+      ]
+    },
+    "CaseOrigin": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "authored"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "artifacts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            },
+            "explanation": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "evidence"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "artifacts",
+            "explanation"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "derived"
+            },
+            "parent_case_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "transformation": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "parent_case_id",
+            "transformation"
+          ]
+        }
+      ]
+    },
+    "CastFinish": {
+      "type": "string",
+      "enum": [
+        "commit",
+        "resolve"
+      ]
+    },
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "statement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "reference",
+        "statement"
+      ]
+    },
+    "Justification": {
+      "description": "Observation-only cases cannot enter the acceptance gate.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "citations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Citation"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "rules"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "citations"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "invariant"
+            },
+            "specification": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "specification"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assumptions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "observation"
+            },
+            "source_sha256": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "source_sha256",
+            "assumptions"
+          ]
+        }
+      ]
+    },
+    "Mana": {
+      "type": "string",
+      "enum": [
+        "white",
+        "blue",
+        "black",
+        "red",
+        "green",
+        "colorless"
+      ]
+    },
+    "Operation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "card": {
+              "type": "string"
+            },
+            "finish": {
+              "$ref": "#/$defs/CastFinish"
+            },
+            "kind": {
+              "type": "string",
+              "const": "cast"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Target"
+              }
+            },
+            "x": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "default": null,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "card",
+            "targets",
+            "finish"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "pass_priority"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "resolve_stack"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    "PlacedCard": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/$defs/Seat"
+        },
+        "plus_one_counters": {
+          "type": "integer",
+          "format": "uint32",
+          "default": 0,
+          "minimum": 0
+        },
+        "tapped": {
+          "type": "boolean",
+          "default": false
+        },
+        "zone": {
+          "$ref": "#/$defs/CardZone"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "name",
+        "owner",
+        "zone"
+      ]
+    },
+    "Predicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "kind": {
+              "type": "string",
+              "const": "life"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "$ref": "#/$defs/CardZone"
+            },
+            "kind": {
+              "type": "string",
+              "const": "zone"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "const": "tapped"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "kind": {
+              "type": "string",
+              "const": "plus_one_counters"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "const": "prepared"
+            },
+            "object": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "const": "offered_cast_spell"
+            },
+            "object": {
+              "type": "string"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "object",
+            "seat",
+            "equals"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "equals": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "kind": {
+              "type": "string",
+              "const": "zone_count"
+            },
+            "name": {
+              "type": "string"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            },
+            "zone": {
+              "$ref": "#/$defs/CardZone"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat",
+            "zone",
+            "name",
+            "equals"
+          ]
+        }
+      ]
+    },
+    "Scenario": {
+      "type": "object",
+      "properties": {
+        "cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlacedCard"
+          }
+        },
+        "life": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "mana": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/Mana"
+            }
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Operation"
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "seed",
+        "life",
+        "mana",
+        "cards",
+        "operations"
+      ]
+    },
+    "Seat": {
+      "type": "string",
+      "enum": [
+        "player",
+        "opponent"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "player"
+            },
+            "seat": {
+              "$ref": "#/$defs/Seat"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seat"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "object"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "label"
+          ]
+        }
+      ]
+    }
+  }
+}

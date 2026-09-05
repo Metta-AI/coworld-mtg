@@ -1,0 +1,12 @@
+{
+  "id": "added-mid-leaf-flush",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::first_departing_granter_preserves_later_member_types_and_trigger' (3422637) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2257:13:"
+  ],
+  "summary": [],
+  "finished": "2026-09-05T19:07:37.510864+00:00"
+}

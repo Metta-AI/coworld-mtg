@@ -1,0 +1,23 @@
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-verifiable-loop/crates/engine)
+error[E0382]: use of moved value: `origin`
+    --> crates/engine/tests/integration/trigger_suppression_event_timing.rs:3482:40
+     |
+3472 |     for origin in [
+     |         ------
+     |         |
+     |         this reinitialization might get skipped
+     |         move occurs because `origin` has type `OriginConstraint`, which does not implement the `Copy` trait
+...
+3476 |         for perform in [false, true] {
+     |         ---------------------------- inside of this loop
+...
+3482 |                     death_trigger(vec![origin], specific(t)),
+     |                                        ^^^^^^ value moved here, in previous iteration of loop
+     |
+help: consider cloning the value if the performance cost is acceptable
+     |
+3482 |                     death_trigger(vec![origin.clone()], specific(t)),
+     |                                              ++++++++
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `engine` (test "integration") due to 1 previous error

@@ -1,0 +1,36 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "isolated-original-component-runtime-confirmation",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "original_production_diff_empty": true,
+  "target": "/home/ubuntu/repos/phase-hushbringer-baseline-tests/target",
+  "result": {
+    "passed": 1,
+    "failed": 4,
+    "ignored": 0,
+    "exit": 101
+  },
+  "meaning": "Fresh original compilation in a target used only by the baseline confirms the historical cost observations: deferred Hush-first1, Traveler-first1 despite desired0, false cross-component peers, and all immediate-control tuples correct. The old shared-target logs remain unchanged and separately labeled.",
+  "artifacts": [
+    {
+      "path": "hushbringer-root-baseline-components-v7.py",
+      "sha256": "7cb264fec88f8218995e0e7fa98465cffd12caa667da5ede642dab58c9038b7f"
+    },
+    {
+      "path": "hushbringer-root-baseline-components-v7-components.log",
+      "sha256": "5d5d8007cbcc4e5b04f57cecb826cb5e5de4e6c485379667f72db3ac272ce850"
+    },
+    {
+      "path": "hushbringer-root-baseline-components-v7-components.exit",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    {
+      "path": "hushbringer-root-baseline-components-v7-receipt.json",
+      "sha256": "1be63a03cf2f6feddf01b73077e0dfdf56cba1e2de3a63acd98a21db6cdfa9c5"
+    },
+    {
+      "path": "../v7-component-stop/hushbringer-v7-baseline-attempt-1/test-module.rs",
+      "sha256": "253b5d67f8f16804cd995d783e358cacb1543a57d9d6f096f4f51655fb4c054d"
+    }
+  ]
+}

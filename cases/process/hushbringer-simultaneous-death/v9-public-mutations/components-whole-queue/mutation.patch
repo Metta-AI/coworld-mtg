@@ -1,0 +1,11 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -1849,7 +1849,7 @@
+     // the members of one selected sacrifice action share its event boundary.
+     for component in pending
+         .deferred_sacrificed_permanents
+-        .chunk_by(|a, b| a.component == b.component)
++        .chunk_by(|_, _| true)
+     {
+         let candidates: Vec<_> = component
+             .iter()

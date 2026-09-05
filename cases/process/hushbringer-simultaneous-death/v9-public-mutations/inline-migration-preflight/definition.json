@@ -1,0 +1,19 @@
+{
+  "id": "inline-migration-preflight",
+  "file": "crates/engine/src/game/engine.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "apply_action_boundary_with_stack_limit",
+      "old": "        super::casting_costs::validate_pending_deferred_sacrifice_components(state)?;\n",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "deferred_components_inline_legacy_rejects_before_discard"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

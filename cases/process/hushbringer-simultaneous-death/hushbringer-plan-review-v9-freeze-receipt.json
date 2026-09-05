@@ -1,0 +1,80 @@
+{
+  "status": "CLEAN_FULL_PLAN_REVIEW_NOT_IMPLEMENTATION_ACCEPTANCE",
+  "created_utc": "2026-09-05T17:09:09.517798+00:00",
+  "blocking_findings": 0,
+  "material_findings": 0,
+  "review_mode": "fresh full review of entire frozen v9 plan; v8 findings are context only",
+  "reviewer": "/root/hushbringer_plan_review_v9",
+  "all_remote_actions_via": "ssh nishadsingh-box-4",
+  "report": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-review-v9.md",
+  "report_sha256": "b340c41d627e9068990ea4d37caba5111dd307cb7e43b42c6eb7116ffc84647a",
+  "report_bytes": 25730,
+  "report_lines": 156,
+  "plan": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-v9.md",
+  "plan_sha256": "1e2c3adde42263f56fc9a25c7745854f4a5426ae4d2c25eda36f4f6fb0c3613f",
+  "plan_freeze_receipt_sha256": "36aa05a0c5fb7961aef0eec3126994a97b6015218e2923efd07bc53f0c2de518",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "source_preservation": {
+    "manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-production-final-partial-source-v7.json",
+    "manifest_sha256": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+    "files_checked": 2051,
+    "changed_or_missing": [],
+    "tracked_binary_diff_sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+    "archive_sha256": "e252079cbab8be1d0f1ffdf0c06856e59c4bef1afbf613ce1d7de84128dc1622"
+  },
+  "plan_input_hash_checks": {
+    "checked": 14,
+    "mismatches": [],
+    "input_sha256": {
+      "hushbringer-plan-v8.md": "a9a0b06254700faab85996d1ddfbbbbceabc2a57a35034f89a0531f7ffe179be",
+      "hushbringer-plan-review-v8.md": "bf09a3332792afc1667b74e17d11c41aa7f78c5bca30097be39916a4381bc8e0",
+      "hushbringer-implementation-tests-v7.md": "52456b23142de241fdb299e43d691f3dcb63127a43a51a2f09d5929ed309d71a",
+      "hushbringer-implementation-production-v6.md": "350f5acc8fd75ec3069d971cc075546f3f3f172eaef03957529809bb32710604",
+      "hushbringer-tests-v7-final-partial-receipt.json": "0e0b00af0cb605871bbed6d864d000135c6b6aaaeebb70e545058bd3b330ce0e",
+      "hushbringer-production-final-partial-receipt-v7.json": "032dc925ab0487e3e14c90c1e2aa93711d634f5f3498fa74d5ffff7d5db47d07",
+      "hushbringer-production-final-partial-source-v7.json": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+      "hushbringer-plan-v9-oracle-evidence.json": "646cc7112d1117ba0dc0a1170476685db02d2f74888bce0e170bcec114ae65a3",
+      "hushbringer-root-baseline-components-v7-receipt.json": "1be63a03cf2f6feddf01b73077e0dfdf56cba1e2de3a63acd98a21db6cdfa9c5",
+      "hushbringer-root-baseline-components-v7-components.log": "5d5d8007cbcc4e5b04f57cecb826cb5e5de4e6c485379667f72db3ac272ce850",
+      "hushbringer-root-baseline-library-v7-receipt.json": "7c4fbd545b6ec439a3046a4e5e8f40ee2a2234374270eff6681d4554292e6ec0",
+      "hushbringer-root-baseline-oversimplify-v7-receipt.json": "3bc057fc3cbbcc5f33ef3da7f614a0afba1bf3d16dabf90ff48bfabeaed12fd4",
+      "hushbringer-root-full-engine-v7-receipt.json": "66cf3b1921cdc5392caec88c05c48aefad632f250b920a05ce8c20b059d9b1c0",
+      "hushbringer-root-integration-v7-receipt.json": "cc558a89f34735d327e548e92d4d8ad15a2c1ad89d864089e13ce8d93690aed6"
+    }
+  },
+  "v8_table_preservation": {
+    "old_rows": 125,
+    "new_rows": 151,
+    "missing_old_rows": []
+  },
+  "baseline_production_diff_empty": true,
+  "instructions_and_rules_sha256": {
+    "CLAUDE.md": "728c0a332f4bb922a3c48b46b33014bf44f82ea09f5cc5c092076449e4673b05",
+    "AGENTS.md": "728c0a332f4bb922a3c48b46b33014bf44f82ea09f5cc5c092076449e4673b05",
+    ".claude/skills/review-engine-plan/SKILL.md": "5a38518146e2af561706ec58ed15356bd31d5e706d29ad0bb0bf18fd8c3eb97a",
+    "docs/MagicCompRules.txt": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f"
+  },
+  "review_oracle_evidence": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-review-v9-oracle-evidence.json",
+  "review_oracle_evidence_sha256": "d68e767c1463155e5b70b173afb54880acc6c90cf939db54d6021227ed481141",
+  "v8_findings_disposition": {
+    "R1": "resolved in plan; actor authorization and lawful independent actions preserved",
+    "R2": "resolved in plan; exact production same-binding/incarnation wrapper-only discriminator",
+    "R3": "resolved in plan; original assertions, true fixture authority, old-seam mutations and public companions required"
+  },
+  "source_or_plan_edits": false,
+  "builds_or_tests_run": false,
+  "commits_or_pushes": false,
+  "child_agents": false,
+  "implementation_accepted": false,
+  "exact_seam_mutations_executed": 0,
+  "required_next_gates": [
+    "implement all retained repair and fixture work",
+    "original-production corrected overlays and required public companions",
+    "all retained active/desired reaching matrices",
+    "all isolated exact seam mutations with restoration passes",
+    "final full Phase format/check/library/integration and required suites",
+    "independent implementation review",
+    "root-owned frozen candidate worker acceptance twice"
+  ]
+}

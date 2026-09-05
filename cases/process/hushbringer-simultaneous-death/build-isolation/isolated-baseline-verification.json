@@ -1,0 +1,89 @@
+{
+  "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+  "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "results": [
+    {
+      "case_id": "29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"74682b60e6c16274bdc0e91bd786d95191720fbb41fb5a4d6a996f80a752736f\",\n    \"74682b60e6c16274bdc0e91bd786d95191720fbb41fb5a4d6a996f80a752736f\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"d44491b2d10fe59db09d2dbc9d86373356101a25eb9e878156055d99d3b582c3\",\n    \"d44491b2d10fe59db09d2dbc9d86373356101a25eb9e878156055d99d3b582c3\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"1ffb9d0aecfa3c22b5016ead62bc34f8a773159f95a02e5d72c6e6e562bc15a9\",\n    \"1ffb9d0aecfa3c22b5016ead62bc34f8a773159f95a02e5d72c6e6e562bc15a9\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"fd8ab2cf7544942b73e69a285dd0f291acc6bb6b1de3ffa4a8528034f9163b1c\",\n    \"fd8ab2cf7544942b73e69a285dd0f291acc6bb6b1de3ffa4a8528034f9163b1c\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+      "result": {
+        "kind": "violated",
+        "assertion_ids": [
+          "simultaneous-death-suppressed"
+        ]
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"c5c9e52d041ffe3327af2c3abedab83d0ab0296c70feda25349a12d931e6f4d2\",\n    \"c5c9e52d041ffe3327af2c3abedab83d0ab0296c70feda25349a12d931e6f4d2\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"violated\",\n    \"assertion_ids\": [\n      \"simultaneous-death-suppressed\"\n    ]\n  }\n}\n"
+    },
+    {
+      "case_id": "b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"3e81842f00d2b76e27f54700a3ce9c3539631d1a15dca81be1eb8d26585641ac\",\n    \"3e81842f00d2b76e27f54700a3ce9c3539631d1a15dca81be1eb8d26585641ac\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"e1ed72f00f353392fbd4f4c15fcd586ddd76f3ddc1b90f63406543c71f389685\",\n    \"e1ed72f00f353392fbd4f4c15fcd586ddd76f3ddc1b90f63406543c71f389685\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"eba47971922bf9b7bb4097e8751d500120ba4e2cf1d3257f4b0279fd561bbfa4\",\n    \"eba47971922bf9b7bb4097e8751d500120ba4e2cf1d3257f4b0279fd561bbfa4\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"b657b950018562126825c40231b41d5840e29a246e7bc8ecab4bb882a8f5ee0e\",\n    \"b657b950018562126825c40231b41d5840e29a246e7bc8ecab4bb882a8f5ee0e\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    },
+    {
+      "case_id": "7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b",
+      "result": {
+        "kind": "satisfied"
+      },
+      "verification_exit": 0,
+      "verification_output": "{\n  \"protocol\": \"coworld-improvement-v1\",\n  \"case_id\": \"7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b\",\n  \"corpus_sha256\": \"8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c\",\n  \"worker_sha256\": \"e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98\",\n  \"checker_sha256\": \"f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1\",\n  \"evidence_sha256\": [\n    \"f445f1f13ec3bf7b0449aff095b1d28e2069505d6c1a107d0168f6a0c6f3adb9\",\n    \"f445f1f13ec3bf7b0449aff095b1d28e2069505d6c1a107d0168f6a0c6f3adb9\"\n  ],\n  \"repeatability\": \"verified\",\n  \"result\": {\n    \"kind\": \"satisfied\"\n  }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "utc": "2026-09-05T18:19:44.231034+00:00",
+  "receipt_sha256": "ebd73280b83a0bb30ad8cf38fe11fefd165a35ade8b069f9cf74b9153328f8c4",
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "changed_during_run": [],
+  "workspace_clippy_disposition": "Interrupted by root under measured host memory pressure. This attempt is not a source diagnostic or completed Clippy gate.",
+  "checks": [
+    {
+      "command": [
+        "env",
+        "CARGO_BUILD_JOBS=2",
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--bins"
+      ],
+      "exit": 0,
+      "log_sha256": "3202b2e21fa810e886e9b59dcdf5624dbc5e496bdda57d3a196509669ce7ccc6",
+      "tail": "ed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n     Running unittests src/bin/set_check.rs (target/debug/deps/set_check-c8ee3d82a97e9a13)\n\nrunning 9 tests\ntest tests::ast_hash_is_stable_across_runs ... ok\ntest tests::ast_hash_changes_when_oracle_text_changes ... ok\ntest tests::deck_line_does_not_strip_quantity_words ... ok\ntest tests::ast_hash_changes_when_parsed_field_changes ... ok\ntest tests::basic_land_detection ... ok\ntest tests::diff_detects_changed_hash_and_flags_regression ... ok\ntest tests::deck_line_ignores_headers_and_blanks ... ok\ntest tests::deck_line_strips_quantity_and_collector_suffix ... ok\ntest tests::parse_deck_list_inline_comma_separated ... ok\n\ntest result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n     Running unittests src/bin/tokens_gen.rs (target/debug/deps/tokens_gen-3c85bd3c0fcb47d6)\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n"
+    },
+    {
+      "command": [
+        "env",
+        "CARGO_BUILD_JOBS=2",
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--doc"
+      ],
+      "exit": 0,
+      "log_sha256": "737cbe5cf6cf40449b844ca6109a7b2aaf4e8185025cdb743683bb4c7c55625e",
+      "tail": "rofile [unoptimized + debuginfo] target(s) in 0.14s\n   Doc-tests engine\n\nrunning 7 tests\ntest crates/engine/src/game/scenario_db.rs - game::scenario_db (line 8) ... ignored\ntest crates/engine/src/parser/oracle_nom/bridge.rs - parser::oracle_nom::bridge::split_once_on_lower (line 58) ... ignored\ntest crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::scan_at_word_boundaries (line 889) ... ignored\ntest crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::scan_preceded (line 1112) ... ignored\ntest crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::scan_split_at_phrase (line 1074) ... ignored\ntest crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::split_once_on (line 1147) ... ignored\ntest crates/engine/src/testing.rs - testing::assert_engine_eq (line 15) ... ignored\n\ntest result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n"
+    },
+    {
+      "command": [
+        "env",
+        "CARGO_BUILD_JOBS=2",
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 101,
+      "log_sha256": "d8252ca1d324b373eb2c3858dc76b07c2f2f2595dca52d4c86a6923151b7f5be",
+      "tail": "hase-verifiable-loop/target/debug/deps/libserde-4de35753636882d6.rmeta --extern serde_json=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libserde_json-5fc5ac1f06c34cba.rmeta --extern smallvec=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libsmallvec-cb0a74fcbc47aca0.rmeta --extern strum=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libstrum-a998fe61560c8fba.rmeta --extern tempfile=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libtempfile-b95bc942357a049e.rmeta --extern thiserror=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libthiserror-d3b37307fafb4f2c.rmeta --extern toml=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libtoml-306711c8c6778265.rmeta --extern tracing=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libtracing-c7940677f1b85e4f.rmeta --extern web_time=/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/libweb_time-1c79691079d97a77.rmeta` (signal: 15, SIGTERM: termination signal)\n"
+    }
+  ]
+}

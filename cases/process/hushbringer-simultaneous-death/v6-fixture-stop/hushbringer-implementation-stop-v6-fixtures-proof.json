@@ -1,0 +1,17 @@
+{
+  "baseline_head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "baseline_production_diff": "",
+  "baseline_overlay_sha256": "ff07d4b130b01271b2bd1b5fdf4756fc0eb8013b9899c650125ba72383f0062d",
+  "active_current_test_sha256": "e43c3f516347273f6c49ee4eab8410e7c6fdff14824b2129aeb1a39b6fc90e59",
+  "logs": {
+    "hushbringer-baseline-v6.log": "3bc666ab3b9ce2b75e8034363d5b92b7d2f977b65a03bb12a1de0a1a00ed12d9",
+    "hushbringer-active-tests-v6-attempt-4.log": "dd0bb6077008a61d45665c467b9a8cdbdb84730af80231e2f3e8b1328a67a119",
+    "hushbringer-baseline-expanded-v6-attempt-1.log": "c0131a1d848a11e19685b1e696b3b661c84f823b17464ff6d9537a8634e36884"
+  },
+  "baseline_transformation_receipt": {
+    "active_test_sha256": "02173f4932e98a745e6fb5950b665aa3532e5361cfd271782602fcfec71c312e",
+    "baseline_test_sha256": "ff07d4b130b01271b2bd1b5fdf4756fc0eb8013b9899c650125ba72383f0062d",
+    "transformation": "Only assert_snapshot becomes a documented no-op and field-presence guards become true because baseline has no event snapshot field. All payoff/zone/ordering/lifetime assertions remain unchanged. Baseline receipt does not claim snapshot-field validation.",
+    "initial_test_preserved": "/home/ubuntu/coworld-migration-20260904/hushbringer-baseline-v6-initial-test-module.rs"
+  }
+}

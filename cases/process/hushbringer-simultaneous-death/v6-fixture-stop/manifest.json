@@ -1,0 +1,35 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "description": "Original-base proof of three fixture/claim contradictions; disposition and acceptance pending. New snapshot-only assertions were disabled in the baseline overlay as recorded.",
+  "artifacts": [
+    {
+      "path": "hushbringer-implementation-stop-v6-fixtures.md",
+      "sha256": "478f7118d3fcb67c1e5d0e625303ade9436d32bea444af1e06109c552476f064"
+    },
+    {
+      "path": "hushbringer-implementation-stop-v6-fixtures-proof.json",
+      "sha256": "9751430d733a65368201155add87d648c54ae8b777546fcda689ca5a59b397e7"
+    },
+    {
+      "path": "hushbringer-baseline-v6-expanded-fixture-receipt.json",
+      "sha256": "68b899a47ee0639c5c9f1f39106623e1182610d300ab64fe284b1f8ec085e22a"
+    },
+    {
+      "path": "hushbringer-baseline-v6.log",
+      "sha256": "3bc666ab3b9ce2b75e8034363d5b92b7d2f977b65a03bb12a1de0a1a00ed12d9"
+    },
+    {
+      "path": "hushbringer-active-tests-v6-attempt-4.log",
+      "sha256": "dd0bb6077008a61d45665c467b9a8cdbdb84730af80231e2f3e8b1328a67a119"
+    },
+    {
+      "path": "hushbringer-baseline-expanded-v6-attempt-1.log",
+      "sha256": "c0131a1d848a11e19685b1e696b3b661c84f823b17464ff6d9537a8634e36884"
+    },
+    {
+      "path": "baseline-overlay.rs",
+      "sha256": "ff07d4b130b01271b2bd1b5fdf4756fc0eb8013b9899c650125ba72383f0062d"
+    }
+  ],
+  "retention_limit": "The stop proof records hashes of the then-current active test source, but an immutable copy of that exact active source was not retained. The exact baseline overlay and all cited runtime logs are retained. Later final source snapshots must not be mislabeled as the earlier active attempt."
+}

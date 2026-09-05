@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutionEvidence",
+  "type": "object",
+  "properties": {
+    "binary_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "declared_phase_revision": {
+      "description": "Workspace declaration only; overrides are identified by the binary and build record.",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/ExecutionOutcome"
+    },
+    "protocol": {
+      "$ref": "#/$defs/ProtocolVersion"
+    },
+    "request_id": {
+      "$ref": "#/$defs/Sha256"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "request_id",
+    "binary_sha256",
+    "declared_phase_revision",
+    "outcome"
+  ],
+  "$defs": {
+    "CardZone": {
+      "type": "string",
+      "enum": [
+        "hand",
+        "library",
+        "battlefield",
+        "graveyard",
+        "exile",
+        "stack",
+        "command"
+      ]
+    },
+    "ExecutionOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "completed"
+            },
+            "observation": {
+              "$ref": "#/$defs/Observation"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/StepEvidence"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "observation",
+            "steps"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "inconclusive"
+            },
+            "reason": {
+              "$ref": "#/$defs/IncompleteReason"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reason"
+          ]
+        }
+      ]
+    },
+    "IncompleteReason": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "unresolved_card"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "name"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "invalid_scenario"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "driver_failed"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "worker_budget"
+            },
+            "seconds": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seconds"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "worker_failed"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "invalid_evidence"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "repeated_execution_diverged"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "guard_not_reached"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assertion_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "missing_observation"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "assertion_id"
+          ]
+        }
+      ]
+    },
+    "ObjectObservation": {
+      "type": "object",
+      "properties": {
+        "cast_spell_offered_to": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Seat"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "object_id": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "owner": {
+          "$ref": "#/$defs/Seat"
+        },
+        "plus_one_counters": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        },
+        "prepared": {
+          "type": "boolean"
+        },
+        "tapped": {
+          "type": "boolean"
+        },
+        "zone": {
+          "$ref": "#/$defs/CardZone"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "object_id",
+        "name",
+        "owner",
+        "zone",
+        "tapped",
+        "plus_one_counters",
+        "prepared",
+        "cast_spell_offered_to"
+      ]
+    },
+    "Observation": {
+      "type": "object",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0
+          }
+        },
+        "life": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "objects": {
+          "description": "Includes tokens and copies, sorted by engine object ID. JSON object keys remain strings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ObjectObservation"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "life",
+        "objects",
+        "labels"
+      ]
+    },
+    "ProtocolVersion": {
+      "type": "string",
+      "enum": [
+        "coworld-improvement-v1"
+      ]
+    },
+    "Seat": {
+      "type": "string",
+      "enum": [
+        "player",
+        "opponent"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "StepEvidence": {
+      "type": "object",
+      "properties": {
+        "operation_index": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "state_sha256": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "operation_index",
+        "state_sha256"
+      ]
+    }
+  }
+}

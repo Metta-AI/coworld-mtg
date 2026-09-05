@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvaluationReceipt",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "checker_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "corpus_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "evidence_sha256": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Sha256"
+      }
+    },
+    "protocol": {
+      "$ref": "#/$defs/ProtocolVersion"
+    },
+    "repeatability": {
+      "$ref": "#/$defs/Repeatability"
+    },
+    "result": {
+      "$ref": "#/$defs/CheckResult"
+    },
+    "worker_sha256": {
+      "$ref": "#/$defs/Sha256"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "case_id",
+    "corpus_sha256",
+    "worker_sha256",
+    "checker_sha256",
+    "evidence_sha256",
+    "repeatability",
+    "result"
+  ],
+  "$defs": {
+    "CheckResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "satisfied"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assertion_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "violated"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "assertion_ids"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "inconclusive"
+            },
+            "reason": {
+              "$ref": "#/$defs/IncompleteReason"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reason"
+          ]
+        }
+      ]
+    },
+    "IncompleteReason": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "unresolved_card"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "name"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "invalid_scenario"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "driver_failed"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "worker_budget"
+            },
+            "seconds": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seconds"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "worker_failed"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "invalid_evidence"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "repeated_execution_diverged"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "guard_not_reached"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "detail"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "assertion_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "missing_observation"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "assertion_id"
+          ]
+        }
+      ]
+    },
+    "ProtocolVersion": {
+      "type": "string",
+      "enum": [
+        "coworld-improvement-v1"
+      ]
+    },
+    "Repeatability": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "diverged",
+        "inconclusive"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

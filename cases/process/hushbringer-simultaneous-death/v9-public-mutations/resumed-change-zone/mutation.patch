@@ -1,0 +1,22 @@
+--- a/crates/engine/src/game/effects/mod.rs
++++ b/crates/engine/src/game/effects/mod.rs
+@@ -951,17 +951,11 @@
+                         enter_attached_to,
+                     };
+                     let before_zone = state.objects.get(obj_id).map(|object| object.zone);
+-                    let result = crate::game::zones::with_departure_member(
+-                        state,
+-                        events,
+-                        owner,
+-                        *obj_id,
+-                        |state, events| {
++                    let result = (|| {
+                             crate::game::effects::change_zone::process_one_zone_move(
+                                 state, &ctx, *obj_id, events,
+                             )
+-                        },
+-                    );
++                        })();
+                     match result {
+                         crate::game::effects::change_zone::ZoneMoveResult::Done => {
+                             if let Some(count) = moved_count.as_mut() {

@@ -1,0 +1,130 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running tests/integration/main.rs (target/debug/deps/integration-7bdd4945820186df)
+
+running 91 tests
+test trigger_suppression_event_timing::aggregate_payment_no_hush_and_surviving_hush_single_payment_controls ... ok
+test trigger_suppression_event_timing::ambiguous_delayed_primary_alternative_co_death_and_identity_compatibility ... ok
+test trigger_suppression_event_timing::ambiguous_reflexive_compatibility_and_empty_creation_disposal ... ok
+test trigger_suppression_event_timing::ambiguous_registered_delayed_matchers_preserve_ungated_compatibility ... ok
+test trigger_suppression_event_timing::attachment_relative_suppression_binds_live_relation_before_departure ... ok
+test trigger_suppression_event_timing::augment_subject_preserves_the_sba_owner_and_co_departed_observer_payoff ... ok
+test trigger_suppression_event_timing::change_zone_choice_uses_selected_objects_and_finalizes_before_continuation ... ok
+test trigger_suppression_event_timing::chosen_sacrifice_closes_before_later_hush_departure_instruction ... ok
+test trigger_suppression_event_timing::chosen_spell_and_activation_cost_rejection_preserves_state_for_valid_retry ... ok
+test trigger_suppression_event_timing::clause_local_disjunction_registers_once_for_eligible_sibling ... ok
+test trigger_suppression_event_timing::co_departed_observer_and_self_trigger_both_use_before_suppression ... ok
+test trigger_suppression_event_timing::completed_keep_sacrifice_sweeps_share_one_boundary_across_choice_routes ... ok
+test trigger_suppression_event_timing::controller_relative_and_conditional_suppression_bind_before_departure ... ok
+test trigger_suppression_event_timing::cross_pause_batch_preserves_completed_segment_compatibility_and_no_hush_twin ... ok
+test trigger_suppression_event_timing::dedicated_mill_exile_and_torpor_only_etb_controls_remain_positive ... ok
+test trigger_suppression_event_timing::delayed_cleanup_retains_persistent_and_expires_this_turn_listeners ... ok
+test trigger_suppression_event_timing::delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener ... ok
+test trigger_suppression_event_timing::delayed_native_sacrifice_and_exile_alternatives_remain_eligible ... ok
+test trigger_suppression_event_timing::delayed_reflexive_suppression_discards_unmatched_listener ... ok
+test trigger_suppression_event_timing::delayed_same_occurrence_tries_eligible_alternative_exactly_once ... ok
+test trigger_suppression_event_timing::destroy_guard_regeneration_and_indestructible_preserve_actual_departures_only ... ok
+test trigger_suppression_event_timing::destroy_self_reference_and_partial_illegality_preserve_existing_guards ... ok
+test trigger_suppression_event_timing::devour_child_sacrifice_is_independent_of_parent_co_entry ... ok
+test trigger_suppression_event_timing::distinct_controller_delayed_listeners_keep_creation_source_and_controller ... ok
+test trigger_suppression_event_timing::dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins ... ok
+test trigger_suppression_event_timing::effect_zone_choice_pay_cost_uses_selected_group_before_continuation ... ok
+test trigger_suppression_event_timing::empty_sweep_and_zero_choice_do_not_leak_into_later_death ... ok
+test trigger_suppression_event_timing::enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat ... ok
+test trigger_suppression_event_timing::first_departing_granter_preserves_later_member_types_and_trigger ... ok
+test trigger_suppression_event_timing::from_anywhere_and_dies_observers_choose_different_worlds ... ok
+test trigger_suppression_event_timing::granted_suppression_and_granted_death_trigger_use_effective_abilities ... ok
+test trigger_suppression_event_timing::hand_library_choice_preserves_selected_cards_and_nondeath_payoff ... ok
+test trigger_suppression_event_timing::haunt_payoff_uses_the_linked_subject_death_before_world ... ok
+test trigger_suppression_event_timing::inherited_sacrifice_current_controller_and_unauthorized_nonanaphoric_siblings ... ok
+test trigger_suppression_event_timing::inherited_sacrifice_no_hush_and_single_slot_controls ... ok
+test trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling ... ignored, Known baseline aggregate paid continuation drops following SequentialSibling; desired gain remains one
+test trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection ... ignored, Known pre-existing complete aggregate payment loop lacks a simultaneous owner; not a cross-pause case
+test trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed ... ignored, Known pre-existing complete aggregate payment grouping; independent reversed-order diagnostic
+test trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed ... ignored, Known registered ambiguous-origin suppression bypass; desired surviving-Hush suppression stays unresolved
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy ... ignored, Known baseline cast-created Regenerate definitions are lost on layer reset before Destroy
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush ... ignored, Known baseline cast-created regeneration persistence; protected Hush, normal targets
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed ... ignored, Known baseline cast-created regeneration persistence; protected Hush, reversed targets
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed ... ignored, Known baseline cast-created regeneration persistence; protected Traveler, reversed targets
+test trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression ... ignored, Known pre-existing cross-pause batch grouping gap; synchronous completed segments are the bounded repair
+test trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures ... ignored, Known pre-existing inherited ParentTarget sacrifice loop lacks a simultaneous owner
+test trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed ... ignored, Known inherited ParentTarget grouping gap, independent reverse-order desired diagnostic
+test trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed ... ignored, Known pre-existing direct delayed matcher bypass; this patch repairs registered matchers only
+test trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed ... ignored, Known direct WhenDiesOrExiled bypass; desired Hush suppression
+test trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed ... ignored, Known direct WhenDies bypass; desired Hush suppression
+test trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed ... ignored, Known direct WhenEntersBattlefield bypass; desired Hush suppression
+test trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed ... ignored, Known direct WhenLeavesPlayFiltered bypass; desired Hush suppression
+test trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world ... ignored, Known intrinsic merge split flush removes a rider grant before a later simultaneous member; general layer-world repair excluded
+test trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed ... ignored, Known registered restricted-origin suppression bypass; desired surviving-Hush suppression stays unresolved
+test trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once ... ignored, Known baseline resumed explicit-target ChangeZone duplicate dispatch; desired one Spirit remains unresolved
+test trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed ... ignored, Known baseline resumed duplicate dispatch, reversed tail; desired one Spirit remains unresolved
+test trigger_suppression_event_timing::legacy_direct_delayed_identity_and_nondeath_siblings_preserve_lifetime ... ok
+test trigger_suppression_event_timing::legacy_direct_delayed_no_hush_positive_controls ... ok
+test trigger_suppression_event_timing::legacy_direct_delayed_surviving_hush_bypass_compatibility ... ok
+test trigger_suppression_event_timing::library_position_choice_and_targeted_leaf_preserve_non_death_events ... ok
+test trigger_suppression_event_timing::merged_intrinsic_flush_limit_has_a_subject_first_positive_twin ... ok
+test trigger_suppression_event_timing::multi_object_spell_sacrifice_cost_preserves_commit_and_suppression ... ok
+test trigger_suppression_event_timing::natural_effect_zone_choice_finalizes_before_chained_hush_departure ... ok
+test trigger_suppression_event_timing::not_equals_battlefield_rejects_death_but_allows_real_library_graveyard_move ... ok
+test trigger_suppression_event_timing::opponent_scoped_keep_sweep_preserves_owner_and_out_of_scope_board ... ok
+test trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death ... ok
+test trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death ... ok
+test trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit ... ok
+test trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility ... ok
+test trigger_suppression_event_timing::paused_choice_state_roundtrip_and_following_action_have_no_stale_scope ... ok
+test trigger_suppression_event_timing::real_mutate_cast_departure_preserves_component_routing_and_normal_group_controls ... ok
+test trigger_suppression_event_timing::remaining_complete_producers_capture_each_actual_group ... ok
+test trigger_suppression_event_timing::repeated_object_id_retains_distinct_incarnation_and_event_suppression ... ok
+test trigger_suppression_event_timing::resumed_change_zone_no_hush_duplicate_payoff_compatibility ... ok
+test trigger_suppression_event_timing::resumed_change_zone_tail_suppression_uses_authoritative_records ... ok
+test trigger_suppression_event_timing::seeded_regeneration_guard_preserves_actual_departures_only ... ok
+test trigger_suppression_event_timing::self_from_anywhere_exception_functions_in_destination_with_hush_surviving ... ok
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds ... COST_COMPONENT_PROOF deferred=true with_hush=false traveler_first=false spirits=1 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds' (3115034) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first ... COST_COMPONENT_PROOF deferred=true with_hush=true traveler_first=false spirits=0 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":["EntersBattlefield","Dies"]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first' (3115035) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3174:5:
+assertion `left == right` failed
+  left: 0
+ right: 1
+FAILED
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed ... COST_COMPONENT_PROOF deferred=true with_hush=false traveler_first=true spirits=1 expected=1 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed' (3115036) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+FAILED
+test trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first ... COST_COMPONENT_PROOF deferred=true with_hush=true traveler_first=true spirits=0 expected=0 h_peers=[ObjectId(2)] t_peers=[ObjectId(1)] t_snapshot={"after":[],"before":["EntersBattlefield","Dies"]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+
+thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first' (3115037) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:
+assertion failed: departure(&result, id).co_departed.is_empty()
+FAILED
+test trigger_suppression_event_timing::separate_spell_sacrifice_cost_components_bind_separate_worlds ... COST_COMPONENT_PROOF deferred=false with_hush=false traveler_first=false spirits=1 expected=1 h_peers=[] t_peers=[] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=false with_hush=false traveler_first=true spirits=1 expected=1 h_peers=[] t_peers=[] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=false with_hush=true traveler_first=false spirits=1 expected=1 h_peers=[] t_peers=[] t_snapshot={"after":[],"before":[]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+COST_COMPONENT_PROOF deferred=false with_hush=true traveler_first=true spirits=0 expected=0 h_peers=[] t_peers=[] t_snapshot={"after":["EntersBattlefield","Dies"],"before":["EntersBattlefield","Dies"]} life=22 zones=[Graveyard, Graveyard, Graveyard]
+ok
+test trigger_suppression_event_timing::sequential_destroy_instructions_bind_separate_before_worlds ... ok
+test trigger_suppression_event_timing::single_departure_after_world_observes_ability_removal_source_leaving ... ok
+test trigger_suppression_event_timing::standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice ... ok
+test trigger_suppression_event_timing::stripped_or_phased_suppressor_allows_the_same_reached_death ... ok
+test trigger_suppression_event_timing::successive_sba_iterations_bind_new_world_after_suppressor_dies ... ok
+test trigger_suppression_event_timing::two_suppression_controllers_and_between_event_control_rebind_are_distinct ... ok
+test trigger_suppression_event_timing::two_target_destroy_owns_one_event_in_both_target_orders ... ok
+test trigger_suppression_event_timing::unattach_fallback_and_native_cause_remain_distinct ... ok
+test trigger_suppression_event_timing::unpaused_bounce_batch_and_selected_bounce_share_actual_departure_group ... ok
+test trigger_suppression_event_timing::unpaused_change_zone_no_hush_payoff_remains_exactly_one ... ok
+
+failures:
+
+failures:
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed
+    trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first
+
+test result: FAILED. 67 passed; 4 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 9.95s
+
+error: test failed, to rerun pass `-p engine --test integration`

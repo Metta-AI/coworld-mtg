@@ -1,0 +1,20 @@
+{
+  "id": "change-zone-resolve",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins' (3292475) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::remaining_complete_producers_capture_each_actual_group' (3292507) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_redirect_only_preserves_original_incarnation' (3292510) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_no_replacement_borrows_outer_owner' (3292509) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure' (3292511) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure_reversed' (3292512) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::unpaused_change_zone_no_hush_payoff_remains_exactly_one' (3292531) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 84 passed; 7 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.68s"
+  ],
+  "finished": "2026-09-05T18:13:49.691958+00:00"
+}

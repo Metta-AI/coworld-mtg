@@ -1,0 +1,20 @@
+{
+  "id": "components-whole-queue",
+  "file": "crates/engine/src/game/casting_costs.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "pay_deferred_spell_sacrifices_at_commit",
+      "old": ".chunk_by(|a, b| a.component == b.component)",
+      "new": ".chunk_by(|_, _| true)"
+    }
+  ],
+  "tests": [
+    "deferred_components_identical_filters_serde_and_both_finalizers",
+    "deferred_components_mixed_cardinalities_keep_exact_peers"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

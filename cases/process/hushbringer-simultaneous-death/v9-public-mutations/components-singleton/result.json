@@ -1,0 +1,14 @@
+{
+  "id": "components-singleton",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_mixed_cardinalities_keep_exact_peers' (3352754) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4638:29:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.23s"
+  ],
+  "finished": "2026-09-05T18:40:33.018619+00:00"
+}

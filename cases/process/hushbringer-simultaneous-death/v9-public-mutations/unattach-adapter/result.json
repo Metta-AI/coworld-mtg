@@ -1,0 +1,14 @@
+{
+  "id": "unattach-adapter",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::unattach_fallback_and_native_cause_remain_distinct' (3384200) panicked at crates/engine/src/game/scenario.rs:3353:9:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.80s"
+  ],
+  "finished": "2026-09-05T18:51:53.939456+00:00"
+}

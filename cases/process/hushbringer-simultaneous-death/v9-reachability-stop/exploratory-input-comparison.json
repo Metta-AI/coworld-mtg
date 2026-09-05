@@ -1,0 +1,16 @@
+{
+  "kind": "exploratory_build_input_comparison",
+  "utc": "2026-09-05T18:13:34.742361+00:00",
+  "baseline_build_json_sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff",
+  "candidate_build_json_sha256": "93805b8c68571f4dd2d7537161e6f2942f8c294b24c1ee20e1eb3c34b6281617",
+  "matching_inputs": {
+    "builder_sha256": true,
+    "compiler": true,
+    "harness_source_files": true,
+    "build_environment": true
+  },
+  "baseline_worker": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "candidate_worker": "2bc9d4c58c0c3ac54ceafdbe09c7208f5b1f7dca04cdb627ebba1e572b75e55b",
+  "candidate_clean_committed": false,
+  "acceptance_eligible": false
+}

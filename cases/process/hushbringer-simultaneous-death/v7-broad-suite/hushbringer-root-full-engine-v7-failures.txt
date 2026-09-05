@@ -1,0 +1,33 @@
+
+failures:
+
+---- game::effects::tests::bounce_followup_draws_when_caster_controlled_parent_target stdout ----
+
+thread 'game::effects::tests::bounce_followup_draws_when_caster_controlled_parent_target' (3161759) panicked at crates/engine/src/game/effects/mod.rs:13079:9:
+assertion `left == right` failed
+  left: 0
+ right: 1
+
+---- game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield stdout ----
+
+thread 'game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield' (3165201) panicked at crates/engine/src/game/triggers.rs:11830:9:
+assertion `left == right` failed: exit LKI holds the last on-battlefield power (3/3)
+  left: Some(1)
+ right: Some(3)
+
+---- game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry stdout ----
+
+thread 'game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry' (3165202) panicked at crates/engine/src/game/triggers.rs:12007:9:
+assertion `left == right` failed: exit LKI holds the last on-battlefield power (3/3)
+  left: Some(1)
+ right: Some(3)
+
+
+failures:
+    game::effects::tests::bounce_followup_draws_when_caster_controlled_parent_target
+    game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield
+    game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry
+
+test result: FAILED. 16574 passed; 3 failed; 7 ignored; 0 measured; 0 filtered out; finished in 70.50s
+
+error: test failed, to rerun pass `-p engine --lib`

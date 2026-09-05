@@ -1,0 +1,20 @@
+{
+  "id": "owner-finalization",
+  "file": "crates/engine/src/game/zones.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "with_departure_suppression",
+      "old": "    finish_departure_suppression(state, events, frame);\n",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+    "repeated_object_id_retains_distinct_incarnation_and_event_suppression"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

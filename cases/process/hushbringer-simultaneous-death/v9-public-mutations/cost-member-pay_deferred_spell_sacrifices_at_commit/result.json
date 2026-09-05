@@ -1,0 +1,20 @@
+{
+  "id": "cost-member-pay_deferred_spell_sacrifices_at_commit",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_identical_filters_serde_and_both_finalizers' (3341588) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::deferred_components_mixed_cardinalities_keep_exact_peers' (3341593) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4638:29:",
+    "thread 'trigger_suppression_event_timing::deferred_components_surviving_suppressor_and_failed_mana_retry_keep_provenance' (3341595) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds' (3341649) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first' (3341650) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed' (3341651) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first' (3341652) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3174:5:"
+  ],
+  "summary": [
+    "test result: FAILED. 84 passed; 7 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.36s"
+  ],
+  "finished": "2026-09-05T18:35:10.298817+00:00"
+}
