@@ -104,3 +104,7 @@ A [typed input audit](hushbringer-v9-acceptance-inputs-audit.json) recomputed al
 The [frozen v9 runtime gates](v9-frozen-gates/README.md) retain the complete passing-suite logs and the explicit known-limitation run, tied to an immutable source snapshot. Mutation proof and independent implementation review are still pending at that checkpoint.
 
 The [v9 reachability stop](v9-reachability-stop/README.md) records a proof obligation that cannot use a coherent shipped game, and the resulting return to full planning. It also retains the successful exploratory ten-case campaign and its exact build-input comparison. This is process evidence, not acceptance.
+
+The [full integrated v10 plan](hushbringer-plan-v10.md) retains the prior obligations and adds explicit evidence for the battle-protector boundary, eight reachable state-based-action paths and two batching paths. It distinguishes captured versus fallback performance and specifies provenance for reusing an immutable canonical executable in restoration checks. The [v10 manifest](v10-plan-manifest.json) records the frozen artifacts. Fresh full review is pending at this checkpoint.
+
+The [fresh full v10 review](hushbringer-plan-review-v10.md) was clean after reviewing the complete integrated plan and verifying all 2,051 frozen source files. A fresh executor now owns supplemental fixture adoption and the remaining implementation evidence. This is plan approval; the repair still requires final implementation review and fixed-checker acceptance.

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "cargo",
+    "clippy",
+    "--workspace",
+    "--all-targets",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-verifiable-loop",
+  "cargo_build_jobs": 1,
+  "started_utc": "2026-09-05T18:40:56.419284+00:00",
+  "finished_utc": "2026-09-05T18:56:07.899541+00:00",
+  "exit": 101,
+  "log_sha256": "82050fc4918d09dad90324559697d67f2a108082cebc715dc43289efd56bd115",
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "changed_during_run": []
+}

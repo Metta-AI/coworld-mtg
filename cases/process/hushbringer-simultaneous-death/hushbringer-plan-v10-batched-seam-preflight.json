@@ -1,0 +1,28 @@
+{
+  "utc": "2026-09-05T18:43:41.043600+00:00",
+  "kind": "source-backed batched seam preflight, not runtime mutation result",
+  "production_root": "/home/ubuntu/repos/phase-verifiable-loop",
+  "inspected_sources": {
+    "crates/engine/src/game/triggers.rs": "05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903",
+    "crates/engine/src/game/trigger_matchers.rs": "1eef66a5b3f50dceb8643ede0ea6deac723336640a3bd006dfa96406eb7002d7",
+    "crates/engine/src/game/trigger_suppression.rs": "f37e54b657772b0551e46d3d612e4d44682ebfd6cffca8b1936b80d266d929cc",
+    "crates/engine/src/game/effects/destroy.rs": "4e406bbd6cf734adf91b1f4b700ee9b19745b44b50dbbb44af46bc098b6b5006",
+    "crates/engine/tests/integration/trigger_suppression_event_timing.rs": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+    "crates/engine/tests/integration/batched_trigger_subject_count.rs": "2cfd90a4312b1142b271cdfde8427975214052b16ef470dab8ebe698fc9c5767"
+  },
+  "released_mutations": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/released-matcher-mutations-v9.json",
+    "sha256": "dee6a9f52c59bf2dd621861ec8e6f7afbedf1465b1eb687776b1683210f52ec4"
+  },
+  "plan_sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a",
+  "new_plan_section": "4b",
+  "predictions": [
+    "Outer ordinary adapter can reject the current single suppressed subject before batched adapter invocation.",
+    "Existing nonbatched self-arrival and co-dying-Hush disjunction tests do not independently guarantee broad live batched death gate discrimination.",
+    "Mixed creature/noncreature batch with surviving Hush supplies eligible seed and differing counted batch membership for exact adapter mutation.",
+    "Batched destination-functioning self-arrival with surviving Hush supplies exact broad death gate discriminator."
+  ],
+  "measured_results": [],
+  "changes_to_production_or_tests": false,
+  "new_fixtures_are_planned_not_executed": true
+}

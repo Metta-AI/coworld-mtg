@@ -1,0 +1,62 @@
+{
+  "utc": "2026-09-05T18:27:39.566898+00:00",
+  "transport": "ssh nishadsingh-box-4 / remote HTTPS Scryfall API",
+  "cards": [
+    {
+      "name": "Hushbringer",
+      "url": "https://api.scryfall.com/cards/named?exact=Hushbringer",
+      "sha256": "adb5d42b1fd7d0d57074ef73336e5e928efdd977cb6a8217a9305666ddfe9b8c",
+      "oracle_text": "Flying, lifelink\nCreatures entering or dying don't cause abilities to trigger.",
+      "mana_cost": "{1}{W}",
+      "scryfall_uri": "https://scryfall.com/card/eld/18/hushbringer?utm_source=api"
+    },
+    {
+      "name": "Doomed Traveler",
+      "url": "https://api.scryfall.com/cards/named?exact=Doomed%20Traveler",
+      "sha256": "6c98e616ca2b011808cdebe02a7c5c462ae3dae0ceb394a91280c1599db0ff79",
+      "oracle_text": "When this creature dies, create a 1/1 white Spirit creature token with flying.",
+      "mana_cost": "{W}",
+      "scryfall_uri": "https://scryfall.com/card/clu/59/doomed-traveler?utm_source=api"
+    },
+    {
+      "name": "Wrath of God",
+      "url": "https://api.scryfall.com/cards/named?exact=Wrath%20of%20God",
+      "sha256": "e83a862015bf22646330f422e93cb6373389a038b5c1e289ad98a364831d71df",
+      "oracle_text": "Destroy all creatures. They can't be regenerated.",
+      "mana_cost": "{2}{W}{W}",
+      "scryfall_uri": "https://scryfall.com/card/cmm/70/wrath-of-god?utm_source=api"
+    },
+    {
+      "name": "Curtains' Call",
+      "url": "https://api.scryfall.com/cards/named?exact=Curtains%27%20Call",
+      "sha256": "c082b132e61a85576355ef9c7ba139ca7086e5cc33874e360bbd74dc63c2a186",
+      "oracle_text": "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy two target creatures.",
+      "mana_cost": "{5}{B}",
+      "scryfall_uri": "https://scryfall.com/card/otc/130/curtains-call?utm_source=api"
+    },
+    {
+      "name": "Stonecoil Serpent",
+      "url": "https://api.scryfall.com/cards/named?exact=Stonecoil%20Serpent",
+      "sha256": "b4c247a5681f792a6aa408758e03d4eaefb0ccc86374bebcf31d91a6229e93c0",
+      "oracle_text": "Reach, trample, protection from multicolored\nThis creature enters with X +1/+1 counters on it.",
+      "mana_cost": "{X}",
+      "scryfall_uri": "https://scryfall.com/card/soc/356/stonecoil-serpent?utm_source=api"
+    },
+    {
+      "name": "Oversimplify",
+      "url": "https://api.scryfall.com/cards/named?exact=Oversimplify",
+      "sha256": "677a4c5120411685523bab2f1f89dba9a8bb967bdfde14b8fd80457a4488637f",
+      "oracle_text": "Exile all creatures. Each player creates a 0/0 green and blue Fractal creature token and puts a number of +1/+1 counters on it equal to the total power of creatures they controlled that were exiled this way.",
+      "mana_cost": "{3}{G}{U}",
+      "scryfall_uri": "https://scryfall.com/card/soc/322/oversimplify?utm_source=api"
+    },
+    {
+      "name": "Hulkling, Burgeoning Bruiser",
+      "url": "https://api.scryfall.com/cards/named?exact=Hulkling%2C%20Burgeoning%20Bruiser",
+      "sha256": "259f8d886d90e520ad8b0f3eb36c4e98bb5131f2bf7977dec464df33e4c93982",
+      "oracle_text": "Vigilance\nWhenever another creature you control enters, if it has greater power or toughness than Hulkling, put a +1/+1 counter on Hulkling.",
+      "mana_cost": "{2}{G}",
+      "scryfall_uri": "https://scryfall.com/card/msh/173/hulkling-burgeoning-bruiser?utm_source=api"
+    }
+  ]
+}
