@@ -118,3 +118,5 @@ The [nine trigger-matcher mutation checks](v9-matcher-proofs/README.md) retain i
 The [library and lexical proof archive](library-and-lexical-proofs/README.md) reconciles nineteen original mutations with three later discriminators. It preserves historical survivors and distinguishes public runtime evidence, private lexical contracts and the terminal-gated defensive battle result.
 
 The [two final batching proofs](v10-batched-proofs/README.md) close the previously held adapter and death-prefilter rows. Both orderings fail under each exact mutation and all nineteen independently run controls pass; later assertions that did not execute remain explicitly unclaimed.
+
+The [current-main harness integration check](coworld-main-integration/README.md) preserves the newer release/pin and validates the merged loop. Its separate campaign still observes the Hushbringer baseline violation; it does not replace the fixed-input repair comparison.

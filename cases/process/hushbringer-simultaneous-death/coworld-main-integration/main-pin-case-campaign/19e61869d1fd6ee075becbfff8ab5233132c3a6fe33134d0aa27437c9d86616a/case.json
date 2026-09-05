@@ -1,0 +1,116 @@
+{
+  "title": "Rancor returns after its enchanted creature dies",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/2x2/156/rancor",
+        "reference": "Ruling 2018-03-16; CR 608.2b, 603.6c",
+        "statement": "Rancor returns only after going from battlefield to graveyard. An Aura spell that loses its target never enters the battlefield."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "green"
+      ],
+      [
+        "black",
+        "colorless"
+      ]
+    ],
+    "cards": [
+      {
+        "label": "rancor",
+        "name": "Rancor",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "bear",
+        "name": "Grizzly Bears",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "doom",
+        "name": "Doom Blade",
+        "owner": "opponent",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "rancor",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "bear"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      },
+      {
+        "kind": "pass_priority"
+      },
+      {
+        "kind": "cast",
+        "card": "doom",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "bear"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      },
+      {
+        "kind": "resolve_stack"
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "target-died",
+      "predicate": {
+        "kind": "zone",
+        "object": "bear",
+        "equals": "graveyard"
+      }
+    },
+    {
+      "id": "removal-finished",
+      "predicate": {
+        "kind": "zone",
+        "object": "doom",
+        "equals": "graveyard"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "aura-returns-to-hand",
+      "predicate": {
+        "kind": "zone",
+        "object": "rancor",
+        "equals": "hand"
+      }
+    }
+  ]
+}

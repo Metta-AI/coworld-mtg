@@ -1,0 +1,47 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "cf6bea70987ae5ea9919c024dfd50529bd8dfcb6a60eb330fe8055a49fa2c943",
+  "binary_sha256": "b94f3089631b5a278c1fc688329b240ff0f6dc5517b26f98908144a8a55dbd10",
+  "declared_phase_revision": "b5f468588240df079cad95b94467038ffa6d0282",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        25
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Swords to Plowshares",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Grizzly Bears",
+          "owner": "opponent",
+          "zone": "exile",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "bear": 2,
+        "swords": 1
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "bfe6dc81445d949656e4b84e1def9076245f7e6768802548d42ea1c1b01e137d"
+      }
+    ]
+  }
+}

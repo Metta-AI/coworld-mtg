@@ -1,0 +1,43 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "corpus_path": "/home/ubuntu/repos/coworld-mtg-publish/cases/corpus/corpus.json",
+  "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "red",
+        "white"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "helix",
+        "name": "Lightning Helix",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "helix",
+        "targets": [
+          {
+            "kind": "player",
+            "seat": "opponent"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "85f44096b3b9c34d1e2b59dc8316bb04c7c088b95bff235ea35b80b35c76baf0",
+  "binary_sha256": "b94f3089631b5a278c1fc688329b240ff0f6dc5517b26f98908144a8a55dbd10",
+  "declared_phase_revision": "b5f468588240df079cad95b94467038ffa6d0282",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        20
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Doomed Traveler",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Wrath of God",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 4,
+          "name": "Spirit",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "traveler": 1,
+        "wrath": 2
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "627f24c89e37f10e27011c7ac2c07155ddc91a9851b14d82cb34619c5ffe4ebc"
+      },
+      {
+        "operation_index": 1,
+        "state_sha256": "627f24c89e37f10e27011c7ac2c07155ddc91a9851b14d82cb34619c5ffe4ebc"
+      }
+    ]
+  }
+}
