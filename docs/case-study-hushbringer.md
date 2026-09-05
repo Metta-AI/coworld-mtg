@@ -41,6 +41,39 @@ change needed to cover: a dedicated haunt matcher, choose-and-sacrifice-rest
 sweeps, and a separate multi-target destruction path. That review changed the
 implementation obligation before anyone wrote the engine patch.
 
+The implementation then exposed a second, sharper distinction. Wrath makes
+Hushbringer and Traveler die together. Paying two separate sacrifice costs can
+make Hushbringer die first and Traveler second. In that ordering, Hushbringer is
+already gone when Traveler dies, so Traveler should create a Spirit. The
+reverse ordering should create none.
+
+The partial repair passed the original simultaneous-death tests but failed
+this new cost case: Hushbringer-first produced zero Spirits instead of one.
+The original engine produced one. Deferred payment had flattened separate
+cost selections into one list, and the repair treated that list as a single
+event. The [retained failed attempt](../cases/process/hushbringer-simultaneous-death/v7-component-stop/README.md)
+records the exact operations, reached zones, life total, object groups and
+before/after snapshots. Its failure was kept visible and sent through another
+planning and review cycle. A [fresh original-engine run with an isolated build](../cases/process/hushbringer-simultaneous-death/v7-component-isolated-runtime/README.md)
+confirmed the cost observations independently of the earlier shared build
+directory.
+
+This changed the design requirement: preserve which validated cost component
+each selected object belongs to, then close that component's event before
+starting the next. A snapshot needs both a time and a well-defined event. A
+flat collection of objects cannot recover the decision that grouped them.
+The case's expectation stayed fixed while the repair obligation grew.
+
+The build workflow needed a correction too. Sharing a Cargo output directory
+between the original and modified engine checkouts caused a test compile to
+see an older engine type. The [build-isolation record](../cases/process/hushbringer-simultaneous-death/build-isolation/README.md)
+retains the failed compile and the builder change. Both comparison workers
+now require separate build directories and the same corrected builder. The
+rebuilt baseline still passes nine cases and violates Hushbringer; the original
+checker and case remain preserved. Build provenance belongs inside the
+experiment because the executable being compared must be the one we intended
+to build.
+
 There is an unusual external corroboration. Magic Online's [February 4, 2025
 patch notes](https://www.mtgo.com/news/mtgo-blog-02042025) listed a fix for the
 same Hushbringer simultaneous-death symptom. We do not know whether their

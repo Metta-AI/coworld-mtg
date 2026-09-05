@@ -80,3 +80,8 @@ production discrimination for the resolver wrapper, and resolve the
 preserving their assertions. The [v8 manifest](v8-plan-manifest.json) binds
 the eighth full review and the supporting evidence. A fresh v9 planner was
 dispatched; implementation remains unaccepted.
+
+An [isolated original-engine cost run](v7-component-isolated-runtime/README.md)
+confirmed the earlier deferred-cost observations using a fresh baseline
+compilation and the exact retained test overlay. This supplements the
+historical shared-target evidence without relabeling it.

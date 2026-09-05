@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-05T16:44:45.554731+00:00",
+  "head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "production_diff_empty": true,
+  "target": "/home/ubuntu/repos/phase-hushbringer-baseline-tests/target",
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "spell_sacrifice_cost_components",
+        "--",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "command_exit": 101,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-root-baseline-components-v7-components.log",
+      "log_sha256": "5d5d8007cbcc4e5b04f57cecb826cb5e5de4e6c485379667f72db3ac272ce850"
+    }
+  ]
+}
