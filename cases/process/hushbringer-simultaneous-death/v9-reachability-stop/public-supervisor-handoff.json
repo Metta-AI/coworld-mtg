@@ -1,0 +1,304 @@
+{
+  "utc": "2026-09-05T18:21:32.268463+00:00",
+  "ownership": "Root now owns active checkout, primary isolated mutation checkout/supervisor and final report; primary executor releases ownership and agent slot.",
+  "active_source_unchanged": true,
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "source_archive_sha256": "3f7768a91a7456a5b0b7e6a5d9cb6f769eb8fd2c6ec0cfeec9fac559cb8cb1a5",
+  "supervisors": [
+    {
+      "pid": 3257715,
+      "ppid": 1,
+      "args": "python3 /home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/run-mutations.py"
+    }
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations/target",
+  "supervisor_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/mutations-1-supervisor.log",
+  "script_hashes": {
+    "run-mutations.py": "c2a19e66939cdaaf695adaa5489ed4fc0bf4b85bc74fb477ad5eb6e72be37498",
+    "mutation-tools.py": "2a2e5fe6bd0ae1ed883704602372488bec42b9299e20f34f9c40a6dbfb8d844d",
+    "reserve-public-mutations.py": "6038423187bbaa87e3135744383b3c7beeb9568d21200ab2d53b4f2d759d4ed4",
+    "mutation-inventory-v9.json": "07e5bbecbaf36f0d61ba4337a466ac243e7c4365b31a8d79d863c8f3308debe6"
+  },
+  "fixed_execution": "The already-running driver holds canonical frozen archive bytes and the public-row list in memory; it writes only its isolated checkout. Active source changes cannot enter this run. Current metadata has a two-test-name correction documented in mutation-test-name-errata.json; source transforms/actual full-module command are unchanged.",
+  "per_attempt": "Full source manifest/archive/patch before Cargo. Explicit own target/jobs2. Cargo JSON proves actual integration executable fresh:false and hash. Fresh-byte restore then full canonical verification and91-active matrix rerun after each mutant. Failed attempts remain immutable.",
+  "states": {
+    "augment-handoff": {
+      "id": "augment-handoff",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::augment_subject_preserves_the_sba_owner_and_co_departed_observer_payoff' (3264936) panicked at crates/engine/src/game/scenario.rs:3353:9:"
+      ],
+      "summary": [
+        "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.22s"
+      ],
+      "finished": "2026-09-05T18:06:35.587597+00:00"
+    },
+    "destroy-resolve": {
+      "id": "destroy-resolve",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::attachment_relative_suppression_binds_live_relation_before_departure' (3269712) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::chosen_sacrifice_closes_before_later_hush_departure_instruction' (3269715) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::destroy_self_reference_and_partial_illegality_preserve_existing_guards' (3269883) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::first_departing_granter_preserves_later_member_types_and_trigger' (3269893) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::empty_sweep_and_zero_choice_do_not_leak_into_later_death' (3269891) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::granted_suppression_and_granted_death_trigger_use_effective_abilities' (3269895) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat' (3269892) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::merged_intrinsic_flush_limit_has_a_subject_first_positive_twin' (3269909) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4011:5:",
+        "thread 'trigger_suppression_event_timing::paused_choice_state_roundtrip_and_following_action_have_no_stale_scope' (3269991) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::haunt_payoff_uses_the_linked_subject_death_before_world' (3269897) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::real_mutate_cast_departure_preserves_component_routing_and_normal_group_controls' (3270029) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4011:5:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_redirect_only_preserves_original_incarnation' (3270048) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_no_replacement_borrows_outer_owner' (3270047) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure' (3270060) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure_reversed' (3270061) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::seeded_regeneration_guard_preserves_actual_departures_only' (3270065) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resumed_change_zone_tail_suppression_uses_authoritative_records' (3270064) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility' (3269977) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resumed_change_zone_no_hush_duplicate_payoff_compatibility' (3270063) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::single_departure_after_world_observes_ability_removal_source_leaving' (3270114) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::sequential_destroy_instructions_bind_separate_before_worlds' (3270110) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:309:9:",
+        "thread 'trigger_suppression_event_timing::two_target_destroy_owns_one_event_in_both_target_orders' (3270119) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:339:13:",
+        "thread 'trigger_suppression_event_timing::two_suppression_controllers_and_between_event_control_rebind_are_distinct' (3270118) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::unpaused_change_zone_no_hush_payoff_remains_exactly_one' (3270123) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+      ],
+      "summary": [
+        "test result: FAILED. 67 passed; 24 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.59s"
+      ],
+      "finished": "2026-09-05T18:08:19.100889+00:00"
+    },
+    "destroy-resolve_all": {
+      "id": "destroy-resolve_all",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::co_departed_observer_and_self_trigger_both_use_before_suppression' (3279369) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::clause_local_disjunction_registers_once_for_eligible_sibling' (3279368) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::controller_relative_and_conditional_suppression_bind_before_departure' (3279372) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2300:13:",
+        "thread 'trigger_suppression_event_timing::delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener' (3279385) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::delayed_same_occurrence_tries_eligible_alternative_exactly_once' (3279388) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::from_anywhere_and_dies_observers_choose_different_worlds' (3279399) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death' (3279430) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:135:5:",
+        "thread 'trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death' (3279431) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:135:5:",
+        "thread 'trigger_suppression_event_timing::haunt_payoff_uses_the_linked_subject_death_before_world' (3279402) panicked at crates/engine/src/game/scenario.rs:3353:9:",
+        "thread 'trigger_suppression_event_timing::repeated_object_id_retains_distinct_incarnation_and_event_suppression' (3279442) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::unattach_fallback_and_native_cause_remain_distinct' (3279463) panicked at crates/engine/src/game/scenario.rs:3353:9:"
+      ],
+      "summary": [
+        "test result: FAILED. 80 passed; 11 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.52s"
+      ],
+      "finished": "2026-09-05T18:10:03.030759+00:00"
+    },
+    "keep-sweep": {
+      "id": "keep-sweep",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::completed_keep_sacrifice_sweeps_share_one_boundary_across_choice_routes' (3285142) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:819:17:",
+        "thread 'trigger_suppression_event_timing::opponent_scoped_keep_sweep_preserves_owner_and_out_of_scope_board' (3285188) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+      ],
+      "summary": [
+        "test result: FAILED. 89 passed; 2 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.44s"
+      ],
+      "finished": "2026-09-05T18:12:04.864339+00:00"
+    },
+    "change-zone-resolve": {
+      "id": "change-zone-resolve",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins' (3292475) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::remaining_complete_producers_capture_each_actual_group' (3292507) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_redirect_only_preserves_original_incarnation' (3292510) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_no_replacement_borrows_outer_owner' (3292509) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure' (3292511) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resolver_reentry_same_incarnation_cannot_claim_outer_departure_reversed' (3292512) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::unpaused_change_zone_no_hush_payoff_remains_exactly_one' (3292531) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+      ],
+      "summary": [
+        "test result: FAILED. 84 passed; 7 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.68s"
+      ],
+      "finished": "2026-09-05T18:13:49.691958+00:00"
+    },
+    "change-zone-resolve_all": {
+      "id": "change-zone-resolve_all",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::remaining_complete_producers_capture_each_actual_group' (3296245) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+      ],
+      "summary": [
+        "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.68s"
+      ],
+      "finished": "2026-09-05T18:16:32.676632+00:00"
+    },
+    "shared-batch-delivery": {
+      "id": "shared-batch-delivery",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::unpaused_bounce_batch_and_selected_bounce_share_actual_departure_group' (3301130) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+      ],
+      "summary": [
+        "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.71s"
+      ],
+      "finished": "2026-09-05T18:18:48.698381+00:00"
+    },
+    "resumed-change-zone": {
+      "id": "resumed-change-zone",
+      "outcome": "runtime failure",
+      "mutant_exit": 101,
+      "restore_exit": 0,
+      "compiled": true,
+      "failures": [
+        "thread 'trigger_suppression_event_timing::resumed_change_zone_tail_suppression_uses_authoritative_records' (3304923) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+        "thread 'trigger_suppression_event_timing::resumed_change_zone_no_hush_duplicate_payoff_compatibility' (3304922) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+      ],
+      "summary": [
+        "test result: FAILED. 89 passed; 2 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.35s"
+      ],
+      "finished": "2026-09-05T18:20:34.445465+00:00"
+    },
+    "all-eligible-sacrifice": {
+      "status": "started/in flight or explicitly reserved; inspect nested receipts"
+    },
+    "player-scope-sacrifice": {
+      "status": "unstarted"
+    },
+    "choice-sacrifice": {
+      "status": "unstarted"
+    },
+    "choice-change-bounce": {
+      "status": "unstarted"
+    },
+    "choice-pay-cost": {
+      "status": "unstarted"
+    },
+    "cost-member-handle_sacrifice_for_cost": {
+      "status": "unstarted"
+    },
+    "cost-member-pay_deferred_spell_sacrifices_at_commit": {
+      "status": "unstarted"
+    },
+    "components-whole-queue": {
+      "status": "unstarted"
+    },
+    "components-singleton": {
+      "status": "unstarted"
+    },
+    "components-filter-grouping": {
+      "status": "unstarted"
+    },
+    "owner-finalization": {
+      "status": "unstarted"
+    },
+    "after-world-flush": {
+      "status": "unstarted"
+    },
+    "haunt-adapter": {
+      "status": "unstarted"
+    },
+    "unattach-adapter": {
+      "status": "unstarted"
+    },
+    "component-binding-distinct-invocation": {
+      "status": "unstarted"
+    },
+    "component-serde-drop": {
+      "status": "unstarted"
+    },
+    "inline-migration-preflight": {
+      "status": "unstarted"
+    },
+    "concession-preflight-exception": {
+      "status": "unstarted"
+    },
+    "independent-debug-preflight-exceptions": {
+      "status": "unstarted"
+    },
+    "normal-leaf-authority": {
+      "status": "unstarted"
+    },
+    "library-leaf-authority": {
+      "status": "unstarted"
+    },
+    "added-mid-leaf-flush": {
+      "status": "unstarted"
+    },
+    "before-clause-gate": {
+      "status": "unstarted"
+    },
+    "any-clause-after-to-before": {
+      "status": "unstarted"
+    },
+    "ambiguous-origin-before-misclassification": {
+      "status": "unstarted"
+    },
+    "ambiguous-origin-after-approximation": {
+      "status": "unstarted"
+    },
+    "delayed-ambiguous-live-gate": {
+      "status": "unstarted"
+    },
+    "ordinary-adapter": {
+      "status": "unstarted"
+    },
+    "batched-adapter": {
+      "status": "unstarted"
+    },
+    "ordinary-global-death-gate": {
+      "status": "unstarted"
+    },
+    "batched-global-death-gate": {
+      "status": "unstarted"
+    },
+    "self-arrival-exception": {
+      "status": "unstarted"
+    },
+    "before-live-subject-authority": {
+      "status": "unstarted"
+    }
+  },
+  "completed_rows": 8,
+  "runtime_killed": 8,
+  "survived": 0,
+  "invalid_attempts": 0,
+  "safe_suffix": [
+    "before-clause-gate",
+    "any-clause-after-to-before",
+    "ambiguous-origin-before-misclassification",
+    "ambiguous-origin-after-approximation",
+    "delayed-ambiguous-live-gate",
+    "ordinary-adapter",
+    "batched-adapter",
+    "ordinary-global-death-gate",
+    "batched-global-death-gate",
+    "self-arrival-exception",
+    "before-live-subject-authority"
+  ],
+  "safe_reservation": "Before reassignment, run reserve-public-mutations.py with exact still-unstarted IDs. It atomically creates released marker directories and records partial success if a race occurs. Driver checks job.exists() before source mutation and skips marked rows. Confirm marker receipts, then release only reserved IDs. Markers do not count as completed proof.",
+  "graceful_stop": "Run reserve-public-mutations.py --all-unstarted. Current in-flight row completes mutant and exact fresh-mtime restore, then driver skips remaining marked rows and exits. Verify process gone, every2051 isolated source hash equals canonical, and current row restored exit0. Do not treat the final all-requested-rows-completed log as completed coverage when markers exist.",
+  "forced_stop_recovery": "If emergency interruption is necessary, retain process/log/exit evidence. After no Cargo/compiler remains in this checkout, restore every differing source from frozen archive with fresh write_bytes, verify all2051 hashes, then archive/record and rebuild/rerun the positive matrix in the same own target before any further experiment.",
+  "independent_owners": {
+    "fiveR2R3": "/root/hushbringer_mutations_r2_r3_v9, phase-hushbringer-mutations-r2-r3",
+    "nineteenLibrary": "/root/hushbringer_mutations_library_v9, phase-hushbringer-mutations-library"
+  },
+  "stop_reason": "Battle-protector public runtime discriminator conflicts with normal terminal-state reachability; fresh integrated v10 planning/review required."
+}
