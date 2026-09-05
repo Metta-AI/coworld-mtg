@@ -1,0 +1,19 @@
+{
+  "id": "all-eligible-sacrifice",
+  "file": "crates/engine/src/game/effects/sacrifice.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "resolve",
+      "marker": "crate::game::zones::with_departure_member",
+      "index": 0
+    }
+  ],
+  "tests": [
+    "remaining_complete_producers_capture_each_actual_group"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "augment-handoff",
+  "file": "crates/engine/src/game/augment.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "check_standalone_augment_permanents",
+      "marker": "crate::game::zones::with_departure_member",
+      "index": 0
+    }
+  ],
+  "tests": [
+    "augment_subject_preserves_the_sba_owner_and_co_departed_observer_payoff"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

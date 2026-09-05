@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/effects/sacrifice.rs
++++ b/crates/engine/src/game/effects/sacrifice.rs
+@@ -283,15 +283,9 @@
+                 &eligible,
+                 |state, events, owner| {
+                     for &obj_id in &eligible {
+-                        match crate::game::zones::with_departure_member(
+-                            state,
+-                            events,
+-                            owner,
+-                            obj_id,
+-                            |state, events| {
++                        match (|| {
+                                 sacrifice::sacrifice_permanent(state, obj_id, chooser, events)
+-                            },
+-                        ) {
++                            })() {
+                             Ok(SacrificeOutcome::Complete) => sacrificed += 1,
+                             Ok(SacrificeOutcome::NeedsReplacementChoice(player)) => {
+                                 state.waiting_for =

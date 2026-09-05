@@ -1,0 +1,19 @@
+{
+  "id": "cost-member-handle_sacrifice_for_cost",
+  "file": "crates/engine/src/game/casting_costs.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "handle_sacrifice_for_cost",
+      "marker": "crate::game::zones::with_departure_member",
+      "index": 0
+    }
+  ],
+  "tests": [
+    "multi_object_spell_sacrifice_cost_preserves_commit_and_suppression"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

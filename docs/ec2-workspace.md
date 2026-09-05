@@ -9,7 +9,7 @@ The macOS checkout is a migration backup; run builds and experiments on EC2.
 ssh nishadsingh-box-4
 cd /home/ubuntu/repos/coworld-mtg
 export PATH=/home/ubuntu/.cargo/bin:$PATH
-export CARGO_BUILD_JOBS=4
+export CARGO_BUILD_JOBS=1
 scripts/check.sh
 ```
 

@@ -1,0 +1,19 @@
+{
+  "id": "normal-leaf-authority",
+  "file": "crates/engine/src/game/zones.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "move_to_zone",
+      "old": "    with_departure_leaf(state, events, object_id, to, |state, events, binding| {\n        move_to_zone_inner(state, object_id, to, events, binding);\n    });",
+      "new": "    move_to_zone_inner(state, object_id, to, events, None);"
+    }
+  ],
+  "tests": [
+    "standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

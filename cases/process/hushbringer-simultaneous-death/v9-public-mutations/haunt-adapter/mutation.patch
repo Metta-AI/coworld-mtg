@@ -1,0 +1,8 @@
+--- a/crates/engine/src/game/haunt.rs
++++ b/crates/engine/src/game/haunt.rs
+@@ -147,5 +147,4 @@
+         return false;
+     }
+     haunted_creature(state, source_id) == Some(*object_id)
+-        && !super::trigger_suppression::death_suppressed_before(state, record)
+ }

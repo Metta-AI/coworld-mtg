@@ -1,0 +1,19 @@
+{
+  "id": "added-mid-leaf-flush",
+  "file": "crates/engine/src/game/zones.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "move_to_zone_inner",
+      "old": "    // CR 111.8: A token that has left the battlefield can't move to another zone",
+      "new": "    super::layers::flush_layers(state);\n    // CR 111.8: A token that has left the battlefield can't move to another zone"
+    }
+  ],
+  "tests": [
+    "first_departing_granter_preserves_later_member_types_and_trigger"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

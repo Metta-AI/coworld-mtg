@@ -1,0 +1,14 @@
+{
+  "id": "haunt-adapter",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::haunt_payoff_uses_the_linked_subject_death_before_world' (3379304) panicked at crates/engine/src/game/scenario.rs:3353:9:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.74s"
+  ],
+  "finished": "2026-09-05T18:49:59.066880+00:00"
+}

@@ -1,0 +1,22 @@
+--- a/crates/engine/src/game/effects/choose_and_sacrifice_rest.rs
++++ b/crates/engine/src/game/effects/choose_and_sacrifice_rest.rs
+@@ -559,17 +559,11 @@
+                     .map(|obj| obj.controller)
+                     .unwrap_or(state.active_player);
+                 // Use the sacrifice primitive directly — single authority for sacrifice.
+-                match crate::game::zones::with_departure_member(
+-                    state,
+-                    events,
+-                    owner,
+-                    obj_id,
+-                    |state, events| {
++                match (|| {
+                         crate::game::sacrifice::sacrifice_permanent(
+                             state, obj_id, controller, events,
+                         )
+-                    },
+-                ) {
++                    })() {
+                     Ok(crate::game::sacrifice::SacrificeOutcome::Complete) => {}
+                     Ok(crate::game::sacrifice::SacrificeOutcome::NeedsReplacementChoice(
+                         player,

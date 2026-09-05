@@ -1,0 +1,192 @@
+{
+  "utc_started": "2026-09-05T19:10:41.719973+00:00",
+  "row": {
+    "id": "added-mid-leaf-flush",
+    "file": "crates/engine/src/game/zones.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "move_to_zone_inner",
+        "old": "    // CR 111.8: A token that has left the battlefield can't move to another zone",
+        "new": "    super::layers::flush_layers(state);\n    // CR 111.8: A token that has left the battlefield can't move to another zone"
+      }
+    ],
+    "tests": [
+      "first_departing_granter_preserves_later_member_types_and_trigger"
+    ],
+    "kind": "public",
+    "description": null,
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "tests": [
+    "first_departing_granter_preserves_later_member_types_and_trigger",
+    "two_target_destroy_owns_one_event_in_both_target_orders",
+    "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+    "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+    "oracle_wrath_without_hush_creates_exactly_one_spirit"
+  ],
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "qualification": "Original full mutant matrix observed intended Creature-record assertion then collateral R2 stack-overflow abort. These separate target/control invocations measure their complete results. Original full restored 91/20 passed.",
+  "phases": {
+    "baseline": [
+      {
+        "test": "first_departing_granter_preserves_later_member_types_and_trigger",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/baseline-0/receipt.json",
+        "receipt_sha256": "98e47b306413dbbac62e06a48c56b0393885e652f15753bc59bf3eca92bf7e77",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.02s"
+        ],
+        "log_sha256": "565016b50d63dc81ca7eae6337c050fc380fff9a7cddc9d94aee4ca24e90f6e4"
+      },
+      {
+        "test": "two_target_destroy_owns_one_event_in_both_target_orders",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/baseline-1/receipt.json",
+        "receipt_sha256": "e88a8efd919033491a4d6c2cc828dde55562efc3538cef66328e4e285f7fc89d",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.21s"
+        ],
+        "log_sha256": "4effb90995d93e1b69c54b15412e875dd04984b27a3d7ebe3193ec2d89b22571"
+      },
+      {
+        "test": "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/baseline-2/receipt.json",
+        "receipt_sha256": "ed2f193e8e5f37fa836486e7447d69aa592508de1a2e9fc5bca9b5cf4016d3c2",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.19s"
+        ],
+        "log_sha256": "a605640a8745d04017bd2393f423427bea0100cdbcd50a7eb232d8cf25e38d24"
+      },
+      {
+        "test": "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/baseline-3/receipt.json",
+        "receipt_sha256": "bc16e259c67f72216a11b45949ce0c5b986ffd5f7aa0b8264a9b69efeebe37ce",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.16s"
+        ],
+        "log_sha256": "8228669c94712960966ab2b413a41e104ac3a90726540d419b3065f91984407c"
+      },
+      {
+        "test": "oracle_wrath_without_hush_creates_exactly_one_spirit",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/baseline-4/receipt.json",
+        "receipt_sha256": "6361b7834349f8febffb5f65ec74dedb8ccaaa1823dff7ef3e1d811635b4ddcd",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.16s"
+        ],
+        "log_sha256": "5a223706956a4fb365f88f13802f47c8be865b63f1ed51817baebce5fa26eada"
+      }
+    ],
+    "mutant": [
+      {
+        "test": "first_departing_granter_preserves_later_member_types_and_trigger",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/mutant-0/receipt.json",
+        "receipt_sha256": "421d1d32279fffaa6c3ff07943d97b28dc5a6cfa72af8ae85f3ae6d5cfda18cd",
+        "exit": 101,
+        "summary": [
+          "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+        ],
+        "log_sha256": "04a239a12e7c481ac099226c72bb5d510f005e4b3dc487f7466e935f19109925"
+      },
+      {
+        "test": "two_target_destroy_owns_one_event_in_both_target_orders",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/mutant-1/receipt.json",
+        "receipt_sha256": "82e9f1ebec7c25eb162fc0b5e24f7c6139479c00889c5314665ac3d76c003910",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.20s"
+        ],
+        "log_sha256": "c408302c52d26e0a48506adc6b6f0902ee7c9182a8540e44eae325a183876a7d"
+      },
+      {
+        "test": "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/mutant-2/receipt.json",
+        "receipt_sha256": "46f1c741aaa4dfbb976ae4285c80bc347b04d027b726f24f78127a9c5c3a46f1",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.16s"
+        ],
+        "log_sha256": "5ce7a2813cd7ad79c55567241c0d9d3f8559ac82dd836418aa0a69a6a2c2e59d"
+      },
+      {
+        "test": "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/mutant-3/receipt.json",
+        "receipt_sha256": "8f5350999a3a6ff0fb0b9f2ae7242af4d7258780034b02feeeb33c0fee1720df",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.17s"
+        ],
+        "log_sha256": "af1dc039e7eacacf597296f517b4822c913172e58631740bc75cd86b934dd65f"
+      },
+      {
+        "test": "oracle_wrath_without_hush_creates_exactly_one_spirit",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/mutant-4/receipt.json",
+        "receipt_sha256": "09e9c1de8b1ae66a47649e1b81b3181635982ae1ce18e42fbd1b14e21cfdcc57",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.17s"
+        ],
+        "log_sha256": "b9cc2435ec261f1351328f738a4086c1339ac5de408cc6a7c3abff6a38d687d9"
+      }
+    ],
+    "restored": [
+      {
+        "test": "first_departing_granter_preserves_later_member_types_and_trigger",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/restored-0/receipt.json",
+        "receipt_sha256": "1a42883ce7ca4df17c6fd0b558d64b73c32d7b12442fe8f9ba708bfdd01c1720",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.02s"
+        ],
+        "log_sha256": "345a60ab378ee410ab89013ca84996a571f7a88e801b982a7448c384fa9ff5fe"
+      },
+      {
+        "test": "two_target_destroy_owns_one_event_in_both_target_orders",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/restored-1/receipt.json",
+        "receipt_sha256": "262b41d87ed6a6555b52904993656d3c40e856275d4754ab50ad11ccbdf56112",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.20s"
+        ],
+        "log_sha256": "ea71573dcd57a1ae1343bb41850badca2b845767c33c7589f4b1b58e285b58ac"
+      },
+      {
+        "test": "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/restored-2/receipt.json",
+        "receipt_sha256": "396e7b437e2b4c9d2f50d11f647d1455e4028676aa2070ab2328a0de026828fa",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.16s"
+        ],
+        "log_sha256": "4379bac23839faf44ab880440315f95b1135605dc445bdbc37caa33601be3ff6"
+      },
+      {
+        "test": "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/restored-3/receipt.json",
+        "receipt_sha256": "2213cccb60232280a7dcbbdaab250d75a1040db4bd24adf3189374fb4ee45fd1",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.16s"
+        ],
+        "log_sha256": "9a90dd1758c4a7c4b6a11484e560d1b3b13a0305f512e94c7f1e192da460e501"
+      },
+      {
+        "test": "oracle_wrath_without_hush_creates_exactly_one_spirit",
+        "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/restored-4/receipt.json",
+        "receipt_sha256": "e82e48857cd9cc466c72130b984ce0c4936dbcbf113801fbc9be2915f73ea4ba",
+        "exit": 0,
+        "summary": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.16s"
+        ],
+        "log_sha256": "a655fbdcb339439e71b0db9ef300a9d5259c40f72c2c79705b5065cad632a5d5"
+      }
+    ]
+  },
+  "utc_finished": "2026-09-05T19:14:43.099011+00:00",
+  "source_restored": true,
+  "status": "Target semantic failure with four completed positive controls, all five baseline/restored pass; fresh mutant and restored integration compilation."
+}

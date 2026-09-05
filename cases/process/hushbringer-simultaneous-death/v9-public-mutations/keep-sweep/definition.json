@@ -1,0 +1,19 @@
+{
+  "id": "keep-sweep",
+  "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "sacrifice_unchosen",
+      "marker": "crate::game::zones::with_departure_member",
+      "index": 0
+    }
+  ],
+  "tests": [
+    "completed_keep_sacrifice_sweeps_share_one_boundary_across_choice_routes"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

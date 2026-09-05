@@ -1,0 +1,21 @@
+{
+  "id": "component-binding-distinct-invocation",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_identical_filters_serde_and_both_finalizers' (3388737) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4552:17:",
+    "thread 'trigger_suppression_event_timing::deferred_components_mixed_cardinalities_keep_exact_peers' (3388742) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4617:21:",
+    "thread 'trigger_suppression_event_timing::deferred_components_legacy_and_malformed_refuse_then_cancel_reannounce' (3388741) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4733:9:",
+    "thread 'trigger_suppression_event_timing::deferred_components_surviving_suppressor_and_failed_mana_retry_keep_provenance' (3388744) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5538:13:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_bind_separate_worlds' (3388796) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_hush_first' (3388797) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3174:5:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_no_hush_reversed' (3388798) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:",
+    "thread 'trigger_suppression_event_timing::separate_deferred_spell_sacrifice_cost_components_traveler_first' (3388799) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:3179:9:"
+  ],
+  "summary": [
+    "test result: FAILED. 83 passed; 8 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.41s"
+  ],
+  "finished": "2026-09-05T18:54:00.520967+00:00"
+}

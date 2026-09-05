@@ -1,0 +1,19 @@
+{
+  "id": "choice-change-bounce",
+  "file": "crates/engine/src/game/engine_resolution_choices.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "handle_resolution_choice",
+      "marker": "super::zones::with_departure_member",
+      "index": 1
+    }
+  ],
+  "tests": [
+    "change_zone_choice_uses_selected_objects_and_finalizes_before_continuation"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

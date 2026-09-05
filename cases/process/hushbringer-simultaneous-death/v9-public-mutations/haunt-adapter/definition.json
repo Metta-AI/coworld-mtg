@@ -1,0 +1,19 @@
+{
+  "id": "haunt-adapter",
+  "file": "crates/engine/src/game/haunt.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "match_haunted_creature_dies",
+      "old": "        && !super::trigger_suppression::death_suppressed_before(state, record)\n",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "haunt_payoff_uses_the_linked_subject_death_before_world"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

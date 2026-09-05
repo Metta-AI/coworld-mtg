@@ -1,0 +1,14 @@
+{
+  "id": "shared-batch-delivery",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::unpaused_bounce_batch_and_selected_bounce_share_actual_departure_group' (3301130) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.71s"
+  ],
+  "finished": "2026-09-05T18:18:48.698381+00:00"
+}

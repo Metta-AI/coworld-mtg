@@ -1,0 +1,15 @@
+{
+  "id": "keep-sweep",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::completed_keep_sacrifice_sweeps_share_one_boundary_across_choice_routes' (3285142) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:819:17:",
+    "thread 'trigger_suppression_event_timing::opponent_scoped_keep_sweep_preserves_owner_and_out_of_scope_board' (3285188) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 89 passed; 2 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.44s"
+  ],
+  "finished": "2026-09-05T18:12:04.864339+00:00"
+}

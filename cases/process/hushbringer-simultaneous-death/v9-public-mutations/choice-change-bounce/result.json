@@ -1,0 +1,15 @@
+{
+  "id": "choice-change-bounce",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::change_zone_choice_uses_selected_objects_and_finalizes_before_continuation' (3324217) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2409:13:",
+    "thread 'trigger_suppression_event_timing::unpaused_bounce_batch_and_selected_bounce_share_actual_departure_group' (3324310) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 89 passed; 2 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.88s"
+  ],
+  "finished": "2026-09-05T18:27:58.477965+00:00"
+}

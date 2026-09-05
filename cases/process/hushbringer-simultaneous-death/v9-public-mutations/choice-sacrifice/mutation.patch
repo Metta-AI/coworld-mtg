@@ -1,0 +1,22 @@
+--- a/crates/engine/src/game/engine_resolution_choices.rs
++++ b/crates/engine/src/game/engine_resolution_choices.rs
+@@ -3308,17 +3308,11 @@
+                         &chosen,
+                         |state, events, owner| {
+                             for &card_id in &chosen {
+-                                match super::zones::with_departure_member(
+-                                    state,
+-                                    events,
+-                                    owner,
+-                                    card_id,
+-                                    |state, events| {
++                                match (|| {
+                                         super::sacrifice::sacrifice_permanent(
+                                             state, card_id, player, events,
+                                         )
+-                                    },
+-                                ) {
++                                    })() {
+                                     Ok(super::sacrifice::SacrificeOutcome::Complete) => {}
+                                     Ok(
+                                         super::sacrifice::SacrificeOutcome::NeedsReplacementChoice(

@@ -1,0 +1,12 @@
+--- a/crates/engine/src/game/engine.rs
++++ b/crates/engine/src/game/engine.rs
+@@ -249,9 +249,6 @@
+             action,
+             GameAction::CancelCast
+                 | GameAction::Concede { .. }
+-                | GameAction::Debug(_)
+-                | GameAction::GrantDebugPermission { .. }
+-                | GameAction::RevokeDebugPermission { .. }
+         )
+     {
+         super::casting_costs::validate_pending_deferred_sacrifice_components(state)?;

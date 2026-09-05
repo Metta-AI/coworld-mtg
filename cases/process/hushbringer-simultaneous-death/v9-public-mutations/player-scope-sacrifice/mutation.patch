@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/effects/mod.rs
++++ b/crates/engine/src/game/effects/mod.rs
+@@ -5804,15 +5804,9 @@
+                 let (player, mut cards) = selections.remove(0);
+                 while !cards.is_empty() {
+                     let card = cards.remove(0);
+-                    match crate::game::zones::with_departure_member(
+-                        state,
+-                        events,
+-                        owner,
+-                        card,
+-                        |state, events| {
++                    match (|| {
+                             crate::game::sacrifice::sacrifice_permanent(state, card, player, events)
+-                        },
+-                    )
++                        })()
+                     .map_err(|error| EffectError::InvalidParam(error.to_string()))?
+                     {
+                         crate::game::sacrifice::SacrificeOutcome::Complete => sacrificed += 1,

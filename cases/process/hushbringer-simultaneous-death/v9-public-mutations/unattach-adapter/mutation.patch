@@ -1,0 +1,12 @@
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -2881,8 +2881,7 @@
+                     .map(|attached| attached == *object_id)
+                     .unwrap_or(false)
+                 // CR 603.10c: Only the death-caused fallback looks back here.
+-                && (*to != Zone::Graveyard
+-                    || !super::trigger_suppression::death_suppressed_before(state, record))
++
+         }
+         _ => false,
+     }

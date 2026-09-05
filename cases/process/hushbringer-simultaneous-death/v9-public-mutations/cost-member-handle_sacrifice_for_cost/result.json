@@ -1,0 +1,16 @@
+{
+  "id": "cost-member-handle_sacrifice_for_cost",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::chosen_spell_and_activation_cost_rejection_preserves_state_for_valid_retry' (3335722) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2833:17:",
+    "thread 'trigger_suppression_event_timing::multi_object_spell_sacrifice_cost_preserves_commit_and_suppression' (3335765) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::separate_spell_sacrifice_cost_components_bind_separate_worlds' (3335794) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 88 passed; 3 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.42s"
+  ],
+  "finished": "2026-09-05T18:32:43.457357+00:00"
+}

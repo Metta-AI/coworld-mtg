@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -942,6 +942,7 @@
+     events: &mut Vec<GameEvent>,
+     departure_binding: Option<DepartureMemberBinding>,
+ ) {
++    super::layers::flush_layers(state);
+     // CR 111.8: A token that has left the battlefield can't move to another zone
+     // or come back onto the battlefield — "if such a token would change zones, it
+     // remains in its current zone instead." It ceases to exist at the next SBA

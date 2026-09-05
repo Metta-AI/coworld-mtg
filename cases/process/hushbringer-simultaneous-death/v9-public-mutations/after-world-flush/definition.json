@@ -1,0 +1,20 @@
+{
+  "id": "after-world-flush",
+  "file": "crates/engine/src/game/zones.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "finish_departure_suppression",
+      "old": "        super::layers::flush_layers(state);\n",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins",
+    "standalone_zone_leaf_after_world_inverse_reaches_unowned_sacrifice"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

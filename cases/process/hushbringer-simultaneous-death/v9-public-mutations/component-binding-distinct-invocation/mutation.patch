@@ -1,0 +1,11 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -2046,7 +2046,7 @@
+     if let Some(filter) = deferred_sacrifice_filter {
+         if can_defer_spell_sacrifice_until_mana_payment(state, player, &pending, chosen) {
+             let component = DeferredSacrificeComponentId(
+-                u64::try_from(pending.deferred_sacrificed_permanents.len()).map_err(|_| {
++                u64::try_from(0_usize).map_err(|_| {
+                     EngineError::InvalidAction("Too many deferred sacrifice selections".to_string())
+                 })?,
+             );

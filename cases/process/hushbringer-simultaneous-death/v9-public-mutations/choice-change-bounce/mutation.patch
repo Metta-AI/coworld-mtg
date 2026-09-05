@@ -1,0 +1,14 @@
+--- a/crates/engine/src/game/engine_resolution_choices.rs
++++ b/crates/engine/src/game/engine_resolution_choices.rs
+@@ -3391,9 +3391,9 @@
+                                     enters_modified_if: enters_modified_if.clone(),
+                                     enter_attached_to: None,
+                                 };
+-                                match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move(
++                                match (|| effects::change_zone::process_one_zone_move(
+                             state, &ctx, *card_id, events,
+-                        )) {
++                        ))() {
+                             effects::change_zone::ZoneMoveResult::Done => {
+                                 // CR 118.3: When this is a cost-payment exile (e.g., Mimeoplasm),
+                                 // populate the exile-link index map so the continuation can

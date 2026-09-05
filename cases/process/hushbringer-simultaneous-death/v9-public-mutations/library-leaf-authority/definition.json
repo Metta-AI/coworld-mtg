@@ -1,0 +1,20 @@
+{
+  "id": "library-leaf-authority",
+  "file": "crates/engine/src/game/zones.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "move_to_library_at_index",
+      "old": "    with_departure_leaf(\n        state,\n        events,\n        object_id,\n        Zone::Library,\n        |state, events, binding| {\n            move_to_library_at_index_inner(state, object_id, index, events, binding);\n        },\n    );",
+      "new": "    move_to_library_at_index_inner(state, object_id, index, events, None);"
+    }
+  ],
+  "tests": [
+    "dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins",
+    "library_position_choice_and_targeted_leaf_preserve_non_death_events"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

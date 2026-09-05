@@ -1,0 +1,14 @@
+{
+  "id": "inline-migration-preflight",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::deferred_components_inline_legacy_rejects_before_discard' (3398305) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4697:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.15s"
+  ],
+  "finished": "2026-09-05T18:58:42.985953+00:00"
+}

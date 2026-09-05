@@ -1,0 +1,14 @@
+{
+  "id": "change-zone-resolve_all",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::remaining_complete_producers_capture_each_actual_group' (3296245) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 90 passed; 1 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 4.68s"
+  ],
+  "finished": "2026-09-05T18:16:32.676632+00:00"
+}

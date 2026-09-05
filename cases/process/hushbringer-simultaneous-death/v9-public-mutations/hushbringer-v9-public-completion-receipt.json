@@ -1,0 +1,26 @@
+{
+  "utc": "2026-09-05T19:08:39.863083+00:00",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations",
+  "supervisor_pid": 3257715,
+  "supervisor_exited": true,
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "verified_source_files": 2051,
+  "source_mismatches": [],
+  "completed_public_rows": 30,
+  "released_rows_not_counted": [
+    "before-clause-gate",
+    "any-clause-after-to-before",
+    "ambiguous-origin-before-misclassification",
+    "ambiguous-origin-after-approximation",
+    "delayed-ambiguous-live-gate",
+    "ordinary-adapter",
+    "batched-adapter",
+    "ordinary-global-death-gate",
+    "batched-global-death-gate",
+    "self-arrival-exception",
+    "before-live-subject-authority"
+  ],
+  "audit_sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18",
+  "supervisor_log_sha256": "7a086007d60a6b4db07b9508fb93461df7c2557b592f4a35d3d3acd65b3f14a7",
+  "scope": "All original 30 public rows freshly compiled mutant/restored, designated tests failed, restored full 91/20 passed. Root mechanical audit, not independent implementation review or acceptance. Checkout released for root-owned v10 supplemental verification."
+}

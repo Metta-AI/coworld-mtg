@@ -1,0 +1,17 @@
+--- a/crates/engine/src/game/zone_pipeline.rs
++++ b/crates/engine/src/game/zone_pipeline.rs
+@@ -950,13 +950,7 @@
+         let mut queue = reqs.into_iter();
+         while let Some(req) = queue.next() {
+             let destination = req.to;
+-            match zones::with_departure_member(
+-                state,
+-                events,
+-                owner,
+-                req.object_id,
+-                |state, events| move_object(state, req, events),
+-            ) {
++            match (|| move_object(state, req, events))() {
+                 ZoneMoveResult::Done => {}
+                 ZoneMoveResult::NeedsChoice(_) => {
+                     // CR 616.1: `move_object` already parked the surfaced prompt

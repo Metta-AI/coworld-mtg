@@ -1,0 +1,19 @@
+{
+  "id": "unattach-adapter",
+  "file": "crates/engine/src/game/trigger_matchers.rs",
+  "operations": [
+    {
+      "kind": "replace",
+      "function": "match_unattach",
+      "old": "                && (*to != Zone::Graveyard\n                    || !super::trigger_suppression::death_suppressed_before(state, record))",
+      "new": ""
+    }
+  ],
+  "tests": [
+    "unattach_fallback_and_native_cause_remain_distinct"
+  ],
+  "kind": "public",
+  "description": null,
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

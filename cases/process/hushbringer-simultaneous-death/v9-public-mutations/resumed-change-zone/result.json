@@ -1,0 +1,15 @@
+{
+  "id": "resumed-change-zone",
+  "outcome": "runtime failure",
+  "mutant_exit": 101,
+  "restore_exit": 0,
+  "compiled": true,
+  "failures": [
+    "thread 'trigger_suppression_event_timing::resumed_change_zone_tail_suppression_uses_authoritative_records' (3304923) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:",
+    "thread 'trigger_suppression_event_timing::resumed_change_zone_no_hush_duplicate_payoff_compatibility' (3304922) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:271:10:"
+  ],
+  "summary": [
+    "test result: FAILED. 89 passed; 2 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.35s"
+  ],
+  "finished": "2026-09-05T18:20:34.445465+00:00"
+}

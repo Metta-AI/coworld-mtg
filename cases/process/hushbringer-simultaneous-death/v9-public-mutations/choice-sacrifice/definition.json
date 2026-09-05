@@ -1,0 +1,19 @@
+{
+  "id": "choice-sacrifice",
+  "file": "crates/engine/src/game/engine_resolution_choices.rs",
+  "operations": [
+    {
+      "kind": "unwrap",
+      "function": "handle_resolution_choice",
+      "marker": "super::zones::with_departure_member",
+      "index": 0
+    }
+  ],
+  "tests": [
+    "natural_effect_zone_choice_finalizes_before_chained_hush_departure"
+  ],
+  "kind": "public",
+  "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+  "status": "planned; no mutation executed",
+  "transformation_dry_run": "source pattern matched"
+}

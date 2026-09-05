@@ -1,0 +1,26 @@
+--- a/crates/engine/src/game/effects/destroy.rs
++++ b/crates/engine/src/game/effects/destroy.rs
+@@ -220,12 +220,7 @@
+         &candidates,
+         |state, events, owner| {
+             for obj_id in candidates.iter().copied() {
+-                let outcome = crate::game::zones::with_departure_member(
+-                    state,
+-                    events,
+-                    owner,
+-                    obj_id,
+-                    |state, events| {
++                let outcome = (|| {
+                         destroy_single_object(
+                             state,
+                             obj_id,
+@@ -233,8 +228,7 @@
+                             cant_regenerate,
+                             events,
+                         )
+-                    },
+-                );
++                    })();
+                 match outcome {
+                     DestroyOutcome::Completed | DestroyOutcome::Skipped => {}
+                     DestroyOutcome::NeedsChoice => return true,
