@@ -1,0 +1,123 @@
+{
+  "utc": "2026-09-05T19:03:33.362743+00:00",
+  "scope": "Foundational process evidence, with first-panic limits; not acceptance",
+  "files": [
+    {
+      "path": "sba-eight-foundational-results.json",
+      "sha256": "38407d2c92c2e9ba0b871cd4ca240c55f2eb21b8606f88e7c2c028fb38e1c5d7",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-eight-foundational-results.json"
+    },
+    {
+      "path": "overlay-1.patch",
+      "sha256": "ff867b90dd217519d477682b58f678979a949bb51fa90d9a5d63873a661cfa71",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/proposals/overlay-1.patch"
+    },
+    {
+      "path": "overlay-1.json",
+      "sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/proposals/overlay-1.json"
+    },
+    {
+      "path": "sba-public-observer-fixtures.rs",
+      "sha256": "0d407eaa7073a4694fae6e2368fbb3e3016f4c9f1fe0883edd4fc1542837a7a2",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/proposals/sba-public-observer-fixtures.rs"
+    },
+    {
+      "path": "overlay-validation-receipt.json",
+      "sha256": "1f088e6e86091460498e0dc6cffc2f115f41c86751683fbd76b0b6fb5334d046",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/overlay-validation-1/receipt.json"
+    },
+    {
+      "path": "sba-check_zero_toughness-outcome.json",
+      "sha256": "2d963156ebf1a1f84427d24a3dfbc557faef81ced5e035bcce8675fdffa928f2",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/outcome.json"
+    },
+    {
+      "path": "sba-check_zero_toughness-mutant.log.gz",
+      "sha256": "39ab01522cbe34d5dc6b472be0bcf03cfb211179c4bdc67a8b5718b559d2900f",
+      "uncompressed_sha256": "126e751fe8bd2c2bb18fcf4d97aedc99f7ca27f1d75f622438bde397464ea97e",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_lethal_damage-outcome.json",
+      "sha256": "37b46d745b1529e50c4ab74c0c33cbebf99b5737b1db70aedcd4952c64df6107",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/outcome.json"
+    },
+    {
+      "path": "sba-check_lethal_damage-mutant.log.gz",
+      "sha256": "84406628f5593690fbfa789f3ed8494d61fbd6fed0d9c4360279dc5c5383585f",
+      "uncompressed_sha256": "f8750af4be9fe0c1a175e63b94ec03bc38f927823fe7453d17e56c52d4181681",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_unattached_auras-outcome.json",
+      "sha256": "ff87dea75c808993549232c0f2a33de9b6543e103852b726f98d92aafe847a64",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/outcome.json"
+    },
+    {
+      "path": "sba-check_unattached_auras-mutant.log.gz",
+      "sha256": "feda91771ed7049bc66ca370909e47f0b380ea9f3e4ae6b22d24a1f949b8106d",
+      "uncompressed_sha256": "425a91194d14006abf247966fd3e266ef7c3ccc627467ab36dbf906d205fc19e",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_role_uniqueness-outcome.json",
+      "sha256": "bfe4adc2270c6aa5e088cd030c0f8bbb3e7f41ab770478892ec49d05be2d166d",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/outcome.json"
+    },
+    {
+      "path": "sba-check_role_uniqueness-mutant.log.gz",
+      "sha256": "f1ced782c22b830dfe4a198be32eb87e44f38ab7cbe11e02910d9ce8525b034f",
+      "uncompressed_sha256": "03ae6829c4a072e6a94804df633da63a9236fab0f8e7d1dc81c407f4274d0b6e",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_world_rule-outcome.json",
+      "sha256": "3fdf54718813c5dad93358e9efcc46486caca001796fbe4a6dfddb9f3ea84ad8",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/outcome.json"
+    },
+    {
+      "path": "sba-check_world_rule-mutant.log.gz",
+      "sha256": "ec7f4ef383f3f1b4e5e6fe1717c9861b8d7e71efc9bbbbd8d07de1ec038c3660",
+      "uncompressed_sha256": "86a8169811837176a09c137e6791b625e6305790fec19581d49e994f2ed0ca7a",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_zero_loyalty-outcome.json",
+      "sha256": "4785277fc79e8051ae5943308918b243d8ea82486222306487566ad4c8ef2c88",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/outcome.json"
+    },
+    {
+      "path": "sba-check_zero_loyalty-mutant.log.gz",
+      "sha256": "5c33ba1132cf9a0f59165f30050a8ca0d5d9e79b3458b8655b97faf26362893f",
+      "uncompressed_sha256": "cfad6f7eaf3f7a7f9d4c2dbc04d3a3080d8d0da4d42e2e5fce8378b0c2bc84fd",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_zero_defense-outcome.json",
+      "sha256": "68c194e46693105d5c72b4c0b164c6e57a12ad0dce2eb250e40d26b036f0790a",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/outcome.json"
+    },
+    {
+      "path": "sba-check_zero_defense-mutant.log.gz",
+      "sha256": "80a8722c4e555bc582da3ead8b20d59cca81ac98d5048855897e29aba45d5aa9",
+      "uncompressed_sha256": "bba9fdc40dc59d6cf62e4f17ef50e6d165cf20e645bb86bbabe12342b1edb9c2",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "sba-check_saga_sacrifice-outcome.json",
+      "sha256": "a7ea3260d86035c7499c1e9e879d64cf4fa828bb5ec5b19e2429e21af213c550",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/outcome.json"
+    },
+    {
+      "path": "sba-check_saga_sacrifice-mutant.log.gz",
+      "sha256": "aaa7ac4ead094c3994e632ed65c25902fb3cf9f08d76917af533adaae02c6d75",
+      "uncompressed_sha256": "de684f88e78d96bcd69402f8eda1d6fc7ed825134a56ea8a6836a617dcb3052f",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/public/command.log"
+    },
+    {
+      "path": "README.md",
+      "sha256": "00583378e373e4f9dffbedd660882e3d3ec44c1c26ca2a37b254961f9c97b901"
+    }
+  ]
+}

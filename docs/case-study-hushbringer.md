@@ -94,6 +94,20 @@ checker and case remain preserved. Build provenance belongs inside the
 experiment because the executable being compared must be the one we intended
 to build.
 
+The tests themselves also became an object of the investigation. Removing a
+required event handoff left all 119 existing state-based-action unit tests
+green. A new public gameplay fixture noticed what they missed: an observer
+that died in the same event should have granted one life, but did not. This
+happened in eight [isolated handoff experiments](../cases/process/hushbringer-simultaneous-death/v9-sba-foundation/README.md).
+Restoring the handoff restored the payoff. Passing a suite is evidence only
+for distinctions that its tests can observe.
+
+That first fixture still had a limit: several variants ran inside one test,
+so the first mutant failure prevented later variants from executing. The
+next verification plan requires independent invocations for those variants.
+The retained record distinguishes the failures actually observed from the
+controls still to be tested.
+
 There is an unusual external corroboration. Magic Online's [February 4, 2025
 patch notes](https://www.mtgo.com/news/mtgo-blog-02042025) listed a fix for the
 same Hushbringer simultaneous-death symptom. We do not know whether their
