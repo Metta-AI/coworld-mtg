@@ -130,3 +130,5 @@ The [private-corpus and browser follow-up](coworld-main-private-check/README.md)
 The [native library-choice fix and fresh full review](v10-library-choice-review/README.md) add nine public tests covering sixty cases. The maintainer gate now passes, while one incorrect choice-timing citation requires a final comment-only correction; all prior metadata versions and their corrections remain attributable.
 
 The [final citation correction](v10-citation-correction/README.md) changes only one comment token and preserves exact source lineage. Its fresh full independent review is pending; historical runtime evidence retains its original compilation identity.
+
+The [engine/corpus publication boundary](corpus-pin-boundary/README.md) adds the corpus lock to the Phase pin check. A deliberately stale revision passed the old gate; the new CLI regression rejects it and fails when the checker is reverted.

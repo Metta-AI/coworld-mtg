@@ -1,0 +1,36 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "original_checker_sha256": "762161f4baa428486e5c07333d51a39c89ec2e766037ea85e52380d4a9aec8ab",
+  "candidate_checker_sha256": "a8e4755e01174d941dde5bccb123a93673c82edc4762fc7debb575928e4a8f54",
+  "before_mismatched_corpus_exit": 0,
+  "verification": [
+    {
+      "command": [
+        "python3",
+        "scripts/check-phase-pin.py"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/corpus-pin-boundary/0.log",
+      "sha256": "5f91cec4a7d9a5e71f472acc3bcbb3ef313f346a8d35d03e462dd03a1322cd69"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/corpus-pin-boundary/1.log",
+      "sha256": "87e57e945192c4cae76b2a70c3d22e87eb1415a72c4cb985fcacb329ccc69c6e"
+    }
+  ],
+  "scope": "publication preflight; original fixed acceptance experiment unchanged",
+  "revert_test": {
+    "exit": 1,
+    "assertion": "stale corpus unexpectedly accepted",
+    "log_sha256": "c3492c36aa7c470f3d77436a11b87c35022975a9e88c6b472bde3a1185e47833"
+  }
+}

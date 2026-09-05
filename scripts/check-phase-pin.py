@@ -69,6 +69,12 @@ def main() -> None:
         r'^PHASE_REVISION = "([0-9a-f]+)"$',
         REVISION,
     )
+    corpus = json.loads((ROOT / "corpus.lock.json").read_text())
+    if corpus["phase_revision"] != REVISION:
+        raise ValueError(
+            f"corpus.lock.json: expected Phase {REVISION!r}, "
+            f"found {corpus['phase_revision']!r}"
+        )
     print(f"Phase pin is consistent: {REPOSITORY}@{REVISION}")
 
 

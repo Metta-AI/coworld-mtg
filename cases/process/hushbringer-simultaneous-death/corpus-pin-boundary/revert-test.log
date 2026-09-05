@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_corpus_revision_is_part_of_pin_gate (__main__.PhasePinTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmpunfqpffx/scripts/tests/test_phase_pin.py", line 43, in test_corpus_revision_is_part_of_pin_gate
+    self.assertNotEqual(stale.returncode, 0)
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 1 test in 0.044s
+
+FAILED (failures=1)
