@@ -66,3 +66,9 @@ regression found by the expanded tests. Deferred payment merged separate
 sacrifice costs, which gave the second cost an earlier event snapshot. The
 repair was sent back through planning and review. This was not treated as an
 existing-engine compatibility exception or as acceptance of the candidate.
+
+The [frozen v8 plan](hushbringer-plan-v8.md) adds explicit cost-component
+provenance while retaining the earlier obligations. The
+[partial implementation handoff](v7-partial/README.md) records the exact source,
+passing checks, unresolved failures and remaining gates before that revision.
+The plan is pending independent review at this checkpoint.

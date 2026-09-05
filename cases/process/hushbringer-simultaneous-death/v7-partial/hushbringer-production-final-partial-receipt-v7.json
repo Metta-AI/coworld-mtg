@@ -1,0 +1,54 @@
+{
+  "status": "final_partial_released_not_accepted",
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "ownership_released": true,
+  "source_manifest": "hushbringer-production-final-partial-source-v7.json",
+  "source_manifest_sha256": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+  "source_files": 2051,
+  "changed_or_new_files": 28,
+  "report": "hushbringer-implementation-production-v6.md",
+  "report_sha256": "350f5acc8fd75ec3069d971cc075546f3f3f172eaef03957529809bb32710604",
+  "private_tests": {
+    "passed": 6,
+    "failed": 0,
+    "ignored": 0
+  },
+  "public_tests": {
+    "passed": 67,
+    "failed": 4,
+    "ignored": 20
+  },
+  "scoped_engine_clippy_exit": 0,
+  "workspace_clippy": "unrelated E0004, reproduced on originalbase",
+  "baseline_manabrew_clippy_exit": 101,
+  "baseline_target": "/home/ubuntu/repos/phase-hushbringer-baseline-tests/target",
+  "card_data_exit": 0,
+  "generator_sources_restored_exactly": true,
+  "format_exit": 0,
+  "diff_check": "pass",
+  "full_engine_test": "deferred to v8",
+  "isolated_seam_mutations_completed": 0,
+  "known_blocker": "deferred Composite Hush-first baseline 1 Spirit -> active 0; lost cost-component authority",
+  "remaining": [
+    "reviewed v8 component fix",
+    "all runtime/private retests",
+    "isolated per-seam rollback discrimination",
+    "full engine test",
+    "root worker comparison",
+    "independent implementation review",
+    "root commit"
+  ],
+  "created_utc": "2026-09-05T15:36:33.983292+00:00",
+  "evidence_hashes": {
+    "hushbringer-production-engine-clippy-v7.log": "27f71f7ba87e7bf70ad038d33fd332a0b0e8e9b04f49de9e3c53cd8ea8d6c9c7",
+    "hushbringer-baseline-manabrew-clippy-v7.log": "7a7a47c2e9a1f37f053fb06c8a584986088dbfed0de5171399781f66a00dd836",
+    "hushbringer-card-data-v7.log": "4351534ad03d00030e226fdd0f0f1779e33a13ddcadbb6a6d5565d6d2214ecbe",
+    "hushbringer-generator-restoration-v7.json": "1bcfeff9e96c95072123533902ce1157b9951f5493f96b0c4f0254411de2e0f2",
+    "hushbringer-production-private-v7-attempt-3.log": "3f004976fdc78fafbe445d2c613f1354c18de1b94dfe43c639688b4cf77690f8",
+    "hushbringer-combined-cr-diff-v7.txt": "9b22d1d6ed7cecdfca4074fc96d1d0a8ef83c085d9e39cf3ef5f66b43642cf6e"
+  },
+  "peer_report_sha256": "52456b23142de241fdb299e43d691f3dcb63127a43a51a2f09d5929ed309d71a",
+  "peer_receipt_sha256": "0e0b00af0cb605871bbed6d864d000135c6b6aaaeebb70e545058bd3b330ce0e"
+}

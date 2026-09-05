@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-05T16:35:31.201583+00:00",
+  "head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "production_diff_empty": true,
+  "target": "/home/ubuntu/repos/phase-hushbringer-baseline-tests/target",
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "oversimplify_per_player_fractal::oversimplify_per_player_fractal_counters_match_exiled_power",
+        "--",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "command_exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-root-baseline-oversimplify-v7-oversimplify.log",
+      "log_sha256": "c71341bc46e074cc8d0d36c11ea273262e5e82b982ee4b74f8d48bd50d8e21e4"
+    }
+  ]
+}

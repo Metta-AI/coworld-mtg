@@ -1,0 +1,139 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running tests/integration/main.rs (target/debug/deps/integration-7bdd4945820186df)
+
+running 20 tests
+test trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling ... 
+thread 'trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling' (3114401) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1514:5:
+assertion `left == right` failed: desired sequential gain/payment payoff
+  left: 20
+ right: 21
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+test trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection ... 
+thread 'trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection' (3114402) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1519:5:
+assertion `left == right` failed: aggregate grouping; reverse=false
+  left: 1
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed ... ok
+test trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed' (3114404) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy ... 
+thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy' (3114405) panicked at crates/engine/src/game/scenario.rs:3342:13:
+assertion `left == right` failed: object 2 expected in Battlefield, found in Graveyard
+  left: Graveyard
+ right: Battlefield
+FAILED
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush ... 
+thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush' (3114406) panicked at crates/engine/src/game/scenario.rs:3342:13:
+assertion `left == right` failed: object 1 expected in Battlefield, found in Graveyard
+  left: Graveyard
+ right: Battlefield
+FAILED
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed ... 
+thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed' (3114407) panicked at crates/engine/src/game/scenario.rs:3342:13:
+assertion `left == right` failed: object 1 expected in Battlefield, found in Graveyard
+  left: Graveyard
+ right: Battlefield
+FAILED
+test trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed ... 
+thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed' (3114408) panicked at crates/engine/src/game/scenario.rs:3342:13:
+assertion `left == right` failed: object 2 expected in Battlefield, found in Graveyard
+  left: Graveyard
+ right: Battlefield
+FAILED
+test trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression ... 
+thread 'trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression' (3114409) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2585:5:
+assertion `left == right` failed
+  left: 1
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures ... 
+thread 'trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures' (3114410) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1384:5:
+assertion `left == right` failed
+  left: 1
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed ... ok
+test trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed' (3114412) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed' (3114413) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed' (3114414) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed' (3114415) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed' (3114416) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world ... 
+thread 'trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world' (3114417) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4015:9:
+desired merged-group later member retains starting creature type
+FAILED
+test trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed ... 
+thread 'trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed' (3114418) panicked at crates/engine/src/game/scenario.rs:3353:9:
+assertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)
+  left: 2
+ right: 0
+FAILED
+test trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once ... 
+thread 'trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once' (3114419) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2511:5:
+assertion `left == right` failed: resumed payoff; hush=false, reverse=false, pause=true
+  left: 2
+ right: 1
+FAILED
+test trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed ... 
+thread 'trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed' (3114420) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2511:5:
+assertion `left == right` failed: resumed payoff; hush=false, reverse=true, pause=true
+  left: 2
+ right: 1
+FAILED
+
+failures:
+
+failures:
+    trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling
+    trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection
+    trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy
+    trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush
+    trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed
+    trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed
+    trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression
+    trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures
+    trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world
+    trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed
+    trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once
+    trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed
+
+test result: FAILED. 2 passed; 18 failed; 0 ignored; 0 measured; 3049 filtered out; finished in 0.58s
+
+error: test failed, to rerun pass `-p engine --test integration`

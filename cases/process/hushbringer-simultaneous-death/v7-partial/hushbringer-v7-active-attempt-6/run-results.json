@@ -1,0 +1,26 @@
+{
+  "source_receipt_sha256": "fc38d1ab4e17d6367d86dec0c42d3ddce3a3c262c0b55d997b64b7e37eacabb1",
+  "logs": {
+    "cargo.log": {
+      "sha256": "e1797641dc9afe42031dc1a6b976168fba8c3d4fe78adf48925760fe1dc64391",
+      "test_summaries": [
+        "test result: FAILED. 67 passed; 4 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 9.96s"
+      ],
+      "compiled_only_failure": false
+    },
+    "final-confirmation.log": {
+      "sha256": "a45fef9e7704f31a95833458a27e47531a29d0c17333ef2c8667f7676a4d93fe",
+      "test_summaries": [
+        "test result: FAILED. 67 passed; 4 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 9.95s"
+      ],
+      "compiled_only_failure": false
+    },
+    "ignored-desired.log": {
+      "sha256": "6a9c854a7e2cf45df5c2f19b6d2a9873eac016a07406dc764621bed504587ddd",
+      "test_summaries": [
+        "test result: FAILED. 2 passed; 18 failed; 0 ignored; 0 measured; 3049 filtered out; finished in 0.58s"
+      ],
+      "compiled_only_failure": false
+    }
+  }
+}

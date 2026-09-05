@@ -1,0 +1,405 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "v7-partial-released-not-accepted",
+  "active": {
+    "passed": 67,
+    "failed": 4,
+    "ignored": 20,
+    "exit": 101
+  },
+  "desired": {
+    "passed": 2,
+    "failed": 18,
+    "ignored": 0,
+    "exit": 101,
+    "passing_cases": [
+      "known_gap_aggregate_payment_should_group_completed_selection_reversed",
+      "known_gap_inherited_target_sacrifice_should_group_both_departures_reversed"
+    ],
+    "classification": "Order-specific sequential suppression, not group repair; retained ignored diagnostics"
+  },
+  "exact_seam_mutations": 0,
+  "description": "Both executors released ownership after the introduced deferred-component regression. Frozen partial artifacts retain passing and failing checks without establishing acceptance. All remaining obligations are recorded in both reports.",
+  "retention": "Full source archives remain on EC2 at the exact paths/hashes below. Prior shared-target baseline evidence remains historical; the isolated worker evidence is archived separately.",
+  "artifacts": [
+    {
+      "path": "hushbringer-baseline-manabrew-clippy-v7.log",
+      "sha256": "7a7a47c2e9a1f37f053fb06c8a584986088dbfed0de5171399781f66a00dd836",
+      "bytes": 2961
+    },
+    {
+      "path": "hushbringer-card-data-v7.log",
+      "sha256": "4351534ad03d00030e226fdd0f0f1779e33a13ddcadbb6a6d5565d6d2214ecbe",
+      "bytes": 5061
+    },
+    {
+      "path": "hushbringer-combined-cr-diff-v7.txt",
+      "sha256": "9b22d1d6ed7cecdfca4074fc96d1d0a8ef83c085d9e39cf3ef5f66b43642cf6e",
+      "bytes": 34716
+    },
+    {
+      "path": "hushbringer-generator-restoration-v7.json",
+      "sha256": "1bcfeff9e96c95072123533902ce1157b9951f5493f96b0c4f0254411de2e0f2",
+      "bytes": 586
+    },
+    {
+      "path": "hushbringer-implementation-production-v6.md",
+      "sha256": "350f5acc8fd75ec3069d971cc075546f3f3f172eaef03957529809bb32710604",
+      "bytes": 64009
+    },
+    {
+      "path": "hushbringer-implementation-stop-v7-components-proof.json",
+      "sha256": "03175d1f920493d14a77afd3b3c378dc021683c43597493e91ecac0ad3619ed1",
+      "bytes": 4505
+    },
+    {
+      "path": "hushbringer-implementation-stop-v7-components.md",
+      "sha256": "8ef63b83773d5c595aa3a0c294def5623febe9c12171805d6a8e04e1fcf9c230",
+      "bytes": 7652
+    },
+    {
+      "path": "hushbringer-implementation-tests-v7.md",
+      "sha256": "52456b23142de241fdb299e43d691f3dcb63127a43a51a2f09d5929ed309d71a",
+      "bytes": 23468
+    },
+    {
+      "path": "hushbringer-production-engine-clippy-v7.log",
+      "sha256": "27f71f7ba87e7bf70ad038d33fd332a0b0e8e9b04f49de9e3c53cd8ea8d6c9c7",
+      "bytes": 158
+    },
+    {
+      "path": "hushbringer-production-final-partial-receipt-v7.json",
+      "sha256": "032dc925ab0487e3e14c90c1e2aa93711d634f5f3498fa74d5ffff7d5db47d07",
+      "bytes": 2548
+    },
+    {
+      "path": "hushbringer-production-final-partial-source-v7.json",
+      "sha256": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+      "bytes": 282016
+    },
+    {
+      "path": "hushbringer-production-private-v7-attempt-3.log",
+      "sha256": "3f004976fdc78fafbe445d2c613f1354c18de1b94dfe43c639688b4cf77690f8",
+      "bytes": 984
+    },
+    {
+      "path": "hushbringer-tests-cr-audit-v7.txt",
+      "sha256": "3cdbefca861a9bd52b41b0c79df10806701285123edf2020bb15b7c286dec71f",
+      "bytes": 8777
+    },
+    {
+      "path": "hushbringer-tests-v7-final-partial-main.rs",
+      "sha256": "3c9de72738baaf5c2f4009a282f309776661182bc806b2be3483b212a3208438",
+      "bytes": 34746
+    },
+    {
+      "path": "hushbringer-tests-v7-final-partial-module.rs",
+      "sha256": "9c910733be643af92021c946351b70d9e4dd6c8d8df1f92016f3980ebbaf4486",
+      "bytes": 164646
+    },
+    {
+      "path": "hushbringer-tests-v7-final-partial-receipt.json",
+      "sha256": "0e0b00af0cb605871bbed6d864d000135c6b6aaaeebb70e545058bd3b330ce0e",
+      "bytes": 8765
+    },
+    {
+      "path": "hushbringer-tests-v7-row-status.json",
+      "sha256": "714b72eb9619c68f0567d66413c6f3f14701e9864e4f37c7f02307122e6cb927",
+      "bytes": 21986
+    },
+    {
+      "path": "hushbringer-tests-v7-source-stability.json",
+      "sha256": "f921e6b33324da6436e294016a783723f9da1639d9633e5618d18ce7780104d1",
+      "bytes": 272
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-1/cargo.log",
+      "sha256": "6cf8d1f37b3a4a3b37add6ae34c1c3bbb17f4f1882c1d8296c751f5700fc9ffa",
+      "bytes": 1114
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-1/combined.patch",
+      "sha256": "a8f552dc58b54e338e725883c24f8b3240c61c8376dab11936430220693c4c60",
+      "bytes": 223509
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-1/manifest.json",
+      "sha256": "7f9dd55c20d9734bd091951859954c1fb22916a8df4bf0893c0018e28fd2acc2",
+      "bytes": 236011
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-1/receipt.json",
+      "sha256": "eeec5f0d32c95ad853294ad7ca8e0fb911c796f41abdf6dc6d5540f270dc5c42",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-1/run-results.json",
+      "sha256": "e394463242569ca60990fd045e3979c7460a4b18253ee5e821b09e92bf99ad55",
+      "bytes": 288
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-1/test-module.rs",
+      "sha256": "332fd6cfbcfe4d0b01d9be047f4d02cd2bc925abcd37ca89eb06dff24026cbbd",
+      "bytes": 155054
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-2/cargo.log",
+      "sha256": "91e9160748ca229ba143e9ecdaac3c4f72108da5786f826facba8239d4821140",
+      "bytes": 13013
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-2/combined.patch",
+      "sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+      "bytes": 227458
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-2/manifest.json",
+      "sha256": "4d036f95d76f9fa104c1bdace3a9037ed0a3fd07e78ce5b12e4b5bd2dfba035f",
+      "bytes": 236011
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-2/receipt.json",
+      "sha256": "093d0c901c23eb9a760454dcf84f7f39c4d830e05d9e52052e52024dfa3373d7",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-2/run-results.json",
+      "sha256": "869ce87e7c289f88d2d0322edc1d885c4509741f7950fdd2870a9e4cfc5a439c",
+      "bytes": 409
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-2/test-module.rs",
+      "sha256": "f4e18c55b6003a635d29637cdabf116edd026cce506194cf9c844d79ce0790d5",
+      "bytes": 155142
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-3/cargo.log",
+      "sha256": "e337cc74c022c1069aa6a8cccc2cd4ae2146dea4336f0f5fc3580376a0a84478",
+      "bytes": 13235
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-3/combined.patch",
+      "sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+      "bytes": 227458
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-3/manifest.json",
+      "sha256": "38229b256eeafc455a3cd5965728655ef8a1651499964046e2cd6c057bf59e6f",
+      "bytes": 236011
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-3/receipt.json",
+      "sha256": "506448bec5242ccdb69b6818b6aff9ff434346a07f3b5c57883f13bc248d5c42",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-3/run-results.json",
+      "sha256": "cfb5b23026d551b13cbd88711c6ced58dcc5cd4cb432b5158a0c56b7090c265a",
+      "bytes": 409
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-3/test-module.rs",
+      "sha256": "754158891507b0478283565104563afb7b7b2962acf9adb324a61d8db1d784cd",
+      "bytes": 162804
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/cargo.log",
+      "sha256": "e000c3d4b480b399fcc8e621385b56e45a9128fb2a338484c9cd1c34dd780b74",
+      "bytes": 16454
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/combined.patch",
+      "sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+      "bytes": 227458
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/manifest.json",
+      "sha256": "cd3d072982a4ee5a74cc00abab1442efeee4e4dcea1f5447483292ed1aa30d25",
+      "bytes": 236011
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/receipt.json",
+      "sha256": "001d04ee1d115c02a99c43dbb18e2d6bcb12e47e54ecf224aaae5ee414349165",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/run-results.json",
+      "sha256": "52d9a43411e74f6c1c7477021df68211c31b040551825d505811ef4041735cf0",
+      "bytes": 409
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/test-module.rs",
+      "sha256": "b4210811323eb15c76478db70bd974198d706ff356ee7e3d8efafca64736acd7",
+      "bytes": 163761
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-5/cargo.log",
+      "sha256": "54ca94d1d6265872fb5f966d54bdd763740d2c4f1da2ee0d366bff7ffe59278a",
+      "bytes": 3126
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-5/combined.patch",
+      "sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+      "bytes": 227458
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-5/manifest.json",
+      "sha256": "179ad2c85367e65ae37999c2b01eab30ee0528d5f8c31f0494cc624576d4075d",
+      "bytes": 236011
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-5/receipt.json",
+      "sha256": "638ceae11aa28f563693ba36c8e1dd1537286f19dd41e5b5fffef8402df931e9",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-5/run-results.json",
+      "sha256": "e5ba5e20a2f15aa6e719e2ccc5dc88e0a0c7c128d1a60b83992e90ebd239b7ee",
+      "bytes": 288
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-5/test-module.rs",
+      "sha256": "9c910733be643af92021c946351b70d9e4dd6c8d8df1f92016f3980ebbaf4486",
+      "bytes": 164646
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/cargo.log",
+      "sha256": "e1797641dc9afe42031dc1a6b976168fba8c3d4fe78adf48925760fe1dc64391",
+      "bytes": 49596
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/combined.patch",
+      "sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472",
+      "bytes": 227458
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/final-confirmation.exit",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+      "bytes": 4
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/final-confirmation.log",
+      "sha256": "a45fef9e7704f31a95833458a27e47531a29d0c17333ef2c8667f7676a4d93fe",
+      "bytes": 15845
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/ignored-desired.log",
+      "sha256": "6a9c854a7e2cf45df5c2f19b6d2a9873eac016a07406dc764621bed504587ddd",
+      "bytes": 9745
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/manifest.json",
+      "sha256": "179ad2c85367e65ae37999c2b01eab30ee0528d5f8c31f0494cc624576d4075d",
+      "bytes": 236011
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/receipt.json",
+      "sha256": "fc38d1ab4e17d6367d86dec0c42d3ddce3a3c262c0b55d997b64b7e37eacabb1",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/run-results.json",
+      "sha256": "ebc4f25741345eaf8aac570bcd948b291b5bde1a9a6b9d50a80270f2fc68a0f8",
+      "bytes": 1021
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-6/test-module.rs",
+      "sha256": "9c910733be643af92021c946351b70d9e4dd6c8d8df1f92016f3980ebbaf4486",
+      "bytes": 164646
+    },
+    {
+      "path": "hushbringer-v7-active-library-rebuild-provenance.json",
+      "sha256": "d01b33ab62dea671148f6ec6b62299c561251b92422c302d25c31a6f6f3aed3b",
+      "bytes": 509
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/cargo.log",
+      "sha256": "24563877abe35aeb1922a44a9fafbd7270484950782a8a5fc478126cb10ba75f",
+      "bytes": 4165
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/combined.patch",
+      "sha256": "e44d8a99833a4b075a5568f45c66d6239554ec17b2abcfdd55b149661724c4c0",
+      "bytes": 444
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/full-include-ignored.log",
+      "sha256": "b3bbfbd0aa5b664ac6f5ba6183c744a65123da4a2540edadcd1224f6032babf1",
+      "bytes": 36693
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/manifest.json",
+      "sha256": "35730986ac723b9ce4afc097f417a6bc8e3821d7cf921e1c6bf6a9a012097625",
+      "bytes": 235892
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/receipt.json",
+      "sha256": "907286dc2fd7e403b5dfe984c7a0f274f50c9cac37ec602ba7ec99324b839040",
+      "bytes": 566
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/run-results.json",
+      "sha256": "99c1cd686eeba9fd92322b750f3dadfe0379f672ae96cb6c57ce1330fa440f32",
+      "bytes": 717
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/test-module.rs",
+      "sha256": "253b5d67f8f16804cd995d783e358cacb1543a57d9d6f096f4f51655fb4c054d",
+      "bytes": 163496
+    },
+    {
+      "path": "hushbringer-v7-baseline-overlay-transform.json",
+      "sha256": "aef0de5ef23fd980c8bf03594bc2be458d30e9d1b7cb3cf9f1abe34cb53d5753",
+      "bytes": 571
+    },
+    {
+      "path": "hushbringer-v7-final-receipt-attempt1-error.txt",
+      "sha256": "f0f19cc1d70df48589d39f4c2a302ab35c070f4e7895eeae62fe00dd9261b3c7",
+      "bytes": 159
+    }
+  ],
+  "external_source_archives": [
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-1/source.tar.gz",
+      "sha256": "666348572418ac2b1538f2064b46ef938b940f54884bf9eb6571df0b23574c8b",
+      "bytes": 13485894,
+      "host": "nishadsingh-box-4"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-2/source.tar.gz",
+      "sha256": "d2fcd6f325ad39990d7a0865873e604f28d9b13ce139891d853f59d51d266012",
+      "bytes": 13486523,
+      "host": "nishadsingh-box-4"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-3/source.tar.gz",
+      "sha256": "fb8cf8b5eb7b54c6ac530d52e9b6945674516a04684aa60634414afd3cf889b3",
+      "bytes": 13487526,
+      "host": "nishadsingh-box-4"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-4/source.tar.gz",
+      "sha256": "765dcac3526bf4c59ac4f96de52e20886c28d71ce2cbcead96ecefe806fb41ee",
+      "bytes": 13487752,
+      "host": "nishadsingh-box-4"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-5/source.tar.gz",
+      "sha256": "700ddce98d2ff0ec7d9dfa70c30383e9e0356707aaf2d86fd6d6cc491e1e2117",
+      "bytes": 13487903,
+      "host": "nishadsingh-box-4"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-6/source.tar.gz",
+      "sha256": "5a83b7415c8668ee8c44595751e0139a2ca3b758b65da42870a963c930cbbb0b",
+      "bytes": 13487938,
+      "host": "nishadsingh-box-4"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-baseline-attempt-1/source.tar.gz",
+      "sha256": "214f864066635552ed4727cc4819eb7904fdfa3d78fc2311bd4b20590b5c25f1",
+      "bytes": 13480391,
+      "host": "nishadsingh-box-4"
+    }
+  ]
+}

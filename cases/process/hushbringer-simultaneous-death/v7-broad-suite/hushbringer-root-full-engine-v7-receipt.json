@@ -1,0 +1,19 @@
+{
+  "stage": "v7-partial-broad-suite-before-reviewed-component-repair",
+  "started_utc": "2026-09-05T16:15:41.896892+00:00",
+  "finished_utc": "2026-09-05T16:17:47.516305+00:00",
+  "command": [
+    "cargo",
+    "test",
+    "-p",
+    "engine",
+    "--",
+    "--test-threads=2"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-verifiable-loop",
+  "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+  "command_exit": 101,
+  "source_manifest_sha256": "0301cf3cce5276bedb0ef6c68451c6ec81adf3cf3877cc1bad099a4c5aba9263",
+  "changed_source_files": [],
+  "log_sha256": "64b5b2964238c2775b9f5fd919e8bedf7f2adad2451fe796c97d5be54d02c58d"
+}

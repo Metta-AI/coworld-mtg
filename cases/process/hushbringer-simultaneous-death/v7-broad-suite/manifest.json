@@ -1,0 +1,106 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "v7-broad-verification-failed-requires-reviewed-disposition",
+  "active_library": {
+    "passed": 16574,
+    "failed": 3,
+    "ignored": 7
+  },
+  "active_integration": {
+    "passed": 3042,
+    "failed": 5,
+    "ignored": 22
+  },
+  "baseline": "All four newly failing pre-existing tests pass on original production in its isolated target. Three other matching baseline LKI siblings also pass.",
+  "classification": "Four deferred component test failures remain. The three library failures and Oversimplify failure appear related to fixtures assigning derived power/controller fields directly; their disposition is pending fresh review. No expectation is waived.",
+  "artifacts": [
+    {
+      "path": "hushbringer-root-baseline-library-v7-bounce.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "hushbringer-root-baseline-library-v7-bounce.log",
+      "sha256": "964638b7149ed36d9b57e21e14db4f7b00e64caa2c32bfe328cc7e601c532104"
+    },
+    {
+      "path": "hushbringer-root-baseline-library-v7-lki.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "hushbringer-root-baseline-library-v7-lki.log",
+      "sha256": "8752d54cea4477f7c8b8552a16ba71b0b421754c595d6b439521fd2978a8fb40"
+    },
+    {
+      "path": "hushbringer-root-baseline-library-v7-receipt.json",
+      "sha256": "7c4fbd545b6ec439a3046a4e5e8f40ee2a2234374270eff6681d4554292e6ec0"
+    },
+    {
+      "path": "hushbringer-root-baseline-library-v7.py",
+      "sha256": "935795fc6274c869f75b20ccc554e631fa014a5e7eabce68e69faa79e56da8cf"
+    },
+    {
+      "path": "hushbringer-root-baseline-oversimplify-v7-oversimplify.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "hushbringer-root-baseline-oversimplify-v7-oversimplify.log",
+      "sha256": "c71341bc46e074cc8d0d36c11ea273262e5e82b982ee4b74f8d48bd50d8e21e4"
+    },
+    {
+      "path": "hushbringer-root-baseline-oversimplify-v7-receipt.json",
+      "sha256": "3bc057fc3cbbcc5f33ef3da7f614a0afba1bf3d16dabf90ff48bfabeaed12fd4"
+    },
+    {
+      "path": "hushbringer-root-baseline-oversimplify-v7.py",
+      "sha256": "97fe31f83477b29cfac4588baafd18ce785667938f59f33fe08824116cc6bc6d"
+    },
+    {
+      "path": "hushbringer-root-full-engine-v7-receipt.json",
+      "sha256": "66cf3b1921cdc5392caec88c05c48aefad632f250b920a05ce8c20b059d9b1c0"
+    },
+    {
+      "path": "hushbringer-root-full-engine-v7.exit",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    {
+      "path": "hushbringer-root-full-engine-v7.py",
+      "sha256": "44cb0d2651253f597c4cef48fe2d40d435bd27eba1afddb9c14cf6a6f732a288"
+    },
+    {
+      "path": "hushbringer-root-integration-v7-receipt.json",
+      "sha256": "cc558a89f34735d327e548e92d4d8ad15a2c1ad89d864089e13ce8d93690aed6"
+    },
+    {
+      "path": "hushbringer-root-integration-v7.exit",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    {
+      "path": "hushbringer-root-integration-v7.py",
+      "sha256": "1974792bf6077bb133d0f254ee3179649f3acdf01a4713883fb588c800c4fc7a"
+    },
+    {
+      "path": "hushbringer-root-full-engine-v7-failures.txt",
+      "sha256": "391837b85f2cfde620b5d27534b5577edad0120a83b77560ffaa34e60ed15f6d",
+      "description": "Exact suffix of full log beginning at first failures section; full log bound below."
+    },
+    {
+      "path": "hushbringer-root-integration-v7-failures.txt",
+      "sha256": "c1f658eec3f35bb5f03147d20ad5db41e4714601db5ab03b16f7376f187032e5",
+      "description": "Exact suffix of full log beginning at first failures section; full log bound below."
+    }
+  ],
+  "external_full_logs": [
+    {
+      "host": "nishadsingh-box-4",
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-root-full-engine-v7.log",
+      "sha256": "64b5b2964238c2775b9f5fd919e8bedf7f2adad2451fe796c97d5be54d02c58d",
+      "bytes": 1518414
+    },
+    {
+      "host": "nishadsingh-box-4",
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-root-integration-v7.log",
+      "sha256": "573346849a623819052e3871eec6adf74f2d4dcc89daa21fcd05ffcd4fb71b5e",
+      "bytes": 293724
+    }
+  ]
+}
