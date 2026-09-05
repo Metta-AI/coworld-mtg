@@ -1,0 +1,11 @@
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-verifiable-loop/crates/engine)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3m 16s
+     Running unittests src/lib.rs (target/debug/deps/engine-444923dba8f143d6)
+
+running 3 tests
+test game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members ... ok
+test game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences ... ok
+test game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 16578 filtered out; finished in 0.00s
+

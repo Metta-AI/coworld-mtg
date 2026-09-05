@@ -24,3 +24,29 @@ independent approval and generated note belong to the acceptance protocol
 described in [verifiable cases](../../../docs/verifiable-cases.md).
 Implementation and acceptance were still pending when this planning snapshot
 was written.
+
+## Implementation exposed three baseline test assumptions
+
+The [v6 fixture stop](v6-fixture-stop/hushbringer-implementation-stop-v6-fixtures.md)
+records three failures that also occurred on the original engine: a dropped
+post-payment continuation, a cast-created regeneration shield that did not
+preserve the expected creature, and duplicate token creation after a paused
+zone change resumed. The Hushbringer primary tests had passed on the repair.
+
+These are separate behavior claims. The [v7 plan](hushbringer-plan-v7.md)
+proposes preserving the desired behavior for those old defects as explicit
+diagnostics, while using reaching fixtures and narrowly labeled compatibility
+checks to test this repair. The executable acceptance case and its zero-Spirit
+expectation remain unchanged.
+
+The [stop manifest](v6-fixture-stop/manifest.json) retains the exact baseline
+overlay and runtime logs. It also discloses a retention gap: the earlier active
+test-source hashes were recorded, but immutable copies of those exact active
+files were not saved. Later snapshots must not be presented as those files.
+
+The [full v7 review](hushbringer-plan-review-v7.md) was clean. This was the
+seventh plan-review round. It preserves all pending runtime, isolated-revert
+and frozen-worker gates. The [partial test handoff](v6-tests-partial/hushbringer-implementation-tests-v6.md)
+and [immutable receipt](v6-tests-partial/hushbringer-tests-v6-final-partial-receipt.json)
+record what had and had not run before the fresh v7 executor took over.
+The [v7 checkpoint manifest](v7-plan-manifest.json) binds these artifacts.

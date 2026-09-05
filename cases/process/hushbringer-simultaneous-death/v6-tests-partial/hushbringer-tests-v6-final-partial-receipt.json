@@ -1,0 +1,40 @@
+{
+  "state": "partial; ownership released to root; three unchanged failures await reviewed v7 disposition",
+  "utc": "2026-09-05T01:18:44.181275+00:00",
+  "active_head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "active_branch": "codex/hushbringer-simultaneous-death",
+  "baseline_head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "baseline_production_diff": "",
+  "source_snapshots": {
+    "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/tests/integration/trigger_suppression_event_timing.rs": {
+      "snapshot": "/home/ubuntu/coworld-migration-20260904/hushbringer-tests-v6-final-partial-module.rs",
+      "sha256": "eeaf1a4c2802cd1747d7482a4c47897a724e358f873f1a1d22da6615de87cebe"
+    },
+    "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/tests/integration/main.rs": {
+      "snapshot": "/home/ubuntu/coworld-migration-20260904/hushbringer-tests-v6-final-partial-main.rs",
+      "sha256": "3c9de72738baaf5c2f4009a282f309776661182bc806b2be3483b212a3208438"
+    }
+  },
+  "last_whole_module_result": "41passed/3failed/4ignored in active attempt4 BEFORE two independent additions; no later whole-module run claimed",
+  "independent_results": {
+    "chosen_spell_and_activation_cost_rejection_preserves_state_for_valid_retry": "PASS1/1 after compile-only CastPaymentMode import-path fix",
+    "library_position_choice_and_targeted_leaf_preserve_non_death_events": "PASS1/1"
+  },
+  "commands": [
+    "cd /home/ubuntu/repos/phase-verifiable-loop && export PATH=/home/ubuntu/.cargo/bin:$PATH CARGO_BUILD_JOBS=4 && cargo test -p engine --test integration chosen_spell_and_activation_cost_rejection_preserves_state_for_valid_retry -- --nocapture",
+    "cd /home/ubuntu/repos/phase-verifiable-loop && export PATH=/home/ubuntu/.cargo/bin:$PATH CARGO_BUILD_JOBS=4 && cargo test -p engine --test integration library_position_choice_and_targeted_leaf_preserve_non_death_events -- --nocapture"
+  ],
+  "logs_sha256": {
+    "hushbringer-baseline-v6.log": "3bc666ab3b9ce2b75e8034363d5b92b7d2f977b65a03bb12a1de0a1a00ed12d9",
+    "hushbringer-active-tests-v6-attempt-4.log": "dd0bb6077008a61d45665c467b9a8cdbdb84730af80231e2f3e8b1328a67a119",
+    "hushbringer-baseline-expanded-v6-attempt-1.log": "c0131a1d848a11e19685b1e696b3b661c84f823b17464ff6d9537a8634e36884",
+    "hushbringer-independent-cost-v6.log": "2a9dfae4d000597f4df8bfab9122e7e359c5dd99ebff43477bb140bf6e30f351",
+    "hushbringer-independent-cost-v6-attempt-2.log": "e4ac2df2eb02be23cb626c69e9ac9b863f08d4d7c65e5e8be48f4801ac43c6dd",
+    "hushbringer-independent-library-v6.log": "fca5b94f8b6bacc90babc5769d4159eda0c006d6a0ce3659fbdac0f0ff47aaf3",
+    "hushbringer-production-private-v6.log": "8539289917eb12886b59b4f80f30b1191f60f46e82e519cdfb6723e95cd36e82",
+    "hushbringer-production-serde-v6.log": "993f3dbc1439def20053b84d7eeb5445cdf51bf9e2c41d333981b6493a60f3a5",
+    "hushbringer-tests-cr-audit-v6.txt": "00f3c2fed80f6fdecda3834a0136f621d0275d222705b41b49498b4dbc037730"
+  },
+  "historical_source_retention_limit": "Exact active attempt4/proof-time source not archived; hashes retained only. Exact original3 module, expanded baseline overlay, and final-partial source archived distinctly.",
+  "exact_seam_reverts_performed": 0
+}

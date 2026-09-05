@@ -1,0 +1,28 @@
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-verifiable-loop/crates/engine)
+error[E0603]: enum `CastPaymentMode` is private
+    --> crates/engine/tests/integration/trigger_suppression_event_timing.rs:2525:63
+     |
+2525 |                         payment_mode: engine::types::actions::CastPaymentMode::Auto,
+     |                         ------------ while setting this field ^^^^^^^^^^^^^^^ private enum
+     |
+note: the enum `CastPaymentMode` is defined here
+    --> crates/engine/src/types/actions.rs:6:37
+     |
+   6 |     AutoMayChoice, AutoPassRequest, CastPaymentMode, CombatDamageAssignmentMode, CounterCostChoice,
+     |                                     ^^^^^^^^^^^^^^^
+help: consider importing one of these unit variants instead
+     |
+2525 -                         payment_mode: engine::types::actions::CastPaymentMode::Auto,
+2525 +                         payment_mode: crate::rules::CastPaymentMode::Auto,
+     |
+2525 -                         payment_mode: engine::types::actions::CastPaymentMode::Auto,
+2525 +                         payment_mode: engine::types::game_state::CastPaymentMode::Auto,
+     |
+help: import `CastPaymentMode` directly
+     |
+2525 -                         payment_mode: engine::types::actions::CastPaymentMode::Auto,
+2525 +                         payment_mode: engine::types::game_state::CastPaymentMode,
+     |
+
+For more information about this error, try `rustc --explain E0603`.
+error: could not compile `engine` (test "integration") due to 1 previous error
