@@ -1,0 +1,88 @@
+{
+  "status": "released exact inventory bound to final v10 frozen candidate; runtime results pending",
+  "rows": [
+    {
+      "id": "scope-before-flush",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_suppression",
+          "old": "        super::layers::flush_layers(state);\n",
+          "new": ""
+        }
+      ],
+      "tests": [
+        {
+          "test": "game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority",
+          "role": "discriminator",
+          "failure_marker": "owner before-world must evaluate dirty continuous-effect authority"
+        },
+        {
+          "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+          "role": "control"
+        }
+      ],
+      "kind": "private-lexical",
+      "status": "exact transformation dry-run matched final source; runtime results pending",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "leaf-consumes-member",
+      "file": "crates/engine/src/game/zones.rs",
+      "operations": [
+        {
+          "kind": "replace",
+          "function": "with_departure_leaf",
+          "old": "        without_departure_member(state, events, |state, events| {\n            body(state, events, Some(binding))\n        });",
+          "new": "        body(state, events, Some(binding));"
+        }
+      ],
+      "tests": [
+        {
+          "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+          "role": "discriminator",
+          "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+        },
+        {
+          "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+          "role": "control"
+        }
+      ],
+      "kind": "private-lexical",
+      "status": "exact transformation dry-run matched final source; runtime results pending",
+      "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+    },
+    {
+      "id": "sba-check_battle_protector",
+      "file": "crates/engine/src/game/sba.rs",
+      "operations": [
+        {
+          "kind": "unwrap",
+          "function": "check_battle_protector",
+          "marker": "zones::with_departure_member",
+          "index": 0
+        }
+      ],
+      "tests": [
+        {
+          "test": "game::sba::tests::battle_protector_defensive_handoff_after_terminal_setup",
+          "role": "discriminator",
+          "evidence_kind": "battle_defensive",
+          "failure_marker": "defensive member owns an authoritative singleton snapshot"
+        },
+        {
+          "test": "game::sba::tests::battle_public_terminal_presets_return_with_empty_departure_scope",
+          "role": "control"
+        }
+      ],
+      "kind": "private-defensive",
+      "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+      "status": "exact transformation dry-run matched final source; runtime results pending",
+      "transformation_dry_run": "source pattern matched"
+    }
+  ],
+  "frozen_source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "frozen_source_archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+  "frozen_receipt_sha256": "a0afbd5663fc4548e040830f6e93442499497d987fc76dd10221857e4dfa6fd1"
+}

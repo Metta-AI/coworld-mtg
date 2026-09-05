@@ -1,0 +1,33 @@
+{
+  "execution_mode": "reused_canonical_executable_no_compile",
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "started": "2026-09-05T19:07:48.430392+00:00",
+  "command": [
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+    "departure_scope_",
+    "--nocapture"
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+  "build_jobs": 2,
+  "frozen_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+  "source_archive_sha256": "afba8c7ba483636871a3759aa829f42050efd3b9fdf13821d4c10d0677fb7104",
+  "mutation_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "finished": "2026-09-05T19:07:48.583228+00:00",
+  "exit": 0,
+  "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+  "artifacts": [],
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 16582
+    }
+  ],
+  "source_unchanged_during_command": true
+}

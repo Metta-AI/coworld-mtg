@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1842,9 +1842,7 @@
+         // its owner's graveyard) — a "leaves the battlefield" event that must
+         // consult Moved redirects. Bail on a CR 616.1 pause (the SBA fixpoint
+         // re-runs and finds any remaining Sagas).
+-        if zones::with_departure_member(state, events, owner, saga_id, |state, events| {
+-            move_to_graveyard_via_pipeline(state, saga_id, events)
+-        }) {
++        if (|| move_to_graveyard_via_pipeline(state, saga_id, events))() {
+             return;
+         }
+         events.push(GameEvent::PermanentSacrificed {

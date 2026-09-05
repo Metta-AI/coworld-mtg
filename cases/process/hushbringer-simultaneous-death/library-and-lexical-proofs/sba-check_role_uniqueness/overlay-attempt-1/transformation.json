@@ -1,0 +1,26 @@
+{
+  "row": {
+    "id": "sba-check_role_uniqueness",
+    "file": "crates/engine/src/game/sba.rs",
+    "operations": [
+      {
+        "kind": "unwrap",
+        "function": "check_role_uniqueness",
+        "marker": "zones::with_departure_member",
+        "index": 0
+      }
+    ],
+    "tests": [
+      "game::sba::tests"
+    ],
+    "kind": "sba-library",
+    "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "test_overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "additional_public_filter": "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+  "changed_files": [
+    "crates/engine/src/game/sba.rs"
+  ]
+}

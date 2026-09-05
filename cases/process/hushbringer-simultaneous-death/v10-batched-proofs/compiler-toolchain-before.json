@@ -1,0 +1,28 @@
+{
+  "source_inputs": {
+    ".cargo/config.toml": "d0efb995770ad964d022f8c58a19a7e01ca5de25d1b6386bdf4f9dcb01fa30c5",
+    "Cargo.lock": "91e0526d3953b7545a54c2a94b94406de52ffa4702454785620e5b0aef298a7a",
+    "crates/engine/build.rs": "df71512fdb1361abd831f78486dbe61b3585d05ef4f958a710c29332db883f1d",
+    "crates/engine/data/known-tokens.toml": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+    "rust-toolchain.toml": "52562c175563386d0f9f19afafd2855662ef2590765204b35bd624de13fe67af"
+  },
+  "tools": {
+    "/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/bin/cargo": {
+      "mtime_ns": 1788564058833360357,
+      "sha256": "5f77eba1bc589e56e4d5f0faac4e6752f24e74467ab361276fd2bb422dcbde30"
+    },
+    "/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/bin/rustc": {
+      "mtime_ns": 1788564061535307873,
+      "sha256": "4b085d5175a3a6eb4968b6b5ebbaf644c7acb9c89b875193edee7cf5657c0079"
+    },
+    "/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib/librustc_driver-e72eaebd313594af.so": {
+      "mtime_ns": 1788564063967260633,
+      "sha256": "493bb8b269c719fd2cd8dbd99e8554b8fde83f08d3fd533306c422846a071445"
+    }
+  },
+  "utc": "2026-09-05T20:34:49.378782+00:00",
+  "versions": {
+    "cargo": "cargo 1.97.0-nightly (eb94155a9 2026-04-09)\nrelease: 1.97.0-nightly\ncommit-hash: eb94155a9a60943bd7b1cb04abec42f5d0de6ddc\ncommit-date: 2026-04-09\nhost: x86_64-unknown-linux-gnu\nlibgit2: 1.9.2 (sys:0.20.4 vendored)\nlibcurl: 8.19.0-DEV (sys:0.4.87+curl-8.19.0 vendored ssl:OpenSSL/3.5.4)\nssl: OpenSSL 3.5.4 30 Sep 2025\nos: Ubuntu 22.4.0 (jammy) [64-bit]\n",
+    "rustc": "rustc 1.97.0-nightly (0febdbab2 2026-04-18)\nbinary: rustc\ncommit-hash: 0febdbab2720dc0360cd294c67db88d6d06580d4\ncommit-date: 2026-04-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0-nightly\nLLVM version: 22.1.2\n"
+  }
+}

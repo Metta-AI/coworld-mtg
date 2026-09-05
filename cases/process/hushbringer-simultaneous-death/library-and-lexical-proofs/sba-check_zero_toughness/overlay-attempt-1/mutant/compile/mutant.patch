@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -786,9 +786,7 @@
+         }
+         // CR 614.6: zero-toughness death is a "leaves the battlefield" event —
+         // consult Moved redirects via the pipeline; bail on a CR 616.1 pause.
+-        if zones::with_departure_member(state, events, owner, id, |state, events| {
+-            move_to_graveyard_via_pipeline(state, id, events)
+-        }) {
++        if (|| move_to_graveyard_via_pipeline(state, id, events))() {
+             return;
+         }
+         *any_performed = true;

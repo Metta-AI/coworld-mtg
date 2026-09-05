@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "-p",
+    "engine",
+    "--message-format=json",
+    "--test",
+    "integration",
+    "trigger_suppression_event_timing",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3",
+  "env": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_BUILD_RUSTFLAGS": null,
+    "CARGO_ENCODED_RUSTFLAGS": null,
+    "CARGO_PROFILE_DEV_DEBUG": null,
+    "CARGO_PROFILE_TEST_DEBUG": null,
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+    "FORGE_TEST_FULL_DB": null,
+    "GATED_SETS": null,
+    "GATED_SETS_AS_OF": null,
+    "PHASE_REPLACEMENT_INDEX_AUDIT": null,
+    "PHASE_TRIGGER_INDEX_AUDIT": null,
+    "RTK_DISABLED": "1",
+    "RUSTC_WORKSPACE_WRAPPER": null,
+    "RUSTC_WRAPPER": null,
+    "RUSTFLAGS": null,
+    "RUST_MIN_STACK": null,
+    "RUST_TEST_THREADS": "1"
+  },
+  "source_manifest_sha256": "f8a95ba4a44e8f1e637fb76c546f9a8ff8486648ab94ba922f70dc4cc7e60bf6",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+  "utc_start": "2026-09-05T20:47:49.696660+00:00"
+}

@@ -1,0 +1,88 @@
+{
+  "utc": "2026-09-05T20:44:16.930833+00:00",
+  "report": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations.md",
+  "report_sha256": "5dd081e88da433c2dbecadf52b85ccad2df24b7be03e6ec4cb8bf45a6abaf41a",
+  "assigned_original_rows": 19,
+  "original_runtime_failure_rows": 16,
+  "original_survivors": [
+    "sba-check_battle_protector",
+    "scope-before-flush",
+    "leaf-consumes-member"
+  ],
+  "original_counts": {
+    "baseline": {
+      "passed": 1119,
+      "failed": 0,
+      "ignored": 0,
+      "invocations": 27
+    },
+    "mutant": {
+      "passed": 1093,
+      "failed": 26,
+      "ignored": 0,
+      "invocations": 27
+    },
+    "restored": {
+      "passed": 1119,
+      "failed": 0,
+      "ignored": 0,
+      "invocations": 27
+    }
+  },
+  "original_proof_index_sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526",
+  "original_archive_audit_sha256": "9bd607ebf4334a9e539a98244e8e496483b60fd5c5deb5132ec5cffb3fc85f45",
+  "supplemental_rows": 3,
+  "supplemental_counts": {
+    "baseline": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "invocations": 6
+    },
+    "mutant": {
+      "passed": 3,
+      "failed": 3,
+      "ignored": 0,
+      "invocations": 6
+    },
+    "restored": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "invocations": 6
+    }
+  },
+  "supplemental_results_sha256": "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d",
+  "supplemental_independent_audit_sha256": "7e9cd244ecff7dbd1958ca7d42bb7060bd26064643fcb0e1643340c508fecda4",
+  "supplemental_rows_evidence": [
+    {
+      "id": "scope-before-flush",
+      "outcome_sha256": "b489e91a1366cca86ecadff8ea88ed130355ed11ff3b73daea87c6cb3ca2ad07",
+      "mutant_executable_sha256": "63096c1c455f19f4c3c55be03514906c18a9e56ff442c9a5bb788b2f2912ac5a",
+      "evidence_level": "private lexical runtime"
+    },
+    {
+      "id": "leaf-consumes-member",
+      "outcome_sha256": "09de48dc36e829d8dad55e09073c80ab960306ec3232b937fa7dc6d298f3465d",
+      "mutant_executable_sha256": "36ecc113c786381d1b9b459d5b01224ec4680335fc395a8be39674759037dc98",
+      "evidence_level": "private lexical runtime"
+    },
+    {
+      "id": "sba-check_battle_protector",
+      "outcome_sha256": "cfa8dbf9f068ad2ccdf74535681be1755728d41b0e1457a2af3fd2191c5171d6",
+      "mutant_executable_sha256": "9fae4abb23ba7c1dbb03820e63aad25d4f6b894221c24df799a432f4edc0f33d",
+      "evidence_level": "lower-level defensive contract"
+    }
+  ],
+  "maintainer_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/production-path-maintainer-map-final.json",
+  "maintainer_map_sha256": "6452f834293d21a56a39a47a625b290ead1dbe0454c54132e85728a5c961c90a",
+  "frozen_final_source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "source_files_restored": 2051,
+  "source_restoration_receipt_sha256": "2f85fd179c4ab3c36c145b98e15ea0be739e3e69be1a5bf7dbc90dcb7ac44bf7",
+  "active_source_or_Coworld_writes": false,
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "checkout_ownership_released": true,
+  "root_expanded_campaign": "Root owns execution and final aggregation; no completion claim here.",
+  "known_ignored_diagnostics": "Retained20 diagnostics; existing explicit2-pass18-fail characterization unchanged.",
+  "runtime_presence_and_config_audit_sha256": "f8d2708ce54220a386bcfbec1476f07f40aeb6a48588c307f58484d9627974a0"
+}

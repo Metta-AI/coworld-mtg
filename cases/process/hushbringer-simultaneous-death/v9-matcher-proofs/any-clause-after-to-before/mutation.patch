@@ -1,0 +1,11 @@
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -1106,7 +1106,7 @@
+                 let self_arrival = source_id == record.object_id
+                     && matches!(valid_card, Some(TargetFilter::SelfRef))
+                     && trigger.trigger_zones.contains(to);
+-                !self_arrival && super::trigger_suppression::death_suppressed_after(state, record)
++                !self_arrival && super::trigger_suppression::death_suppressed_before(state, record)
+             }
+             OriginConstraint::Equals(Zone::Battlefield) => {
+                 super::trigger_suppression::death_suppressed_before(state, record)

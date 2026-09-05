@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -1108,9 +1108,7 @@
+                     && trigger.trigger_zones.contains(to);
+                 !self_arrival && super::trigger_suppression::death_suppressed_after(state, record)
+             }
+-            OriginConstraint::Equals(Zone::Battlefield) => {
+-                super::trigger_suppression::death_suppressed_before(state, record)
+-            }
++            OriginConstraint::Equals(Zone::Battlefield) => false,
+             OriginConstraint::Equals(_) => false, // Rejected by matches_from above.
+             OriginConstraint::NotEquals(_) | OriginConstraint::OneOf(_) => {
+                 // Ambiguous/restricted origins retain each consumer's legacy

@@ -1,0 +1,124 @@
+{
+  "title": "Lightning Helix loses its target and its life gain",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/mkm/218/lightning-helix",
+        "reference": "Ruling 2024-02-02; CR 608.2b",
+        "statement": "If the only target becomes illegal, neither damage nor life gain occurs. With a legal target, both instructions occur."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "red",
+        "white"
+      ],
+      [
+        "white"
+      ]
+    ],
+    "cards": [
+      {
+        "label": "helix",
+        "name": "Lightning Helix",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "bear",
+        "name": "Grizzly Bears",
+        "owner": "opponent",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "swords",
+        "name": "Swords to Plowshares",
+        "owner": "opponent",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "irrelevant-land",
+        "name": "Forest",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "helix",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "bear"
+          }
+        ],
+        "finish": "commit",
+        "x": null
+      },
+      {
+        "kind": "pass_priority"
+      },
+      {
+        "kind": "cast",
+        "card": "swords",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "bear"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      },
+      {
+        "kind": "resolve_stack"
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "target-actually-exiled",
+      "predicate": {
+        "kind": "zone",
+        "object": "bear",
+        "equals": "exile"
+      }
+    },
+    {
+      "id": "helix-finished",
+      "predicate": {
+        "kind": "zone",
+        "object": "helix",
+        "equals": "graveyard"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "no-life-without-target",
+      "predicate": {
+        "kind": "life",
+        "seat": "player",
+        "equals": 20
+      }
+    }
+  ]
+}

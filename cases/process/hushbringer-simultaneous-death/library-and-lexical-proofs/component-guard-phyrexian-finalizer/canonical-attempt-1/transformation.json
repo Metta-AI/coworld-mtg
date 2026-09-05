@@ -1,0 +1,25 @@
+{
+  "row": {
+    "id": "component-guard-phyrexian-finalizer",
+    "file": "crates/engine/src/game/casting_costs.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "finalize_mana_payment_with_phyrexian_choices",
+        "old": "    if let Some(pending) = state.pending_cast.as_ref() {\n        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n    }\n\n",
+        "new": ""
+      }
+    ],
+    "tests": [
+      "deferred_component_phyrexian_finalizer_guard_precedes_payment"
+    ],
+    "kind": "component-library",
+    "description": null,
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "test_overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "changed_files": [
+    "crates/engine/src/game/casting_costs.rs"
+  ]
+}

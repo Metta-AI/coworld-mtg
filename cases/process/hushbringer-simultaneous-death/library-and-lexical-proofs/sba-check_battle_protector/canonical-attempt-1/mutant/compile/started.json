@@ -1,0 +1,20 @@
+{
+  "started": "2026-09-05T19:20:10.556534+00:00",
+  "command": [
+    "cargo",
+    "+nightly-2026-04-19",
+    "test",
+    "-p",
+    "engine",
+    "--message-format=json",
+    "--lib",
+    "--no-run"
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+  "build_jobs": 2,
+  "frozen_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "source_manifest_sha256": "8f250fc0d7c9bdc77b7e3cfdb02e19bbac76c824af395480a5458d5766cf52a2",
+  "source_archive_sha256": "0f22366ba23e32a863cbbb44dc4c7dda9c05dcc62b7e1f015c62607a34257027",
+  "mutation_patch_sha256": "3204079e06115a1d1dc70c13e189f19bec400e84eee1cffcb2cf7eae47223d94"
+}

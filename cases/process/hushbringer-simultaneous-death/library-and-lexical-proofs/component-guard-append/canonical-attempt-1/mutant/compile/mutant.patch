@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -1916,7 +1916,6 @@
+     selection: CostSelection<'_>,
+     events: &mut Vec<GameEvent>,
+ ) -> Result<WaitingFor, EngineError> {
+-    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+     let CostSelection {
+         min_count,
+         count,

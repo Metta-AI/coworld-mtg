@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -1115,9 +1115,7 @@
+             OriginConstraint::NotEquals(_) | OriginConstraint::OneOf(_) => {
+                 // Ambiguous/restricted origins retain each consumer's legacy
+                 // policy: ordinary live cache; registered delayed bypass.
+-                legacy_death_suppressors.is_some_and(|active| {
+-                    super::trigger_suppression::legacy_death_suppressed(state, record, active)
+-                })
++                super::trigger_suppression::death_suppressed_after(state, record)
+             }
+         };
+         if suppressed {

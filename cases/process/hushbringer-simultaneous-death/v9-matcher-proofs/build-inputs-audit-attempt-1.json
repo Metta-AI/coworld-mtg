@@ -1,0 +1,6 @@
+{
+  "status": "read-only audit script dependency unavailable",
+  "error": "ModuleNotFoundError: No module named tomllib",
+  "before_any_build_source_or_artifact_write": true,
+  "disposition": "Dropped optional independent TOML semantic comparison; bind actual source build.rs/TOML and generated output bytes without claiming independent regeneration."
+}

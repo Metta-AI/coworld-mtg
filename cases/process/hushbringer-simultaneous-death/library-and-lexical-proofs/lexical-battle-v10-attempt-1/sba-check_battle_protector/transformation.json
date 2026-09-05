@@ -1,0 +1,37 @@
+{
+  "row": {
+    "id": "sba-check_battle_protector",
+    "file": "crates/engine/src/game/sba.rs",
+    "operations": [
+      {
+        "kind": "unwrap",
+        "function": "check_battle_protector",
+        "marker": "zones::with_departure_member",
+        "index": 0
+      }
+    ],
+    "tests": [
+      {
+        "test": "game::sba::tests::battle_protector_defensive_handoff_after_terminal_setup",
+        "role": "discriminator",
+        "evidence_kind": "battle_defensive",
+        "failure_marker": "defensive member owns an authoritative singleton snapshot"
+      },
+      {
+        "test": "game::sba::tests::battle_public_terminal_presets_return_with_empty_departure_scope",
+        "role": "control"
+      }
+    ],
+    "kind": "private-defensive",
+    "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+    "status": "exact transformation dry-run matched final source; runtime results pending",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "changed_files": [
+    "crates/engine/src/game/sba.rs"
+  ],
+  "tests_unchanged": true,
+  "canonical_seam_mtime_ns": 1788640420666147868,
+  "mutant_seam_mtime_ns": 1788640805233703682,
+  "test_tail_sha256": "31a497116dd3184e5b58208b01392bce328f763c8ae885b5c10eb38c5f6bfd75"
+}

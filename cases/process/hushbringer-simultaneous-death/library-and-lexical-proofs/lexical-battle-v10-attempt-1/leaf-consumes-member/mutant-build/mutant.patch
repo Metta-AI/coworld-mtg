@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -868,9 +868,7 @@
+     if let Some(binding) = binding {
+         // Consume the borrowed member for this leaf only; recursive delivery is
+         // an independent cause unless its producer explicitly supplies a member.
+-        without_departure_member(state, events, |state, events| {
+-            body(state, events, Some(binding))
+-        });
++        body(state, events, Some(binding));
+     } else if subject.is_some()
+         && !state
+             .departure_suppression_scope

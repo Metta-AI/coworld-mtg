@@ -1,0 +1,18 @@
+{
+  "id": "ordinary-global-death-gate",
+  "matrix_counts": {
+    "failed": 2,
+    "ignored": 20,
+    "passed": 89
+  },
+  "named_exits": [
+    101,
+    0
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::self_from_anywhere_exception_functions_in_destination_with_hush_surviving"
+  ],
+  "outcome": "intended assertion failure",
+  "restored": true,
+  "utc": "2026-09-05T19:20:02.116801+00:00"
+}

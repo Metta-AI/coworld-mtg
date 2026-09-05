@@ -1,0 +1,23 @@
+{
+  "frozen_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10/source.json",
+  "frozen_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "frozen_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10/source.tar.gz",
+  "frozen_archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+  "frozen_receipt_sha256": "a0afbd5663fc4548e040830f6e93442499497d987fc76dd10221857e4dfa6fd1",
+  "source_files": 2051,
+  "archive_bytes_fully_verified": true,
+  "pure_helpers": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/mutation-tools.py",
+  "pure_helpers_sha256": "2a2e5fe6bd0ae1ed883704602372488bec42b9299e20f34f9c40a6dbfb8d844d",
+  "scripts": {
+    "verify-expanded-sba-v10.py": "0927c7c5cc9b186c87b9e060fb5a87d2c1487a38b32834f8517cb7e0fd1d8948",
+    "verify-lexical-battle-v10.py": "2d57994df68df6c52d5b6249ec9ba1b88ae0997c9c1b71c59d1b238302c5aa81"
+  },
+  "inventories": {
+    "expanded-v10-inventory.json": "7e63acff0c48e670f4e25c84769991edc92a3a8e360d30d061a5d47bb6a694c3",
+    "lexical-battle-v10-inventory.json": "224ab3aa8c107a088100779097f82aa84751b34d4fd407936a25cfffc829ca7e"
+  },
+  "bare_assertion_final_line": 2050,
+  "root_cases_per_phase": 70,
+  "library_cases_per_phase": 6,
+  "source_checkout_writes": false
+}

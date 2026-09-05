@@ -1,0 +1,15 @@
+--- a/crates/engine/src/game/triggers.rs
++++ b/crates/engine/src/game/triggers.rs
+@@ -1423,7 +1423,11 @@
+         let mut registered_this_event: HashSet<(ObjectId, usize)> = HashSet::new();
+         // CR 603.6a + CR 611.3: ETB causal suppression remains event-wide.
+         // Death suppression is selected by each matching clause's timing.
+-        if etb_event_is_suppressed_cached(state, event, &active_suppress_triggers) {
++        if super::trigger_suppression::event_is_suppressed_by_static_triggers_cached(
++            state,
++            event,
++            &active_suppress_triggers,
++        ) {
+             continue;
+         }
+ 

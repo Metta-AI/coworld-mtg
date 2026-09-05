@@ -1,0 +1,17 @@
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -1134,7 +1134,13 @@
+     source_id: ObjectId,
+     state: &GameState,
+ ) -> bool {
+-    match_changes_zone_with_context(event, trigger, source_id, state, None)
++    match_changes_zone_with_context(
++        event,
++        trigger,
++        source_id,
++        state,
++        Some(&super::trigger_suppression::active_suppress_trigger_statics(state)),
++    )
+ }
+ 
+ fn match_changes_zone_with_context(

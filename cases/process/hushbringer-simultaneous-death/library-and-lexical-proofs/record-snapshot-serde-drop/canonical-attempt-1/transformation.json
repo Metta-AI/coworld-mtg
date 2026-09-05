@@ -1,0 +1,24 @@
+{
+  "row": {
+    "id": "record-snapshot-serde-drop",
+    "file": "crates/engine/src/types/game_state.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "old": "    #[serde(default, skip_serializing_if = \"Option::is_none\")]\n    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,",
+        "new": "    #[serde(skip)]\n    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,"
+      }
+    ],
+    "tests": [
+      "zone_change_suppression_preserves_missing_empty_and_captured_history"
+    ],
+    "kind": "schema-library",
+    "description": null,
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "test_overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "changed_files": [
+    "crates/engine/src/types/game_state.rs"
+  ]
+}

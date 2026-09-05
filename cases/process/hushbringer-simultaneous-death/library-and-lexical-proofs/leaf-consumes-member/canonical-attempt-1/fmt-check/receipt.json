@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cargo",
+    "+nightly-2026-04-19",
+    "fmt",
+    "--all",
+    "--",
+    "--check"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+}

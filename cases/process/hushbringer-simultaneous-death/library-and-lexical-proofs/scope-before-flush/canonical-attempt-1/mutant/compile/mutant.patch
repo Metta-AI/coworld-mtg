@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -671,7 +671,6 @@
+         {
+             state.departure_suppression_scope.boundary_flushes.0 += 1;
+         }
+-        super::layers::flush_layers(state);
+         let active = super::trigger_suppression::active_suppress_trigger_statics(state);
+         Some(DepartureSuppressionCapture {
+             outcomes: subjects

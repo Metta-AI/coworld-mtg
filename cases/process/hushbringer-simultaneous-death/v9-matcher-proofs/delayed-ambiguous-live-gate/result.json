@@ -1,0 +1,19 @@
+{
+  "id": "delayed-ambiguous-live-gate",
+  "matrix_counts": {
+    "failed": 3,
+    "ignored": 20,
+    "passed": 88
+  },
+  "named_exits": [
+    101,
+    101
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::ambiguous_registered_delayed_matchers_preserve_ungated_compatibility",
+    "trigger_suppression_event_timing::ambiguous_delayed_primary_alternative_co_death_and_identity_compatibility"
+  ],
+  "outcome": "intended assertion failure",
+  "restored": true,
+  "utc": "2026-09-05T19:14:35.147987+00:00"
+}

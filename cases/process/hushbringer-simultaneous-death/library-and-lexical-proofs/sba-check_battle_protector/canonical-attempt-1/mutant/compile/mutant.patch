@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1723,9 +1723,7 @@
+                 // the battle is put into the graveyard, a "leaves the
+                 // battlefield" event that must consult Moved redirects. Bail on a
+                 // CR 616.1 pause (the SBA fixpoint re-runs and finds the rest).
+-                if zones::with_departure_member(state, events, owner, battle_id, |state, events| {
+-                    move_to_graveyard_via_pipeline(state, battle_id, events)
+-                }) {
++                if (|| move_to_graveyard_via_pipeline(state, battle_id, events))() {
+                     return;
+                 }
+                 *any_performed = true;

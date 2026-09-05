@@ -1,0 +1,167 @@
+{
+  "status": "released after passing consolidated candidate baseline",
+  "module_filter": "trigger_suppression_event_timing",
+  "expected_pass": 184,
+  "expected_ignored": 20,
+  "rows": {
+    "batched-adapter": [
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch",
+        "with_hush": true,
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": true,
+        "designated_mutant_failure": true
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_forward",
+        "with_hush": true,
+        "reverse": false,
+        "select_creature": false,
+        "select_noncreature": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_forward",
+        "with_hush": true,
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": false,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_hush_reverse",
+        "with_hush": true,
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": true,
+        "designated_mutant_failure": true
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_reverse",
+        "with_hush": true,
+        "reverse": true,
+        "select_creature": false,
+        "select_noncreature": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_reverse",
+        "with_hush": true,
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": false,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_forward",
+        "with_hush": false,
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_forward",
+        "with_hush": false,
+        "reverse": false,
+        "select_creature": false,
+        "select_noncreature": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_forward",
+        "with_hush": false,
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": false,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_reverse",
+        "with_hush": false,
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_reverse",
+        "with_hush": false,
+        "reverse": true,
+        "select_creature": false,
+        "select_noncreature": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_reverse",
+        "with_hush": false,
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": false,
+        "designated_mutant_failure": false
+      }
+    ],
+    "batched-global-death-gate": [
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter",
+        "with_hush": true,
+        "reverse": false,
+        "any": true,
+        "designated_mutant_failure": true
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_hush_forward",
+        "with_hush": true,
+        "reverse": false,
+        "any": false,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_any_hush_reverse",
+        "with_hush": true,
+        "reverse": true,
+        "any": true,
+        "designated_mutant_failure": true
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_hush_reverse",
+        "with_hush": true,
+        "reverse": true,
+        "any": false,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_any_no_hush_forward",
+        "with_hush": false,
+        "reverse": false,
+        "any": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_no_hush_forward",
+        "with_hush": false,
+        "reverse": false,
+        "any": false,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_any_no_hush_reverse",
+        "with_hush": false,
+        "reverse": true,
+        "any": true,
+        "designated_mutant_failure": false
+      },
+      {
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_no_hush_reverse",
+        "with_hush": false,
+        "reverse": true,
+        "any": false,
+        "designated_mutant_failure": false
+      }
+    ]
+  },
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "source_archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+  "validation_receipt_sha256": "d34a65fdc1c8b4ae272ea561a3890ff8e34ebda5618591e6c904a8d984821d87"
+}

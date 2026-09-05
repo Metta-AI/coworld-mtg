@@ -1,0 +1,19 @@
+{
+  "id": "before-live-subject-authority",
+  "matrix_counts": {
+    "failed": 2,
+    "ignored": 20,
+    "passed": 89
+  },
+  "named_exits": [
+    101,
+    101
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::attachment_relative_suppression_binds_live_relation_before_departure",
+    "trigger_suppression_event_timing::enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat"
+  ],
+  "outcome": "intended assertion failure",
+  "restored": true,
+  "utc": "2026-09-05T19:25:15.314597+00:00"
+}

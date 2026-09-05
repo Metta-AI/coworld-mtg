@@ -1,0 +1,392 @@
+{
+  "id": "leaf-consumes-member",
+  "baseline": [
+    {
+      "started": "2026-09-05T20:37:51.315288+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-engine",
+        "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+      "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+      "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "f8394525ee44de2cf3c69a36882307d9395e72916627b64435bb23a4bcd9fe5e",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "2ea284bbcd16e872fa68ad94cbf83a8f0a40ff0ceb937ac0505289cf9670a2dd",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "role": "discriminator",
+        "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "fa56dd72df2f3785024c76c78a18084dace3dd17e8fb1ca0427427e870908749",
+      "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+      "finished": "2026-09-05T20:37:51.906707+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 16592
+        }
+      ],
+      "log_sha256": "19be254423dd5b80e1227b79ae272c531da3a28db2ef14442e5b4a3dace5a54b",
+      "evidence": [],
+      "after_history_evidence": [],
+      "battle_defensive_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:37:52.477046+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-engine",
+        "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+      "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+      "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "f8394525ee44de2cf3c69a36882307d9395e72916627b64435bb23a4bcd9fe5e",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "2ea284bbcd16e872fa68ad94cbf83a8f0a40ff0ceb937ac0505289cf9670a2dd",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "role": "control"
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "fa56dd72df2f3785024c76c78a18084dace3dd17e8fb1ca0427427e870908749",
+      "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+      "finished": "2026-09-05T20:37:53.048998+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 16592
+        }
+      ],
+      "log_sha256": "59a16f41b90421910faa8eb6de9d8a64f0d271220b4fface0ed8183f5360d54d",
+      "evidence": [],
+      "after_history_evidence": [],
+      "battle_defensive_evidence": [],
+      "source_and_executable_unchanged": true
+    }
+  ],
+  "mutant_build": {
+    "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/source.json",
+    "source_manifest_sha256": "9023119ed01687a1394de2dc8a6d5106534da7a4fe5625c9f45c8e4aa5b359c6",
+    "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/source.tar.gz",
+    "source_archive_sha256": "f7a8938153fda218d3f5d08abcdfd6167adaa0c7084171acf7919625ce583cc7",
+    "mutant_patch_sha256": "3153be5c9d152ffbc8f0273493eb1b98d239aa0e63a19cad6f0821adb9256283",
+    "started": "2026-09-05T20:38:12.192403+00:00",
+    "command": [
+      "cargo",
+      "+nightly-2026-04-19",
+      "test",
+      "-p",
+      "engine",
+      "--lib",
+      "--message-format=json",
+      "--no-run"
+    ],
+    "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+    "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+    "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+    "environment": {
+      "CARGO_BUILD_JOBS": "1",
+      "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+      "RUSTFLAGS": null,
+      "CARGO_ENCODED_RUSTFLAGS": null,
+      "RUSTUP_TOOLCHAIN": null,
+      "RUST_MIN_STACK": null
+    },
+    "finished": "2026-09-05T20:39:38.821286+00:00",
+    "exit": 0,
+    "log_sha256": "971897585ec3421eb7bf12dc0c67a51b1ab11bf4dbacbe1aef27abbbbe7b6125",
+    "artifacts": [
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "custom-build"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "build-script-build",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/build.rs",
+          "edition": "2021",
+          "doc": false,
+          "doctest": false,
+          "test": false
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": 0,
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": true,
+        "executable": null,
+        "executable_sha256": null
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "engine",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/src/lib.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": true
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+        "executable_sha256": "36ecc113c786381d1b9b459d5b01224ec4680335fc395a8be39674759037dc98"
+      }
+    ],
+    "build_scripts": [
+      {
+        "reason": "build-script-executed",
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+        "linked_libs": [],
+        "linked_paths": [],
+        "cfgs": [],
+        "env": [],
+        "out_dir": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/build/engine-d4fc5f5dfa6fd822/out"
+      }
+    ],
+    "counts": [],
+    "source_unchanged": true
+  },
+  "mutant": [
+    {
+      "started": "2026-09-05T20:39:39.834768+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+        "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+      "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+      "executable_sha256": "36ecc113c786381d1b9b459d5b01224ec4680335fc395a8be39674759037dc98",
+      "source_manifest_sha256": "9023119ed01687a1394de2dc8a6d5106534da7a4fe5625c9f45c8e4aa5b359c6",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/source.tar.gz",
+      "source_archive_sha256": "f7a8938153fda218d3f5d08abcdfd6167adaa0c7084171acf7919625ce583cc7",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "77cafcbe90dc60a10e5c408ff2c26248f65b0d3c1f735e48c0a59e5140471455",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "role": "discriminator",
+        "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "2b14dd5adb1942995bfef8c46ad0b357185d4823e922298c0298cfc279d1b131",
+      "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+      "finished": "2026-09-05T20:39:40.413558+00:00",
+      "exit": 101,
+      "counts": [
+        {
+          "status": "FAILED",
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0,
+          "filtered_out": 16592
+        }
+      ],
+      "log_sha256": "0a6c23e187ae3866a5a1b1962417eced9bf55d1efca65eb285114fb15d3a8167",
+      "evidence": [],
+      "after_history_evidence": [],
+      "battle_defensive_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:39:40.986275+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+        "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+      "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+      "executable_sha256": "36ecc113c786381d1b9b459d5b01224ec4680335fc395a8be39674759037dc98",
+      "source_manifest_sha256": "9023119ed01687a1394de2dc8a6d5106534da7a4fe5625c9f45c8e4aa5b359c6",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/source.tar.gz",
+      "source_archive_sha256": "f7a8938153fda218d3f5d08abcdfd6167adaa0c7084171acf7919625ce583cc7",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "77cafcbe90dc60a10e5c408ff2c26248f65b0d3c1f735e48c0a59e5140471455",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "role": "control"
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/leaf-consumes-member/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "2b14dd5adb1942995bfef8c46ad0b357185d4823e922298c0298cfc279d1b131",
+      "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+      "finished": "2026-09-05T20:39:41.567764+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 16592
+        }
+      ],
+      "log_sha256": "59a16f41b90421910faa8eb6de9d8a64f0d271220b4fface0ed8183f5360d54d",
+      "evidence": [],
+      "after_history_evidence": [],
+      "battle_defensive_evidence": [],
+      "source_and_executable_unchanged": true
+    }
+  ],
+  "restored": [
+    {
+      "started": "2026-09-05T20:39:42.317953+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-engine",
+        "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+      "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+      "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "f8394525ee44de2cf3c69a36882307d9395e72916627b64435bb23a4bcd9fe5e",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "2ea284bbcd16e872fa68ad94cbf83a8f0a40ff0ceb937ac0505289cf9670a2dd",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "role": "discriminator",
+        "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "fa56dd72df2f3785024c76c78a18084dace3dd17e8fb1ca0427427e870908749",
+      "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+      "finished": "2026-09-05T20:39:42.892741+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 16592
+        }
+      ],
+      "log_sha256": "19be254423dd5b80e1227b79ae272c531da3a28db2ef14442e5b4a3dace5a54b",
+      "evidence": [],
+      "after_history_evidence": [],
+      "battle_defensive_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:39:43.461810+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-engine",
+        "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+      "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+      "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "f8394525ee44de2cf3c69a36882307d9395e72916627b64435bb23a4bcd9fe5e",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "2ea284bbcd16e872fa68ad94cbf83a8f0a40ff0ceb937ac0505289cf9670a2dd",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "role": "control"
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "fa56dd72df2f3785024c76c78a18084dace3dd17e8fb1ca0427427e870908749",
+      "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+      "finished": "2026-09-05T20:39:44.037467+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 16592
+        }
+      ],
+      "log_sha256": "59a16f41b90421910faa8eb6de9d8a64f0d271220b4fface0ed8183f5360d54d",
+      "evidence": [],
+      "after_history_evidence": [],
+      "battle_defensive_evidence": [],
+      "source_and_executable_unchanged": true
+    }
+  ],
+  "classifications": [
+    {
+      "case": {
+        "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "role": "discriminator",
+        "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+      },
+      "classification": "private_lexical_contract_failure"
+    },
+    {
+      "case": {
+        "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "role": "control"
+      },
+      "classification": "unaffected_control_pass"
+    }
+  ],
+  "problems": [],
+  "status": "verified_required_discriminator_and_controls"
+}

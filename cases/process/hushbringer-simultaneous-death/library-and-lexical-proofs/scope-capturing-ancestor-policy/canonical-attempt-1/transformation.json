@@ -1,0 +1,24 @@
+{
+  "row": {
+    "id": "scope-capturing-ancestor-policy",
+    "file": "crates/engine/src/game/zones.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "with_departure_suppression",
+        "old": "    let can_capture = !subjects.is_empty()\n        && !state\n            .departure_suppression_scope\n            .frames\n            .iter()\n            .any(|frame| frame.capture.is_some());",
+        "new": "    let can_capture = !subjects.is_empty();"
+      }
+    ],
+    "tests": [
+      "departure_scope_"
+    ],
+    "kind": "scope-library",
+    "status": "planned; no mutation executed",
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+  },
+  "test_overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "changed_files": [
+    "crates/engine/src/game/zones.rs"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "before-clause-gate",
+  "matrix_counts": {
+    "failed": 49,
+    "ignored": 20,
+    "passed": 42
+  },
+  "named_exits": [
+    101,
+    101
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+    "trigger_suppression_event_timing::delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener"
+  ],
+  "outcome": "intended assertion failure",
+  "recovered_bookkeeping_stop": true,
+  "restored": true,
+  "utc": "2026-09-05T19:02:16.871894+00:00"
+}

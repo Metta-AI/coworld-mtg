@@ -1,0 +1,26 @@
+{
+  "driver_sha256": "db07371dc5858d79a1159f667d22fed9f6d038d751a92d131da3a37fe2534187",
+  "mutant_sha256": "5274d23a341b736494e8ee1b1aecd9b69720bdae829d7fad68ea89734d1f2ffa",
+  "original_sha256": "1eef66a5b3f50dceb8643ede0ea6deac723336640a3bd006dfa96406eb7002d7",
+  "patch_sha256": "762f559474b24043847def241cf6204efff2159698ee988136f0470f0a846995",
+  "row": {
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill.",
+    "file": "crates/engine/src/game/trigger_matchers.rs",
+    "id": "self-arrival-exception",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "zone_change_clause_matches",
+        "kind": "replace",
+        "new": "super::trigger_suppression::death_suppressed_after(state, record)",
+        "old": "!self_arrival && super::trigger_suppression::death_suppressed_after(state, record)"
+      }
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "self_from_anywhere_exception_functions_in_destination_with_hush_surviving"
+    ]
+  },
+  "source_mtime_ns": 1788636037420159177,
+  "support_sha256": "fb8a2321776b9b6de22e85a870d7c576576ec0a63b84f4432ea28ab88b57900d"
+}

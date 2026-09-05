@@ -1,0 +1,28 @@
+{
+  "driver_sha256": "a68ffbc6715ba25c1ceacf9fa89cedc3e225afad87599e38cb09323e9afeb4e9",
+  "mutant_sha256": "2609440e68a32618f51fb51c43a221e41a16e1f2b6d9f731b2cdecddae665e30",
+  "original_sha256": "1eef66a5b3f50dceb8643ede0ea6deac723336640a3bd006dfa96406eb7002d7",
+  "patch_sha256": "8c1deb96bc6f33325ec7aa3c736ecbcd15265cea2a2fca60738bc9a8c0aa320f",
+  "row": {
+    "description": null,
+    "file": "crates/engine/src/game/trigger_matchers.rs",
+    "id": "before-clause-gate",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "zone_change_clause_matches",
+        "kind": "replace",
+        "new": "            OriginConstraint::Equals(Zone::Battlefield) => false,",
+        "old": "            OriginConstraint::Equals(Zone::Battlefield) => {\n                super::trigger_suppression::death_suppressed_before(state, record)\n            }"
+      }
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+      "delayed_first_suppressed_occurrence_retains_one_shot_or_recurring_listener"
+    ],
+    "transformation_dry_run": "source pattern matched"
+  },
+  "source_mtime_ns": 1788634614189781615,
+  "support_sha256": "fb8a2321776b9b6de22e85a870d7c576576ec0a63b84f4432ea28ab88b57900d"
+}

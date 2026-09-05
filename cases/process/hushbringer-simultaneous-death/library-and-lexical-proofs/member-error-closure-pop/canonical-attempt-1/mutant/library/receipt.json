@@ -1,0 +1,31 @@
+{
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "departure_scope_",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T19:19:21.286497+00:00",
+  "executable_sha256": "c605fb187280cf7add4da9a11f5957ba47240db9935e8c9f47f7a4bb74834c49",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/compile/receipt.json",
+  "compile_receipt_sha256": "24a8456e7c36bd0c0c61dd42a2c9a6d0e565249b85ccf3ee608bd87cf3cbb42a",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/compile/source.json",
+  "source_manifest_sha256": "a85212823959e7e8da88b974fa66e542ef08d79c7f968537a009135e13404bbd",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/compile/source.tar.gz",
+  "source_archive_sha256": "1aa1ad09ee1ea4c0d77d3ea20bd012556843078f2b83b13f7e559841db37b953",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T19:19:21.882805+00:00",
+  "exit": 101,
+  "log_sha256": "84e4166baad04d4e88cb0321dfcdb127f8652623dc318dc9d475cb72307cdda4",
+  "counts": [
+    {
+      "status": "FAILED",
+      "passed": 0,
+      "failed": 6,
+      "ignored": 0,
+      "filtered_out": 16582
+    }
+  ],
+  "source_unchanged_during_run": true
+}

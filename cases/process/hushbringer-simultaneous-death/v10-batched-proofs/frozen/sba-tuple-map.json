@@ -1,0 +1,408 @@
+{
+  "status": "released after passing consolidated candidate baseline",
+  "rows": {
+    "sba-check_zero_toughness": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_lethal_damage": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_unattached_auras": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_role_uniqueness": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_world_rule": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_zero_loyalty": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_zero_defense": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "sba-check_saga_sacrifice": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ]
+  },
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "source_archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+  "validation_receipt_sha256": "d34a65fdc1c8b4ae272ea561a3890ff8e34ebda5618591e6c904a8d984821d87"
+}
