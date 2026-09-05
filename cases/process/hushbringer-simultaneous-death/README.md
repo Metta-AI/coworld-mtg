@@ -85,3 +85,17 @@ An [isolated original-engine cost run](v7-component-isolated-runtime/README.md)
 confirmed the earlier deferred-cost observations using a fresh baseline
 compilation and the exact retained test overlay. This supplements the
 historical shared-target evidence without relabeling it.
+
+The [frozen v9 plan](hushbringer-plan-v9.md) addresses those findings with
+explicit global-action exemptions, a concrete same-object replacement and
+sacrifice path for the resolver boundary, and bounded LKI/controller fixture
+changes that preserve the original assertions. Its
+[freeze receipt](hushbringer-plan-v9-freeze-receipt.json) records source
+preservation. A fresh full v9 review is pending at this checkpoint.
+
+The [fresh full v9 review](hushbringer-plan-review-v9.md) was clean, the
+ninth completed full plan-review round. The
+[v9 manifest](v9-plan-manifest.json) binds the plan, review and supporting
+evidence. A fresh executor was dispatched with exclusive source ownership
+and a separate mutation checkout. Runtime proof and independent implementation
+review remain required before acceptance.

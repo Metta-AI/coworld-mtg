@@ -1,0 +1,36 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "v9-full-plan-review-clean-implementation-dispatched",
+  "full_plan_review_round": 9,
+  "description": "Fresh full review returned zero blocking or material gaps. This approves the plan only. Actual implementation, all runtime and isolated mutation gates, independent implementation review and fixed-checker acceptance remain required.",
+  "artifacts": [
+    {
+      "path": "hushbringer-plan-v9.md",
+      "sha256": "1e2c3adde42263f56fc9a25c7745854f4a5426ae4d2c25eda36f4f6fb0c3613f"
+    },
+    {
+      "path": "hushbringer-plan-v9-freeze-receipt.json",
+      "sha256": "36aa05a0c5fb7961aef0eec3126994a97b6015218e2923efd07bc53f0c2de518"
+    },
+    {
+      "path": "hushbringer-plan-v9-oracle-evidence.json",
+      "sha256": "646cc7112d1117ba0dc0a1170476685db02d2f74888bce0e170bcec114ae65a3"
+    },
+    {
+      "path": "hushbringer-plan-review-v9.md",
+      "sha256": "b340c41d627e9068990ea4d37caba5111dd307cb7e43b42c6eb7116ffc84647a"
+    },
+    {
+      "path": "hushbringer-plan-review-v9-freeze-receipt.json",
+      "sha256": "bf8beca46431eb6151f5c27099c5c90301c7bcba483655f20e9efb99a59a8f6f"
+    },
+    {
+      "path": "v8-plan-manifest.json",
+      "sha256": "05f076940ac29dba70606c5cc9fe7c3b49c3f1fde57fd8755278b77efa84a41f"
+    },
+    {
+      "path": "v7-component-isolated-runtime/manifest.json",
+      "sha256": "643d171c2c8e1162751cd3a758a94b4576385986365a681f169ccaa167abdad6"
+    }
+  ]
+}
