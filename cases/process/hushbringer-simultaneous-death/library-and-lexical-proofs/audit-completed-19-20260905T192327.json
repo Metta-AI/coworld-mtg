@@ -1,0 +1,1866 @@
+{
+  "utc": "2026-09-05T19:23:27.108231+00:00",
+  "count": 19,
+  "rows": [
+    {
+      "id": "sba-check_zero_toughness",
+      "outcome_sha256": "2d963156ebf1a1f84427d24a3dfbc557faef81ced5e035bcce8675fdffa928f2",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "ec2c7da1349cdcc942098a884266ddbf139bb43b34c13a667415a1b9a6a058da",
+            "log_sha256": "8220e8eaf068459dc24fcef935eb828a9bbb96b993524c3b74f8e636e4e7ddaf"
+          },
+          {
+            "filter": "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "c6801ca68ed81f3aff1fed6069d3e36e9ff4875c59805eddf1a0a37ab002cbca",
+            "log_sha256": "67a39337cee2d6ea79556a95189530b760bdecc5e749afc6ed9eb97f6ae63f17"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "1f6fe44c0bf809884f4bb0eeb63221814d9e36a2cdadc861e1cc97e4598be307",
+            "log_sha256": "4d5c0f4877600df2a56f89d7e3a128cd6aec88098e6a37a8e5ca624616b03608"
+          },
+          {
+            "filter": "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "2999843bc10830f64493595c49d8e454350098e3f84acf4e8ae49ee960058e54",
+            "log_sha256": "126e751fe8bd2c2bb18fcf4d97aedc99f7ca27f1d75f622438bde397464ea97e"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "faf834eef19d19f36012382e692b645200b04e46519c1d81c21b65e3e5e70df0",
+            "log_sha256": "848d90a07adb0c5e3ceeed6dbf25508c3c1f85863dfd24df2b71402509a3ab83"
+          },
+          {
+            "filter": "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "20a1ed1eb2d08faf890ee2f3efa82c8469b6773e27a9fd2dab3990c3f9af6174",
+            "log_sha256": "67a39337cee2d6ea79556a95189530b760bdecc5e749afc6ed9eb97f6ae63f17"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff' (3329177) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for ZeroToughness; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "949b2afe54bc39d37e0f708a640ad2b98dc95cf1e844c940dbe1ad2008be10fb",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "9befa743ecaea3f0f8557855e8fcd4c1be42c560a211669d2e8cea36ed6a1e24",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_lethal_damage",
+      "outcome_sha256": "37b46d745b1529e50c4ab74c0c33cbebf99b5737b1db70aedcd4952c64df6107",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "faf834eef19d19f36012382e692b645200b04e46519c1d81c21b65e3e5e70df0",
+            "log_sha256": "3b88953efcb3c966a8953e5ccd9d7d86394dd71b5c2daf94e9474e53e7854337"
+          },
+          {
+            "filter": "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "20a1ed1eb2d08faf890ee2f3efa82c8469b6773e27a9fd2dab3990c3f9af6174",
+            "log_sha256": "12d38c0c06b164d3de61dd97720e48507474fa2d04df949c473d9957d9a3d4c1"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "5e54e94489d1890168eb30a03b94fb2fd3c736a1be6c7ff04a924f8babe28d06",
+            "log_sha256": "776b100969de8540d8ed2159f659bc463879fdc6dd6c5b18d83456768b3610fe"
+          },
+          {
+            "filter": "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "40f1809ff8b145cc315fbc327012764b573131c2e3d5cadcc7bb7805f3bfbff7",
+            "log_sha256": "f8750af4be9fe0c1a175e63b94ec03bc38f927823fe7453d17e56c52d4181681"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "f98dc34dad70ce465f1da01be024527188774ea6d36bd23eded5f77d598642e8",
+            "log_sha256": "561f90c3b556b29a2176d9b448ece4aa7cc3ff4e314eba39550fc19cced8444a"
+          },
+          {
+            "filter": "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "bd3e11b1eb65ab0ff42e95cf18fb499b4d66ab8f4ee6f4eaf21d44f0df032445",
+            "log_sha256": "12d38c0c06b164d3de61dd97720e48507474fa2d04df949c473d9957d9a3d4c1"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff' (3341785) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for LethalDamage; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "884aecd4bb5b06dee82a0c40f051118a3c4f034e6e1c5c0dca94bce7c48adfef",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "fd42b1f10583f8b2619a6794081cd658d0ffbfe2e947ccdac6b5a0de1cc0151d",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_unattached_auras",
+      "outcome_sha256": "ff87dea75c808993549232c0f2a33de9b6543e103852b726f98d92aafe847a64",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "f98dc34dad70ce465f1da01be024527188774ea6d36bd23eded5f77d598642e8",
+            "log_sha256": "3a64b9b26c9a407dd09c62cff378e1595e25af01c00596844db7e8b22ba2a000"
+          },
+          {
+            "filter": "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "bd3e11b1eb65ab0ff42e95cf18fb499b4d66ab8f4ee6f4eaf21d44f0df032445",
+            "log_sha256": "00ef65b52bde85a5ac7f019c9ff1b801c47b03b28d3b07fbfc6424fdfbbc0da2"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "bce587f8bd94819eeee698a02d79cb394b3d38addab940c0ec577af222f6494d",
+            "log_sha256": "3f6596b6e11924045e563fa2e9e9bdafebcba58c988a67e1ff5bd4cbe084e5ad"
+          },
+          {
+            "filter": "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "b94ea3500f613d4337140d8bd177e9124e2455470d7df2897ed5dd25c1254897",
+            "log_sha256": "425a91194d14006abf247966fd3e266ef7c3ccc627467ab36dbf906d205fc19e"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "746aca8e1d4a327654ec05a4d89b7a88aa206f769ed3581315b6b17870662741",
+            "log_sha256": "10f776fd74a0379fc6bda65a305d6911bb565d8b1ade5ae94659846c5576911b"
+          },
+          {
+            "filter": "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "eb5801ace875177cb057073e33248e3f1b65dea156e56e6ee2df0d07967a7d1d",
+            "log_sha256": "00ef65b52bde85a5ac7f019c9ff1b801c47b03b28d3b07fbfc6424fdfbbc0da2"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff' (3351775) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for UnattachedAura; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "d924769abc9b77b293fb9ef2ba62d8952bb590a8d2b74acc487de11a5f37e303",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "3b834a398a9b9c072f0356666f2a371ae4cd1258ffb57f8eebaa640602b2b9a8",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_role_uniqueness",
+      "outcome_sha256": "bfe4adc2270c6aa5e088cd030c0f8bbb3e7f41ab770478892ec49d05be2d166d",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "746aca8e1d4a327654ec05a4d89b7a88aa206f769ed3581315b6b17870662741",
+            "log_sha256": "a6a63f4b1399129e33e76983803431be8eb75ff60db9286ae913ec5c9a420748"
+          },
+          {
+            "filter": "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "eb5801ace875177cb057073e33248e3f1b65dea156e56e6ee2df0d07967a7d1d",
+            "log_sha256": "77c0a72065fc9a4fa623c039b37e3a48a8119967445da2e39e43888944ae9ae6"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "04bf9de80414a56e560a0936b70f84d62348113c99352eb0006481b2f538fd55",
+            "log_sha256": "df2428f656853ac1ab7f40c9123d64ea4141e2f1888c379de0a07bba1098dc93"
+          },
+          {
+            "filter": "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "0cf81949211a2487a0c0b9b48a09797578ccf52cfeab49ebe95930e9b10934fd",
+            "log_sha256": "03ae6829c4a072e6a94804df633da63a9236fab0f8e7d1dc81c407f4274d0b6e"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "69596b8ee1e4aaa3f8929204769fdcd0ae1991d0731982b064bd3b32c3dc0473",
+            "log_sha256": "41813c13ef1b978ff291c5b024bd1ae2fff04a9dc38dbffeac372cd258b8c19a"
+          },
+          {
+            "filter": "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "d74a035fe204bcbc699e3ffa1a0fa7f10f34f983442c85dd769e214a78198895",
+            "log_sha256": "77c0a72065fc9a4fa623c039b37e3a48a8119967445da2e39e43888944ae9ae6"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff' (3365937) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for RoleUniqueness; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "ece83fe18aef833b8e70928ab806b16c321f73da9d61ee47293fb394e8635f72",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "e4a672ebfbe32aa8aa586f094ed29179428134c0b194bad27e5923e173cb7bff",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_world_rule",
+      "outcome_sha256": "3fdf54718813c5dad93358e9efcc46486caca001796fbe4a6dfddb9f3ea84ad8",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "69596b8ee1e4aaa3f8929204769fdcd0ae1991d0731982b064bd3b32c3dc0473",
+            "log_sha256": "7c2ae108ba7399eb406c30577484bda22d2013e6922a1ba062b645201a39035a"
+          },
+          {
+            "filter": "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "d74a035fe204bcbc699e3ffa1a0fa7f10f34f983442c85dd769e214a78198895",
+            "log_sha256": "ead48d4cd5e08075ee51cde2c8993db5424f66e5a8a906617b5b5e4859974923"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "52ef4894743183bf64f39bae08e556043a361c19ce4e7eb19e4b9e2289827b4a",
+            "log_sha256": "661f7b9a565df6dd0b170ad7b2d37285ecadc30e0318cd46b801b93758121b15"
+          },
+          {
+            "filter": "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "0fe4d9a2259a2cd1b6f2bdbb5cb76d105a06562117df73de61209bbdf44259c5",
+            "log_sha256": "86a8169811837176a09c137e6791b625e6305790fec19581d49e994f2ed0ca7a"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "28950a871e4c6593a5f64c0af50bce5acb5ba121f026bce3ac2d494ca684bd59",
+            "log_sha256": "9a8571f95baf2d4195ae7ea627bb5b489f31b42d48cedf392a1446d10bbfe11e"
+          },
+          {
+            "filter": "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "63fd9b818dfdcd372b61d4fa2b5e96f8eeffbfdb29111496e1d784b3987088a3",
+            "log_sha256": "ead48d4cd5e08075ee51cde2c8993db5424f66e5a8a906617b5b5e4859974923"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff' (3377500) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for WorldRule; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_world_rule_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "1d1ca0dd9473d91e2e176e23ea04423202613325c6129e81f547dea8420cc678",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "54560f9a6596a09dbfd6530e10f5caf898ccd00bd622a8981b112bb78fa542fe",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_zero_loyalty",
+      "outcome_sha256": "4785277fc79e8051ae5943308918b243d8ea82486222306487566ad4c8ef2c88",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "28950a871e4c6593a5f64c0af50bce5acb5ba121f026bce3ac2d494ca684bd59",
+            "log_sha256": "c2674f7f2ce85ca91acc8c27d23eb177b6eada0cab1c77ff2ab884b48c282ed4"
+          },
+          {
+            "filter": "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "63fd9b818dfdcd372b61d4fa2b5e96f8eeffbfdb29111496e1d784b3987088a3",
+            "log_sha256": "4650b1d2e147365d5b7e81a7e0c0ddbb1a53ef27069513312c748cc0922584ea"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "0825eec2b986f0ec2dfde34875c82aa99613c220f8a9e0570d25f9ba54968062",
+            "log_sha256": "cb8717a6f0efed905e952fe8d1d9cf02a514128deae3efe7f40050936572dcca"
+          },
+          {
+            "filter": "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "50147336e0b7f8c6e14a44bae31becd5ee9ccd6f4f9492cfcb8177c9d13a3145",
+            "log_sha256": "cfad6f7eaf3f7a7f9d4c2dbc04d3a3080d8d0da4d42e2e5fce8378b0c2bc84fd"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+            "log_sha256": "143a318f88a244fc21e66008b93328a6d69efddccc8569ad0bbdea9a2c6a57a4"
+          },
+          {
+            "filter": "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+            "log_sha256": "4650b1d2e147365d5b7e81a7e0c0ddbb1a53ef27069513312c748cc0922584ea"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff' (3387446) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for ZeroLoyalty; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "1e3c2ae3e4b389cc7b50bbde8e72235f8a99fa761971d1ae11e05c0420095ad4",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "7008f4c9fd8e097322190929d3d8e8d9f2502388c58c0be824fe95d8319caf6c",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_zero_defense",
+      "outcome_sha256": "68c194e46693105d5c72b4c0b164c6e57a12ad0dce2eb250e40d26b036f0790a",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "ec48f480ff710517558cb479a43b66899514a3c83eee0a695a55ad2b38febbf5"
+          },
+          {
+            "filter": "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "ec610dc114c065c9d4860ca091daf1cab7b2af9f0605516c7be920ccee352e05"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "a123e97a775af1ebb51fe544a82d8738fd3280e9ba6cf6305d09cb88fddd1de8",
+            "log_sha256": "213d74c4b34d2414c845fd65c705020e21002e474c4a04b6141b4796e315c78b"
+          },
+          {
+            "filter": "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "30c611edab1e327a0ec86fc033573a6e336b30b21f660d5f3a2f39c9e45ef6c0",
+            "log_sha256": "bba9fdc40dc59d6cf62e4f17ef50e6d165cf20e645bb86bbabe12342b1edb9c2"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "453978564620f7aa007dd722155276dc03abcfa9e5e148a8c860f3e309d0e177"
+          },
+          {
+            "filter": "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "ec610dc114c065c9d4860ca091daf1cab7b2af9f0605516c7be920ccee352e05"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff' (3401347) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for ZeroDefense; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "f4de131589042dc048ac8d5a60449fbeb848812bc062b5d639791e47292add01",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "479ba9555dfa202f653524d4ef89d7fd5a3a57f06a9706d4f479ddd8f5cb2240",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_battle_protector",
+      "outcome_sha256": "244be0bc6137f53e956c209b58fa9e14c617e62c53f8b8b5cdd4c0143a6dec83",
+      "status": "survived",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "5dd4a9166c187637df81e865ec604229156f456b6112a0bcfd246673249ac2a0"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "45d72f88da834f2fdfd61f1a2e87dbd4fada5c33c0483b5024d0f9894d93f8c7",
+            "log_sha256": "24f235102cc708260ce82e65f62cd2fcc21cb715affc63e1441e40405683fb20"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "72d9e1f52c0c8b040b585a027f5567b2e9f2f6eefe10253e4d13cdba9e5af95d"
+          }
+        ]
+      },
+      "assertion_snippets": [],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "8f250fc0d7c9bdc77b7e3cfdb02e19bbac76c824af395480a5458d5766cf52a2",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "3204079e06115a1d1dc70c13e189f19bec400e84eee1cffcb2cf7eae47223d94",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "sba-check_saga_sacrifice",
+      "outcome_sha256": "a7ea3260d86035c7499c1e9e879d64cf4fa828bb5ec5b19e2429e21af213c550",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "ac5436779514c995c1bf984773219ce0c5a2882ec473403ed0195cda15932f43"
+          },
+          {
+            "filter": "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "840e3eaac37317cd4a94b0807619b129d9646b0a6dceccb924321bc96f38cb4e"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": "4f3d660374a256e693c875efc3cdc6357079448ffde6b549724983057bbb47bd",
+            "log_sha256": "93accd1df2a4d70abb91523945f0975f2abb2488d9cddd3273f5e936cb34ece7"
+          },
+          {
+            "filter": "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": "05315541521b967143a23bfa318520896962a4c4be3c8ffbbba95f10e72597af",
+            "log_sha256": "de684f88e78d96bcd69402f8eda1d6fc7ed825134a56ea8a6836a617dcb3052f"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "game::sba::tests",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 119,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16469
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "02565705359a28fc345281d547e430d3e43189ac3645f7093f8c4b0fe34d9b3d"
+          },
+          {
+            "filter": "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 3096
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "840e3eaac37317cd4a94b0807619b129d9646b0a6dceccb924321bc96f38cb4e"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/public/command.log",
+          "failure": "thread 'trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff' (3407451) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:5782:17:\nassertion `left == right` failed: co-dying observer payoff for SagaSacrifice; observer_departs=true, reverse=false\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "9b862f4daa0f319b329675ad7bffc8653a3d748bcc052ea3b83f4965dbc0eb13",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "3d929b90c35e222dc7e41bd56abaa68e0fa058beed014a384e513396e24a7d2b",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "component-guard-normal-finalizer",
+      "outcome_sha256": "6da036febfaa4bef89280ae7ac9a8cc6c8c83885ea1ec21a22ae65e2862d3061",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "488adb6575d93b7ffdfa1eaee1f52925184f5114c9a6c0c5b7a5166005efc916"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "bcbffd31c50cfc1544c34d12ea01a1b84412b8ce0279f76e303348be96e190f7"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "732e62e429d378d1be593046c82c816a5e97d3f145e5cfa3c27105d7fa4408e4"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/mutant/command.log",
+          "failure": "thread 'game::casting_costs::deferred_component_guard_tests::deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt' (3301545) panicked at crates/engine/src/game/casting_costs.rs:19221:9:\ninternal entry must refuse unknown provenance before changing state: Ok(PhyrexianPayment { player: PlayerId(0), spell_object: ObjectId(3), shards: [PhyrexianShard { shard_index: 0, color: Black, options: ManaOrLife }] })\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest game::casting_costs::deferred_component_guard_tests::deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt ... FAILED\n\nfailures:\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+        "mutant": "95de42c7426a010b6c792c50c2bd4e4dc072fc760697ed6a579db183e9ac7e31",
+        "restored": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+      },
+      "mutant_patch_sha256": "f43a0706be5d873ce90c2ae0c16f9f03d0939939a208a5dfa721972187288c88",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "fresh restored Cargo compilation",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "component-guard-phyrexian-finalizer",
+      "outcome_sha256": "43caad97436bb27466b7c4d6a79dd75f71f69b3045d730aea936b3929bacac93",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "deferred_component_phyrexian_finalizer_guard_precedes_payment",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "4f76c1bd9ffda6bcd488048849126b3372fb64985e5db6e0a50f4aa8783f52dc"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "deferred_component_phyrexian_finalizer_guard_precedes_payment",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": "9cb16949126db49d0112f0ba2cd3363a8f3f1720253354552176f8ceb844619a",
+            "log_sha256": "74bd6fd8e18db85f613dc5dd39db83ab114ae346d97b08efcf5b5c1dbc872725"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "deferred_component_phyrexian_finalizer_guard_precedes_payment",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "4f76c1bd9ffda6bcd488048849126b3372fb64985e5db6e0a50f4aa8783f52dc"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::casting_costs::deferred_component_guard_tests::deferred_component_phyrexian_finalizer_guard_precedes_payment' (3413573) panicked at crates/engine/src/game/casting_costs.rs:19225:9:\nassertion `left == right` failed: early component guard preserves full serialized state\n  left: Object {\"active_player\": Number(0), \"all_creature_types\": Array [], \"alt_cost_grant_permissions_used\": Array [], \"attacked_defenders_this_turn\": Object {}, \"attacking_creatures_this_turn\": Object {}, \"battlefield\": Array [Number(1), Number(2)], \"cancelled_casts\": Array [], \"cards_discarded_this_turn_by_player\": Object {}, \"combat\": Null, \"combat_phase_skip_next_turn\": Array [Object {\"active\": Bool(false), \"pending\": Number(0)}, Object {\"active\": Bool(false), \"pending\": Number(0)}], \"command_zone\": Array [], \"commander_cast_count\": Object {}, \"commander_damage\": Array [], \"creature_attacked_defenders_this_turn\": Object {}, \"creatures_attacked_this_turn\": Array [], \"creatures_blocked_this_turn\": Array [], \"crew_activated_this_turn\": Array [], \"current_combat_attacker_restriction\": Null, \"current_combat_attacker_restriction_source\": Null, \"current_starting_player\": Number(0), \"damage_dealt_this_turn\": Array [], \"day_night\": Null, \"debug_mode\": Bool(false), \"debug_permitted\": Array [], \"deck_pools\": Array [], \"delayed_triggers\": Array [], \"eliminated_players\": Array [], \"exerted_this_turn\": Array [], \"exile\": Array [], \"exile_cast_permissions_used\": Array [], \"exile_links\": Array [], \"exile_play_permissions_used\": Array [], \"exile_play_single_use_consumed\": Array [], \"extra_loyalty_activations_this_turn\": Object {}, \"extra_phase_resume\": Array [], \"extra_phases\": Array [], \"extra_turns\": Array [], \"format_config\": Object {\"allow_debug_actions\": Bool(false), \"command_zone\": Bool(false), \"commander_damage_threshold\": Null, \"deck_size\": Number(60), \"format\": String(\"Standard\"), \"max_players\": Number(2), \"min_players\": Number(2), \"range_of_influence\": Null, \"singleton\": Bool(false), \"starting_life\": Number(20), \"supplies_fixed_deck\": Bool(false), \"team_based\": Bool(false), \"uses_commander\": Bool(false)}, \"game_number\": Number(1), \"graveyard_cast_permissions_used\": Array [], \"graveyard_cast_permissions_used_per_type\": Array [], \"hand_cast_free_permissions_used\": Array [], \"has_pending_cast\": Bool(true), \"lands_played_this_turn\": Number(0), \"lands_played_this_turn_by_player\": Object {}, \"last_vote_ballots\": Array [], \"loop_detection\": Object {\"type\": String(\"Off\")}, \"loyalty_abilities_activated_this_turn\": Object {}, \"mana_spent_on_spells_this_turn\": Object {}, \"match_config\": Object {\"match_type\": String(\"Bo1\")}, \"match_phase\": String(\"InGame\"), \"match_score\": Object {\"draws\": Number(0), \"p0_wins\": Number(0), \"p1_wins\": Number(0)}, \"max_lands_per_turn\": Number(1), \"modal_modes_chosen_this_game\": Array [], \"modal_modes_chosen_this_turn\": Array [], \"next_continuous_effect_id\": Number(1), \"next_game_chooser\": Null, \"next_object_id\": Number(4), \"next_pip_id\": Number(3), \"next_stack_commit_id\": Number(0), \"next_timestamp\": Number(3), \"next_tracked_set_id\": Number(1), \"objects\": Object {\"1\": Object {\"abilities\": Array [], \"assigns_damage_as_though_unblocked\": Bool(false), \"assigns_damage_from_toughness\": Bool(false), \"assigns_no_combat_damage\": Bool(false), \"attached_to\": Null, \"attachments\": Array [], \"available_mana_pips\": Array [], \"back_face\": Null, \"base_abilities\": Array [], \"base_card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"base_characteristics_initialized\": Bool(true), \"base_color\": Array [], \"base_controller\": Number(0), \"base_defense\": Null, \"base_keywords\": Array [], \"base_loyalty\": Null, \"base_mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"base_name\": String(\"2/2 Vanilla\"), \"base_power\": Number(2), \"base_printed_ref\": Null, \"base_replacement_definitions\": Array [], \"base_static_definitions\": Array [], \"base_toughness\": Number(2), \"base_trigger_definitions\": Array [], \"card_id\": Number(1), \"card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"color\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"damage_marked\": Number(0), \"dealt_deathtouch_damage\": Bool(false), \"display_source\": String(\"Card\"), \"echo_due\": Bool(false), \"entered_battlefield_turn\": Number(1), \"face_down\": Bool(false), \"flipped\": Bool(false), \"foretold\": Bool(false), \"harnessed\": Bool(false), \"has_mana_ability\": Bool(false), \"has_summoning_sickness\": Bool(false), \"id\": Number(1), \"in_attraction_deck\": Bool(false), \"in_contraption_deck\": Bool(false), \"incarnation\": Number(0), \"intensity\": Number(0), \"is_commander\": Bool(false), \"is_emblem\": Bool(false), \"is_renowned\": Bool(false), \"is_saddled\": Bool(false), \"is_suspected\": Bool(false), \"is_token\": Bool(false), \"keywords\": Array [], \"loyalty\": Null, \"loyalty_activations_this_turn\": Number(0), \"mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"mana_spent_to_cast\": Bool(false), \"modal_back_face\": Bool(false), \"monstrous\": Bool(false), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"phase_status\": Object {\"status\": String(\"PhasedIn\")}, \"power\": Number(2), \"printed_ref\": Null, \"replacement_definitions\": Array [], \"saddled_by\": Array [], \"static_definitions\": Array [], \"summoning_sick\": Bool(false), \"tapped\": Bool(false), \"timestamp\": Number(1), \"toughness\": Number(2), \"transformed\": Bool(false), \"trigger_definitions\": Array [], \"zone\": String(\"Battlefield\")}, \"2\": Object {\"abilities\": Array [], \"assigns_damage_as_though_unblocked\": Bool(false), \"assigns_damage_from_toughness\": Bool(false), \"assigns_no_combat_damage\": Bool(false), \"attached_to\": Null, \"attachments\": Array [], \"available_mana_pips\": Array [], \"back_face\": Null, \"base_abilities\": Array [], \"base_card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"base_characteristics_initialized\": Bool(true), \"base_color\": Array [], \"base_controller\": Number(0), \"base_defense\": Null, \"base_keywords\": Array [], \"base_loyalty\": Null, \"base_mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"base_name\": String(\"2/2 Vanilla\"), \"base_power\": Number(2), \"base_printed_ref\": Null, \"base_replacement_definitions\": Array [], \"base_static_definitions\": Array [], \"base_toughness\": Number(2), \"base_trigger_definitions\": Array [], \"card_id\": Number(2), \"card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"color\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"damage_marked\": Number(0), \"dealt_deathtouch_damage\": Bool(false), \"display_source\": String(\"Card\"), \"echo_due\": Bool(false), \"entered_battlefield_turn\": Number(1), \"face_down\": Bool(false), \"flipped\": Bool(false), \"foretold\": Bool(false), \"harnessed\": Bool(false), \"has_mana_ability\": Bool(false), \"has_summoning_sickness\": Bool(false), \"id\": Number(2), \"in_attraction_deck\": Bool(false), \"in_contraption_deck\": Bool(false), \"incarnation\": Number(0), \"intensity\": Number(0), \"is_commander\": Bool(false), \"is_emblem\": Bool(false), \"is_renowned\": Bool(false), \"is_saddled\": Bool(false), \"is_suspected\": Bool(false), \"is_token\": Bool(false), \"keywords\": Array [], \"loyalty\": Null, \"loyalty_activations_this_turn\": Number(0), \"mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"mana_spent_to_cast\": Bool(false), \"modal_back_face\": Bool(false), \"monstrous\": Bool(false), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"phase_status\": Object {\"status\": String(\"PhasedIn\")}, \"power\": Number(2), \"printed_ref\": Null, \"replacement_definitions\": Array [], \"saddled_by\": Array [], \"static_definitions\": Array [], \"summoning_sick\": Bool(false), \"tapped\": Bool(false), \"timestamp\": Number(2), \"toughness\": Number(2), \"transformed\": Bool(false), \"trigger_definitions\": Array [], \"zone\": String(\"Battlefield\")}, \"3\": Object {\"abilities\": Array [Object {\"condition\": Null, \"cost\": Null, \"description\": Null, \"duration\": Null, \"effect\": Object {\"amount\": Object {\"type\": String(\"Fixed\"), \"value\": Number(1)}, \"type\": String(\"GainLife\")}, \"forward_result\": Bool(false), \"kind\": String(\"Spell\"), \"optional\": Bool(false), \"optional_targeting\": Bool(false), \"sub_ability\": Null, \"target_prompt\": Null}], \"additional_cost\": Object {\"data\": Object {\"count\": Number(1), \"target\": Object {\"controller\": String(\"You\"), \"properties\": Array [], \"type\": String(\"Typed\"), \"type_filters\": Array [String(\"Creature\")]}, \"type\": String(\"Sacrifice\")}, \"type\": String(\"Required\")}, \"assigns_damage_as_though_unblocked\": Bool(false), \"assigns_damage_from_toughness\": Bool(false), \"assigns_no_combat_damage\": Bool(false), \"attached_to\": Null, \"attachments\": Array [], \"available_mana_pips\": Array [], \"back_face\": Null, \"base_abilities\": Array [Object {\"condition\": Null, \"cost\": Null, \"description\": Null, \"duration\": Null, \"effect\": Object {\"amount\": Object {\"type\": String(\"Fixed\"), \"value\": Number(1)}, \"type\": String(\"GainLife\")}, \"forward_result\": Bool(false), \"kind\": String(\"Spell\"), \"optional\": Bool(false), \"optional_targeting\": Bool(false), \"sub_ability\": Null, \"target_prompt\": Null}], \"base_card_types\": Object {\"core_types\": Array [String(\"Instant\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"base_characteristics_initialized\": Bool(true), \"base_color\": Array [String(\"Black\")], \"base_controller\": Number(0), \"base_defense\": Null, \"base_keywords\": Array [], \"base_loyalty\": Null, \"base_mana_cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"base_name\": String(\"Test internal component guard\"), \"base_power\": Null, \"base_printed_ref\": Null, \"base_replacement_definitions\": Array [], \"base_static_definitions\": Array [], \"base_toughness\": Null, \"base_trigger_definitions\": Array [], \"card_id\": Number(3), \"card_types\": Object {\"core_types\": Array [String(\"Instant\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"cast_cost_paid_object\": Object {\"lki\": Object {\"base_power\": Number(2), \"base_toughness\": Number(2), \"card_types\": Array [String(\"Creature\")], \"chosen_attributes\": Array [], \"colors\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"is_suspected\": Bool(false), \"keywords\": Array [], \"mana_value\": Number(0), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"power\": Number(2), \"subtypes\": Array [], \"supertypes\": Array [], \"tapped\": Bool(false), \"toughness\": Number(2)}, \"object_id\": Number(1)}, \"color\": Array [String(\"Black\")], \"controller\": Number(0), \"counters\": Object {}, \"damage_marked\": Number(0), \"dealt_deathtouch_damage\": Bool(false), \"display_source\": String(\"Card\"), \"echo_due\": Bool(false), \"entered_battlefield_turn\": Null, \"face_down\": Bool(false), \"flipped\": Bool(false), \"foretold\": Bool(false), \"harnessed\": Bool(false), \"has_mana_ability\": Bool(false), \"has_summoning_sickness\": Bool(false), \"id\": Number(3), \"in_attraction_deck\": Bool(false), \"in_contraption_deck\": Bool(false), \"incarnation\": Number(0), \"intensity\": Number(0), \"is_commander\": Bool(false), \"is_emblem\": Bool(false), \"is_renowned\": Bool(false), \"is_saddled\": Bool(false), \"is_suspected\": Bool(false), \"is_token\": Bool(false), \"keywords\": Array [], \"loyalty\": Null, \"loyalty_activations_this_turn\": Number(0), \"mana_cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"mana_spent_to_cast\": Bool(true), \"mana_spent_to_cast_amount\": Number(1), \"modal_back_face\": Bool(false), \"monstrous\": Bool(false), \"name\": String(\"Test internal component guard\"), \"owner\": Number(0), \"phase_status\": Object {\"status\": String(\"PhasedIn\")}, \"power\": Null, \"printed_ref\": Null, \"replacement_definitions\": Array [], \"saddled_by\": Array [], \"static_definitions\": Array [], \"summoning_sick\": Bool(false), \"tapped\": Bool(false), \"timestamp\": Number(0), \"toughness\": Null, \"transformed\": Bool(false), \"trigger_definitions\": Array [], \"zone\": String(\"Hand\")}}, \"pending_cast\": Object {\"ability\": Object {\"condition\": Null, \"context\": Object {\"additional_cost_paid\": Bool(false), \"alternative_mana_cost_paid\": Bool(false), \"optional_effect_performed\": Bool(false)}, \"controller\": Number(0), \"cost_paid_object\": Object {\"lki\": Object {\"base_power\": Number(2), \"base_toughness\": Number(2), \"card_types\": Array [String(\"Creature\")], \"chosen_attributes\": Array [], \"colors\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"is_suspected\": Bool(false), \"keywords\": Array [], \"mana_value\": Number(0), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"power\": Number(2), \"subtypes\": Array [], \"supertypes\": Array [], \"tapped\": Bool(false), \"toughness\": Number(2)}, \"object_id\": Number(1)}, \"duration\": Null, \"effect\": Object {\"amount\": Object {\"type\": String(\"Fixed\"), \"value\": Number(1)}, \"type\": String(\"GainLife\")}, \"forward_result\": Bool(false), \"kind\": String(\"Spell\"), \"optional\": Bool(false), \"optional_targeting\": Bool(false), \"source_id\": Number(3), \"sub_ability\": Null, \"targets\": Array []}, \"additional_cost_decided\": Bool(false), \"additional_cost_source\": String(\"Other\"), \"assist_state\": String(\"NotOffered\"), \"base_cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"card_id\": Number(3), \"casting_variant\": String(\"Normal\"), \"cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"deferred_sacrificed_permanents\": Array [Object {\"filter\": Object {\"controller\": String(\"You\"), \"properties\": Array [], \"type\": String(\"Typed\"), \"type_filters\": Array [String(\"Creature\")]}, \"object_id\": Number(1)}], \"deferred_target_selection\": Bool(false), \"object_id\": Number(3), \"origin_zone\": String(\"Hand\"), \"payment_mode\": Object {\"type\": String(\"Manual\")}}, \"pending_replacement\": Null, \"pending_trigger\": Null, \"phase\": String(\"PreCombatMain\"), \"players\": Array [Object {\"attraction_deck\": Array [], \"bending_types_this_turn\": Array [], \"can_look_at_top_of_library\": Bool(false), \"cards_drawn_this_step\": Number(0), \"cards_drawn_this_turn\": Number(0), \"commander_color_identity\": Array [], \"contraption_crank_sprocket\": Number(3), \"contraption_deck\": Array [], \"crimes_committed_this_turn\": Number(0), \"descended_this_turn\": Bool(false), \"drew_from_empty_library\": Bool(false), \"energy\": Number(0), \"graveyard\": Array [], \"hand\": Array [Number(3)], \"has_drawn_this_turn\": Bool(false), \"id\": Number(0), \"is_eliminated\": Bool(false), \"lands_played_this_turn\": Number(0), \"library\": Array [], \"life\": Number(18), \"life_gained_this_turn\": Number(0), \"life_lost_last_turn\": Number(0), \"life_lost_this_turn\": Number(2), \"mana_pool\": Object {\"mana\": Array [Object {\"color\": String(\"Black\"), \"pip_id\": Number(2), \"restrictions\": Array [], \"snow\": Bool(false), \"source_id\": Number(0)}]}, \"poison_counters\": Number(0), \"speed_trigger_used_this_turn\": Bool(false), \"status\": Object {\"type\": String(\"Active\")}, \"turns_taken\": Number(0)}, Object {\"attraction_deck\": Array [], \"bending_types_this_turn\": Array [], \"can_look_at_top_of_library\": Bool(false), \"cards_drawn_this_step\": Number(0), \"cards_drawn_this_turn\": Number(0), \"commander_color_identity\": Array [], \"contraption_crank_sprocket\": Number(3), \"contraption_deck\": Array [], \"crimes_committed_this_turn\": Number(0), \"descended_this_turn\": Bool(false), \"drew_from_empty_library\": Bool(false), \"energy\": Number(0), \"graveyard\": Array [], \"hand\": Array [], \"has_drawn_this_turn\": Bool(false), \"id\": Number(1), \"is_eliminated\": Bool(false), \"lands_played_this_turn\": Number(0), \"library\": Array [], \"life\": Number(20), \"life_gained_this_turn\": Number(0), \"life_lost_last_turn\": Number(0), \"life_lost_this_turn\": Number(0), \"mana_pool\": Object {\"mana\": Array []}, \"poison_counters\": Number(0), \"speed_trigger_used_this_turn\": Bool(false), \"status\": Object {\"type\": String(\"Active\")}, \"turns_taken\": Number(0)}], \"players_attacked_this_step\": Array [], \"players_attacked_this_turn\": Array [], \"players_who_created_token_this_turn\": Array [], \"players_who_discarded_card_this_turn\": Array [], \"players_who_sacrificed_artifact_this_turn\": Array [], \"players_who_searched_library_this_turn\": Array [], \"priority_pass_count\": Number(0), \"priority_passes\": Array [], \"priority_player\": Number(0), \"public_revealed_cards\": Array [], \"revealed_cards\": Array [], \"ring_bearer\": Object {}, \"ring_level\": Object {}, \"rng_seed\": Number(42), \"rng_word_pos\": Number(0), \"scheduled_turn_controls\": Array [], \"seat_order\": Array [Number(0), Number(1)], \"sideboard_submitted\": Array [], \"spells_cast_last_turn\": Null, \"spells_cast_this_game\": Object {}, \"spells_cast_this_game_by_player\": Object {}, \"spells_cast_this_turn\": Number(0), \"spells_cast_this_turn_by_player\": Object {}, \"stack\": Array [Object {\"controller\": Number(0), \"id\": Number(3), \"kind\": Object {\"data\": Object {\"actual_mana_spent\": Number(0), \"card_id\": Number(3), \"casting_variant\": String(\"Normal\")}, \"type\": String(\"Spell\")}, \"source_id\": Number(3)}], \"steps_to_skip\": Array [Object {}, Object {}], \"top_of_library_cast_permissions_used\": Array [], \"tracked_object_sets\": Object {}, \"transient_continuous_effects\": Array [], \"triggers_fired_this_game\": Array [], \"triggers_fired_this_turn\": Array [], \"triggers_fired_this_turn_per_opponent\": Array [], \"turn_direction\": String(\"Normal\"), \"turn_number\": Number(2), \"turns_to_skip\": Array [Number(0), Number(0)], \"waiting_for\": Object {\"data\": Object {\"player\": Number(0), \"shards\": Array [Object {\"color\": String(\"Black\"), \"options\": Object {\"type\": String(\"ManaOrLife\")}, \"shard_index\": Number(0)}], \"spell_object\": Number(3)}, \"type\": String(\"PhyrexianPayment\")}}\n right: Object {\"active_player\": Number(0), \"all_creature_types\": Array [], \"alt_cost_grant_permissions_used\": Array [], \"attacked_defenders_this_turn\": Object {}, \"attacking_creatures_this_turn\": Object {}, \"battlefield\": Array [Number(1), Number(2)], \"cancelled_casts\": Array [], \"cards_discarded_this_turn_by_player\": Object {}, \"combat\": Null, \"combat_phase_skip_next_turn\": Array [Object {\"active\": Bool(false), \"pending\": Number(0)}, Object {\"active\": Bool(false), \"pending\": Number(0)}], \"command_zone\": Array [], \"commander_cast_count\": Object {}, \"commander_damage\": Array [], \"creature_attacked_defenders_this_turn\": Object {}, \"creatures_attacked_this_turn\": Array [], \"creatures_blocked_this_turn\": Array [], \"crew_activated_this_turn\": Array [], \"current_combat_attacker_restriction\": Null, \"current_combat_attacker_restriction_source\": Null, \"current_starting_player\": Number(0), \"damage_dealt_this_turn\": Array [], \"day_night\": Null, \"debug_mode\": Bool(false), \"debug_permitted\": Array [], \"deck_pools\": Array [], \"delayed_triggers\": Array [], \"eliminated_players\": Array [], \"exerted_this_turn\": Array [], \"exile\": Array [], \"exile_cast_permissions_used\": Array [], \"exile_links\": Array [], \"exile_play_permissions_used\": Array [], \"exile_play_single_use_consumed\": Array [], \"extra_loyalty_activations_this_turn\": Object {}, \"extra_phase_resume\": Array [], \"extra_phases\": Array [], \"extra_turns\": Array [], \"format_config\": Object {\"allow_debug_actions\": Bool(false), \"command_zone\": Bool(false), \"commander_damage_threshold\": Null, \"deck_size\": Number(60), \"format\": String(\"Standard\"), \"max_players\": Number(2), \"min_players\": Number(2), \"range_of_influence\": Null, \"singleton\": Bool(false), \"starting_life\": Number(20), \"supplies_fixed_deck\": Bool(false), \"team_based\": Bool(false), \"uses_commander\": Bool(false)}, \"game_number\": Number(1), \"graveyard_cast_permissions_used\": Array [], \"graveyard_cast_permissions_used_per_type\": Array [], \"hand_cast_free_permissions_used\": Array [], \"has_pending_cast\": Bool(true), \"lands_played_this_turn\": Number(0), \"lands_played_this_turn_by_player\": Object {}, \"last_vote_ballots\": Array [], \"loop_detection\": Object {\"type\": String(\"Off\")}, \"loyalty_abilities_activated_this_turn\": Object {}, \"mana_spent_on_spells_this_turn\": Object {}, \"match_config\": Object {\"match_type\": String(\"Bo1\")}, \"match_phase\": String(\"InGame\"), \"match_score\": Object {\"draws\": Number(0), \"p0_wins\": Number(0), \"p1_wins\": Number(0)}, \"max_lands_per_turn\": Number(1), \"modal_modes_chosen_this_game\": Array [], \"modal_modes_chosen_this_turn\": Array [], \"next_continuous_effect_id\": Number(1), \"next_game_chooser\": Null, \"next_object_id\": Number(4), \"next_pip_id\": Number(3), \"next_stack_commit_id\": Number(0), \"next_timestamp\": Number(3), \"next_tracked_set_id\": Number(1), \"objects\": Object {\"1\": Object {\"abilities\": Array [], \"assigns_damage_as_though_unblocked\": Bool(false), \"assigns_damage_from_toughness\": Bool(false), \"assigns_no_combat_damage\": Bool(false), \"attached_to\": Null, \"attachments\": Array [], \"available_mana_pips\": Array [], \"back_face\": Null, \"base_abilities\": Array [], \"base_card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"base_characteristics_initialized\": Bool(true), \"base_color\": Array [], \"base_controller\": Number(0), \"base_defense\": Null, \"base_keywords\": Array [], \"base_loyalty\": Null, \"base_mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"base_name\": String(\"2/2 Vanilla\"), \"base_power\": Number(2), \"base_printed_ref\": Null, \"base_replacement_definitions\": Array [], \"base_static_definitions\": Array [], \"base_toughness\": Number(2), \"base_trigger_definitions\": Array [], \"card_id\": Number(1), \"card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"color\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"damage_marked\": Number(0), \"dealt_deathtouch_damage\": Bool(false), \"display_source\": String(\"Card\"), \"echo_due\": Bool(false), \"entered_battlefield_turn\": Number(1), \"face_down\": Bool(false), \"flipped\": Bool(false), \"foretold\": Bool(false), \"harnessed\": Bool(false), \"has_mana_ability\": Bool(false), \"has_summoning_sickness\": Bool(false), \"id\": Number(1), \"in_attraction_deck\": Bool(false), \"in_contraption_deck\": Bool(false), \"incarnation\": Number(0), \"intensity\": Number(0), \"is_commander\": Bool(false), \"is_emblem\": Bool(false), \"is_renowned\": Bool(false), \"is_saddled\": Bool(false), \"is_suspected\": Bool(false), \"is_token\": Bool(false), \"keywords\": Array [], \"loyalty\": Null, \"loyalty_activations_this_turn\": Number(0), \"mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"mana_spent_to_cast\": Bool(false), \"modal_back_face\": Bool(false), \"monstrous\": Bool(false), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"phase_status\": Object {\"status\": String(\"PhasedIn\")}, \"power\": Number(2), \"printed_ref\": Null, \"replacement_definitions\": Array [], \"saddled_by\": Array [], \"static_definitions\": Array [], \"summoning_sick\": Bool(false), \"tapped\": Bool(false), \"timestamp\": Number(1), \"toughness\": Number(2), \"transformed\": Bool(false), \"trigger_definitions\": Array [], \"zone\": String(\"Battlefield\")}, \"2\": Object {\"abilities\": Array [], \"assigns_damage_as_though_unblocked\": Bool(false), \"assigns_damage_from_toughness\": Bool(false), \"assigns_no_combat_damage\": Bool(false), \"attached_to\": Null, \"attachments\": Array [], \"available_mana_pips\": Array [], \"back_face\": Null, \"base_abilities\": Array [], \"base_card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"base_characteristics_initialized\": Bool(true), \"base_color\": Array [], \"base_controller\": Number(0), \"base_defense\": Null, \"base_keywords\": Array [], \"base_loyalty\": Null, \"base_mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"base_name\": String(\"2/2 Vanilla\"), \"base_power\": Number(2), \"base_printed_ref\": Null, \"base_replacement_definitions\": Array [], \"base_static_definitions\": Array [], \"base_toughness\": Number(2), \"base_trigger_definitions\": Array [], \"card_id\": Number(2), \"card_types\": Object {\"core_types\": Array [String(\"Creature\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"color\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"damage_marked\": Number(0), \"dealt_deathtouch_damage\": Bool(false), \"display_source\": String(\"Card\"), \"echo_due\": Bool(false), \"entered_battlefield_turn\": Number(1), \"face_down\": Bool(false), \"flipped\": Bool(false), \"foretold\": Bool(false), \"harnessed\": Bool(false), \"has_mana_ability\": Bool(false), \"has_summoning_sickness\": Bool(false), \"id\": Number(2), \"in_attraction_deck\": Bool(false), \"in_contraption_deck\": Bool(false), \"incarnation\": Number(0), \"intensity\": Number(0), \"is_commander\": Bool(false), \"is_emblem\": Bool(false), \"is_renowned\": Bool(false), \"is_saddled\": Bool(false), \"is_suspected\": Bool(false), \"is_token\": Bool(false), \"keywords\": Array [], \"loyalty\": Null, \"loyalty_activations_this_turn\": Number(0), \"mana_cost\": Object {\"generic\": Number(0), \"shards\": Array [], \"type\": String(\"Cost\")}, \"mana_spent_to_cast\": Bool(false), \"modal_back_face\": Bool(false), \"monstrous\": Bool(false), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"phase_status\": Object {\"status\": String(\"PhasedIn\")}, \"power\": Number(2), \"printed_ref\": Null, \"replacement_definitions\": Array [], \"saddled_by\": Array [], \"static_definitions\": Array [], \"summoning_sick\": Bool(false), \"tapped\": Bool(false), \"timestamp\": Number(2), \"toughness\": Number(2), \"transformed\": Bool(false), \"trigger_definitions\": Array [], \"zone\": String(\"Battlefield\")}, \"3\": Object {\"abilities\": Array [Object {\"condition\": Null, \"cost\": Null, \"description\": Null, \"duration\": Null, \"effect\": Object {\"amount\": Object {\"type\": String(\"Fixed\"), \"value\": Number(1)}, \"type\": String(\"GainLife\")}, \"forward_result\": Bool(false), \"kind\": String(\"Spell\"), \"optional\": Bool(false), \"optional_targeting\": Bool(false), \"sub_ability\": Null, \"target_prompt\": Null}], \"additional_cost\": Object {\"data\": Object {\"count\": Number(1), \"target\": Object {\"controller\": String(\"You\"), \"properties\": Array [], \"type\": String(\"Typed\"), \"type_filters\": Array [String(\"Creature\")]}, \"type\": String(\"Sacrifice\")}, \"type\": String(\"Required\")}, \"assigns_damage_as_though_unblocked\": Bool(false), \"assigns_damage_from_toughness\": Bool(false), \"assigns_no_combat_damage\": Bool(false), \"attached_to\": Null, \"attachments\": Array [], \"available_mana_pips\": Array [], \"back_face\": Null, \"base_abilities\": Array [Object {\"condition\": Null, \"cost\": Null, \"description\": Null, \"duration\": Null, \"effect\": Object {\"amount\": Object {\"type\": String(\"Fixed\"), \"value\": Number(1)}, \"type\": String(\"GainLife\")}, \"forward_result\": Bool(false), \"kind\": String(\"Spell\"), \"optional\": Bool(false), \"optional_targeting\": Bool(false), \"sub_ability\": Null, \"target_prompt\": Null}], \"base_card_types\": Object {\"core_types\": Array [String(\"Instant\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"base_characteristics_initialized\": Bool(true), \"base_color\": Array [String(\"Black\")], \"base_controller\": Number(0), \"base_defense\": Null, \"base_keywords\": Array [], \"base_loyalty\": Null, \"base_mana_cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"base_name\": String(\"Test internal component guard\"), \"base_power\": Null, \"base_printed_ref\": Null, \"base_replacement_definitions\": Array [], \"base_static_definitions\": Array [], \"base_toughness\": Null, \"base_trigger_definitions\": Array [], \"card_id\": Number(3), \"card_types\": Object {\"core_types\": Array [String(\"Instant\")], \"subtypes\": Array [], \"supertypes\": Array []}, \"cast_cost_paid_object\": Object {\"lki\": Object {\"base_power\": Number(2), \"base_toughness\": Number(2), \"card_types\": Array [String(\"Creature\")], \"chosen_attributes\": Array [], \"colors\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"is_suspected\": Bool(false), \"keywords\": Array [], \"mana_value\": Number(0), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"power\": Number(2), \"subtypes\": Array [], \"supertypes\": Array [], \"tapped\": Bool(false), \"toughness\": Number(2)}, \"object_id\": Number(1)}, \"color\": Array [String(\"Black\")], \"controller\": Number(0), \"counters\": Object {}, \"damage_marked\": Number(0), \"dealt_deathtouch_damage\": Bool(false), \"display_source\": String(\"Card\"), \"echo_due\": Bool(false), \"entered_battlefield_turn\": Null, \"face_down\": Bool(false), \"flipped\": Bool(false), \"foretold\": Bool(false), \"harnessed\": Bool(false), \"has_mana_ability\": Bool(false), \"has_summoning_sickness\": Bool(false), \"id\": Number(3), \"in_attraction_deck\": Bool(false), \"in_contraption_deck\": Bool(false), \"incarnation\": Number(0), \"intensity\": Number(0), \"is_commander\": Bool(false), \"is_emblem\": Bool(false), \"is_renowned\": Bool(false), \"is_saddled\": Bool(false), \"is_suspected\": Bool(false), \"is_token\": Bool(false), \"keywords\": Array [], \"loyalty\": Null, \"loyalty_activations_this_turn\": Number(0), \"mana_cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"mana_spent_to_cast\": Bool(false), \"modal_back_face\": Bool(false), \"monstrous\": Bool(false), \"name\": String(\"Test internal component guard\"), \"owner\": Number(0), \"phase_status\": Object {\"status\": String(\"PhasedIn\")}, \"power\": Null, \"printed_ref\": Null, \"replacement_definitions\": Array [], \"saddled_by\": Array [], \"static_definitions\": Array [], \"summoning_sick\": Bool(false), \"tapped\": Bool(false), \"timestamp\": Number(0), \"toughness\": Null, \"transformed\": Bool(false), \"trigger_definitions\": Array [], \"zone\": String(\"Hand\")}}, \"pending_cast\": Object {\"ability\": Object {\"condition\": Null, \"context\": Object {\"additional_cost_paid\": Bool(false), \"alternative_mana_cost_paid\": Bool(false), \"optional_effect_performed\": Bool(false)}, \"controller\": Number(0), \"cost_paid_object\": Object {\"lki\": Object {\"base_power\": Number(2), \"base_toughness\": Number(2), \"card_types\": Array [String(\"Creature\")], \"chosen_attributes\": Array [], \"colors\": Array [], \"controller\": Number(0), \"counters\": Object {}, \"is_suspected\": Bool(false), \"keywords\": Array [], \"mana_value\": Number(0), \"name\": String(\"2/2 Vanilla\"), \"owner\": Number(0), \"power\": Number(2), \"subtypes\": Array [], \"supertypes\": Array [], \"tapped\": Bool(false), \"toughness\": Number(2)}, \"object_id\": Number(1)}, \"duration\": Null, \"effect\": Object {\"amount\": Object {\"type\": String(\"Fixed\"), \"value\": Number(1)}, \"type\": String(\"GainLife\")}, \"forward_result\": Bool(false), \"kind\": String(\"Spell\"), \"optional\": Bool(false), \"optional_targeting\": Bool(false), \"source_id\": Number(3), \"sub_ability\": Null, \"targets\": Array []}, \"additional_cost_decided\": Bool(false), \"additional_cost_source\": String(\"Other\"), \"assist_state\": String(\"NotOffered\"), \"base_cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"card_id\": Number(3), \"casting_variant\": String(\"Normal\"), \"cost\": Object {\"generic\": Number(1), \"shards\": Array [String(\"PhyrexianBlack\")], \"type\": String(\"Cost\")}, \"deferred_sacrificed_permanents\": Array [Object {\"filter\": Object {\"controller\": String(\"You\"), \"properties\": Array [], \"type\": String(\"Typed\"), \"type_filters\": Array [String(\"Creature\")]}, \"object_id\": Number(1)}], \"deferred_target_selection\": Bool(false), \"object_id\": Number(3), \"origin_zone\": String(\"Hand\"), \"payment_mode\": Object {\"type\": String(\"Manual\")}}, \"pending_replacement\": Null, \"pending_trigger\": Null, \"phase\": String(\"PreCombatMain\"), \"players\": Array [Object {\"attraction_deck\": Array [], \"bending_types_this_turn\": Array [], \"can_look_at_top_of_library\": Bool(false), \"cards_drawn_this_step\": Number(0), \"cards_drawn_this_turn\": Number(0), \"commander_color_identity\": Array [], \"contraption_crank_sprocket\": Number(3), \"contraption_deck\": Array [], \"crimes_committed_this_turn\": Number(0), \"descended_this_turn\": Bool(false), \"drew_from_empty_library\": Bool(false), \"energy\": Number(0), \"graveyard\": Array [], \"hand\": Array [Number(3)], \"has_drawn_this_turn\": Bool(false), \"id\": Number(0), \"is_eliminated\": Bool(false), \"lands_played_this_turn\": Number(0), \"library\": Array [], \"life\": Number(20), \"life_gained_this_turn\": Number(0), \"life_lost_last_turn\": Number(0), \"life_lost_this_turn\": Number(0), \"mana_pool\": Object {\"mana\": Array [Object {\"color\": String(\"Colorless\"), \"pip_id\": Number(1), \"restrictions\": Array [], \"snow\": Bool(false), \"source_id\": Number(0)}, Object {\"color\": String(\"Black\"), \"pip_id\": Number(2), \"restrictions\": Array [], \"snow\": Bool(false), \"source_id\": Number(0)}]}, \"poison_counters\": Number(0), \"speed_trigger_used_this_turn\": Bool(false), \"status\": Object {\"type\": String(\"Active\")}, \"turns_taken\": Number(0)}, Object {\"attraction_deck\": Array [], \"bending_types_this_turn\": Array [], \"can_look_at_top_of_library\": Bool(false), \"cards_drawn_this_step\": Number(0), \"cards_drawn_this_turn\": Number(0), \"commander_color_identity\": Array [], \"contraption_crank_sprocket\": Number(3), \"contraption_deck\": Array [], \"crimes_committed_this_turn\": Number(0), \"descended_this_turn\": Bool(false), \"drew_from_empty_library\": Bool(false), \"energy\": Number(0), \"graveyard\": Array [], \"hand\": Array [], \"has_drawn_this_turn\": Bool(false), \"id\": Number(1), \"is_eliminated\": Bool(false), \"lands_played_this_turn\": Number(0), \"library\": Array [], \"life\": Number(20), \"life_gained_this_turn\": Number(0), \"life_lost_last_turn\": Number(0), \"life_lost_this_turn\": Number(0), \"mana_pool\": Object {\"mana\": Array []}, \"poison_counters\": Number(0), \"speed_trigger_used_this_turn\": Bool(false), \"status\": Object {\"type\": String(\"Active\")}, \"turns_taken\": Number(0)}], \"players_attacked_this_step\": Array [], \"players_attacked_this_turn\": Array [], \"players_who_created_token_this_turn\": Array [], \"players_who_discarded_card_this_turn\": Array [], \"players_who_sacrificed_artifact_this_turn\": Array [], \"players_who_searched_library_this_turn\": Array [], \"priority_pass_count\": Number(0), \"priority_passes\": Array [], \"priority_player\": Number(0), \"public_revealed_cards\": Array [], \"revealed_cards\": Array [], \"ring_bearer\": Object {}, \"ring_level\": Object {}, \"rng_seed\": Number(42), \"rng_word_pos\": Number(0), \"scheduled_turn_controls\": Array [], \"seat_order\": Array [Number(0), Number(1)], \"sideboard_submitted\": Array [], \"spells_cast_last_turn\": Null, \"spells_cast_this_game\": Object {}, \"spells_cast_this_game_by_player\": Object {}, \"spells_cast_this_turn\": Number(0), \"spells_cast_this_turn_by_player\": Object {}, \"stack\": Array [Object {\"controller\": Number(0), \"id\": Number(3), \"kind\": Object {\"data\": Object {\"actual_mana_spent\": Number(0), \"card_id\": Number(3), \"casting_variant\": String(\"Normal\")}, \"type\": String(\"Spell\")}, \"source_id\": Number(3)}], \"steps_to_skip\": Array [Object {}, Object {}], \"top_of_library_cast_permissions_used\": Array [], \"tracked_object_sets\": Object {}, \"transient_continuous_effects\": Array [], \"triggers_fired_this_game\": Array [], \"triggers_fired_this_turn\": Array [], \"triggers_fired_this_turn_per_opponent\": Array [], \"turn_direction\": String(\"Normal\"), \"turn_number\": Number(2), \"turns_to_skip\": Array [Number(0), Number(0)], \"waiting_for\": Object {\"data\": Object {\"player\": Number(0), \"shards\": Array [Object {\"color\": String(\"Black\"), \"options\": Object {\"type\": String(\"ManaOrLife\")}, \"shard_index\": Number(0)}], \"spell_object\": Number(3)}, \"type\": String(\"PhyrexianPayment\")}}\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest game::casting_costs::deferred_component_guard_tests::deferred_component_phyrexian_finalizer_guard_precedes_payment ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "655880fe92d687fce8d7c5f2f9f0206aa8c96aba74033b57dbd6f7c933d2390c",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "66ddd457b21bfc80151d6fcfe6438f6d54d50487a8cb78c5cc531d0466f036d9",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "component-guard-append",
+      "outcome_sha256": "dc6dd65bfce4998fbde7182f3d12033ae92156c8249d8dbd377ffe203245272e",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "032feb2bc64388aafb810fe35fb7a8dad7898077e2abeeed6ed0359088f92335"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": "ffe8956fe6caf859a6401d35e2f00b15233301d5bfc25b63e96efc3ce8f871e8",
+            "log_sha256": "0e8544b80f04632078802231a3ce4cc5a9119c8c48afe7f6635141adccdf27a2"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "032feb2bc64388aafb810fe35fb7a8dad7898077e2abeeed6ed0359088f92335"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::casting_costs::deferred_component_guard_tests::deferred_component_append_guard_precedes_cost_snapshot_and_new_selection' (3419228) panicked at crates/engine/src/game/casting_costs.rs:19224:9:\ninternal entry must refuse unknown provenance before changing state: Ok(ManaPayment { player: PlayerId(0), convoke_mode: None })\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest game::casting_costs::deferred_component_guard_tests::deferred_component_append_guard_precedes_cost_snapshot_and_new_selection ... FAILED\n\nfailures:\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "4c8d924af524e6ce53b58d2fd12ad91506c1f14c57f54e125af902b44603bffb",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "1d919a912689c91e146af1f451e711331c3da8454a2edf50dccbc16e4ec77658",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "record-snapshot-serde-drop",
+      "outcome_sha256": "93885e9a73d9191c57a6fa43047495c241b7a06c6e759cb85cad7270b1950c53",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "zone_change_suppression_preserves_missing_empty_and_captured_history",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "280cdd50dd06dd7aa9207a804d81b762965dbf511a5b2ac0b3511624e61201a9"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "zone_change_suppression_preserves_missing_empty_and_captured_history",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": "8ee39a0b63a8a5d1b6fde79c36237becd4f4c702ce9a7f6e2859f00b652efe46",
+            "log_sha256": "27c092e21bf7256ec7ee698c99a51da7110a5c817b8e6889cadba3d090e2f96b"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "zone_change_suppression_preserves_missing_empty_and_captured_history",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 1,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16587
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "280cdd50dd06dd7aa9207a804d81b762965dbf511a5b2ac0b3511624e61201a9"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'types::events::tests::zone_change_suppression_preserves_missing_empty_and_captured_history' (3423843) panicked at crates/engine/src/types/events.rs:1612:13:\nassertion `left == right` failed\n  left: false\n right: true\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest types::events::tests::zone_change_suppression_preserves_missing_empty_and_captured_history ... FAILED\n"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "687952f33db635688cf26a19d4f302066cd57a39b8680418836eacfea9c94778",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "479bc14f56d846997852d1e5a01424412924829e8b245f74d5ddf4eb00b3ed6d",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "owner-allocator-reset",
+      "outcome_sha256": "11f956d502f981c618609c5eafccf995a2bb4a5fba469eb2c303a3d372978d25",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "departure_scope_",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 6,
+                "ignored": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": "937d7e4dccf1cacef2a23c38e33cda6b6d25323bdb3a8c567e103e770ed1e6ed",
+            "log_sha256": "7031e0d1bfba875eac11d48f373a9909193705d734365eee0b85e384eb264fab"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip' (3427727) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed\n  left: 2\n right: 0\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members' (3427726) panicked at crates/engine/src/game/zones.rs:1784:9:"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members' (3427726) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed\n  left: 1\n right: 0\n\nthread 'game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences' (3427729) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences' (3427729) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed\n  left: 2\n right: 0\n\nthread 'game::zones::tests::departure_scope_standalone_after_world_is_final_at_each_leaf_return' (3427730) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_standalone_after_world_is_final_at_each_leaf_return' (3427730) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed\n  left: 1\n right: 0\n\nthread 'game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return' (3427725) panicked at crates/engine/src/game/zone_pipeline.rs:2298:9:\nassertion `left == right` failed"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return' (3427725) panicked at crates/engine/src/game/zone_pipeline.rs:2298:9:\nassertion `left == right` failed\n  left: 1\n right: 0\ntest game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip ... FAILED\ntest game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members ... FAILED\ntest game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences ... FAILED"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_natural_replacement_pause_and_resume_restore_empty_stacks' (3427728) panicked at crates/engine/src/game/zones.rs:1784:9:\nassertion `left == right` failed\n  left: 3\n right: 0\ntest game::zones::tests::departure_scope_natural_replacement_pause_and_resume_restore_empty_stacks ... FAILED\n\nfailures:"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "4fc0f415a084f5c88f376329356856ed505010c9027ee94bb5026106efcdb18b",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "b858d7119926de1e00766c9246be761ccd496d9f0de0f746bdf27a6394e9e0d9",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "scope-before-flush",
+      "outcome_sha256": "d22114448ef85b739a6e54027de2f5fc1ef8f87029a7e4bc3cdaf1f923e4fdde",
+      "status": "survived",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": "b18770c73010664f309cf263142c210c135d0d6fa23cf0c61a1bf51c4ca3a68a",
+            "log_sha256": "c8505eb1cd751b89b5d3a8d1847025c13db53172a10e97dd07c1dd240d83502b"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ]
+      },
+      "assertion_snippets": [],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "dd38209c7f5ad99d976bbd2a11d178a25ac06af6ec99cbc37037d9557c682504",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "62007f55dd0e39d4893caf03d93087b3aeda6ccc2f3a66a0b1e11e87b1365d69",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "scope-capturing-ancestor-policy",
+      "outcome_sha256": "6110d0d0bbd4251b0425843b65163baf86c271bc9331f70f1c0b5a22cb5d3c51",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "departure_scope_",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 5,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": "eb9570466c4aefd3ea1023d0fa3f5e408ee98e7b3b541694b3dc5bba01ea51a0",
+            "log_sha256": "5735136ff67b4be27ab019f2e138bb10ed47550c4da09ee10bca8166606da1da"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences' (3435187) panicked at crates/engine/src/game/zones.rs:1892:9:\nassertion failed: records[1].trigger_suppression.is_none()\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return ... ok\ntest game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences ... FAILED\ntest game::zones::tests::departure_scope_standalone_after_world_is_final_at_each_leaf_return ... ok\ntest game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip ... ok"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "585807760ac1883707333348ddfb47495601329f0a097310015c1808009cfcb0",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "c37369e5643f38fa5ba30c53530db059e6739c2d7143091ac2104dbcb1c5b388",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "leaf-top-barrier",
+      "outcome_sha256": "f5c8007d1d850749cff104d910734b8aea4f512a165e6de2d475147ff0a0b932",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "departure_scope_",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 5,
+                "failed": 1,
+                "ignored": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": "8da4c37daa918f6db0d980aa3e94e7eca12dd1f05d51997ff290de5834956b4d",
+            "log_sha256": "13feaa0b025b47aa79a2b1ae5328cf9a2882b854920a5e3abf7d0dfd0f8ed51c"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members' (3438192) panicked at crates/engine/src/game/zones.rs:1846:9:\nassertion `left == right` failed\n  left: [ObjectId(3), ObjectId(2)]\n right: [ObjectId(2)]\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences ... ok\ntest game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return ... ok"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "d94ff18f5a2b3ab188a6c34a830498f20bd66b489125fbcbb2e403591362a712",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "40054f86b36389468a8d7148c7651ac1227bbf9badbdf6ce3458ed0a553a9814",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "leaf-consumes-member",
+      "outcome_sha256": "12861cb9ab9d98cf01dbe9136d5171d9a4a286575d66e811100014cfc7aba578",
+      "status": "survived",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": "2d3f61b6e7e4d2278d4ee6eea2d8c4379d32e6059ee59c56ad39f093865f7add",
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "e8091eac3f34abf0afc24c115f7d95c57d1a3c9df38508246971a4bf09b7eb48"
+          }
+        ]
+      },
+      "assertion_snippets": [],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "00ab09f522eee47653f6d213ddeeefe67af968d44a20e7ea41dc563bc2a4662f",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "3153be5c9d152ffbc8f0273493eb1b98d239aa0e63a19cad6f0821adb9256283",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    },
+    {
+      "id": "member-error-closure-pop",
+      "outcome_sha256": "41983ac7781681540eab319730c2de16308fc96ed10174d24a0bdb3c2e4e374a",
+      "status": "runtime_failure_candidate",
+      "attempt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1",
+      "phases": {
+        "baseline": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "e8091eac3f34abf0afc24c115f7d95c57d1a3c9df38508246971a4bf09b7eb48"
+          }
+        ],
+        "mutant": [
+          {
+            "filter": "departure_scope_",
+            "exit": 101,
+            "counts": [
+              {
+                "status": "FAILED",
+                "passed": 0,
+                "failed": 6,
+                "ignored": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": "c605fb187280cf7add4da9a11f5957ba47240db9935e8c9f47f7a4bb74834c49",
+            "log_sha256": "84e4166baad04d4e88cb0321dfcdb127f8652623dc318dc9d475cb72307cdda4"
+          }
+        ],
+        "restored": [
+          {
+            "filter": "departure_scope_",
+            "exit": 0,
+            "counts": [
+              {
+                "status": "ok",
+                "passed": 6,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered_out": 16582
+              }
+            ],
+            "executable_sha256": null,
+            "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf"
+          }
+        ]
+      },
+      "assertion_snippets": [
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip' (3444775) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed\n  left: 4\n right: 3\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences' (3444777) panicked at crates/engine/src/game/zones.rs:772:5:"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_nested_owners_and_reused_ids_do_not_steal_occurrences' (3444777) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed\n  left: 3\n right: 2\n\nthread 'game::zones::tests::departure_scope_standalone_after_world_is_final_at_each_leaf_return' (3444778) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_standalone_after_world_is_final_at_each_leaf_return' (3444778) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed\n  left: 3\n right: 2\n\nthread 'game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return' (3444773) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return' (3444773) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed\n  left: 3\n right: 2\n\nthread 'game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members' (3444774) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members' (3444774) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed\n  left: 3\n right: 2\ntest game::zones::tests::departure_scope_closes_on_error_and_only_claims_explicit_members ... FAILED\ntest game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip ... FAILED\ntest game::zone_pipeline::departure_scope_tests::synchronous_batch_finalizes_exact_departures_before_return ... FAILED"
+        },
+        {
+          "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/library/command.log",
+          "failure": "thread 'game::zones::tests::departure_scope_natural_replacement_pause_and_resume_restore_empty_stacks' (3444776) panicked at crates/engine/src/game/zones.rs:772:5:\nassertion `left == right` failed\n  left: 5\n right: 4\ntest game::zones::tests::departure_scope_natural_replacement_pause_and_resume_restore_empty_stacks ... FAILED\n\nfailures:"
+        }
+      ],
+      "source_manifest_sha256": {
+        "baseline": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "mutant": "a85212823959e7e8da88b974fa66e542ef08d79c7f968537a009135e13404bbd",
+        "restored": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225"
+      },
+      "mutant_patch_sha256": "21d8be1d9d10e1dcb8a026fcb4a16ca4fec4521e17b397d7e9d915a35e125396",
+      "tests_byte_identical": true,
+      "archives_verified": true,
+      "fresh_mutant_compilation": true,
+      "restored_execution_mode": "source-identical reused canonical executable with fresh original Cargo provenance",
+      "strictly_increasing_seam_mtimes": true
+    }
+  ]
+}

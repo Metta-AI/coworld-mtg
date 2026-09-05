@@ -1,0 +1,3236 @@
+{
+  "utc": "2026-09-05T19:24:56.046758+00:00",
+  "rows": [
+    {
+      "row": {
+        "id": "sba-check_zero_toughness",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_zero_toughness",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/outcome.json",
+      "outcome_sha256": "2d963156ebf1a1f84427d24a3dfbc557faef81ced5e035bcce8675fdffa928f2",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/baseline/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/baseline/compile/source.tar.gz",
+          "source_archive_sha256": "2c20347925befeee362ab9d540d2190a0d48ea912672709cf336acbe79c5e67d",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/baseline/compile/receipt.json",
+          "receipt_sha256": "601cff6d52ae9f3420edf1cb56db94cb2c87537b90642130fac91e316c91c844",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "ec2c7da1349cdcc942098a884266ddbf139bb43b34c13a667415a1b9a6a058da",
+              "log_sha256": "8220e8eaf068459dc24fcef935eb828a9bbb96b993524c3b74f8e636e4e7ddaf",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "c6801ca68ed81f3aff1fed6069d3e36e9ff4875c59805eddf1a0a37ab002cbca",
+              "log_sha256": "67a39337cee2d6ea79556a95189530b760bdecc5e749afc6ed9eb97f6ae63f17",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "949b2afe54bc39d37e0f708a640ad2b98dc95cf1e844c940dbe1ad2008be10fb",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "95d3780e14649776c60f44ac0508ff5e36f06b22f7ea4048b4ac79322c22a6cb",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "b89f811ff64b46710decdd9fa0ecf13f2b17b2be3818d375a157100d48c61cb2",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "1f6fe44c0bf809884f4bb0eeb63221814d9e36a2cdadc861e1cc97e4598be307",
+              "log_sha256": "4d5c0f4877600df2a56f89d7e3a128cd6aec88098e6a37a8e5ca624616b03608",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "2999843bc10830f64493595c49d8e454350098e3f84acf4e8ae49ee960058e54",
+              "log_sha256": "126e751fe8bd2c2bb18fcf4d97aedc99f7ca27f1d75f622438bde397464ea97e",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/restored/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/restored/compile/source.tar.gz",
+          "source_archive_sha256": "0bd86fd22de2d4868ba9540db687f805fe7f9592bdda49e29f7700ac93a203c3",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_toughness/overlay-attempt-1/restored/compile/receipt.json",
+          "receipt_sha256": "4d84dc99b32fa54695e960bbe06bfe6d70614b97571d0a8658c791449e670efe",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "faf834eef19d19f36012382e692b645200b04e46519c1d81c21b65e3e5e70df0",
+              "log_sha256": "848d90a07adb0c5e3ceeed6dbf25508c3c1f85863dfd24df2b71402509a3ab83",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_toughness_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "20a1ed1eb2d08faf890ee2f3efa82c8469b6773e27a9fd2dab3990c3f9af6174",
+              "log_sha256": "67a39337cee2d6ea79556a95189530b760bdecc5e749afc6ed9eb97f6ae63f17",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_lethal_damage",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_lethal_damage",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/outcome.json",
+      "outcome_sha256": "37b46d745b1529e50c4ab74c0c33cbebf99b5737b1db70aedcd4952c64df6107",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/baseline/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/baseline/compile/source.tar.gz",
+          "source_archive_sha256": "0930e65480ca3a7caf4aa8c8d51b29a238baa88af38670bdc1e0e8f3f15f39c9",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/baseline/compile/receipt.json",
+          "receipt_sha256": "63912ef8dba360a5e3a0c413c0e31556099c6e9531522c7562ed509f6d1b0054",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "faf834eef19d19f36012382e692b645200b04e46519c1d81c21b65e3e5e70df0",
+              "log_sha256": "3b88953efcb3c966a8953e5ccd9d7d86394dd71b5c2daf94e9474e53e7854337",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "20a1ed1eb2d08faf890ee2f3efa82c8469b6773e27a9fd2dab3990c3f9af6174",
+              "log_sha256": "12d38c0c06b164d3de61dd97720e48507474fa2d04df949c473d9957d9a3d4c1",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "884aecd4bb5b06dee82a0c40f051118a3c4f034e6e1c5c0dca94bce7c48adfef",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "df0a54d6f712a95bf3166f8ca925b64266bca1c0db2e27d0a2fdd2104c6359aa",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "9891eb93cd628df020c442e4a9485151e47ffedb4eb02bb07efb08e09f2b132f",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "5e54e94489d1890168eb30a03b94fb2fd3c736a1be6c7ff04a924f8babe28d06",
+              "log_sha256": "776b100969de8540d8ed2159f659bc463879fdc6dd6c5b18d83456768b3610fe",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "40f1809ff8b145cc315fbc327012764b573131c2e3d5cadcc7bb7805f3bfbff7",
+              "log_sha256": "f8750af4be9fe0c1a175e63b94ec03bc38f927823fe7453d17e56c52d4181681",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/restored/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/restored/compile/source.tar.gz",
+          "source_archive_sha256": "8b5c0c1b5c917619ded6b4275e09579c2b9a0b9505f648665f08fe8a152b3542",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_lethal_damage/overlay-attempt-1/restored/compile/receipt.json",
+          "receipt_sha256": "06ab9fd1110943f6bc93944feff05e90c5c52cd45040ff762d36d584f200095e",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "f98dc34dad70ce465f1da01be024527188774ea6d36bd23eded5f77d598642e8",
+              "log_sha256": "561f90c3b556b29a2176d9b448ece4aa7cc3ff4e314eba39550fc19cced8444a",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_lethal_damage_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "bd3e11b1eb65ab0ff42e95cf18fb499b4d66ab8f4ee6f4eaf21d44f0df032445",
+              "log_sha256": "12d38c0c06b164d3de61dd97720e48507474fa2d04df949c473d9957d9a3d4c1",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_unattached_auras",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_unattached_auras",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/outcome.json",
+      "outcome_sha256": "ff87dea75c808993549232c0f2a33de9b6543e103852b726f98d92aafe847a64",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/baseline/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/baseline/compile/source.tar.gz",
+          "source_archive_sha256": "dc014c64007bee796129845a69b07ac6dc8c4dd3e21e69a42947724f15a5198b",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/baseline/compile/receipt.json",
+          "receipt_sha256": "b6011d90c2908cb62e95358e6c883aa9ae045de6979befc66d78df90624a2b24",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "f98dc34dad70ce465f1da01be024527188774ea6d36bd23eded5f77d598642e8",
+              "log_sha256": "3a64b9b26c9a407dd09c62cff378e1595e25af01c00596844db7e8b22ba2a000",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "bd3e11b1eb65ab0ff42e95cf18fb499b4d66ab8f4ee6f4eaf21d44f0df032445",
+              "log_sha256": "00ef65b52bde85a5ac7f019c9ff1b801c47b03b28d3b07fbfc6424fdfbbc0da2",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "d924769abc9b77b293fb9ef2ba62d8952bb590a8d2b74acc487de11a5f37e303",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "0c27b4d489f5df8bb4616770c98a5f550a0bdcc388888500ef3c96ac2ad87996",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "9e0200cb39495846ceabef892ff0c63ea2d21d9ec982d19f4058ef6142271d72",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "bce587f8bd94819eeee698a02d79cb394b3d38addab940c0ec577af222f6494d",
+              "log_sha256": "3f6596b6e11924045e563fa2e9e9bdafebcba58c988a67e1ff5bd4cbe084e5ad",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "b94ea3500f613d4337140d8bd177e9124e2455470d7df2897ed5dd25c1254897",
+              "log_sha256": "425a91194d14006abf247966fd3e266ef7c3ccc627467ab36dbf906d205fc19e",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/restored/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/restored/compile/source.tar.gz",
+          "source_archive_sha256": "9196c7b28afd0ff0fa8c931ab142ba635530ecd29f37ffbdca10dce0093f9702",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_unattached_auras/overlay-attempt-1/restored/compile/receipt.json",
+          "receipt_sha256": "379feb2b1db5e1a26e04436f80014ed681f1c9c4e95d479c1599018f0ad4ab56",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "746aca8e1d4a327654ec05a4d89b7a88aa206f769ed3581315b6b17870662741",
+              "log_sha256": "10f776fd74a0379fc6bda65a305d6911bb565d8b1ade5ae94659846c5576911b",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "eb5801ace875177cb057073e33248e3f1b65dea156e56e6ee2df0d07967a7d1d",
+              "log_sha256": "00ef65b52bde85a5ac7f019c9ff1b801c47b03b28d3b07fbfc6424fdfbbc0da2",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_role_uniqueness",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_role_uniqueness",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/outcome.json",
+      "outcome_sha256": "bfe4adc2270c6aa5e088cd030c0f8bbb3e7f41ab770478892ec49d05be2d166d",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/baseline/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/baseline/compile/source.tar.gz",
+          "source_archive_sha256": "c8b889aec82eaddfc537390fc77eb3e3a178543e4b348695f246a507703267bc",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/baseline/compile/receipt.json",
+          "receipt_sha256": "57eba610ba252e5b652c5a3c5750218369ba196fc9bd405b15110aa0bbac89e7",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "746aca8e1d4a327654ec05a4d89b7a88aa206f769ed3581315b6b17870662741",
+              "log_sha256": "a6a63f4b1399129e33e76983803431be8eb75ff60db9286ae913ec5c9a420748",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "eb5801ace875177cb057073e33248e3f1b65dea156e56e6ee2df0d07967a7d1d",
+              "log_sha256": "77c0a72065fc9a4fa623c039b37e3a48a8119967445da2e39e43888944ae9ae6",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "ece83fe18aef833b8e70928ab806b16c321f73da9d61ee47293fb394e8635f72",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "3b086b91ae6156fc634dfa3072ebcb085ea2896ffb1317aef01c983b2a27488b",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "0e812fc549e1432213f4a9b886e22cfecd9e77babecb50baf21b5e036bcc14bb",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "04bf9de80414a56e560a0936b70f84d62348113c99352eb0006481b2f538fd55",
+              "log_sha256": "df2428f656853ac1ab7f40c9123d64ea4141e2f1888c379de0a07bba1098dc93",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "0cf81949211a2487a0c0b9b48a09797578ccf52cfeab49ebe95930e9b10934fd",
+              "log_sha256": "03ae6829c4a072e6a94804df633da63a9236fab0f8e7d1dc81c407f4274d0b6e",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/restored/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/restored/compile/source.tar.gz",
+          "source_archive_sha256": "bc582d0895eb35aa0c46eb13e7b9c7125246e26bae7a54cb7cbd10e07963b087",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/restored/compile/receipt.json",
+          "receipt_sha256": "72172ce36127378f1aaf3f6707ed3395fecb7135bd6c78e4a83824892c7f92bb",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "69596b8ee1e4aaa3f8929204769fdcd0ae1991d0731982b064bd3b32c3dc0473",
+              "log_sha256": "41813c13ef1b978ff291c5b024bd1ae2fff04a9dc38dbffeac372cd258b8c19a",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d74a035fe204bcbc699e3ffa1a0fa7f10f34f983442c85dd769e214a78198895",
+              "log_sha256": "77c0a72065fc9a4fa623c039b37e3a48a8119967445da2e39e43888944ae9ae6",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_world_rule",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_world_rule",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/outcome.json",
+      "outcome_sha256": "3fdf54718813c5dad93358e9efcc46486caca001796fbe4a6dfddb9f3ea84ad8",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/baseline/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/baseline/compile/source.tar.gz",
+          "source_archive_sha256": "eeb9da3f409f32e5608fb3219f5d3def5f91712a8f9c57fdb1ef885512ca223f",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/baseline/compile/receipt.json",
+          "receipt_sha256": "c6dd9f4c0727bbb42df4ef16466baac71e92ac777f9e3bf1d63bece67e7ba436",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "69596b8ee1e4aaa3f8929204769fdcd0ae1991d0731982b064bd3b32c3dc0473",
+              "log_sha256": "7c2ae108ba7399eb406c30577484bda22d2013e6922a1ba062b645201a39035a",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d74a035fe204bcbc699e3ffa1a0fa7f10f34f983442c85dd769e214a78198895",
+              "log_sha256": "ead48d4cd5e08075ee51cde2c8993db5424f66e5a8a906617b5b5e4859974923",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "1d1ca0dd9473d91e2e176e23ea04423202613325c6129e81f547dea8420cc678",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "0288d8b1d1c559956d9afa74033067c86be16f95bc5bcd0c082062b582baf390",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "93c3d2c3661b12c27c0e197d834de5697a67ec764143112c973a7c7844d83ea9",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "52ef4894743183bf64f39bae08e556043a361c19ce4e7eb19e4b9e2289827b4a",
+              "log_sha256": "661f7b9a565df6dd0b170ad7b2d37285ecadc30e0318cd46b801b93758121b15",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "0fe4d9a2259a2cd1b6f2bdbb5cb76d105a06562117df73de61209bbdf44259c5",
+              "log_sha256": "86a8169811837176a09c137e6791b625e6305790fec19581d49e994f2ed0ca7a",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/restored/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/restored/compile/source.tar.gz",
+          "source_archive_sha256": "983fbf79a49f7b2c13df37c6199e0360703692a55b44103a0f1815f53edc1021",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_world_rule/overlay-attempt-1/restored/compile/receipt.json",
+          "receipt_sha256": "11c870576709eacffcc3c3b7499387f1f6f793d41568970a01323a93503f9aa9",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "28950a871e4c6593a5f64c0af50bce5acb5ba121f026bce3ac2d494ca684bd59",
+              "log_sha256": "9a8571f95baf2d4195ae7ea627bb5b489f31b42d48cedf392a1446d10bbfe11e",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_world_rule_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "63fd9b818dfdcd372b61d4fa2b5e96f8eeffbfdb29111496e1d784b3987088a3",
+              "log_sha256": "ead48d4cd5e08075ee51cde2c8993db5424f66e5a8a906617b5b5e4859974923",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_zero_loyalty",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_zero_loyalty",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/outcome.json",
+      "outcome_sha256": "4785277fc79e8051ae5943308918b243d8ea82486222306487566ad4c8ef2c88",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/baseline/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/baseline/compile/source.tar.gz",
+          "source_archive_sha256": "007c88dfcc0e42df0ef346c70826433417210e11220d370a02122224bbcfea16",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/baseline/compile/receipt.json",
+          "receipt_sha256": "1469415be61d29b4b4504dec173b91fcab5ba343b247f705bcf4fa444f338464",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "28950a871e4c6593a5f64c0af50bce5acb5ba121f026bce3ac2d494ca684bd59",
+              "log_sha256": "c2674f7f2ce85ca91acc8c27d23eb177b6eada0cab1c77ff2ab884b48c282ed4",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "63fd9b818dfdcd372b61d4fa2b5e96f8eeffbfdb29111496e1d784b3987088a3",
+              "log_sha256": "4650b1d2e147365d5b7e81a7e0c0ddbb1a53ef27069513312c748cc0922584ea",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "1e3c2ae3e4b389cc7b50bbde8e72235f8a99fa761971d1ae11e05c0420095ad4",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "763a7657daf158e852b0fcc02098fdd1c28a082b9dcda772c548130aa6f6b4dd",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "93f4fc985cca4f8af20e3f826bb217dd4fdf9d59ef5b7eac003f083a8b25ddec",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "0825eec2b986f0ec2dfde34875c82aa99613c220f8a9e0570d25f9ba54968062",
+              "log_sha256": "cb8717a6f0efed905e952fe8d1d9cf02a514128deae3efe7f40050936572dcca",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "50147336e0b7f8c6e14a44bae31becd5ee9ccd6f4f9492cfcb8177c9d13a3145",
+              "log_sha256": "cfad6f7eaf3f7a7f9d4c2dbc04d3a3080d8d0da4d42e2e5fce8378b0c2bc84fd",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/restored-recovery-1/compile/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/restored-recovery-1/compile/source.tar.gz",
+          "source_archive_sha256": "35ef679e3fdf8e187fdb103f5bc95b344b66a7718bffaae4147a92b6bc7f253d",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_loyalty/overlay-attempt-1/restored-recovery-1/compile/receipt.json",
+          "receipt_sha256": "b6cf70336266f367e1d7798487dcc4ea995f90ddb91948a10de3b6a06f2f4a20",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "143a318f88a244fc21e66008b93328a6d69efddccc8569ad0bbdea9a2c6a57a4",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+              "log_sha256": "4650b1d2e147365d5b7e81a7e0c0ddbb1a53ef27069513312c748cc0922584ea",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_zero_defense",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_zero_defense",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/outcome.json",
+      "outcome_sha256": "68c194e46693105d5c72b4c0b164c6e57a12ad0dce2eb250e40d26b036f0790a",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "38edba3be6a5d4f5610eb85f2345685e3ae090c387fff44ca0036881569c223a",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "05843f68a3041caa2ce418672d57369b4e5cd295be52ab11fc4626864a48f1c8",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "ec48f480ff710517558cb479a43b66899514a3c83eee0a695a55ad2b38febbf5",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "05843f68a3041caa2ce418672d57369b4e5cd295be52ab11fc4626864a48f1c8",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            },
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+                "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+              "log_sha256": "ec610dc114c065c9d4860ca091daf1cab7b2af9f0605516c7be920ccee352e05",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "integration",
+                "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/baseline/canonical-public/receipt.json",
+                "runtime_receipt_sha256": "9a8344e6068d5f59be027bcd8222bcc1eb5dd28650b915d9a2e0a504dab481fb",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "f4de131589042dc048ac8d5a60449fbeb848812bc062b5d639791e47292add01",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "0ff1768514edf62e199cb14b0c8e1484ff1f230756f28276d625e7ef31b379d7",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "3eab1e67db314c93c62a61b55563cf5629ba48174f2d16b31bc439ad903d3215",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "a123e97a775af1ebb51fe544a82d8738fd3280e9ba6cf6305d09cb88fddd1de8",
+              "log_sha256": "213d74c4b34d2414c845fd65c705020e21002e474c4a04b6141b4796e315c78b",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "30c611edab1e327a0ec86fc033573a6e336b30b21f660d5f3a2f39c9e45ef6c0",
+              "log_sha256": "bba9fdc40dc59d6cf62e4f17ef50e6d165cf20e645bb86bbabe12342b1edb9c2",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "882d4d88945dae869e60d52ab08425c0a3b542006b03585c276f69b4202fbaff",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "d510c1742d85af084e16b2fe9fc6061fa560f9b08bc75f56df6f7a97b246c397",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "453978564620f7aa007dd722155276dc03abcfa9e5e148a8c860f3e309d0e177",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "d510c1742d85af084e16b2fe9fc6061fa560f9b08bc75f56df6f7a97b246c397",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            },
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+                "sba_member_handoff_zero_defense_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+              "log_sha256": "ec610dc114c065c9d4860ca091daf1cab7b2af9f0605516c7be920ccee352e05",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "integration",
+                "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/restored/canonical-public/receipt.json",
+                "runtime_receipt_sha256": "140245f564a7dbcd9b95d0c98b3a143e501927ebcaee9e6a239c341ba5423c76",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_battle_protector",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_battle_protector",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/outcome.json",
+      "outcome_sha256": "244be0bc6137f53e956c209b58fa9e14c617e62c53f8b8b5cdd4c0143a6dec83",
+      "status": "survived",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "74fff271f75a0d577b97f5e9cf9399feb8e09352863d7dccf2b48773c589e3e3",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "079ddc49f474f8de2333cad1f236846a6d42bae1f0f6b28ba5591296cc84943a",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "5dd4a9166c187637df81e865ec604229156f456b6112a0bcfd246673249ac2a0",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "079ddc49f474f8de2333cad1f236846a6d42bae1f0f6b28ba5591296cc84943a",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "8f250fc0d7c9bdc77b7e3cfdb02e19bbac76c824af395480a5458d5766cf52a2",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "0f22366ba23e32a863cbbb44dc4c7dda9c05dcc62b7e1f015c62607a34257027",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "9f9baf78d1d285b0bd576f967baaf5e9219ffaecfc859df25507088b9a1e5083",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "45d72f88da834f2fdfd61f1a2e87dbd4fada5c33c0483b5024d0f9894d93f8c7",
+              "log_sha256": "24f235102cc708260ce82e65f62cd2fcc21cb715affc63e1441e40405683fb20",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "731eb2b51f160f4ab6ebc7e82cfbe5f0fd8d2e65a83445f25157677c5af6e1b0",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "e3a0fd615c0039f1b61b5af8843cf775f26a05eb1387f6f5188f11133464ecbf",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "72d9e1f52c0c8b040b585a027f5567b2e9f2f6eefe10253e4d13cdba9e5af95d",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "e3a0fd615c0039f1b61b5af8843cf775f26a05eb1387f6f5188f11133464ecbf",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "sba-check_saga_sacrifice",
+        "file": "crates/engine/src/game/sba.rs",
+        "operations": [
+          {
+            "kind": "unwrap",
+            "function": "check_saga_sacrifice",
+            "marker": "zones::with_departure_member",
+            "index": 0
+          }
+        ],
+        "tests": [
+          "game::sba::tests"
+        ],
+        "kind": "sba-library",
+        "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/outcome.json",
+      "outcome_sha256": "a7ea3260d86035c7499c1e9e879d64cf4fa828bb5ec5b19e2429e21af213c550",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "3b42e43e727dddf40f11c3c2bdabaf7a1bc6826773efa7e3a737913e839b2d29",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "448775d21c255348948e0c898656e3cf774e933dff5384c3b42822cb67f81b93",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "ac5436779514c995c1bf984773219ce0c5a2882ec473403ed0195cda15932f43",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "448775d21c255348948e0c898656e3cf774e933dff5384c3b42822cb67f81b93",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            },
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+                "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+              "log_sha256": "840e3eaac37317cd4a94b0807619b129d9646b0a6dceccb924321bc96f38cb4e",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "integration",
+                "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/baseline/canonical-public/receipt.json",
+                "runtime_receipt_sha256": "2d1a06bb538377fa0c98fc6f46b99650d6c423970ccd426a6e26274778020efe",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "9b862f4daa0f319b329675ad7bffc8653a3d748bcc052ea3b83f4965dbc0eb13",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "e5351bbc2c7bfa3e67927b36701d074c702736f193fc5ef7cedb73fd0e0d1cfc",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "30d757f1c873d68dfe877d55d5d5d14fbd7575a19c7b8176a25cecd6d6a1e438",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4f3d660374a256e693c875efc3cdc6357079448ffde6b549724983057bbb47bd",
+              "log_sha256": "93accd1df2a4d70abb91523945f0975f2abb2488d9cddd3273f5e936cb34ece7",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            },
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+                "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "05315541521b967143a23bfa318520896962a4c4be3c8ffbbba95f10e72597af",
+              "log_sha256": "de684f88e78d96bcd69402f8eda1d6fc7ed825134a56ea8a6836a617dcb3052f",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "739c3e6b82ec4ca80aa78a3786812f1a01211394e8c7bb184e4222325a0dd3d0",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "0538e6f69378ce41200a48c5facb0e72baf5ae0f572356970ea4c6b3e2898c31",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "game::sba::tests",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 119,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16469
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "02565705359a28fc345281d547e430d3e43189ac3645f7093f8c4b0fe34d9b3d",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "0538e6f69378ce41200a48c5facb0e72baf5ae0f572356970ea4c6b3e2898c31",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            },
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/integration",
+                "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 3096
+                }
+              ],
+              "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+              "log_sha256": "840e3eaac37317cd4a94b0807619b129d9646b0a6dceccb924321bc96f38cb4e",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "integration",
+                "executable_sha256": "d1aba13f77932c528526dd8e7dac55fe3c005d464ee5327fe303585aab9bf6df",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/restored/canonical-public/receipt.json",
+                "runtime_receipt_sha256": "240b21503924618e5698395396015c473d15ab0607fb3d00984066d5c913b5c2",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "component-guard-normal-finalizer",
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "finalize_mana_payment",
+            "old": "    if let Some(pending) = state.pending_cast.as_ref() {\n        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n    }\n\n",
+            "new": ""
+          }
+        ],
+        "tests": [
+          "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt"
+        ],
+        "kind": "component-library",
+        "description": null,
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/outcome.json",
+      "outcome_sha256": "6da036febfaa4bef89280ae7ac9a8cc6c8c83885ea1ec21a22ae65e2862d3061",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/baseline/source.json",
+          "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/baseline/source.tar.gz",
+          "source_archive_sha256": "b53662f9b46277592882dddbad0565f0c0d49508cf434d3b844051940fd04af6",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/baseline/receipt.json",
+          "receipt_sha256": "b45bbafeab6c4513989f68cda45dd96fd5870b4933bab90ede0d06c9f781a361",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "+nightly-2026-04-19",
+                "test",
+                "-p",
+                "engine",
+                "--lib",
+                "--message-format=json",
+                "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt",
+                "--",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "c1f71e28da4bafeaa47b5ebbd4a76eda2ca754fa57a3e12119c2623aaf65c499",
+              "log_sha256": "488adb6575d93b7ffdfa1eaee1f52925184f5114c9a6c0c5b7a5166005efc916",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/mutant/source.json",
+          "source_manifest_sha256": "95de42c7426a010b6c792c50c2bd4e4dc072fc760697ed6a579db183e9ac7e31",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/mutant/source.tar.gz",
+          "source_archive_sha256": "921ad16f948366e6205f4762a008d899c1dd38e4845905ec9600a6933c540693",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/mutant/receipt.json",
+          "receipt_sha256": "83bde3802ea6d5c2df41f577515c7d1091264754a07c34e59f859440df18e1cf",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "+nightly-2026-04-19",
+                "test",
+                "-p",
+                "engine",
+                "--lib",
+                "--message-format=json",
+                "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt",
+                "--",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "07cc48af6f94cd004da76f0c163001c0c347e15eb5896993d6ad5bf514243df9",
+              "log_sha256": "bcbffd31c50cfc1544c34d12ea01a1b84412b8ce0279f76e303348be96e190f7",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/restored/source.json",
+          "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/restored/source.tar.gz",
+          "source_archive_sha256": "9568228066874a6ce1b3f9694bde554111b7b4b7a1494cea7d70c443120c523a",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-normal-finalizer/attempt-1/restored/receipt.json",
+          "receipt_sha256": "9a3c2b92ba7bb03950b5ad25f53227eb1bbd2568d0975fb2c5f8b3285b18da24",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "+nightly-2026-04-19",
+                "test",
+                "-p",
+                "engine",
+                "--lib",
+                "--message-format=json",
+                "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt",
+                "--",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "ec2c7da1349cdcc942098a884266ddbf139bb43b34c13a667415a1b9a6a058da",
+              "log_sha256": "732e62e429d378d1be593046c82c816a5e97d3f145e5cfa3c27105d7fa4408e4",
+              "canonical_association": null,
+              "runtime_context_sha256": null,
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "component-guard-phyrexian-finalizer",
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "finalize_mana_payment_with_phyrexian_choices",
+            "old": "    if let Some(pending) = state.pending_cast.as_ref() {\n        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n    }\n\n",
+            "new": ""
+          }
+        ],
+        "tests": [
+          "deferred_component_phyrexian_finalizer_guard_precedes_payment"
+        ],
+        "kind": "component-library",
+        "description": null,
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/outcome.json",
+      "outcome_sha256": "43caad97436bb27466b7c4d6a79dd75f71f69b3045d730aea936b3929bacac93",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "250c79eab77f96e4b5115de88c62436fef6e8edc364264ef35b1db3363c5a66a",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "777c188a235339731e77f5b4e0dd179e9d227fc03e275f90a68f2c518fb5db21",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "deferred_component_phyrexian_finalizer_guard_precedes_payment",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "4f76c1bd9ffda6bcd488048849126b3372fb64985e5db6e0a50f4aa8783f52dc",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "777c188a235339731e77f5b4e0dd179e9d227fc03e275f90a68f2c518fb5db21",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "655880fe92d687fce8d7c5f2f9f0206aa8c96aba74033b57dbd6f7c933d2390c",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "4184b6baea2f12154dac87694573d8e4b52e4885362fe614717e8e7aaf667c9b",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "01cbe2751f87b2d7e1f1f38a4b8525683edd4ad1220063ce43133581bfcf4c65",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "deferred_component_phyrexian_finalizer_guard_precedes_payment",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "9cb16949126db49d0112f0ba2cd3363a8f3f1720253354552176f8ceb844619a",
+              "log_sha256": "74bd6fd8e18db85f613dc5dd39db83ab114ae346d97b08efcf5b5c1dbc872725",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "72e58b12b687f4f2cccb806e3bb3870a0c76add91993ee18231452d6c3d7f764",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "0279fec0aa1f4ea22dbcbb774195c60e4e90db43bfd85dde0c885b8243c82e52",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "deferred_component_phyrexian_finalizer_guard_precedes_payment",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "4f76c1bd9ffda6bcd488048849126b3372fb64985e5db6e0a50f4aa8783f52dc",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "0279fec0aa1f4ea22dbcbb774195c60e4e90db43bfd85dde0c885b8243c82e52",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "component-guard-append",
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "handle_sacrifice_for_cost",
+            "old": "    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n",
+            "new": ""
+          }
+        ],
+        "tests": [
+          "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection"
+        ],
+        "kind": "component-library",
+        "description": null,
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/outcome.json",
+      "outcome_sha256": "dc6dd65bfce4998fbde7182f3d12033ae92156c8249d8dbd377ffe203245272e",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "8dbee163f3a7c7d2e421e9fc9dad542c5ae51157dc4746d362222d16bc066b30",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "2955c4a250141ca28966afc475464beaebc3bad293075142f4bf6a8c21a084f8",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "032feb2bc64388aafb810fe35fb7a8dad7898077e2abeeed6ed0359088f92335",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "2955c4a250141ca28966afc475464beaebc3bad293075142f4bf6a8c21a084f8",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "4c8d924af524e6ce53b58d2fd12ad91506c1f14c57f54e125af902b44603bffb",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "18ec7d78e94fd0fbcadd0c17a6bb910143d111c63e454d4062d49cdd9f5151af",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "a46ef6d622cc719bcbb6233c35324698e5e6abedac746a4941b0eff8a3bea5c9",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "ffe8956fe6caf859a6401d35e2f00b15233301d5bfc25b63e96efc3ce8f871e8",
+              "log_sha256": "0e8544b80f04632078802231a3ce4cc5a9119c8c48afe7f6635141adccdf27a2",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "5df3a1c6d713348c6a1a773ac51263908c4def98120be4aadbdbd3161023aa7f",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "b46b848842bf124cfc0aeb0b6f2aa7f04ae9322bb2843777b0dd9c0b79ec61ee",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "032feb2bc64388aafb810fe35fb7a8dad7898077e2abeeed6ed0359088f92335",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-append/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "b46b848842bf124cfc0aeb0b6f2aa7f04ae9322bb2843777b0dd9c0b79ec61ee",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "record-snapshot-serde-drop",
+        "file": "crates/engine/src/types/game_state.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "old": "    #[serde(default, skip_serializing_if = \"Option::is_none\")]\n    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,",
+            "new": "    #[serde(skip)]\n    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,"
+          }
+        ],
+        "tests": [
+          "zone_change_suppression_preserves_missing_empty_and_captured_history"
+        ],
+        "kind": "schema-library",
+        "description": null,
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/outcome.json",
+      "outcome_sha256": "93885e9a73d9191c57a6fa43047495c241b7a06c6e759cb85cad7270b1950c53",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "9fd486835dc5f8598df99f97f8f3dcb4bdc5ec5ec0d114f7663f6320a1ba63ee",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "b9da8e2b20f1b2654ed09ecca12122f30e6e7f99ba5c286f17cd7b9bbebb98a7",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "zone_change_suppression_preserves_missing_empty_and_captured_history",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "280cdd50dd06dd7aa9207a804d81b762965dbf511a5b2ac0b3511624e61201a9",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "b9da8e2b20f1b2654ed09ecca12122f30e6e7f99ba5c286f17cd7b9bbebb98a7",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "687952f33db635688cf26a19d4f302066cd57a39b8680418836eacfea9c94778",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "fd573368c199d183115fde1779f1c97d47aff7a3288984404b85f4605906178b",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "8ca33ca32ba92ed8b5aa34cb8666e5256ca21411bcfd361761304a86fafc53ae",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "zone_change_suppression_preserves_missing_empty_and_captured_history",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "8ee39a0b63a8a5d1b6fde79c36237becd4f4c702ce9a7f6e2859f00b652efe46",
+              "log_sha256": "27c092e21bf7256ec7ee698c99a51da7110a5c817b8e6889cadba3d090e2f96b",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "e8ed29bac6c7a441f76f320dad2b0409e606696e079ebf91c1e62ad801401533",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "ea0c38bc1113d59dc27aac087231368945bdd7cce63acd0027cc14b6b413db46",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "zone_change_suppression_preserves_missing_empty_and_captured_history",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 1,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16587
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "280cdd50dd06dd7aa9207a804d81b762965dbf511a5b2ac0b3511624e61201a9",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/record-snapshot-serde-drop/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "ea0c38bc1113d59dc27aac087231368945bdd7cce63acd0027cc14b6b413db46",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "owner-allocator-reset",
+        "file": "crates/engine/src/game/zones.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "with_departure_suppression",
+            "old": "    reset_departure_allocator(state);\n",
+            "new": ""
+          }
+        ],
+        "tests": [
+          "departure_scope_"
+        ],
+        "kind": "scope-library",
+        "description": null,
+        "status": "planned; no mutation executed",
+        "transformation_dry_run": "source pattern matched"
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/outcome.json",
+      "outcome_sha256": "11f956d502f981c618609c5eafccf995a2bb4a5fba469eb2c303a3d372978d25",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "afba8c7ba483636871a3759aa829f42050efd3b9fdf13821d4c10d0677fb7104",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "3801fefe52d2eeece42dae843ab43b8df588b49676bde39fb67f3c018d65d27b",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "3801fefe52d2eeece42dae843ab43b8df588b49676bde39fb67f3c018d65d27b",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "4fc0f415a084f5c88f376329356856ed505010c9027ee94bb5026106efcdb18b",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "056ea989ec7ee1a70262e921230df3fa382f788a14a0ec964593fe5605c13681",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "f353a334a2273146825226ed41ba8d64238ec6be47c5127a2bd0f68a9c599c89",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 6,
+                  "ignored": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "937d7e4dccf1cacef2a23c38e33cda6b6d25323bdb3a8c567e103e770ed1e6ed",
+              "log_sha256": "7031e0d1bfba875eac11d48f373a9909193705d734365eee0b85e384eb264fab",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "fb9818d71e712ecdf46304292fa695e7d767dddb134eccd1cd49bc6c56a5eab9",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "2bdea641bf1da8481faf600e1996eaf07b7b4c87bef89953dcbaf463a943331d",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/owner-allocator-reset/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "2bdea641bf1da8481faf600e1996eaf07b7b4c87bef89953dcbaf463a943331d",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "scope-before-flush",
+        "file": "crates/engine/src/game/zones.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "with_departure_suppression",
+            "old": "        super::layers::flush_layers(state);\n",
+            "new": ""
+          }
+        ],
+        "tests": [
+          "departure_scope_"
+        ],
+        "kind": "scope-library",
+        "status": "planned; no mutation executed",
+        "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/outcome.json",
+      "outcome_sha256": "d22114448ef85b739a6e54027de2f5fc1ef8f87029a7e4bc3cdaf1f923e4fdde",
+      "status": "survived",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "39cf0682564ca12a6728cd2b0ba4dd0da382013ac2c0c3e4138d8b5671755d72",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "d164442c880b7c4671dd3d22c154fad852a01075ecfc15a019df75a9169af13d",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "d164442c880b7c4671dd3d22c154fad852a01075ecfc15a019df75a9169af13d",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "dd38209c7f5ad99d976bbd2a11d178a25ac06af6ec99cbc37037d9557c682504",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "dc30a377a0b669fec1a114cb1a7c8bdd21af3d5d39b0fe99c00e82f79ff393f2",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "bdaded37509b6b9e2c606259b604d13202f23d0ae99f35e936f7a3f8eac91c60",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "b18770c73010664f309cf263142c210c135d0d6fa23cf0c61a1bf51c4ca3a68a",
+              "log_sha256": "c8505eb1cd751b89b5d3a8d1847025c13db53172a10e97dd07c1dd240d83502b",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "1ef5dd1057745b6af0242a95935051924ec7caabc4969b4a208da3994be7d5f2",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "5af67dd9fd9724a8cedc0271b0864b7456ef66f5516f19eab2340fd83d85a832",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "5af67dd9fd9724a8cedc0271b0864b7456ef66f5516f19eab2340fd83d85a832",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "scope-capturing-ancestor-policy",
+        "file": "crates/engine/src/game/zones.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "with_departure_suppression",
+            "old": "    let can_capture = !subjects.is_empty()\n        && !state\n            .departure_suppression_scope\n            .frames\n            .iter()\n            .any(|frame| frame.capture.is_some());",
+            "new": "    let can_capture = !subjects.is_empty();"
+          }
+        ],
+        "tests": [
+          "departure_scope_"
+        ],
+        "kind": "scope-library",
+        "status": "planned; no mutation executed",
+        "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/outcome.json",
+      "outcome_sha256": "6110d0d0bbd4251b0425843b65163baf86c271bc9331f70f1c0b5a22cb5d3c51",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "f0e3b96aba6908d787e565ade34cb21ddfd4a879a4c5b0e7c3da5eca32e9e5de",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "8949c9067e101782cb689ae8c755f8fa0f051c3db7aa5d1ceca2f269e581cb2b",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "8949c9067e101782cb689ae8c755f8fa0f051c3db7aa5d1ceca2f269e581cb2b",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "585807760ac1883707333348ddfb47495601329f0a097310015c1808009cfcb0",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "c223884021e3300f4c928a33e16a80cc386c0924d668bd44e3b034d5b538fa73",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "2fc8389a5b080b70e3ef89dceb422692f8795ea77d9ce3c279a8a98f9ec90abb",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 5,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "eb9570466c4aefd3ea1023d0fa3f5e408ee98e7b3b541694b3dc5bba01ea51a0",
+              "log_sha256": "5735136ff67b4be27ab019f2e138bb10ed47550c4da09ee10bca8166606da1da",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "59f4227dddd705272660fe23b6581464d7ba3c407b71037a9ca4f8d964414719",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "043917d4054db2fe8e4dc6be9feea76f3039e900ebc5630192f90c64d3094aa5",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "043917d4054db2fe8e4dc6be9feea76f3039e900ebc5630192f90c64d3094aa5",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "leaf-top-barrier",
+        "file": "crates/engine/src/game/zones.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "with_departure_leaf",
+            "old": "        .member_bindings\n        .last()\n        .copied()\n        .flatten()\n        .filter(|binding| Some(binding.subject) == subject);",
+            "new": "        .member_bindings\n        .iter()\n        .rev()\n        .find_map(|entry| *entry)\n        .filter(|binding| Some(binding.subject) == subject);"
+          }
+        ],
+        "tests": [
+          "departure_scope_"
+        ],
+        "kind": "scope-library",
+        "status": "planned; no mutation executed",
+        "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/outcome.json",
+      "outcome_sha256": "f5c8007d1d850749cff104d910734b8aea4f512a165e6de2d475147ff0a0b932",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "681a5a93611f21ce432c5b5ff8074588555da0d4be783088349cefde8a397f8c",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "08d4bd847680187ca19d28cbc9b94582f14de41c86df817acf79e4dbf6b8d06b",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "08d4bd847680187ca19d28cbc9b94582f14de41c86df817acf79e4dbf6b8d06b",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "d94ff18f5a2b3ab188a6c34a830498f20bd66b489125fbcbb2e403591362a712",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "e295e60fb22c933564d2be322fcbae6fbe01553582d15f3008c12c34654cf4d4",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "65e958fdc661036a6891305b959af3fabafb316ba069d52ffe61d909786255d7",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 5,
+                  "failed": 1,
+                  "ignored": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "8da4c37daa918f6db0d980aa3e94e7eca12dd1f05d51997ff290de5834956b4d",
+              "log_sha256": "13feaa0b025b47aa79a2b1ae5328cf9a2882b854920a5e3abf7d0dfd0f8ed51c",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "f79bdcc50bdda225c160a7fe0d8ed6576df45f6f4eef2fe779325e1fe8362198",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "eb6b4898a94981414089907d1b2b72c502f5d6e9df413fb066942b48eaffa5a8",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "eb6b4898a94981414089907d1b2b72c502f5d6e9df413fb066942b48eaffa5a8",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "leaf-consumes-member",
+        "file": "crates/engine/src/game/zones.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "with_departure_leaf",
+            "old": "        without_departure_member(state, events, |state, events| {\n            body(state, events, Some(binding))\n        });",
+            "new": "        body(state, events, Some(binding));"
+          }
+        ],
+        "tests": [
+          "departure_scope_"
+        ],
+        "kind": "scope-library",
+        "status": "planned; no mutation executed",
+        "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/outcome.json",
+      "outcome_sha256": "12861cb9ab9d98cf01dbe9136d5171d9a4a286575d66e811100014cfc7aba578",
+      "status": "survived",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "b1dae96bd5b90e41485f6866be29ac43a168b3120df8cb2a9471c315e2161bc0",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "5dbda040769542a1ee40c6c0285b983120664762f14550ed9599ffa887a805c2",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "5dbda040769542a1ee40c6c0285b983120664762f14550ed9599ffa887a805c2",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "00ab09f522eee47653f6d213ddeeefe67af968d44a20e7ea41dc563bc2a4662f",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "14dcac3081e0560547c7e84ddd1572866e1d76a2a5295883ea598256569a208c",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "7b28287124ba48194cdedb97672b20e6d19327d2eeefae80e995ea9930dccc1f",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "2d3f61b6e7e4d2278d4ee6eea2d8c4379d32e6059ee59c56ad39f093865f7add",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "c01d52590f42e5067a5ad1101c42aec20c9cdf32b7cbe1e3049d07b95233f2ad",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "c6d212ecba6d1381f201bb0f3d810cec2e571a01e0d6873d0f4c5f44d808e8ac",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "e8091eac3f34abf0afc24c115f7d95c57d1a3c9df38508246971a4bf09b7eb48",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-consumes-member/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "c6d212ecba6d1381f201bb0f3d810cec2e571a01e0d6873d0f4c5f44d808e8ac",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    },
+    {
+      "row": {
+        "id": "member-error-closure-pop",
+        "file": "crates/engine/src/game/zones.rs",
+        "operations": [
+          {
+            "kind": "replace",
+            "function": "with_departure_binding",
+            "old": "    state\n        .departure_suppression_scope\n        .member_bindings\n        .truncate(depth);\n",
+            "new": ""
+          }
+        ],
+        "tests": [
+          "departure_scope_"
+        ],
+        "kind": "scope-library",
+        "status": "planned; no mutation executed",
+        "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+      },
+      "outcome": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/outcome.json",
+      "outcome_sha256": "41983ac7781681540eab319730c2de16308fc96ed10174d24a0bdb3c2e4e374a",
+      "status": "runtime_failure_candidate",
+      "phases": {
+        "baseline": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/baseline/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/baseline/canonical-library/source.tar.gz",
+          "source_archive_sha256": "725c1f359418a28c36674fc67c52b2124b2288f274342c1c2452b862d3c68986",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/baseline/canonical-library/receipt.json",
+          "receipt_sha256": "58b23c6ab8b6b433d80f8158c815e0124a31a789219ea0ed968d246a8cb9f4e2",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "e8091eac3f34abf0afc24c115f7d95c57d1a3c9df38508246971a4bf09b7eb48",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/baseline/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "58b23c6ab8b6b433d80f8158c815e0124a31a789219ea0ed968d246a8cb9f4e2",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        },
+        "mutant": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/compile/source.json",
+          "source_manifest_sha256": "a85212823959e7e8da88b974fa66e542ef08d79c7f968537a009135e13404bbd",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/compile/source.tar.gz",
+          "source_archive_sha256": "1aa1ad09ee1ea4c0d77d3ea20bd012556843078f2b83b13f7e559841db37b953",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/mutant/compile/receipt.json",
+          "receipt_sha256": "24a8456e7c36bd0c0c61dd42a2c9a6d0e565249b85ccf3ee608bd87cf3cbb42a",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 101,
+              "counts": [
+                {
+                  "status": "FAILED",
+                  "passed": 0,
+                  "failed": 6,
+                  "ignored": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "c605fb187280cf7add4da9a11f5957ba47240db9935e8c9f47f7a4bb74834c49",
+              "log_sha256": "84e4166baad04d4e88cb0321dfcdb127f8652623dc318dc9d475cb72307cdda4",
+              "canonical_association": null,
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "fresh_Cargo_compilation"
+        },
+        "restored": {
+          "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/restored/canonical-library/source.json",
+          "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+          "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/restored/canonical-library/source.tar.gz",
+          "source_archive_sha256": "818bdfee2de0b72a00bc5a14df70566c4bc2ea618e2584dca4f47f1cb2771e05",
+          "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/restored/canonical-library/receipt.json",
+          "receipt_sha256": "21f2ddbf155c947a8ee35fa698dc7bb4d00c71dc372b7c79ce0ef5368dbe1c41",
+          "runs": [
+            {
+              "command": [
+                "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+                "departure_scope_",
+                "--nocapture"
+              ],
+              "exit": 0,
+              "counts": [
+                {
+                  "status": "ok",
+                  "passed": 6,
+                  "failed": 0,
+                  "ignored": 0,
+                  "measured": 0,
+                  "filtered_out": 16582
+                }
+              ],
+              "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+              "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+              "canonical_association": {
+                "mode": "reused_canonical_executable_no_compile",
+                "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+                "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+                "executable_name": "engine",
+                "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+                "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/member-error-closure-pop/canonical-attempt-1/restored/canonical-library/receipt.json",
+                "runtime_receipt_sha256": "21f2ddbf155c947a8ee35fa698dc7bb4d00c71dc372b7c79ce0ef5368dbe1c41",
+                "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+                "matches_compiled_source": true
+              },
+              "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+              "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine"
+            }
+          ],
+          "restoration_compile_mode": "preserved_canonical_executable"
+        }
+      }
+    }
+  ],
+  "audit": "audit-completed-19-20260905T192327.json",
+  "audit_sha256": "9bd607ebf4334a9e539a98244e8e496483b60fd5c5deb5132ec5cffb3fc85f45"
+}

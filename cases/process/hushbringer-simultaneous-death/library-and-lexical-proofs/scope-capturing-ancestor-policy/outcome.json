@@ -1,0 +1,213 @@
+{
+  "id": "scope-capturing-ancestor-policy",
+  "status": "runtime_failure_candidate",
+  "attempt": "canonical-attempt-1",
+  "baseline": {
+    "mode": "reused_canonical_executable_no_compile",
+    "associations": [
+      {
+        "mode": "reused_canonical_executable_no_compile",
+        "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+        "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+        "executable_name": "engine",
+        "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+        "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/baseline/canonical-library/receipt.json",
+        "runtime_receipt_sha256": "8949c9067e101782cb689ae8c755f8fa0f051c3db7aa5d1ceca2f269e581cb2b",
+        "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "matches_compiled_source": true
+      }
+    ],
+    "runs": [
+      {
+        "execution_mode": "reused_canonical_executable_no_compile",
+        "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+        "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+        "started": "2026-09-05T19:11:39.394177+00:00",
+        "command": [
+          "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+          "departure_scope_",
+          "--nocapture"
+        ],
+        "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+        "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+        "build_jobs": 2,
+        "frozen_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+        "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "source_archive_sha256": "f0e3b96aba6908d787e565ade34cb21ddfd4a879a4c5b0e7c3da5eca32e9e5de",
+        "mutation_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "finished": "2026-09-05T19:11:39.550222+00:00",
+        "exit": 0,
+        "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+        "artifacts": [],
+        "counts": [
+          {
+            "status": "ok",
+            "passed": 6,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered_out": 16582
+          }
+        ],
+        "source_unchanged_during_command": true
+      }
+    ],
+    "status": "passed"
+  },
+  "mutant": {
+    "compile": {
+      "started": "2026-09-05T19:11:59.232372+00:00",
+      "command": [
+        "cargo",
+        "+nightly-2026-04-19",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--lib",
+        "--no-run"
+      ],
+      "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+      "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+      "build_jobs": 2,
+      "frozen_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+      "source_manifest_sha256": "585807760ac1883707333348ddfb47495601329f0a097310015c1808009cfcb0",
+      "source_archive_sha256": "c223884021e3300f4c928a33e16a80cc386c0924d668bd44e3b034d5b538fa73",
+      "mutation_patch_sha256": "c37369e5643f38fa5ba30c53530db059e6739c2d7143091ac2104dbcb1c5b388",
+      "finished": "2026-09-05T19:13:20.878707+00:00",
+      "exit": 0,
+      "log_sha256": "763022e359953874db256672a7744c69bfa403d995540733b97dd21d5798d7b9",
+      "artifacts": [
+        {
+          "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+          "target": {
+            "kind": [
+              "custom-build"
+            ],
+            "crate_types": [
+              "bin"
+            ],
+            "name": "build-script-build",
+            "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/build.rs",
+            "edition": "2021",
+            "doc": false,
+            "doctest": false,
+            "test": false
+          },
+          "fresh": true,
+          "executable": null,
+          "executable_sha256": null
+        },
+        {
+          "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+          "target": {
+            "kind": [
+              "lib"
+            ],
+            "crate_types": [
+              "lib"
+            ],
+            "name": "engine",
+            "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/src/lib.rs",
+            "edition": "2021",
+            "doc": true,
+            "doctest": true,
+            "test": true
+          },
+          "fresh": false,
+          "executable": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+          "executable_sha256": "eb9570466c4aefd3ea1023d0fa3f5e408ee98e7b3b541694b3dc5bba01ea51a0"
+        }
+      ],
+      "counts": [],
+      "source_unchanged_during_command": true
+    },
+    "runs": [
+      {
+        "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+        "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+        "command": [
+          "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+          "departure_scope_",
+          "--nocapture"
+        ],
+        "started": "2026-09-05T19:13:21.427158+00:00",
+        "executable_sha256": "eb9570466c4aefd3ea1023d0fa3f5e408ee98e7b3b541694b3dc5bba01ea51a0",
+        "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/compile/receipt.json",
+        "compile_receipt_sha256": "2fc8389a5b080b70e3ef89dceb422692f8795ea77d9ce3c279a8a98f9ec90abb",
+        "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/compile/source.json",
+        "source_manifest_sha256": "585807760ac1883707333348ddfb47495601329f0a097310015c1808009cfcb0",
+        "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/mutant/compile/source.tar.gz",
+        "source_archive_sha256": "c223884021e3300f4c928a33e16a80cc386c0924d668bd44e3b034d5b538fa73",
+        "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+        "finished": "2026-09-05T19:13:22.436380+00:00",
+        "exit": 101,
+        "log_sha256": "5735136ff67b4be27ab019f2e138bb10ed47550c4da09ee10bca8166606da1da",
+        "counts": [
+          {
+            "status": "FAILED",
+            "passed": 5,
+            "failed": 1,
+            "ignored": 0,
+            "filtered_out": 16582
+          }
+        ],
+        "source_unchanged_during_run": true
+      }
+    ],
+    "status": "runtime_failed"
+  },
+  "restored": {
+    "mode": "reused_canonical_executable_no_compile",
+    "associations": [
+      {
+        "mode": "reused_canonical_executable_no_compile",
+        "canonical_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/receipt.json",
+        "canonical_receipt_sha256": "5070861363660c013e7a2686e86078bf442a35cc755d9fc5a7205b4c3e9ce9b4",
+        "executable_name": "engine",
+        "executable_sha256": "4475d1a89e0df66987705bd6c7d498ed18541fcfd429b5f5af7b44323c1242f8",
+        "runtime_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-capturing-ancestor-policy/canonical-attempt-1/restored/canonical-library/receipt.json",
+        "runtime_receipt_sha256": "043917d4054db2fe8e4dc6be9feea76f3039e900ebc5630192f90c64d3094aa5",
+        "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "matches_compiled_source": true
+      }
+    ],
+    "runs": [
+      {
+        "execution_mode": "reused_canonical_executable_no_compile",
+        "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+        "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+        "started": "2026-09-05T19:13:31.056767+00:00",
+        "command": [
+          "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/canonical-overlay-2/engine",
+          "departure_scope_",
+          "--nocapture"
+        ],
+        "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+        "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+        "build_jobs": 2,
+        "frozen_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+        "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+        "source_archive_sha256": "59f4227dddd705272660fe23b6581464d7ba3c407b71037a9ca4f8d964414719",
+        "mutation_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "finished": "2026-09-05T19:13:31.211213+00:00",
+        "exit": 0,
+        "log_sha256": "9af9a9b83658554b3816bd32564863eff6fb7d466426abf16eda69aad4165ebf",
+        "artifacts": [],
+        "counts": [
+          {
+            "status": "ok",
+            "passed": 6,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered_out": 16582
+          }
+        ],
+        "source_unchanged_during_command": true
+      }
+    ],
+    "status": "passed"
+  },
+  "overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e"
+}

@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1588,9 +1588,7 @@
+             continue;
+         }
+         // CR 704.5v + CR 614.6: zero-defense battle death must consult redirects.
+-        if zones::with_departure_member(state, events, owner, id, |state, events| {
+-            move_to_graveyard_via_pipeline(state, id, events)
+-        }) {
++        if (|| move_to_graveyard_via_pipeline(state, id, events))() {
+             return;
+         }
+         *any_performed = true;

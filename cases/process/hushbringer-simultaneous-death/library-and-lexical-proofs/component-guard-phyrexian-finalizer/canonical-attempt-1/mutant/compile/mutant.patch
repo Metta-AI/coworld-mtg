@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -9553,10 +9553,6 @@
+     phyrexian_choices: &[crate::types::game_state::ShardChoice],
+     events: &mut Vec<GameEvent>,
+ ) -> Result<WaitingFor, EngineError> {
+-    if let Some(pending) = state.pending_cast.as_ref() {
+-        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+-    }
+-
+     let pending = state
+         .pending_cast
+         .take()

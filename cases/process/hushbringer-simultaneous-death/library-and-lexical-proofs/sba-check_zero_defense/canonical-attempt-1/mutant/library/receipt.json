@@ -1,0 +1,31 @@
+{
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "game::sba::tests",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T18:58:34.426193+00:00",
+  "executable_sha256": "a123e97a775af1ebb51fe544a82d8738fd3280e9ba6cf6305d09cb88fddd1de8",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/compile/receipt.json",
+  "compile_receipt_sha256": "3eab1e67db314c93c62a61b55563cf5629ba48174f2d16b31bc439ad903d3215",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/compile/source.json",
+  "source_manifest_sha256": "f4de131589042dc048ac8d5a60449fbeb848812bc062b5d639791e47292add01",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_zero_defense/canonical-attempt-1/mutant/compile/source.tar.gz",
+  "source_archive_sha256": "0ff1768514edf62e199cb14b0c8e1484ff1f230756f28276d625e7ef31b379d7",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T18:58:35.021611+00:00",
+  "exit": 0,
+  "log_sha256": "213d74c4b34d2414c845fd65c705020e21002e474c4a04b6141b4796e315c78b",
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 119,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 16469
+    }
+  ],
+  "source_unchanged_during_run": true
+}

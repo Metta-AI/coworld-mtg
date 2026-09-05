@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -9205,10 +9205,6 @@
+     player: PlayerId,
+     events: &mut Vec<GameEvent>,
+ ) -> Result<WaitingFor, EngineError> {
+-    if let Some(pending) = state.pending_cast.as_ref() {
+-        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+-    }
+-
+     // CR 107.4f + CR 601.2f: Pause for per-shard Phyrexian choice if the cost contains
+     // Phyrexian mana AND at least one shard has both mana and life options available.
+     // `PendingCast` stays in `state.pending_cast` across the pause — the resume handler

@@ -1,0 +1,67 @@
+{
+  "started": "2026-09-05T19:10:18.311072+00:00",
+  "command": [
+    "cargo",
+    "+nightly-2026-04-19",
+    "test",
+    "-p",
+    "engine",
+    "--message-format=json",
+    "--lib",
+    "--no-run"
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+  "build_jobs": 2,
+  "frozen_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "source_manifest_sha256": "dd38209c7f5ad99d976bbd2a11d178a25ac06af6ec99cbc37037d9557c682504",
+  "source_archive_sha256": "dc30a377a0b669fec1a114cb1a7c8bdd21af3d5d39b0fe99c00e82f79ff393f2",
+  "mutation_patch_sha256": "62007f55dd0e39d4893caf03d93087b3aeda6ccc2f3a66a0b1e11e87b1365d69",
+  "finished": "2026-09-05T19:11:09.363008+00:00",
+  "exit": 0,
+  "log_sha256": "0a9b3be622a4aa9868a6c84a98879aacc6183af34cbe1e0c7b72e135928d32fb",
+  "artifacts": [
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "custom-build"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "build-script-build",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/build.rs",
+        "edition": "2021",
+        "doc": false,
+        "doctest": false,
+        "test": false
+      },
+      "fresh": true,
+      "executable": null,
+      "executable_sha256": null
+    },
+    {
+      "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "engine",
+        "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/src/lib.rs",
+        "edition": "2021",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "fresh": false,
+      "executable": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+      "executable_sha256": "b18770c73010664f309cf263142c210c135d0d6fa23cf0c61a1bf51c4ca3a68a"
+    }
+  ],
+  "counts": [],
+  "source_unchanged_during_command": true
+}

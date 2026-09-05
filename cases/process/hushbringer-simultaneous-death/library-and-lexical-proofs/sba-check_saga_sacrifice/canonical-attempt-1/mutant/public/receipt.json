@@ -1,0 +1,31 @@
+{
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/integration-7bdd4945820186df",
+    "sba_member_handoff_saga_sacrifice_has_runtime_observer_payoff",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T19:00:49.545747+00:00",
+  "executable_sha256": "05315541521b967143a23bfa318520896962a4c4be3c8ffbbba95f10e72597af",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/compile/receipt.json",
+  "compile_receipt_sha256": "30d757f1c873d68dfe877d55d5d5d14fbd7575a19c7b8176a25cecd6d6a1e438",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/compile/source.json",
+  "source_manifest_sha256": "9b862f4daa0f319b329675ad7bffc8653a3d748bcc052ea3b83f4965dbc0eb13",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_saga_sacrifice/canonical-attempt-1/mutant/compile/source.tar.gz",
+  "source_archive_sha256": "e5351bbc2c7bfa3e67927b36701d074c702736f193fc5ef7cedb73fd0e0d1cfc",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T19:00:50.047938+00:00",
+  "exit": 101,
+  "log_sha256": "de684f88e78d96bcd69402f8eda1d6fc7ed825134a56ea8a6836a617dcb3052f",
+  "counts": [
+    {
+      "status": "FAILED",
+      "passed": 0,
+      "failed": 1,
+      "ignored": 0,
+      "filtered_out": 3096
+    }
+  ],
+  "source_unchanged_during_run": true
+}

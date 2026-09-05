@@ -1,0 +1,104 @@
+{
+  "utc": "2026-09-05T20:41:45.512920+00:00",
+  "status": "Read-only audit of actual ongoing verifier parent environments and complete Cargo config search paths; presence checked even for empty values. No new source or test execution.",
+  "verifiers": [
+    {
+      "pid": 3464782,
+      "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+      "ambient_PHASE_and_FORGE_presence_including_empty": {},
+      "cargo_config_search_files": [
+        {
+          "path": "/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/.cargo/config.toml",
+          "sha256": "d0efb995770ad964d022f8c58a19a7e01ca5de25d1b6386bdf4f9dcb01fa30c5",
+          "bytes": 1320,
+          "has_PHASE_or_FORGE_name": false
+        }
+      ]
+    },
+    {
+      "pid": 3467889,
+      "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations",
+      "ambient_PHASE_and_FORGE_presence_including_empty": {},
+      "cargo_config_search_files": [
+        {
+          "path": "/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/.cargo/config.toml",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/phase-hushbringer-mutations/.cargo/config",
+          "exists": false
+        },
+        {
+          "path": "/home/ubuntu/repos/phase-hushbringer-mutations/.cargo/config.toml",
+          "sha256": "d0efb995770ad964d022f8c58a19a7e01ca5de25d1b6386bdf4f9dcb01fa30c5",
+          "bytes": 1320,
+          "has_PHASE_or_FORGE_name": false
+        }
+      ]
+    }
+  ]
+}

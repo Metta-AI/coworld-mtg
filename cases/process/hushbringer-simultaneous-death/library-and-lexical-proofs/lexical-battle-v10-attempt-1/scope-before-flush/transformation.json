@@ -1,0 +1,35 @@
+{
+  "row": {
+    "id": "scope-before-flush",
+    "file": "crates/engine/src/game/zones.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "with_departure_suppression",
+        "old": "        super::layers::flush_layers(state);\n",
+        "new": ""
+      }
+    ],
+    "tests": [
+      {
+        "test": "game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority",
+        "role": "discriminator",
+        "failure_marker": "owner before-world must evaluate dirty continuous-effect authority"
+      },
+      {
+        "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "role": "control"
+      }
+    ],
+    "kind": "private-lexical",
+    "status": "exact transformation dry-run matched final source; runtime results pending",
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+  },
+  "changed_files": [
+    "crates/engine/src/game/zones.rs"
+  ],
+  "tests_unchanged": true,
+  "canonical_seam_mtime_ns": 1788640420675147693,
+  "mutant_seam_mtime_ns": 1788640557634489044,
+  "test_tail_sha256": "6f6f0c92966fa7f498f627f774158d54862c3547b982ce37d9f17cad194f7e65"
+}

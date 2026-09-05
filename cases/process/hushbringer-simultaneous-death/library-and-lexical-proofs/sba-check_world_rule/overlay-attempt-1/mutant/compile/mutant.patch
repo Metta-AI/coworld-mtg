@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1503,9 +1503,7 @@
+         // graveyard through the replacement pipeline (Moved redirects apply).
+         // CR 616.1: bail on a replacement-order pause; the fixpoint re-derives
+         // the remaining doomed permanents on the next pass.
+-        if zones::with_departure_member(state, events, owner, id, |state, events| {
+-            move_to_graveyard_via_pipeline(state, id, events)
+-        }) {
++        if (|| move_to_graveyard_via_pipeline(state, id, events))() {
+             return;
+         }
+         *any_performed = true;

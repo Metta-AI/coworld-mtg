@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -773,10 +773,6 @@
+         state.departure_suppression_scope.member_bindings.len(),
+         depth + 1
+     );
+-    state
+-        .departure_suppression_scope
+-        .member_bindings
+-        .truncate(depth);
+     reset_departure_allocator(state);
+     result
+ }

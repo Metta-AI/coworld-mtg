@@ -1,0 +1,25 @@
+{
+  "row": {
+    "id": "component-guard-append",
+    "file": "crates/engine/src/game/casting_costs.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "handle_sacrifice_for_cost",
+        "old": "    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n",
+        "new": ""
+      }
+    ],
+    "tests": [
+      "deferred_component_append_guard_precedes_cost_snapshot_and_new_selection"
+    ],
+    "kind": "component-library",
+    "description": null,
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "test_overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "changed_files": [
+    "crates/engine/src/game/casting_costs.rs"
+  ]
+}

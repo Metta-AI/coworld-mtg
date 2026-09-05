@@ -1,0 +1,10 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -716,7 +716,6 @@
+     let frame = scope.frames.pop().expect("departure owner remains live");
+     assert_eq!(frame.id, id, "departure owners close in lexical order");
+     finish_departure_suppression(state, events, frame);
+-    reset_departure_allocator(state);
+     result
+ }
+ 

@@ -1,0 +1,31 @@
+{
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "departure_scope_",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T19:15:32.265921+00:00",
+  "executable_sha256": "8da4c37daa918f6db0d980aa3e94e7eca12dd1f05d51997ff290de5834956b4d",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/compile/receipt.json",
+  "compile_receipt_sha256": "65e958fdc661036a6891305b959af3fabafb316ba069d52ffe61d909786255d7",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/compile/source.json",
+  "source_manifest_sha256": "d94ff18f5a2b3ab188a6c34a830498f20bd66b489125fbcbb2e403591362a712",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/leaf-top-barrier/canonical-attempt-1/mutant/compile/source.tar.gz",
+  "source_archive_sha256": "e295e60fb22c933564d2be322fcbae6fbe01553582d15f3008c12c34654cf4d4",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T19:15:32.860458+00:00",
+  "exit": 101,
+  "log_sha256": "13feaa0b025b47aa79a2b1ae5328cf9a2882b854920a5e3abf7d0dfd0f8ed51c",
+  "counts": [
+    {
+      "status": "FAILED",
+      "passed": 5,
+      "failed": 1,
+      "ignored": 0,
+      "filtered_out": 16582
+    }
+  ],
+  "source_unchanged_during_run": true
+}

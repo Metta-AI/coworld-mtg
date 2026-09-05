@@ -1,0 +1,23 @@
+{
+  "utc": "2026-09-05T20:33:41.075118+00:00",
+  "arguments": {
+    "manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10/source.json",
+    "manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+    "archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10/source.tar.gz",
+    "archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+    "inventory": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-inventory.json",
+    "inventory_sha256": "224ab3aa8c107a088100779097f82aa84751b34d4fd407936a25cfffc829ca7e",
+    "helpers": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/mutation-tools.py",
+    "helpers_sha256": "2a2e5fe6bd0ae1ed883704602372488bec42b9299e20f34f9c40a6dbfb8d844d",
+    "out": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1",
+    "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+    "apply_frozen": true,
+    "runtime_input_manifest": null,
+    "runtime_input_manifest_sha256": null,
+    "jobs": "1"
+  },
+  "head": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "source_files": 2051,
+  "all_source_bytes_applied_with_fresh_mtimes": true,
+  "script_sha256": "2d57994df68df6c52d5b6249ec9ba1b88ae0997c9c1b71c59d1b238302c5aa81"
+}

@@ -1,0 +1,11 @@
+--- a/crates/engine/src/types/game_state.rs
++++ b/crates/engine/src/types/game_state.rs
+@@ -646,7 +646,7 @@
+     /// CR 603.10: Evaluated suppression in the worlds immediately before and
+     /// after this occurrence. None is legacy/unavailable history; empty Some
+     /// is authoritative. Non-dispatched turn-history copies retain None.
+-    #[serde(default, skip_serializing_if = "Option::is_none")]
++    #[serde(skip)]
+     pub trigger_suppression: Option<TriggerSuppressionSnapshot>,
+     pub object_id: ObjectId,
+     pub name: String,

@@ -1,0 +1,31 @@
+{
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "departure_scope_",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T19:11:09.921872+00:00",
+  "executable_sha256": "b18770c73010664f309cf263142c210c135d0d6fa23cf0c61a1bf51c4ca3a68a",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/mutant/compile/receipt.json",
+  "compile_receipt_sha256": "bdaded37509b6b9e2c606259b604d13202f23d0ae99f35e936f7a3f8eac91c60",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/mutant/compile/source.json",
+  "source_manifest_sha256": "dd38209c7f5ad99d976bbd2a11d178a25ac06af6ec99cbc37037d9557c682504",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/scope-before-flush/canonical-attempt-1/mutant/compile/source.tar.gz",
+  "source_archive_sha256": "dc30a377a0b669fec1a114cb1a7c8bdd21af3d5d39b0fe99c00e82f79ff393f2",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T19:11:10.527634+00:00",
+  "exit": 0,
+  "log_sha256": "c8505eb1cd751b89b5d3a8d1847025c13db53172a10e97dd07c1dd240d83502b",
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 16582
+    }
+  ],
+  "source_unchanged_during_run": true
+}

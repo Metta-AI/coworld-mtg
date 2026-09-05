@@ -1,0 +1,43 @@
+{
+  "started": "2026-09-05T20:37:34.490340+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+  "executable_sha256": "63096c1c455f19f4c3c55be03514906c18a9e56ff442c9a5bb788b2f2912ac5a",
+  "source_manifest_sha256": "e7ac115855f38abae4b7e6dc4bc772ebc5f9dbb1135d1c36fdde709f865e3f1b",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/scope-before-flush/mutant-build/source.tar.gz",
+  "source_archive_sha256": "d61a4676c7f5f54fd67e30301469f50370af4c2e5244bbcf978259c02ec36315",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/scope-before-flush/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "f047abc1cb050ad7e206b937d88e3926cdb3e124c32fc2f949f47d02374b66a3",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+    "role": "control"
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/scope-before-flush/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "7444cc10d6d8976dd37144ef08cf55538bb8fc2a3732cb9009ffc2863c0b9dec",
+  "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+  "finished": "2026-09-05T20:37:35.070560+00:00",
+  "exit": 0,
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 16592
+    }
+  ],
+  "log_sha256": "59a16f41b90421910faa8eb6de9d8a64f0d271220b4fface0ed8183f5360d54d",
+  "evidence": [],
+  "after_history_evidence": [],
+  "battle_defensive_evidence": [],
+  "source_and_executable_unchanged": true
+}

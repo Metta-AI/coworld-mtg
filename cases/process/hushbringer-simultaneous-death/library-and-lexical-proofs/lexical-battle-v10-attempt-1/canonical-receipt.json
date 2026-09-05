@@ -1,0 +1,53 @@
+{
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "origin_cargo_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/receipt.json",
+  "origin_cargo_receipt_sha256": "2ea284bbcd16e872fa68ad94cbf83a8f0a40ff0ceb937ac0505289cf9670a2dd",
+  "executable": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-engine",
+  "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+  "artifact": {
+    "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine#0.24.0",
+    "target": {
+      "kind": [
+        "lib"
+      ],
+      "crate_types": [
+        "lib"
+      ],
+      "name": "engine",
+      "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine/src/lib.rs",
+      "edition": "2021",
+      "doc": true,
+      "doctest": true,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "0",
+      "debuginfo": "line-tables-only",
+      "debug_assertions": true,
+      "overflow_checks": true,
+      "test": true
+    },
+    "features": [],
+    "fresh": false,
+    "executable": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e"
+  },
+  "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/linked-libraries.json",
+  "linked_libraries_sha256": "fa56dd72df2f3785024c76c78a18084dace3dd17e8fb1ca0427427e870908749",
+  "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de",
+  "ambient_override_audit_sha256": "076608c0cebef2e052a3692c0d58cd1699297724a2e93038d86698eea018d1c4",
+  "generated_build_outputs": [
+    {
+      "path": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/build/engine-d4fc5f5dfa6fd822/out/known-tokens.json",
+      "sha256": "bc191adfb9f3ab8de547f132f1d36c04b695b1a0b58f91eeb5c00b4ac40b4b25",
+      "copy": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/generated-0-known-tokens.json",
+      "canonical_embedding_offset": 15728468,
+      "embedded": true
+    }
+  ],
+  "runtime_input_hashes": {
+    "crates/engine/data/known-tokens.toml": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+    "crates/engine/tests/fixtures/integration_cards.json": "080f95c0d081724ed531a235eb85674d7b890b5f54c548ae662e0f517fff3573"
+  }
+}

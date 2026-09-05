@@ -1,0 +1,28 @@
+{
+  "started": "2026-09-05T20:35:55.874146+00:00",
+  "command": [
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-engine",
+    "game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+  "executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/source.tar.gz",
+  "source_archive_sha256": "f8394525ee44de2cf3c69a36882307d9395e72916627b64435bb23a4bcd9fe5e",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/receipt.json",
+  "compilation_receipt_sha256": "2ea284bbcd16e872fa68ad94cbf83a8f0a40ff0ceb937ac0505289cf9670a2dd",
+  "mode": "direct_preserved_canonical_artifact",
+  "case": {
+    "test": "game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority",
+    "role": "discriminator",
+    "failure_marker": "owner before-world must evaluate dirty continuous-effect authority"
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/canonical-build/linked-libraries.json",
+  "linked_libraries_sha256": "fa56dd72df2f3785024c76c78a18084dace3dd17e8fb1ca0427427e870908749",
+  "runtime_input_manifest_sha256": "f6db8b88fdc50b13a5b87ff103f7f9a878df6e89d47933646bfddf2e917f62de"
+}

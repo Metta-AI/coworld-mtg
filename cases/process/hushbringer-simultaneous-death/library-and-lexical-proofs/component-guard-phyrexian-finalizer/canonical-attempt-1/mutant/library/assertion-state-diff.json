@@ -1,0 +1,417 @@
+{
+  "source_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/component-guard-phyrexian-finalizer/canonical-attempt-1/mutant/library/command.log",
+  "source_log_sha256": "74bd6fd8e18db85f613dc5dd39db83ab114ae346d97b08efcf5b5c1dbc872725",
+  "assertion": "early component guard preserves full serialized state",
+  "changes": [
+    {
+      "path": "$.objects.3",
+      "observed_mutant": {
+        "abilities": [
+          {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "amount": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "type": "GainLife"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          }
+        ],
+        "additional_cost": {
+          "data": {
+            "count": 1,
+            "target": {
+              "controller": "You",
+              "properties": [],
+              "type": "Typed",
+              "type_filters": [
+                "Creature"
+              ]
+            },
+            "type": "Sacrifice"
+          },
+          "type": "Required"
+        },
+        "assigns_damage_as_though_unblocked": false,
+        "assigns_damage_from_toughness": false,
+        "assigns_no_combat_damage": false,
+        "attached_to": null,
+        "attachments": [],
+        "available_mana_pips": [],
+        "back_face": null,
+        "base_abilities": [
+          {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "amount": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "type": "GainLife"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          }
+        ],
+        "base_card_types": {
+          "core_types": [
+            "Instant"
+          ],
+          "subtypes": [],
+          "supertypes": []
+        },
+        "base_characteristics_initialized": true,
+        "base_color": [
+          "Black"
+        ],
+        "base_controller": 0,
+        "base_defense": null,
+        "base_keywords": [],
+        "base_loyalty": null,
+        "base_mana_cost": {
+          "generic": 1,
+          "shards": [
+            "PhyrexianBlack"
+          ],
+          "type": "Cost"
+        },
+        "base_name": "Test internal component guard",
+        "base_power": null,
+        "base_printed_ref": null,
+        "base_replacement_definitions": [],
+        "base_static_definitions": [],
+        "base_toughness": null,
+        "base_trigger_definitions": [],
+        "card_id": 3,
+        "card_types": {
+          "core_types": [
+            "Instant"
+          ],
+          "subtypes": [],
+          "supertypes": []
+        },
+        "cast_cost_paid_object": {
+          "lki": {
+            "base_power": 2,
+            "base_toughness": 2,
+            "card_types": [
+              "Creature"
+            ],
+            "chosen_attributes": [],
+            "colors": [],
+            "controller": 0,
+            "counters": {},
+            "is_suspected": false,
+            "keywords": [],
+            "mana_value": 0,
+            "name": "2/2 Vanilla",
+            "owner": 0,
+            "power": 2,
+            "subtypes": [],
+            "supertypes": [],
+            "tapped": false,
+            "toughness": 2
+          },
+          "object_id": 1
+        },
+        "color": [
+          "Black"
+        ],
+        "controller": 0,
+        "counters": {},
+        "damage_marked": 0,
+        "dealt_deathtouch_damage": false,
+        "display_source": "Card",
+        "echo_due": false,
+        "entered_battlefield_turn": null,
+        "face_down": false,
+        "flipped": false,
+        "foretold": false,
+        "harnessed": false,
+        "has_mana_ability": false,
+        "has_summoning_sickness": false,
+        "id": 3,
+        "in_attraction_deck": false,
+        "in_contraption_deck": false,
+        "incarnation": 0,
+        "intensity": 0,
+        "is_commander": false,
+        "is_emblem": false,
+        "is_renowned": false,
+        "is_saddled": false,
+        "is_suspected": false,
+        "is_token": false,
+        "keywords": [],
+        "loyalty": null,
+        "loyalty_activations_this_turn": 0,
+        "mana_cost": {
+          "generic": 1,
+          "shards": [
+            "PhyrexianBlack"
+          ],
+          "type": "Cost"
+        },
+        "mana_spent_to_cast": true,
+        "mana_spent_to_cast_amount": 1,
+        "modal_back_face": false,
+        "monstrous": false,
+        "name": "Test internal component guard",
+        "owner": 0,
+        "phase_status": {
+          "status": "PhasedIn"
+        },
+        "power": null,
+        "printed_ref": null,
+        "replacement_definitions": [],
+        "saddled_by": [],
+        "static_definitions": [],
+        "summoning_sick": false,
+        "tapped": false,
+        "timestamp": 0,
+        "toughness": null,
+        "transformed": false,
+        "trigger_definitions": [],
+        "zone": "Hand"
+      },
+      "expected_unchanged": {
+        "abilities": [
+          {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "amount": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "type": "GainLife"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          }
+        ],
+        "additional_cost": {
+          "data": {
+            "count": 1,
+            "target": {
+              "controller": "You",
+              "properties": [],
+              "type": "Typed",
+              "type_filters": [
+                "Creature"
+              ]
+            },
+            "type": "Sacrifice"
+          },
+          "type": "Required"
+        },
+        "assigns_damage_as_though_unblocked": false,
+        "assigns_damage_from_toughness": false,
+        "assigns_no_combat_damage": false,
+        "attached_to": null,
+        "attachments": [],
+        "available_mana_pips": [],
+        "back_face": null,
+        "base_abilities": [
+          {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "amount": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "type": "GainLife"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          }
+        ],
+        "base_card_types": {
+          "core_types": [
+            "Instant"
+          ],
+          "subtypes": [],
+          "supertypes": []
+        },
+        "base_characteristics_initialized": true,
+        "base_color": [
+          "Black"
+        ],
+        "base_controller": 0,
+        "base_defense": null,
+        "base_keywords": [],
+        "base_loyalty": null,
+        "base_mana_cost": {
+          "generic": 1,
+          "shards": [
+            "PhyrexianBlack"
+          ],
+          "type": "Cost"
+        },
+        "base_name": "Test internal component guard",
+        "base_power": null,
+        "base_printed_ref": null,
+        "base_replacement_definitions": [],
+        "base_static_definitions": [],
+        "base_toughness": null,
+        "base_trigger_definitions": [],
+        "card_id": 3,
+        "card_types": {
+          "core_types": [
+            "Instant"
+          ],
+          "subtypes": [],
+          "supertypes": []
+        },
+        "cast_cost_paid_object": {
+          "lki": {
+            "base_power": 2,
+            "base_toughness": 2,
+            "card_types": [
+              "Creature"
+            ],
+            "chosen_attributes": [],
+            "colors": [],
+            "controller": 0,
+            "counters": {},
+            "is_suspected": false,
+            "keywords": [],
+            "mana_value": 0,
+            "name": "2/2 Vanilla",
+            "owner": 0,
+            "power": 2,
+            "subtypes": [],
+            "supertypes": [],
+            "tapped": false,
+            "toughness": 2
+          },
+          "object_id": 1
+        },
+        "color": [
+          "Black"
+        ],
+        "controller": 0,
+        "counters": {},
+        "damage_marked": 0,
+        "dealt_deathtouch_damage": false,
+        "display_source": "Card",
+        "echo_due": false,
+        "entered_battlefield_turn": null,
+        "face_down": false,
+        "flipped": false,
+        "foretold": false,
+        "harnessed": false,
+        "has_mana_ability": false,
+        "has_summoning_sickness": false,
+        "id": 3,
+        "in_attraction_deck": false,
+        "in_contraption_deck": false,
+        "incarnation": 0,
+        "intensity": 0,
+        "is_commander": false,
+        "is_emblem": false,
+        "is_renowned": false,
+        "is_saddled": false,
+        "is_suspected": false,
+        "is_token": false,
+        "keywords": [],
+        "loyalty": null,
+        "loyalty_activations_this_turn": 0,
+        "mana_cost": {
+          "generic": 1,
+          "shards": [
+            "PhyrexianBlack"
+          ],
+          "type": "Cost"
+        },
+        "mana_spent_to_cast": false,
+        "modal_back_face": false,
+        "monstrous": false,
+        "name": "Test internal component guard",
+        "owner": 0,
+        "phase_status": {
+          "status": "PhasedIn"
+        },
+        "power": null,
+        "printed_ref": null,
+        "replacement_definitions": [],
+        "saddled_by": [],
+        "static_definitions": [],
+        "summoning_sick": false,
+        "tapped": false,
+        "timestamp": 0,
+        "toughness": null,
+        "transformed": false,
+        "trigger_definitions": [],
+        "zone": "Hand"
+      }
+    },
+    {
+      "path": "$.players[0].life",
+      "observed_mutant": 18,
+      "expected_unchanged": 20
+    },
+    {
+      "path": "$.players[0].life_lost_this_turn",
+      "observed_mutant": 2,
+      "expected_unchanged": 0
+    },
+    {
+      "path": "$.players[0].mana_pool.mana",
+      "observed_mutant": [
+        {
+          "color": "Black",
+          "pip_id": 2,
+          "restrictions": [],
+          "snow": false,
+          "source_id": 0
+        }
+      ],
+      "expected_unchanged": [
+        {
+          "color": "Colorless",
+          "pip_id": 1,
+          "restrictions": [],
+          "snow": false,
+          "source_id": 0
+        },
+        {
+          "color": "Black",
+          "pip_id": 2,
+          "restrictions": [],
+          "snow": false,
+          "source_id": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "utc": "2026-09-05T20:43:17.565192+00:00",
+  "rows": [
+    {
+      "id": "scope-before-flush",
+      "status": "verified_required_discriminator_and_controls",
+      "classification": [
+        {
+          "case": {
+            "test": "game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority",
+            "role": "discriminator",
+            "failure_marker": "owner before-world must evaluate dirty continuous-effect authority"
+          },
+          "classification": "private_lexical_contract_failure"
+        },
+        {
+          "case": {
+            "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+            "role": "control"
+          },
+          "classification": "unaffected_control_pass"
+        }
+      ],
+      "outcome_sha256": "b489e91a1366cca86ecadff8ea88ed130355ed11ff3b73daea87c6cb3ca2ad07",
+      "canonical_source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "mutant_source_manifest_sha256": "e7ac115855f38abae4b7e6dc4bc772ebc5f9dbb1135d1c36fdde709f865e3f1b",
+      "mutant_archive_sha256": "d61a4676c7f5f54fd67e30301469f50370af4c2e5244bbcf978259c02ec36315",
+      "canonical_executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "mutant_executable_sha256": "63096c1c455f19f4c3c55be03514906c18a9e56ff442c9a5bb788b2f2912ac5a",
+      "restoration": {
+        "files": [
+          {
+            "file": "crates/engine/src/game/zones.rs",
+            "before_write_mtime_ns": 1788640557634489044,
+            "restored_mtime_ns": 1788640655086594293,
+            "source_sha256": "cc34cdff1f6d753a29e89bcb9e2076d67d9680e2286111b0f2375b6a892b2aa9"
+          }
+        ],
+        "mutant_snapshot_mtime_ns": 1788640557634489044,
+        "all_source_restored": true,
+        "comparison": "Observed file mtime before restoration versus fresh write mtime; no wall-clock comparison."
+      },
+      "assertions": [
+        {
+          "test": "game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority",
+          "intended_assertion": "owner before-world must evaluate dirty continuous-effect authority",
+          "actual_panic": "thread 'game::zones::tests::departure_scope_before_world_flushes_dirty_ability_authority' (3471359) panicked at crates/engine/src/game/zones.rs:4003:17:\nassertion `left == right` failed: owner before-world must evaluate dirty continuous-effect authority\n  left: Some(TriggerSuppressionSnapshot { before: [Dies], after: [Dies] })\n right: Some(TriggerSuppressionSnapshot { before: [], after: [Dies] })\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+          "log_sha256": "7c00d45f64bb0de13d4710747cc4d0bf5646155d7cba21ebca00e226c157ae13"
+        }
+      ]
+    },
+    {
+      "id": "leaf-consumes-member",
+      "status": "verified_required_discriminator_and_controls",
+      "classification": [
+        {
+          "case": {
+            "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+            "role": "discriminator",
+            "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+          },
+          "classification": "private_lexical_contract_failure"
+        },
+        {
+          "case": {
+            "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+            "role": "control"
+          },
+          "classification": "unaffected_control_pass"
+        }
+      ],
+      "outcome_sha256": "09de48dc36e829d8dad55e09073c80ab960306ec3232b937fa7dc6d298f3465d",
+      "canonical_source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "mutant_source_manifest_sha256": "9023119ed01687a1394de2dc8a6d5106534da7a4fe5625c9f45c8e4aa5b359c6",
+      "mutant_archive_sha256": "f7a8938153fda218d3f5d08abcdfd6167adaa0c7084171acf7919625ce583cc7",
+      "canonical_executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "mutant_executable_sha256": "36ecc113c786381d1b9b459d5b01224ec4680335fc395a8be39674759037dc98",
+      "restoration": {
+        "files": [
+          {
+            "file": "crates/engine/src/game/zones.rs",
+            "before_write_mtime_ns": 1788640673050242983,
+            "restored_mtime_ns": 1788640781584162179,
+            "source_sha256": "cc34cdff1f6d753a29e89bcb9e2076d67d9680e2286111b0f2375b6a892b2aa9"
+          }
+        ],
+        "mutant_snapshot_mtime_ns": 1788640673050242983,
+        "all_source_restored": true,
+        "comparison": "Observed file mtime before restoration versus fresh write mtime; no wall-clock comparison."
+      },
+      "assertions": [
+        {
+          "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+          "intended_assertion": "recursive child cannot claim the ancestor member's snapshot",
+          "actual_panic": "thread 'game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor' (3473546) panicked at crates/engine/src/game/zones.rs:4084:9:\nrecursive child cannot claim the ancestor member's snapshot\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nFAILED\n",
+          "log_sha256": "0a6c23e187ae3866a5a1b1962417eced9bf55d1efca65eb285114fb15d3a8167"
+        }
+      ]
+    },
+    {
+      "id": "sba-check_battle_protector",
+      "status": "verified_required_discriminator_and_controls",
+      "classification": [
+        {
+          "case": {
+            "test": "game::sba::tests::battle_protector_defensive_handoff_after_terminal_setup",
+            "role": "discriminator",
+            "evidence_kind": "battle_defensive",
+            "failure_marker": "defensive member owns an authoritative singleton snapshot"
+          },
+          "classification": "lower_level_defensive_contract_snapshot_failure"
+        },
+        {
+          "case": {
+            "test": "game::sba::tests::battle_public_terminal_presets_return_with_empty_departure_scope",
+            "role": "control"
+          },
+          "classification": "unaffected_control_pass"
+        }
+      ],
+      "outcome_sha256": "cfa8dbf9f068ad2ccdf74535681be1755728d41b0e1457a2af3fd2191c5171d6",
+      "canonical_source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "mutant_source_manifest_sha256": "4d533ba7ed5c60d3b5f572471e8e40fc62b452c0ed9a703624625d5c618044cd",
+      "mutant_archive_sha256": "70c11b1839a558f1ed4f0455530f4445a852a9e0532104cbc9449a6dfca3987a",
+      "canonical_executable_sha256": "4a0d97c031f779e88e3bab2e9689d733d501ef183f6d212af8e94453c16d7c4e",
+      "mutant_executable_sha256": "9fae4abb23ba7c1dbb03820e63aad25d4f6b894221c24df799a432f4edc0f33d",
+      "restoration": {
+        "files": [
+          {
+            "file": "crates/engine/src/game/sba.rs",
+            "before_write_mtime_ns": 1788640805233703682,
+            "restored_mtime_ns": 1788640907104712480,
+            "source_sha256": "19c52bd041d233ce838a7de363447756e171e7118c4670bc70987684fa8931e0"
+          }
+        ],
+        "mutant_snapshot_mtime_ns": 1788640805233703682,
+        "all_source_restored": true,
+        "comparison": "Observed file mtime before restoration versus fresh write mtime; no wall-clock comparison."
+      },
+      "assertions": [
+        {
+          "test": "game::sba::tests::battle_protector_defensive_handoff_after_terminal_setup",
+          "intended_assertion": "defensive member owns an authoritative singleton snapshot",
+          "actual_panic": "thread 'game::sba::tests::battle_protector_defensive_handoff_after_terminal_setup' (3475867) panicked at crates/engine/src/game/sba.rs:2198:14:\ndefensive member owns an authoritative singleton snapshot\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nFAILED\n",
+          "log_sha256": "a79b9d4a1816e7676e08afcbcc2b5878ed2b77baf78cdab4214fae3e5224cff7"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "baseline": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "invocations": 6
+    },
+    "mutant": {
+      "passed": 3,
+      "failed": 3,
+      "ignored": 0,
+      "invocations": 6
+    },
+    "restored": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "invocations": 6
+    }
+  },
+  "all2051_current_source_hashes_restored": true,
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "runtime_context_sha256": "10e3b8c56332878c63536fcd1b6283c2b70c3179b2a1fab48678e058f75511d9",
+  "actual_presence_and_config_audit_sha256": "f8d2708ce54220a386bcfbec1476f07f40aeb6a48588c307f58484d9627974a0",
+  "results_sha256": "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d",
+  "script_sha256": "2d57994df68df6c52d5b6249ec9ba1b88ae0997c9c1b71c59d1b238302c5aa81",
+  "canonical_receipt_sha256": "50357db43b7712c5c1ce2d28dcc72ba14db5b0a3cade3b1cac7a702ccd9e9dbd"
+}

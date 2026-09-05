@@ -1,0 +1,16 @@
+--- a/crates/engine/src/game/zones.rs
++++ b/crates/engine/src/game/zones.rs
+@@ -660,12 +660,7 @@
+             }
+         }
+     }
+-    let can_capture = !subjects.is_empty()
+-        && !state
+-            .departure_suppression_scope
+-            .frames
+-            .iter()
+-            .any(|frame| frame.capture.is_some());
++    let can_capture = !subjects.is_empty();
+     let capture = if can_capture {
+         #[cfg(test)]
+         {

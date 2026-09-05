@@ -1,0 +1,35 @@
+{
+  "row": {
+    "id": "leaf-consumes-member",
+    "file": "crates/engine/src/game/zones.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "with_departure_leaf",
+        "old": "        without_departure_member(state, events, |state, events| {\n            body(state, events, Some(binding))\n        });",
+        "new": "        body(state, events, Some(binding));"
+      }
+    ],
+    "tests": [
+      {
+        "test": "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "role": "discriminator",
+        "failure_marker": "recursive child cannot claim the ancestor member's snapshot"
+      },
+      {
+        "test": "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "role": "control"
+      }
+    ],
+    "kind": "private-lexical",
+    "status": "exact transformation dry-run matched final source; runtime results pending",
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill."
+  },
+  "changed_files": [
+    "crates/engine/src/game/zones.rs"
+  ],
+  "tests_unchanged": true,
+  "canonical_seam_mtime_ns": 1788640655086594293,
+  "mutant_seam_mtime_ns": 1788640673050242983,
+  "test_tail_sha256": "6f6f0c92966fa7f498f627f774158d54862c3547b982ce37d9f17cad194f7e65"
+}

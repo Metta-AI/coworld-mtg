@@ -1,0 +1,29 @@
+{
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/sba-check_battle_protector/mutant-build/source.json",
+  "source_manifest_sha256": "4d533ba7ed5c60d3b5f572471e8e40fc62b452c0ed9a703624625d5c618044cd",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/sba-check_battle_protector/mutant-build/source.tar.gz",
+  "source_archive_sha256": "70c11b1839a558f1ed4f0455530f4445a852a9e0532104cbc9449a6dfca3987a",
+  "mutant_patch_sha256": "3204079e06115a1d1dc70c13e189f19bec400e84eee1cffcb2cf7eae47223d94",
+  "started": "2026-09-05T20:40:18.642978+00:00",
+  "command": [
+    "cargo",
+    "+nightly-2026-04-19",
+    "test",
+    "-p",
+    "engine",
+    "--lib",
+    "--message-format=json",
+    "--no-run"
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations-library/target",
+    "RUSTFLAGS": null,
+    "CARGO_ENCODED_RUSTFLAGS": null,
+    "RUSTUP_TOOLCHAIN": null,
+    "RUST_MIN_STACK": null
+  }
+}

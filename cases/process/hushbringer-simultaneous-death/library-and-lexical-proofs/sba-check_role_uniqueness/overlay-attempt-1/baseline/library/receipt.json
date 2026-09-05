@@ -1,0 +1,29 @@
+{
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "game::sba::tests",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T18:41:22.099772+00:00",
+  "executable_sha256": "746aca8e1d4a327654ec05a4d89b7a88aa206f769ed3581315b6b17870662741",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/baseline/compile/receipt.json",
+  "compile_receipt_sha256": "57eba610ba252e5b652c5a3c5750218369ba196fc9bd405b15110aa0bbac89e7",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/baseline/compile/source.json",
+  "source_manifest_sha256": "452a70ff8d86413f2916f90d4cdcab79bf50fef89610a066eb4c96c1063ad225",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_role_uniqueness/overlay-attempt-1/baseline/compile/source.tar.gz",
+  "source_archive_sha256": "c8b889aec82eaddfc537390fc77eb3e3a178543e4b348695f246a507703267bc",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T18:41:22.891306+00:00",
+  "exit": 0,
+  "log_sha256": "a6a63f4b1399129e33e76983803431be8eb75ff60db9286ae913ec5c9a420748",
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 119,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 16469
+    }
+  ],
+  "source_unchanged_during_run": true
+}

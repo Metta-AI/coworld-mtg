@@ -1,0 +1,25 @@
+{
+  "row": {
+    "id": "component-guard-normal-finalizer",
+    "file": "crates/engine/src/game/casting_costs.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "finalize_mana_payment",
+        "old": "    if let Some(pending) = state.pending_cast.as_ref() {\n        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;\n    }\n\n",
+        "new": ""
+      }
+    ],
+    "tests": [
+      "deferred_component_normal_finalizer_guard_precedes_phyrexian_prompt"
+    ],
+    "kind": "component-library",
+    "description": null,
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "changed_files": [
+    "crates/engine/src/game/casting_costs.rs"
+  ],
+  "tests_policy": "only exact production seam transformed; full diff retained"
+}

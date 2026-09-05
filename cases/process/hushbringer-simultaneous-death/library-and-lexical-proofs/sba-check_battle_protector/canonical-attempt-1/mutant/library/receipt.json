@@ -1,0 +1,31 @@
+{
+  "package_cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-library/crates/engine",
+  "runtime_context_sha256": "d6cb603f89a1711e24f4cfd9d7c67bdd9f5c4ff377a5660dd5490f80f2b0586b",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations-library/target/debug/deps/engine-444923dba8f143d6",
+    "game::sba::tests",
+    "--nocapture"
+  ],
+  "started": "2026-09-05T19:21:11.994739+00:00",
+  "executable_sha256": "45d72f88da834f2fdfd61f1a2e87dbd4fada5c33c0483b5024d0f9894d93f8c7",
+  "compile_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/mutant/compile/receipt.json",
+  "compile_receipt_sha256": "9f9baf78d1d285b0bd576f967baaf5e9219ffaecfc859df25507088b9a1e5083",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/mutant/compile/source.json",
+  "source_manifest_sha256": "8f250fc0d7c9bdc77b7e3cfdb02e19bbac76c824af395480a5458d5766cf52a2",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/sba-check_battle_protector/canonical-attempt-1/mutant/compile/source.tar.gz",
+  "source_archive_sha256": "0f22366ba23e32a863cbbb44dc4c7dda9c05dcc62b7e1f015c62607a34257027",
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-library",
+  "finished": "2026-09-05T19:21:12.648669+00:00",
+  "exit": 0,
+  "log_sha256": "24f235102cc708260ce82e65f62cd2fcc21cb715affc63e1441e40405683fb20",
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 119,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 16469
+    }
+  ],
+  "source_unchanged_during_run": true
+}

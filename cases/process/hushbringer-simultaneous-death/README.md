@@ -114,3 +114,5 @@ The [thirty original public-path mutation checks](v9-public-mutations/README.md)
 The [five resolver and last-known-information mutation proofs](v9-resolver-lki-proofs/README.md) bind the preserved assertions to exact implementation changes, reaching public tests and negative controls. They retain both observed failures and explicit limits on later assertions that did not execute.
 
 The [nine trigger-matcher mutation checks](v9-matcher-proofs/README.md) retain independently observed failures and controls, with explicit canonical-executable reuse and complete source/runtime identities. The two later batching checks are excluded from this checkpoint.
+
+The [library and lexical proof archive](library-and-lexical-proofs/README.md) reconciles nineteen original mutations with three later discriminators. It preserves historical survivors and distinguishes public runtime evidence, private lexical contracts and the terminal-gated defensive battle result.

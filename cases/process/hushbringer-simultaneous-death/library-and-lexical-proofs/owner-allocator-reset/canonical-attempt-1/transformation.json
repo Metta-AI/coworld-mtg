@@ -1,0 +1,25 @@
+{
+  "row": {
+    "id": "owner-allocator-reset",
+    "file": "crates/engine/src/game/zones.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "with_departure_suppression",
+        "old": "    reset_departure_allocator(state);\n",
+        "new": ""
+      }
+    ],
+    "tests": [
+      "departure_scope_"
+    ],
+    "kind": "scope-library",
+    "description": null,
+    "status": "planned; no mutation executed",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "test_overlay_manifest_sha256": "cd7426566ef71e3bd942315d49a9008f8b6456984cd7abcf7044d7006452ab0e",
+  "changed_files": [
+    "crates/engine/src/game/zones.rs"
+  ]
+}
