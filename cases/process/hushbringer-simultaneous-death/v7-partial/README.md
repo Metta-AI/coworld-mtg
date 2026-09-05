@@ -16,3 +16,9 @@ handoff, not an accepted repair.
 The [manifest](manifest.json) binds the exact reports, source manifests, test
 files and logs. Complete source archives remain on EC2 at the listed paths
 and hashes. Earlier failed attempts retain their original records.
+
+A [final joint source receipt](hushbringer-v7-final-joint-source-receipt.json)
+binds a complete archive of all 2,051 files in the final production manifest,
+including both new Rust modules. Every source hash was verified before and
+after archival, before any subsequent repair edits. This supplements the
+per-attempt archives without replacing their histories.

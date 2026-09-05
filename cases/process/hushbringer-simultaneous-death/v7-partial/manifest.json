@@ -356,6 +356,11 @@
       "path": "hushbringer-v7-final-receipt-attempt1-error.txt",
       "sha256": "f0f19cc1d70df48589d39f4c2a302ab35c070f4e7895eeae62fe00dd9261b3c7",
       "bytes": 159
+    },
+    {
+      "path": "hushbringer-v7-final-joint-source-receipt.json",
+      "sha256": "7c72d73a3a61be5259e99549b89d7e7ecb85e68ec98277dad561e0c04f897a19",
+      "bytes": 841
     }
   ],
   "external_source_archives": [
@@ -400,6 +405,13 @@
       "sha256": "214f864066635552ed4727cc4819eb7904fdfa3d78fc2311bd4b20590b5c25f1",
       "bytes": 13480391,
       "host": "nishadsingh-box-4"
+    },
+    {
+      "host": "nishadsingh-box-4",
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-final-joint-source.tar.gz",
+      "sha256": "e252079cbab8be1d0f1ffdf0c06856e59c4bef1afbf613ce1d7de84128dc1622",
+      "bytes": 27638214,
+      "description": "Complete final joint partial source, all2051 manifest files, verified before and after archival. No listed source file had executable permission; archive modes normalized0644."
     }
   ]
 }

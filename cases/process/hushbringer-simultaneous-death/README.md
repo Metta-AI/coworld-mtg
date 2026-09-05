@@ -72,3 +72,11 @@ provenance while retaining the earlier obligations. The
 [partial implementation handoff](v7-partial/README.md) records the exact source,
 passing checks, unresolved failures and remaining gates before that revision.
 The plan is pending independent review at this checkpoint.
+
+The [full v8 review](hushbringer-plan-review-v8.md) returned three blocking
+findings: preserve concession during legacy recovery, establish exact
+production discrimination for the resolver wrapper, and resolve the
+[four additional LKI/controller failures](v7-broad-suite/README.md) while
+preserving their assertions. The [v8 manifest](v8-plan-manifest.json) binds
+the eighth full review and the supporting evidence. A fresh v9 planner was
+dispatched; implementation remains unaccepted.
