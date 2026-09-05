@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/filter.rs
++++ b/crates/engine/src/game/filter.rs
+@@ -762,8 +762,8 @@
+     if matches!(controller_lookup, ControllerLookup::LiveOrLki)
+         && !matches!(obj.zone, Zone::Battlefield | Zone::Stack)
+     {
+-        if let Some(lki) = state.lki_cache.get(&object_id) {
+-            return lki.controller;
++        if let Some(_lki) = state.lki_cache.get(&object_id) {
++            return obj.controller;
+         }
+     }
+     obj.controller

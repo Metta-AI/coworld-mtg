@@ -1,0 +1,25 @@
+{
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+  "toolchain_file": "rustc 1.97.0-nightly (0febdbab2 2026-04-18)\nbinary: rustc\ncommit-hash: 0febdbab2720dc0360cd294c67db88d6d06580d4\ncommit-date: 2026-04-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0-nightly\nLLVM version: 22.1.2\ncargo 1.97.0-nightly (eb94155a9 2026-04-09)\n",
+  "cargo_build_jobs": 2,
+  "rustflags": "unset",
+  "cargo_encoded_rustflags": "unset",
+  "runtime_test_threads": 1,
+  "RUST_MIN_STACK_from_cargo_config": "16777216",
+  "profile_dev": {
+    "opt-level": 0,
+    "debug": "line-tables-only",
+    "split-debuginfo": "unpacked"
+  },
+  "profile_test": {
+    "inherits": "dev",
+    "codegen-units": 256
+  },
+  "source_commands": [
+    "cargo fmt --all before mutation snapshot",
+    "cargo fmt --all --check for recorded phase checks",
+    "cargo test -p engine --message-format=json --lib|--test integration <fully-qualified-filter> -- --exact --nocapture --test-threads=1"
+  ],
+  "freshness": "No target copying; changed/restore writes use current mtimes; full manifest hash verified before and after commands; Cargo fresh=false and executable hashes captured."
+}

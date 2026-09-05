@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/effects/mod.rs
++++ b/crates/engine/src/game/effects/mod.rs
+@@ -5998,9 +5998,7 @@
+     events: &mut Vec<GameEvent>,
+     depth: u32,
+ ) -> Result<(), EffectError> {
+-    crate::game::zones::without_departure_member(state, events, |state, events| {
+-        resolve_ability_chain_inner(state, ability, events, depth)
+-    })
++    resolve_ability_chain_inner(state, ability, events, depth)
+ }
+ 
+ fn resolve_ability_chain_inner(

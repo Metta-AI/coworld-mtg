@@ -1,0 +1,33 @@
+--- a/crates/engine/src/game/effects/mod.rs
++++ b/crates/engine/src/game/effects/mod.rs
+@@ -9166,9 +9166,13 @@
+                         state.current_trigger_event.as_ref()
+                     {
+                         if record.object_id == id {
++                            let mut record = record.as_ref().clone();
++                            if let Some(obj) = state.objects.get(&id) {
++                                record.controller = obj.controller;
++                            }
+                             return crate::game::filter::matches_target_filter_on_zone_change_record(
+                                 state,
+-                                record,
++                                &record,
+                                 filter,
+                                 &crate::game::filter::FilterContext::from_ability(ability),
+                             );
+@@ -9177,10 +9181,14 @@
+                     // CR 400.7: Check last-known information for past-tense conditions.
+                     // Try LKI cache first, fall back to current state if object still exists.
+                     if let Some(lki) = state.lki_cache.get(&id) {
++                        let mut lki = lki.clone();
++                        if let Some(obj) = state.objects.get(&id) {
++                            lki.controller = obj.controller;
++                        }
+                         crate::game::filter::matches_target_filter_on_lki_snapshot(
+                             state,
+                             id,
+-                            lki,
++                            &lki,
+                             filter,
+                             &crate::game::filter::FilterContext::from_ability(ability),
+                         )

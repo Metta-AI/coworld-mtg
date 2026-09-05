@@ -1,0 +1,2247 @@
+
+FILE crates/engine/src/game/filter.rs SHA256 8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66
+730: #[derive(Clone, Copy)]
+731: enum ControllerLookup {
+732:     /// Normal filter matching: off-stack/off-battlefield objects may need
+733:     /// at-departure controller information for look-back effects.
+734:     LiveOrLki,
+735:     /// Owner-zone matching has already substituted ownership for controller;
+736:     /// stale LKI must not override that owner-scoped value.
+737:     LiveOnly,
+738: }
+739: 
+740: /// CR 608.2h + CR 400.7: The effective controller of `obj` for filter
+741: /// predicates that look back at non-battlefield objects.
+742: ///
+743: /// On the stack and battlefield, `obj.controller` is the live value. Once an
+744: /// object leaves those zones, it ceases to have a controller (CR 109.4: "Objects
+745: /// that are neither on the stack nor on the battlefield aren't controlled by
+746: /// any player"), and the at-departure controller is preserved in
+747: /// `state.lki_cache` by `change_zone` (`game/zones.rs:65-92`). Filters such as
+748: /// "creatures they controlled that were exiled this way" (Oversimplify) must
+749: /// read the at-exile controller, not the post-reset owner; the LKI cache holds
+750: /// exactly that value.
+751: ///
+752: /// Returns the LKI controller when the lookup mode permits it, the object is
+753: /// outside the stack/battlefield, and an LKI snapshot exists; otherwise the
+754: /// live `obj.controller`. Stack and battlefield objects always use the live
+755: /// value.
+756: fn effective_controller(
+757:     state: &GameState,
+758:     obj: &GameObject,
+759:     object_id: ObjectId,
+760:     controller_lookup: ControllerLookup,
+761: ) -> PlayerId {
+762:     if matches!(controller_lookup, ControllerLookup::LiveOrLki)
+763:         && !matches!(obj.zone, Zone::Battlefield | Zone::Stack)
+764:     {
+765:         if let Some(lki) = state.lki_cache.get(&object_id) {
+766:             return lki.controller;
+767:         }
+768:     }
+769:     obj.controller
+770: }
+771: 
+772: pub(crate) fn controller_ref_player(
+773:     state: &GameState,
+774:     source_id: ObjectId,
+775:     source_controller: Option<PlayerId>,
+776:     ability: Option<&ResolvedAbility>,
+1387:     )
+1388: }
+1389: 
+1390: /// CR 400.7 + CR 608.2h: Evaluate a target filter against last-known information.
+1391: ///
+1392: /// This reuses the zone-change snapshot evaluator because both paths answer the
+1393: /// same question: did the object have the requested characteristics at the last
+1394: /// moment it existed in the relevant public zone?
+1395: pub fn matches_target_filter_on_lki_snapshot(
+1396:     state: &GameState,
+1397:     object_id: ObjectId,
+1398:     lki: &LKISnapshot,
+1399:     filter: &TargetFilter,
+1400:     ctx: &FilterContext<'_>,
+1401: ) -> bool {
+1402:     let record = ZoneChangeRecord {
+1403:         object_id,
+1404:         name: lki.name.clone(),
+1405:         core_types: lki.card_types.clone(),
+1406:         subtypes: lki.subtypes.clone(),
+1407:         supertypes: lki.supertypes.clone(),
+1408:         keywords: lki.keywords.clone(),
+1409:         trigger_definitions: Vec::new(),
+1410:         power: lki.power,
+1411:         toughness: lki.toughness,
+1412:         // CR 208.4b + CR 613.4b: Carry base P/T into the synthesized record so
+1413:         // the base-scope `PtComparison` arm reads the LKI base value.
+1414:         base_power: lki.base_power,
+1415:         base_toughness: lki.base_toughness,
+1416:         colors: lki.colors.clone(),
+1417:         mana_value: lki.mana_value,
+1418:         controller: lki.controller,
+1419:         owner: lki.owner,
+1420:         from_zone: None,
+1421:         cast_from_zone: None,
+1422:         played_from_zone: None,
+1423:         to_zone: Zone::Battlefield,
+1424:         attachments: vec![],
+1425:         linked_exile_snapshot: vec![],
+1426:         is_token: false,
+1427:         combat_status: Default::default(),
+1428:         co_departed: Vec::new(),
+1429:         trigger_suppression: None,
+1430:         attached_to: None,
+1431:         entered_incarnation: None,
+1432:         turn_zone_change_index: 0,
+1433:         // CR 701.60b: Carry suspected status from the LKI snapshot so
+1434:         // `FilterProp::Suspected` reads the cost-paid look-back value.
+1435:         is_suspected: lki.is_suspected,
+1436:     };
+1437:     matches_target_filter_on_zone_change_record(state, &record, filter, ctx)
+1438: }
+1439: 
+1440: /// CR 603.4 + CR 603.6 + CR 603.10: Evaluate a trigger condition whose
+1441: /// subject is the object from a zone-change event.
+1442: ///
+1443: /// Enter-the-battlefield conditions evaluate the live object in the destination
+1444: /// zone. Death/leaves-the-battlefield conditions evaluate the zone-change
+1445: /// record, which carries the event-time public characteristics used for LKI.
+1446: pub fn matches_zone_change_event_object_filter(
+1447:     state: &GameState,
+1448:     event: &crate::types::events::GameEvent,
+1449:     origin: Option<Zone>,
+1450:     destination: Zone,
+1451:     filter: &TargetFilter,
+1452:     ctx: &FilterContext<'_>,
+1453: ) -> bool {
+1454:     let crate::types::events::GameEvent::ZoneChanged {
+1455:         object_id,
+1456:         from,
+1457:         to,
+1458:         record,
+1459:     } = event
+1460:     else {
+1461:         return false;
+1462:     };
+1463: 
+1464:     if origin.is_some_and(|required| *from != Some(required)) || *to != destination {
+1465:         return false;
+1466:     }
+1467: 
+1468:     if destination == Zone::Battlefield {
+1469:         // CR 603.4: the intervening-if is rechecked when the ability resolves.
+1470:         // CR 608.2h: a filter that reads the entrant's characteristics uses its
+1471:         // CURRENT info only while the entrant is still in the public zone it was
+1472:         // expected in (the battlefield); once it has left, it uses the entrant's
+1473:         // LAST KNOWN INFORMATION. CR 603.10a: an ETB trigger is not a look-back
+1474:         // trigger, so the normal CR 608.2h rule applies. CR 400.7: the live
+1475:         // object is reverted to its base characteristics on its zone exit
+1476:         // (zones.rs revert_layered_characteristics_to_base), so reading the live
+1477:         // object after it leaves would compare against baseline P/T rather than
+1478:         // its last on-battlefield values — hence the LKI dispatch below. A
+1479:         // fully-absent entrant (objects.get == None) likewise routes to LKI
+1480:         // rather than a spurious false from matches_target_filter.
+1481:         // CR 400.7: a leave + re-entry reuses the SAME ObjectId but bumps the
+1482:         // object's incarnation (move_to_zone -> reset_for_battlefield_entry). The
+1483:         // original ETB trigger must use the ORIGINAL entrant's info, so the live
+1484:         // object only counts as "still the original entrant" when its incarnation
+1485:         // matches the one captured in the ETB record. A re-entered incarnation is
+1486:         // a different object for this trigger and routes to the original exit LKI
+1487:         // below. `entered_incarnation == None` (legacy/defensive records) falls
+1488:         // back to the zone-only check.
+1489:         let still_on_battlefield = state.objects.get(object_id).is_some_and(|obj| {
+1490:             obj.zone == Zone::Battlefield
+1491:                 && record
+1492:                     .entered_incarnation
+1493:                     .is_none_or(|inc| obj.incarnation == inc)
+1494:         });
+1495:         if still_on_battlefield {
+1496:             matches_target_filter(state, *object_id, filter, ctx)
+1497:         } else if let Some(lki) = state.lki_cache.get(object_id) {
+1498:             // CR 608.2h: the entrant has left the battlefield — evaluate against
+1499:             // its exit-time LKI (the most-recently-existed battlefield
+1500:             // characteristics, snapshotted before the base revert).
+1501:             matches_target_filter_on_lki_snapshot(state, *object_id, lki, filter, ctx)
+1502:         } else {
+1503:             // No exit LKI cached (defensive — a battlefield exit always caches
+1504:             // one). Use the zone-change record rather than the reverted live
+1505:             // object so the comparison never regresses to baseline P/T.
+1506:             matches_target_filter_on_zone_change_record(state, record, filter, ctx)
+1507:         }
+1508:     } else {
+1509:         matches_target_filter_on_zone_change_record(state, record, filter, ctx)
+1510:     }
+1511: }
+1512: 
+1513: fn filter_inner(
+1514:     state: &GameState,
+1515:     object_id: ObjectId,
+1516:     filter: &TargetFilter,
+1517:     ctx: &FilterContext<'_>,
+
+FILE crates/engine/src/game/effects/mod.rs SHA256 35b0d4f29051664c16f798f3f9b806f2aa5f34928ed893bdae150d803d2fbc26
+5993: /// Resolve an ability and follow its sub_ability chain using typed nested structs.
+5994: /// No SVar lookup, no parse_ability(). The depth is bounded by the data structure.
+5995: pub fn resolve_ability_chain(
+5996:     state: &mut GameState,
+5997:     ability: &ResolvedAbility,
+5998:     events: &mut Vec<GameEvent>,
+5999:     depth: u32,
+6000: ) -> Result<(), EffectError> {
+6001:     crate::game::zones::without_departure_member(state, events, |state, events| {
+6002:         resolve_ability_chain_inner(state, ability, events, depth)
+6003:     })
+6004: }
+6005: 
+6006: fn resolve_ability_chain_inner(
+6007:     state: &mut GameState,
+6008:     ability: &ResolvedAbility,
+6009:     events: &mut Vec<GameEvent>,
+6010:     depth: u32,
+6011: ) -> Result<(), EffectError> {
+6012:     // Safety limit to prevent stack overflow on pathological data
+6013:     if depth > 20 {
+9121:         AbilityCondition::TargetMatchesFilter {
+9122:             filter,
+9123:             use_lki,
+9124:             subject_slot,
+9125:         } => {
+9126:             // CR 608.2c: An explicit `subject_slot` tests a specific declared
+9127:             // chain slot (Malamet's condition reads slot 0, the you-control
+9128:             // fighter) — the current node's local `targets` were overwritten by
+9129:             // most-recent-only chain propagation, so resolve against the
+9130:             // flattened root chain instead of `targets.first()`.
+9131:             // CR 109.4 + CR 603.2: without a slot, "that creature" / "it" is the
+9132:             // ability's first object target, OR — for subject-based triggers that
+9133:             // carry no chosen target — the triggering event's subject object.
+9134:             // Mirror the `ParentTargetController` fallback (targeting.rs): when
+9135:             // `targets` has no object, resolve the anaphor against
+9136:             // `TriggeringSource` from the current trigger event.
+9137:             let target_id = if let Some(index) = subject_slot {
+9138:                 match crate::game::targeting::resolve_parent_slot_from_root(state, ability, *index)
+9139:                 {
+9140:                     Some(TargetRef::Object(id)) => Some(id),
+9141:                     _ => None,
+9142:                 }
+9143:             } else {
+9144:                 ability
+9145:                     .targets
+9146:                     .iter()
+9147:                     .find_map(|t| match t {
+9148:                         TargetRef::Object(id) => Some(*id),
+9149:                         _ => None,
+9150:                     })
+9151:                     .or_else(|| {
+9152:                         crate::game::targeting::resolve_event_context_target(
+9153:                             state,
+9154:                             &TargetFilter::TriggeringSource,
+9155:                             ability.source_id,
+9156:                         )
+9157:                         .and_then(|t| match t {
+9158:                             TargetRef::Object(id) => Some(id),
+9159:                             TargetRef::Player(_) => None,
+9160:                         })
+9161:                     })
+9162:             };
+9163:             let matched = if let Some(id) = target_id {
+9164:                 if *use_lki {
+9165:                     if let Some(GameEvent::ZoneChanged { record, .. }) =
+9166:                         state.current_trigger_event.as_ref()
+9167:                     {
+9168:                         if record.object_id == id {
+9169:                             return crate::game::filter::matches_target_filter_on_zone_change_record(
+9170:                                 state,
+9171:                                 record,
+9172:                                 filter,
+9173:                                 &crate::game::filter::FilterContext::from_ability(ability),
+9174:                             );
+9175:                         }
+9176:                     }
+9177:                     // CR 400.7: Check last-known information for past-tense conditions.
+9178:                     // Try LKI cache first, fall back to current state if object still exists.
+9179:                     if let Some(lki) = state.lki_cache.get(&id) {
+9180:                         crate::game::filter::matches_target_filter_on_lki_snapshot(
+9181:                             state,
+9182:                             id,
+9183:                             lki,
+9184:                             filter,
+9185:                             &crate::game::filter::FilterContext::from_ability(ability),
+9186:                         )
+9187:                     } else {
+9188:                         // Object still exists — check current state.
+9189:                         // CR 107.3a + CR 601.2b: ability-context filter evaluation.
+9190:                         crate::game::filter::matches_target_filter(
+9191:                             state,
+9192:                             id,
+9193:                             filter,
+9194:                             &crate::game::filter::FilterContext::from_ability(ability),
+9195:                         )
+9196:                     }
+9197:                 } else {
+9198:                     // Check current state for present-tense conditions.
+9199:                     // CR 107.3a + CR 601.2b: ability-context filter evaluation.
+9200:                     crate::game::filter::matches_target_filter(
+9201:                         state,
+9202:                         id,
+9203:                         filter,
+9204:                         &crate::game::filter::FilterContext::from_ability(ability),
+9205:                     )
+9206:                 }
+9207:             } else {
+9208:                 false
+9209:             };
+9210:             matched
+13022:     fn bounce_then_draw_if_controller_matched_lki(
+13023:         permanent_controller: PlayerId,
+13024:     ) -> (GameState, Vec<GameEvent>) {
+13025:         let mut state = GameState::new_two_player(42);
+13026:         create_object(
+13027:             &mut state,
+13028:             CardId(1),
+13029:             PlayerId(0),
+13030:             "Drawn Card".to_string(),
+13031:             Zone::Library,
+13032:         );
+13033:         let permanent = create_object(
+13034:             &mut state,
+13035:             CardId(2),
+13036:             PlayerId(1),
+13037:             "Target Permanent".to_string(),
+13038:             Zone::Battlefield,
+13039:         );
+13040:         let permanent_obj = state.objects.get_mut(&permanent).unwrap();
+13041:         permanent_obj.card_types.core_types.push(CoreType::Artifact);
+13042:         permanent_obj.base_card_types = permanent_obj.card_types.clone();
+13043:         let base_controller = permanent_obj.base_controller;
+13044:         if permanent_controller == PlayerId(0) {
+13045:             // CR 611.2a + CR 613.1b: temporary control must survive layer evaluation.
+13046:             state.add_transient_continuous_effect(
+13047:                 permanent,
+13048:                 permanent_controller,
+13049:                 crate::types::ability::Duration::UntilEndOfTurn,
+13050:                 TargetFilter::SpecificObject { id: permanent },
+13051:                 vec![crate::types::ability::ContinuousModification::ChangeController],
+13052:                 None,
+13053:             );
+13054:         }
+13055:         crate::game::layers::flush_layers(&mut state);
+13056:         assert_eq!(state.objects[&permanent].owner, PlayerId(1));
+13057:         assert_eq!(state.objects[&permanent].controller, permanent_controller);
+13058:         assert_eq!(state.objects[&permanent].base_controller, base_controller);
+13059: 
+13060:         let draw = ResolvedAbility::new(
+13061:             Effect::Draw {
+13062:                 count: QuantityExpr::Fixed { value: 1 },
+13063:                 target: TargetFilter::Controller,
+13064:             },
+13065:             vec![],
+13066:             ObjectId(100),
+13067:             PlayerId(0),
+13068:         )
+13069:         .condition(AbilityCondition::TargetMatchesFilter {
+13070:             filter: TargetFilter::Typed(TypedFilter::permanent().controller(ControllerRef::You)),
+13071:             use_lki: true,
+13072:             subject_slot: None,
+13073:         });
+13074:         let ability = ResolvedAbility::new(
+13075:             Effect::Bounce {
+13076:                 target: TargetFilter::Any,
+13077:                 destination: None,
+13078:                 selection: BounceSelection::Targeted,
+13079:             },
+13080:             vec![TargetRef::Object(permanent)],
+13081:             ObjectId(100),
+13082:             PlayerId(0),
+13083:         )
+13084:         .sub_ability(draw);
+13085: 
+13086:         let mut events = Vec::new();
+13087:         resolve_ability_chain(&mut state, &ability, &mut events, 0).unwrap();
+13088:         assert_eq!(state.objects[&permanent].zone, Zone::Hand);
+13089:         assert_eq!(state.objects[&permanent].controller, PlayerId(1));
+13090:         assert_eq!(state.lki_cache[&permanent].controller, permanent_controller);
+13091:         assert!(events.iter().any(|event| matches!(event,
+13092:             GameEvent::ZoneChanged { object_id, from: Some(Zone::Battlefield), to: Zone::Hand, record, .. }
+13093:             if *object_id == permanent && record.controller == permanent_controller)));
+13094:         (state, events)
+13095:     }
+13096: 
+13097:     #[test]
+13098:     fn bounce_followup_draws_when_caster_controlled_parent_target() {
+13099:         let (state, events) = bounce_then_draw_if_controller_matched_lki(PlayerId(0));
+13100: 
+13101:         assert_eq!(state.players[0].hand.len(), 1);
+13102:         assert_eq!(state.players[1].hand.len(), 1);
+13103:         assert!(events.iter().any(|event| matches!(
+13104:             event,
+13105:             GameEvent::ZoneChanged {
+13106:                 from: Some(Zone::Battlefield),
+13107:                 to: Zone::Hand,
+13108:                 ..
+13109:             }
+13110:         )));
+13111:     }
+13112: 
+13113:     #[test]
+13114:     fn bounce_followup_skips_draw_when_opponent_controlled_parent_target() {
+13115:         let (state, events) = bounce_then_draw_if_controller_matched_lki(PlayerId(1));
+13116: 
+13117:         assert_eq!(state.players[0].hand.len(), 0);
+13118:         assert_eq!(state.players[1].hand.len(), 1);
+13119:         assert!(events.iter().any(|event| matches!(
+13120:             event,
+13121:             GameEvent::ZoneChanged {
+13122:                 from: Some(Zone::Battlefield),
+13123:                 to: Zone::Hand,
+13124:                 ..
+13125:             }
+13126:         )));
+13127:     }
+13128: 
+13129:     #[test]
+13130:     fn previous_effect_amount_for_damage_ignores_counter_side_effects() {
+
+FILE crates/engine/src/game/zones.rs SHA256 740e37afea6f50ad08af2a27b9603ed06c576341370d6664ceb4a1080f35b6f3
+680:                     (
+681:                         *subject,
+682:                         super::trigger_suppression::outcomes_for_live_subject(
+683:                             state,
+684:                             subject.object_id,
+685:                             &active,
+686:                         ),
+687:                     )
+688:                 })
+689:                 .collect(),
+690:         })
+691:     } else {
+692:         // Independent children cannot manufacture a fresh layer world midway
+693:         // through an ancestor's action. Their records keep unavailable history.
+694:         None
+695:     };
+696:     let scope = &mut state.departure_suppression_scope;
+697:     let member_depth = scope.member_bindings.len();
+698:     let id = DepartureScopeId(scope.next_id);
+699:     scope.next_id += 1;
+700:     scope.frames.push(DepartureScopeFrame {
+701:         id,
+702:         event_start: events.len(),
+703:         candidates: subjects,
+704:         capture,
+705:         emitted: Vec::new(),
+706:     });
+707:     scope.member_bindings.push(None);
+708:     let result = body(state, events, &DepartureScopeToken(id));
+709:     let scope = &mut state.departure_suppression_scope;
+710:     assert_eq!(
+711:         scope.member_bindings.len(),
+712:         member_depth + 1,
+713:         "unclosed departure member"
+714:     );
+715:     scope.member_bindings.truncate(member_depth);
+716:     let frame = scope.frames.pop().expect("departure owner remains live");
+717:     assert_eq!(frame.id, id, "departure owners close in lexical order");
+718:     finish_departure_suppression(state, events, frame);
+719:     reset_departure_allocator(state);
+720:     result
+721: }
+722: 
+723: pub(crate) fn with_departure_member<R>(
+724:     state: &mut GameState,
+725:     events: &mut Vec<GameEvent>,
+726:     owner: &DepartureScopeToken,
+727:     object_id: ObjectId,
+728:     body: impl FnOnce(&mut GameState, &mut Vec<GameEvent>) -> R,
+729: ) -> R {
+730:     let frame = state
+731:         .departure_suppression_scope
+732:         .frames
+733:         .iter()
+734:         .find(|frame| frame.id == owner.0)
+735:         .expect("borrowed departure owner remains live");
+736:     let subject = state
+737:         .objects
+738:         .get(&object_id)
+739:         .filter(|obj| obj.zone == Zone::Battlefield)
+740:         .map(|obj| DepartureSubject {
+741:             object_id,
+742:             incarnation: obj.incarnation,
+743:         })
+744:         .filter(|subject| frame.candidates.contains(subject));
+745:     let binding = subject.map(|subject| DepartureMemberBinding {
+746:         owner: owner.0,
+747:         subject,
+748:     });
+749:     with_departure_binding(state, events, binding, body)
+750: }
+751: 
+752: pub(crate) fn without_departure_member<R>(
+753:     state: &mut GameState,
+754:     events: &mut Vec<GameEvent>,
+755:     body: impl FnOnce(&mut GameState, &mut Vec<GameEvent>) -> R,
+756: ) -> R {
+757:     with_departure_binding(state, events, None, body)
+758: }
+759: 
+760: fn with_departure_binding<R>(
+761:     state: &mut GameState,
+762:     events: &mut Vec<GameEvent>,
+763:     binding: Option<DepartureMemberBinding>,
+764:     body: impl FnOnce(&mut GameState, &mut Vec<GameEvent>) -> R,
+765: ) -> R {
+766:     let depth = state.departure_suppression_scope.member_bindings.len();
+767:     state
+768:         .departure_suppression_scope
+769:         .member_bindings
+770:         .push(binding);
+771:     let result = body(state, events);
+772:     assert_eq!(
+773:         state.departure_suppression_scope.member_bindings.len(),
+774:         depth + 1
+775:     );
+776:     state
+777:         .departure_suppression_scope
+778:         .member_bindings
+779:         .truncate(depth);
+780:     reset_departure_allocator(state);
+781:     result
+782: }
+783: 
+784: fn reset_departure_allocator(state: &mut GameState) {
+785:     let scope = &mut state.departure_suppression_scope;
+786:     if scope.frames.is_empty() && scope.member_bindings.is_empty() {
+787:         scope.next_id = 0;
+788:     }
+789: }
+790: 
+791: fn finish_departure_suppression(
+792:     state: &mut GameState,
+846: fn with_departure_leaf(
+847:     state: &mut GameState,
+848:     events: &mut Vec<GameEvent>,
+849:     object_id: ObjectId,
+850:     to: Zone,
+851:     body: impl FnOnce(&mut GameState, &mut Vec<GameEvent>, Option<DepartureMemberBinding>),
+852: ) {
+853:     let subject = state
+854:         .objects
+855:         .get(&object_id)
+856:         .filter(|obj| obj.zone == Zone::Battlefield && to != Zone::Battlefield)
+857:         .map(|obj| DepartureSubject {
+858:             object_id,
+859:             incarnation: obj.incarnation,
+860:         });
+861:     let binding = state
+862:         .departure_suppression_scope
+863:         .member_bindings
+864:         .last()
+865:         .copied()
+866:         .flatten()
+867:         .filter(|binding| Some(binding.subject) == subject);
+868:     if let Some(binding) = binding {
+869:         // Consume the borrowed member for this leaf only; recursive delivery is
+870:         // an independent cause unless its producer explicitly supplies a member.
+871:         without_departure_member(state, events, |state, events| {
+872:             body(state, events, Some(binding))
+873:         });
+874:     } else if subject.is_some()
+875:         && !state
+876:             .departure_suppression_scope
+877:             .frames
+878:             .iter()
+879:             .any(|frame| frame.capture.is_some())
+880:     {
+881:         with_departure_suppression(state, events, &[object_id], |state, events, owner| {
+882:             with_departure_member(state, events, owner, object_id, |state, events| {
+883:                 let binding = state
+884:                     .departure_suppression_scope
+885:                     .member_bindings
+886:                     .last()
+887:                     .copied()
+888:                     .flatten();
+889:                 without_departure_member(state, events, |state, events| {
+890:                     body(state, events, binding)
+891:                 });
+892:             });
+893:         });
+894:     } else {
+895:         without_departure_member(state, events, |state, events| body(state, events, None));
+896:     }
+897: }
+898: 
+899: fn claim_departure_event(
+900:     state: &mut GameState,
+901:     binding: Option<DepartureMemberBinding>,
+902:     from: Zone,
+903:     object_id: ObjectId,
+904:     turn_zone_change_index: usize,
+905:     event_offset: usize,
+906: ) {
+907:     if from != Zone::Battlefield {
+908:         return;
+909:     }
+910:     if let Some(binding) = binding {
+911:         assert_eq!(binding.subject.object_id, object_id);
+912:         let frame = state
+913:             .departure_suppression_scope
+914:             .frames
+915:             .iter_mut()
+916:             .find(|frame| frame.id == binding.owner)
+917:             .expect("leaf owner remains live");
+918:         frame.emitted.push(DepartureEventKey {
+919:             event_offset,
+920:             object_id,
+921:             turn_zone_change_index,
+922:         });
+923:     }
+924: }
+925: 
+1008:     }
+1009: 
+1010:     let obj = state.objects.get(&object_id).expect("object exists");
+1011:     let from = obj.zone;
+1012: 
+1013:     // CR 603.2g + CR 603.6a: A Battlefield → Battlefield no-op does not put a
+1014:     // permanent onto the battlefield, so no trigger event occurs and no ETB
+1015:     // ability can trigger. No new object is created and no ZoneChanged event is
+1016:     // emitted.
+1017:     // Without this guard, move_to_zone(coiling_id, Battlefield) while Coiling
+1018:     // Oracle is already on the battlefield removes then re-adds it, emits a
+1019:     // spurious ZoneChanged{from:Battlefield, to:Battlefield} event, and fires
+1020:     // its own ETB trigger again — causing an infinite loop.
+1021:     if from == Zone::Battlefield && to == Zone::Battlefield {
+1022:         return;
+1023:     }
+1024: 
+1025:     let owner = obj.owner;
+1026:     let redirect_attraction_to_command = super::attractions::is_attraction_card(obj)
+1027:         && !matches!(to, Zone::Battlefield | Zone::Exile | Zone::Command);
+1028:     if redirect_attraction_to_command {
+1029:         // CR 717.6: Astrotorium-backed cards that would move to any zone other
+1030:         // than battlefield, exile, or command move to command instead.
+
+FILE crates/engine/src/game/engine_replacement.rs SHA256 33d7ea5046c944f2f7763c65b0f58f3e5c9a526aa56e02d9a91c96547ec669aa
+1470: pub(super) fn apply_post_replacement_effect(
+1471:     state: &mut GameState,
+1472:     effect_def: &AbilityDefinition,
+1473:     object_id: Option<ObjectId>,
+1474:     spell_resolution: Option<&crate::types::game_state::PendingSpellResolution>,
+1475:     event: Option<&ReplacementEvent>,
+1476:     replacement_applied: HashSet<AppliedReplacementKey>,
+1477:     events: &mut Vec<GameEvent>,
+1478: ) -> Option<WaitingFor> {
+1479:     let (source_id, controller) = object_id
+1480:         .and_then(|obj_id| {
+1481:             state
+1482:                 .objects
+1483:                 .get(&obj_id)
+1484:                 .or_else(|| {
+1485:                     state
+1486:                         .liminal_entries
+1487:                         .get(&obj_id)
+1488:                         .map(|entry| &entry.object)
+1489:                 })
+1490:                 .map(|obj| (obj_id, super::replacement::replacement_source_player(obj)))
+1491:         })
+1492:         .unwrap_or((ObjectId(0), state.active_player));
+1493: 
+1494:     // CR 614.1c: Walk past modifier-only effects (Tap/Untap/PutCounter/ChangeZone)
+1495:     // in the sub_ability chain to find the real work. Composable replacements like
+1496:     // Vesuva's "enter tapped as a copy" emit Tap { SelfRef } → sub_ability(BecomeCopy);
+1497:     // the modifier was already applied to the ProposedEvent by `event_modifiers_for_ability`,
+1498:     // so we skip to the first non-modifier effect for post-replacement dispatch.
+1499:     let real_work =
+1500:         super::replacement::EventModifiers::first_non_modifier_ability(Some(effect_def))
+1501:             .unwrap_or(effect_def);
+1502: 
+1503:     if let Effect::BecomeCopy { ref target, .. } = *real_work.effect {
+1504:         let max_mana_value = spell_resolution
+1505:             .and_then(|ctx| copy_target_mana_value_ceiling(ctx.actual_mana_spent, real_work));
+1506:         let valid_targets = find_copy_targets(state, target, source_id, controller, max_mana_value);
+1507:         if valid_targets.is_empty() {
+1508:             return None;
+1509:         }
+1510:         // CR 607.2a: For ExiledCardByIndex (The Mimeoplasm), the target is already
+1511:         // determined by the index - no choice prompt needed. Directly resolve the copy.
+1512:         if matches!(target, TargetFilter::ExiledCardByIndex { .. }) {
+1513:             let targets = valid_targets
+1514:                 .into_iter()
+1515:                 .map(TargetRef::Object)
+1516:                 .collect::<Vec<_>>();
+1517:             let mut resolved =
+1518:                 build_resolved_from_def_with_targets(real_work, source_id, controller, targets);
+1519:             resolved.set_replacement_applied_recursive(replacement_applied);
+1520:             let _ = effects::resolve_ability_chain(state, &resolved, events, 0);
+1521:             return match &state.waiting_for {
+1522:                 WaitingFor::Priority { .. } => None,
+1523:                 wf => Some(wf.clone()),
+1524:             };
+1525:         } else {
+1526:             return Some(WaitingFor::CopyTargetChoice {
+1527:                 player: controller,
+1528:                 source_id,
+1529:                 valid_targets,
+1530:                 max_mana_value,
+1531:             });
+1532:         }
+1533:     }
+1534: 
+1535:     // CR 614.1c: The injected `Object(source)` target is the source-as-SelfRef
+1536:     // hook for replacement post-effects that consume their source (BecomeCopy,
+1537:     // PutCounter, Choose). For an interactive chooser-driven `Effect::Sacrifice`
+1538:     // whose `target` is a `Typed(...)` scope filter (e.g., the Devour synthesizer's
+1539:     // "sacrifice any number of your creatures"), the source is NOT the sacrificed
+1540:     // object — the prompt picks from the controller's eligible pool. Suppress the
+1541:     // injection in that case so `sacrifice.rs::resolve` falls through to its
+1542:     // chooser-driven `EffectZoneChoice` branch instead of treating the source as
+1543:     // a pre-selected sacrifice target.
+1544:     //
+1545:     // Gated on `event == ReplacementEvent::Moved` so the suppression scopes to
+1546:     // ETB-style replacements (the Devour shape). Non-ETB events that carry
+1547:     // `Sacrifice { Typed }` post-effects — Dralnu, Lich Lord (DealtDamage:
+1548:     // "sacrifice that many permanents") and Outfitted Jouster (DamageDone:
+1549:     // "sacrifice an Equipment") — keep the pre-Devour injection path so their
+1550:     // target-as-pre-selected resolution is unchanged.
+1551:     let sacrifice_typed_scope = is_as_enters_sacrifice_scope_replacement(event, &real_work.effect);
+1552:     let targets = if sacrifice_typed_scope {
+1553:         Vec::new()
+1554:     } else {
+1555:         object_id
+1556:             .map(TargetRef::Object)
+1557:             .into_iter()
+1558:             .collect::<Vec<_>>()
+1559:     };
+1560:     let mut resolved =
+1561:         build_resolved_from_def_with_targets(effect_def, source_id, controller, targets);
+1562:     resolved.set_replacement_applied_recursive(replacement_applied);
+1563:     let _ = effects::resolve_ability_chain(state, &resolved, events, 0);
+1564: 
+1565:     match &state.waiting_for {
+1566:         WaitingFor::Priority { .. } => None,
+1567:         wf => Some(wf.clone()),
+1568:     }
+1569: }
+1570: 
+1571: pub(crate) fn apply_pending_post_replacement_effect(
+1572:     state: &mut GameState,
+1573:     object_id: Option<ObjectId>,
+1574:     spell_resolution: Option<&crate::types::game_state::PendingSpellResolution>,
+1575:     event: Option<ReplacementEvent>,
+1576:     events: &mut Vec<GameEvent>,
+1577: ) -> Option<WaitingFor> {
+1578:     // CR 614.12a (approximation): sacrifice prompt fires after ZoneChange completes,
+1579:     // matching Siege/Tribute precedent. A strict reading of 614.12a says the choice
+1580:     // is made *before* the permanent enters, but the engine's pipeline applies the
+1581:     // zone change first and then drains the post-replacement continuation; the
+1582:     // observable behavior is equivalent for as-enters sacrifice/counter mechanics
+1583:     // (Devour, Siege protector, Tribute) where the choice doesn't gate entry.
+1584:     //
+1585:     // CR 615.5 + CR 616.1g: Resident-top dispatch. `begin_dispatch` takes the
+1586:     // continuation and marks the drain `Dispatching` WITHOUT removing it, so:
+1587:     //   * a nested `has_post_replacement_drain()` taken while the effect runs sees
+1588:     //     no ready work and cannot re-drain this one (the old slot was likewise
+1589:     //     empty at this point — the continuation had been moved out of it), and
+1590:     //   * the effect can still read this drain's event context (CR 615.5), which is
+1591:     //     how `PostReplacementSourceController` resolves "the source's controller
+1592:     //     draws cards" for Swans of Bryn Argoll.
+1593:     // The drain is popped after the dispatch returns.
+1594:     //
+1595:     // `Resolved` carries captured targets (prevention follow-ups); `Template` is an
+1596:     // AST that resolves against `source` for ETB / Optional accept.
+1597:     let source = state.post_replacement_source().or(object_id);
+1598:     let replacement_applied = state
+1599:         .post_replacement_drains
+1600:         .resident_mut()
+1601:         .map(|drain| std::mem::take(&mut drain.applied))
+1602:         .unwrap_or_default();
+1603: 
+1604:     let waiting_for = match state.post_replacement_drains.begin_dispatch() {
+1605:         Some(PostReplacementContinuation::Resolved(resolved)) => {
+1606:             apply_post_replacement_resolved_effect(state, &resolved, replacement_applied, events)
+1607:         }
+1608:         Some(PostReplacementContinuation::Template(effect_def)) => apply_post_replacement_effect(
+1609:             state,
+1610:             &effect_def,
+1611:             source,
+1612:             spell_resolution,
+1613:             event.as_ref(),
+1614:             replacement_applied,
+1615:             events,
+
+FILE crates/engine/src/game/replacement.rs SHA256 935feb3952f274f6345f74b12bed7b6b60c7895de403f73355b5abbba0e76f4c
+4890: 
+4891:     if !in_scanned_zone
+4892:         && !is_entering
+4893:         && !is_being_discarded
+4894:         && !is_applicable_dredge
+4895:         && !is_stack_self_move
+4896:     {
+4897:         return false;
+4898:     }
+4899: 
+4900:     // CR 701.19: skip consumed one-shot replacements such as used regeneration.
+4901:     if repl_def.is_consumed {
+4902:         return false;
+4903:     }
+4904:     // CR 708.3 + CR 708.2a: An object put onto the battlefield FACE DOWN is turned
+4905:     // face down BEFORE it enters (CR 708.3), so it enters as a 2/2 with no text
+4906:     // (CR 708.2a) — its OWN text-derived "As ~ enters" replacement has no effect.
+4907:     // `is_entering` is true only when this candidate's source IS the entering
+4908:     // object (obj.id == rid.source), so this suppresses ONLY the object's own
+4909:     // self-replacement. EXTERNAL replacements (another permanent's enters-tapped)
+4910:     // have `is_entering == false` (source ≠ entrant) and still apply.
+5880:     /// `ControllerRef`; resolved to a concrete `PlayerId` and written onto the
+5881:     /// `ZoneChange`'s `controller_override` when the replacement is applied.
+5882:     controller_override: Option<ControllerRef>,
+5883: }
+5884: 
+5885: #[derive(Debug, Clone, Default)]
+5886: pub(super) struct EnterReplacementModifiers {
+5887:     pub enter_tapped: Option<bool>,
+5888:     pub counters: Vec<(CounterType, u32)>,
+5889: }
+5890: 
+5891: impl EventModifiers {
+5892:     /// True if this single effect (ignoring sub_ability chain) is purely a
+5893:     /// ProposedEvent modifier with no additional resolution work.
+5894:     fn is_event_modifier_effect(effect: &Effect) -> bool {
+5895:         matches!(
+5896:             effect,
+5897:             // CR 701.26a/b: a SelfRef single tap/untap is purely an enters-tapped
+5898:             // event modifier (either polarity).
+5899:             Effect::SetTapState {
+5900:                 target: TargetFilter::SelfRef,
+5901:                 scope: EffectScope::Single,
+5902:                 ..
+5903:             } | Effect::PutCounter {
+5904:                 target: TargetFilter::SelfRef,
+5905:                 ..
+5906:             } | Effect::ChangeZone { .. }
+5907:         )
+5908:     }
+5909: 
+5910:     /// True if this ability has any effect on the ProposedEvent beyond the event-modifier
+5911:     /// fields tracked here (i.e., it still needs to run as a post-replacement side effect).
+5912:     /// An ability that is *purely* a Tap SelfRef / PutCounter-SelfRef / ChangeZone has no
+5913:     /// remaining work after its modifiers are applied to the event.
+5914:     fn has_only_event_modifier(ability: Option<&AbilityDefinition>) -> bool {
+5915:         let Some(mut current) = ability else {
+5916:             return false;
+5917:         };
+5918:         loop {
+5919:             if !Self::is_event_modifier_effect(&current.effect) {
+5920:                 return false;
+5921:             }
+5922:             let Some(next) = current.sub_ability.as_deref() else {
+5923:                 return true;
+5924:             };
+5925:             current = next;
+5926:         }
+5927:     }
+5928: 
+5929:     /// CR 614.1c: Walk the ability's sub_ability chain and find the first effect
+5930:     /// that is NOT a pure event modifier. Returns `None` when the entire chain is
+5931:     /// modifiers (shock land class) or when there is no ability at all.
+5932:     pub(super) fn first_non_modifier_ability(
+5933:         ability: Option<&AbilityDefinition>,
+5934:     ) -> Option<&AbilityDefinition> {
+5935:         let mut current = ability?;
+5936:         loop {
+5937:             if !Self::is_event_modifier_effect(&current.effect) {
+5938:                 return Some(current);
+5939:             }
+5940:             current = current.sub_ability.as_deref()?;
+5941:         }
+5942:     }
+5943: }
+5944: 
+5945: /// CR 614.1c: Compute the ProposedEvent modifications an ability would introduce.
+5946: /// Walks the sub_ability chain so composed replacements (e.g., Tap { SelfRef } →
+5947: /// BecomeCopy for Vesuva's "enter tapped as a copy") accumulate all modifier
+5948: /// effects onto the event, while non-modifier work is handled separately via
+5949: /// `apply_post_replacement_effect`.
+5950: fn event_modifiers_for_ability(
+6295:                             // etc.) fires as a post-replacement continuation.
+6296:                             //
+6297:                             // Without this guard, `first_non_modifier_ability` skips
+6298:                             // the ChangeZone prefix (treating it as a Damage-event
+6299:                             // modifier, which has no meaning) and stashes only the
+6300:                             // Shuffle tail — leaving the creature on the battlefield.
+6301:                             //
+6302:                             // CR 614.1c: for non-Damage events, walk past modifier-
+6303:                             // only effects (Tap/Untap/PutCounter/ChangeZone) to find
+6304:                             // the first non-modifier work. Covers the existing
+6305:                             // ChangeZone → sub_ability pattern (Nexus of Fate shuffle-
+6306:                             // back) and composed replacements like Tap → BecomeCopy
+6307:                             // (Vesuva "enter tapped as a copy").
+6308:                             if is_damage {
+6309:                                 Some(PostReplacementContinuation::Template(Box::new(def.clone())))
+6310:                             } else {
+6311:                                 match EventModifiers::first_non_modifier_ability(Some(def)) {
+6312:                                     Some(real_work) => Some(PostReplacementContinuation::Template(
+6313:                                         Box::new(real_work.clone()),
+6314:                                     )),
+6315:                                     None if EventModifiers::has_only_event_modifier(Some(def)) => {
+6316:                                         None
+6317:                                     }
+6318:                                     _ => Some(PostReplacementContinuation::Template(Box::new(
+6319:                                         def.clone(),
+6320:                                     ))),
+6321:                                 }
+6322:                             }
+6323:                         })
+6324:                     }
+6325:                 }
+6540:                             .extend(modifiers.etb_counters.iter().cloned()),
+6541:                         _ => {}
+6542:                     }
+6543:                 }
+6544:                 if consume_on_apply {
+6545:                     mark_replacement_consumed(state, rid);
+6546:                 }
+6547:                 // CR 614.12a: Stash the mandatory execute ability as a post-replacement
+6548:                 // effect when it has work beyond the event modifiers (e.g., a Choose
+6549:                 // prompt for Siege protector / Tribute opponent selection). Runs after
+6550:                 // the ZoneChange completes. Only the first such stash in a chained
+6551:                 // pipeline wins; this matches how Optional replacements queue their
+6552:                 // accept-branch post-effect.
+6553:                 if let Some(post) = mandatory_post_effect {
+6554:                     // CR 615.5 + CR 609.7: only the Prevented arm populates
+6555:                     // `post_replacement_event_source`; clear here so a prior
+6556:                     // prevention's source can't leak into a non-prevention stash.
+6557:                     //
+6558:                     // CR 614.13 + CR 608.2c: stash the AFFECTED object of the
+6559:                     // (possibly modified) event as the continuation source, so a
+6560:                     // scoped-player execute (Land Equilibrium's "that player …
+6561:                     // sacrifices a land": `ControllerRef::You` bound via the entering
+6562:                     // land's resulting controller) keys off the entering object, not
+6563:                     // the replacement's own source. For a self-scoped replacement
+6564:                     // (`valid_card: SelfRef`, the Devour family) these coincide.
+6565:                     //
+6566:                     // NOTE: for battlefield-ENTRY drains this is defensive alignment
+6567:                     // rather than the sole binding — the land-play epilogue
+6568:                     // (`engine.rs`) and the general zone-change drain
+6569:                     // (`engine_replacement.rs`, "For ZoneChange events the post-effect
+6570:                     // resolves against the zone-changing object") both clear
+6571:                     // `post_replacement_source` and re-pass the entering object at
+6572:                     // drain time. The stashed source is observable only on the
+6573:                     // `TokenEntry` drain path, which does not clear it. See the
+6574:                     // implementation report's Part 3 finding.
+6575:                     stash_post_replacement_continuation(
+6576:                         state,
+6577:                         post,
+6578:                         new_event.affected_object_id().unwrap_or(rid.source),
+6579:                         replacement_applied.clone(),
+6580:                         None,
+6581:                         // CR 614.6 + CR 608.2d: carry the replaced Draw's affected
+6582:                         // player (the drawing player) so an "any other player may"
+6583:                         // execute (Zur's Weirding) can exclude them from the APNAP
+6584:                         // fan-out. `None` for every other event kind (see the
+
+FILE crates/engine/src/game/zone_pipeline.rs SHA256 ecc6dbd6f0385c72ab2238dc700692c60255f041628985e4ac6cf5db301a8e72
+1289:     if matches!(drain, PostReplacementDrainOwner::DeliveryTail)
+1290:         && state.has_post_replacement_drain()
+1291:     {
+1292:         // CR 603.6d + CR 614.12a: For an "as-enters" (battlefield-entry) Moved
+1293:         // post-effect, the effect resolves against the zone-changing object (the
+1294:         // ENTRANT), NOT the replacement's host source. Drop the stashed host
+1295:         // source slot for battlefield entries — exactly as the cast-resolution
+1296:         // (`stack.rs`), land-play (`engine.rs`), and replacement-choice resume
+1297:         // (`engine_replacement.rs`) drain sites already do — so a non-self `Moved`
+1298:         // GenericEffect (Displaced Dinosaurs: "As a historic permanent you control
+1299:         // enters, it becomes a 7/7 Dinosaur creature in addition to its other
+1300:         // types") binds its `SelfRef` execute to the entrant, not the host.
+1301:         //
+1302:         // Scoped to `to == Battlefield`: only as-enters replacements bind to the
+1303:         // entrant. A non-battlefield delivery that incidentally drains an outer
+1304:         // effect's still-pending continuation here (e.g. a Mill replacement's
+1305:         // doubling continuation while its milled cards move to the graveyard)
+1306:         // must keep the host source slot — its post-effect belongs to the host,
+1307:         // not the moved card.
+1308:         if to == Zone::Battlefield {
+1309:             state.clear_post_replacement_source();
+1310:         }
+1311:         let waiting_for = crate::game::engine_replacement::apply_pending_post_replacement_effect(
+1312:             state,
+1313:             Some(object_id),
+1314:             None,
+1315:             Some(crate::types::replacements::ReplacementEvent::Moved),
+1316:             events,
+1317:         );
+1318:         if let Some(wf) = waiting_for {
+1319:             if !matches!(wf, WaitingFor::Priority { .. }) {
+1320:                 state.waiting_for = wf;
+1321:                 return replacement_pause_delivery_result(state);
+1322:             }
+1323:         }
+1324:     }
+1325:     ZoneDeliveryResult::Done
+1326: }
+1327: 
+1328: fn aura_enchant_filter(state: &GameState, object_id: ObjectId) -> Option<TargetFilter> {
+1329:     let obj = state.objects.get(&object_id)?;
+
+FILE crates/engine/src/game/effects/change_zone.rs SHA256 c5e12a1cad5cbc23a87e48c23e0ebd3f8f8878eb347c0172bd2bed718db6b56b
+844:         && state.devour_eligible_snapshot.is_none()
+845:         && targeted_objects
+846:             .iter()
+847:             .any(|id| crate::game::engine_replacement::object_has_devour_replacement(state, *id))
+848:     {
+849:         state.devour_eligible_snapshot = Some(state.battlefield.iter().copied().collect());
+850:     }
+851: 
+852:     // CR 608.2c: "that many" in a later instruction refers back to the number
+853:     // of objects this targeted move actually relocated (e.g. Vengeful Regrowth:
+854:     // "Return up to three target land cards ... Create that many ... tokens").
+855:     // Tracked the same way the mass `resolve_all` path counts, so the chained
+856:     // sub-ability's `QuantityRef::EventContextAmount` resolves correctly.
+857:     let mut moved_count: i32 = 0;
+858:     let paused = crate::game::zones::with_departure_suppression(
+859:         state,
+860:         events,
+861:         &targeted_objects,
+862:         |state, events, owner| {
+863:             for (i, obj_id) in targeted_objects.iter().enumerate() {
+864:                 if dest_zone == Zone::Exile {
+865:                     let acting_player = state
+866:                         .objects
+867:                         .get(obj_id)
+868:                         .map(|obj| obj.controller)
+869:                         .unwrap_or(ability.controller);
+870:                     if crate::game::static_abilities::triggered_cause_sacrifice_or_exile_muzzled(
+871:                         state,
+872:                         ability,
+873:                         *obj_id,
+874:                         acting_player,
+875:                     ) {
+876:                         continue;
+877:                     }
+878:                 }
+879: 
+880:                 // CR 608.2c: snapshot the pre-move zone so the post-move check below
+881:                 // counts only objects this move actually relocated to the destination
+882:                 // (a no-op or replacement-prevented move returns `Done` without moving).
+883:                 // Mirrors the mass path's `departed`/`moved_count` accounting and the
+884:                 // drain's resume-side increment.
+885:                 let before_zone = state.objects.get(obj_id).map(|object| object.zone);
+886:                 let moved_to_dest = |state: &GameState| {
+887:                     before_zone != Some(dest_zone)
+888:                         && state
+889:                             .objects
+890:                             .get(obj_id)
+891:                             .is_some_and(|object| object.zone == dest_zone)
+892:                 };
+893:                 let per_obj_ctx = ChangeZoneIterationCtx {
+894:                     enter_with_counters: enter_with_counters_for_object(
+895:                         state,
+896:                         ability,
+897:                         *obj_id,
+898:                         &effect_enter_with_counters,
+899:                         &effect_conditional_enter_with_counters,
+900:                     ),
+901:                     ..ctx.clone()
+902:                 };
+903:                 match crate::game::zones::with_departure_member(
+904:                     state,
+905:                     events,
+906:                     owner,
+907:                     *obj_id,
+908:                     |state, events| process_one_zone_move(state, &per_obj_ctx, *obj_id, events),
+909:                 ) {
+910:                     ZoneMoveResult::Done => {
+911:                         if moved_to_dest(state) {
+912:                             moved_count += 1;
+913:                         }
+914:                     }
+915:                     ZoneMoveResult::NeedsAuraAttachmentChoice => {
+916:                         if moved_to_dest(state) {
+917:                             moved_count += 1;
+918:                         }
+
+FILE crates/engine/src/game/effects/sacrifice.rs SHA256 81b55a267e6538f47c406bae9e6dceb0915c187e7d684dc80ffd30b238417d27
+350: 
+351:         // EffectResolved is emitted by the EffectZoneChoice handler after the player chooses
+352:         // (matching the DiscardChoice pattern — single authority for the event).
+353:         return Ok(());
+354:     }
+355: 
+356:     for obj_id in targeted_objects {
+357:         let obj = state
+358:             .objects
+359:             .get(&obj_id)
+360:             .ok_or(EffectError::ObjectNotFound(obj_id))?;
+361: 
+362:         // CR 114.5: Emblems cannot be sacrificed
+363:         if obj.is_emblem {
+364:             continue;
+365:         }
+366: 
+367:         // CR 701.17a: A player can't sacrifice something that isn't a permanent.
+368:         if obj.zone != Zone::Battlefield {
+369:             continue;
+370:         }
+371: 
+372:         // CR 701.17a: Defense-in-depth — a player can only sacrifice permanents
+373:         // they control. The primary fix is that Sacrifice no longer creates
+374:         // target slots (see extract_target_filter_from_effect), but if this
+375:         // path is ever reached, enforce controller ownership.
+376:         //
+377:         // CR 701.17a: "To sacrifice a permanent, its controller moves it..." — for an
+378:         // explicit anaphoric target (ParentTarget/ParentTargetSlot, e.g. Animate
+379:         // Dead's "that creature's controller sacrifices it"), the acting player is
+380:         // the object's OWN current controller, unconditionally, even if control
+381:         // changed since the ability (e.g. a delayed leaves-battlefield trigger) was
+382:         // created. The equality check below remains a valid defense-in-depth guard
+383:         // for every OTHER filter shape reaching this path.
+384:         if obj.controller != ability.controller
+385:             && !matches!(
+386:                 filter,
+387:                 TargetFilter::ParentTarget | TargetFilter::ParentTargetSlot { .. }
+388:             )
+389:         {
+390:             continue;
+391:         }
+392: 
+393:         let player_id = obj.controller;
+394: 
+395:         if crate::game::static_abilities::triggered_cause_sacrifice_or_exile_muzzled(
+396:             state, ability, obj_id, player_id,
+397:         ) {
+398:             continue;
+399:         }
+400: 
+401:         match sacrifice::sacrifice_permanent(state, obj_id, player_id, events) {
+402:             Ok(SacrificeOutcome::Complete) => {}
+403:             Ok(SacrificeOutcome::NeedsReplacementChoice(player)) => {
+404:                 state.waiting_for =
+405:                     crate::game::replacement::replacement_choice_waiting_for(player, state);
+406:                 return Ok(());
+407:             }
+408:             Err(_) => {
+409:                 // Object may have left the battlefield between check and sacrifice;
+410:                 // skip silently (same as the zone check above).
+411:                 continue;
+412:             }
+413:         }
+414:     }
+415: 
+416:     events.push(GameEvent::EffectResolved {
+417:         kind: EffectKind::from(&ability.effect),
+
+FILE crates/engine/src/game/triggers.rs SHA256 05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903
+11735:     /// base (1/1) by `move_to_zone` (CR 400.7). Pre-fix, the Battlefield branch
+11736:     /// read the reverted live object (1/1), so a creature that was 3/3 on the
+11737:     /// battlefield but printed 1/1 failed the > Hulkling-2/2 comparison after
+11738:     /// leaving — wrong. This test moves the entrant off the battlefield via the
+11739:     /// production `move_to_zone` path and asserts the recheck sees the exit LKI.
+11740:     #[test]
+11741:     fn zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield() {
+11742:         // Source = Hulkling 2/2.
+11743:         let mut state = setup();
+11744:         let source = create_object(
+11745:             &mut state,
+11746:             CardId(70),
+11747:             PlayerId(0),
+11748:             "Hulkling, Burgeoning Bruiser".to_string(),
+11749:             Zone::Battlefield,
+11750:         );
+11751:         {
+11752:             let obj = state.objects.get_mut(&source).unwrap();
+11753:             obj.card_types.core_types.push(CoreType::Creature);
+11754:             obj.base_card_types = obj.card_types.clone();
+11755:             obj.base_power = Some(2);
+11756:             obj.base_toughness = Some(2);
+11757:             obj.power = Some(2);
+11758:             obj.toughness = Some(2);
+11759:         }
+11760: 
+11761:         // The condition the parser produces for Hulkling: AnyOf(power>source.power,
+11762:         // toughness>source.toughness) on a creature entering the battlefield. Same
+11763:         // literal as `zone_change_object_condition_entering_greater_pt_than_source`.
+11764:         let condition = TriggerCondition::ZoneChangeObjectMatchesFilter {
+11765:             origin: None,
+11766:             destination: Zone::Battlefield,
+11767:             filter: TargetFilter::Typed(TypedFilter::creature().properties(vec![
+11768:                 FilterProp::AnyOf {
+11769:                     props: vec![
+11770:                         FilterProp::PtComparison {
+11771:                             stat: PtStat::Power,
+11772:                             scope: PtValueScope::Current,
+11773:                             comparator: Comparator::GT,
+11774:                             value: QuantityExpr::Ref {
+11775:                                 qty: QuantityRef::Power {
+11776:                                     scope: crate::types::ability::ObjectScope::Source,
+11777:                                 },
+11778:                             },
+11779:                         },
+11780:                         FilterProp::PtComparison {
+11781:                             stat: PtStat::Toughness,
+11782:                             scope: PtValueScope::Current,
+11783:                             comparator: Comparator::GT,
+11784:                             value: QuantityExpr::Ref {
+11785:                                 qty: QuantityRef::Toughness {
+11786:                                     scope: crate::types::ability::ObjectScope::Source,
+11787:                                 },
+11788:                             },
+11789:                         },
+11790:                     ],
+11791:                 },
+11792:             ])),
+11793:         };
+11794: 
+11795:         // POSITIVE entrant: printed base 1/1 (NOT greater than source 2/2), but
+11796:         // 3/3 while on the battlefield (the layered value greater than 2/2).
+11797:         let entrant = create_object(
+11798:             &mut state,
+11799:             CardId(71),
+11800:             PlayerId(0),
+11801:             "Newcomer".to_string(),
+11802:             Zone::Battlefield,
+11803:         );
+11804:         {
+11805:             let obj = state.objects.get_mut(&entrant).unwrap();
+11806:             obj.card_types.core_types.push(CoreType::Creature);
+11807:             obj.base_card_types = obj.card_types.clone();
+11808:             obj.base_power = Some(1);
+11809:             obj.base_toughness = Some(1);
+11810:             obj.power = Some(1);
+11811:             obj.toughness = Some(1);
+11812:         }
+11813:         // CR 611.2a + CR 613.4c: seed a real temporary layer effect, not derived P/T.
+11814:         let pump_id = state.add_transient_continuous_effect(
+11815:             source,
+11816:             PlayerId(0),
+11817:             crate::types::ability::Duration::UntilEndOfTurn,
+11818:             TargetFilter::SpecificObject { id: entrant },
+11819:             vec![
+11820:                 crate::types::ability::ContinuousModification::AddPower { value: 2 },
+11821:                 crate::types::ability::ContinuousModification::AddToughness { value: 2 },
+11822:             ],
+11823:             None,
+11824:         );
+11825:         crate::game::layers::flush_layers(&mut state);
+11826:         assert_eq!(state.objects[&source].power, Some(2));
+11827:         assert_eq!(state.objects[&source].toughness, Some(2));
+11828:         assert_eq!(state.objects[&entrant].base_power, Some(1));
+11829:         assert_eq!(state.objects[&entrant].power, Some(3));
+11830:         assert_eq!(state.objects[&entrant].toughness, Some(3));
+11831:         // The original ETB event used for the intervening-if recheck.
+11832:         let etb_event = zone_changed_event(
+11833:             entrant,
+11834:             Zone::Hand,
+11835:             Zone::Battlefield,
+11836:             vec![CoreType::Creature],
+11837:             Vec::new(),
+11838:         );
+11839: 
+11840:         // Move the entrant off the battlefield via the PRODUCTION exit path. This
+11841:         // snapshots exit LKI (live 3/3) AND reverts the live object to base (1/1).
+11842:         let mut evs = Vec::new();
+11843:         crate::game::zones::move_to_zone(&mut state, entrant, Zone::Graveyard, &mut evs);
+11844:         assert!(!state
+11845:             .transient_continuous_effects
+11846:             .iter()
+11847:             .any(|effect| effect.id == pump_id));
+11848: 
+11849:         // Non-vacuity: live obj and LKI now hold DISTINCT values. If these ever
+11850:         // coincide the positive/pre-fix discrimination below is meaningless.
+11851:         assert_eq!(
+11852:             state.objects.get(&entrant).unwrap().power,
+11853:             Some(1),
+11854:             "live obj reverted to printed base (1/1) after leaving the battlefield"
+11855:         );
+11856:         assert_eq!(
+11857:             state.lki_cache.get(&entrant).unwrap().power,
+11858:             Some(3),
+11859:             "exit LKI holds the last on-battlefield power (3/3)"
+11860:         );
+11861: 
+11862:         // POSITIVE: exit LKI 3/3 > source 2/2 (CR 608.2h). Pre-fix this read the
+11863:         // reverted live object 1/1 → false; post-fix it reads the exit LKI → true.
+11864:         assert!(
+11865:             check_trigger_condition(
+11866:                 &state,
+11867:                 &condition,
+11868:                 PlayerId(0),
+11869:                 Some(source),
+11870:                 Some(&etb_event)
+11871:             ),
+11872:             "exit LKI 3/3 > source 2/2 (CR 608.2h); pre-fix reads reverted 1/1 -> false"
+11873:         );
+11874: 
+11875:         // NEGATIVE sibling: entrant whose exit LKI is 1/1 (base 1/1, live 1/1 on
+11876:         // battlefield), NOT greater than source 2/2. Discriminates an over-broad
+11877:         // fix that would pass any off-battlefield entrant.
+11878:         let weak = create_object(
+11879:             &mut state,
+11880:             CardId(72),
+11881:             PlayerId(0),
+11882:             "Weakling".to_string(),
+11883:             Zone::Battlefield,
+11884:         );
+11885:         {
+11886:             let obj = state.objects.get_mut(&weak).unwrap();
+11887:             obj.card_types.core_types.push(CoreType::Creature);
+11888:             obj.base_card_types = obj.card_types.clone();
+11889:             obj.base_power = Some(1);
+11890:             obj.base_toughness = Some(1);
+11891:             obj.power = Some(1);
+11892:             obj.toughness = Some(1);
+11893:         }
+11894:         let weak_etb_event = zone_changed_event(
+11895:             weak,
+11896:             Zone::Hand,
+11897:             Zone::Battlefield,
+11898:             vec![CoreType::Creature],
+11899:             Vec::new(),
+11900:         );
+11901:         let mut weak_evs = Vec::new();
+11902:         crate::game::zones::move_to_zone(&mut state, weak, Zone::Graveyard, &mut weak_evs);
+11903:         assert_eq!(
+11904:             state.lki_cache.get(&weak).unwrap().power,
+11905:             Some(1),
+11906:             "exit LKI for the weak entrant is 1/1"
+11907:         );
+11908:         assert!(
+11909:             !check_trigger_condition(
+11910:                 &state,
+11911:                 &condition,
+11912:                 PlayerId(0),
+11913:                 Some(source),
+11914:                 Some(&weak_etb_event)
+11915:             ),
+11916:             "exit LKI 1/1 is not greater than source 2/2 -> false"
+11917:         );
+11918:     }
+11919: 
+11920:     /// CR 400.7 + CR 608.2h + CR 603.4: A leave + re-entry reuses the SAME
+11921:     /// ObjectId but bumps the object's incarnation (`move_to_zone` ->
+11922:     /// `reset_for_battlefield_entry`). An ETB intervening-if triggered by the
+11923:     /// ORIGINAL entry must, when rechecked at resolution (CR 603.4), still use
+11924:     /// the ORIGINAL entrant's information — its last-known information now that it
+11925:     /// has left (CR 608.2h) — NOT the characteristics of the NEW incarnation that
+11926:     /// happens to occupy the same storage id. The incarnation gate in
+11927:     /// `matches_zone_change_event_object_filter` distinguishes the two: the live
+11928:     /// object only counts as "still the original entrant" when its incarnation
+11929:     /// matches the one captured in the ETB record.
+11930:     #[test]
+11931:     fn zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry() {
+11932:         // Source = Hulkling 2/2.
+11933:         let mut state = setup();
+11934:         let source = create_object(
+11935:             &mut state,
+11936:             CardId(70),
+11937:             PlayerId(0),
+11938:             "Hulkling, Burgeoning Bruiser".to_string(),
+11939:             Zone::Battlefield,
+11940:         );
+11941:         {
+11942:             let obj = state.objects.get_mut(&source).unwrap();
+11943:             obj.card_types.core_types.push(CoreType::Creature);
+11944:             obj.base_card_types = obj.card_types.clone();
+11945:             obj.base_power = Some(2);
+11946:             obj.base_toughness = Some(2);
+11947:             obj.power = Some(2);
+11948:             obj.toughness = Some(2);
+11949:         }
+11950: 
+11951:         // Hulkling's intervening-if: AnyOf(power>source.power, toughness>source.toughness)
+11952:         // on a creature entering the battlefield (same literal as the sibling tests).
+11953:         let condition = TriggerCondition::ZoneChangeObjectMatchesFilter {
+11954:             origin: None,
+11955:             destination: Zone::Battlefield,
+11956:             filter: TargetFilter::Typed(TypedFilter::creature().properties(vec![
+11957:                 FilterProp::AnyOf {
+11958:                     props: vec![
+11959:                         FilterProp::PtComparison {
+11960:                             stat: PtStat::Power,
+11961:                             scope: PtValueScope::Current,
+11962:                             comparator: Comparator::GT,
+11963:                             value: QuantityExpr::Ref {
+11964:                                 qty: QuantityRef::Power {
+11965:                                     scope: crate::types::ability::ObjectScope::Source,
+11966:                                 },
+11967:                             },
+11968:                         },
+11969:                         FilterProp::PtComparison {
+11970:                             stat: PtStat::Toughness,
+11971:                             scope: PtValueScope::Current,
+11972:                             comparator: Comparator::GT,
+11973:                             value: QuantityExpr::Ref {
+11974:                                 qty: QuantityRef::Toughness {
+11975:                                     scope: crate::types::ability::ObjectScope::Source,
+11976:                                 },
+11977:                             },
+11978:                         },
+11979:                     ],
+11980:                 },
+11981:             ])),
+11982:         };
+11983: 
+11984:         // Entrant created in hand with printed base 1/1.
+11985:         let entrant = create_object(
+11986:             &mut state,
+11987:             CardId(71),
+11988:             PlayerId(0),
+11989:             "Newcomer".to_string(),
+11990:             Zone::Hand,
+11991:         );
+11992:         {
+11993:             let obj = state.objects.get_mut(&entrant).unwrap();
+11994:             obj.card_types.core_types.push(CoreType::Creature);
+11995:             obj.base_card_types = obj.card_types.clone();
+11996:             obj.base_power = Some(1);
+11997:             obj.base_toughness = Some(1);
+11998:             obj.power = Some(1);
+11999:             obj.toughness = Some(1);
+12000:         }
+12001: 
+12002:         // FIRST battlefield entry via the PRODUCTION path. This is the event the
+12003:         // intervening-if is rechecked against; its record carries
+12004:         // `entered_incarnation` = the entrant's incarnation at this entry (CR 400.7).
+12005:         let mut first_evs = Vec::new();
+12006:         crate::game::zones::move_to_zone(&mut state, entrant, Zone::Battlefield, &mut first_evs);
+12007:         let etb_event = first_evs
+12008:             .into_iter()
+12009:             .find(|e| {
+12010:                 matches!(
+12011:                     e,
+12012:                     GameEvent::ZoneChanged {
+12013:                         to: Zone::Battlefield,
+12014:                         ..
+12015:                     }
+12016:                 )
+12017:             })
+12018:             .expect("first battlefield entry produced a ZoneChanged event");
+12019:         let GameEvent::ZoneChanged { record, .. } = &etb_event else {
+12020:             unreachable!("etb_event is ZoneChanged");
+12021:         };
+12022:         let first_incarnation = record
+12023:             .entered_incarnation
+12024:             .expect("production battlefield entry records entered_incarnation");
+12025: 
+12026:         // While on the battlefield the entrant is buffed to 3/3 (layered above its
+12027:         // printed base), which IS greater than the source's 2/2 threshold.
+12028: 
+12029:         // CR 611.2a + CR 613.4c: seed a real temporary layer effect, not derived P/T.
+12030:         let pump_id = state.add_transient_continuous_effect(
+12031:             source,
+12032:             PlayerId(0),
+12033:             crate::types::ability::Duration::UntilEndOfTurn,
+12034:             TargetFilter::SpecificObject { id: entrant },
+12035:             vec![
+12036:                 crate::types::ability::ContinuousModification::AddPower { value: 2 },
+12037:                 crate::types::ability::ContinuousModification::AddToughness { value: 2 },
+12038:             ],
+12039:             None,
+12040:         );
+12041:         crate::game::layers::flush_layers(&mut state);
+12042:         assert_eq!(state.objects[&source].power, Some(2));
+12043:         assert_eq!(state.objects[&source].toughness, Some(2));
+12044:         assert_eq!(state.objects[&entrant].base_power, Some(1));
+12045:         assert_eq!(state.objects[&entrant].power, Some(3));
+12046:         assert_eq!(state.objects[&entrant].toughness, Some(3));
+12047:         // Leave to the graveyard via the production exit path: caches exit LKI
+12048:         // (3/3) and reverts the live object to its printed base (1/1).
+12049:         let mut leave_evs = Vec::new();
+12050:         crate::game::zones::move_to_zone(&mut state, entrant, Zone::Graveyard, &mut leave_evs);
+12051:         assert!(!state
+12052:             .transient_continuous_effects
+12053:             .iter()
+12054:             .any(|effect| effect.id == pump_id));
+12055:         assert_eq!(
+12056:             state.lki_cache.get(&entrant).unwrap().power,
+12057:             Some(3),
+12058:             "exit LKI holds the last on-battlefield power (3/3)"
+12059:         );
+12060: 
+12061:         // RE-ENTER the battlefield with the SAME ObjectId. `reset_for_battlefield_entry`
+12062:         // bumps the incarnation; the live object is base 1/1 again.
+12063:         let mut reentry_evs = Vec::new();
+12064:         crate::game::zones::move_to_zone(&mut state, entrant, Zone::Battlefield, &mut reentry_evs);
+12065:         let live = state.objects.get(&entrant).unwrap();
+12066:         assert_eq!(
+12067:             live.zone,
+12068:             Zone::Battlefield,
+12069:             "entrant occupies the battlefield again under the same ObjectId"
+12070:         );
+12071:         assert_eq!(
+12072:             live.power,
+12073:             Some(1),
+12074:             "re-entered incarnation is printed base 1/1"
+12075:         );
+12076:         assert!(
+12077:             live.incarnation > first_incarnation,
+12078:             "re-entry bumped the incarnation past the original entry (live {} > original {})",
+12079:             live.incarnation,
+12080:             first_incarnation
+12081:         );
+12082: 
+12083:         // The intervening-if recheck against the ORIGINAL ETB event must use the
+12084:         // ORIGINAL entrant's exit LKI (3/3 > 2/2 -> true). The incarnation gate
+12085:         // makes `still_on_battlefield` FALSE (live incarnation != recorded entry
+12086:         // incarnation), routing the recheck to the exit LKI.
+12087:         //
+12088:         // DISCRIMINATION: reverting the incarnation gate in
+12089:         // `matches_zone_change_event_object_filter` (back to a zone-only
+12090:         // `still_on_battlefield` check) FLIPS this assertion — the re-entered
+12091:         // object is on the battlefield under the same id, so the recheck reads the
+12092:         // live reverted base 1/1, and 1/1 > 2/2 is false.
+12093:         assert!(
+12094:             check_trigger_condition(
+12095:                 &state,
+12096:                 &condition,
+12097:                 PlayerId(0),
+12098:                 Some(source),
+12099:                 Some(&etb_event)
+12100:             ),
+12101:             "original exit LKI 3/3 > source 2/2 (CR 608.2h); reverting the \
+12102:              incarnation gate reads the re-entered base 1/1 -> false"
+12103:         );
+12104:     }
+12105: 
+12106:     #[test]
+
+FILE crates/engine/tests/integration/trigger_suppression_event_timing.rs SHA256 85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11
+4235: fn resolver_reentry_case(reverse: bool, replacement: bool, terminal_sacrifice: bool) {
+4236:     let mut s = scenario();
+4237:     let x = {
+4238:         let mut x = s.add_creature(P0, "Test replacement subject X", 2, 2);
+4239:         if replacement {
+4240:             let redirect = change(TargetFilter::SelfRef, Zone::Battlefield, Zone::Battlefield);
+4241:             let execute = if terminal_sacrifice {
+4242:                 chain(
+4243:                     redirect,
+4244:                     ability(Effect::Sacrifice {
+4245:                         target: TargetFilter::SelfRef,
+4246:                         count: fixed(1),
+4247:                         min_count: 0,
+4248:                     }),
+4249:                 )
+4250:             } else {
+4251:                 redirect
+4252:             };
+4253:             let mut definition = ReplacementDefinition::new(ReplacementEvent::Moved)
+4254:                 .valid_card(TargetFilter::SelfRef)
+4255:                 .destination_zone(Zone::Graveyard)
+4256:                 .execute(execute);
+4257:             definition.consume_on_apply = true;
+4258:             x.with_replacement_definition(definition);
+4259:         }
+4260:         x.id()
+4261:     };
+4262:     let y = s.add_creature(P0, "Test direct subject Y", 2, 2).id();
+4263:     let later = traveler(&mut s);
+4264:     let later_kill = typed_spell(&mut s, destroy(specific(later)));
+4265:     let spell = typed_spell(
+4266:         &mut s,
+4267:         change(creature_filter(), Zone::Battlefield, Zone::Graveyard)
+4268:             .multi_target(MultiTargetSpec::fixed(2, 2)),
+4269:     );
+4270:     let mut r = s.build();
+4271:     let initial_x = r.state().objects[&x].incarnation;
+4272:     let initial_y = r.state().objects[&y].incarnation;
+4273:     let targets = if reverse { [y, x] } else { [x, y] };
+4274:     let result = r.cast(spell).target_objects(&targets).resolve();
+4275:     result.assert_zone(&[spell, y], Zone::Graveyard);
+4276:     assert!(matches!(
+4277:         result.final_waiting_for(),
+4278:         WaitingFor::Priority { .. }
+4279:     ));
+4280:     assert!(result.state().stack.is_empty());
+4281:     assert!(result.state().pending_replacement.is_none());
+4282:     assert!(result.state().post_replacement_drains.is_empty());
+4283:     assert!(result.state().pending_change_zone_iteration.is_none());
+4284:     let replacement_count = result
+4285:         .events()
+4286:         .iter()
+4287:         .filter(|event| {
+4288:             matches!(event,
+4289:         GameEvent::ReplacementApplied { source_id, .. } if *source_id == x)
+4290:         })
+4291:         .count();
+4292:     let sacrificed = |id| {
+4293:         result
+4294:             .events()
+4295:             .iter()
+4296:             .filter(|event| {
+4297:                 matches!(event,
+4298:         GameEvent::PermanentSacrificed { object_id, .. } if *object_id == id)
+4299:             })
+4300:             .count()
+4301:     };
+4302:     let x_departures: Vec<_> = result
+4303:         .events()
+4304:         .iter()
+4305:         .filter_map(|event| match event {
+4306:             GameEvent::ZoneChanged {
+4307:                 object_id,
+4308:                 from: Some(Zone::Battlefield),
+4309:                 record,
+4310:                 to,
+4311:                 ..
+4312:             } if *object_id == x => Some((*to, record.as_ref())),
+4313:             _ => None,
+4314:         })
+4315:         .collect();
+4316:     let y_record = departure(&result, y);
+4317:     eprintln!("RESOLVER_REENTRY reverse={reverse} replacement={replacement} terminal={terminal_sacrifice} replacements={replacement_count} x_sacrifices={} x_departures={:?} y_peers={:?} y_snapshot={:?} initial_x={initial_x} final_x={} initial_y={initial_y} final_y={}",
+4318:         sacrificed(x), x_departures, y_record.co_departed, y_record.trigger_suppression,
+4319:         result.state().objects[&x].incarnation, result.state().objects[&y].incarnation);
+4320:     assert_eq!(replacement_count, usize::from(replacement));
+4321:     assert_eq!(
+4322:         sacrificed(x),
+4323:         usize::from(replacement && terminal_sacrifice)
+4324:     );
+4325:     assert_eq!(sacrificed(y), 0);
+4326:     assert!(!result.events().iter().any(|event| matches!(
+4327:         event,
+4328:         GameEvent::ZoneChanged {
+4329:             from: Some(Zone::Battlefield),
+4330:             to: Zone::Battlefield,
+4331:             ..
+4332:         }
+4333:     )));
+4334:     assert_eq!(result.state().objects[&y].incarnation, initial_y + 1);
+4335:     assert_snapshot(y_record, false, false);
+4336:     if !replacement {
+4337:         result.assert_zone(&[x], Zone::Graveyard);
+4338:         assert_eq!(x_departures.len(), 1);
+4339:         assert_eq!(x_departures[0].0, Zone::Graveyard);
+4340:         let x_record = x_departures[0].1;
+4341:         assert_snapshot(x_record, false, false);
+4342:         assert_eq!(x_record.co_departed, vec![y]);
+4343:         assert_eq!(y_record.co_departed, vec![x]);
+4344:         assert_eq!(result.state().objects[&x].incarnation, initial_x + 1);
+4345:     } else if terminal_sacrifice {
+4346:         result.assert_zone(&[x], Zone::Graveyard);
+4347:         assert_eq!(x_departures.len(), 1);
+4348:         assert_eq!(x_departures[0].0, Zone::Graveyard);
+4349:         let x_record = x_departures[0].1;
+4350:         assert_eq!(result.state().objects[&x].incarnation, initial_x + 1);
+4351:         assert_ne!(
+4352:             x_record.turn_zone_change_index,
+4353:             y_record.turn_zone_change_index
+4354:         );
+4355:         // The independent child has no fresh layer boundary beneath a capturing ancestor.
+4356:         assert!(x_record.trigger_suppression.is_none());
+4357:         assert!(x_record.co_departed.is_empty());
+4358:         assert!(y_record.co_departed.is_empty());
+4359:     } else {
+4360:         result.assert_zone(&[x], Zone::Battlefield);
+4361:         assert!(x_departures.is_empty());
+4362:         assert_eq!(result.state().objects[&x].incarnation, initial_x);
+4363:         assert!(y_record.co_departed.is_empty());
+4364:     }
+4365:     assert_eq!(spirits(result.state()), 0);
+4366:     let later_result = r.cast(later_kill).target_object(later).resolve();
+4367:     later_result.assert_zone(&[later, later_kill], Zone::Graveyard);
+4368:     assert_eq!(spirits(later_result.state()), 1);
+4369:     assert_snapshot(departure(&later_result, later), false, false);
+4370:     assert!(departure(&later_result, later).co_departed.is_empty());
+4371: }
+4372: 
+4373: #[test]
+4374: fn resolver_reentry_same_incarnation_cannot_claim_outer_departure() {
+4375:     resolver_reentry_case(false, true, true);
+4376: }
+4377: #[test]
+4378: fn resolver_reentry_same_incarnation_cannot_claim_outer_departure_reversed() {
+4379:     resolver_reentry_case(true, true, true);
+4380: }
+4381: #[test]
+4382: fn resolver_reentry_no_replacement_borrows_outer_owner() {
+4383:     for reverse in [false, true] {
+4384:         resolver_reentry_case(reverse, false, false);
+4385:     }
+4386: }
+4387: #[test]
+4388: fn resolver_reentry_redirect_only_preserves_original_incarnation() {
+4389:     for reverse in [false, true] {
+4390:         resolver_reentry_case(reverse, true, false);
+4391:     }
+4392: }
+4393: 
+4394: fn component_pending(state: &GameState) -> &engine::types::game_state::PendingCast {
+4395:     state
+4997: fn original_entry_lki_public_case(reenter: bool, buff: bool) {
+4998:     use engine::types::ability::{
+4999:         FilterProp, ObjectScope, PtStat, PtValueScope, QuantityRef, TriggerCondition,
+5000:     };
+5001:     use engine::types::game_state::{FullControlMode, StackEntryKind};
+5002:     let mut s = scenario();
+5003:     let entrant = s
+5004:         .add_creature_to_hand(P0, "Test original entrant", 1, 1)
+5005:         .id();
+5006:     let condition = TriggerCondition::ZoneChangeObjectMatchesFilter {
+5007:         origin: None,
+5008:         destination: Zone::Battlefield,
+5009:         filter: TargetFilter::Typed(TypedFilter::creature().properties(vec![FilterProp::AnyOf {
+5010:             props: vec![
+5011:                 FilterProp::PtComparison {
+5012:                     stat: PtStat::Power,
+5013:                     scope: PtValueScope::Current,
+5014:                     comparator: Comparator::GT,
+5015:                     value: QuantityExpr::Ref {
+5016:                         qty: QuantityRef::Power {
+5017:                             scope: ObjectScope::Source,
+5018:                         },
+5019:                     },
+5020:                 },
+5021:                 FilterProp::PtComparison {
+5022:                     stat: PtStat::Toughness,
+5023:                     scope: PtValueScope::Current,
+5024:                     comparator: Comparator::GT,
+5025:                     value: QuantityExpr::Ref {
+5026:                         qty: QuantityRef::Toughness {
+5027:                             scope: ObjectScope::Source,
+5028:                         },
+5029:                     },
+5030:                 },
+5031:             ],
+5032:         }])),
+5033:     };
+5034:     let observer = s
+5035:         .add_creature(P0, "Test entrant threshold observer", 2, 2)
+5036:         .with_trigger_definition(
+5037:             TriggerDefinition::new(TriggerMode::ChangesZone)
+5038:                 .destination(Zone::Battlefield)
+5039:                 .valid_card(specific(entrant))
+5040:                 .condition(condition)
+5041:                 .execute(gain(1)),
+5042:         )
+5043:         .id();
+5044:     let unrelated = s.add_vanilla(P0, 1, 1);
+5045:     let grant = s
+5046:         .add_creature(P0, "Test specific entrant static source", 0, 0)
+5047:         .as_enchantment()
+5048:         .with_static_definition(
+5049:             StaticDefinition::new(StaticMode::Continuous)
+5050:                 .affected(specific(if buff { entrant } else { unrelated }))
+5051:                 .modifications(vec![
+5052:                     ContinuousModification::AddPower { value: 2 },
+5053:                     ContinuousModification::AddToughness { value: 2 },
+5054:                 ]),
+5055:         )
+5056:         .id();
+5057:     let entry = typed_spell(
+5058:         &mut s,
+5059:         change(
+5060:             TargetFilter::And {
+5061:                 filters: vec![creature_filter(), specific(entrant)],
+5062:             },
+5063:             Zone::Hand,
+5064:             Zone::Battlefield,
+5065:         ),
+5066:     );
+5067:     let exit = typed_spell(
+5068:         &mut s,
+5069:         change(specific(entrant), Zone::Battlefield, Zone::Graveyard),
+5070:     );
+5071:     let remove_grant = typed_spell(
+5072:         &mut s,
+5073:         change(specific(grant), Zone::Battlefield, Zone::Exile),
+5074:     );
+5075:     let return_spell = typed_spell(
+5076:         &mut s,
+5077:         mass_change(specific(entrant), Zone::Graveyard, Zone::Battlefield),
+5078:     );
+5079:     let mut r = s.build();
+5080:     for actor in [P0, P1] {
+5081:         engine::game::engine::apply(
+5082:             r.state_mut(),
+5083:             actor,
+5084:             GameAction::SetFullControl {
+5085:                 mode: FullControlMode::Locked,
+5086:             },
+5087:         )
+5088:         .unwrap();
+5089:     }
+5090:     drop(r.cast(entry).target_object(entrant).commit());
+5091:     let events = resolve_committed_response(&mut r, entry);
+5092:     let entry_event=events.iter().find(|event|matches!(event,
+5093:         GameEvent::ZoneChanged {object_id,from:Some(Zone::Hand),to:Zone::Battlefield,..} if *object_id==entrant))
+5094:         .expect("real original entry");
+5095:     let GameEvent::ZoneChanged { record, .. } = entry_event else {
+5096:         unreachable!()
+5097:     };
+5098:     let original_incarnation = record.entered_incarnation.unwrap();
+5099:     assert_eq!(r.state().objects[&observer].power, Some(2));
+5100:     assert_eq!(r.state().objects[&entrant].base_power, Some(1));
+5101:     assert_eq!(
+5102:         r.state().objects[&entrant].power,
+5103:         Some(if buff { 3 } else { 1 })
+5104:     );
+5105:     let triggered = |state: &GameState| {
+5106:         state
+5107:             .stack
+5108:             .iter()
+5109:             .filter(|entry| {
+5110:                 entry.source_id == observer
+5111:                     && matches!(entry.kind, StackEntryKind::TriggeredAbility { .. })
+5112:             })
+5113:             .count()
+5114:     };
+5115:     assert_eq!(triggered(r.state()), usize::from(buff));
+5116:     if !buff {
+5117:         settle(&mut r);
+5118:         assert_eq!(r.life(P0), 20);
+5119:         assert_eq!(r.state().objects[&unrelated].power, Some(3));
+5120:         return;
+5121:     }
+5122:     assert_eq!(r.life(P0), 20, "original trigger remains unresolved");
+5123:     drop(r.cast(exit).target_object(entrant).commit());
+5124:     let exit_events = resolve_committed_response(&mut r, exit);
+5125:     assert_eq!(event_departure(&exit_events, entrant).power, Some(3));
+5126:     assert_eq!(r.state().lki_cache[&entrant].power, Some(3));
+5127:     assert_eq!(r.state().objects[&entrant].power, Some(1));
+5128:     assert_eq!(triggered(r.state()), 1);
+5129:     drop(r.cast(remove_grant).target_object(grant).commit());
+5130:     resolve_committed_response(&mut r, remove_grant);
+5131:     assert_eq!(r.state().objects[&grant].zone, Zone::Exile);
+5132:     if reenter {
+5133:         drop(r.cast(return_spell).commit());
+5134:         let return_events = resolve_committed_response(&mut r, return_spell);
+5135:         assert!(return_events.iter().any(|event| matches!(event,
+5136:             GameEvent::ZoneChanged {object_id,to:Zone::Battlefield,..} if *object_id==entrant)));
+5137:         assert_ne!(
+5138:             r.state().objects[&entrant].incarnation,
+5139:             original_incarnation
+5140:         );
+5141:         assert_eq!(r.state().objects[&entrant].power, Some(1));
+5142:         assert_eq!(
+5143:             triggered(r.state()),
+5144:             1,
+5145:             "new 1/1 entry creates no qualifying trigger"
+5146:         );
+5147:     }
+5148:     assert_eq!(r.state().objects[&unrelated].zone, Zone::Battlefield);
+5149:     assert_eq!(r.state().objects[&unrelated].power, Some(1));
+5150:     settle(&mut r);
+5151:     // CR 603.4 + CR 608.2h: the original intervening-if uses the entrant's exit LKI.
+5152:     assert_eq!(r.life(P0), 21);
+5153: }
+5154: #[test]
+5155: fn original_entry_lki_public_responses_preserve_original_condition() {
+5156:     original_entry_lki_public_case(false, true);
+5157: }
+5158: #[test]
+5159: fn original_entry_lki_public_same_id_reentry_preserves_original_condition() {
+5160:     original_entry_lki_public_case(true, true);
+5161: }
+5162: #[test]
+5163: fn original_entry_lki_public_unpumped_entry_does_not_trigger() {
+5164:     original_entry_lki_public_case(false, false);
+5165: }
+5166: 
+5167: fn temporary_theft(target: TargetFilter) -> AbilityDefinition {
+5168:     let mut theft = ability(Effect::GainControl { target });
+5169:     theft.duration = Some(engine::types::ability::Duration::UntilEndOfTurn);
+5170:     theft
+5171: }
+5172: 
+5173: #[test]
+5174: fn real_control_spell_then_bounce_uses_exit_controller_for_draw() {
+5175:     use engine::types::ability::{AbilityCondition, BounceSelection, TypeFilter};
+5176:     for theft in [false, true] {
+5177:         let mut s = scenario();
+5178:         s.with_library_top(P0, &["Draw one", "Draw two"]);
+5179:         let target = s
+5180:             .add_creature(P1, "Test opponent artifact", 0, 1)
+5181:             .as_artifact()
+5182:             .id();
+5183:         let filter = TargetFilter::Typed(TypedFilter::new(TypeFilter::Artifact));
+5184:         let steal = typed_spell(&mut s, temporary_theft(filter.clone()));
+5185:         let draw = ability(Effect::Draw {
+5186:             count: fixed(1),
+5187:             target: TargetFilter::Controller,
+5188:         })
+5189:         .condition(AbilityCondition::TargetMatchesFilter {
+5190:             filter: TargetFilter::Typed(TypedFilter::permanent().controller(ControllerRef::You)),
+5191:             use_lki: true,
+5192:             subject_slot: None,
+5193:         });
+5194:         let bounce = typed_spell(
+5195:             &mut s,
+5196:             chain(
+5197:                 ability(Effect::Bounce {
+5198:                     target: filter,
+5199:                     destination: None,
+5200:                     selection: BounceSelection::Targeted,
+5201:                 }),
+5202:                 draw,
+5203:             ),
+5204:         );
+5205:         let mut r = s.build();
+5206:         if theft {
+5207:             let result = r.cast(steal).target_object(target).resolve();
+5208:             result.assert_zone(&[steal], Zone::Graveyard);
+5209:             assert_eq!(r.state().objects[&target].controller, P0);
+5210:         }
+5211:         assert_eq!(r.state().objects[&target].owner, P1);
+5212:         let result = r.cast(bounce).target_object(target).resolve();
+5213:         result.assert_zone(&[target], Zone::Hand);
+5214:         result.assert_zone(&[bounce], Zone::Graveyard);
+5215:         result.assert_hand_drawn(P0, i64::from(theft));
+5216:         assert_eq!(result.state().objects[&target].controller, P1);
+5217:         assert_eq!(
+5218:             departure(&result, target).controller,
+5219:             if theft { P0 } else { P1 }
+5220:         );
+5221:         assert_eq!(
+5222:             result.state().lki_cache[&target].controller,
+5223:             if theft { P0 } else { P1 }
+5224:         );
+5225:         assert!(result.state().players[1].hand.contains(&target));
+5226:     }
+5227: }
+5228: 
+5229: #[test]
+5230: fn real_control_spell_then_oracle_oversimplify_keeps_per_player_exit_power() {
+5231:     let db = crate::support::shared_card_db()
+5232:         .expect("card database is required for Oversimplify execution");
+5233:     let face = db.get_face_by_name("Oversimplify").unwrap();
+5234:     let definition = face.abilities.first().unwrap();
+5235:     assert_implemented(definition);
+5236:     for theft in [false, true] {
+5237:         let mut s = scenario();
+5238:         let big = s.add_creature(P0, "Test P0 4/4", 4, 4).id();
+5239:         let small = s.add_creature(P0, "Test P0 1/1", 1, 1).id();
+5240:         let mid = s.add_creature(P1, "Test P1 3/3", 3, 3).id();
+5241:         let stolen = s.add_creature(P0, "Test P0 owned 2/2", 2, 2).id();
+5242:         let steal = s
+5243:             .add_spell_to_hand(P1, "Test P1 temporary theft", true)
+5244:             .with_ability_definition(temporary_theft(TargetFilter::And {
+5245:                 filters: vec![creature_filter(), specific(stolen)],
+5246:             }))
+5247:             .id();
+5248:         s.with_mana_pool(
+5249:             P0,
+5250:             [
+5251:                 ManaType::Colorless,
+5252:                 ManaType::Colorless,
+5253:                 ManaType::Colorless,
+5254:                 ManaType::Green,
+5255:                 ManaType::Blue,
+5256:             ]
+5257:             .into_iter()
+5258:             .map(|color| ManaUnit::new(color, ObjectId(0), false, vec![]))
+5259:             .collect(),
+5260:         );
+5261:         let spell = s
+5262:             .add_spell_to_hand(P0, "Oversimplify", false)
+5263:             .with_ability_definition(definition.clone())
+5264:             .with_mana_cost(ManaCost::Cost {
+5265:                 generic: 3,
+5266:                 shards: vec![ManaCostShard::Green, ManaCostShard::Blue],
+5267:             })
+5268:             .id();
+5269:         let mut r = s.build();
+5270:         if theft {
+5271:             if r.state().priority_player != P1 {
+5272:                 r.act(GameAction::PassPriority).unwrap();
+5273:             }
+5274:             r.cast(steal)
+5275:                 .target_object(stolen)
+5276:                 .resolve()
+5277:                 .assert_zone(&[steal], Zone::Graveyard);
+5278:             assert_eq!(r.state().objects[&stolen].controller, P1);
+5279:         }
+5280:         assert_eq!(r.state().objects[&stolen].owner, P0);
+5281:         if r.state().priority_player != P0 {
+5282:             r.act(GameAction::PassPriority).unwrap();
+5283:         }
+5284:         let result = r.cast(spell).resolve();
+5285:         result.assert_zone(&[big, small, mid, stolen], Zone::Exile);
+5286:         result.assert_zone(&[spell], Zone::Graveyard);
+5287:         assert_eq!(result.state().objects[&spell].mana_spent_to_cast_amount, 5);
+5288:         assert_eq!(
+5289:             departure(&result, stolen).controller,
+5290:             if theft { P1 } else { P0 }
+5291:         );
+5292:         assert_eq!(departure(&result, stolen).power, Some(2));
+5293:         assert_eq!(result.state().objects[&stolen].controller, P0);
+5294:         assert_eq!(
+5295:             result.state().lki_cache[&stolen].controller,
+5296:             if theft { P1 } else { P0 }
+5297:         );
+5298:         for (controller, expected) in [
+5299:             (P0, if theft { 5 } else { 7 }),
+5300:             (P1, if theft { 5 } else { 3 }),
+5301:         ] {
+5302:             let tokens: Vec<_> = result
+5303:                 .state()
+5304:                 .battlefield
+5305:                 .iter()
+5306:                 .filter_map(|id| result.state().objects.get(id))
+5307:                 .filter(|object| {
+5308:                     object.name == "Fractal" && object.is_token && object.controller == controller
+5309:                 })
+5310:                 .collect();
+5311:             assert_eq!(tokens.len(), 1);
+5312:             assert_eq!(
+5313:                 tokens[0].counters.get(&CounterType::Plus1Plus1).copied(),
+5314:                 Some(expected)
+5315:             );
+5316:         }
+5317:     }
+5318: }
+5319: 
+5320: #[test]
+5321: fn effect_zone_choice_replaces_nonempty_tracked_set_and_preserves_empty_compatibility() {
+5322:     use engine::types::ability::QuantityRef;
+5323:     for empty in [false, true] {
+5324:         for with_hush in [false, true] {
+5325:             let mut s = scenario();
+5326:             let h = if with_hush {
+5327:                 hush(&mut s)
+5328:             } else {
+
+FILE crates/engine/tests/integration/oversimplify_per_player_fractal.rs SHA256 c0f3c1512a23df4005facfb0b605558022fa605766e30a827a11f03f0e2a6b51
+1: //! Oversimplify (SOC/C21/DSC/PRM) — per-player Fractal token counter count.
+2: //!
+3: //! Oracle text:
+4: //!   "Exile all creatures. Each player creates a 0/0 green and blue Fractal
+5: //!    creature token and puts a number of +1/+1 counters on it equal to the
+6: //!    total power of creatures they controlled that were exiled this way."
+7: //!
+8: //! Pre-fix bug: the dynamic-quantity clause was silently swallowed at parse
+9: //! time (`SwallowedClause` / `DynamicQty`), so the Fractal token entered with
+10: //! `enter_with_counters: []` and was a 0/0 — instantly dead to SBAs. Four
+11: //! repairs land the card end-to-end:
+12: //!
+13: //!   1. Parser — `try_parse_put_counters_on_token_followup` now accepts the
+14: //!      third-person `puts ` verb AND the `"a number of <type> counters on it
+15: //!      equal to <quantity>"` body (delegating to the shared
+16: //!      `parse_dynamic_counter_suffix_body`).
+17: //!   2. Parser — `parse_type_phrase_with_ctx` lowers
+18: //!      `"creatures they controlled that were exiled this way"` into a
+19: //!      composite `And{Typed{Creature,ScopedPlayer}, ExiledBySource}` filter.
+20: //!   3. Engine — `QuantityRef::Aggregate{Power|Toughness}` falls back to the
+21: //!      LKI snapshot when the matched object is off battlefield, per CR 608.2h
+22: //!      + CR 400.7. Without this, the aggregate returned 0 because
+23: //!        `obj.power` is `None` for non-battlefield objects.
+24: //!   4. Engine — `Typed{controller: ...}` filter evaluation falls back to the
+25: //!      LKI controller for non-battlefield objects, so "they controlled"
+26: //!      semantics work even for stolen creatures (whose post-exile controller
+27: //!      resets to owner).
+28: //!
+29: //! This test drives the real resolver (`resolve_ability_chain`) end-to-end:
+30: //! exile all creatures, then verify each player's Fractal token enters with
+31: //! the correct counter count equal to that player's total exiled power.
+32: 
+33: use engine::game::ability_utils::build_resolved_from_def;
+34: use engine::game::effects::resolve_ability_chain;
+35: use engine::game::zones::create_object;
+36: use engine::types::card_type::CoreType;
+37: use engine::types::counter::CounterType;
+38: use engine::types::events::GameEvent;
+39: use engine::types::game_state::GameState;
+40: use engine::types::identifiers::CardId;
+41: use engine::types::player::PlayerId;
+42: use engine::types::zones::Zone;
+43: 
+44: use crate::support::shared_card_db as load_db;
+45: 
+46: fn add_creature(
+47:     state: &mut GameState,
+48:     card_id: u64,
+49:     owner: PlayerId,
+50:     name: &str,
+51:     power: i32,
+52:     toughness: i32,
+53: ) -> engine::types::identifiers::ObjectId {
+54:     let id = create_object(
+55:         state,
+56:         CardId(card_id),
+57:         owner,
+58:         name.to_string(),
+59:         Zone::Battlefield,
+60:     );
+61:     let obj = state.objects.get_mut(&id).unwrap();
+62:     obj.card_types.core_types.push(CoreType::Creature);
+63:     obj.base_card_types = obj.card_types.clone();
+64:     obj.power = Some(power);
+65:     obj.toughness = Some(toughness);
+66:     obj.base_power = Some(power);
+67:     obj.base_toughness = Some(toughness);
+68:     // Ensure the battlefield list reflects the live creature.
+69:     if !state.battlefield.contains(&id) {
+70:         state.battlefield.push_back(id);
+71:     }
+72:     id
+73: }
+74: 
+75: #[test]
+76: fn oversimplify_per_player_fractal_counters_match_exiled_power() {
+77:     let Some(db) = load_db() else {
+78:         // No card-data export available in this build — skip.
+79:         return;
+80:     };
+81: 
+82:     let face = db
+83:         .get_face_by_name("Oversimplify")
+84:         .expect("Oversimplify should be in the card database");
+85:     let definition = face
+86:         .abilities
+87:         .first()
+88:         .expect("Oversimplify should parse a spell ability");
+89: 
+90:     // ----- Parser-level assertions (the four-task class repair). -----
+91:     use engine::types::ability::{
+92:         AggregateFunction, ControllerRef, Effect, ObjectProperty, QuantityExpr, QuantityRef,
+93:         TargetFilter, TypedFilter,
+94:     };
+95:     let Effect::ChangeZoneAll { .. } = definition.effect.as_ref() else {
+96:         panic!(
+97:             "Oversimplify must start with ChangeZoneAll (exile all creatures), got {:?}",
+98:             definition.effect
+99:         );
+100:     };
+101:     let token_def = definition
+102:         .sub_ability
+103:         .as_deref()
+104:         .expect("Oversimplify chains the per-player Token sub-ability");
+105:     let Effect::Token {
+106:         enter_with_counters,
+107:         ..
+108:     } = token_def.effect.as_ref()
+109:     else {
+110:         panic!(
+111:             "Oversimplify's sub-ability must be a Token effect, got {:?}",
+112:             token_def.effect
+113:         );
+114:     };
+115:     assert_eq!(
+116:         enter_with_counters.len(),
+117:         1,
+118:         "the Fractal token must carry exactly one enter_with_counters entry — \
+119:          pre-fix this list was empty (DynamicQty SwallowedClause)"
+120:     );
+121:     let (counter_type, count_expr) = &enter_with_counters[0];
+122:     assert_eq!(*counter_type, CounterType::Plus1Plus1);
+123:     let expected_count = QuantityExpr::Ref {
+124:         qty: QuantityRef::Aggregate {
+125:             function: AggregateFunction::Sum,
+126:             property: ObjectProperty::Power,
+127:             filter: TargetFilter::And {
+128:                 filters: vec![
+129:                     TargetFilter::Typed(
+130:                         TypedFilter::creature().controller(ControllerRef::ScopedPlayer),
+131:                     ),
+132:                     TargetFilter::ExiledBySource,
+133:                 ],
+134:             },
+135:         },
+136:     };
+137:     assert_eq!(
+138:         count_expr, &expected_count,
+139:         "the counter quantity must be the composite Aggregate{{Sum, Power, \
+140:          And[Typed{{Creature, ScopedPlayer}}, ExiledBySource]}}"
+141:     );
+142: 
+143:     // ----- Runtime end-to-end: cast and resolve. -----
+144:     let mut state = GameState::new_two_player(7);
+145:     let source_id = create_object(
+146:         &mut state,
+147:         CardId(1000),
+148:         PlayerId(0),
+149:         "Oversimplify".to_string(),
+150:         Zone::Stack,
+151:     );
+152:     state
+153:         .objects
+154:         .get_mut(&source_id)
+155:         .unwrap()
+156:         .card_types
+157:         .core_types = vec![CoreType::Sorcery];
+158: 
+159:     // P0 controls a 4/4 and a 1/1 — total power 5.
+160:     let p0_big = add_creature(&mut state, 101, PlayerId(0), "P0 Big", 4, 4);
+161:     let p0_small = add_creature(&mut state, 102, PlayerId(0), "P0 Small", 1, 1);
+162:     // P1 controls a single 3/3 — total power 3.
+163:     let p1_mid = add_creature(&mut state, 103, PlayerId(1), "P1 Mid", 3, 3);
+164:     // CR 109.4 + CR 608.2h: A *stolen* creature — owned by P0 but currently
+165:     // controlled by P1 (Threaten-style). This exercises Task 4's LKI
+166:     // controller-fallback end-to-end: post-exile, `obj.controller` would
+167:     // reset toward owner (P0), but the look-back filter's "they controlled"
+168:     // scoping must read the at-exile controller (P1) from the LKI cache.
+169:     // Without the fallback, this 2/2 would count toward P0 (yielding P0:7,
+170:     // P1:3) instead of P1 (correct: P0:5, P1:5).
+171:     let stolen = add_creature(&mut state, 104, PlayerId(0), "Stolen 2/2", 2, 2);
+172:     // CR 611.2a + CR 613.1b: use actual temporary control authority at the exit boundary.
+173:     state.add_transient_continuous_effect(
+174:         source_id,
+175:         PlayerId(1),
+176:         engine::types::ability::Duration::UntilEndOfTurn,
+177:         TargetFilter::SpecificObject { id: stolen },
+178:         vec![engine::types::ability::ContinuousModification::ChangeController],
+179:         None,
+180:     );
+181:     engine::game::layers::flush_layers(&mut state);
+182:     assert_eq!(state.objects[&stolen].owner, PlayerId(0));
+183:     assert_eq!(state.objects[&stolen].controller, PlayerId(1));
+184: 
+185:     let ability = build_resolved_from_def(definition, source_id, PlayerId(0));
+186:     let mut events = Vec::<GameEvent>::new();
+187:     resolve_ability_chain(&mut state, &ability, &mut events, 0)
+188:         .expect("Oversimplify must resolve without error");
+189: 
+190:     // Sanity: every battlefield creature left the battlefield (exiled).
+191:     for victim in [p0_big, p0_small, p1_mid, stolen] {
+192:         assert!(
+193:             !state.battlefield.contains(&victim),
+194:             "creature {victim:?} must be exiled off the battlefield"
+195:         );
+196:     }
+197: 
+198:     for victim in [p0_big, p0_small, p1_mid, stolen] {
+199:         assert_eq!(state.objects[&victim].zone, Zone::Exile);
+200:     }
+201:     assert_eq!(state.objects[&stolen].controller, PlayerId(0));
+202:     assert_eq!(state.lki_cache[&stolen].controller, PlayerId(1));
+203:     assert_eq!(state.lki_cache[&stolen].power, Some(2));
+204: 
+205:     // Find each player's Fractal token. The per-player iteration creates one
+206:     // token per player; the iterating player is the token's controller.
+207:     let p0_token = state
+208:         .battlefield
+209:         .iter()
+210:         .filter_map(|id| state.objects.get(id))
+211:         .find(|obj| obj.is_token && obj.controller == PlayerId(0) && obj.name == "Fractal")
+212:         .expect("P0 must have a Fractal token on the battlefield");
+213:     let p1_token = state
+214:         .battlefield
+215:         .iter()
+216:         .filter_map(|id| state.objects.get(id))
+217:         .find(|obj| obj.is_token && obj.controller == PlayerId(1) && obj.name == "Fractal")
+218:         .expect("P1 must have a Fractal token on the battlefield");
+219: 
+220:     // P0 controlled 4+1 = 5 power. P1 controlled 3 (P1 Mid) + 2 (the stolen
+221:     // P0-owned 2/2) = 5 power — the stolen creature counts toward P1, NOT
+222:     // P0, because "they controlled" reads the at-exile controller via LKI
+223:     // (Task 4). If the LKI controller fallback regresses, this becomes
+224:     // P0:7 / P1:3 and the asserts fail. Each token must also survive SBAs
+225:     // (a 0/0 with N counters is N/N).
+226:     let p0_counters = p0_token
+227:         .counters
+228:         .get(&CounterType::Plus1Plus1)
+229:         .copied()
+230:         .unwrap_or(0);
+231:     let p1_counters = p1_token
+232:         .counters
+233:         .get(&CounterType::Plus1Plus1)
+234:         .copied()
+235:         .unwrap_or(0);
+236:     assert_eq!(
+237:         p0_counters, 5,
+238:         "P0's Fractal must enter with 5 +1/+1 counters (4+1 power exiled — \
+239:          the stolen 2/2 must NOT count for P0 since P1 controlled it at exile), \
+240:          got {p0_counters}"
+241:     );
+242:     assert_eq!(
+243:         p1_counters, 5,
+244:         "P1's Fractal must enter with 5 +1/+1 counters (3 own + 2 stolen \
+245:          — the stolen P0-owned creature counts toward P1 because P1 was its \
+246:          controller at exile per CR 109.4 LKI), got {p1_counters}"
+247:     );
+248: }
