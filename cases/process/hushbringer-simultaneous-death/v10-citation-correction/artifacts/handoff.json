@@ -1,0 +1,157 @@
+{
+  "role": "fresh engine-implementation-executor",
+  "status": "Citation correction complete; executor CR audit has no outstanding findings. Prior independent Maintainer PASS is reused only for byte-identical executable source. Fresh full independent review and final committed-worker acceptance remain pending.",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "branch": "codex/hushbringer-simultaneous-death",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "prior_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "source_freeze": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/receipt.json",
+    "sha256": "fe4d5c640b5f70b0774fcbd95d0c43e65498b8a343087ba6aaaa664d3205d848"
+  },
+  "diff_summary": {
+    "current_round": "Only CR 115.1 -> CR 608.2d in the existing line comment at engine_resolution_choices.rs:3528. Exact reverse replacement recovers the prior entire file. The other 2050 manifest files, every test and all executable source bytes are unchanged. No other source edits.",
+    "complete_candidate_diff": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/candidate.patch",
+      "sha256": "bce8afb1b9dee80de513227b394581be59d3a0c67bc5feb85fb3807e9c0028e7"
+    },
+    "exact_current_round_delta": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/citation-fix.patch",
+      "sha256": "0d33f09cbdf6a255aff33b590b6a762efa012630eeda90729d2775f9346130d4"
+    },
+    "historical_full_candidate_handoff": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/handoff.json",
+      "sha256": "54644215dadafd430cae007d017b2b419d43f6a1cca1beae127745601eaf28ef"
+    }
+  },
+  "verification": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+    "sha256": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+  },
+  "parser_gate": "No parser source, variants, data, support assertions, allowlists, corpus coverage or card support changed. No current-round generation or support claim; historical generation evidence is explicitly reused.",
+  "production_coverage_map": {
+    "callsite_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+      "sha256": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9"
+    },
+    "native_library_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+      "sha256": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327"
+    },
+    "common_boundary_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+      "sha256": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee"
+    },
+    "constructor_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+      "sha256": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c"
+    },
+    "counts": {
+      "callsites": 51,
+      "native_arms": 3,
+      "native_parameter_cases_historical": 60,
+      "common_boundary_rows": 11,
+      "actual_constructors": 82,
+      "production_constructors": 3,
+      "test_constructors": 79,
+      "named_constructor_expressions": 81,
+      "self_constructor_expressions": 1,
+      "raw_regex_occurrences": 92,
+      "nonconstructor_occurrences": 11
+    }
+  },
+  "maintainer_matrix": {
+    "artifact": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-path-maintainer-map.json",
+      "sha256": "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6"
+    },
+    "rows": 67,
+    "historical_public_mutations": 56,
+    "historical_private_mutations": 10,
+    "historical_defensive_mutations": 1,
+    "qualification": "Historical runtime/build/mutation evidence retains its original source and executable identity. Current source differs from fdc9 only by the exact citation token at engine_resolution_choices.rs:3528, proven by frozen-source/lineage.json. No runtime, compilation, or mutation experiment was run on the current source identity.",
+    "prior_independent_verdict": "PASS on fdc9",
+    "current_independent_verdict": "pending"
+  },
+  "cr_gate": {
+    "audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+    },
+    "annotation_count": 185,
+    "unchanged_prior_reviews_reused": 184,
+    "corrected_rule_locally_verified": "608.2d",
+    "source_rows_checked": 185,
+    "outstanding_findings": [],
+    "executor_passed": true,
+    "current_independent_review": "pending"
+  },
+  "judgment_calls": [
+    "Retained every byte of the bounded placement-order and private-zone compatibility wording. CR 608.2d alone supports the existing choice-timing description; no extra citation is needed.",
+    "Applied explicit risk scaling for a comment-only repair: fresh fmt and exact full source/archive lineage, reuse of prior full verification, no redundant compilation or runtime suite.",
+    "Retained every historical mutation evidence payload and every complete selected map; updated only current source/status/reference fields."
+  ],
+  "stop_items": [],
+  "cr_annotations_changed": [
+    {
+      "id": "CR-NATIVE-LIBRARY-CHOICE",
+      "prior_executor_id": "remaining-native-choice-cr-citation",
+      "severity": "LOW",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "prior_rule": "115.1",
+      "corrected_rule": "608.2d",
+      "status": "corrected by executor; awaiting fresh independent review",
+      "review": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/review-report.json",
+        "sha256": "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd"
+      },
+      "rule_check": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/rule-check.json",
+        "sha256": "dc11a01cf728981e43196c2b9d570babbdf9cc0e7f42812a702cd1f18ae8bd1e"
+      },
+      "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+      "delta": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/citation-fix.patch",
+        "sha256": "0d33f09cbdf6a255aff33b590b6a762efa012630eeda90729d2775f9346130d4"
+      }
+    }
+  ],
+  "plan_deviations": "None. This citation obligation is already covered by approved plan v10 and the complete review. No redesign, gameplay/test edits, commits, pushes or subagents.",
+  "risks_and_retained_limits": [
+    "All previous ten named rule limits remain: aggregate grouping, inherited-target grouping, direct delayed suppression, full cross-pause grouping, ambiguous origins, intrinsic merge/nested layer worlds, co-dying off-zone Any source availability, aggregate paid continuation, cast-created regeneration persistence, and resumed duplicate dispatch.",
+    "The 20 ignored desired diagnostics remain diagnostic-only. Prior fdc9 explicit execution was 2 pass/18 fail with the same prior candidate failure set; fixed original was 0 pass/20 fail. These are reused historical outcomes through exact comment-only lineage, not a new execution or support promotion.",
+    "The existing native resumed explicit-target no-Hush count of exactly two remains narrow compatibility, not the desired one. Seeded regeneration tests prove first-destruction interception only, not full shield lifetime.",
+    "Prior tracked-set empty-choice life23 versus selected22 remains measured original-production compatibility.",
+    "Zero legal Battle protector delivery has only a defensive lower-level mutation: shipped formats terminate before a legal nonterminal public zero-opponent path. Public healthy/legal/multiple-choice/terminal/attacked/phased controls remain separate.",
+    "Inherited broad non-Siege zero-defense stack guard and inherited non-Siege present-protector handling are not expanded or certified as complete rules behavior.",
+    "Legacy None snapshot fallback may rescan functioning sources, including no-suppressor contexts. Five Scute cross-source tests are batching behavior checks, not throughput evidence; historical /tmp/gamestate.json benchmark input is unavailable.",
+    "Known fixed-base workspace Clippy manabrew-compat SetFullControl E0004 remains out of scope. Upstream integration follows acceptance of the fixed-base experiment.",
+    "No parser/db/card support increase, no database fixture adaptation, no UI/card-data support promotion, and no throughput claim."
+  ],
+  "authoritative_maps": {
+    "constructor_audit": "constructor-audit.json",
+    "callsite_map": "production-entry-callsite-map.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map.json",
+    "maintainer_matrix": "production-path-maintainer-map.json",
+    "cr_audit": "cr-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "historical-canonical-reference.json"
+  },
+  "outstanding_review_findings": [],
+  "cr_gate_passed": true,
+  "implementation_ready_for_acceptance": false,
+  "pending_followup": [
+    "Fresh independent reviewer reviews the final source and runtime after this handoff.",
+    "Root compiles the actual final clean committed candidate worker before frozen-checker acceptance. Historical canonical integration executable is never committed-worker proof."
+  ],
+  "historical_canonical": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+    "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+  },
+  "source_ownership": "released to root at sealed handoff; no more source edits by this executor",
+  "finalized_utc": "2026-09-05T22:56:21.295150+00:00"
+}

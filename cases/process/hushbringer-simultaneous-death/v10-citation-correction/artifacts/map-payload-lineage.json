@@ -1,0 +1,404 @@
+{
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "prior_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "maps": {
+    "constructor_audit": {
+      "prior_map": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/manual-constructor-boundary-audit-final.json",
+        "sha256": "2b91951f30139d9cda6ec206eb2095340e683ca648a2fc57de3f3cb071bddaec"
+      },
+      "current_map": "constructor-audit.json",
+      "row_changes": [],
+      "all_other_row_fields_identical": true,
+      "historical_evidence_payloads_identical": true
+    },
+    "callsite_map": {
+      "prior_map": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/production-entry-callsite-map-reviewed.json",
+        "sha256": "65ca6f78e4729e9815f6601239370235f9fc7b92713e5e10658e27a578a697be"
+      },
+      "current_map": "production-entry-callsite-map.json",
+      "row_changes": [],
+      "all_other_row_fields_identical": true,
+      "historical_evidence_payloads_identical": true
+    },
+    "native_library_map": {
+      "prior_map": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/native-library-public-map.json",
+        "sha256": "6026cc33c74ec961ac2b565d84f63c166d6270c7a9085d16ad7756513920b185"
+      },
+      "current_map": "native-library-public-map.json",
+      "row_changes": [],
+      "all_other_row_fields_identical": true,
+      "historical_evidence_payloads_identical": true
+    },
+    "common_boundary_map": {
+      "prior_map": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/typed-common-boundary-map-reviewed.json",
+        "sha256": "0ed7f3ea4bdc0a4cede05c4f92f79f4ac19a776571e5450294b1f202f7bac55b"
+      },
+      "current_map": "typed-common-boundary-map.json",
+      "row_changes": [
+        {
+          "collection": "rows",
+          "index": 9,
+          "field": "constructor_audit"
+        }
+      ],
+      "all_other_row_fields_identical": true,
+      "historical_evidence_payloads_identical": true
+    },
+    "maintainer_matrix": {
+      "prior_map": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/production-path-maintainer-map-v10-reviewed.json",
+        "sha256": "c9ff6f2c51063ed8444c7a872f1d43278dc36f4db6c8fa499d1ab3a3746fadad"
+      },
+      "current_map": "production-path-maintainer-map.json",
+      "row_changes": [
+        {
+          "collection": "rows",
+          "index": 0,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 1,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 2,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 3,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 4,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 5,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 6,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 7,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 8,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 9,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 10,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 11,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 12,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 13,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 14,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 15,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 16,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 17,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 18,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 19,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 20,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 21,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 22,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 23,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 24,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 25,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 26,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 27,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 28,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 29,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 30,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 31,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 32,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 33,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 34,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 35,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 36,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 37,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 38,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 39,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 40,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 41,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 42,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 43,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 44,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 45,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 46,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 47,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 48,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 49,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 50,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 51,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 52,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 53,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 54,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 55,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 56,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 57,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 58,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 59,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 60,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 61,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 62,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 63,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 64,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 65,
+          "field": "source_lineage"
+        },
+        {
+          "collection": "rows",
+          "index": 66,
+          "field": "source_lineage"
+        }
+      ],
+      "all_other_row_fields_identical": true,
+      "historical_evidence_payloads_identical": true
+    }
+  },
+  "cr_annotation_count": 185,
+  "cr_changed_indices": [
+    184
+  ],
+  "cr_unchanged_annotation_objects": 184,
+  "historical_evidence_payloads_preserved": true
+}

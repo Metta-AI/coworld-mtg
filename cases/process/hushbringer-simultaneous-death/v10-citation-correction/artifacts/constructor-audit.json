@@ -1,0 +1,995 @@
+{
+  "utc": "2026-09-05T22:56:21.295150+00:00",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "literal_audit_method": "Full unchanged constructor syntax sweep plus manual expression/function-result discrimination and lexical cfg(test)/external-module classification. Corrects two prior return-signature false positives and test/production categories.",
+  "constructors": [
+    {
+      "file": "crates/engine/src/database/synthesis.rs",
+      "line": 11632,
+      "body_sha256": "0b64ebae5d6f9ddbd40440f3f2c9b186e895a784bd593ae90d2aafead2a82682",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/casting_tests.rs",
+      "line": 45137,
+      "body_sha256": "d8b3eb153f36c412b6e6dc31d86c49fb7960661f40fe0013178a876355ce646d",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/derived_views.rs",
+      "line": 1573,
+      "body_sha256": "376229deb0ca52257ea6159d9ede3d3f9eea5d135e496cda31226141c8472fc9",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "line": 2202,
+      "body_sha256": "c7fbee80077cb271a75ccc0881a2fb96396b7333e41cc426545d0863662be67f",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "line": 2210,
+      "body_sha256": "567404da6d23f0e08b2506c16f048cf643dc1bb0669479fa366f56642ffcb50e",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 12247,
+      "body_sha256": "4604021d49271d63005d5da504c1a1b2e71db50c6754cac5613f92b6ed1c40e0",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 18663,
+      "body_sha256": "b88b08f53c8e6f1ce4fa6684e9216e6cb593914891a9fe4d5dfbadc0dd3624f6",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 19009,
+      "body_sha256": "fcd045b28dd40075b9a4c5d64f9708e7ba872471eab0690bfc34aa73e2bfa5eb",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 46,
+      "body_sha256": "ff5ddcadca918c9a0a7918d4bcd62bc1c4196c624635972370407c431ba44f1b",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 194,
+      "body_sha256": "0dbaf8f1e567a8452c69817a1c5237e06dc61cf583ba54c4fa6b2410cda7530f",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 251,
+      "body_sha256": "db23140eb5da0f0a570c686f2d275104c3ce1e6ead774c5f22f4927794b035be",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 321,
+      "body_sha256": "db23140eb5da0f0a570c686f2d275104c3ce1e6ead774c5f22f4927794b035be",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 1402,
+      "body_sha256": "a53598f966369bcd89c1df563429adb2c88570c1e715dd4fb828407f3eb6a935",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "production",
+      "category": "Synthetic LKI filter record with None; no event capture authority"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10269,
+      "body_sha256": "30307b9d53875118a10da003c0da8ccf70a7e92b3c246f9f359ef342aaecab51",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10282,
+      "body_sha256": "927704d06461ad1627c7db5c65c2fc8c7ddf371fcdeed73ef0338cbe5a61d02a",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10295,
+      "body_sha256": "fa89ea7c3494026f01be0f9a302aa40c6ce9518b5b219825a96633eb6356aeeb",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10308,
+      "body_sha256": "c70c340749190fd6365e493c727ae95528a443b9dc6dcdbf3ca4a11727594068",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10452,
+      "body_sha256": "ee948acd4034bbbe2d41c58e6b491b5312751f34876967547c02f413f9aaaadd",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10670,
+      "body_sha256": "5d339e52e651e675349e1317ae5492959a740e385133c491b45cb66ca8a7b679",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10682,
+      "body_sha256": "02f9adf5c5f8fac4cdef66417bdadc83eb1b9d849fa9c1ac31db753df43e826f",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10694,
+      "body_sha256": "6ed67a771a216763e580f3d5cd86f5de6091c23b11f896d419af764d76ca6d06",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10753,
+      "body_sha256": "e95b62593ab795028f9da9dec452ae9b2f4af24c4007c90ba2ffc0b5d752bdb4",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10764,
+      "body_sha256": "04fbe7129e13f1c308014375b9065b0a3f27f3e9c4c1f5e2522b9dd530a4620a",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10833,
+      "body_sha256": "0298b7badff6152a3e8d905cea67f8325676c27ac1b29a1bec81ead53bbbf596",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 11161,
+      "body_sha256": "7633a7451391e47f3aac207e948cba6d1843bfe246249809296e447ce0c094c7",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/game_object.rs",
+      "line": 1499,
+      "body_sha256": "56ffb98863c01e30ca1d1ae82e80bfe355205a0c6beb6511c62df4fa5acd886b",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "production",
+      "scope_basis": "GameObject impl snapshot_for_zone_change; earlier cfg(test) annotates only _gameobject_partition_is_total, not this impl",
+      "category": "Real reusable snapshot constructor initializes None; owned emitted events acquire capture later"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7077,
+      "body_sha256": "d990291f947d0676e20283db5ce7501a3714e2291b80ae15f74308a53d170f3c",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7082,
+      "body_sha256": "57929e6e2f7be082140a1bb2e297fb848663d3817ffa856ed97ced21c08717c9",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7087,
+      "body_sha256": "327a7b825f081579477ac4ad829a0c004eb84478fc8d7778b7e16b9d36edfb24",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7116,
+      "body_sha256": "66a4b4455f6b9f66353202207a9bc1003023c8cea8371a5837a7c01974799007",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7122,
+      "body_sha256": "862ea39e9ad32fd415bf18122341191a44725baf619dd5833adf320a68e329d2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7128,
+      "body_sha256": "df6532bf7eb4cc33a3b9fd415ec5d54b0d360d9a106bbd385bdbcd6ae6d936d4",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7134,
+      "body_sha256": "9102752cd3959fa200556a53c5b40c6eb285a5f06574febc2a70c8e69bcd50d0",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7141,
+      "body_sha256": "5560044e2b0ac03d17e864278140a0dae5780f217237db720c8c77a2ed4eb581",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7185,
+      "body_sha256": "512164f6c7a711f1479a2f340cbb114f178e0e970dff485218a90c595b9612f2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7191,
+      "body_sha256": "1e0aa0f1065cef162dd4a07f6ddfb93f43f873f1e6a8d49dd75e19c466d96f34",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7197,
+      "body_sha256": "ed8b3d7f6524cf5fcbf16ddef7913dda92380ec0c894b9ccada515485767bbe4",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7770,
+      "body_sha256": "89c7ba4b3b8c08ccf552eaf83f237213294073f7712c432f366adadc49ac35f5",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 10941,
+      "body_sha256": "1e69b79caf80999e71d556dd7bc4cc06b7ff5fa11b325e4c69527ede4c382af3",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3199,
+      "body_sha256": "3b9ac2692321cd358b4f09111d4a0cbccf7b75545ce967ce09c8817d4ad81e72",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3318,
+      "body_sha256": "93954039c14538bccf7c96732309dedb946a9260e211c2292a61e3f57da3aee2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3339,
+      "body_sha256": "65ad0f5c8154de03dca91a1ba2309c022ef568c7873108b7d50549aa80b59cdc",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3393,
+      "body_sha256": "363732f73b2fc8634d756bd05698dfc2cd52cee5f7cebf5fb00d71af695ee6ab",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/stack.rs",
+      "line": 2495,
+      "body_sha256": "97cd0ef9bc306cfe27efe7ad74af321fbf4df39bfcc4c2123f34e780d64646eb",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "production",
+      "category": "Synthetic token batching/probe record with None; no death capture authority"
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "line": 4001,
+      "body_sha256": "754bd9fa5921f6df847a93734761a8f1478adc42c2a0307227805f90304f4c12",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "line": 4050,
+      "body_sha256": "48ea3cd302989def23b8963fa15b12c6f9c7b8e9bb2d096a977b8570a8df6127",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7026,
+      "body_sha256": "7e3d3a6fcc073543009296290f1a574ead1a78d5d035a04b4397c3da8e8bd4a2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7135,
+      "body_sha256": "187bd8e9f10baadbe1df97321e60de925210d87ee8fab9bf9b3a53200f6be912",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7279,
+      "body_sha256": "1532ecd83bff21ad9f33f568cd491f558f3d4e6ad5f047017e747a926fc932bb",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7303,
+      "body_sha256": "f62bb445159424278708ad8a7e3c6e16b56ad3a8dce6b4734a2bb7b25e45cb88",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7591,
+      "body_sha256": "609dc7d4755985d94333041a507fa5a5ba25c6bda2031e07c65a7e242c230420",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7666,
+      "body_sha256": "3498588d213efcd96f7922016a8ecf6a5790605e3dcb7709b60718db63cafe21",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7782,
+      "body_sha256": "c157931c5fc83d7595743dc2af6603347d9816a3c9470dce8aa22e107b3ec7cc",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7800,
+      "body_sha256": "e9aaf9de6ee8b56864041fedd1632f6ae23498de362878ec5a4da351b56bf058",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7820,
+      "body_sha256": "da1ab2b97d8a64ea7c7a50c8142a7d79d2a2f2c8919d58c5023466bdcf933954",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7907,
+      "body_sha256": "575070ae4b649308803621695692e19c77bd48109224e98b586ff2a4f310d237",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7922,
+      "body_sha256": "dca9cfd3404a2dd5b4a6a3ea538e0c1b6edc3fbbdd81b5abd227ed07c04169ea",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14073,
+      "body_sha256": "6845f1b754aaacb502f65e6d7a5857418d8673c372547cfcaee8d854eec0fccc",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14092,
+      "body_sha256": "7369692595354a56861591bdc84231ccb09f596fe935698e1e0fc8f1dbabb2f2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14112,
+      "body_sha256": "8c3376232c2677f09441667991e39ddcc421caef9f908b54078c8b7ac73226de",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14135,
+      "body_sha256": "1d368e3e3a9c7369340bb6e51c0570531d3749e5522d4b0a6caf31c7ad289c57",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14390,
+      "body_sha256": "6845f1b754aaacb502f65e6d7a5857418d8673c372547cfcaee8d854eec0fccc",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14408,
+      "body_sha256": "1d368e3e3a9c7369340bb6e51c0570531d3749e5522d4b0a6caf31c7ad289c57",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 8398,
+      "body_sha256": "7e3d3a6fcc073543009296290f1a574ead1a78d5d035a04b4397c3da8e8bd4a2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 10354,
+      "body_sha256": "6d3e8528126d9b73ee979b3406ab783599ce4fb896e86416cf75a1beaefae81d",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 15046,
+      "body_sha256": "20bbb86959bd6bd20825dfc81cb9cf068a8a06e63c4956d1793dcd09f84b7836",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 897,
+      "body_sha256": "ea339488202835158b6cedcc09c7c1837ab4e5bfeae5f1500c48d91fe553acf2",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 976,
+      "body_sha256": "543883471a94c6ba56a0406525536d5996e82e2fbdea6cc384bf5ab3932be37e",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1064,
+      "body_sha256": "c18d82fea3ee6a45b7d7422e3e36d3b2930327e0fed7e8db78d76c35e26bde30",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1116,
+      "body_sha256": "e3be541ace2339242e877b9a636b00c4d176a80acb30887d7e70c67121631381",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1167,
+      "body_sha256": "b8b6b4ba3cc1c3c474eb8ede8d38b132c324153389c0b65437be77684398d42b",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1262,
+      "body_sha256": "543883471a94c6ba56a0406525536d5996e82e2fbdea6cc384bf5ab3932be37e",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1887,
+      "body_sha256": "70cfa9fab01d300aa2fcd02ae7d50c8b4b6da5769c86feb74ee8784e6e8ed220",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_ordering_parity_tests.rs",
+      "line": 1034,
+      "body_sha256": "8b6d9a3bdff66eacf0136c60ebb28832858ce99ef1aacc2e935e9c70eec2d89c",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_push_first_contract_tests.rs",
+      "line": 45,
+      "body_sha256": "b3318b91ae2ef30b6b2b94166b9b246e1a17e353fd21d4231c66a93061f847b0",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "scope_basis": "External file included only by #[cfg(test)] #[path] module in casting.rs/engine.rs/triggers.rs, inspected at source",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 2882,
+      "body_sha256": "20302b60f7298da7cbc9b1025abffd564f8a0797f336ef14aa49ae88e719b360",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "line": 1574,
+      "body_sha256": "554f181c1fc84d45b41390019322ebeb3a7798332a093b4add7c77857df90104",
+      "trigger_suppression_value": null,
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "line": 1602,
+      "body_sha256": "1a2f528dabd93c502ea7f171f0d3335e6b24c0abbda43cfa6423081590393a69",
+      "trigger_suppression_value": "snapshot.clone()",
+      "struct_update": true,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs",
+      "line": 79,
+      "body_sha256": "5f78df1750dfc79bd9c275416f114bf75427fe7d0800851c3b7c1222ea105dad",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs",
+      "line": 109,
+      "body_sha256": "1af607d6d0ab65b1aa09ea047899645a0a4ececc570ca1f6418f9315ab730bfc",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/tests/integration/madame_null_integration.rs",
+      "line": 86,
+      "body_sha256": "111ac84c832ac2a074144fb4d38ccefbed8213c8ade5211ab24a1bdc914e578e",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "test",
+      "category": "Test-only record fixture/update; no production constructor reachability claim"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 840,
+      "syntax": "Self",
+      "trigger_suppression_value": "None",
+      "struct_update": false,
+      "scope": "test",
+      "category": "cfg(test) ZoneChangeRecord::test_minimal Self constructor; mechanical None default",
+      "scope_basis": "impl ZoneChangeRecord is cfg(test), source lines831-872",
+      "enclosing_excerpt_sha256": "31e359d8f8a1d27492669ff228b5aa14c4f72961f97383a0a0402333e02dcf2e",
+      "enclosing_excerpt_lines": [
+        840,
+        872
+      ],
+      "literal_source_sha256": "0993856b7fa2558ddcf6cada602d15878ee1e34054dd3c05ea0f26edd2323761",
+      "literal_source_lines": [
+        840,
+        870
+      ]
+    }
+  ],
+  "non_constructor_hits": [
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 645,
+      "reason": "declaration/impl/function result body"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 832,
+      "reason": "declaration/impl/function result body"
+    },
+    {
+      "file": "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+      "line": 172,
+      "reason": "declaration/impl/function result body"
+    },
+    {
+      "file": "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+      "line": 176,
+      "reason": "declaration/impl/function result body"
+    },
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 246,
+      "reason": "declaration/impl/function result body"
+    },
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2907,
+      "reason": "declaration/impl/function result body"
+    },
+    {
+      "file": "crates/engine/src/game/game_object.rs",
+      "line": 1498,
+      "reason": "Function return signature opening brace, not a ZoneChangeRecord literal"
+    },
+    {
+      "file": "crates/engine/src/game/stack.rs",
+      "line": 2493,
+      "reason": "Function return signature opening brace, not a ZoneChangeRecord literal"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 835,
+      "reason": "Documentation example, not executable literal",
+      "occurrences": 1
+    },
+    {
+      "file": "crates/engine/tests/integration/loop_shortcut.rs",
+      "line": 65,
+      "reason": "Two occurrences inside raw golden Debug string, not executable literals",
+      "occurrences": 2
+    }
+  ],
+  "unaccounted_literals": [],
+  "changed_files": {
+    "crates/engine/src/game/augment.rs": {
+      "sha256": "2043b2204e22607e7c1a087803e15a7c366eb6545b5da443bd15c2d44fe82460",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/casting_costs.rs": {
+      "sha256": "3aa382b537506f6b71e1bd3c4041ff8564878711c9a382a2a24bc0c67a19b162",
+      "classification": "deferred sacrifice component provenance, guards, complete component owner/member grouping and tests"
+    },
+    "crates/engine/src/game/derived_views.rs": {
+      "sha256": "1bd7797b61555a7396ea07dcd342d70323664a2b3246499cdaafa13b770d7775",
+      "classification": "Test-only fixture adds mechanical None; no production behavior change"
+    },
+    "crates/engine/src/game/effects/change_zone.rs": {
+      "sha256": "6230ca37071c2b8eb32546f05133f111319cf82c0ec0833c04b5da34e301a454",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs": {
+      "sha256": "8b889373a9238b46a169044b3405a5efb7b7dfcf378209da2726f09dde5d1bcc",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/effects/destroy.rs": {
+      "sha256": "4e406bbd6cf734adf91b1f4b700ee9b19745b44b50dbbb44af46bc098b6b5006",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/effects/mod.rs": {
+      "sha256": "35b0d4f29051664c16f798f3f9b806f2aa5f34928ed893bdae150d803d2fbc26",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/effects/sacrifice.rs": {
+      "sha256": "81b55a267e6538f47c406bae9e6dceb0915c187e7d684dc80ffd30b238417d27",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/engine.rs": {
+      "sha256": "e58c0f6ff1d62bb6d0c78b2cbe45a880681766369a4c92cf60124ecfca8d1822",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/engine_resolution_choices.rs": {
+      "sha256": "253815c97ce827680554c901a9225401b07cd57be8be2c389e9d3c095aaf786d",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/filter.rs": {
+      "sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66",
+      "classification": "mechanical ZoneChangeRecord trigger_suppression: None initialization; original LKI/filter/stack semantics unchanged"
+    },
+    "crates/engine/src/game/game_object.rs": {
+      "sha256": "a5737473ca1011bacdeefdde53866c67ed3079ab212101c11e5fe31f1f456abc",
+      "classification": "mechanical ZoneChangeRecord None initialization; no new capture authority"
+    },
+    "crates/engine/src/game/haunt.rs": {
+      "sha256": "2a4226407c86adca02220dab2bd95ec9b4f4817c125f7861005980a6fa7a1e3a",
+      "classification": "production dedicated haunted-creature death matcher before-snapshot suppression gate"
+    },
+    "crates/engine/src/game/mod.rs": {
+      "sha256": "4d5c083a86163f7706dbc10466d4ad8804ad9cfe74bebfc48ea8896a9a3e32c1",
+      "classification": "module registration"
+    },
+    "crates/engine/src/game/sba.rs": {
+      "sha256": "73e5862e83261a91b9c054df3bcb4718226274ed01a82c36269ce2b458f6854e",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/stack.rs": {
+      "sha256": "228b8f8082d1775f75e336f25f304648a5f3c0704d5b8339c9087a8ff9777cb9",
+      "classification": "mechanical ZoneChangeRecord trigger_suppression: None initialization; original LKI/filter/stack semantics unchanged"
+    },
+    "crates/engine/src/game/trigger_matchers.rs": {
+      "sha256": "1eef66a5b3f50dceb8643ede0ea6deac723336640a3bd006dfa96406eb7002d7",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/trigger_suppression.rs": {
+      "sha256": "7cdd1c1bd1afdcabd3de79ad950a06d8f50bd43a145048b80c64303fe33325cd",
+      "classification": "typed suppression authority helper; cfg(test) private authority matrix"
+    },
+    "crates/engine/src/game/triggers.rs": {
+      "sha256": "05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/zone_pipeline.rs": {
+      "sha256": "ecc6dbd6f0385c72ab2238dc700692c60255f041628985e4ac6cf5db301a8e72",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/game/zones.rs": {
+      "sha256": "cc34cdff1f6d753a29e89bcb9e2076d67d9680e2286111b0f2375b6a892b2aa9",
+      "classification": "production authority/owner/member/consumer change plus existing tests; see physical seam map and diff"
+    },
+    "crates/engine/src/types/events.rs": {
+      "sha256": "ebfd1027f45468d12a9f97bc2f057b9c457166e09ba824a61b028343beaa20c9",
+      "classification": "serialization test additions for missing, authoritative-empty and captured event history; no production event enum change"
+    },
+    "crates/engine/src/types/game_state.rs": {
+      "sha256": "065812c4cf63c11a1bb724f7997b07346c76a2480eceebfa0bb30ec7a02c3828",
+      "classification": "event snapshot and component schema; serde-skipped lexical state; constructors/normalization/tests"
+    },
+    "crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs": {
+      "sha256": "e9c899abb333a2ee836dde07e3770963eaa9829f5a47143100aefcd9125a3172",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    },
+    "crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs": {
+      "sha256": "3e165ca76c8fec0c94eea3894df7b2020d1ca8bf5dee14e060f01ba63196c5ae",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    },
+    "crates/engine/tests/integration/loop_shortcut.rs": {
+      "sha256": "f1b7a337c26554bc0c7b82b39c524f5cd1ebbac80195b751984b920f31b5b134",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    },
+    "crates/engine/tests/integration/madame_null_integration.rs": {
+      "sha256": "07e4406f5333bfc1ee4bd91e0a95819920ad0300776178bd18c720653f416c69",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    },
+    "crates/engine/tests/integration/main.rs": {
+      "sha256": "3c9de72738baaf5c2f4009a282f309776661182bc806b2be3483b212a3208438",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    },
+    "crates/engine/tests/integration/oversimplify_per_player_fractal.rs": {
+      "sha256": "c0f3c1512a23df4005facfb0b605558022fa605766e30a827a11f03f0e2a6b51",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    },
+    "crates/engine/tests/integration/trigger_suppression_event_timing.rs": {
+      "sha256": "71a16f0c601736b79cfcbe0b97e51f810a7baef5f7b15b1d172240f0f37ab98a",
+      "classification": "test fixtures/registered module and mechanical event literal carry-through"
+    }
+  },
+  "scope_classification_note": "Source directory placement does not establish production scope. Exactly three production constructor expressions: filter LKI adapter, GameObject snapshot, stack token probe. All external test modules are test-only. None is mechanical initialization, not new capture authority.",
+  "prior_literal_audit_method": "Balanced braces after removing comments and strings; exclude struct/impl and return-type function bodies; retain exhaustive literals and struct-update sites. Compiler checks remain authoritative for exhaustiveness.",
+  "counts": {
+    "constructors": 82,
+    "named_constructor_expressions": 81,
+    "self_constructor_expressions": 1,
+    "raw_regex_occurrences": 92,
+    "non_constructor_occurrences": 11,
+    "non_constructor_hits": 10,
+    "scopes": {
+      "test": 79,
+      "production": 3
+    }
+  },
+  "supersedes": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/manual-constructor-boundary-audit-final.json",
+    "sha256": "2b91951f30139d9cda6ec206eb2095340e683ca648a2fc57de3f3cb071bddaec",
+    "reason": "Full selected prior map retained with current citation-only source/status bindings; prior bytes remain immutable."
+  },
+  "authoritative_maps": {
+    "constructor_audit": "constructor-audit.json",
+    "callsite_map": "production-entry-callsite-map.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map.json",
+    "maintainer_matrix": "production-path-maintainer-map.json",
+    "cr_audit": "cr-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "historical-canonical-reference.json"
+  },
+  "review_status": "Citation correction complete; executor CR audit has no outstanding findings. Prior independent Maintainer PASS is reused only for byte-identical executable source. Fresh full independent review and final committed-worker acceptance remain pending.",
+  "evidence_reuse_qualification": "Historical runtime/build/mutation evidence retains its original source and executable identity. Current source differs from fdc9 only by the exact citation token at engine_resolution_choices.rs:3528, proven by frozen-source/lineage.json. No runtime, compilation, or mutation experiment was run on the current source identity.",
+  "current_source_lineage": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+    "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+  },
+  "prior_independent_review": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/review-report.json",
+    "sha256": "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd"
+  },
+  "outstanding_findings": [],
+  "status": "82 constructors retained: 3 production, 79 test; 92 raw regex occurrences include 11 nonconstructors. No constructor source changed in this round.",
+  "historical_raw_regex_audit": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/complete-constructor-regex-hits.json",
+    "sha256": "97e6328ed9a9badb03a93e448e102f2b8f8cdfbb5744c93e988bd50aef9f9465",
+    "qualification": "Unchanged complete constructor syntax and exact line positions; raw sweep reused with comment-only lineage."
+  }
+}

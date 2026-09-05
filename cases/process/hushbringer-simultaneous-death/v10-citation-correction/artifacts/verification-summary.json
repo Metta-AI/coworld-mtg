@@ -1,0 +1,346 @@
+{
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "prior_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "current_round": {
+    "format": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/format-receipt.json",
+      "sha256": "9e3342a1f7bfb1d93fcf455f5686532fe0edf682b8b193a3a5771ae56fc0232e"
+    },
+    "source_lineage": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+      "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+    },
+    "source_files": 2051,
+    "byte_identical_files": 2050,
+    "exact_comment_only_files": 1,
+    "rule_check": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/rule-check.json",
+      "sha256": "dc11a01cf728981e43196c2b9d570babbdf9cc0e7f42812a702cd1f18ae8bd1e"
+    },
+    "current_compilation_performed": false,
+    "current_runtime_tests_performed": false,
+    "current_card_generation_performed": false,
+    "current_clippy_performed": false
+  },
+  "evidence_reuse_qualification": "Historical runtime/build/mutation evidence retains its original source and executable identity. Current source differs from fdc9 only by the exact citation token at engine_resolution_choices.rs:3528, proven by frozen-source/lineage.json. No runtime, compilation, or mutation experiment was run on the current source identity.",
+  "historical_verification_summary": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/verification-summary.json",
+    "sha256": "90889073212466f229c7478d115659fe21f93b681ac76a49c33e623037848938",
+    "contents": {
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_files_verified": 2051,
+      "interim_sealed_files_verified": 16,
+      "prior_sealed_artifacts_verified": 101,
+      "gates": {
+        "1": {
+          "summaries": [
+            {
+              "passed": 196,
+              "failed": 0,
+              "ignored": 20,
+              "measured": 0,
+              "filtered": 2978
+            }
+          ],
+          "totals": {
+            "passed": 196,
+            "failed": 0,
+            "ignored": 20
+          }
+        },
+        "3": {
+          "summaries": [
+            {
+              "passed": 16586,
+              "failed": 0,
+              "ignored": 7,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "totals": {
+            "passed": 16586,
+            "failed": 0,
+            "ignored": 7
+          }
+        },
+        "4": {
+          "summaries": [
+            {
+              "passed": 3172,
+              "failed": 0,
+              "ignored": 22,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "totals": {
+            "passed": 3172,
+            "failed": 0,
+            "ignored": 22
+          }
+        },
+        "5": {
+          "summaries": [
+            {
+              "passed": 0,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "passed": 6,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "passed": 0,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "passed": 0,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "passed": 9,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "passed": 0,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "totals": {
+            "passed": 15,
+            "failed": 0,
+            "ignored": 0
+          }
+        },
+        "6": {
+          "summaries": [
+            {
+              "passed": 0,
+              "failed": 0,
+              "ignored": 7,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "totals": {
+            "passed": 0,
+            "failed": 0,
+            "ignored": 7
+          }
+        },
+        "7": {
+          "summaries": [
+            {
+              "passed": 5,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 16588
+            }
+          ],
+          "totals": {
+            "passed": 5,
+            "failed": 0,
+            "ignored": 0
+          }
+        },
+        "8": {
+          "summaries": [
+            {
+              "passed": 2,
+              "failed": 18,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 3174
+            }
+          ],
+          "totals": {
+            "passed": 2,
+            "failed": 18,
+            "ignored": 0
+          }
+        }
+      },
+      "desired_failure_names": [
+        "trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling",
+        "trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection",
+        "trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed",
+        "trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression",
+        "trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures",
+        "trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world",
+        "trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once",
+        "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed"
+      ],
+      "desired_failure_set_matches_prior_candidate": true,
+      "workspace_clippy": "Known fixed-base manabrew-compat SetFullControl E0004 only; out of scope",
+      "card_generation": {
+        "started": "2026-09-05T21:22:30.753526+00:00",
+        "command": [
+          "./scripts/gen-card-data.sh"
+        ],
+        "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+        "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+        "exit": 0,
+        "generation_log_sha256": "8cc33484960519c45b704f77e0cbc3236c6a8c5969a0f3b2f7a69ffaca7cf7af",
+        "changed_by_generator": [
+          "crates/engine/data/known-tokens.toml",
+          "crates/engine/data/oracle-subtypes.json"
+        ],
+        "post_restore_changed": [],
+        "known_before": {
+          "crates/engine/data/known-tokens.toml": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+          "crates/engine/data/oracle-subtypes.json": "9b28e522611e1684254409ab20a360e284ee0dc0f00e8eadf93c071724df0472"
+        },
+        "known_generated": {
+          "crates/engine/data/known-tokens.toml": "1453a08584b55a483be503c439f1e549fb8263dd278ff0ecc67f454597fec158",
+          "crates/engine/data/oracle-subtypes.json": "b8abc528906b7310d763dcbafb920724dc164054f38a8a7d4495b5d8dd6da019"
+        },
+        "known_restored": {
+          "crates/engine/data/known-tokens.toml": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+          "crates/engine/data/oracle-subtypes.json": "9b28e522611e1684254409ab20a360e284ee0dc0f00e8eadf93c071724df0472"
+        },
+        "finished": "2026-09-05T21:35:33.277127+00:00"
+      },
+      "canonical_integration": {
+        "cargo_artifact": {
+          "reason": "compiler-artifact",
+          "package_id": "path+file:///home/ubuntu/repos/phase-verifiable-loop/crates/engine#0.24.0",
+          "manifest_path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/Cargo.toml",
+          "target": {
+            "kind": [
+              "test"
+            ],
+            "crate_types": [
+              "bin"
+            ],
+            "name": "integration",
+            "src_path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/tests/integration/main.rs",
+            "edition": "2021",
+            "doc": false,
+            "doctest": false,
+            "test": true
+          },
+          "profile": {
+            "opt_level": "0",
+            "debuginfo": "line-tables-only",
+            "debug_assertions": true,
+            "overflow_checks": true,
+            "test": true
+          },
+          "features": [],
+          "filenames": [
+            "/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/integration-7bdd4945820186df"
+          ],
+          "executable": "/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/integration-7bdd4945820186df",
+          "fresh": false
+        },
+        "sha256": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+        "stat": {
+          "size": 279329808,
+          "mtime_ns": 1788644170856391956,
+          "inode": 5697526
+        }
+      }
+    }
+  },
+  "historical_prior_author_handoff": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/handoff.json",
+    "sha256": "54644215dadafd430cae007d017b2b419d43f6a1cca1beae127745601eaf28ef"
+  },
+  "historical_independent_review": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/review-report.json",
+    "sha256": "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd"
+  },
+  "historical_canonical": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+    "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+  },
+  "historical_runtime_results": {
+    "focused_module": {
+      "passed": 196,
+      "ignored": 20
+    },
+    "engine_library": {
+      "passed": 16586,
+      "ignored": 7
+    },
+    "integration": {
+      "passed": 3172,
+      "ignored": 22
+    },
+    "bins": {
+      "passed": 15
+    },
+    "docs": {
+      "executed": 0,
+      "ignored": 7
+    },
+    "cross_source_behavior": {
+      "passed": 5,
+      "throughput_claim": false
+    },
+    "native_controls": {
+      "tests_passed": 9,
+      "parameter_cases": 60
+    },
+    "desired_diagnostics": {
+      "passed": 2,
+      "failed": 18,
+      "same_prior_candidate_failure_set": true
+    },
+    "engine_clippy": "passed on prior fdc9 source",
+    "workspace_clippy": "known original manabrew-compat SetFullControl E0004 only",
+    "card_generation": "prior generation passed, 35802 cards and 2870 tokens; generated source bytes restored before prior canonical build"
+  },
+  "historical_reviewer_runtime": "Complete prior independent reviewer ran original primary outcomes 1/1/1, fdc9 candidate outcomes 0/0/1, and 9 natural native-choice tests with 60 cases. It reused preserved executables; no current-source or committed-worker proof.",
+  "historical_mutation_qualification": "67 original source-bound mutations retained: 56 public, 10 private, 1 defensive. Prior independent review verified 476 immutable path/hash associations, checked 8 mutable paths separately, and treated 65 reused-target executable hashes as per-run claims. These remain historical attestations, not fresh rehash/runtime claims by this executor.",
+  "cr_audit": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+    "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+  },
+  "executor_cr_audit_passed": true,
+  "outstanding_findings": [],
+  "fresh_independent_review": "pending",
+  "final_committed_worker_compilation": "pending root",
+  "acceptance": false,
+  "authoritative_maps": {
+    "constructor_audit": "constructor-audit.json",
+    "callsite_map": "production-entry-callsite-map.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map.json",
+    "maintainer_matrix": "production-path-maintainer-map.json",
+    "cr_audit": "cr-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "historical-canonical-reference.json"
+  }
+}

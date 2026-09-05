@@ -2,8 +2,8 @@
 
 Checkpoint: 2026-09-05. The reusable harness is implemented. The Hushbringer
 repair has completed two full independent implementation reviews. New native
-library-choice tests resolve the coverage finding; one comment citation remains
-for a fresh correction and review. The harness, narrative and earlier evidence
+library-choice tests resolve the coverage finding. The remaining citation is
+corrected, and a fresh full independent review is underway. The harness, narrative and earlier evidence
 were pushed to main at 06cdb7d. There is no accepted repair receipt yet.
 
 The loop now carries an explicit case from a justified expectation through
@@ -68,8 +68,7 @@ with ssh nishadsingh-box-4. Migration verified 3,902 files before local cleanup,
 and cleanup freed 12,964,511,744 bytes on the Mac. The
 [workspace guide](ec2-workspace.md) records the retained locations.
 
-Remaining steps are to correct the final citation, obtain a fresh clean
-implementation review, commit the repair, compare the clean committed candidate
+Remaining steps are to obtain a fresh clean implementation review, commit the repair, compare the clean committed candidate
 against the fixed baseline, and generate the actual acceptance bundle. Coworld
 main already includes the harness and preserves its newer release and Phase
 pin. Integration of newer Phase commits and publication of the reviewed repair
