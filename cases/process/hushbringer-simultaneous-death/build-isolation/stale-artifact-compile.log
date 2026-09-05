@@ -1,0 +1,60 @@
+   Compiling engine v0.24.0 (/home/ubuntu/repos/phase-verifiable-loop/crates/engine)
+error[E0560]: struct `ZoneChangeRecord` has no field named `trigger_suppression`
+  --> crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs:80:13
+   |
+80 |             trigger_suppression: None,
+   |             ^^^^^^^^^^^^^^^^^^^ `ZoneChangeRecord` does not have this field
+   |
+   = note: all struct fields are already assigned
+
+error[E0560]: struct `ZoneChangeRecord` has no field named `trigger_suppression`
+   --> crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs:110:13
+    |
+110 |             trigger_suppression: None,
+    |             ^^^^^^^^^^^^^^^^^^^ `ZoneChangeRecord` does not have this field
+    |
+    = note: all struct fields are already assigned
+
+error[E0560]: struct `ZoneChangeRecord` has no field named `trigger_suppression`
+  --> crates/engine/tests/integration/madame_null_integration.rs:87:13
+   |
+87 |             trigger_suppression: None,
+   |             ^^^^^^^^^^^^^^^^^^^ `ZoneChangeRecord` does not have this field
+   |
+   = note: all struct fields are already assigned
+
+error[E0609]: no field `trigger_suppression` on type `&ZoneChangeRecord`
+   --> crates/engine/tests/integration/trigger_suppression_event_timing.rs:269:10
+    |
+269 |         .trigger_suppression
+    |          ^^^^^^^^^^^^^^^^^^^ unknown field
+    |
+    = note: available fields are: `object_id`, `name`, `core_types`, `subtypes`, `supertypes` ... and 23 others
+
+error[E0609]: no field `trigger_suppression` on type `&Box<ZoneChangeRecord>`
+    --> crates/engine/tests/integration/trigger_suppression_event_timing.rs:2409:128
+     |
+2409 | ...{object_id,record,..} if *object_id==t&&record.trigger_suppression.is_some())));
+     |                                                   ^^^^^^^^^^^^^^^^^^^ unknown field
+     |
+     = note: available fields are: `object_id`, `name`, `core_types`, `subtypes`, `supertypes` ... and 23 others
+
+error[E0609]: no field `trigger_suppression` on type `&Box<ZoneChangeRecord>`
+    --> crates/engine/tests/integration/trigger_suppression_event_timing.rs:2586:114
+     |
+2586 | ...{object_id,record,..} if *object_id==t&&record.trigger_suppression.is_some())));
+     |                                                   ^^^^^^^^^^^^^^^^^^^ unknown field
+     |
+     = note: available fields are: `object_id`, `name`, `core_types`, `subtypes`, `supertypes` ... and 23 others
+
+error[E0609]: no field `trigger_suppression` on type `&Box<ZoneChangeRecord>`
+    --> crates/engine/tests/integration/trigger_suppression_event_timing.rs:2833:160
+     |
+2833 | ...ttlefield),record,..} if *object_id==t&&record.trigger_suppression.is_some())));
+     |                                                   ^^^^^^^^^^^^^^^^^^^ unknown field
+     |
+     = note: available fields are: `object_id`, `name`, `core_types`, `subtypes`, `supertypes` ... and 23 others
+
+Some errors have detailed explanations: E0560, E0609.
+For more information about an error, try `rustc --explain E0560`.
+error: could not compile `engine` (test "integration") due to 7 previous errors

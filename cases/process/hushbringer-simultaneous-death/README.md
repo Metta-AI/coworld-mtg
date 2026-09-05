@@ -50,3 +50,11 @@ and frozen-worker gates. The [partial test handoff](v6-tests-partial/hushbringer
 and [immutable receipt](v6-tests-partial/hushbringer-tests-v6-final-partial-receipt.json)
 record what had and had not run before the fresh v7 executor took over.
 The [v7 checkpoint manifest](v7-plan-manifest.json) binds these artifacts.
+
+## The build workflow also changed
+
+The [build-isolation record](build-isolation/README.md) attributes a worker
+builder correction to this investigation. Cross-checkout Cargo artifact reuse
+caused an active Phase test compile to see an older engine type. Builds now
+use separate output directories. Both comparison workers must be rebuilt
+with the same corrected builder while the checker and case remain fixed.

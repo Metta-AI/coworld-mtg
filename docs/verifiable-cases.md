@@ -128,8 +128,11 @@ python3 scripts/build-case-worker.py --phase-checkout /path/to/phase-checkout \
 
 The builder copies the harness workspace, records source file hashes, the
 resolved lockfile and the executable digest, and records an optional Phase
-checkout's commit, patch from the baseline, dirty diff and source files. The builder checks its record against the Rust `BuildRecord` contract before reporting success. A local override changes only the copied
-workspace. The worker's `declared_phase_revision` is the workspace declaration;
+checkout's commit, patch from the baseline, dirty diff and source files. The
+builder checks its record against the Rust `BuildRecord` contract before
+reporting success. Each invocation uses its own Cargo target directory; build
+outputs are never shared between different source checkouts. A local override
+changes only the copied workspace. The worker's `declared_phase_revision` is the workspace declaration;
 the executable fingerprint and build record identify an override's actual
 source. Source changes during a build prevent it from being certified.
 
@@ -233,3 +236,10 @@ Keep planning, rejected proposals and review artifacts alongside the experiment
 under distinct names. They explain how the obligation changed; they are not
 acceptance evidence by themselves. Only the accepted bundle's measured results,
 source bindings and review decision authorize its generated case note.
+
+If the builder changes during an investigation, preserve the prior artifacts
+and rebuild both workers with the same revised builder. Continue judging both
+with the original preserved coordinator and unchanged case, corpus and
+acceptance plan. Changing build isolation must not change the expected result.
+After verification, generated target directories may be removed to reclaim
+space; retain the worker, source snapshots, build record and resolved lockfile.

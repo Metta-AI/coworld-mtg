@@ -46,7 +46,7 @@ def main():
     copy_sources(ROOT, build)
     shutil.copy2(build / 'Cargo.lock', build / 'Cargo.lock.input')
     command = [str(ROOT / 'scripts/cargo.sh'), 'build', '--manifest-path', str(build / 'Cargo.toml'),
-               '--package', 'coworld-mtg-harness', '--target-dir', str(output / 'target'),
+               '--package', 'coworld-mtg-harness', '--target-dir', str(ROOT / 'target'),
                '--message-format=json-render-diagnostics']
     pin = json.loads((ROOT / 'phase-source.json').read_text())
     phase = {'kind': 'pinned', **pin}
