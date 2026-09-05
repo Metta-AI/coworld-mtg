@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/trigger_suppression.rs
++++ b/crates/engine/src/game/trigger_suppression.rs
+@@ -95,7 +95,16 @@
+ ) -> Vec<SuppressedTriggerEvent> {
+     outcomes_matching(active, |suppressor| {
+         let ctx = super::filter::FilterContext::from_source(state, suppressor.source_id);
+-        super::filter::matches_target_filter(state, object_id, &suppressor.source_filter, &ctx)
++        super::filter::matches_target_filter_on_zone_change_record(
++            state,
++            &state.objects[&object_id].snapshot_for_zone_change(
++                object_id,
++                Some(Zone::Battlefield),
++                Zone::Graveyard,
++            ),
++            &suppressor.source_filter,
++            &ctx,
++        )
+     })
+ }
+ 

@@ -1,0 +1,19 @@
+{
+  "id": "ambiguous-origin-before-misclassification",
+  "matrix_counts": {
+    "failed": 4,
+    "ignored": 20,
+    "passed": 87
+  },
+  "named_exits": [
+    101,
+    101
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility",
+    "trigger_suppression_event_timing::ambiguous_delayed_primary_alternative_co_death_and_identity_compatibility"
+  ],
+  "outcome": "intended assertion failure",
+  "restored": true,
+  "utc": "2026-09-05T19:08:52.762758+00:00"
+}

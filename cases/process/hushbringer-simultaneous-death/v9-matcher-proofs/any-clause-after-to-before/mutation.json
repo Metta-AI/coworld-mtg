@@ -1,0 +1,28 @@
+{
+  "driver_sha256": "db07371dc5858d79a1159f667d22fed9f6d038d751a92d131da3a37fe2534187",
+  "mutant_sha256": "9ffd210ffa241e1ffd47a7356fbec3abedb9980790a103df485b8fbe3b99bdbe",
+  "original_sha256": "1eef66a5b3f50dceb8643ede0ea6deac723336640a3bd006dfa96406eb7002d7",
+  "patch_sha256": "d96c5c8f585432fac59e853a7a738eda5df6cb2c697b57083430e59caa2d71f9",
+  "row": {
+    "description": null,
+    "file": "crates/engine/src/game/trigger_matchers.rs",
+    "id": "any-clause-after-to-before",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "zone_change_clause_matches",
+        "kind": "replace",
+        "new": "!self_arrival && super::trigger_suppression::death_suppressed_before(state, record)",
+        "old": "!self_arrival && super::trigger_suppression::death_suppressed_after(state, record)"
+      }
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "from_anywhere_and_dies_observers_choose_different_worlds",
+      "delayed_same_occurrence_tries_eligible_alternative_exactly_once"
+    ],
+    "transformation_dry_run": "source pattern matched"
+  },
+  "source_mtime_ns": 1788634983928600197,
+  "support_sha256": "fb8a2321776b9b6de22e85a870d7c576576ec0a63b84f4432ea28ab88b57900d"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "any-clause-after-to-before",
+  "matrix_counts": {
+    "failed": 6,
+    "ignored": 20,
+    "passed": 85
+  },
+  "named_exits": [
+    101,
+    101
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::from_anywhere_and_dies_observers_choose_different_worlds",
+    "trigger_suppression_event_timing::delayed_same_occurrence_tries_eligible_alternative_exactly_once"
+  ],
+  "outcome": "intended assertion failure",
+  "restored": true,
+  "utc": "2026-09-05T19:05:38.130400+00:00"
+}

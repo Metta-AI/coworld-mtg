@@ -1,0 +1,136 @@
+{
+  "argv": [
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/canonical-baseline/integration-executable",
+    "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "binary_binding": {
+    "cargo_command_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/canonical-baseline/matrix.receipt.json",
+    "cargo_command_receipt_sha256": "9487d1a08854756093794d88530d395c5cbcf57b89e12120ca00107d94c61da4",
+    "compiler_artifact": {
+      "artifact": {
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/integration-7bdd4945820186df",
+        "features": [],
+        "filenames": [
+          "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/integration-7bdd4945820186df"
+        ],
+        "fresh": false,
+        "manifest_path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/crates/engine/Cargo.toml",
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/crates/engine#0.24.0",
+        "profile": {
+          "debug_assertions": true,
+          "debuginfo": "line-tables-only",
+          "opt_level": "0",
+          "overflow_checks": true,
+          "test": true
+        },
+        "reason": "compiler-artifact",
+        "target": {
+          "crate_types": [
+            "bin"
+          ],
+          "doc": false,
+          "doctest": false,
+          "edition": "2021",
+          "kind": [
+            "test"
+          ],
+          "name": "integration",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/crates/engine/tests/integration/main.rs",
+          "test": true
+        }
+      },
+      "hashed_files": [
+        {
+          "mtime_ns": 1788634091070942823,
+          "newer_than_command_start": true,
+          "path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/integration-7bdd4945820186df",
+          "sha256": "6f5af1ecec2b609c3ba717b2778528971dea3917035bc50a0a8aa5c0354ee13e"
+        },
+        {
+          "mtime_ns": 1788634091070942823,
+          "newer_than_command_start": true,
+          "path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/integration-7bdd4945820186df",
+          "sha256": "6f5af1ecec2b609c3ba717b2778528971dea3917035bc50a0a8aa5c0354ee13e"
+        }
+      ]
+    },
+    "fresh_engine_artifacts": [
+      {
+        "artifact": {
+          "executable": null,
+          "features": [],
+          "filenames": [
+            "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/libengine-48612e4348717538.rlib",
+            "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/libengine-48612e4348717538.rmeta"
+          ],
+          "fresh": false,
+          "manifest_path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/crates/engine/Cargo.toml",
+          "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/crates/engine#0.24.0",
+          "profile": {
+            "debug_assertions": true,
+            "debuginfo": "line-tables-only",
+            "opt_level": "0",
+            "overflow_checks": true,
+            "test": false
+          },
+          "reason": "compiler-artifact",
+          "target": {
+            "crate_types": [
+              "lib"
+            ],
+            "doc": true,
+            "doctest": true,
+            "edition": "2021",
+            "kind": [
+              "lib"
+            ],
+            "name": "engine",
+            "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/crates/engine/src/lib.rs",
+            "test": true
+          }
+        },
+        "hashed_files": [
+          {
+            "mtime_ns": 1788634055985623072,
+            "newer_than_command_start": true,
+            "path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/libengine-48612e4348717538.rlib",
+            "sha256": "86aa5399362d206350097793b0892faa5bce0bb4a5f66bf1c3ee272b5b8ccf9e"
+          },
+          {
+            "mtime_ns": 1788633772452116264,
+            "newer_than_command_start": false,
+            "path": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target/debug/deps/libengine-48612e4348717538.rmeta",
+            "sha256": "f3aa4b40d8d5944ca2e54f062aea0e345012ac0b09542d7b8183759893257c61"
+          }
+        ]
+      }
+    ],
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/canonical-baseline/integration-executable",
+    "runtime_manifest_sha256": "f6f021beedd66d7e453bd75e3cfbecdc90c45329307ac06e5f2acc0feed0ffb4",
+    "sha256": "6f5af1ecec2b609c3ba717b2778528971dea3917035bc50a0a8aa5c0354ee13e",
+    "source_archive_sha256": "647c96da8cc1d1a497cb5391ef3da4305fbb9b941ef581ca4f65986104bf1449",
+    "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+  },
+  "compilation": "none; direct execution of preserved binary, provenance recorded in binary_binding",
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3",
+  "env": {
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+    "RUST_MIN_STACK": "16777216",
+    "RUST_TEST_THREADS": "1"
+  },
+  "exit": 0,
+  "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/canonical-confirmed/9.log",
+  "log_sha256": "11c4732eb98edf931b08fc1fcd96f02c786ecdd00e8b57e809ebaf09fdeacfc8",
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "source_verified_after": true,
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations-r2-r3/target",
+  "test_results": [
+    "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 1.23s"
+  ],
+  "utc_end": "2026-09-05T18:51:10.545001+00:00",
+  "utc_start": "2026-09-05T18:51:08.683163+00:00"
+}

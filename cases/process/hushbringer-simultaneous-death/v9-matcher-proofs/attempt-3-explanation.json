@@ -1,0 +1,16 @@
+{
+  "status": "runner bookkeeping stop after intended mutation assertions; restored bytes verified",
+  "mutation": "before-clause-gate",
+  "actual_mutant_counts": {
+    "passed": 42,
+    "failed": 49,
+    "ignored": 20
+  },
+  "designated_exact_exits": [
+    101,
+    101
+  ],
+  "reason": "Automatic filesystem mtime after byte write failed stricter userspace pre-write nanosecond comparison. It was newer than the mutant, and all2051 source bytes were already restored. No semantic test/setup failure caused this stop.",
+  "first_restored_mtime_ns": 1788634760207945979,
+  "correction": "Write canonical bytes then set mtime explicitly to current time with os.utime; require newer than mutant; verify full source/runtime hashes; run same restored matrix and exact filters."
+}

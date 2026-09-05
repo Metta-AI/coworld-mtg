@@ -1,0 +1,20 @@
+{
+  "safe_inference": "Absent variables remain absent in direct execution because direct context updates only its recorded allowlist and Cargo config is frozen; current supervisor did not mutate these keys",
+  "scope": "Supplemental allowlisted audit of still-running supervisor initial environment; not retroactive replacement of captured Cargo child environment",
+  "selected_environment": {
+    "CARGO_BUILD_RUSTFLAGS": null,
+    "CARGO_ENCODED_RUSTFLAGS": null,
+    "GATED_SETS": null,
+    "GATED_SETS_AS_OF": null,
+    "LD_AUDIT": null,
+    "LD_PRELOAD": null,
+    "ORACLE_POOL_DIR": null,
+    "PHASE_REPLACEMENT_INDEX_AUDIT": null,
+    "RUSTC_WORKSPACE_WRAPPER": null,
+    "RUSTC_WRAPPER": null,
+    "RUSTFLAGS": null
+  },
+  "source_runtime_search": "rg on engine source/tests/build.rs found GATED_SETS, GATED_SETS_AS_OF and PHASE_REPLACEMENT_INDEX_AUDIT in addition to earlier allowlist. ORACLE_POOL_DIR belongs to ignored separate library census, not selected integration matrix.",
+  "supervisor_pid": 3409646,
+  "utc": "2026-09-05T19:13:35.637428+00:00"
+}

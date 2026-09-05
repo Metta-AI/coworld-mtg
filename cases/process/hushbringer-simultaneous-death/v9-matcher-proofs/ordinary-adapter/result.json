@@ -1,0 +1,17 @@
+{
+  "id": "ordinary-adapter",
+  "matrix_counts": {
+    "failed": 1,
+    "ignored": 20,
+    "passed": 90
+  },
+  "named_exits": [
+    101
+  ],
+  "named_failing_assertions": [
+    "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+  ],
+  "outcome": "intended assertion failure",
+  "restored": true,
+  "utc": "2026-09-05T19:17:19.893773+00:00"
+}

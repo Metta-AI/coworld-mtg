@@ -1,0 +1,18 @@
+{
+  "status": "invalid direct-execution setup; no mutation started",
+  "canonical_cargo_counts": {
+    "passed": 91,
+    "ignored": 20
+  },
+  "failed_command": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/canonical-baseline/0.command.json",
+  "failed_exit": -6,
+  "reason": "Direct subprocess omitted frozen .cargo/config.toml RUST_MIN_STACK=16777216, which Cargo supplies to tests; libtest worker stack overflowed.",
+  "correction": "Explicitly set the same RUST_MIN_STACK for direct execution; retain original canonical Cargo binary/source provenance and re-execute full matrix plus exact tests under corrected environment before any mutation.",
+  "retained": [
+    "attempt-1-run.py",
+    "attempt-1-launch.json",
+    "attempt-1-supervisor.log",
+    "attempt-1-supervisor.exit",
+    "canonical-baseline source/archive/commands/logs/exits/binary"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "driver_sha256": "db07371dc5858d79a1159f667d22fed9f6d038d751a92d131da3a37fe2534187",
+  "mutant_sha256": "eb3864bcfc711372f6234e135136c090ad6a29e31d2afcdca81a2f8a3b24e84b",
+  "original_sha256": "05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903",
+  "patch_sha256": "f223bb097842971952c017c67c96b32ed7716f367f017855df6c5bdaa2cfdb29",
+  "row": {
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill.",
+    "file": "crates/engine/src/game/triggers.rs",
+    "id": "ordinary-global-death-gate",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "collect_pending_triggers",
+        "kind": "replace",
+        "new": "super::trigger_suppression::event_is_suppressed_by_static_triggers_cached(state, event, &active_suppress_triggers)",
+        "old": "etb_event_is_suppressed_cached(state, event, &active_suppress_triggers)"
+      }
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "self_from_anywhere_exception_functions_in_destination_with_hush_surviving",
+      "clause_local_disjunction_registers_once_for_eligible_sibling"
+    ]
+  },
+  "source_mtime_ns": 1788635883110184196,
+  "support_sha256": "fb8a2321776b9b6de22e85a870d7c576576ec0a63b84f4432ea28ab88b57900d"
+}

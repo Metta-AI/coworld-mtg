@@ -1,0 +1,27 @@
+{
+  "driver_sha256": "db07371dc5858d79a1159f667d22fed9f6d038d751a92d131da3a37fe2534187",
+  "mutant_sha256": "a30ba72ce0ad476c295abf17a0def5f6142771c740fb299dee99a65bff5d437a",
+  "original_sha256": "f37e54b657772b0551e46d3d612e4d44682ebfd6cffca8b1936b80d266d929cc",
+  "patch_sha256": "cf221857e3f4c8adbe157ac9a6f254e7cbd50f33b0d4b282642f3f3e241fe57a",
+  "row": {
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill.",
+    "file": "crates/engine/src/game/trigger_suppression.rs",
+    "id": "before-live-subject-authority",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "outcomes_for_live_subject",
+        "kind": "replace",
+        "new": "super::filter::matches_target_filter_on_zone_change_record(state, &state.objects[&object_id].snapshot_for_zone_change(object_id, Some(Zone::Battlefield), Zone::Graveyard), &suppressor.source_filter, &ctx)",
+        "old": "super::filter::matches_target_filter(state, object_id, &suppressor.source_filter, &ctx)"
+      }
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "attachment_relative_suppression_binds_live_relation_before_departure",
+      "enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat"
+    ]
+  },
+  "source_mtime_ns": 1788636202778954305,
+  "support_sha256": "fb8a2321776b9b6de22e85a870d7c576576ec0a63b84f4432ea28ab88b57900d"
+}

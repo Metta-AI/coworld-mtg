@@ -1,0 +1,18 @@
+--- a/crates/engine/src/game/triggers.rs
++++ b/crates/engine/src/game/triggers.rs
+@@ -770,14 +770,7 @@
+             continue;
+         }
+         if let Some(matcher) = trigger_matcher(trig_def.mode.clone()) {
+-            if !super::trigger_matchers::match_for_ordinary_collection(
+-                matcher,
+-                event,
+-                trig_def,
+-                obj_id,
+-                state,
+-                active_suppress_triggers,
+-            ) {
++            if !matcher(event, trig_def, obj_id, state) {
+                 continue;
+             }
+             if !check_trigger_constraint(state, trig_def, obj_id, trig_idx, controller, event) {

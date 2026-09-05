@@ -1,0 +1,26 @@
+{
+  "driver_sha256": "db07371dc5858d79a1159f667d22fed9f6d038d751a92d131da3a37fe2534187",
+  "mutant_sha256": "f6b210d8264d7ab1aa3cd1e4aedbd2648a127b892e29fa2f10d803fd2df1f5b3",
+  "original_sha256": "05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903",
+  "patch_sha256": "4e4a568be306c9e984c5f464e8146190381277bf8231b1d11eb633eed6ba9d63",
+  "row": {
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill.",
+    "file": "crates/engine/src/game/triggers.rs",
+    "id": "ordinary-adapter",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "collect_matching_triggers_inner",
+        "kind": "replace",
+        "new": "matcher(event, trig_def, obj_id, state)",
+        "old": "super::trigger_matchers::match_for_ordinary_collection(\n                matcher,\n                event,\n                trig_def,\n                obj_id,\n                state,\n                active_suppress_triggers,\n            )"
+      }
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+    ]
+  },
+  "source_mtime_ns": 1788635712573461185,
+  "support_sha256": "fb8a2321776b9b6de22e85a870d7c576576ec0a63b84f4432ea28ab88b57900d"
+}
