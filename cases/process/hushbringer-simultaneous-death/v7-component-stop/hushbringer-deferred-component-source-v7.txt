@@ -1,0 +1,668 @@
+
+2dec6c88915db4697706234a7ba2fcedd97b1689 crates/engine/src/game/casting_costs.rs:264
+264: fn continue_after_declared_mana_split(
+265:     state: &mut GameState,
+266:     player: PlayerId,
+267:     mut pending: PendingCast,
+268:     split: DeclaredManaSplit,
+269:     events: &mut Vec<GameEvent>,
+270: ) -> Result<WaitingFor, EngineError> {
+271:     if !split.declared.is_empty() {
+272:         pending.declared_mana_additions.extend(split.declared);
+273:         pending.cost = super::casting::recompute_pending_mana_total(
+274:             state,
+275:             player,
+276:             &pending,
+277:             pending.ability.chosen_x,
+278:         );
+279:     }
+280:     if split.payment_mode.is_some() {
+281:         pending.additional_cost_payment_mode = split.payment_mode;
+282:     }
+283:     if let Some(residual) = split.residual {
+284:         let (current, remaining) = split_first_residual_payment(residual);
+285:         if let Some(remaining) = remaining {
+286:             let remaining = prepend_deferred_required_cost(remaining, &mut pending);
+287:             pending.additional_cost_flow = Some(AdditionalCost::Required(remaining));
+288:         }
+289:         return pay_additional_cost(state, player, current, pending, events);
+290:     }
+291:     if let Some(payment_mode) = pending.additional_cost_payment_mode.take() {
+292:         state.pending_cast = Some(Box::new(pending));
+293:         return enter_payment_step(state, player, Some(payment_mode), events);
+294:     }
+295:     finish_pending_cost_or_cast(state, player, pending, events)
+296: }
+297: 
+298: /// Handle the player's decision on an additional cost (kicker, blight, "or pay").
+299: ///
+300: /// For `Optional`: `pay=true` pays the cost and sets `additional_cost_paid`, `pay=false` skips.
+301: /// For `Choice`: `pay=true` pays the first cost, `pay=false` pays the second cost.
+302: pub(crate) fn handle_decide_additional_cost(
+303:     state: &mut GameState,
+304:     player: PlayerId,
+305:     pending: PendingCast,
+306:     additional_cost: &AdditionalCost,
+307:     pay: bool,
+308:     events: &mut Vec<GameEvent>,
+309: ) -> Result<WaitingFor, EngineError> {
+310:     if pending
+311:         .additional_cost_queue
+312:         .first()
+313:         .is_some_and(|instance| {
+314:             matches!(
+315:                 instance.cost,
+316:                 AdditionalCost::Optional {
+317:                     repeatability: crate::types::ability::AdditionalCostRepeatability::Repeatable,
+318:                     ..
+319:                 }
+320:             )
+321:         })
+322:     {
+323:         return handle_decide_repeatable_additional_cost(state, player, pending, pay, events);
+324:     }
+325: 
+326:     match (pending.additional_cost_flow.as_ref(), additional_cost) {
+327:         (Some(AdditionalCost::Kicker { .. }), _) => {
+328:             return handle_decide_kicker_cost(state, player, pending, pay, events);
+329:         }
+330:         (
+331:             Some(AdditionalCost::Optional {
+332:                 repeatability: crate::types::ability::AdditionalCostRepeatability::Repeatable,
+333:                 ..
+334:             }),
+335:             _,
+336:         ) => {
+337:             return handle_decide_repeatable_additional_cost(state, player, pending, pay, events);
+338:         }
+339:         (None, AdditionalCost::Kicker { .. }) => {
+340:             let mut pending = pending;
+341:             pending.additional_cost_flow = Some(additional_cost.clone());
+
+2dec6c88915db4697706234a7ba2fcedd97b1689 crates/engine/src/game/casting_costs.rs:1638
+1638: fn can_defer_spell_sacrifice_until_mana_payment(
+1639:     state: &GameState,
+1640:     player: PlayerId,
+1641:     pending: &PendingCast,
+1642:     chosen: &[ObjectId],
+1643: ) -> bool {
+1644:     if chosen.is_empty() || pending.activation_ability_index.is_some() {
+1645:         return false;
+1646:     }
+1647:     if sacrifice_selection_needs_replacement_choice(state, player, chosen) {
+1648:         return false;
+1649:     }
+1650: 
+1651:     let mut cost = pending.cost.clone();
+1652:     // CR 601.2f: preview the same final floor pass `finish_pending_cost_or_cast`
+1653:     // will apply before the spell reaches final payment.
+1654:     super::casting::apply_cost_floor(state, player, pending.object_id, &mut cost);
+1655:     super::casting::apply_cost_floor_with_selected_targets(
+1656:         state,
+1657:         player,
+1658:         pending.object_id,
+1659:         &pending.ability,
+1660:         &mut cost,
+1661:     );
+1662: 
+1663:     cost_has_x(&cost) || cost.mana_value() > 0
+1664: }
+1665: 
+1666: fn sacrifice_selection_needs_replacement_choice(
+1667:     state: &GameState,
+1668:     player: PlayerId,
+1669:     chosen: &[ObjectId],
+1670: ) -> bool {
+1671:     let mut simulated = state.clone();
+1672:     let mut events = Vec::new();
+1673:     chosen.iter().copied().any(|object_id| {
+1674:         matches!(
+1675:             super::sacrifice::sacrifice_permanent(&mut simulated, object_id, player, &mut events),
+1676:             Ok(super::sacrifice::SacrificeOutcome::NeedsReplacementChoice(
+1677:                 _
+1678:             ))
+1679:         )
+1680:     })
+1681: }
+1682: 
+1683: fn auto_activate_spell_mana_abilities_before_deferred_sacrifice(
+1684:     state: &mut GameState,
+1685:     player: PlayerId,
+1686:     pending: &PendingCast,
+1687:     events: &mut Vec<GameEvent>,
+1688: ) -> Result<(), EngineError> {
+1689:     let previous_pending = state.pending_cast.clone();
+1690:     let mut simulated = state.clone();
+1691:     simulated.pending_cast = Some(Box::new(pending.clone()));
+1692:     if pending.activation_ability_index.is_some()
+1693:         || pending.payment_mode != CastPaymentMode::Auto
+1694:         || cost_has_x(&pending.cost)
+1695:         || !super::casting::can_pay_cost_after_auto_tap(
+1696:             &simulated,
+1697:             player,
+1698:             pending.object_id,
+1699:             &pending.cost,
+1700:         )
+1701:     {
+1702:         return Ok(());
+1703:     }
+1704: 
+1705:     // CR 601.2g + CR 601.2h: spell mana abilities are activated before costs
+1706:     // are paid, so a permanent can tap for mana first and then be sacrificed as
+1707:     // a non-mana additional cost. The final spend remains in `finalize_cast`.
+1708:     let mut simulated_events = events.clone();
+1709:     let events_before = simulated_events.len();
+1710:     let spell_meta = super::casting::build_spell_meta(&simulated, player, pending.object_id);
+1711:     let spell_ctx = spell_meta.as_ref().map(PaymentContext::Spell);
+1712:     auto_tap_mana_sources_with_context(
+1713:         &mut simulated,
+1714:         player,
+1715:         &pending.cost,
+
+2dec6c88915db4697706234a7ba2fcedd97b1689 crates/engine/src/game/casting_costs.rs:1795
+1795: fn pay_deferred_spell_sacrifices_at_commit(
+1796:     state: &mut GameState,
+1797:     player: PlayerId,
+1798:     pending: &PendingCast,
+1799:     events: &mut Vec<GameEvent>,
+1800: ) -> Result<Option<(usize, usize)>, EngineError> {
+1801:     if pending.deferred_sacrificed_permanents.is_empty() {
+1802:         return Ok(None);
+1803:     }
+1804: 
+1805:     let cost_event_start = events.len();
+1806:     for selection in &pending.deferred_sacrificed_permanents {
+1807:         let id = selection.object_id;
+1808:         match super::sacrifice::sacrifice_permanent(state, id, player, events)
+1809:             .map_err(|e| EngineError::InvalidAction(format!("{e}")))?
+1810:         {
+1811:             super::sacrifice::SacrificeOutcome::Complete => {}
+1812:             super::sacrifice::SacrificeOutcome::NeedsReplacementChoice(_) => {
+1813:                 return Err(EngineError::ActionNotAllowed(
+1814:                     "Deferred sacrifice cost requires replacement ordering".to_string(),
+1815:                 ));
+1816:             }
+1817:         }
+1818:     }
+1819:     // CR 603.10a + CR 701.21a + CR 601.2h + CR 118.8: permanents sacrificed to
+1820:     // pay one cost component leave the battlefield together.
+1821:     let departed_ids: Vec<ObjectId> = pending
+1822:         .deferred_sacrificed_permanents
+1823:         .iter()
+1824:         .map(|selection| selection.object_id)
+1825:         .collect();
+1826:     crate::game::zones::mark_simultaneous_departures(
+1827:         events,
+1828:         &crate::game::zones::departed_subset(state, &departed_ids),
+1829:     );
+1830:     Ok(Some((cost_event_start, events.len())))
+1831: }
+1832: 
+1833: fn park_deferred_cost_triggers_if_paused(
+1834:     state: &mut GameState,
+1835:     events: &[GameEvent],
+1836:     cost_event_range: Option<(usize, usize)>,
+1837:     waiting_for: &WaitingFor,
+1838: ) {
+1839:     if matches!(waiting_for, WaitingFor::Priority { .. }) {
+1840:         return;
+1841:     }
+1842:     let Some((start, end)) = cost_event_range else {
+1843:         return;
+1844:     };
+1845:     let cost_events: Vec<GameEvent> = events[start..end]
+1846:         .iter()
+1847:         .filter(|ev| !matches!(ev, GameEvent::PhaseChanged { .. }))
+1848:         .cloned()
+1849:         .collect();
+1850:     crate::game::triggers::collect_triggers_into_deferred(state, &cost_events);
+1851: }
+1852: 
+1853: pub(crate) fn handle_sacrifice_for_cost(
+1854:     state: &mut GameState,
+1855:     player: PlayerId,
+1856:     mut pending: PendingCast,
+1857:     paid_cost: Option<SpellCostPayment<'_>>,
+1858:     selection: CostSelection<'_>,
+1859:     events: &mut Vec<GameEvent>,
+1860: ) -> Result<WaitingFor, EngineError> {
+1861:     let CostSelection {
+1862:         min_count,
+1863:         count,
+1864:         legal_permanents,
+1865:         chosen,
+1866:     } = selection;
+1867:     if chosen.len() < min_count || chosen.len() > count {
+1868:         let requirement = if min_count == count {
+1869:             format!("exactly {} permanent(s)", count)
+1870:         } else {
+1871:             format!("between {} and {} permanent(s)", min_count, count)
+1872:         };
+
+2dec6c88915db4697706234a7ba2fcedd97b1689 crates/engine/src/game/casting_costs.rs:1984
+1984:     let deferred_sacrifice_filter = paid_cost.and_then(|payment| {
+1985:         super::casting::find_non_self_sacrifice_cost(payment.cost).map(|(_, filter)| filter.clone())
+1986:     });
+1987:     if let Some(filter) = deferred_sacrifice_filter {
+1988:         if can_defer_spell_sacrifice_until_mana_payment(state, player, &pending, chosen) {
+1989:             pending
+1990:                 .deferred_sacrificed_permanents
+1991:                 .extend(
+1992:                     chosen
+1993:                         .iter()
+1994:                         .copied()
+1995:                         .map(|object_id| DeferredSacrificeSelection {
+1996:                             object_id,
+1997:                             filter: filter.clone(),
+1998:                         }),
+1999:                 );
+2000:             return finish_pending_cost_or_cast(state, player, pending, events);
+2001:         }
+2002:     }
+2003: 
+2004:     // Boundary of the cost-payment events THIS handler produces — captured
+2005:     // before the sacrifice so the death/leaves-the-battlefield `ZoneChanged`
+2006:     // records (and their producer co-departed stamp, below) can be scanned for
+2007:     // observers if the cast pauses before Priority (see the deferred-parking
+2008:     // block after `finish_pending_cost_or_cast`).
+2009:     let cost_event_start = events.len();
+2010: 
+2011:     // Sacrifice each chosen permanent
+2012:     for &id in chosen {
+2013:         super::sacrifice::sacrifice_permanent(state, id, player, events)
+2014:             .map_err(|e| EngineError::InvalidAction(format!("{e}")))?;
+2015:     }
+2016: 
+2017:     // CR 603.10a + CR 701.21a + CR 601.2h + CR 118.8: permanents sacrificed to pay
+2018:     // one cost component leave the battlefield together; a co-departing observer
+2019:     // among them observes the rest (look-back-in-time). Single authority — identical
+2020:     // wiring to `effects::sacrifice::resolve`. `departed_subset` drops any permanent
+2021:     // that did not actually leave (CantBeSacrificed, replacement).
+2022:     crate::game::zones::mark_simultaneous_departures(
+2023:         events,
+2024:         &crate::game::zones::departed_subset(state, chosen),
+2025:     );
+2026:     let cost_event_end = events.len();
+2027: 
+2028:     let waiting_for = finish_pending_cost_or_cast(state, player, pending, events)?;
+2029: 
+2030:     // CR 603.6c + CR 603.10a + CR 603.3b: When `finish_pending_cost_or_cast`
+2031:     // lands on `Priority` the cast completed in THIS action, so
+2032:     // `run_post_action_pipeline` will scan `events` (including the
+2033:     // cost-sacrifice `ZoneChanged` records stamped just above) and the
+2034:     // leaves-the-battlefield / dies observers fire normally.
+2035:     //
+2036:     // But when the cast PAUSES on a later target/kicker/modal choice
+2037:     // (a non-`Priority` `WaitingFor`), `apply_action` does NOT run the
+2038:     // post-action pipeline over this action's `events` (engine.rs gates the
+2039:     // pipeline on `WaitingFor::Priority`), and the cast lands in a LATER
+2040:     // action whose fresh `events` vector no longer carries these records — so
+2041:     // the producer co-departed stamp would be unreadable and a "whenever a
+2042:     // creature you control dies" / leaves-the-battlefield observer among the
+2043:     // co-sacrificed permanents would under-observe. Mirror the established
+2044:     // B2 parking pattern in `engine_resolution_choices::batch_or_drain_observer_triggers`:
+2045:     // collect the cost-payment observer triggers into `deferred_triggers` now,
+2046:     // where the stamped records are still in scope. They are NOT drained while
+2047:     // the announced spell remains on the stack (`should_drain_deferred_triggers_now`
+2048:     // refuses to drain with a `Spell` entry present), so they reach the stack
+2049:     // at the next true resolution boundary after the cast completes — CR 603.3
+2050:     // ("the next time a player would receive priority").
+2051:     if !matches!(waiting_for, WaitingFor::Priority { .. }) {
+2052:         let cost_events: Vec<GameEvent> = events[cost_event_start..cost_event_end]
+2053:             .iter()
+2054:             .filter(|ev| !matches!(ev, GameEvent::PhaseChanged { .. }))
+2055:             .cloned()
+2056:             .collect();
+2057:         crate::game::triggers::collect_triggers_into_deferred(state, &cost_events);
+2058:     }
+2059: 
+2060:     Ok(waiting_for)
+2061: }
+
+2dec6c88915db4697706234a7ba2fcedd97b1689 crates/engine/src/types/game_state.rs:2238
+2238: pub struct DeferredSacrificeSelection {
+2239:     pub object_id: ObjectId,
+2240:     pub filter: TargetFilter,
+2241: }
+2242: 
+2243: #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+2244: pub struct PendingCast {
+2245:     pub object_id: ObjectId,
+2246:     pub card_id: CardId,
+2247:     pub ability: ResolvedAbility,
+2248:     pub cost: ManaCost,
+2249:     /// CR 601.2f: The tax-inclusive base mana cost captured at announcement,
+
+current crates/engine/src/game/casting_costs.rs:264
+264: fn continue_after_declared_mana_split(
+265:     state: &mut GameState,
+266:     player: PlayerId,
+267:     mut pending: PendingCast,
+268:     split: DeclaredManaSplit,
+269:     events: &mut Vec<GameEvent>,
+270: ) -> Result<WaitingFor, EngineError> {
+271:     if !split.declared.is_empty() {
+272:         pending.declared_mana_additions.extend(split.declared);
+273:         pending.cost = super::casting::recompute_pending_mana_total(
+274:             state,
+275:             player,
+276:             &pending,
+277:             pending.ability.chosen_x,
+278:         );
+279:     }
+280:     if split.payment_mode.is_some() {
+281:         pending.additional_cost_payment_mode = split.payment_mode;
+282:     }
+283:     if let Some(residual) = split.residual {
+284:         let (current, remaining) = split_first_residual_payment(residual);
+285:         if let Some(remaining) = remaining {
+286:             let remaining = prepend_deferred_required_cost(remaining, &mut pending);
+287:             pending.additional_cost_flow = Some(AdditionalCost::Required(remaining));
+288:         }
+289:         return pay_additional_cost(state, player, current, pending, events);
+290:     }
+291:     if let Some(payment_mode) = pending.additional_cost_payment_mode.take() {
+292:         state.pending_cast = Some(Box::new(pending));
+293:         return enter_payment_step(state, player, Some(payment_mode), events);
+294:     }
+295:     finish_pending_cost_or_cast(state, player, pending, events)
+296: }
+297: 
+298: /// Handle the player's decision on an additional cost (kicker, blight, "or pay").
+299: ///
+300: /// For `Optional`: `pay=true` pays the cost and sets `additional_cost_paid`, `pay=false` skips.
+301: /// For `Choice`: `pay=true` pays the first cost, `pay=false` pays the second cost.
+302: pub(crate) fn handle_decide_additional_cost(
+303:     state: &mut GameState,
+304:     player: PlayerId,
+305:     pending: PendingCast,
+306:     additional_cost: &AdditionalCost,
+307:     pay: bool,
+308:     events: &mut Vec<GameEvent>,
+309: ) -> Result<WaitingFor, EngineError> {
+310:     if pending
+311:         .additional_cost_queue
+312:         .first()
+313:         .is_some_and(|instance| {
+314:             matches!(
+315:                 instance.cost,
+316:                 AdditionalCost::Optional {
+317:                     repeatability: crate::types::ability::AdditionalCostRepeatability::Repeatable,
+318:                     ..
+319:                 }
+320:             )
+321:         })
+322:     {
+323:         return handle_decide_repeatable_additional_cost(state, player, pending, pay, events);
+324:     }
+325: 
+326:     match (pending.additional_cost_flow.as_ref(), additional_cost) {
+327:         (Some(AdditionalCost::Kicker { .. }), _) => {
+328:             return handle_decide_kicker_cost(state, player, pending, pay, events);
+329:         }
+330:         (
+331:             Some(AdditionalCost::Optional {
+332:                 repeatability: crate::types::ability::AdditionalCostRepeatability::Repeatable,
+333:                 ..
+334:             }),
+335:             _,
+336:         ) => {
+337:             return handle_decide_repeatable_additional_cost(state, player, pending, pay, events);
+338:         }
+339:         (None, AdditionalCost::Kicker { .. }) => {
+340:             let mut pending = pending;
+341:             pending.additional_cost_flow = Some(additional_cost.clone());
+
+current crates/engine/src/game/casting_costs.rs:1638
+1638: fn can_defer_spell_sacrifice_until_mana_payment(
+1639:     state: &GameState,
+1640:     player: PlayerId,
+1641:     pending: &PendingCast,
+1642:     chosen: &[ObjectId],
+1643: ) -> bool {
+1644:     if chosen.is_empty() || pending.activation_ability_index.is_some() {
+1645:         return false;
+1646:     }
+1647:     if sacrifice_selection_needs_replacement_choice(state, player, chosen) {
+1648:         return false;
+1649:     }
+1650: 
+1651:     let mut cost = pending.cost.clone();
+1652:     // CR 601.2f: preview the same final floor pass `finish_pending_cost_or_cast`
+1653:     // will apply before the spell reaches final payment.
+1654:     super::casting::apply_cost_floor(state, player, pending.object_id, &mut cost);
+1655:     super::casting::apply_cost_floor_with_selected_targets(
+1656:         state,
+1657:         player,
+1658:         pending.object_id,
+1659:         &pending.ability,
+1660:         &mut cost,
+1661:     );
+1662: 
+1663:     cost_has_x(&cost) || cost.mana_value() > 0
+1664: }
+1665: 
+1666: fn sacrifice_selection_needs_replacement_choice(
+1667:     state: &GameState,
+1668:     player: PlayerId,
+1669:     chosen: &[ObjectId],
+1670: ) -> bool {
+1671:     let mut simulated = state.clone();
+1672:     let mut events = Vec::new();
+1673:     chosen.iter().copied().any(|object_id| {
+1674:         matches!(
+1675:             super::sacrifice::sacrifice_permanent(&mut simulated, object_id, player, &mut events),
+1676:             Ok(super::sacrifice::SacrificeOutcome::NeedsReplacementChoice(
+1677:                 _
+1678:             ))
+1679:         )
+1680:     })
+1681: }
+1682: 
+1683: fn auto_activate_spell_mana_abilities_before_deferred_sacrifice(
+1684:     state: &mut GameState,
+1685:     player: PlayerId,
+1686:     pending: &PendingCast,
+1687:     events: &mut Vec<GameEvent>,
+1688: ) -> Result<(), EngineError> {
+1689:     let previous_pending = state.pending_cast.clone();
+1690:     let mut simulated = state.clone();
+1691:     simulated.pending_cast = Some(Box::new(pending.clone()));
+1692:     if pending.activation_ability_index.is_some()
+1693:         || pending.payment_mode != CastPaymentMode::Auto
+1694:         || cost_has_x(&pending.cost)
+1695:         || !super::casting::can_pay_cost_after_auto_tap(
+1696:             &simulated,
+1697:             player,
+1698:             pending.object_id,
+1699:             &pending.cost,
+1700:         )
+1701:     {
+1702:         return Ok(());
+1703:     }
+1704: 
+1705:     // CR 601.2g + CR 601.2h: spell mana abilities are activated before costs
+1706:     // are paid, so a permanent can tap for mana first and then be sacrificed as
+1707:     // a non-mana additional cost. The final spend remains in `finalize_cast`.
+1708:     let mut simulated_events = events.clone();
+1709:     let events_before = simulated_events.len();
+1710:     let spell_meta = super::casting::build_spell_meta(&simulated, player, pending.object_id);
+1711:     let spell_ctx = spell_meta.as_ref().map(PaymentContext::Spell);
+1712:     auto_tap_mana_sources_with_context(
+1713:         &mut simulated,
+1714:         player,
+1715:         &pending.cost,
+
+current crates/engine/src/game/casting_costs.rs:1795
+1795: fn pay_deferred_spell_sacrifices_at_commit(
+1796:     state: &mut GameState,
+1797:     player: PlayerId,
+1798:     pending: &PendingCast,
+1799:     events: &mut Vec<GameEvent>,
+1800: ) -> Result<Option<(usize, usize)>, EngineError> {
+1801:     if pending.deferred_sacrificed_permanents.is_empty() {
+1802:         return Ok(None);
+1803:     }
+1804: 
+1805:     let cost_event_start = events.len();
+1806:     let candidates: Vec<_> = pending
+1807:         .deferred_sacrificed_permanents
+1808:         .iter()
+1809:         .map(|selection| selection.object_id)
+1810:         .collect();
+1811:     crate::game::zones::with_departure_suppression(
+1812:         state,
+1813:         events,
+1814:         &candidates,
+1815:         |state, events, owner| {
+1816:             for selection in &pending.deferred_sacrificed_permanents {
+1817:                 let id = selection.object_id;
+1818:                 match crate::game::zones::with_departure_member(
+1819:                     state,
+1820:                     events,
+1821:                     owner,
+1822:                     id,
+1823:                     |state, events| {
+1824:                         super::sacrifice::sacrifice_permanent(state, id, player, events)
+1825:                     },
+1826:                 )
+1827:                 .map_err(|e| EngineError::InvalidAction(format!("{e}")))?
+1828:                 {
+1829:                     super::sacrifice::SacrificeOutcome::Complete => {}
+1830:                     super::sacrifice::SacrificeOutcome::NeedsReplacementChoice(_) => {
+1831:                         return Err(EngineError::ActionNotAllowed(
+1832:                             "Deferred sacrifice cost requires replacement ordering".to_string(),
+1833:                         ));
+1834:                     }
+1835:                 }
+1836:             }
+1837:             Ok::<(), EngineError>(())
+1838:         },
+1839:     )?;
+1840:     Ok(Some((cost_event_start, events.len())))
+1841: }
+1842: 
+1843: fn park_deferred_cost_triggers_if_paused(
+1844:     state: &mut GameState,
+1845:     events: &[GameEvent],
+1846:     cost_event_range: Option<(usize, usize)>,
+1847:     waiting_for: &WaitingFor,
+1848: ) {
+1849:     if matches!(waiting_for, WaitingFor::Priority { .. }) {
+1850:         return;
+1851:     }
+1852:     let Some((start, end)) = cost_event_range else {
+1853:         return;
+1854:     };
+1855:     let cost_events: Vec<GameEvent> = events[start..end]
+1856:         .iter()
+1857:         .filter(|ev| !matches!(ev, GameEvent::PhaseChanged { .. }))
+1858:         .cloned()
+1859:         .collect();
+1860:     crate::game::triggers::collect_triggers_into_deferred(state, &cost_events);
+1861: }
+1862: 
+1863: pub(crate) fn handle_sacrifice_for_cost(
+1864:     state: &mut GameState,
+1865:     player: PlayerId,
+1866:     mut pending: PendingCast,
+1867:     paid_cost: Option<SpellCostPayment<'_>>,
+1868:     selection: CostSelection<'_>,
+1869:     events: &mut Vec<GameEvent>,
+1870: ) -> Result<WaitingFor, EngineError> {
+1871:     let CostSelection {
+1872:         min_count,
+
+current crates/engine/src/game/casting_costs.rs:1994
+1994:     let deferred_sacrifice_filter = paid_cost.and_then(|payment| {
+1995:         super::casting::find_non_self_sacrifice_cost(payment.cost).map(|(_, filter)| filter.clone())
+1996:     });
+1997:     if let Some(filter) = deferred_sacrifice_filter {
+1998:         if can_defer_spell_sacrifice_until_mana_payment(state, player, &pending, chosen) {
+1999:             pending
+2000:                 .deferred_sacrificed_permanents
+2001:                 .extend(
+2002:                     chosen
+2003:                         .iter()
+2004:                         .copied()
+2005:                         .map(|object_id| DeferredSacrificeSelection {
+2006:                             object_id,
+2007:                             filter: filter.clone(),
+2008:                         }),
+2009:                 );
+2010:             return finish_pending_cost_or_cast(state, player, pending, events);
+2011:         }
+2012:     }
+2013: 
+2014:     // Boundary of the cost-payment events THIS handler produces — captured
+2015:     // before the sacrifice so the death/leaves-the-battlefield `ZoneChanged`
+2016:     // records (and their producer co-departed stamp, below) can be scanned for
+2017:     // observers if the cast pauses before Priority (see the deferred-parking
+2018:     // block after `finish_pending_cost_or_cast`).
+2019:     let cost_event_start = events.len();
+2020: 
+2021:     crate::game::zones::with_departure_suppression(
+2022:         state,
+2023:         events,
+2024:         chosen,
+2025:         |state, events, owner| {
+2026:             // Sacrifice each chosen permanent
+2027:             for &id in chosen {
+2028:                 crate::game::zones::with_departure_member(
+2029:                     state,
+2030:                     events,
+2031:                     owner,
+2032:                     id,
+2033:                     |state, events| {
+2034:                         super::sacrifice::sacrifice_permanent(state, id, player, events)
+2035:                     },
+2036:                 )
+2037:                 .map_err(|e| EngineError::InvalidAction(format!("{e}")))?;
+2038:             }
+2039: 
+2040:             Ok::<(), EngineError>(())
+2041:         },
+2042:     )?;
+2043:     let cost_event_end = events.len();
+2044: 
+2045:     let waiting_for = finish_pending_cost_or_cast(state, player, pending, events)?;
+2046: 
+2047:     // CR 603.6c + CR 603.10a + CR 603.3b: When `finish_pending_cost_or_cast`
+2048:     // lands on `Priority` the cast completed in THIS action, so
+2049:     // `run_post_action_pipeline` will scan `events` (including the
+2050:     // cost-sacrifice `ZoneChanged` records stamped just above) and the
+2051:     // leaves-the-battlefield / dies observers fire normally.
+2052:     //
+2053:     // But when the cast PAUSES on a later target/kicker/modal choice
+2054:     // (a non-`Priority` `WaitingFor`), `apply_action` does NOT run the
+2055:     // post-action pipeline over this action's `events` (engine.rs gates the
+2056:     // pipeline on `WaitingFor::Priority`), and the cast lands in a LATER
+2057:     // action whose fresh `events` vector no longer carries these records — so
+2058:     // the producer co-departed stamp would be unreadable and a "whenever a
+2059:     // creature you control dies" / leaves-the-battlefield observer among the
+2060:     // co-sacrificed permanents would under-observe. Mirror the established
+2061:     // B2 parking pattern in `engine_resolution_choices::batch_or_drain_observer_triggers`:
+2062:     // collect the cost-payment observer triggers into `deferred_triggers` now,
+2063:     // where the stamped records are still in scope. They are NOT drained while
+2064:     // the announced spell remains on the stack (`should_drain_deferred_triggers_now`
+2065:     // refuses to drain with a `Spell` entry present), so they reach the stack
+2066:     // at the next true resolution boundary after the cast completes — CR 603.3
+2067:     // ("the next time a player would receive priority").
+2068:     if !matches!(waiting_for, WaitingFor::Priority { .. }) {
+2069:         let cost_events: Vec<GameEvent> = events[cost_event_start..cost_event_end]
+2070:             .iter()
+2071:             .filter(|ev| !matches!(ev, GameEvent::PhaseChanged { .. }))
+
+current crates/engine/src/types/game_state.rs:2301
+2301: pub struct DeferredSacrificeSelection {
+2302:     pub object_id: ObjectId,
+2303:     pub filter: TargetFilter,
+2304: }
+2305: 
+2306: #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+2307: pub struct PendingCast {
+2308:     pub object_id: ObjectId,
+2309:     pub card_id: CardId,
+2310:     pub ability: ResolvedAbility,
+2311:     pub cost: ManaCost,
+2312:     /// CR 601.2f: The tax-inclusive base mana cost captured at announcement,

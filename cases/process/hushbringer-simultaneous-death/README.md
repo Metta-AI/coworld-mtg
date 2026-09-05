@@ -58,3 +58,11 @@ builder correction to this investigation. Cross-checkout Cargo artifact reuse
 caused an active Phase test compile to see an older engine type. Builds now
 use separate output directories. Both comparison workers must be rebuilt
 with the same corrected builder while the checker and case remain fixed.
+
+## A regression required a stronger cost boundary
+
+The [v7 component stop](v7-component-stop/README.md) preserves an introduced
+regression found by the expanded tests. Deferred payment merged separate
+sacrifice costs, which gave the second cost an earlier event snapshot. The
+repair was sent back through planning and review. This was not treated as an
+existing-engine compatibility exception or as acceptance of the candidate.

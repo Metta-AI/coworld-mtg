@@ -19,3 +19,10 @@ The original checker executable, case, corpus and acceptance plan remain
 unchanged. Both baseline and candidate workers must be rebuilt with the same
 revised builder and reevaluated by that preserved checker. Earlier binaries
 and receipts remain available; they are not relabeled as the rebuilt workers.
+
+The [rebuilt baseline](isolated-baseline-build.json) completed successfully
+with the revised builder. The original preserved checker
+[verified all ten receipts](isolated-baseline-verification.json): nine cases
+were satisfied and the unchanged Hushbringer target was violated. The campaign
+exit status of one records that retained violation. Candidate comparison and
+acceptance remain separate required steps.

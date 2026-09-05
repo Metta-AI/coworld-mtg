@@ -1,0 +1,11 @@
+Lightning Helix gains life when its target remains legal: Satisfied
+Lightning Helix loses its target and its life gain: Satisfied
+Removing Hushbringer before the deaths restores the trigger: Satisfied
+Hushbringer leaves Stonecoil Serpent entry counters intact: Satisfied
+Hushbringer suppresses a death trigger even while dying: Violated { assertion_ids: ["simultaneous-death-suppressed"] }
+Young Pyromancer keeps the token from a countered spell: Satisfied
+Rancor returns after its enchanted creature dies: Satisfied
+Rancor cannot return from a battlefield it never reached: Satisfied
+Swords to Plowshares remembers counters after exile: Satisfied
+Doomed Traveler creates a Spirit without Hushbringer: Satisfied
+Error: campaign contains failed or inconclusive cases; all receipts retained

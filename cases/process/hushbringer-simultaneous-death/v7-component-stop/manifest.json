@@ -1,0 +1,90 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "v7-introduced-regression-stop",
+  "description": "The deferred queue merged separate sacrifice cost components. This is an introduced Hush-first payoff regression requiring a reviewed typed component boundary, not a baseline compatibility exception. The immutable acceptance case remains unchanged. These records do not establish acceptance.",
+  "retention": "Exact full source archives remain on EC2, hash-bound below. Retained tracked patches alone omit new untracked Rust modules; use full source archives for complete reproduction.",
+  "artifacts": [
+    {
+      "path": "hushbringer-implementation-stop-v7-components.md",
+      "sha256": "8ef63b83773d5c595aa3a0c294def5623febe9c12171805d6a8e04e1fcf9c230"
+    },
+    {
+      "path": "hushbringer-implementation-stop-v7-components-proof.json",
+      "sha256": "03175d1f920493d14a77afd3b3c378dc021683c43597493e91ecac0ad3619ed1"
+    },
+    {
+      "path": "hushbringer-deferred-component-source-v7.txt",
+      "sha256": "33c9e3b04b73627c1b8b6f0a99ac0d6be5834d672ee1b7074c37b50226c46753"
+    },
+    {
+      "path": "hushbringer-v7-baseline-overlay-transform.json",
+      "sha256": "aef0de5ef23fd980c8bf03594bc2be458d30e9d1b7cb3cf9f1abe34cb53d5753"
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/run-results.json",
+      "sha256": "52d9a43411e74f6c1c7477021df68211c31b040551825d505811ef4041735cf0"
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/manifest.json",
+      "sha256": "cd3d072982a4ee5a74cc00abab1442efeee4e4dcea1f5447483292ed1aa30d25"
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/cargo.log",
+      "sha256": "e000c3d4b480b399fcc8e621385b56e45a9128fb2a338484c9cd1c34dd780b74"
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/test-module.rs",
+      "sha256": "b4210811323eb15c76478db70bd974198d706ff356ee7e3d8efafca64736acd7"
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/combined.patch",
+      "sha256": "d9eb4769cb42734b98e4a9ff02e5d8708eccb3564ba1537193c23b5f5bded472"
+    },
+    {
+      "path": "hushbringer-v7-active-attempt-4/receipt.json",
+      "sha256": "001d04ee1d115c02a99c43dbb18e2d6bcb12e47e54ecf224aaae5ee414349165"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/run-results.json",
+      "sha256": "99c1cd686eeba9fd92322b750f3dadfe0379f672ae96cb6c57ce1330fa440f32"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/manifest.json",
+      "sha256": "35730986ac723b9ce4afc097f417a6bc8e3821d7cf921e1c6bf6a9a012097625"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/full-include-ignored.log",
+      "sha256": "b3bbfbd0aa5b664ac6f5ba6183c744a65123da4a2540edadcd1224f6032babf1"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/cargo.log",
+      "sha256": "24563877abe35aeb1922a44a9fafbd7270484950782a8a5fc478126cb10ba75f"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/test-module.rs",
+      "sha256": "253b5d67f8f16804cd995d783e358cacb1543a57d9d6f096f4f51655fb4c054d"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/combined.patch",
+      "sha256": "e44d8a99833a4b075a5568f45c66d6239554ec17b2abcfdd55b149661724c4c0"
+    },
+    {
+      "path": "hushbringer-v7-baseline-attempt-1/receipt.json",
+      "sha256": "907286dc2fd7e403b5dfe984c7a0f274f50c9cac37ec602ba7ec99324b839040"
+    }
+  ],
+  "external_source_archives": [
+    {
+      "host": "nishadsingh-box-4",
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-active-attempt-4/source.tar.gz",
+      "sha256": "765dcac3526bf4c59ac4f96de52e20886c28d71ce2cbcead96ecefe806fb41ee",
+      "bytes": 13487752
+    },
+    {
+      "host": "nishadsingh-box-4",
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v7-baseline-attempt-1/source.tar.gz",
+      "sha256": "214f864066635552ed4727cc4819eb7904fdfa3d78fc2311bd4b20590b5c25f1",
+      "bytes": 13480391
+    }
+  ]
+}
