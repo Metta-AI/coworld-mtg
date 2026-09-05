@@ -1,0 +1,169 @@
+{
+  "started": "2026-09-05T20:38:54.507865+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "ca428bb928535380e10eb7a74d4e7257775104e2f13b8e3a8312df9f5380557b",
+  "source_manifest_sha256": "ecf7a3463a2af589bbe89e46928b0dedd20dbe0648c4bcb0350c6962ecb16050",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/mutant-build/source.tar.gz",
+  "source_archive_sha256": "68b1d6529be037c044d7142cad8faaa6a0ea922aa228f11b55e642440380f64f",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "4b56f046a9a260d603ee234cd66c39a6ca624d3a3c0aa095a3006b6d4628e575",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::sba_member_handoff_zero_toughness_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+    "subject_departs": false,
+    "observer_departs": true,
+    "reverse": false
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "e019045cb02aa36fb4125b92f6149ca2f12ff8096e161ff56cd7c68834cb1ea8",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+  "finished": "2026-09-05T20:38:55.136758+00:00",
+  "exit": 0,
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 3181
+    }
+  ],
+  "log_sha256": "377c84b000afd9b1b0a6c36ca75f42d0ee09b2a04f6f10f2a9bf60f183fae402",
+  "evidence": [
+    {
+      "events": [
+        {
+          "data": {
+            "player_id": 1
+          },
+          "type": "PriorityPassed"
+        },
+        {
+          "data": {
+            "from": "Battlefield",
+            "object_id": 2,
+            "record": {
+              "attached_to": null,
+              "attachments": [],
+              "base_power": 1,
+              "base_toughness": 1,
+              "cast_from_zone": null,
+              "co_departed": [],
+              "colors": [],
+              "combat_status": {
+                "attacking": false,
+                "attacking_alone": false,
+                "blocked": false,
+                "blocking": false,
+                "blocking_alone": false,
+                "defending_player": null
+              },
+              "controller": 0,
+              "core_types": [
+                "Creature"
+              ],
+              "entered_incarnation": null,
+              "from_zone": "Battlefield",
+              "is_suspected": false,
+              "is_token": false,
+              "keywords": [],
+              "linked_exile_snapshot": [],
+              "mana_value": 0,
+              "name": "1/1 Vanilla",
+              "object_id": 2,
+              "owner": 0,
+              "played_from_zone": null,
+              "power": 1,
+              "subtypes": [],
+              "supertypes": [],
+              "to_zone": "Graveyard",
+              "toughness": 1,
+              "trigger_definitions": [
+                {
+                  "batched": false,
+                  "condition": null,
+                  "constraint": null,
+                  "damage_kind": "Any",
+                  "description": null,
+                  "destination": null,
+                  "execute": {
+                    "condition": null,
+                    "cost": null,
+                    "description": null,
+                    "duration": null,
+                    "effect": {
+                      "amount": {
+                        "type": "Fixed",
+                        "value": 1
+                      },
+                      "type": "GainLife"
+                    },
+                    "forward_result": false,
+                    "kind": "Spell",
+                    "optional": false,
+                    "optional_targeting": false,
+                    "sub_ability": null,
+                    "target_prompt": null
+                  },
+                  "mode": "ChangesZone",
+                  "optional": false,
+                  "origin": null,
+                  "phase": null,
+                  "secondary": false,
+                  "trigger_zones": [],
+                  "valid_card": null,
+                  "valid_source": null,
+                  "valid_target": null,
+                  "zone_change_clauses": [
+                    {
+                      "destination": "Graveyard",
+                      "origin": {
+                        "data": "Battlefield",
+                        "type": "Equals"
+                      },
+                      "valid_card": {
+                        "id": 1,
+                        "type": "SpecificObject"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "trigger_suppression": {
+                "after": [],
+                "before": []
+              },
+              "turn_zone_change_index": 0
+            },
+            "to": "Graveyard"
+          },
+          "type": "ZoneChanged"
+        },
+        {
+          "data": {
+            "object_id": 2
+          },
+          "type": "CreatureDestroyed"
+        }
+      ],
+      "kind": "ZeroToughness",
+      "life": 20,
+      "observer": 2,
+      "observer_departs": true,
+      "reverse": false,
+      "subject": 1,
+      "subject_departs": false
+    }
+  ],
+  "after_history_evidence": [],
+  "source_and_executable_unchanged": true
+}

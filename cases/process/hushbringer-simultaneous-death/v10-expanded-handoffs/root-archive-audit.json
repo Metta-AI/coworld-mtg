@@ -1,0 +1,140 @@
+{
+  "utc": "2026-09-05T20:57:52.967429+00:00",
+  "scope": "Root mechanical source/archive/build/run identity audit; not independent implementation review. Expected transform is formatted through pinned rustfmt and compared byte-for-byte. Mutant binaries are identified by compile/runtime receipts and are not claimed retained after target reuse.",
+  "canonical_files_verified": 2051,
+  "results_sha256": "3993aaa67819c9251bf611de54158663ed95babae7a6894b08bfa6cbd5b0bf17",
+  "rows": [
+    {
+      "id": "sba-check_zero_toughness",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "db7cc88654d6dc0553d489de819aa6f2a55b3161064ee6df3c715f4d081417c4"
+    },
+    {
+      "id": "sba-check_lethal_damage",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "0cc229e547c3f3d871d93a1590e1da6d711677c45aa61079bcfa9a3b4e8b5d8c"
+    },
+    {
+      "id": "sba-check_unattached_auras",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "236d5c22bb8ba78b644758fd15f2d86828d8a94738c3b3e7d558eb32457c03ff"
+    },
+    {
+      "id": "sba-check_role_uniqueness",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "3fd832d4ede93e94fd96fac854253ebe7b8948dfa040c75f2c12f36a2b40bee1"
+    },
+    {
+      "id": "sba-check_world_rule",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "601da9adeccf484c2ced2a50e6812b980abbe98172e0e6a03434c37420777f3a"
+    },
+    {
+      "id": "sba-check_zero_loyalty",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "5ef14df242af25ccf3b689ccbbbb96affcdf63007136244984041dd06eb0e4ab"
+    },
+    {
+      "id": "sba-check_zero_defense",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "0b12a58aa98ef6aeb0300f57f5b3a419e650cdfae4a6eebc878fe8f80d2d33a8"
+    },
+    {
+      "id": "sba-check_saga_sacrifice",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/sba.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 24,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "ed8f71645b0a1be1b85a7127daef275cbb87fd2450a3c6f625c418567bb6f37d"
+    },
+    {
+      "id": "before-snapshot-some-to-live-fallback",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/trigger_suppression.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 9,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "5ea5daff7f527d95036af307894f9697ad4b7af79bc81a811090cc96c91bdfed"
+    },
+    {
+      "id": "after-snapshot-some-to-live-fallback",
+      "archive_files_verified": 2051,
+      "changed_files": [
+        "crates/engine/src/game/trigger_suppression.rs"
+      ],
+      "exact_defined_transform_after_same_pinned_formatter": true,
+      "test_module_bytes_unchanged": true,
+      "fresh_mutant_integration_artifact": true,
+      "independent_run_records_verified": 9,
+      "status": "verified_required_discriminator_and_controls",
+      "outcome_sha256": "8106a65a88ee1d03a48c03de80a463bfe40b25a48b5e47a5352627a821e90c48"
+    }
+  ],
+  "commands_verified": 210,
+  "all_current_source_restored": true
+}

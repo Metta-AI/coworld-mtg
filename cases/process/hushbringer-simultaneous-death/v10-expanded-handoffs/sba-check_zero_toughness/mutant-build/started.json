@@ -1,0 +1,30 @@
+{
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/mutant-build/source.json",
+  "source_manifest_sha256": "ecf7a3463a2af589bbe89e46928b0dedd20dbe0648c4bcb0350c6962ecb16050",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/mutant-build/source.tar.gz",
+  "source_archive_sha256": "68b1d6529be037c044d7142cad8faaa6a0ea922aa228f11b55e642440380f64f",
+  "mutant_patch_sha256": "9befa743ecaea3f0f8557855e8fcd4c1be42c560a211669d2e8cea36ed6a1e24",
+  "started": "2026-09-05T20:38:02.970148+00:00",
+  "command": [
+    "cargo",
+    "+nightly-2026-04-19",
+    "test",
+    "-p",
+    "engine",
+    "--test",
+    "integration",
+    "--message-format=json",
+    "--no-run"
+  ],
+  "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations",
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations",
+  "target": "/home/ubuntu/repos/phase-hushbringer-mutations/target",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations/target",
+    "RUSTFLAGS": null,
+    "CARGO_ENCODED_RUSTFLAGS": null,
+    "RUSTUP_TOOLCHAIN": null,
+    "RUST_MIN_STACK": null
+  }
+}

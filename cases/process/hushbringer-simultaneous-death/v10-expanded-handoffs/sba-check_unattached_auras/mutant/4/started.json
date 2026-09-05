@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-05T20:42:24.855173+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+  "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+  "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+    "subject_departs": false,
+    "observer_departs": true,
+    "reverse": false
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356"
+}

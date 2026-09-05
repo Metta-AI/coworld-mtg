@@ -1,0 +1,5 @@
+{
+  "utc": "2026-09-05T20:57:41.181966+00:00",
+  "status": "audit setup assumption corrected",
+  "reason": "Raw whitespace normalization did not model rustfmt collapsing a one-expression closure block. The first audit stopped before a result; no runtime/test/source failure. The replacement audit regenerates the exact expected formatted source on stdout."
+}

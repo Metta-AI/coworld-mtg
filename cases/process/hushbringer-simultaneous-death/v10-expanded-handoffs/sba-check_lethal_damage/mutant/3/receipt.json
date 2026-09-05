@@ -1,0 +1,140 @@
+{
+  "started": "2026-09-05T20:40:37.499332+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "45070f8075c6cd5b552f163542ed03d1d548868cce5e30ee411a66ea7d4f7c12",
+  "source_manifest_sha256": "472ab0cc3e8553b34d36d86fce92e2cc169fcd029d8b5ddbf4b1a24e6457c9c4",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_lethal_damage/mutant-build/source.tar.gz",
+  "source_archive_sha256": "22e2cbab5a63e9e1da286568b542304b4cba1d333f6de21d2a1887e319aa41b6",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_lethal_damage/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "b3f4770903c772fbb497030b88b005a3e6a5e6e7c9e37a0bcd08d54d6aa1d922",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::sba_member_handoff_lethal_damage_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+    "subject_departs": true,
+    "observer_departs": false,
+    "reverse": true
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_lethal_damage/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "c520af48948e0688409ccdbf7b04cbaf0875a9f06430acbeb2de131dd44b3120",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+  "finished": "2026-09-05T20:40:38.132186+00:00",
+  "exit": 101,
+  "counts": [
+    {
+      "status": "FAILED",
+      "passed": 0,
+      "failed": 1,
+      "ignored": 0,
+      "filtered_out": 3181
+    }
+  ],
+  "log_sha256": "9040a793017f4ab68db95ac38c2f4996c585167ed9a3fc36074491f82664b527",
+  "evidence": [
+    {
+      "events": [
+        {
+          "data": {
+            "player_id": 1
+          },
+          "type": "PriorityPassed"
+        },
+        {
+          "data": {
+            "from": "Battlefield",
+            "object_id": 2,
+            "record": {
+              "attached_to": null,
+              "attachments": [],
+              "base_power": 1,
+              "base_toughness": 1,
+              "cast_from_zone": null,
+              "co_departed": [],
+              "colors": [],
+              "combat_status": {
+                "attacking": false,
+                "attacking_alone": false,
+                "blocked": false,
+                "blocking": false,
+                "blocking_alone": false,
+                "defending_player": null
+              },
+              "controller": 0,
+              "core_types": [
+                "Creature"
+              ],
+              "entered_incarnation": null,
+              "from_zone": "Battlefield",
+              "is_suspected": false,
+              "is_token": false,
+              "keywords": [],
+              "linked_exile_snapshot": [],
+              "mana_value": 0,
+              "name": "Test lethal handoff subject",
+              "object_id": 2,
+              "owner": 0,
+              "played_from_zone": null,
+              "power": 1,
+              "subtypes": [],
+              "supertypes": [],
+              "to_zone": "Graveyard",
+              "toughness": 1,
+              "turn_zone_change_index": 0
+            },
+            "to": "Graveyard"
+          },
+          "type": "ZoneChanged"
+        },
+        {
+          "data": {
+            "object_id": 2
+          },
+          "type": "CreatureDestroyed"
+        },
+        {
+          "data": {
+            "player_id": 1
+          },
+          "type": "PriorityPassed"
+        },
+        {
+          "data": {
+            "amount": 1,
+            "player_id": 0
+          },
+          "type": "LifeChanged"
+        },
+        {
+          "data": {
+            "kind": "GainLife",
+            "source_id": 1
+          },
+          "type": "EffectResolved"
+        },
+        {
+          "data": {
+            "object_id": 6
+          },
+          "type": "StackResolved"
+        }
+      ],
+      "kind": "LethalDamage",
+      "life": 21,
+      "observer": 1,
+      "observer_departs": false,
+      "reverse": true,
+      "subject": 2,
+      "subject_departs": true
+    }
+  ],
+  "after_history_evidence": [],
+  "source_and_executable_unchanged": true
+}

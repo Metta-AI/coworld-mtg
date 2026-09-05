@@ -1,0 +1,46 @@
+{
+  "row": {
+    "id": "after-snapshot-some-to-live-fallback",
+    "kind": "snapshot-fallback",
+    "file": "crates/engine/src/game/trigger_suppression.rs",
+    "operations": [
+      {
+        "kind": "replace",
+        "function": "death_suppressed_after",
+        "old": "|snapshot| snapshot.after.contains(&SuppressedTriggerEvent::Dies)",
+        "new": "|_| legacy_death_suppressed(state, record, &active_suppress_trigger_statics(state))"
+      }
+    ],
+    "tests": [
+      {
+        "test": "trigger_suppression_event_timing::after_history_authoritative_empty_allows_observer_despite_later_hush_arrival",
+        "role": "discriminator",
+        "failure_marker": "P0 life delta: expected 1, got 0",
+        "initially_live": false,
+        "canonical_life": 21,
+        "mutant_life": 20
+      },
+      {
+        "test": "trigger_suppression_event_timing::after_history_captured_dies_blocks_observer_after_later_hush_departure",
+        "role": "discriminator",
+        "failure_marker": "P0 life delta: expected 0, got 1",
+        "initially_live": true,
+        "canonical_life": 20,
+        "mutant_life": 21
+      },
+      {
+        "test": "trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit",
+        "role": "control",
+        "purpose": "Independently invoked unchanged-world public no-Hush sibling; exact one Spirit."
+      }
+    ],
+    "status": "exact transformation dry-run matched final source; runtime results pending"
+  },
+  "changed_files": [
+    "crates/engine/src/game/trigger_suppression.rs"
+  ],
+  "tests_unchanged": true,
+  "canonical_seam_mtime_ns": 1788641611175054722,
+  "mutant_seam_mtime_ns": 1788641630948670684,
+  "test_tail_sha256": "1b7fb0ac68de665d645ca182d88427c35a4d2bb0ce12e99f015a333f7e2ca77b"
+}

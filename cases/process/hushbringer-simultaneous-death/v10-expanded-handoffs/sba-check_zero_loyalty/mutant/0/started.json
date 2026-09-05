@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-05T20:48:15.040118+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "168b06432ca1a1c9dbce0c2a19f8a7e1d37c11fe09219b44e651b78e12300cb7",
+  "source_manifest_sha256": "2246c9829a8fa985f8edf0db404140ead648d1ba58e3478448681560d8927fc0",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_loyalty/mutant-build/source.tar.gz",
+  "source_archive_sha256": "d7a8ad576c980270de17de52ad0ee41ef61e2f0cc7882a34a1debc7f0ba67fb0",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_loyalty/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "314e1110047fc4e101aa8ef7d5fd8f579af49914f38c27af538ea4179adfe2cf",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+    "subject_departs": true,
+    "observer_departs": true,
+    "reverse": false
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_loyalty/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "feb0d032b03b4bc551ab7cdb95dfb00187946efaa60b1f67915cd691149b7904",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356"
+}

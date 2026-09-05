@@ -1,0 +1,53 @@
+{
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "origin_cargo_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+  "origin_cargo_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+  "executable": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+  "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+  "artifact": {
+    "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+    "target": {
+      "kind": [
+        "test"
+      ],
+      "crate_types": [
+        "bin"
+      ],
+      "name": "integration",
+      "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/tests/integration/main.rs",
+      "edition": "2021",
+      "doc": false,
+      "doctest": false,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "0",
+      "debuginfo": "line-tables-only",
+      "debug_assertions": true,
+      "overflow_checks": true,
+      "test": true
+    },
+    "features": [],
+    "fresh": false,
+    "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917"
+  },
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+  "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+  "ambient_override_audit_sha256": "076608c0cebef2e052a3692c0d58cd1699297724a2e93038d86698eea018d1c4",
+  "generated_build_outputs": [
+    {
+      "path": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/build/engine-d4fc5f5dfa6fd822/out/known-tokens.json",
+      "sha256": "bc191adfb9f3ab8de547f132f1d36c04b695b1a0b58f91eeb5c00b4ac40b4b25",
+      "copy": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/generated-0-known-tokens.json",
+      "canonical_embedding_offset": 13580774,
+      "embedded": true
+    }
+  ],
+  "runtime_input_hashes": {
+    "crates/engine/data/known-tokens.toml": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+    "crates/engine/tests/fixtures/integration_cards.json": "080f95c0d081724ed531a235eb85674d7b890b5f54c548ae662e0f517fff3573"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "started": "2026-09-05T20:50:15.796164+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "cf57da2a9dce02ca8471800df71b632dfce0ade8e87bb3d3189254b0536cab60",
+  "source_manifest_sha256": "317c4308d2d167ed924245930a5ccb15c1a320ce2496f9854b9259a10d4e6026",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_defense/mutant-build/source.tar.gz",
+  "source_archive_sha256": "c453c86014d39c15765152ed0bc016a286d0bf9a6c4752469d13d6ad7eabf743",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_defense/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "3c6979cd4a2ca5aec6390c2a9415d96ff1e580dede12578bf8bb8cf866ff1afe",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::sba_member_handoff_zero_defense_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+    "subject_departs": false,
+    "observer_departs": false,
+    "reverse": false
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_defense/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "3b3475e1eb42468dd69833217a56d105e842ac4ede963531cefc15a9beca8712",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+  "finished": "2026-09-05T20:50:16.432233+00:00",
+  "exit": 0,
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 3181
+    }
+  ],
+  "log_sha256": "d86e46f310dae1629883a2794e75ac942eb034a941b6be45b14ca09fd35d2e8b",
+  "evidence": [
+    {
+      "events": [
+        {
+          "data": {
+            "player_id": 1
+          },
+          "type": "PriorityPassed"
+        }
+      ],
+      "kind": "ZeroDefense",
+      "life": 20,
+      "observer": 2,
+      "observer_departs": false,
+      "reverse": false,
+      "subject": 1,
+      "subject_departs": false
+    }
+  ],
+  "after_history_evidence": [],
+  "source_and_executable_unchanged": true
+}

@@ -1,0 +1,11 @@
+--- a/crates/engine/src/game/trigger_suppression.rs
++++ b/crates/engine/src/game/trigger_suppression.rs
+@@ -161,7 +161,7 @@
+ pub(super) fn death_suppressed_before(state: &GameState, record: &ZoneChangeRecord) -> bool {
+     record.trigger_suppression.as_ref().map_or_else(
+         || legacy_death_suppressed(state, record, &active_suppress_trigger_statics(state)),
+-        |snapshot| snapshot.before.contains(&SuppressedTriggerEvent::Dies),
++        |_| legacy_death_suppressed(state, record, &active_suppress_trigger_statics(state)),
+     )
+ }
+ 

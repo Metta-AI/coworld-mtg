@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1340,9 +1340,7 @@
+             // CR 704.5y + CR 614.6: the older Role is put into its owner's
+             // graveyard through the replacement pipeline. Bail on a CR 616.1
+             // pause (the fixpoint re-derives the rest).
+-            if zones::with_departure_member(state, events, owner, id, |state, events| {
+-                move_to_graveyard_via_pipeline(state, id, events)
+-            }) {
++            if (|| move_to_graveyard_via_pipeline(state, id, events))() {
+                 return;
+             }
+             *any_performed = true;

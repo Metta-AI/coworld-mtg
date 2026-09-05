@@ -1,0 +1,230 @@
+{
+  "started": "2026-09-05T20:44:45.447460+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "9c8f24992ff319db15b744914a26ee9b09d46d5ebf9845716dd58ec084b4374a",
+  "source_manifest_sha256": "1422275b3d122c73f63203b45238b00eda839b3c88f90f392dad85491f66d130",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_role_uniqueness/mutant-build/source.tar.gz",
+  "source_archive_sha256": "fdf2ad948c9715d03d65a82e494d3bfa8fea83886d411827c416f9da2880d414",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_role_uniqueness/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "9535b969135b7b635aa1c2b1e9017693185ccc55120411dee229229f8f91a497",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::sba_member_handoff_role_uniqueness_has_runtime_observer_payoff",
+    "subject_departs": true,
+    "observer_departs": true,
+    "reverse": false
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_role_uniqueness/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "0ff40bb73737693e8ba964be919a03cec67627d39126580310258d3c1d0d08b6",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+  "finished": "2026-09-05T20:44:46.087023+00:00",
+  "exit": 101,
+  "counts": [
+    {
+      "status": "FAILED",
+      "passed": 0,
+      "failed": 1,
+      "ignored": 0,
+      "filtered_out": 3181
+    }
+  ],
+  "log_sha256": "a41437ed05348793a32395bbb50fc0948e9edf675a096acb22ea2eaec0e4eafb",
+  "evidence": [
+    {
+      "events": [
+        {
+          "data": {
+            "player_id": 1
+          },
+          "type": "PriorityPassed"
+        },
+        {
+          "data": {
+            "from": "Battlefield",
+            "object_id": 2,
+            "record": {
+              "attached_to": null,
+              "attachments": [],
+              "base_power": 1,
+              "base_toughness": 1,
+              "cast_from_zone": null,
+              "co_departed": [],
+              "colors": [],
+              "combat_status": {
+                "attacking": false,
+                "attacking_alone": false,
+                "blocked": false,
+                "blocking": false,
+                "blocking_alone": false,
+                "defending_player": null
+              },
+              "controller": 0,
+              "core_types": [
+                "Creature"
+              ],
+              "entered_incarnation": null,
+              "from_zone": "Battlefield",
+              "is_suspected": false,
+              "is_token": false,
+              "keywords": [],
+              "linked_exile_snapshot": [],
+              "mana_value": 0,
+              "name": "1/1 Vanilla",
+              "object_id": 2,
+              "owner": 0,
+              "played_from_zone": null,
+              "power": 1,
+              "subtypes": [],
+              "supertypes": [],
+              "to_zone": "Graveyard",
+              "toughness": 1,
+              "trigger_definitions": [
+                {
+                  "batched": false,
+                  "condition": null,
+                  "constraint": null,
+                  "damage_kind": "Any",
+                  "description": null,
+                  "destination": null,
+                  "execute": {
+                    "condition": null,
+                    "cost": null,
+                    "description": null,
+                    "duration": null,
+                    "effect": {
+                      "amount": {
+                        "type": "Fixed",
+                        "value": 1
+                      },
+                      "type": "GainLife"
+                    },
+                    "forward_result": false,
+                    "kind": "Spell",
+                    "optional": false,
+                    "optional_targeting": false,
+                    "sub_ability": null,
+                    "target_prompt": null
+                  },
+                  "mode": "ChangesZone",
+                  "optional": false,
+                  "origin": null,
+                  "phase": null,
+                  "secondary": false,
+                  "trigger_zones": [],
+                  "valid_card": null,
+                  "valid_source": null,
+                  "valid_target": null,
+                  "zone_change_clauses": [
+                    {
+                      "destination": "Graveyard",
+                      "origin": {
+                        "data": "Battlefield",
+                        "type": "Equals"
+                      },
+                      "valid_card": {
+                        "id": 1,
+                        "type": "SpecificObject"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "trigger_suppression": {
+                "after": [],
+                "before": []
+              },
+              "turn_zone_change_index": 0
+            },
+            "to": "Graveyard"
+          },
+          "type": "ZoneChanged"
+        },
+        {
+          "data": {
+            "object_id": 2
+          },
+          "type": "CreatureDestroyed"
+        },
+        {
+          "data": {
+            "attachment_id": 1,
+            "old_target": {
+              "Object": 3
+            }
+          },
+          "type": "Unattached"
+        },
+        {
+          "data": {
+            "from": "Battlefield",
+            "object_id": 1,
+            "record": {
+              "attached_to": {
+                "data": 3,
+                "type": "Object"
+              },
+              "attachments": [],
+              "base_power": 1,
+              "base_toughness": 1,
+              "cast_from_zone": null,
+              "co_departed": [],
+              "colors": [],
+              "combat_status": {
+                "attacking": false,
+                "attacking_alone": false,
+                "blocked": false,
+                "blocking": false,
+                "blocking_alone": false,
+                "defending_player": null
+              },
+              "controller": 0,
+              "core_types": [
+                "Enchantment"
+              ],
+              "entered_incarnation": null,
+              "from_zone": "Battlefield",
+              "is_suspected": false,
+              "is_token": false,
+              "keywords": [],
+              "linked_exile_snapshot": [],
+              "mana_value": 0,
+              "name": "Test noncreature handoff subject",
+              "object_id": 1,
+              "owner": 0,
+              "played_from_zone": null,
+              "power": 1,
+              "subtypes": [
+                "Aura",
+                "Role"
+              ],
+              "supertypes": [],
+              "to_zone": "Graveyard",
+              "toughness": 1,
+              "turn_zone_change_index": 1
+            },
+            "to": "Graveyard"
+          },
+          "type": "ZoneChanged"
+        }
+      ],
+      "kind": "RoleUniqueness",
+      "life": 20,
+      "observer": 2,
+      "observer_departs": true,
+      "reverse": false,
+      "subject": 1,
+      "subject_departs": true
+    }
+  ],
+  "after_history_evidence": [],
+  "source_and_executable_unchanged": true
+}

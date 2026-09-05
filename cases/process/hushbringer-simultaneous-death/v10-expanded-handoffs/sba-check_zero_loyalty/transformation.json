@@ -1,0 +1,75 @@
+{
+  "row": {
+    "id": "sba-check_zero_loyalty",
+    "file": "crates/engine/src/game/sba.rs",
+    "operations": [
+      {
+        "kind": "unwrap",
+        "function": "check_zero_loyalty",
+        "marker": "zones::with_departure_member",
+        "index": 0
+      }
+    ],
+    "tests": [
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_zero_loyalty_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      }
+    ],
+    "kind": "sba",
+    "description": "Remove only this newly added member-handoff wrapper. Existing movement expression, owner scope, candidate/guard/filter and returned outcome remain.",
+    "status": "exact transformation dry-run matched final source; runtime results pending",
+    "transformation_dry_run": "source pattern matched"
+  },
+  "changed_files": [
+    "crates/engine/src/game/sba.rs"
+  ],
+  "tests_unchanged": true,
+  "canonical_seam_mtime_ns": 1788641202433969828,
+  "mutant_seam_mtime_ns": 1788641240650241569,
+  "test_tail_sha256": "31a497116dd3184e5b58208b01392bce328f763c8ae885b5c10eb38c5f6bfd75"
+}

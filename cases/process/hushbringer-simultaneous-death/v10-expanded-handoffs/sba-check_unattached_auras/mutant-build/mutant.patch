@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1151,9 +1151,7 @@
+                 // CR 704.5m + CR 614.6: an Aura attached to nothing is put into
+                 // its owner's graveyard — a "leaves the battlefield" event that
+                 // must consult Moved redirects. Bail on a CR 616.1 pause.
+-                if zones::with_departure_member(state, events, owner, id, |state, events| {
+-                    move_to_graveyard_via_pipeline(state, id, events)
+-                }) {
++                if (|| move_to_graveyard_via_pipeline(state, id, events))() {
+                     return;
+                 }
+             }

@@ -1,0 +1,7 @@
+from pathlib import Path
+import os,sys,json,hashlib
+p=Path('/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/runtime-context.json')
+assert not p.exists()
+keys=['CARGO', 'CARGO_MANIFEST_DIR', 'CARGO_MANIFEST_PATH', 'CARGO_MANIFEST_LINKS', 'CARGO_BIN_NAME', 'CARGO_TARGET_TMPDIR', 'OUT_DIR', 'RUST_MIN_STACK', 'RUST_BACKTRACE', 'RUST_LIB_BACKTRACE', 'RUST_TEST_THREADS', 'RUST_TEST_NOCAPTURE', 'RUST_LOG', 'RUSTUP_TOOLCHAIN', 'RUSTUP_HOME', 'CARGO_HOME', 'RUSTC', 'RUSTDOC', 'PATH', 'LD_LIBRARY_PATH', 'DYLD_LIBRARY_PATH', 'DYLD_FALLBACK_LIBRARY_PATH', 'LANG', 'LC_ALL', 'LC_CTYPE', 'TZ', 'TMPDIR', 'TEMP', 'TMP']
+p.write_text(json.dumps({'cwd':os.getcwd(),'variables':{k:v for k,v in os.environ.items() if k in keys or k.startswith('CARGO_PKG_')},'override_audit':{k:hashlib.sha256(v.encode()).hexdigest() for k,v in os.environ.items() if v and (k.startswith(('PHASE_','FORGE_','DYLD_')) or (k.startswith('LD_') and k!='LD_LIBRARY_PATH') or (k.startswith('CARGO_TARGET_') and k.endswith(('_RUNNER','_RUSTFLAGS','_LINKER')) and k!='CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUNNER') or k in ['RUSTC_WRAPPER','RUSTC_WORKSPACE_WRAPPER','CARGO_BUILD_RUSTC_WRAPPER','CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER','RUSTFLAGS','CARGO_ENCODED_RUSTFLAGS','CARGO_BUILD_RUSTFLAGS','RUSTDOCFLAGS','RUSTC_BOOTSTRAP','RUST_TEST_THREADS','RUST_TEST_NOCAPTURE'])},'argv':sys.argv[1:],'executable_sha256':hashlib.sha256(Path(sys.argv[1]).read_bytes()).hexdigest()},indent=2)+'\n')
+os.execv(sys.argv[1],sys.argv[1:])
