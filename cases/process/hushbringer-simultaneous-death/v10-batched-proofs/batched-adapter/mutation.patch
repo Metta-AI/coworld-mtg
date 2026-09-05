@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/triggers.rs
++++ b/crates/engine/src/game/triggers.rs
+@@ -288,16 +288,7 @@
+         .filter(|candidate| {
+             !etb_event_is_suppressed_cached(state, candidate, active_suppress_triggers)
+         })
+-        .filter(|candidate| {
+-            super::trigger_matchers::match_for_ordinary_collection(
+-                matcher,
+-                candidate,
+-                trig_def,
+-                obj_id,
+-                state,
+-                active_suppress_triggers,
+-            )
+-        })
++        .filter(|candidate| matcher(candidate, trig_def, obj_id, state))
+         .filter(|candidate| {
+             trig_def.condition.as_ref().is_none_or(|condition| {
+                 check_trigger_condition(state, condition, controller, Some(obj_id), Some(candidate))

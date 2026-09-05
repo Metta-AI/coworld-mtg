@@ -1,0 +1,68 @@
+{
+  "runtime_inputs": {
+    "docs/MagicCompRules.txt": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/docs/MagicCompRules.txt",
+      "sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f"
+    },
+    "client/public/card-data.json": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/client/public/card-data.json",
+      "sha256": "50335033e5bf8e0871ecb57bb9d9a710869aafb042c27c83c90b07fd468fb4bf"
+    },
+    "data/mtgjson/AtomicCards.json": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/data/mtgjson/AtomicCards.json",
+      "sha256": "174409bbbc05112c261046df6b1f4e3245517c66e941738ad50cc4091d88f098"
+    },
+    "data/mtgjson/Meta.json": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/data/mtgjson/Meta.json",
+      "sha256": "d22b9e3b92bd666e22172cd875bae4361cf68448c56b9254f9c834646b7803be"
+    },
+    "data/mtgjson/CardTypes.json": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/data/mtgjson/CardTypes.json",
+      "sha256": "b44043daade56263a242bb3f8e4c43d551898729c23c72037b09b4b3b3af6836"
+    },
+    "data/mtgjson/SetList.json": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/data/mtgjson/SetList.json",
+      "sha256": "f33cf43a9c0655a7cc163dde72350bfdf63814d16901d7d86355d15e58d8cabb"
+    },
+    "scripts/gen-card-data.sh": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/scripts/gen-card-data.sh",
+      "sha256": "73bcbc88f969ffcc3da97282d505dbd86f82dfd98f90d56739f75a5a917987ff"
+    },
+    "scripts/fetch-token-sets.sh": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/scripts/fetch-token-sets.sh",
+      "sha256": "31e89f77b356fda637a3c080be8369920cae60b9a6ff5f14dfbac1d1aa1393c8"
+    },
+    "scripts/lib/mtgjson-fetch.sh": {
+      "exists": true,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/scripts/lib/mtgjson-fetch.sh",
+      "sha256": "5dea3411d28bd2ac10359be5bd2818b21df006cb8ef60b65b7219a32920dacf2"
+    },
+    ".env": {
+      "exists": false,
+      "resolved_path": "/home/ubuntu/repos/phase-verifiable-loop/.env",
+      "sha256": null
+    }
+  },
+  "toolchain": {
+    "cargo": "cargo 1.97.0-nightly (eb94155a9 2026-04-09)\nrelease: 1.97.0-nightly\ncommit-hash: eb94155a9a60943bd7b1cb04abec42f5d0de6ddc\ncommit-date: 2026-04-09\nhost: x86_64-unknown-linux-gnu\nlibgit2: 1.9.2 (sys:0.20.4 vendored)\nlibcurl: 8.19.0-DEV (sys:0.4.87+curl-8.19.0 vendored ssl:OpenSSL/3.5.4)\nssl: OpenSSL 3.5.4 30 Sep 2025\nos: Ubuntu 22.4.0 (jammy) [64-bit]\n",
+    "rustc": "rustc 1.97.0-nightly (0febdbab2 2026-04-18)\nbinary: rustc\ncommit-hash: 0febdbab2720dc0360cd294c67db88d6d06580d4\ncommit-date: 2026-04-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0-nightly\nLLVM version: 22.1.2\n"
+  },
+  "compile_receipts": [
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/compile-5/receipt.json",
+      "sha256": "abf6d0c1a1cb482f337d74dec5ea1c6522ff51c99d836d868e01e0f2fe3b81a5"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/new-baseline-4/receipt.json",
+      "sha256": "d34a65fdc1c8b4ae272ea561a3890ff8e34ebda5618591e6c904a8d984821d87"
+    }
+  ]
+}

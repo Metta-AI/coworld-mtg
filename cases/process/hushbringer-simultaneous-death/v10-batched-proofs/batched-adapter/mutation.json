@@ -1,0 +1,157 @@
+{
+  "driver_sha256": "fd74caa5f2160d1e53d9d02926fcfc8979e0fab57c1ef0e51eeacbf506720242",
+  "mutant_sha256": "61a7b5bf384846acb8cec3c28dbf6b086e8ee822d02b784902dd7242992cba39",
+  "original_sha256": "05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903",
+  "patch_sha256": "fb3a03d6cb804423aa9838fec3c6c1f3d8f76a1b2e1c648bfa18f1ea1f5f8dce",
+  "row": {
+    "controls": [
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_reverse",
+      "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+    ],
+    "description": "Isolated physical seam mutation; record runtime failure and restored positive, never compile-error kill.",
+    "designated": [
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_hush_reverse"
+    ],
+    "file": "crates/engine/src/game/triggers.rs",
+    "fixture_map": [
+      {
+        "designated_mutant_failure": true,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch",
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": true,
+        "with_hush": true
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_forward",
+        "reverse": false,
+        "select_creature": false,
+        "select_noncreature": true,
+        "with_hush": true
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_forward",
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": false,
+        "with_hush": true
+      },
+      {
+        "designated_mutant_failure": true,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_hush_reverse",
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": true,
+        "with_hush": true
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_reverse",
+        "reverse": true,
+        "select_creature": false,
+        "select_noncreature": true,
+        "with_hush": true
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_reverse",
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": false,
+        "with_hush": true
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_forward",
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": true,
+        "with_hush": false
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_forward",
+        "reverse": false,
+        "select_creature": false,
+        "select_noncreature": true,
+        "with_hush": false
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_forward",
+        "reverse": false,
+        "select_creature": true,
+        "select_noncreature": false,
+        "with_hush": false
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_reverse",
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": true,
+        "with_hush": false
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_reverse",
+        "reverse": true,
+        "select_creature": false,
+        "select_noncreature": true,
+        "with_hush": false
+      },
+      {
+        "designated_mutant_failure": false,
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_reverse",
+        "reverse": true,
+        "select_creature": true,
+        "select_noncreature": false,
+        "with_hush": false
+      }
+    ],
+    "id": "batched-adapter",
+    "kind": "public",
+    "operations": [
+      {
+        "function": "matching_batched_trigger_events",
+        "kind": "replace",
+        "new": "matcher(candidate, trig_def, obj_id, state)",
+        "old": "super::trigger_matchers::match_for_ordinary_collection(\n                matcher,\n                candidate,\n                trig_def,\n                obj_id,\n                state,\n                active_suppress_triggers,\n            )"
+      }
+    ],
+    "retained_original_test_names": [
+      "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+    ],
+    "status": "planned; no mutation executed",
+    "tests": [
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_forward",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_reverse",
+      "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_reverse",
+      "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+    ]
+  },
+  "runner_sha256": "5bb02d411957c014944eaf88ac6ee34c37e6e42f4e1a357cdf9c4215e81aeb4f",
+  "source_mtime_ns": 1788640971441462960,
+  "support_sha256": "aa23c18a38aaf1eef5fe8ab45b4abf5cca9595dba75c4a9d28c26121b7ecf510"
+}

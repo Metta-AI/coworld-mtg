@@ -1,0 +1,34 @@
+{
+  "utc": "2026-09-05T20:31:50.158593+00:00",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "files": 2051,
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "source_archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+  "candidate_patch_sha256": "aafe8c8892fa9e12a5502b6b4035247e5f6e48b121e8c9c5c787162a8028ef1a",
+  "from_v9_patch_sha256": "ecb86c96b385b3efb865e4bfa7dd9fb8b7d21e3f59701c47c621089f123c03a0",
+  "changed_from_v9": [
+    "crates/engine/src/game/sba.rs",
+    "crates/engine/src/game/trigger_suppression.rs",
+    "crates/engine/src/game/zones.rs",
+    "crates/engine/tests/integration/trigger_suppression_event_timing.rs"
+  ],
+  "production_unchanged_from_v9": true,
+  "validation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/new-baseline-4/receipt.json",
+  "validation_receipt_sha256": "d34a65fdc1c8b4ae272ea561a3890ff8e34ebda5618591e6c904a8d984821d87",
+  "full_matrix_filter": "trigger_suppression_event_timing",
+  "full_matrix_pass": 184,
+  "full_matrix_ignored": 20,
+  "private_contracts_pass": 5,
+  "plan_sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a",
+  "review_sha256": "15ec8a03f9780b996368b72039f051c279d0b833e0ca6e3e6b9f3745d92f6b97",
+  "maps": {
+    "sba-tuple-map.json": "e88e2422fb5b682037a063fbfd5a145909679a56bf9c756e94cfa072deee107c",
+    "batch-test-map.json": "b042be1ab1c39292a518657175ca70cb15eeafd0c4fb6d23d0c0bc9ca136529c"
+  },
+  "runtime_build_inputs_sha256": "fcc4f115c7bc25824b252b935eeb2b6735fa3ef0d7d2c397782fce40ca9bcf00",
+  "generation_receipt_sha256": "0ce659bdccb27fb12efef887f4836ad4b66ee2674f6d97cb5f24dee500548f38",
+  "all_source_frozen": true,
+  "includes_cfg_test": true,
+  "card_data_restored_fresh_mtimes": true
+}

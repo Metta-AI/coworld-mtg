@@ -1,0 +1,176 @@
+[
+  {
+    "complete_discrimination": true,
+    "controls": [
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/1.log",
+        "log_sha256": "caaa2012c77e95fdac17c87f72ea434188ad792760b452512c684d8f25105191",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/2.log",
+        "log_sha256": "cfd5e5bc23b2791255ef1c4b553da7a4fca8371bf55d5704c7e3215005557c99",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/4.log",
+        "log_sha256": "1f4b98453d11027d710a94b784274a06e32de9e1de2f416b89733d0c03220b56",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/5.log",
+        "log_sha256": "f7cb288a69eca0ec952d146471fbe7fcabadb44092f977bcd336a59a826c7c61",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/6.log",
+        "log_sha256": "915a913f0f971f63b4370c2db707b2b8dfdf0f9d3cf6a6425ee81a97fbfbaefe",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/7.log",
+        "log_sha256": "1824ef1fed9e5ff21bd77a10e1ab1641a0eff1665eeee284a1e1b67797b5a702",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/8.log",
+        "log_sha256": "60cdf3da923286b9b7d39d623a6c8b07eefad174e5e5e4ae289823610efa6972",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/9.log",
+        "log_sha256": "30b8806845fc1216b9ea7d5d5e79218456279cc6304aa8475df3a6765dc5ff72",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_no_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/10.log",
+        "log_sha256": "9e1df2e319601f7894b0d8a32c93528adea9dd287cc0dbdecc2fb76a5104f53e",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_noncreature_only_no_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/11.log",
+        "log_sha256": "cbeac5d94c88494fdf2505e173900c6507321c8179747c4dbf5913b6f21dd985",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_creature_only_no_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/12.log",
+        "log_sha256": "bf7a4b5eb2e78f91984c9b0811d83f6db646c59377f165c48b664d368e1c7c92",
+        "name": "trigger_suppression_event_timing::ordinary_ambiguous_origins_preserve_live_collection_compatibility"
+      }
+    ],
+    "designated": [
+      {
+        "exit": 101,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/0.log",
+        "log_sha256": "6ceaa9a2c73b0dc337b394be68eb61ba23302611661109257526bd83e79e0af5",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch",
+        "reached_assertion": true
+      },
+      {
+        "exit": 101,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-adapter-runtime-mutant/3.log",
+        "log_sha256": "f2ffd786610f525e470801c271c5c49b768187d9cece1a0d29595b13e6a538b5",
+        "name": "trigger_suppression_event_timing::batched_ambiguous_adapter_filters_mixed_eligible_batch_mixed_hush_reverse",
+        "reached_assertion": true
+      }
+    ],
+    "id": "batched-adapter",
+    "matrix_counts": {
+      "failed": 2,
+      "ignored": 20,
+      "passed": 182
+    },
+    "outcome": "both designated orders reached assertions; all named controls passed",
+    "restored": true,
+    "utc": "2026-09-05T20:46:25.170845+00:00"
+  },
+  {
+    "complete_discrimination": true,
+    "controls": [
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/1.log",
+        "log_sha256": "0b3fd31c50098064d4b293b599c795314a9e776e6ccb0b6c05186cda64aa73b8",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/3.log",
+        "log_sha256": "bbdf4205942b38a5c975f727aa507d1fac1117f2e7ccd2e62c821dfb084c7999",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/4.log",
+        "log_sha256": "02edc8b5ac1f9dbd6cf60e4695f2725a1cf738364e24e83a0d6729981f876d10",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_any_no_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/5.log",
+        "log_sha256": "07ab1a5d57ae6bb9b6fa60cdf353940a8596ee51c7b41d9a07f2c82f7befd2ec",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_no_hush_forward"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/6.log",
+        "log_sha256": "c0324ab6807ac9c44f6c97b6697b60cd792e9d2458033edddeda89241eed4142",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_any_no_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/7.log",
+        "log_sha256": "0160c99bc840bcd9cb6db9513825587525d15b1df226349bd642dc01733397e7",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_battlefield_no_hush_reverse"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/8.log",
+        "log_sha256": "fddcdfe170fd29e2e9e72ba35555eb88fde7c50591fe9c6a4a08a266afc96f68",
+        "name": "trigger_suppression_event_timing::self_from_anywhere_exception_functions_in_destination_with_hush_surviving"
+      },
+      {
+        "exit": 0,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/9.log",
+        "log_sha256": "6ba2572fb41c8d355d0a18edfd9cc7266122aa6dc6604c84d9d3434cb3af2cf6",
+        "name": "trigger_suppression_event_timing::clause_local_disjunction_registers_once_for_eligible_sibling"
+      }
+    ],
+    "designated": [
+      {
+        "exit": 101,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/0.log",
+        "log_sha256": "0066482748ddfa10339b36d5be07f8f65da2d4559af7b0ce236c1a677c7ba9aa",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter",
+        "reached_assertion": true
+      },
+      {
+        "exit": 101,
+        "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/batched-global-death-gate-runtime-mutant/2.log",
+        "log_sha256": "0c57e65513e3b7fb20c435760dd8f143db23fec31bce66bfac36da960a4e91b0",
+        "name": "trigger_suppression_event_timing::batched_self_arrival_bypasses_broad_death_prefilter_any_hush_reverse",
+        "reached_assertion": true
+      }
+    ],
+    "id": "batched-global-death-gate",
+    "matrix_counts": {
+      "failed": 2,
+      "ignored": 20,
+      "passed": 182
+    },
+    "outcome": "both designated orders reached assertions; all named controls passed",
+    "restored": true,
+    "utc": "2026-09-05T20:49:54.296076+00:00"
+  }
+]

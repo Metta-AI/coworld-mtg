@@ -1,0 +1,15 @@
+--- a/crates/engine/src/game/triggers.rs
++++ b/crates/engine/src/game/triggers.rs
+@@ -286,7 +286,11 @@
+     event_batch
+         .iter()
+         .filter(|candidate| {
+-            !etb_event_is_suppressed_cached(state, candidate, active_suppress_triggers)
++            !super::trigger_suppression::event_is_suppressed_by_static_triggers_cached(
++                state,
++                candidate,
++                active_suppress_triggers,
++            )
+         })
+         .filter(|candidate| {
+             super::trigger_matchers::match_for_ordinary_collection(
