@@ -1,0 +1,116 @@
+{
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "method": "Independently rehashed all final gate logs; read summaries, full explicit diagnostics and workspace failure. Broad commands executed by author, exact12 canonical tests and original3 worker requests independently executed by reviewer.",
+  "gates": {
+    "0": {
+      "exit": 0,
+      "summaries": [],
+      "log_sha256": "1c2c75b2e9cca1622764b9868f06d748d18339c5821118fc97ad5dceb6345f73"
+    },
+    "1": {
+      "exit": 0,
+      "summaries": [
+        "test result: ok. 196 passed; 0 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 14.69s"
+      ],
+      "log_sha256": "f55debd7fcebc42e288fe5c89df0ae6f73d03d0adc29288422d61c5b312159bd"
+    },
+    "2": {
+      "exit": 0,
+      "summaries": [],
+      "log_sha256": "357e4671f6842098bea1e9bba31abdd9abdccad18588439f4b5518b99eae8d8d"
+    },
+    "3": {
+      "exit": 0,
+      "summaries": [
+        "test result: ok. 16586 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 39.22s"
+      ],
+      "log_sha256": "7a36cd533ae6c497fd39a23a42d871c99bdc1766b6298b35f3108d9b1e5c904e"
+    },
+    "4": {
+      "exit": 0,
+      "summaries": [
+        "test result: ok. 3172 passed; 0 failed; 22 ignored; 0 measured; 0 filtered out; finished in 44.67s"
+      ],
+      "log_sha256": "7d1ea77bceb62c0acda46cc064c7321da9b8c435644d28df66b42da0c370f745"
+    },
+    "5": {
+      "exit": 0,
+      "summaries": [
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ],
+      "log_sha256": "7c30f42a08180de0e45347e036b9e99305a1f2f2aa538d3db7368c49adfcf8ba"
+    },
+    "6": {
+      "exit": 0,
+      "summaries": [
+        "test result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ],
+      "log_sha256": "1d386f91b82c9913eaf1a5fd39f8835e951e9cf4396e921144ca900180e1fae1"
+    },
+    "7": {
+      "exit": 0,
+      "summaries": [
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 16588 filtered out; finished in 0.13s"
+      ],
+      "log_sha256": "01cabe730cc0aa025a748847e2ad3a74bd2af6421380ab7afc8f32bb8c43bac1"
+    },
+    "8": {
+      "exit": 101,
+      "summaries": [
+        "test result: FAILED. 2 passed; 18 failed; 0 ignored; 0 measured; 3174 filtered out; finished in 0.60s"
+      ],
+      "log_sha256": "d76783524b86f9d9e3f25dbd25f098c9544f53d8ee53cc15b882f848b324fdae"
+    },
+    "9": {
+      "exit": 101,
+      "summaries": [],
+      "log_sha256": "2357a80686ed93a6d6723d39ef2b0530f0384a767633a1a4d551cf7053c8fe93"
+    },
+    "10": {
+      "exit": 0,
+      "summaries": [],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "diagnostic_failure_set": [
+    "trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling",
+    "trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection",
+    "trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy",
+    "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush",
+    "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed",
+    "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed",
+    "trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression",
+    "trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures",
+    "trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world",
+    "trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed",
+    "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once",
+    "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed"
+  ],
+  "prior_candidate_diagnostic_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/6.log",
+  "prior_candidate_diagnostic_log_sha256": "50b20f3c3cdc0e697bb4dde688237be14f1067381c123d144ecd7f1b8acc1d19",
+  "same_prior_failure_set": true,
+  "unchanged_baseline_workspace_failure_files": {
+    "crates/manabrew-compat/src/lib.rs": "1da55cae15b1458953fc54eb65a79d2c6deef19a4641df1aa02423c1cc280842",
+    "crates/engine/src/types/actions.rs": "5f70f4a93aa17f236ac4fa8b6ae5910310256366a3f44dc1591bdff301a58d97"
+  },
+  "card_generation": {
+    "exit": 0,
+    "schema_valid_cards": 35802,
+    "token_presets": 2870,
+    "generated_source_files_restored": true,
+    "generation_log_sha256": "8cc33484960519c45b704f77e0cbc3236c6a8c5969a0f3b2f7a69ffaca7cf7af"
+  },
+  "docs": "0 executed;7 ignored, not7 doctests passed",
+  "throughput": "No throughput claim;5 cross-source tests are correctness checks"
+}

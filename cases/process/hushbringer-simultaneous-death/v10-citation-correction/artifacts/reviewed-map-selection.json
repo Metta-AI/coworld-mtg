@@ -1,0 +1,52 @@
+{
+  "utc": "2026-09-05T22:56:21.295150+00:00",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "authoritative_maps": {
+    "constructor_audit": "constructor-audit.json",
+    "callsite_map": "production-entry-callsite-map.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map.json",
+    "maintainer_matrix": "production-path-maintainer-map.json",
+    "cr_audit": "cr-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "historical-canonical-reference.json"
+  },
+  "supersedes": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/reviewed-map-selection.json",
+    "sha256": "997bd4caa2e3c1ef173d3bac9bdc2d3ae0d1d995878aa03112771a469191429b"
+  },
+  "status": "Citation correction complete; executor CR audit has no outstanding findings. Prior independent Maintainer PASS is reused only for byte-identical executable source. Fresh full independent review and final committed-worker acceptance remain pending.",
+  "outstanding_findings": [],
+  "resolved_findings": [
+    {
+      "id": "CR-NATIVE-LIBRARY-CHOICE",
+      "prior_executor_id": "remaining-native-choice-cr-citation",
+      "severity": "LOW",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "prior_rule": "115.1",
+      "corrected_rule": "608.2d",
+      "status": "corrected by executor; awaiting fresh independent review",
+      "review": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/review-report.json",
+        "sha256": "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd"
+      },
+      "rule_check": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/rule-check.json",
+        "sha256": "dc11a01cf728981e43196c2b9d570babbdf9cc0e7f42812a702cd1f18ae8bd1e"
+      },
+      "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+      "delta": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/citation-fix.patch",
+        "sha256": "0d33f09cbdf6a255aff33b590b6a762efa012630eeda90729d2775f9346130d4"
+      }
+    }
+  ],
+  "source_changed": true,
+  "source_change": "one exact comment citation token",
+  "historical_artifacts_preserved": true,
+  "current_independent_review": "pending",
+  "acceptance": false,
+  "review_instruction": "Use only this authoritative map selection for the current candidate. Prior map/status packages are immutable history. Runtime evidence keeps its original source identity; fresh review and actual final committed-worker compilation remain required."
+}

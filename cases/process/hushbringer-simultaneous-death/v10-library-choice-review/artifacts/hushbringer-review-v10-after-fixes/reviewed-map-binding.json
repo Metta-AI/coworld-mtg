@@ -1,0 +1,32 @@
+{
+  "reviewed_map_selection_sha256": "997bd4caa2e3c1ef173d3bac9bdc2d3ae0d1d995878aa03112771a469191429b",
+  "top_level_changes_only": {
+    "production-entry-callsite-map": [
+      "review_status",
+      "supersedes_after_fresh_review",
+      "authoritative_maps"
+    ],
+    "typed-common-boundary-map": [
+      "review_status",
+      "supersedes_after_fresh_review",
+      "authoritative_maps"
+    ],
+    "production-path-maintainer-map-v10": [
+      "status",
+      "review_status",
+      "unresolved_review_items",
+      "supersedes_after_fresh_review",
+      "authoritative_maps"
+    ]
+  },
+  "all_67_reviewed_markdown_rows_equal_json": true,
+  "cr_source_rows": 185,
+  "cr_only_changed_assessment_row": 184,
+  "added_rule_texts_verified": {
+    "608.2d": [
+      "608.2d If an effect of a spell or ability offers any choices other than choices already made as part of casting the spell, activating the ability, or otherwise putting the spell or ability on the stack, the player announces these while applying the effect. The player can\u2019t choose an option that\u2019s illegal or impossible, with the exception that having a library with no cards in it doesn\u2019t make drawing a card an impossible action (see rule 121.3). If an effect divides or distributes something, such as damage or counters, as a player chooses among any number of untargeted players and/or objects, the player chooses the amount and division such that each chosen player or object receives at least one of whatever is being divided. (Note that if an effect divides or distributes something, such as damage or counters, as a player chooses among some number of target objects and/or players, the amount and division were determined as the spell or ability was put onto the stack rather than at this time; see rule 601.2d.)"
+    ]
+  },
+  "remaining_source_citation_finding": true,
+  "metadata_corrections": "Interim source-unaffected sibling statuses and All83 reference superseded. Final constructor audit distinguishes actual Self literal840-870 from earlier enclosing excerpt840-872. Reviewed versions retain the outstanding115.1 finding without source changes."
+}

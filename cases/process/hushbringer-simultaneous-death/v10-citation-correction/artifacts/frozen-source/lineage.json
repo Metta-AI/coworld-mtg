@@ -1,0 +1,37 @@
+{
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "prior_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "prior_source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/frozen-source/source.json",
+  "prior_source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+  "prior_source_archive_sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+  "historical_lineage": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/frozen-source/lineage.json",
+    "sha256": "bd75bb9af3c1a28318290be0e7c231ee158dfd2fd994a77eac67e4fb6c935836"
+  },
+  "source_files": 2051,
+  "unchanged_files": 2050,
+  "changed": [
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "prior_sha256": "d6ec57bc6b231897e5c72dd392b98e240fce3b92cd13fd827e62e84c2e6b2085",
+      "current_sha256": "253815c97ce827680554c901a9225401b07cd57be8be2c389e9d3c095aaf786d",
+      "before": "                // CR 115.1: Resolution-time selection for PutAtLibraryPosition",
+      "after": "                // CR 608.2d: Resolution-time selection for PutAtLibraryPosition",
+      "classification": "Exact replacement of citation in one existing line comment; inverse replacement reconstructs full prior file byte for byte."
+    }
+  ],
+  "files_added": [],
+  "files_removed": [],
+  "same_complete_source_path_set": true,
+  "all_other_2050_files_byte_identical": true,
+  "all_production_and_test_executable_bytes_unchanged": true,
+  "all_tests_byte_identical": true,
+  "full_previous_archive_verified": true,
+  "production_behavior_change": false,
+  "new_tests": false,
+  "new_compilation": false,
+  "new_runtime_evidence": false,
+  "new_mutation_claims": false,
+  "evidence_reuse": "All historical build/runtime receipts retain original source and executable identities. Comment-only lineage permits risk-scaled reuse; it is not compilation or testing of this new source identity."
+}

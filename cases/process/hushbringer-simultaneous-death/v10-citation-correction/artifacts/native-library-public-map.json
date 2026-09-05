@@ -1,0 +1,179 @@
+{
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "rows": [
+    {
+      "id": "native-library-bottom",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "arm_line": 3539,
+      "member_line": 3541,
+      "first_reaching_branch": "Some(Bottom) enters chosen forward loop and move_to_library_position(false)",
+      "constructors": [
+        {
+          "file": "crates/engine/src/game/effects/put_on_top.rs",
+          "line": 213,
+          "branch": "collected_targets.is_empty(), expected > 0, extract_in_zone Hand/Library, eligible nonempty -> natural EffectZoneChoice",
+          "tests": [
+            "native_library_choice_hand_bottom_public_controls",
+            "native_library_choice_library_bottom_public_controls"
+          ]
+        },
+        {
+          "file": "crates/engine/src/game/effects/put_on_top.rs",
+          "line": 264,
+          "branch": "actual Dig SelectCards publishes unkept tracked Library pool; TrackedSet scan retains Library members; collected_targets.len() > expected > 0 -> natural EffectZoneChoice",
+          "tests": [
+            "native_library_choice_dig_tracked_bottom_public_controls"
+          ]
+        }
+      ],
+      "authority": "Actual constructor eligible ids and actual source zone; handler exact-cardinality, eligible membership and actual-zone guards run before owner wrapper. Tests never inject pending choices or mutate zones during a choice.",
+      "storage": "Existing WaitingFor::EffectZoneChoice and normal pending continuation; actual public SelectCards enters handler.",
+      "binding_time": "After natural cast/Dig resolution, before selected placement. No Battlefield candidate survives capture filtering.",
+      "consumer": "Existing library mover emits native Hand/Library records. with_departure_member has no owned departure binding.",
+      "invalidation": "Owner/member scopes end synchronously; pending gain continuation resolves and normal priority returns.",
+      "serialized_impact": "Selected native records have absent trigger_suppression, empty co_departed; Hand changes incarnation once, Library reposition does not.",
+      "evidence_classification": "Public source-unaffected sibling; no wrapper-removal mutation kill claimed",
+      "tests": [
+        "native_library_choice_hand_bottom_public_controls",
+        "native_library_choice_library_bottom_public_controls",
+        "native_library_choice_dig_tracked_bottom_public_controls"
+      ],
+      "controls": "Both orders, Hush/no-Hush; exact eligible pool/full library vectors/event order; selected records exactly one each and nonselected none; empty/short/long/ineligible/unknown choices reject with full serialized state preserved; tracked out-of-pool same-zone and kept-card rejection; valid retry; observer +1 plus continuation +2 once; normal priority, no pending continuation, zero Spirits. Nth covers 1,3,99.",
+      "limitations": "Library-to-Library notifications and payoff are inherited compatibility, not a claim of actual zone change. No duplicate-selection rejection claimed. No stale-zone rejection fixture via fabricated mutation. No BeneathTop coverage claim.",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "test_lines": {
+        "native_library_choice_hand_bottom_public_controls": 7663,
+        "native_library_choice_library_bottom_public_controls": 7689,
+        "native_library_choice_dig_tracked_bottom_public_controls": 7715
+      }
+    },
+    {
+      "id": "native-library-nth",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "arm_line": 3554,
+      "member_line": 3557,
+      "first_reaching_branch": "Some(NthFromTop { n }) computes saturating n-1, iterates chosen forward and calls move_to_library_at_index(index)",
+      "constructors": [
+        {
+          "file": "crates/engine/src/game/effects/put_on_top.rs",
+          "line": 213,
+          "branch": "collected_targets.is_empty(), expected > 0, extract_in_zone Hand/Library, eligible nonempty -> natural EffectZoneChoice",
+          "tests": [
+            "native_library_choice_hand_nth_public_controls",
+            "native_library_choice_library_nth_public_controls"
+          ]
+        },
+        {
+          "file": "crates/engine/src/game/effects/put_on_top.rs",
+          "line": 264,
+          "branch": "actual Dig SelectCards publishes unkept tracked Library pool; TrackedSet scan retains Library members; collected_targets.len() > expected > 0 -> natural EffectZoneChoice",
+          "tests": [
+            "native_library_choice_dig_tracked_nth_public_controls"
+          ]
+        }
+      ],
+      "authority": "Actual constructor eligible ids and actual source zone; handler exact-cardinality, eligible membership and actual-zone guards run before owner wrapper. Tests never inject pending choices or mutate zones during a choice.",
+      "storage": "Existing WaitingFor::EffectZoneChoice and normal pending continuation; actual public SelectCards enters handler.",
+      "binding_time": "After natural cast/Dig resolution, before selected placement. No Battlefield candidate survives capture filtering.",
+      "consumer": "Existing library mover emits native Hand/Library records. with_departure_member has no owned departure binding.",
+      "invalidation": "Owner/member scopes end synchronously; pending gain continuation resolves and normal priority returns.",
+      "serialized_impact": "Selected native records have absent trigger_suppression, empty co_departed; Hand changes incarnation once, Library reposition does not.",
+      "evidence_classification": "Public source-unaffected sibling; no wrapper-removal mutation kill claimed",
+      "tests": [
+        "native_library_choice_hand_nth_public_controls",
+        "native_library_choice_library_nth_public_controls",
+        "native_library_choice_dig_tracked_nth_public_controls"
+      ],
+      "controls": "Both orders, Hush/no-Hush; exact eligible pool/full library vectors/event order; selected records exactly one each and nonselected none; empty/short/long/ineligible/unknown choices reject with full serialized state preserved; tracked out-of-pool same-zone and kept-card rejection; valid retry; observer +1 plus continuation +2 once; normal priority, no pending continuation, zero Spirits. Nth covers 1,3,99.",
+      "limitations": "Library-to-Library notifications and payoff are inherited compatibility, not a claim of actual zone change. No duplicate-selection rejection claimed. No stale-zone rejection fixture via fabricated mutation. No BeneathTop coverage claim.",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "test_lines": {
+        "native_library_choice_hand_nth_public_controls": 7670,
+        "native_library_choice_library_nth_public_controls": 7696,
+        "native_library_choice_dig_tracked_nth_public_controls": 7722
+      }
+    },
+    {
+      "id": "native-library-top",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "arm_line": 3570,
+      "member_line": 3572,
+      "first_reaching_branch": "Default arm with natural Some(Top) iterates chosen in reverse and calls move_to_library_at_index(Some(0))",
+      "constructors": [
+        {
+          "file": "crates/engine/src/game/effects/put_on_top.rs",
+          "line": 213,
+          "branch": "collected_targets.is_empty(), expected > 0, extract_in_zone Hand/Library, eligible nonempty -> natural EffectZoneChoice",
+          "tests": [
+            "native_library_choice_hand_top_public_controls",
+            "native_library_choice_library_top_public_controls"
+          ]
+        },
+        {
+          "file": "crates/engine/src/game/effects/put_on_top.rs",
+          "line": 264,
+          "branch": "actual Dig SelectCards publishes unkept tracked Library pool; TrackedSet scan retains Library members; collected_targets.len() > expected > 0 -> natural EffectZoneChoice",
+          "tests": [
+            "native_library_choice_dig_tracked_top_public_controls"
+          ]
+        }
+      ],
+      "authority": "Actual constructor eligible ids and actual source zone; handler exact-cardinality, eligible membership and actual-zone guards run before owner wrapper. Tests never inject pending choices or mutate zones during a choice.",
+      "storage": "Existing WaitingFor::EffectZoneChoice and normal pending continuation; actual public SelectCards enters handler.",
+      "binding_time": "After natural cast/Dig resolution, before selected placement. No Battlefield candidate survives capture filtering.",
+      "consumer": "Existing library mover emits native Hand/Library records. with_departure_member has no owned departure binding.",
+      "invalidation": "Owner/member scopes end synchronously; pending gain continuation resolves and normal priority returns.",
+      "serialized_impact": "Selected native records have absent trigger_suppression, empty co_departed; Hand changes incarnation once, Library reposition does not.",
+      "evidence_classification": "Public source-unaffected sibling; no wrapper-removal mutation kill claimed",
+      "tests": [
+        "native_library_choice_hand_top_public_controls",
+        "native_library_choice_library_top_public_controls",
+        "native_library_choice_dig_tracked_top_public_controls"
+      ],
+      "controls": "Both orders, Hush/no-Hush; exact eligible pool/full library vectors/event order; selected records exactly one each and nonselected none; empty/short/long/ineligible/unknown choices reject with full serialized state preserved; tracked out-of-pool same-zone and kept-card rejection; valid retry; observer +1 plus continuation +2 once; normal priority, no pending continuation, zero Spirits. Nth covers 1,3,99.",
+      "limitations": "Library-to-Library notifications and payoff are inherited compatibility, not a claim of actual zone change. No duplicate-selection rejection claimed. No stale-zone rejection fixture via fabricated mutation. No BeneathTop coverage claim.",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "test_lines": {
+        "native_library_choice_hand_top_public_controls": 7656,
+        "native_library_choice_library_top_public_controls": 7682,
+        "native_library_choice_dig_tracked_top_public_controls": 7708
+      }
+    }
+  ],
+  "prior_evidence_disposition": "Existing Brainstorm CastSpell/SelectCards proves natural Hand Top order. Existing put_on_top unit Nth is direct populated-target resolver, not natural handler proof; Volcanic Spite prompt-only test does not prove a selected arm. Separate battlefield library leaf mutation stays separate.",
+  "supersedes": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/native-library-public-map.json",
+    "sha256": "6026cc33c74ec961ac2b565d84f63c166d6270c7a9085d16ad7756513920b185",
+    "reason": "Full selected prior map retained with current citation-only source/status bindings; prior bytes remain immutable."
+  },
+  "utc": "2026-09-05T22:56:21.295150+00:00",
+  "authoritative_maps": {
+    "constructor_audit": "constructor-audit.json",
+    "callsite_map": "production-entry-callsite-map.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map.json",
+    "maintainer_matrix": "production-path-maintainer-map.json",
+    "cr_audit": "cr-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "historical-canonical-reference.json"
+  },
+  "review_status": "Citation correction complete; executor CR audit has no outstanding findings. Prior independent Maintainer PASS is reused only for byte-identical executable source. Fresh full independent review and final committed-worker acceptance remain pending.",
+  "evidence_reuse_qualification": "Historical runtime/build/mutation evidence retains its original source and executable identity. Current source differs from fdc9 only by the exact citation token at engine_resolution_choices.rs:3528, proven by frozen-source/lineage.json. No runtime, compilation, or mutation experiment was run on the current source identity.",
+  "current_source_lineage": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+    "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+  },
+  "prior_independent_review": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/review-report.json",
+    "sha256": "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd"
+  },
+  "outstanding_findings": [],
+  "historical_focused_receipt": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/focused-1/receipt.json",
+    "sha256": "8dc4bbfbccdec1196894aa58e15542d10c59f79ea152389ba2204011af34fed1",
+    "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+    "qualification": "Prior 9 test / 60 case run; no new-source test run."
+  },
+  "status": "Three native private-zone placement arms retain natural public controls with no wrapper-removal mutation claim; historical fdc9 evidence reused."
+}

@@ -1,0 +1,120 @@
+{
+  "role": "fresh engine-implementation-executor",
+  "status": "Complete frozen-source evidence handoff; one source citation remains outstanding. No clean CR gate, implementation acceptance, clean workspace-Clippy or desired-rules-complete claim.",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "branch": "codex/hushbringer-simultaneous-death",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "prior_source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "review_fix_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "diff_summary": {
+    "production": "Comment-only corrections in effects/change_zone.rs, engine_resolution_choices.rs, and sba.rs. Five CR groups fixed, including moved and adjacent annotations and explicit inherited non-Siege stack-guard limitation. No gameplay branch changed.",
+    "tests": "Append nine integration tests with 60 parameter cases. Natural CastSpell -> EffectZoneChoice, plus actual CastSpell -> DigChoice -> SelectCards -> tracked Library EffectZoneChoice. Hand/direct Library/Dig-tracked Library; Top, Bottom, Nth 1/3/99; both selected orders and Hush/no-Hush. Exact full vector/event order, selected/nonselected event counts, absent snapshots, incarnation compatibility, invalid selection whole-state preservation and valid retry, observer and continuation payoff, ordinary priority.",
+    "existing_tests": "Prior integration module is a byte-identical prefix. No ignored diagnostic promoted or changed.",
+    "artifact_metadata": "Complete maps copied into this new directory and corrected; historical proof bytes untouched. Constructor categories distinguish three real production expressions, test-only expressions including Self, return signatures, documentation and raw golden strings."
+  },
+  "verification": {
+    "focused": "9 passed, 0 failed, 0 ignored; 60 parameter cases in focused-1/receipt.json",
+    "tilt": "Unavailable; exact detection result in tilt-availability.json. Explicitly authorized direct Cargo fallback uses only this checkout target with CARGO_BUILD_JOBS=1 and RUST_MIN_STACK=16777216.",
+    "final": {
+      "module": "196 passed,20 ignored",
+      "engine_library": "16586 passed,7 ignored",
+      "full_integration": "3172 passed,22 ignored",
+      "bins": "15 passed",
+      "docs": "0 executed,7 ignored",
+      "cross_source_batch_behavior": "5 passed; no throughput claim",
+      "desired_diagnostics": "2 passed,18 failed; exact prior candidate failure set retained",
+      "engine_clippy": "passed --all-targets -D warnings",
+      "workspace_clippy": "known baseline SetFullControl E0004 only",
+      "format": "fmt --all --check passed, no source changes",
+      "card_data": "generation passed; known-tokens and oracle-subtypes exact pre-generation bytes restored with fresh writes before canonical build",
+      "canonical_integration_sha256": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+      "receipts": [
+        "canonical-build.json",
+        "final-gates/receipt.json",
+        "card-data-final/receipt.json",
+        "verification-summary.json"
+      ]
+    }
+  },
+  "parser_gate": "No parser source, variant, card database support, supported-card assertion, semantic support allowlist, or corpus coverage promotion changed. Card-data generation is validation only; known generated source bytes restored with fresh writes before canonical compilation.",
+  "production_coverage_map": [
+    "production-entry-callsite-map-reviewed.json",
+    "native-library-public-map.json",
+    "typed-common-boundary-map-reviewed.json",
+    "manual-constructor-boundary-audit-final.json",
+    "complete-constructor-regex-hits.json",
+    "constructor-consumer-sweep.json"
+  ],
+  "maintainer_matrix": "production-path-maintainer-map-v10-reviewed.json and production-path-maintainer-map-v10-reviewed.md retain all 67 measured historical mutations (56 public, 10 private, 1 defensive). New native controls are source-unaffected siblings with no invented wrapper-mutation kills. All historical commands/binaries retain their actual compilation source identities; frozen-source/lineage.json binds this comment/test-only successor.",
+  "cr_gate": "cr-reviewed-audit.json/md is authoritative:185 added/moved/adjacent annotations reviewed, original five groups fixed, but CR115.1 at engine_resolution_choices.rs:3528 remains incorrect. Prior cr-complete-audit row184 semantic acceptance is superseded. Frozen source was preserved at root instruction for a fresh fix executor after complete review.",
+  "judgment_calls": [
+    "Native Nth tests preserve the current repeated fixed-index insertion convention, including reversal for the selected in-range pair and appending at a clamped out-of-range position. They do not relabel private-zone actions as battlefield departures.",
+    "Library-to-Library record notifications and the observer payoff are explicit existing compatibility behavior, not a claim of actual zone change.",
+    "Rejected choices test empty/short/long cardinality, unknown objects, battlefield ineligible objects, and tracked same-zone out-of-pool/kept cards. No fabricated stale-zone mutation or duplicate-selection rejection claim.",
+    "Both actual constructor branches are reached naturally. No pending choice or tracked pool injected, and no direct resolver test offered as public path evidence.",
+    "No new mutation experiment was required for these private-zone controls or annotation-only production changes; historical measured mutations remain associated with their original builds."
+  ],
+  "stop_items": [
+    {
+      "id": "remaining-native-choice-cr-citation",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "cited_rule": "115.1",
+      "status": "outstanding; no source edit in this frozen evidence package",
+      "problem": "CR 115.1 describes targets announced when placing a spell/ability on the stack; this comment describes non-targeted resolution-time choices. CR 608.2d is the relevant choice-timing rule, or the unrelated label can be removed.",
+      "fresh_review_source": "Root relayed the fresh independent reviewer finding during final verification; executor re-read both exact rule texts and agrees.",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "next_action": "Root waits for complete independent review and dispatches a fresh fix executor. Preserve this source, executable and measured evidence."
+    }
+  ],
+  "cr_annotations_changed": [
+    "Remove unrelated CR 400.3 source-zone citation.",
+    "Use CR 614.8 and 616.1 for regeneration replacement/pending choice; adjacent generic shield comments use 614.8.",
+    "Older Role uses CR 704.5z with 614.6.",
+    "Battle protector uses 310.11, 704.5x/y, Siege opponents 310.12a, and no-battle-type controller designation 704.5x.",
+    "Zero-defense Siege 310.7/704.5v distinguished from non-Siege 310.8/704.5w; inherited all-Battle pending-trigger guard is explicitly preserved as a compatibility limit."
+  ],
+  "plan_deviations": "None requiring re-plan. Missing native controls and complete CR citations were already approved requirements. No production behavior change, no commits or pushes, and all work on EC2.",
+  "risks_and_retained_limits": [
+    "All previous ten named rule limits remain: aggregate grouping, inherited-target grouping, direct delayed suppression, full cross-pause grouping, ambiguous origins, intrinsic merge/nested layer worlds, co-dying off-zone Any source availability, aggregate paid continuation, cast-created regeneration persistence, and resumed duplicate dispatch.",
+    "The 20 ignored desired diagnostics remain diagnostic-only. Prior candidate was 2 pass/18 fail and fixed original was 0 pass/20 fail; final explicit execution must retain and compare those outcomes, never silently promote support.",
+    "The existing native resumed explicit-target no-Hush count of exactly two remains narrow compatibility, not the desired one. Seeded regeneration tests prove first-destruction interception only, not full shield lifetime.",
+    "Prior tracked-set empty-choice life23 versus selected22 remains measured original-production compatibility.",
+    "Zero legal Battle protector delivery has only a defensive lower-level mutation: shipped formats terminate before a legal nonterminal public zero-opponent path. Public healthy/legal/multiple-choice/terminal/attacked/phased controls remain separate.",
+    "Inherited broad non-Siege zero-defense stack guard and inherited non-Siege present-protector handling are not expanded or certified as complete rules behavior.",
+    "Legacy None snapshot fallback may rescan functioning sources, including no-suppressor contexts. Five Scute cross-source tests are batching behavior checks, not throughput evidence; historical /tmp/gamestate.json benchmark input is unavailable.",
+    "Known fixed-base workspace Clippy manabrew-compat SetFullControl E0004 remains out of scope. Upstream integration follows acceptance of the fixed-base experiment.",
+    "No parser/db/card support increase, no database fixture adaptation, no UI/card-data support promotion, and no throughput claim."
+  ],
+  "source_ownership": "Released to root after this sealed handoff. No source writes or builds remain; root owns Git after fresh full independent review. No commit or push performed.",
+  "final_map_corrections": "final-map-corrections.json explicitly supersedes stale interim native sibling statuses, All83 constructor reference, and older current-review metadata. All interim manifest-bound bytes remain unchanged.",
+  "authoritative_maps": {
+    "constructor_audit": "manual-constructor-boundary-audit-final.json",
+    "callsite_map": "production-entry-callsite-map-reviewed.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map-reviewed.json",
+    "maintainer_matrix": "production-path-maintainer-map-v10-reviewed.json",
+    "cr_audit": "cr-reviewed-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "canonical-integration-receipt.json"
+  },
+  "outstanding_review_findings": [
+    {
+      "id": "remaining-native-choice-cr-citation",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "cited_rule": "115.1",
+      "status": "outstanding; no source edit in this frozen evidence package",
+      "problem": "CR 115.1 describes targets announced when placing a spell/ability on the stack; this comment describes non-targeted resolution-time choices. CR 608.2d is the relevant choice-timing rule, or the unrelated label can be removed.",
+      "fresh_review_source": "Root relayed the fresh independent reviewer finding during final verification; executor re-read both exact rule texts and agrees.",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "next_action": "Root waits for complete independent review and dispatches a fresh fix executor. Preserve this source, executable and measured evidence."
+    }
+  ],
+  "cr_gate_passed": false,
+  "implementation_ready_for_acceptance": false,
+  "canonical_immutable_copy": "canonical-integration",
+  "canonical_immutable_receipt": "canonical-integration-receipt.json",
+  "finalized_utc": "2026-09-05T22:38:27.379068+00:00"
+}

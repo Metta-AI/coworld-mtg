@@ -1,0 +1,337 @@
+{
+  "config": {
+    "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+    "output": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates",
+    "commands": [
+      [
+        "python3",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical.py"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "clippy",
+        "-p",
+        "engine",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--bins"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--doc"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::stack::tests::batch_resolve::cross_source_",
+        "--",
+        "--nocapture"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ]
+    ],
+    "stop_on_failure": false
+  },
+  "utc": "2026-09-05T21:35:36.686938+00:00",
+  "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+  "env": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "results": [
+    {
+      "command": [
+        "python3",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical.py"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/0.log",
+      "log_sha256": "1c2c75b2e9cca1622764b9868f06d748d18339c5821118fc97ad5dceb6345f73",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/1.log",
+      "log_sha256": "f55debd7fcebc42e288fe5c89df0ae6f73d03d0adc29288422d61c5b312159bd",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "engine",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/2.log",
+      "log_sha256": "357e4671f6842098bea1e9bba31abdd9abdccad18588439f4b5518b99eae8d8d",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/3.log",
+      "log_sha256": "7a36cd533ae6c497fd39a23a42d871c99bdc1766b6298b35f3108d9b1e5c904e",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/4.log",
+      "log_sha256": "7d1ea77bceb62c0acda46cc064c7321da9b8c435644d28df66b42da0c370f745",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--bins"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/5.log",
+      "log_sha256": "7c30f42a08180de0e45347e036b9e99305a1f2f2aa538d3db7368c49adfcf8ba",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--doc"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/6.log",
+      "log_sha256": "1d386f91b82c9913eaf1a5fd39f8835e951e9cf4396e921144ca900180e1fae1",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::stack::tests::batch_resolve::cross_source_",
+        "--",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/7.log",
+      "log_sha256": "01cabe730cc0aa025a748847e2ad3a74bd2af6421380ab7afc8f32bb8c43bac1",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 101,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/8.log",
+      "log_sha256": "d76783524b86f9d9e3f25dbd25f098c9544f53d8ee53cc15b882f848b324fdae",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 101,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/9.log",
+      "log_sha256": "2357a80686ed93a6d6723d39ef2b0530f0384a767633a1a4d551cf7053c8fe93",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/final-gates/10.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    }
+  ],
+  "finished_utc": "2026-09-05T21:59:54.563396+00:00"
+}

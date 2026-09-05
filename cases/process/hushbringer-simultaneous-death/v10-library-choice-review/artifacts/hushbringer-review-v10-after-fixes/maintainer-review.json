@@ -1,0 +1,1213 @@
+{
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "distinct_mutation_seams": 67,
+  "classes": {
+    "public": 56,
+    "private": 10,
+    "defensive": 1
+  },
+  "rows": [
+    {
+      "id": "augment-handoff",
+      "classification": "public",
+      "file": "crates/engine/src/game/augment.rs",
+      "production_entry": "crates/engine/src/game/augment.rs::check_standalone_augment_permanents",
+      "first_branch": "Public typed Animate grants only Augment to a healthy nonmerged subject; observer gets lethal damage, ordinary lethal category removes observer before standalone Augment removes subject in same SBA iteration.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "destroy-resolve",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "production_entry": "crates/engine/src/game/effects/destroy.rs::resolve",
+      "first_branch": "Public single Effect::Destroy with SelfRef or already-valid target set; separate physical targets belong to one completed instruction.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "destroy-resolve_all",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "production_entry": "crates/engine/src/game/effects/destroy.rs::resolve_all",
+      "first_branch": "Public real Oracle Wrath; effective mass target filter selects simultaneous live creature victims.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "keep-sweep",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "production_entry": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs::sacrifice_unchosen",
+      "first_branch": "All final keep choices complete; shared sacrifice_unchosen recomputes scoped, matching, not-kept victims. Five entry routes all reach this one helper.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "change-zone-resolve",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "production_entry": "crates/engine/src/game/effects/change_zone.rs::resolve",
+      "first_branch": "Public targeted ChangeZone; target validation and actual current source zone precede process_one_zone_move.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "change-zone-resolve_all",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "production_entry": "crates/engine/src/game/effects/change_zone.rs::resolve_all",
+      "first_branch": "Public mass ChangeZone; effective matching set and existing library shuffle/order rules select the action.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "shared-batch-delivery",
+      "classification": "public",
+      "file": "crates/engine/src/game/zone_pipeline.rs",
+      "production_entry": "crates/engine/src/game/zone_pipeline.rs::deliver_batch",
+      "first_branch": "Existing deliver_batch consumes a real Vec<ZoneMoveRequest> and attempted set; each request retains its own actual destination/guards.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "resumed-change-zone",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "production_entry": "crates/engine/src/game/effects/mod.rs::drain_pending_change_zone_iteration",
+      "first_branch": "Natural parked ChangeZone resumes existing remaining list; only completed current segment is owned.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "all-eligible-sacrifice",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/sacrifice.rs",
+      "production_entry": "crates/engine/src/game/effects/sacrifice.rs::resolve",
+      "first_branch": "Mandatory non-up-to sacrifice with eligible.len() <= requested count selects the whole eligible pool before native sacrifice.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "player-scope-sacrifice",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "production_entry": "crates/engine/src/game/effects/mod.rs::perform_player_scope_sacrifices",
+      "first_branch": "Existing final player/card selections form candidates; current selection player remains sacrifice authority.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "choice-sacrifice",
+      "classification": "public",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "production_entry": "crates/engine/src/game/engine_resolution_choices.rs::handle_resolution_choice",
+      "first_branch": "Natural EffectZoneChoice Sacrifice after count/ID/current-zone validation; complete chosen slice owns completed segment.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "choice-change-bounce",
+      "classification": "public",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "production_entry": "crates/engine/src/game/engine_resolution_choices.rs::handle_resolution_choice",
+      "first_branch": "Natural EffectZoneChoice ChangeZone/Bounce shared arm validates chosen IDs and actual zone before delivery.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "choice-pay-cost",
+      "classification": "public",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "production_entry": "crates/engine/src/game/engine_resolution_choices.rs::handle_resolution_choice",
+      "first_branch": "Natural EffectZoneChoice PayCost validates chosen set; cost-payment zone delivery precedes continuation/exile-link indexing.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "cost-member-handle_sacrifice_for_cost",
+      "classification": "public",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "crates/engine/src/game/casting_costs.rs::handle_sacrifice_for_cost",
+      "first_branch": "Immediate successful chosen sacrifice component; existing legal selection/controller/payment checks still own eligibility.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "cost-member-pay_deferred_spell_sacrifices_at_commit",
+      "classification": "public",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "crates/engine/src/game/casting_costs.rs::pay_deferred_spell_sacrifices_at_commit",
+      "first_branch": "Deferred selected queue has validated canonical component runs; each contiguous original run opens its own action owner.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_zero_toughness",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_zero_toughness",
+      "first_branch": "Creature and effective toughness <= 0",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/outcome.json",
+          "sha256": "db7cc88654d6dc0553d489de819aa6f2a55b3161064ee6df3c715f4d081417c4"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_lethal_damage",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_lethal_damage",
+      "first_branch": "Creature and effective toughness > 0 and lethal marked damage, no Indestructible",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_lethal_damage/outcome.json",
+          "sha256": "0cc229e547c3f3d871d93a1590e1da6d711677c45aa61079bcfa9a3b4e8b5d8c"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_unattached_auras",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_unattached_auras",
+      "first_branch": "Enchantment plus Aura subtype, no legal attachment, not BestowRevert",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/outcome.json",
+          "sha256": "236d5c22bb8ba78b644758fd15f2d86828d8a94738c3b3e7d558eb32457c03ff"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_role_uniqueness",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_role_uniqueness",
+      "first_branch": "live attached Role, same host/controller group >= 2, older timestamp",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_role_uniqueness/outcome.json",
+          "sha256": "3fd832d4ede93e94fd96fac854253ebe7b8948dfa040c75f2c12f36a2b40bee1"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_world_rule",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_world_rule",
+      "first_branch": "at least two live World permanents; older acquisition timestamp",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_world_rule/outcome.json",
+          "sha256": "601da9adeccf484c2ced2a50e6812b980abbe98172e0e6a03434c37420777f3a"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_zero_loyalty",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_zero_loyalty",
+      "first_branch": "Planeswalker and loyalty == 0",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_loyalty/outcome.json",
+          "sha256": "5ef14df242af25ccf3b689ccbbbb96affcdf63007136244984041dd06eb0e4ab"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_zero_defense",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_zero_defense",
+      "first_branch": "Battle and defense == 0, no source trigger on stack",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_defense/outcome.json",
+          "sha256": "0b12a58aa98ef6aeb0300f57f5b3a419e650cdfae4a6eebc878fe8f80d2d33a8"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_battle_protector",
+      "classification": "defensive",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_battle_protector",
+      "first_branch": "Siege, absent/illegal protector, not attacked, zero legal living opponents",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "v10 private lexical or defensive battle exact runtime discriminator"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/results.json",
+          "sha256": "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "sba-check_saga_sacrifice",
+      "classification": "public",
+      "file": "crates/engine/src/game/sba.rs",
+      "production_entry": "GameRunner.act(PassPriority) -> public engine action boundary -> priority/SBA iteration -> check_saga_sacrifice",
+      "first_branch": "final chapter exists, lore >= final chapter, no chapter on stack or pending Lore event",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_saga_sacrifice/outcome.json",
+          "sha256": "ed8f71645b0a1be1b85a7127daef275cbb87fd2450a3c6f625c418567bb6f37d"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "components-whole-queue",
+      "classification": "public",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "crates/engine/src/game/casting_costs.rs::pay_deferred_spell_sacrifices_at_commit",
+      "first_branch": "Natural selected sacrifice/mana/Phyrexian or inline PayCost checkpoint; malformed fixtures alter only serialized provenance. See exact operation and designated semantic test for this physical guard.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "components-singleton",
+      "classification": "public",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "crates/engine/src/game/casting_costs.rs::pay_deferred_spell_sacrifices_at_commit",
+      "first_branch": "Natural selected sacrifice/mana/Phyrexian or inline PayCost checkpoint; malformed fixtures alter only serialized provenance. See exact operation and designated semantic test for this physical guard.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "components-filter-grouping",
+      "classification": "public",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "crates/engine/src/game/casting_costs.rs::pay_deferred_spell_sacrifices_at_commit",
+      "first_branch": "Natural selected sacrifice/mana/Phyrexian or inline PayCost checkpoint; malformed fixtures alter only serialized provenance. See exact operation and designated semantic test for this physical guard.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "component-guard-normal-finalizer",
+      "classification": "private",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "Natural manual CastSpell + SelectCards through GameRunner reaches pending checkpoint; targeted internal finalizer/append entry then exercised with missing component metadata",
+      "first_branch": "nonempty deferred queue whose first selection component is None",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "component-guard-phyrexian-finalizer",
+      "classification": "private",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "Natural manual CastSpell + SelectCards through GameRunner reaches pending checkpoint; targeted internal finalizer/append entry then exercised with missing component metadata",
+      "first_branch": "nonempty deferred queue whose first selection component is None",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "component-guard-append",
+      "classification": "private",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "Natural manual CastSpell + SelectCards through GameRunner reaches pending checkpoint; targeted internal finalizer/append entry then exercised with missing component metadata",
+      "first_branch": "nonempty deferred queue whose first selection component is None",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "owner-finalization",
+      "classification": "public",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "crates/engine/src/game/zones.rs::with_departure_suppression",
+      "first_branch": "Owner completes with actual claimed native Battlefield departure keys; no emitted keys is an immediate no-op.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "after-world-flush",
+      "classification": "public",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "crates/engine/src/game/zones.rs::finish_departure_suppression",
+      "first_branch": "Finalizer has capture and actual events; functioning post-event authority is evaluated after the owner body and before next instruction.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "haunt-adapter",
+      "classification": "public",
+      "file": "crates/engine/src/game/haunt.rs",
+      "production_entry": "crates/engine/src/game/haunt.rs::match_haunted_creature_dies",
+      "first_branch": "Real Haunt link with source in Exile and haunted creature actually departing; surviving Hush directly discriminates adapter.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "unattach-adapter",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::match_unattach",
+      "first_branch": "Exact matching actual event reaches the named physical predicate/adapter; designated public fixture exports meaningful event identity and payoff before comparison.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "component-binding-distinct-invocation",
+      "classification": "public",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "crates/engine/src/game/casting_costs.rs::handle_sacrifice_for_cost",
+      "first_branch": "Natural WaitingFor::SacrificeForCost -> handle_sacrifice_for_cost selected valid sacrifice cost; a separate invocation begins after prior queue items and assigns component=u64(queue.len()) before appending. Same-valued cost/filter cannot merge invocations.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "component-serde-drop",
+      "classification": "public",
+      "file": "crates/engine/src/types/game_state.rs",
+      "production_entry": "crates/engine/src/types/game_state.rs::",
+      "first_branch": "Naturally paused pending_cast with nonempty deferred_sacrificed_permanents serializes each DeferredSacrificedPermanent.component; replay must preserve Some(component) rather than recreate missing None provenance.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "inline-migration-preflight",
+      "classification": "public",
+      "file": "crates/engine/src/game/engine.rs",
+      "production_entry": "crates/engine/src/game/engine.rs::apply_action_boundary_with_stack_limit",
+      "first_branch": "Public action boundary first authenticates actor, classifies action, then non-OutOfBandPreference and non-exempt inline PayCost/continuation action must validate pending components before dispatch. Only serialized provenance is removed in the hostile fixture.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "concession-preflight-exception",
+      "classification": "public",
+      "file": "crates/engine/src/game/engine.rs",
+      "production_entry": "crates/engine/src/game/engine.rs::apply_action_boundary_with_stack_limit",
+      "first_branch": "After public actor authorization, matches!(action, Concede{..}) bypasses only pending-component metadata validation. Actual concession remains subject to normal actor/seat gates and reaches elimination despite malformed saved payment provenance.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "independent-debug-preflight-exceptions",
+      "classification": "public",
+      "file": "crates/engine/src/game/engine.rs",
+      "production_entry": "crates/engine/src/game/engine.rs::apply_action_boundary_with_stack_limit",
+      "first_branch": "After actor authorization, Debug/GrantDebugPermission/RevokeDebugPermission match explicit metadata-preflight exclusions. Downstream debug permission and host authorization remain authoritative; permitted actions proceed, unauthorized twins remain rejected.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "normal-leaf-authority",
+      "classification": "public",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "crates/engine/src/game/zones.rs::move_to_zone",
+      "first_branch": "Actual normal leaf receives a live Battlefield subject and non-Battlefield destination; absent usable explicit binding and absent capturing ancestor creates singleton owner.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "library-leaf-authority",
+      "classification": "public",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "crates/engine/src/game/zones.rs::move_to_library_at_index",
+      "first_branch": "Actual move_to_library_at_index has the same standalone/member authority as normal leaf before native library placement.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "added-mid-leaf-flush",
+      "classification": "public",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "crates/engine/src/game/zones.rs::move_to_zone_inner",
+      "first_branch": "A bound later member must retain the selected group layer world until owner epilogue; no new layer flush inside move_to_zone_inner.",
+      "evidence_kinds": [
+        "original public runtime; fresh mutant/restored compilations"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+          "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "before-clause-gate",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::zone_change_clause_matches",
+      "first_branch": "TriggerMode ChangesZone/ChangesZoneAll or LeavesBattlefield selects zone matching; actual ZoneChanged; nonempty clauses take precedence over scalar origin_zones/origin. Matching origin/destination/valid_card plus actual Battlefield->Graveyard reaches OriginConstraint::Equals(Battlefield) and the before predicate.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "any-clause-after-to-before",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::zone_change_clause_matches",
+      "first_branch": "Actual ZoneChanged and matching ChangesZone clause reaches Battlefield->Graveyard with OriginConstraint::Any; surviving observer is not SelfRef destination-functioning source, so !self_arrival selects after.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "ambiguous-origin-before-misclassification",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::zone_change_clause_matches",
+      "first_branch": "ChangesZone ordinary adapter supplies Some(live active slice); nonempty complementary OneOf clause or scalar origin_zones passes matches_from and reaches OneOf/NotEquals arm after actual Battlefield->Graveyard. Co-dying Hush absent at collection permits exact payoff.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "ambiguous-origin-after-approximation",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::zone_change_clause_matches",
+      "first_branch": "Same OneOf/NotEquals dispatch, but real subject-first death retains Dies after history while later Hush departure makes ordinary live slice empty before collection; this specifically distinguishes current live from captured after.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "delayed-ambiguous-live-gate",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::match_changes_zone",
+      "first_branch": "Registered WhenNextEvent/WheneverEvent registry invokes match_changes_zone with None compatibility context; actual ZoneChanged then OneOf/NotEquals arm sees None and preserves ungated delayed matching. Surviving Hush is the discriminator.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "record-snapshot-serde-drop",
+      "classification": "private",
+      "file": "crates/engine/src/types/game_state.rs",
+      "production_entry": "GameEvent::ZoneChanged serde serialization/deserialization boundary (schema-only test)",
+      "first_branch": "snapshot None versus Some(empty) versus Some(before Dies)",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "owner-allocator-reset",
+      "classification": "private",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "producer/standalone zone boundary -> lexical helper; released tests invoke real zone moves and one natural public replacement pause",
+      "first_branch": "outermost owner epilogue after both stacks empty",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "ordinary-adapter",
+      "classification": "public",
+      "file": "crates/engine/src/game/triggers.rs",
+      "production_entry": "crates/engine/src/game/triggers.rs::collect_matching_triggers_inner",
+      "first_branch": "collect_matching_triggers_inner passes source/functioning/zone checks, then calls ordinary adapter; TriggerMode::ChangesZone routes to contextual matcher with Some(active). Actual matching ambiguous creature death beside surviving Hush is filtered before registration.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "batched-adapter",
+      "classification": "public",
+      "file": "crates/engine/src/game/triggers.rs",
+      "production_entry": "crates/engine/src/game/triggers.rs::matching_batched_trigger_events",
+      "first_branch": "A matching noncreature N event passes the outer ordinary gate and trig_def.batched=true enters matching_batched_trigger_events. Each candidate passes the ETB-only filter, then ChangesZone adapter supplies Some(active) to OneOf(Battlefield); surviving Hush excludes creature C. Exact native singleton N/countSome(1) becomes C+N/countSome(2) under only inner-adapter removal.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/audited-results.json",
+          "sha256": "e266178778d3d94b3200d846c9aa881e9efe8e6da331ed291a4999363037d596"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "ordinary-global-death-gate",
+      "classification": "public",
+      "file": "crates/engine/src/game/triggers.rs",
+      "production_entry": "crates/engine/src/game/triggers.rs::collect_pending_triggers",
+      "first_branch": "collect_pending_triggers outer event prefilter is ETB-only. Actual Battlefield->Graveyard must reach destination-functioning self ChangesZone Any clause rather than be globally discarded; source_id==record.object_id, SelfRef, and trigger_zones contains Graveyard.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "batched-global-death-gate",
+      "classification": "public",
+      "file": "crates/engine/src/game/triggers.rs",
+      "production_entry": "crates/engine/src/game/triggers.rs::matching_batched_trigger_events",
+      "first_branch": "Source is dying card functioning in Graveyard with batched=true, Any origin, SelfRef, exact event/source identity. Outer ordinary Any self-arrival gate passes; matching_batched_trigger_events inner ETB-only filter must retain the death event. Broad inner death gate removes it and yields zero versus one registration.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/audited-results.json",
+          "sha256": "e266178778d3d94b3200d846c9aa881e9efe8e6da331ed291a4999363037d596"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "self-arrival-exception",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "production_entry": "crates/engine/src/game/trigger_matchers.rs::zone_change_clause_matches",
+      "first_branch": "Actual ChangesZone Battlefield->Graveyard with Any origin passes shape/destination/filter checks; all three self-arrival predicates are true (same source ObjectId, SelfRef filter, trigger functions in destination). Any exempts this occurrence; Equals(Battlefield) sibling still uses before.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "before-live-subject-authority",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "crates/engine/src/game/trigger_suppression.rs::outcomes_for_live_subject",
+      "first_branch": "Public attachment-relative suppression and actual combat-dependent suppression positively match only the live pre-departure relation.",
+      "evidence_kinds": [
+        "public runtime; exact source-bound canonical reuse explicitly labeled per phase"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+          "sha256": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "scope-before-flush",
+      "classification": "private",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "producer/standalone zone boundary -> lexical helper; released tests invoke real zone moves and one natural public replacement pause",
+      "first_branch": "nonempty candidates and no capturing ancestor",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "v10 private lexical or defensive battle exact runtime discriminator"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/results.json",
+          "sha256": "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "scope-capturing-ancestor-policy",
+      "classification": "private",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "producer/standalone zone boundary -> lexical helper; released tests invoke real zone moves and one natural public replacement pause",
+      "first_branch": "nonempty candidates inside already capturing owner",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "leaf-top-barrier",
+      "classification": "private",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "producer/standalone zone boundary -> lexical helper; released tests invoke real zone moves and one natural public replacement pause",
+      "first_branch": "top member binding is None above matching ancestor binding",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "leaf-consumes-member",
+      "classification": "private",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "producer/standalone zone boundary -> lexical helper; released tests invoke real zone moves and one natural public replacement pause",
+      "first_branch": "valid top binding when entering owned departure leaf",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors",
+        "v10 private lexical or defensive battle exact runtime discriminator"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        },
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/results.json",
+          "sha256": "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "member-error-closure-pop",
+      "classification": "private",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "producer/standalone zone boundary -> lexical helper; released tests invoke real zone moves and one natural public replacement pause",
+      "first_branch": "member closure returns while its owner remains live",
+      "evidence_kinds": [
+        "original library/SBA comparison, including three historical survivors"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+          "sha256": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "before-snapshot-some-to-live-fallback",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "crates/engine/src/game/trigger_suppression.rs::death_suppressed_before",
+      "first_branch": "Actual before-timed clause on a real creature departure, followed by later source arrival/departure so live authority disagrees with captured history.",
+      "evidence_kinds": [
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/before-snapshot-some-to-live-fallback/outcome.json",
+          "sha256": "5ea5daff7f527d95036af307894f9697ad4b7af79bc81a811090cc96c91bdfed"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "after-snapshot-some-to-live-fallback",
+      "classification": "public",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "crates/engine/src/game/trigger_suppression.rs::death_suppressed_after",
+      "first_branch": "Actual after-timed clause on a real creature departure, followed by later source arrival/departure so live authority disagrees with captured history.",
+      "evidence_kinds": [
+        "expanded v10 public per-order/per-control comparison"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/after-snapshot-some-to-live-fallback/outcome.json",
+          "sha256": "8106a65a88ee1d03a48c03de80a463bfe40b25a48b5e47a5352627a821e90c48"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "R2-resolver-barrier",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "production_entry": "Public two-target ChangeZone replacement tail -> child explicit SelfRef Sacrifice of the same live incarnation; parent owns Y only.",
+      "first_branch": "Public two-target ChangeZone replacement tail -> child explicit SelfRef Sacrifice of the same live incarnation; parent owns Y only.",
+      "evidence_kinds": [
+        "five-seam original public/lower-level baseline/mutant/restored fresh compile comparisons"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+          "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "R3-original-entry-exit-lki",
+      "classification": "public",
+      "file": "crates/engine/src/game/filter.rs",
+      "production_entry": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "first_branch": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "evidence_kinds": [
+        "five-seam original public/lower-level baseline/mutant/restored fresh compile comparisons"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+          "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "R3-original-entry-incarnation",
+      "classification": "public",
+      "file": "crates/engine/src/game/filter.rs",
+      "production_entry": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "first_branch": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "evidence_kinds": [
+        "five-seam original public/lower-level baseline/mutant/restored fresh compile comparisons"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+          "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "R3-bounce-exit-controller",
+      "classification": "public",
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "production_entry": "Real control spell makes P0 controller of P1-owned creature, then public bounce followed by conditional draw.",
+      "first_branch": "Real control spell makes P0 controller of P1-owned creature, then public bounce followed by conditional draw.",
+      "evidence_kinds": [
+        "five-seam original public/lower-level baseline/mutant/restored fresh compile comparisons"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+          "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    },
+    {
+      "id": "R3-oversimplify-exit-controller",
+      "classification": "public",
+      "file": "crates/engine/src/game/filter.rs",
+      "production_entry": "Real theft spell followed by real Oracle Oversimplify; actual exile and per-player Fractal creation.",
+      "first_branch": "Real theft spell followed by real Oracle Oversimplify; actual exile and per-player Fractal creation.",
+      "evidence_kinds": [
+        "five-seam original public/lower-level baseline/mutant/restored fresh compile comparisons"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+          "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+        }
+      ],
+      "review": "Checked operation against full production diff, named test path/guards, first reached assertion or supplemental exact run, source/binary binding and retained control/limitation scope."
+    }
+  ],
+  "qualifications": [
+    "Historical earlier library survivors remain recorded; expanded tests are stronger evidence for the same seams, not additional mutations.",
+    "Fresh mutant compiles and direct preserved canonical baseline/restoration runs remain distinguished, with exact original source manifest/archive/build/CWD/env/loader associations.",
+    "First panic limits persist: snapshot failure does not certify later payoff assertions; pre-payoff SBA evidence exports actual events and life, but still does not execute later assertions.",
+    "The added-mid-leaf full mutant matrix aborted; its focused completion is separate, not a full-suite pass.",
+    "Native private-zone9tests60cases are source-unaffected public siblings, no fabricated wrapper kill.",
+    "No fresh final-fdc9 mutation experiment was performed by this reviewer;484current path checks include476immutable receipts/archives/logs and8mutable last-build targets only."
+  ]
+}

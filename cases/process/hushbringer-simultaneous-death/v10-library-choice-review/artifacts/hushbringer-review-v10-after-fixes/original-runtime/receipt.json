@@ -1,0 +1,102 @@
+{
+  "utc": "2026-09-05T21:39:08.374854+00:00",
+  "independent_runtime": true,
+  "build_receipt_sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff",
+  "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "frozen_harness_source_files_verified": 39,
+  "phase": {
+    "kind": "pinned",
+    "repository": "https://github.com/nishu-builder/phase.git",
+    "revision": "2dec6c88915db4697706234a7ba2fcedd97b1689"
+  },
+  "cwd": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "RUST_MIN_STACK": "16777216"
+  },
+  "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "loader": {
+    "log_sha256": "596c6ea75fdbfb878fa6197d4054ca5ec92207407be8ef72dda5d81821a2cc5d",
+    "libraries": [
+      {
+        "path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "realpath": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+      },
+      {
+        "path": "/lib/x86_64-linux-gnu/libm.so.6",
+        "realpath": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "sha256": "df621c68dbfed7e843434ef2faedb9f4d4b0543ad161e9a55eaf4d4ce2443176"
+      },
+      {
+        "path": "/lib/x86_64-linux-gnu/libc.so.6",
+        "realpath": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "e01b1ce7be2987f3b8560e26d0df2623f9dd5cec17be923ae28a785bc0d32d50"
+      },
+      {
+        "path": "/lib64/ld-linux-x86-64.so.2",
+        "realpath": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "sha256": "8d06f393f4a93bcf9b81145a259524d66a95522a646bf8d7e05b6ffdf2e63dcc"
+      }
+    ]
+  },
+  "results": [
+    {
+      "name": "hush-first",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/original-runtime/hush-first-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/original-runtime/hush-first-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "graveyard_guards": true,
+      "request_sha256": "6be759194e3a6769fa9032e2fc12afd917b12c33f3848340eeac8e8a0cf8c5df",
+      "execution_sha256": "b2806e7e79bec1a1844c53e311c6fe971de4b24cc354a5cf2827290387289b99",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "traveler-first",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/original-runtime/traveler-first-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/original-runtime/traveler-first-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "graveyard_guards": true,
+      "request_sha256": "6744d13ef860049b5beb1aae1c5d092dbc80b29adefa334d22cdb3c5201ea819",
+      "execution_sha256": "a86792771cb3a1cbc17867f113f2d39b03710318e3fab25330fd8dad25071c46",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "no-hush",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/original-runtime/no-hush-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/original-runtime/no-hush-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "graveyard_guards": true,
+      "request_sha256": "58896ee2024c24562ed7821eb44e5eacd87bbb195b98bb90f6e3a807c2ad6823",
+      "execution_sha256": "2e62d35b9afd04212dca2f03d1bdbfdb64d53688df04cfa1ed85dab293cf4ef4",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Original observations expose zones/payoff, not stack/priority. Exact candidate companions verify those additional guards."
+}

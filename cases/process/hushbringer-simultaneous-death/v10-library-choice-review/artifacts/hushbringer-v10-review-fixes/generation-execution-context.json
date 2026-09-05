@@ -1,0 +1,16 @@
+{
+  "launcher": "generation launched through subprocess.Popen with this explicit environment overlay in the EC2 executor tool invocation",
+  "environment_overlay": {
+    "PATH": "/home/ubuntu/.cargo/bin: plus inherited SSH PATH",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "source_script": {
+    "path": "/home/ubuntu/repos/phase-verifiable-loop/scripts/gen-card-data.sh",
+    "sha256": "73bcbc88f969ffcc3da97282d505dbd86f82dfd98f90d56739f75a5a917987ff"
+  },
+  "receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/card-data-final/receipt.json",
+  "restore": "Path.write_bytes of captured originals, not copy2; final-driver revalidated all frozen source hashes before canonical build"
+}

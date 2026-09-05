@@ -1,9 +1,10 @@
 # Verifiable improvement loop: implementation checkpoint
 
 Checkpoint: 2026-09-05. The reusable harness is implemented. The Hushbringer
-repair has completed its first full independent implementation review, which
-returned two findings now assigned to a fresh executor. The harness and earlier
-evidence were pushed to main at 53dd0b6. There is no accepted repair receipt yet.
+repair has completed two full independent implementation reviews. New native
+library-choice tests resolve the coverage finding. The remaining citation is
+corrected, and a fresh full independent review is underway. The harness, narrative and earlier evidence
+were pushed to main at 06cdb7d. There is no accepted repair receipt yet.
 
 The loop now carries an explicit case from a justified expectation through
 repeated execution, reduction, comparison and acceptance. Rust types generate
@@ -38,11 +39,11 @@ directories prevent stale artifacts from crossing source checkouts. Removing
 eight required state-based-action handoffs did not fail the old unit suite;
 new public fixtures detected the missing gameplay effect. Independently named
 variants now prevent an early panic from hiding later controls. The reviewed
-fixture snapshot passes 187 public checks and five private boundary checks.
+fixture snapshot passes 196 public checks and five private boundary checks.
 All 67 targeted mutations have recorded discriminators: 56 public runtime,
 ten private/helper/schema, and one defensive Battle contract. Expanded checks
 run all 64 state-based-action variants independently so an early panic cannot
-hide later controls. Broad gates passed 16,586 library and 3,163 integration
+hide later controls. Broad gates passed 16,586 library and 3,172 integration
 tests. The original base still has an unrelated workspace Clippy failure, and
 the explicit desired-diagnostic run retains eighteen failures.
 
@@ -50,8 +51,11 @@ The [independent implementation review](../cases/process/hushbringer-simultaneou
 reproduced the original one-Spirit result in both simultaneous-death orders
 and the candidate zero-Spirit result, while the no-Hushbringer control remained
 one. It found missing natural library-choice coverage and inaccurate moved
-rules citations. Both failed gates and the complete handoff are retained; a
-passing central example did not erase the wider review obligations.
+rules citations. The subsequent [fresh full review](../cases/process/hushbringer-simultaneous-death/v10-library-choice-review/README.md)
+passes the maintainer gate after nine new public tests covering sixty native
+choice cases. It retains one incorrect resolution-time-choice citation as a
+failed CR gate. All attempts, corrected metadata and complete handoffs remain
+attributed; the central example alone did not satisfy the wider obligations.
 
 The [case study](case-study-hushbringer.md) develops these findings into a blog
 narrative. It distinguishes authored rules cases from historical real-game
@@ -64,9 +68,13 @@ with ssh nishadsingh-box-4. Migration verified 3,902 files before local cleanup,
 and cleanup freed 12,964,511,744 bytes on the Mac. The
 [workspace guide](ec2-workspace.md) records the retained locations.
 
-Remaining steps are to address the two review findings, obtain a fresh clean
-implementation review, commit the repair, compare the clean committed candidate
+Remaining steps are to obtain a fresh clean implementation review, commit the repair, compare the clean committed candidate
 against the fixed baseline, and generate the actual acceptance bundle. Coworld
 main already includes the harness and preserves its newer release and Phase
 pin. Integration of newer Phase commits and publication of the reviewed repair
 will follow the fixed-input experiment.
+
+The published harness also passes the complete Rust workspace private-corpus
+suite and both browser tests. Its immutable 46-card corpus was verified and
+materialized on EC2. The eventual Phase pin update also requires a newly built,
+matching corpus archive because the server verifies their revision agreement.

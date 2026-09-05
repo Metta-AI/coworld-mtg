@@ -1,0 +1,593 @@
+--- prior-v10/crates/engine/src/game/effects/change_zone.rs
++++ review-fixes/crates/engine/src/game/effects/change_zone.rs
+@@ -1557,7 +1557,7 @@
+         |state, events, owner| {
+             for (i, obj_id) in matching.iter().enumerate() {
+                 let obj_id = *obj_id;
+-                // CR 400.3: Each object's actual current zone is the source zone for the
++                // Each object's actual current zone is the source zone for the
+                 // move. Single-zone callers pass `origin_zones = [zone]`; multi-zone
+                 // callers (e.g. "search graveyard, hand, and library") let each object's
+                 // own zone drive the move so per-zone replacements/triggers fire correctly.
+--- prior-v10/crates/engine/src/game/engine_resolution_choices.rs
++++ review-fixes/crates/engine/src/game/engine_resolution_choices.rs
+@@ -3527,10 +3527,10 @@
+                 }
+                 // CR 115.1: Resolution-time selection for PutAtLibraryPosition
+                 // from a private zone (e.g. Brainstorm's "put two cards from
+-                // your hand on top of your library"). Cards are placed in
+-                // selection order (first chosen = top). Expressive Iteration's
+-                // tracked-set bottom step chains an exile `ParentTarget` tail —
+-                // detect that continuation shape to honor bottom placement.
++                // your hand on top of your library"). Top preserves selection
++                // order, Bottom appends in selection order, and NthFromTop inserts
++                // each selected card at the same index. These private-zone moves
++                // have no owned battlefield departure or death snapshot.
+                 EffectKind::PutAtLibraryPosition => super::zones::with_departure_suppression(
+                     state,
+                     events,
+--- prior-v10/crates/engine/src/game/sba.rs
++++ review-fixes/crates/engine/src/game/sba.rs
+@@ -186,7 +186,7 @@
+                     );
+                 }
+ 
+-                // CR 614.3 / CR 701.19b: If a regeneration replacement choice is pending, pause SBA evaluation.
++                // CR 614.8 + CR 616.1: A pending regeneration replacement choice pauses SBA evaluation.
+                 if pending_replacement_pauses_sba(state) {
+                     return false;
+                 }
+@@ -260,9 +260,10 @@
+                         return false;
+                     }
+ 
+-                    // CR 704.5v + CR 310.7: If a battle has defense 0 and isn't the source of an
+-                    // ability that has triggered but not yet left the stack, it's put into its
+-                    // owner's graveyard.
++                    // CR 704.5v + CR 310.7: A zero-defense Siege goes to the graveyard
++                    // unless one of its abilities has triggered but not yet left the stack.
++                    // CR 704.5w + CR 310.8: Non-Sieges have no such exception; the
++                    // helper retains an inherited broader stack guard, documented below.
+                     check_zero_defense(
+                         state,
+                         events,
+@@ -277,7 +278,7 @@
+                     // CR 704.5p + CR 310.10: If a battle is somehow attached to a permanent, unattach it.
+                     check_battle_unattached(state, &mut any_performed, &battlefield_snapshot);
+ 
+-                    // CR 704.5x + CR 704.5y + CR 310.9: Battle with no (or illegal) protector —
++                    // CR 704.5x + CR 704.5y + CR 310.11: Battle with no (or illegal) protector —
+                     // controller chooses an appropriate protector; graveyard if none can be chosen.
+                     check_battle_protector(
+                         state,
+@@ -825,7 +826,7 @@
+         })
+         .collect();
+ 
+-    // CR 701.19b: Route each destruction through the replacement pipeline
++    // CR 614.8: Route each destruction through the replacement pipeline
+     // so regeneration shields can intercept.
+     for &id in &to_destroy {
+         if live_battlefield_object(state, &id).is_none() {
+@@ -934,7 +935,7 @@
+                     *any_performed = true;
+                 }
+                 ReplacementResult::Prevented => {
+-                    // CR 701.19b: Regeneration prevented destruction — still counts as SBA performed.
++                    // CR 614.8: Regeneration replaced destruction — still counts as SBA performed.
+                     *any_performed = true;
+                 }
+                 ReplacementResult::NeedsChoice(player) => {
+@@ -1337,7 +1338,7 @@
+             if live_battlefield_object(state, &id).is_none() {
+                 continue;
+             }
+-            // CR 704.5y + CR 614.6: the older Role is put into its owner's
++            // CR 704.5z + CR 614.6: the older Role is put into its owner's
+             // graveyard through the replacement pipeline. Bail on a CR 616.1
+             // pause (the fixpoint re-derives the rest).
+             if zones::with_departure_member(state, events, owner, id, |state, events| {
+@@ -1545,9 +1546,12 @@
+     }
+ }
+ 
+-/// CR 704.5v + CR 310.7: A battle with defense 0 is put into its owner's graveyard,
+-/// unless it's the source of an ability that has triggered but not yet left the
+-/// stack (e.g., the Siege's victory trigger).
++/// CR 704.5v + CR 310.7: A zero-defense Siege is put into its owner's graveyard
++/// unless one of its abilities has triggered but not yet left the stack.
++/// CR 704.5w + CR 310.8: A zero-defense non-Siege has no pending-ability exception.
++/// The inherited implementation below nevertheless applies its stack guard to
++/// every Battle. This repair preserves that broader guard as a compatibility
++/// limitation; it does not implement the distinct non-Siege timing rule.
+ fn check_zero_defense(
+     state: &mut GameState,
+     events: &mut Vec<GameEvent>,
+@@ -1571,8 +1575,9 @@
+             if obj.defense.unwrap_or(0) != 0 {
+                 return false;
+             }
+-            // CR 310.7: Don't SBA-destroy while one of this battle's triggered
+-            // abilities is still on the stack (mirrors CR 714.4 Saga deferral).
++            // CR 310.7 supplies this exception for Sieges only. The inherited
++            // guard also defers non-Sieges with a triggered ability on the stack,
++            // despite CR 310.8; preserving that broader behavior is a known limit.
+             let ability_on_stack = state.stack.iter().any(|entry| {
+                 matches!(
+                     &entry.kind,
+@@ -1587,7 +1592,7 @@
+         if live_battlefield_object(state, &id).is_none() {
+             continue;
+         }
+-        // CR 704.5v + CR 614.6: zero-defense battle death must consult redirects.
++        // CR 704.5v + CR 704.5w + CR 614.6: zero-defense moves consult redirects.
+         if zones::with_departure_member(state, events, owner, id, |state, events| {
+             move_to_graveyard_via_pipeline(state, id, events)
+         }) {
+@@ -1636,7 +1641,7 @@
+     }
+ }
+ 
+-/// CR 704.5w + CR 704.5x + CR 310.10 + CR 310.11a: If a battle that isn't being
++/// CR 704.5x + CR 704.5y + CR 310.11: If a battle that isn't being
+ /// attacked has no protector, an illegal protector, or (for Sieges) a protector
+ /// that equals its controller, its controller chooses a legal protector. If no
+ /// legal player exists, the battle is put into its owner's graveyard.
+@@ -1686,9 +1691,9 @@
+         let is_siege = battle.card_types.subtypes.iter().any(|s| s == "Siege");
+         let protector = battle.protector();
+ 
+-        // Legal protectors for a Siege are opponents of the controller (CR 310.11a).
+-        // For non-Siege battles with no battle type, CR 310.8a says the controller
+-        // becomes the protector; we treat the controller as legal in that case.
++        // CR 310.12a: Only opponents of a Siege's controller can protect it.
++        // CR 704.5x: With no battle type, a missing protector becomes the controller.
++        // The inherited non-Siege branch accepts any already-present protector.
+         let protector_legal = match protector {
+             Some(p) if is_siege => crate::game::players::opponents(state, controller).contains(&p),
+             Some(_) => true,
+@@ -1699,7 +1704,7 @@
+             continue;
+         }
+         if being_attacked.contains(&battle_id) {
+-            // CR 310.10: Only applies to battles that aren't being attacked.
++            // CR 310.11: Only applies to battles that aren't being attacked.
+             continue;
+         }
+ 
+@@ -1710,7 +1715,7 @@
+                 .filter(|p| !state.eliminated_players.contains(p))
+                 .collect()
+         } else {
+-            // CR 310.8a: With no battle types, controller is the protector.
++            // CR 704.5x: With no battle types, choose the controller as protector.
+             vec![controller]
+         };
+ 
+@@ -1719,7 +1724,7 @@
+                 if live_battlefield_object(state, &battle_id).is_none() {
+                     continue;
+                 }
+-                // CR 310.10 / CR 704.5w + CR 614.6: No legal protector exists —
++                // CR 310.11 + CR 704.5x + CR 704.5y + CR 614.6: No legal protector exists —
+                 // the battle is put into the graveyard, a "leaves the
+                 // battlefield" event that must consult Moved redirects. Bail on a
+                 // CR 616.1 pause (the SBA fixpoint re-runs and finds the rest).
+@@ -1750,7 +1755,7 @@
+                 if live_battlefield_object(state, &battle_id).is_none() {
+                     continue;
+                 }
+-                // CR 310.10 + CR 704.5w + CR 704.5x: multiple legal protectors —
++                // CR 310.11 + CR 704.5x + CR 704.5y: multiple legal protectors —
+                 // the controller must choose. Pause the SBA fixpoint and yield
+                 // a WaitingFor (mirrors `check_legend_rule`). The SBA re-runs
+                 // on the next apply and finds any remaining battles.
+--- prior-v10/crates/engine/tests/integration/trigger_suppression_event_timing.rs
++++ review-fixes/crates/engine/tests/integration/trigger_suppression_event_timing.rs
+@@ -7327,3 +7327,406 @@
+ fn public_battle_unattacked_phased_in_invalid_protector_selects_living_opponent() {
+     battle_protector_hostile_sibling_case(false, false);
+ }
++
++// Typed building-block compatibility controls. Every prompt is constructed by
++// resolving a publicly cast spell; the tracked pool comes from an actual Dig
++// choice. No pending choice, eligible set, or departure scope is injected.
++#[derive(Clone, Copy, Debug)]
++enum NativeLibraryChoiceOrigin {
++    Hand,
++    Library,
++    DigTrackedLibrary,
++}
++
++fn native_library_choice_case(
++    origin: NativeLibraryChoiceOrigin,
++    position: engine::types::ability::LibraryPosition,
++    with_hush: bool,
++    reverse: bool,
++) {
++    use engine::types::ability::{DigSource, EffectKind, FilterProp, LibraryPosition};
++    use engine::types::identifiers::TrackedSetId;
++    let mut s = scenario();
++    let suppressor = with_hush.then(|| hush(&mut s));
++    let battlefield_spare = s.add_vanilla(P0, 3, 3);
++    let tail = s.add_card_to_library_top(P0, "Test library tail outside looked-at pool");
++    let from_hand = matches!(origin, NativeLibraryChoiceOrigin::Hand);
++    let tracked = matches!(origin, NativeLibraryChoiceOrigin::DigTrackedLibrary);
++    let (first, spare, second) = if from_hand {
++        (
++            s.add_creature_to_hand(P0, "Test native first", 2, 2).id(),
++            s.add_creature_to_hand(P0, "Test native unselected", 2, 2)
++                .id(),
++            s.add_creature_to_hand(P0, "Test native second", 2, 2).id(),
++        )
++    } else {
++        let second = s.add_card_to_library_top(P0, "Test native second");
++        let spare = s.add_card_to_library_top(P0, "Test native unselected");
++        let first = s.add_card_to_library_top(P0, "Test native first");
++        (first, spare, second)
++    };
++    let front_second = s.add_card_to_library_top(P0, "Test second library guard");
++    let front_first = s.add_card_to_library_top(P0, "Test first library guard");
++    let kept = tracked.then(|| s.add_card_to_library_top(P0, "Test Dig kept card"));
++    let source_zone = if from_hand { Zone::Hand } else { Zone::Library };
++    let mut trigger = death_trigger(
++        vec![OriginConstraint::Equals(source_zone)],
++        specific(second),
++    );
++    trigger.zone_change_clauses[0].destination = Some(Zone::Library);
++    let observer = observer(&mut s, trigger, false);
++    let placement = chain(
++        ability(Effect::PutAtLibraryPosition {
++            target: if tracked {
++                TargetFilter::TrackedSet {
++                    id: TrackedSetId(0),
++                }
++            } else {
++                TargetFilter::Typed(
++                    TypedFilter::card().properties(vec![FilterProp::InZone { zone: source_zone }]),
++                )
++            },
++            count: fixed(2),
++            position: position.clone(),
++        }),
++        gain(2),
++    );
++    let definition = if tracked {
++        chain(
++            ability(Effect::Dig {
++                player: TargetFilter::Controller,
++                count: fixed(6),
++                destination: Some(Zone::Hand),
++                keep_count: Some(1),
++                keep_count_expr: None,
++                up_to: false,
++                filter: TargetFilter::Any,
++                rest_destination: Some(Zone::Library),
++                reveal: false,
++                enter_tapped: false,
++                source: DigSource::Library,
++            }),
++            placement,
++        )
++    } else {
++        placement
++    };
++    let spell = typed_spell(&mut s, definition);
++    let mut r = s.build();
++    assert_fixture(r.state(), &[spell, observer], suppressor);
++    let initial_incarnations = [first, spare, second].map(|id| r.state().objects[&id].incarnation);
++    drop(r.cast(spell).resolve());
++    if let Some(kept) = kept {
++        assert!(matches!(
++            r.state().waiting_for,
++            WaitingFor::DigChoice { .. }
++        ));
++        r.act(GameAction::SelectCards { cards: vec![kept] })
++            .unwrap();
++        assert_eq!(r.state().objects[&kept].zone, Zone::Hand);
++        let pool = &r.state().tracked_object_sets[&r.state().chain_tracked_set_id.unwrap()];
++        assert_eq!(pool, &vec![front_first, front_second, first, spare, second]);
++        assert!(!pool.contains(&tail));
++    }
++    let WaitingFor::EffectZoneChoice {
++        player,
++        cards,
++        count,
++        up_to,
++        source_id,
++        effect_kind,
++        zone,
++        library_position,
++        ..
++    } = &r.state().waiting_for
++    else {
++        panic!(
++            "natural native placement prompt missing: {:?}",
++            r.state().waiting_for
++        );
++    };
++    assert_eq!((*player, *source_id, *count, *up_to), (P0, spell, 2, false));
++    assert_eq!(*effect_kind, EffectKind::PutAtLibraryPosition);
++    assert_eq!(*zone, source_zone);
++    assert_eq!(library_position.as_ref(), Some(&position));
++    let expected_pool = if from_hand {
++        vec![first, spare, second]
++    } else if tracked {
++        vec![front_first, front_second, first, spare, second]
++    } else {
++        vec![front_first, front_second, first, spare, second, tail]
++    };
++    assert_eq!(cards, &expected_pool);
++    assert!(r.state().pending_continuation.is_some());
++    assert_eq!(r.life(P0), 20, "the trailing payoff remains paused");
++    let expected_before = if from_hand {
++        vec![front_first, front_second, tail]
++    } else {
++        vec![front_first, front_second, first, spare, second, tail]
++    };
++    assert_eq!(
++        r.state().players[0]
++            .library
++            .iter()
++            .copied()
++            .collect::<Vec<_>>(),
++        expected_before
++    );
++    let mut invalid = vec![
++        vec![],
++        vec![first],
++        vec![first, spare, second],
++        vec![first, battlefield_spare],
++        vec![first, ObjectId(u64::MAX)],
++    ];
++    if tracked {
++        invalid.push(vec![first, tail]);
++        invalid.push(vec![first, kept.unwrap()]);
++    }
++    for cards in invalid {
++        let before = serde_json::to_value(r.state()).unwrap();
++        assert!(r.act(GameAction::SelectCards { cards }).is_err());
++        assert_eq!(
++            serde_json::to_value(r.state()).unwrap(),
++            before,
++            "rejected selection preserves the complete state and continuation"
++        );
++    }
++    let chosen = if reverse {
++        vec![second, first]
++    } else {
++        vec![first, second]
++    };
++    let mut events = r
++        .act(GameAction::SelectCards {
++            cards: chosen.clone(),
++        })
++        .unwrap()
++        .events;
++    events.extend(settle(&mut r));
++    let mut unaffected = vec![front_first, front_second];
++    if !from_hand {
++        unaffected.push(spare);
++    }
++    unaffected.push(tail);
++    // Explicit vectors preserve the handler's existing placement convention.
++    // In particular, repeated insertion at an in-range Nth index reverses this
++    // selected pair, while an index beyond the end appends the pair in order.
++    let expected_library = match &position {
++        LibraryPosition::Top => [chosen.clone(), unaffected.clone()].concat(),
++        LibraryPosition::Bottom | LibraryPosition::NthFromTop { n: 99 } => {
++            [unaffected.clone(), chosen.clone()].concat()
++        }
++        LibraryPosition::NthFromTop { n: 1 } => {
++            [vec![chosen[1], chosen[0]], unaffected.clone()].concat()
++        }
++        LibraryPosition::NthFromTop { n: 3 } => [
++            vec![front_first, front_second, chosen[1], chosen[0]],
++            unaffected[2..].to_vec(),
++        ]
++        .concat(),
++        other => panic!("unexpected test position {other:?}"),
++    };
++    assert_eq!(
++        r.state().players[0]
++            .library
++            .iter()
++            .copied()
++            .collect::<Vec<_>>(),
++        expected_library
++    );
++    let mut selected_events = vec![];
++    for (index, id) in [first, spare, second].into_iter().enumerate() {
++        let records: Vec<_> = events
++            .iter()
++            .filter_map(|event| match event {
++                GameEvent::ZoneChanged {
++                    object_id,
++                    from: Some(from),
++                    to: Zone::Library,
++                    record,
++                    ..
++                } if *object_id == id && *from == source_zone => Some(record.as_ref()),
++                _ => None,
++            })
++            .collect();
++        assert_eq!(records.len(), usize::from(id != spare));
++        assert_eq!(
++            r.state().objects[&id].zone,
++            if id == spare {
++                source_zone
++            } else {
++                Zone::Library
++            }
++        );
++        assert_eq!(
++            r.state().objects[&id].incarnation,
++            initial_incarnations[index] + u64::from(from_hand && id != spare)
++        );
++        if let Some(record) = records.first() {
++            assert!(record.co_departed.is_empty());
++            assert!(serde_json::to_value(record).unwrap()["trigger_suppression"].is_null());
++            selected_events.push(*record);
++        }
++    }
++    assert_ne!(
++        selected_events[0].turn_zone_change_index,
++        selected_events[1].turn_zone_change_index
++    );
++    for id in [
++        spare,
++        front_first,
++        front_second,
++        tail,
++        battlefield_spare,
++        observer,
++    ] {
++        assert!(!events.iter().any(|event| matches!(event,
++            GameEvent::ZoneChanged { object_id, .. } if *object_id == id)));
++    }
++    let emitted_order: Vec<_> = events
++        .iter()
++        .filter_map(|event| match event {
++            GameEvent::ZoneChanged { object_id, .. } if chosen.contains(object_id) => {
++                Some(*object_id)
++            }
++            _ => None,
++        })
++        .collect();
++    assert_eq!(
++        emitted_order,
++        if matches!(position, LibraryPosition::Top) {
++            vec![chosen[1], chosen[0]]
++        } else {
++            chosen.clone()
++        }
++    );
++    assert!(!events.iter().any(|event| matches!(
++        event,
++        GameEvent::ZoneChanged {
++            from: Some(Zone::Battlefield),
++            ..
++        } | GameEvent::PermanentSacrificed { .. }
++    )));
++    assert_eq!(r.state().objects[&spell].zone, Zone::Graveyard);
++    assert_eq!(r.state().objects[&observer].zone, Zone::Battlefield);
++    assert_eq!(
++        r.state().objects[&battlefield_spare].zone,
++        Zone::Battlefield
++    );
++    if let Some(h) = suppressor {
++        assert_eq!(r.state().objects[&h].zone, Zone::Battlefield);
++    }
++    // This also guards the existing Library-to-Library notification payoff;
++    // it is compatibility coverage, not a claim that repositioning changes zones.
++    assert_eq!(
++        r.life(P0),
++        23,
++        "one selected-card observer payoff and the +2 continuation"
++    );
++    assert_eq!(spirits(r.state()), 0);
++    assert!(r.state().pending_continuation.is_none());
++    assert!(r.state().stack.is_empty());
++    assert!(matches!(r.state().waiting_for, WaitingFor::Priority { .. }));
++    println!(
++        "NATIVE_LIBRARY_CHOICE_EVIDENCE {}",
++        serde_json::json!({
++            "origin": format!("{origin:?}"), "position": position, "hush": with_hush,
++            "reverse": reverse, "chosen": chosen, "eligible": expected_pool,
++            "before": expected_before, "after": expected_library,
++            "selected_records": selected_events, "life": r.life(P0)
++        })
++    );
++}
++
++fn native_library_choice_controls(
++    origin: NativeLibraryChoiceOrigin,
++    positions: &[engine::types::ability::LibraryPosition],
++) {
++    for position in positions {
++        for with_hush in [false, true] {
++            for reverse in [false, true] {
++                native_library_choice_case(origin, position.clone(), with_hush, reverse);
++            }
++        }
++    }
++}
++
++#[test]
++fn native_library_choice_hand_top_public_controls() {
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::Hand,
++        &[engine::types::ability::LibraryPosition::Top],
++    );
++}
++#[test]
++fn native_library_choice_hand_bottom_public_controls() {
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::Hand,
++        &[engine::types::ability::LibraryPosition::Bottom],
++    );
++}
++#[test]
++fn native_library_choice_hand_nth_public_controls() {
++    use engine::types::ability::LibraryPosition::NthFromTop;
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::Hand,
++        &[
++            NthFromTop { n: 1 },
++            NthFromTop { n: 3 },
++            NthFromTop { n: 99 },
++        ],
++    );
++}
++#[test]
++fn native_library_choice_library_top_public_controls() {
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::Library,
++        &[engine::types::ability::LibraryPosition::Top],
++    );
++}
++#[test]
++fn native_library_choice_library_bottom_public_controls() {
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::Library,
++        &[engine::types::ability::LibraryPosition::Bottom],
++    );
++}
++#[test]
++fn native_library_choice_library_nth_public_controls() {
++    use engine::types::ability::LibraryPosition::NthFromTop;
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::Library,
++        &[
++            NthFromTop { n: 1 },
++            NthFromTop { n: 3 },
++            NthFromTop { n: 99 },
++        ],
++    );
++}
++#[test]
++fn native_library_choice_dig_tracked_top_public_controls() {
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::DigTrackedLibrary,
++        &[engine::types::ability::LibraryPosition::Top],
++    );
++}
++#[test]
++fn native_library_choice_dig_tracked_bottom_public_controls() {
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::DigTrackedLibrary,
++        &[engine::types::ability::LibraryPosition::Bottom],
++    );
++}
++#[test]
++fn native_library_choice_dig_tracked_nth_public_controls() {
++    use engine::types::ability::LibraryPosition::NthFromTop;
++    native_library_choice_controls(
++        NativeLibraryChoiceOrigin::DigTrackedLibrary,
++        &[
++            NthFromTop { n: 1 },
++            NthFromTop { n: 3 },
++            NthFromTop { n: 99 },
++        ],
++    );
++}

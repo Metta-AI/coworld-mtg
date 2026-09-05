@@ -1,0 +1,67 @@
+{
+  "utc": "2026-09-05T22:57:25.468695+00:00",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "authoritative_maps": {
+    "constructor_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+      "sha256": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c"
+    },
+    "callsite_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+      "sha256": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9"
+    },
+    "native_library_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+      "sha256": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327"
+    },
+    "common_boundary_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+      "sha256": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee"
+    },
+    "maintainer_matrix": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-path-maintainer-map.json",
+      "sha256": "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6"
+    },
+    "cr_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+    },
+    "source_lineage": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+      "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+    },
+    "verification": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+      "sha256": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+    },
+    "canonical": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+      "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+    }
+  },
+  "call_sites": 51,
+  "historical_mutations": 67,
+  "native_arms": 3,
+  "native_parameter_cases_historical": 60,
+  "common_boundary_rows": 11,
+  "constructors": 82,
+  "production_constructors": 3,
+  "test_constructors": 79,
+  "cr_annotations": 185,
+  "unchanged_cr_annotation_objects": 184,
+  "corrected_cr_annotations": 1,
+  "all185_cr_source_contexts_verified": true,
+  "all51_callsite_lines_verified": true,
+  "all9_native_test_names_verified": true,
+  "all67_historical_matrix_rows_preserved_except_current_lineage_field": true,
+  "all_current_structured_references_checked": 33,
+  "current_findings": [],
+  "prior109_artifacts_rehashed_unchanged": true,
+  "prior_manifest_and_handoff_rehashed_unchanged": true,
+  "prior_complete_review_rehashed_unchanged": true,
+  "source_bytes_verified_after_fmt": 2051,
+  "new_compilation": false,
+  "new_runtime_tests": false,
+  "fresh_independent_review": "pending",
+  "acceptance": false
+}

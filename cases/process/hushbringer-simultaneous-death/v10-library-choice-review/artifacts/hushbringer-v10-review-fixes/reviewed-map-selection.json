@@ -1,0 +1,30 @@
+{
+  "utc": "2026-09-05T21:42:04.762481+00:00",
+  "authoritative_maps": {
+    "constructor_audit": "manual-constructor-boundary-audit-final.json",
+    "callsite_map": "production-entry-callsite-map-reviewed.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map-reviewed.json",
+    "maintainer_matrix": "production-path-maintainer-map-v10-reviewed.json",
+    "cr_audit": "cr-reviewed-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "canonical-integration-receipt.json"
+  },
+  "outstanding_findings": [
+    {
+      "id": "remaining-native-choice-cr-citation",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "cited_rule": "115.1",
+      "status": "outstanding; no source edit in this frozen evidence package",
+      "problem": "CR 115.1 describes targets announced when placing a spell/ability on the stack; this comment describes non-targeted resolution-time choices. CR 608.2d is the relevant choice-timing rule, or the unrelated label can be removed.",
+      "fresh_review_source": "Root relayed the fresh independent reviewer finding during final verification; executor re-read both exact rule texts and agrees.",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "next_action": "Root waits for complete independent review and dispatches a fresh fix executor. Preserve this source, executable and measured evidence."
+    }
+  ],
+  "prior_interim_and_final_versions_preserved": true,
+  "source_changed": false,
+  "review_instruction": "This reviewed selection is authoritative for the final sealed executor handoff. It supersedes prior clean-CR or no-unresolved-items metadata; native-test and physical-mutation evidence is unchanged."
+}
