@@ -1,0 +1,41 @@
+{
+  "stage": "published-main private corpus and browser validation; not repaired-engine acceptance",
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "artifacts": [
+    {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-main-private-check/run.py",
+      "original_sha256": "45dcb3487c909607ab9d857a7f7a6e170895989e7d5007ba89de5b37849f66b6",
+      "artifact": "run.py",
+      "artifact_sha256": "45dcb3487c909607ab9d857a7f7a6e170895989e7d5007ba89de5b37849f66b6",
+      "encoding": "original"
+    },
+    {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-main-private-check/receipt.json",
+      "original_sha256": "336e2fd7c8309a85a0f725179ef8bf6d9e7306f04d4a4cbea0c1a75e234d1169",
+      "artifact": "receipt.json",
+      "artifact_sha256": "336e2fd7c8309a85a0f725179ef8bf6d9e7306f04d4a4cbea0c1a75e234d1169",
+      "encoding": "original"
+    },
+    {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-main-private-check/0.log",
+      "original_sha256": "5dd33fb7d2767bb9fd2f5c63d20eb379557252b90030f50fa4943453b0034174",
+      "artifact": "0.log.gz",
+      "artifact_sha256": "be7be2027ef12b2fc11a30910b22502662aeb19451872719aedda94717f2f534",
+      "encoding": "gzip"
+    },
+    {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-main-private-check/1.log",
+      "original_sha256": "45eb5cc6e0ff3340b04a35fca2a5ecafe7265366fb6f9fc565e957a5b26b196e",
+      "artifact": "1.log.gz",
+      "artifact_sha256": "2267db540154b5e2fca53b60149a20c87b0bf78879fa0c09d377481c563c7f93",
+      "encoding": "gzip"
+    },
+    {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-publication-corpus/original-main-import-receipt.json",
+      "original_sha256": "f4f407a7b7adfab1d7adbedcde0acd17099ece16104efe70b75c1db8c406d9cb",
+      "artifact": "original-main-import-receipt.json",
+      "artifact_sha256": "f4f407a7b7adfab1d7adbedcde0acd17099ece16104efe70b75c1db8c406d9cb",
+      "encoding": "original"
+    }
+  ]
+}

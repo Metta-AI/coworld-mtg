@@ -104,9 +104,22 @@ for distinctions that its tests can observe.
 
 That first fixture still had a limit: several variants ran inside one test,
 so the first mutant failure prevented later variants from executing. The
-next verification plan requires independent invocations for those variants.
-The retained record distinguishes the failures actually observed from the
-controls still to be tested.
+[expanded experiment](../cases/process/hushbringer-simultaneous-death/v10-expanded-handoffs/README.md)
+ran all 64 state-based-action variants independently, plus six snapshot
+fallback and control cases. All seventy baseline and restored invocations
+passed. The mutants produced 38 observed assertion failures and 32 passing
+controls. The record distinguishes lost gameplay payoffs from missing event
+snapshots; it does not infer later assertions from an earlier panic.
+
+Independent review also checked whether the evidence reached each changed
+production branch. Existing top-of-library tests did not establish coverage
+for the natural bottom-of-library and nth-position choices, even though a
+direct resolver test covered an nth-position operation. The
+[review returned that gap](../cases/process/hushbringer-simultaneous-death/v10-implementation-review/README.md)
+along with inaccurate moved rules citations. The central Hushbringer example
+passed, but the implementation had not yet met its full acceptance obligation.
+This is another way the loop improves its evidence: test the route that real
+inputs take, and retain the review that exposed the missing distinction.
 
 There is an unusual external corroboration. Magic Online's [February 4, 2025
 patch notes](https://www.mtgo.com/news/mtgo-blog-02042025) listed a fix for the

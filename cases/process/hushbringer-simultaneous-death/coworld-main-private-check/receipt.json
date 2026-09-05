@@ -1,0 +1,45 @@
+{
+  "started": "2026-09-05T21:46:41.790562+00:00",
+  "checkout": "/home/ubuntu/repos/coworld-mtg-publish",
+  "head": "2895ad02d63e674db1187e604989ff6f24b8c242",
+  "phase_revision": "b5f468588240df079cad95b94467038ffa6d0282",
+  "corpus_manifest_sha256": "81dfdcc9eebd71a452cee6a9619fda269c88c6b2e9071d08878aacaac1cc21f4",
+  "build_environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/coworld-mtg-publish/target"
+  },
+  "commands": [
+    {
+      "command": [
+        "scripts/cargo.sh",
+        "test",
+        "--workspace",
+        "--locked",
+        "--features",
+        "private-corpus-tests"
+      ],
+      "started": "2026-09-05T21:46:41.792445+00:00",
+      "finished": "2026-09-05T21:51:46.699378+00:00",
+      "exit": 0,
+      "log": "0.log",
+      "log_sha256": "5dd33fb7d2767bb9fd2f5c63d20eb379557252b90030f50fa4943453b0034174"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "started": "2026-09-05T21:51:46.699645+00:00",
+      "finished": "2026-09-05T21:52:21.673686+00:00",
+      "exit": 0,
+      "log": "1.log",
+      "log_sha256": "45eb5cc6e0ff3340b04a35fca2a5ecafe7265366fb6f9fc565e957a5b26b196e"
+    }
+  ],
+  "finished": "2026-09-05T21:52:21.673988+00:00",
+  "tracked_diff_unchanged": true
+}
