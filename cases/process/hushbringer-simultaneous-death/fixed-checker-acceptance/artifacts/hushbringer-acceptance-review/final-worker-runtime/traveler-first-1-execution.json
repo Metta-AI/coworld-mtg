@@ -1,0 +1,58 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "bcb9713ddcab601ca723e7fd5da513c147a658010c52324ac937ea6573487fc7",
+  "binary_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+  "declared_phase_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        20
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Doomed Traveler",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Hushbringer",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 3,
+          "name": "Wrath of God",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "hush": 2,
+        "traveler": 1,
+        "wrath": 3
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "d75f805478aa5ba7031830b83c126df74295fd4f2b8ff4b541187a67786e9450"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "bfb59054ad279a0145b2422f128f7e71bf713c809125cf3941599f3092366a76",
+  "binary_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+  "declared_phase_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        20
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Young Pyromancer",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Shock",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 3,
+          "name": "Counterspell",
+          "owner": "opponent",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 5,
+          "name": "Elemental",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "counter": 3,
+        "pyromancer": 1,
+        "shock": 2
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "12d7e3a0526349f6c0229fff3aa54af85731dc5453ad93dc8099742587092664"
+      },
+      {
+        "operation_index": 1,
+        "state_sha256": "e6d336a5d5bf5c3e11e1f4e67d42e9f4e64a940860fbf44cff84c24ce96a34f9"
+      },
+      {
+        "operation_index": 2,
+        "state_sha256": "f9afe4cabbb3b361f3264cf0d3a9dac108f408b489e4308527f61fdc8841ddc6"
+      },
+      {
+        "operation_index": 3,
+        "state_sha256": "f9afe4cabbb3b361f3264cf0d3a9dac108f408b489e4308527f61fdc8841ddc6"
+      }
+    ]
+  }
+}

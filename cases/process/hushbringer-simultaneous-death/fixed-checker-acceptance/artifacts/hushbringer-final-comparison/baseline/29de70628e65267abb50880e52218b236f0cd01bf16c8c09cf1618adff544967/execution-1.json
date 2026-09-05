@@ -1,0 +1,36 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "7c4642de94b4e7240669328aa3ead55cdb3d8d3c741438465d6b96783c893b68",
+  "binary_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "declared_phase_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        23,
+        17
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Lightning Helix",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "helix": 1
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "7adbeee9cb96bd6bcef3c4c953ac890be59ae0a89dfb6189f23ebdaaf01f0569"
+      }
+    ]
+  }
+}

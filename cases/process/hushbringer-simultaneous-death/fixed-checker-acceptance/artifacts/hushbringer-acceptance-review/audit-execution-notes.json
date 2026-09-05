@@ -1,0 +1,11 @@
+{
+  "notes": [
+    "Supplemental runtime initial checker compared a raw request JSON hash before applying Serde defaults. The actual worker completed successfully with0 Spirits; no engine failure occurred. Version2 normalized tapped=false, plus_one_counters=0 and x=null in memory and verified that existing successful execution, then ran the other5 executions. Both script versions and all6 actual outputs are retained; original request artifacts were never altered.",
+    "Build-detail script version1 attempted to hash the historical baseline target executable, which has been removed. Version2 records it as absent and binds the preserved e4 worker instead; no current historical target-byte claim is made.",
+    "Build-detail version2 normalized the engine library package source but initially omitted the same engine package custom build-script artifact. Version3 normalizes those exact2 engine package identities consistently. The sole descriptor discrepancy was the expected source path; all206 descriptors then matched in profile/features/package provenance. All script versions are retained.",
+    "Captured Phase source count2050 is the unchanged builder scope (3 rootCargo/toolchain files plus crates). Independent implementation/live-source manifest count2051 also includes .cargo/config.toml. That config is unchanged, contains aliases and RUST_MIN_STACK, is not a Coworld invocation ancestor, and is not applied by this build. No applicable ancestor or Cargo-home configuration was present."
+  ],
+  "source_mutations": false,
+  "builds_started_by_reviewer": false,
+  "accept_executed": false
+}

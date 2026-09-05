@@ -1,0 +1,1879 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "accepted by preserved checker with independent bound approval",
+  "accepted_bundle": "../../../evidence/hushbringer-simultaneous-death",
+  "copied": [
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/acceptance-review.json",
+      "original_sha256": "e810b0f4371c427f512e474d28a032ddac5b27521e042dbe7a289986dcdc1ae0",
+      "original_bytes": 6998,
+      "artifact": "artifacts/hushbringer-acceptance-review/acceptance-review.json",
+      "artifact_sha256": "e810b0f4371c427f512e474d28a032ddac5b27521e042dbe7a289986dcdc1ae0",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/acceptance-review.md",
+      "original_sha256": "40957bdb2a15017b293598b2c48d9525f2a1adc354a0a431a10dd6c4a9efb8fa",
+      "original_bytes": 3692,
+      "artifact": "artifacts/hushbringer-acceptance-review/acceptance-review.md",
+      "artifact_sha256": "40957bdb2a15017b293598b2c48d9525f2a1adc354a0a431a10dd6c4a9efb8fa",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/approval-template.json",
+      "original_sha256": "7822723297650940d54693f8e8eec0d44161c6814008c734d5dd5c1f3c50dc03",
+      "original_bytes": 332,
+      "artifact": "artifacts/hushbringer-acceptance-review/approval-template.json",
+      "artifact_sha256": "7822723297650940d54693f8e8eec0d44161c6814008c734d5dd5c1f3c50dc03",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/audit-execution-notes.json",
+      "original_sha256": "da8209e91aae944d2917ec4beed9ee34eabea873d4c782dfa9a11399d0a235b3",
+      "original_bytes": 1609,
+      "artifact": "artifacts/hushbringer-acceptance-review/audit-execution-notes.json",
+      "artifact_sha256": "da8209e91aae944d2917ec4beed9ee34eabea873d4c782dfa9a11399d0a235b3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/build-detail-audit-v2.py",
+      "original_sha256": "403e917abb26b0aef7d245d2c2a31c43b4b3bbd5c37594b29ba63272e4023d44",
+      "original_bytes": 5105,
+      "artifact": "artifacts/hushbringer-acceptance-review/build-detail-audit-v2.py",
+      "artifact_sha256": "403e917abb26b0aef7d245d2c2a31c43b4b3bbd5c37594b29ba63272e4023d44",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/build-detail-audit-v3.py",
+      "original_sha256": "5724be9dc20bdb0f1b939e417e4b2e9b3b4b11c86522f4b0a2028c045cec13d3",
+      "original_bytes": 5272,
+      "artifact": "artifacts/hushbringer-acceptance-review/build-detail-audit-v3.py",
+      "artifact_sha256": "5724be9dc20bdb0f1b939e417e4b2e9b3b4b11c86522f4b0a2028c045cec13d3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/build-detail-audit.json",
+      "original_sha256": "7f407c9660e797a0572453f2cd7a9c6b19ebe0f0a0bfe8ed5839be7c04e52f05",
+      "original_bytes": 9902,
+      "artifact": "artifacts/hushbringer-acceptance-review/build-detail-audit.json",
+      "artifact_sha256": "7f407c9660e797a0572453f2cd7a9c6b19ebe0f0a0bfe8ed5839be7c04e52f05",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/build-detail-audit.py",
+      "original_sha256": "ca4bf39973213ef53c36af939f3b2bb1293d751b0ede76cf2b6a869913ddb4dc",
+      "original_bytes": 4829,
+      "artifact": "artifacts/hushbringer-acceptance-review/build-detail-audit.py",
+      "artifact_sha256": "ca4bf39973213ef53c36af939f3b2bb1293d751b0ede76cf2b6a869913ddb4dc",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/candidate-build.json",
+      "original_sha256": "81eb62e305ee8d87d7e99ff31e2bcd382a226afded61236d48d51f6d148df6b9",
+      "original_bytes": 291906,
+      "artifact": "artifacts/hushbringer-acceptance-review/candidate-build.json",
+      "artifact_sha256": "81eb62e305ee8d87d7e99ff31e2bcd382a226afded61236d48d51f6d148df6b9",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/close-acceptance-review.py",
+      "original_sha256": "b878cd265a2cc59e588b67ece1cfb1815bc1c730d1fdbadb208b6134a5e8806d",
+      "original_bytes": 13480,
+      "artifact": "artifacts/hushbringer-acceptance-review/close-acceptance-review.py",
+      "artifact_sha256": "b878cd265a2cc59e588b67ece1cfb1815bc1c730d1fdbadb208b6134a5e8806d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/committed-repair.patch",
+      "original_sha256": "f35967418e623234a47a9dd4499a5516e05cd4fc16d898953e60465d1a87fc60",
+      "original_bytes": 593326,
+      "artifact": "artifacts/hushbringer-acceptance-review/committed-repair.patch.gz",
+      "artifact_sha256": "3943b5f58664093ebcd02656df72142cc07448c2080641c7eeca67bf0cd2937b",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/corpus-expectations-audit.json",
+      "original_sha256": "79e0b7032a60528b977833acf850ef7e4c3fd61ef39ae7192c782bd5100e47e3",
+      "original_bytes": 27236,
+      "artifact": "artifacts/hushbringer-acceptance-review/corpus-expectations-audit.json",
+      "artifact_sha256": "79e0b7032a60528b977833acf850ef7e4c3fd61ef39ae7192c782bd5100e47e3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-build-launch-receipt.json",
+      "original_sha256": "ef79837515925c6260d2b8d65d0d0dce5cc109f48ebd74ebb57b4eab6d783088",
+      "original_bytes": 3173,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-build-launch-receipt.json",
+      "artifact_sha256": "ef79837515925c6260d2b8d65d0d0dce5cc109f48ebd74ebb57b4eab6d783088",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/hush-first-0-execution.json",
+      "original_sha256": "e01b02bb54e292f5e73d40949cbe24703e9f618000a9c7377b2f3d5b39b9fdf6",
+      "original_bytes": 1489,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/hush-first-0-execution.json",
+      "artifact_sha256": "e01b02bb54e292f5e73d40949cbe24703e9f618000a9c7377b2f3d5b39b9fdf6",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/hush-first-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/hush-first-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/hush-first-1-execution.json",
+      "original_sha256": "e01b02bb54e292f5e73d40949cbe24703e9f618000a9c7377b2f3d5b39b9fdf6",
+      "original_bytes": 1489,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/hush-first-1-execution.json",
+      "artifact_sha256": "e01b02bb54e292f5e73d40949cbe24703e9f618000a9c7377b2f3d5b39b9fdf6",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/hush-first-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/hush-first-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/ldd.txt",
+      "original_sha256": "b195464147011d160455f4a58c44b19ea479562c4d2e5883116e3da83ea9e0a7",
+      "original_bytes": 297,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/ldd.txt",
+      "artifact_sha256": "b195464147011d160455f4a58c44b19ea479562c4d2e5883116e3da83ea9e0a7",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/no-hush-0-execution.json",
+      "original_sha256": "27125915c88e898a276bc4b83499386fd383a269f660f27a69c053b5171d66e9",
+      "original_bytes": 1467,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/no-hush-0-execution.json",
+      "artifact_sha256": "27125915c88e898a276bc4b83499386fd383a269f660f27a69c053b5171d66e9",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/no-hush-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/no-hush-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/no-hush-1-execution.json",
+      "original_sha256": "27125915c88e898a276bc4b83499386fd383a269f660f27a69c053b5171d66e9",
+      "original_bytes": 1467,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/no-hush-1-execution.json",
+      "artifact_sha256": "27125915c88e898a276bc4b83499386fd383a269f660f27a69c053b5171d66e9",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/no-hush-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/no-hush-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/receipt.json",
+      "original_sha256": "ad58838b28d252566bc1c407e68c18ae9518eb5fc32d121b92233ae120099af4",
+      "original_bytes": 11034,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/receipt.json",
+      "artifact_sha256": "ad58838b28d252566bc1c407e68c18ae9518eb5fc32d121b92233ae120099af4",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/traveler-first-0-execution.json",
+      "original_sha256": "feafc70f0a1c954fd69a92b6906739ef99c1f37a5f7e5acd33094e249d46bc39",
+      "original_bytes": 1489,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/traveler-first-0-execution.json",
+      "artifact_sha256": "feafc70f0a1c954fd69a92b6906739ef99c1f37a5f7e5acd33094e249d46bc39",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/traveler-first-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/traveler-first-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/traveler-first-1-execution.json",
+      "original_sha256": "feafc70f0a1c954fd69a92b6906739ef99c1f37a5f7e5acd33094e249d46bc39",
+      "original_bytes": 1489,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/traveler-first-1-execution.json",
+      "artifact_sha256": "feafc70f0a1c954fd69a92b6906739ef99c1f37a5f7e5acd33094e249d46bc39",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/traveler-first-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-acceptance-review/final-worker-runtime/traveler-first-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/implementation-review-report.json",
+      "original_sha256": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2",
+      "original_bytes": 14126,
+      "artifact": "artifacts/hushbringer-acceptance-review/implementation-review-report.json",
+      "artifact_sha256": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/manifest.json",
+      "original_sha256": "15abb456ad98cdf7eacf5afa4515166796ad96c917f6b476b523613a07a8ebe9",
+      "original_bytes": 7250,
+      "artifact": "artifacts/hushbringer-acceptance-review/manifest.json",
+      "artifact_sha256": "15abb456ad98cdf7eacf5afa4515166796ad96c917f6b476b523613a07a8ebe9",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/preaudit.json",
+      "original_sha256": "5157845c11395a4e1656a0a87b21c75ef500f1d580b0b5881b75e6b5e9765340",
+      "original_bytes": 38022,
+      "artifact": "artifacts/hushbringer-acceptance-review/preaudit.json",
+      "artifact_sha256": "5157845c11395a4e1656a0a87b21c75ef500f1d580b0b5881b75e6b5e9765340",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/preaudit.py",
+      "original_sha256": "f1f6cedadb840167cf0d274ad2b08c89c70849463c363b1284b4a66a3cc5ecc3",
+      "original_bytes": 4884,
+      "artifact": "artifacts/hushbringer-acceptance-review/preaudit.py",
+      "artifact_sha256": "f1f6cedadb840167cf0d274ad2b08c89c70849463c363b1284b4a66a3cc5ecc3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/review-approved.json",
+      "original_sha256": "859cb24e69b9cb52d7590a007eedaf668ce3b5db7f65fa63e14b5e59cf86ee9c",
+      "original_bytes": 2832,
+      "artifact": "artifacts/hushbringer-acceptance-review/review-approved.json",
+      "artifact_sha256": "859cb24e69b9cb52d7590a007eedaf668ce3b5db7f65fa63e14b5e59cf86ee9c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/supplemental-runtime-v2.py",
+      "original_sha256": "d0c8aa34bff59cd48ef1fbc76e82a5d354060b84cec3bc2607b75ae657b68daf",
+      "original_bytes": 3512,
+      "artifact": "artifacts/hushbringer-acceptance-review/supplemental-runtime-v2.py",
+      "artifact_sha256": "d0c8aa34bff59cd48ef1fbc76e82a5d354060b84cec3bc2607b75ae657b68daf",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/supplemental-runtime.py",
+      "original_sha256": "dde9cc19295e0e73d93fb9ac24a6d51a3bc93d082327257c3a29f3054d14d41f",
+      "original_bytes": 3157,
+      "artifact": "artifacts/hushbringer-acceptance-review/supplemental-runtime.py",
+      "artifact_sha256": "dde9cc19295e0e73d93fb9ac24a6d51a3bc93d082327257c3a29f3054d14d41f",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa.log",
+      "original_sha256": "b70c97ee4d6a918ab1942bebb47d7f7ad028104245dd363745b232ba41c5d12d",
+      "original_bytes": 698,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa.log.gz",
+      "artifact_sha256": "e2c855f1460682e90c875ecf9d951de960d015fd99c0de8a4bf3738996a3e68c",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a.log",
+      "original_sha256": "e575d8771cb394be02e73064bc10de9468f5e870d39ec9d72b0b2ae552679f14",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a.log.gz",
+      "artifact_sha256": "479f8063b59bf1d472297ddbb31392f22cca6b27d0edec0cfcd8d2eb89c3e298",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967.log",
+      "original_sha256": "a980f0ded2cfaed8bac500381745dba3fb88c329e3b530716c7ceb8d62689c3a",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967.log.gz",
+      "artifact_sha256": "b5cb4152fad0b6ccb051bef715643bda36c53e7b3e9ca45ad709c17fe5577ad5",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9.log",
+      "original_sha256": "589c54ac42b4435be4f474093ed5945b6830b34056d4d491315a3abfbd3ea5a3",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9.log.gz",
+      "artifact_sha256": "ea3126391aa5e1695190e594025883b28df047614f569d1a354026236f375845",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512.log",
+      "original_sha256": "58a66936ee0edbd816ab5fe51c9214d63e7f88c61bfc638146e535a4db8f328d",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512.log.gz",
+      "artifact_sha256": "f47413fd518d8610d5aa3c0c393e879047b5754fb1e426fee338e35924d76e21",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d.log",
+      "original_sha256": "d1d37dae8b9b57db0268e565beafa0ea049ac082855a6b4beefca0527715c262",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d.log.gz",
+      "artifact_sha256": "2cfc0fe4258ac4551cb1d93732d0134c268eaa9afe48b2cb3d5d036b60986038",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db.log",
+      "original_sha256": "ce32db124facc1963473dddd0a1742f6e9ef0da9a505ad74863b1d3d88b42f2c",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db.log.gz",
+      "artifact_sha256": "68237f1c32065c2a783e7a66ec84c77664504612d8a590bf67bd3937b5c8bc05",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b.log",
+      "original_sha256": "22682677cabda34dade2f776f91acbb60b8e04b7df80cee0302b90b9db197fa0",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b.log.gz",
+      "artifact_sha256": "e614330031ece886ee4dd4703ed8571cb9b6f406744b69c3e910f21f390b03e2",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc.log",
+      "original_sha256": "0d8c33f6f6b9edccb87b9aca559610ceae67867ead40ead90c802116a9cb2795",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc.log.gz",
+      "artifact_sha256": "eec0fa13d51a3689de5bf7fcf75f68866a2a5bcca2e1a21a7735482eb5191a6b",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366.log",
+      "original_sha256": "01e6b7e6f520aca0f826c96b50d3aebb0d7694855c13d884d3268675b4676cc4",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366.log.gz",
+      "artifact_sha256": "6680022d992062cd64fa67f7b0d925d7a7f3d83d0bd724963b10a02089fd0262",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/baseline-build.log",
+      "original_sha256": "86af2032adcdeb4f04a2044ad061af50e0f1f0d39bda288d3a290274d7dfee7a",
+      "original_bytes": 80,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/baseline-build.log.gz",
+      "artifact_sha256": "dd99612ff9063b61cfa36507ab6d0747b9750eaf1099e4f5617ffd369f0f406f",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa.log",
+      "original_sha256": "c624d9c91ed04aa305f120b2b4489c5d0b1ead992f51187e27e7aec214358e3c",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa.log.gz",
+      "artifact_sha256": "24dbcf34c3b2aa035049765c1a6cabd9e284efa14ce9bb6ac430a140485e1909",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a.log",
+      "original_sha256": "744aac9fd3cbdfb5654240fd01194c8903ae7585ae9829f1080f6188111a3a14",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a.log.gz",
+      "artifact_sha256": "48293f4aaae23515f44f044f8f79b36d44bfb3381e2435e8200b417283d58b4e",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967.log",
+      "original_sha256": "6d6352fe9ab583b001d0f60da5c910d18060bee4bd586ba7e32ea88751e8c424",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967.log.gz",
+      "artifact_sha256": "e2f6b939c3209af4a2731159123369ca15ada72b717c7b558d398121538450fb",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9.log",
+      "original_sha256": "641845ce8a0e756b21fd2bfb55cb86f2826f2e813f4761cfb04a6a42aca82091",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9.log.gz",
+      "artifact_sha256": "c69eedcac9886249133bc644f35ec3c4b489089ca7041f7036d7ed2698066031",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512.log",
+      "original_sha256": "1ad35366ef337e639423b24901cd5b4ed3c9b23fd5a238e5f83f5191833a7009",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512.log.gz",
+      "artifact_sha256": "0a6ed0893f14b7c2f0f5665a1f89787b95ac4a37b2667fca1de9f5ef04f72486",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d.log",
+      "original_sha256": "2420837c68a8d145cdade88c0a1e025e4e32cfc7300841cdf05987118a5d0efe",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d.log.gz",
+      "artifact_sha256": "607a88666a876c7f7575abb85253d4ec07725848cd46780ed4b480f992f0d8b4",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db.log",
+      "original_sha256": "ef9761066eadeb35bc9f8fcd1f26335adf9f5fcec0e750af94f7658121db6551",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db.log.gz",
+      "artifact_sha256": "e1c562caa407a60b85dbc8e435c7addb22e21f891acf2520e6b640bc84f6246b",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b.log",
+      "original_sha256": "8fd7fe2d77a1623ad7f88db256da918d67e382c83882a2aaa63d615513f18a68",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b.log.gz",
+      "artifact_sha256": "fd3dc49b0e0252ce3d30d924b1e8ed70e839dc9e10365e2f4b6675afee0bb798",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc.log",
+      "original_sha256": "bf0b877d83a57e7d18c3e0e2d2ce47156d2fe252203aa5900b4ddff00f760163",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc.log.gz",
+      "artifact_sha256": "8cc6497e5c390b1aa2d4d5d210b0383c50419a852b4a5c6fb83846d97b650d49",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366.log",
+      "original_sha256": "84f3493afee6ac72470c08a74bb009d3272b155ed8d3580898afe7b5a5c10fe0",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366.log.gz",
+      "artifact_sha256": "0596d09838ec735b6d57107d71d6332ff108da0c69035a030ddc74336fdf29c1",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verification-logs/candidate-build.log",
+      "original_sha256": "9d23573fe7c17dd7a8f54cf6d900e50d26a68c2e59a900eff664cd5cba7da20f",
+      "original_bytes": 80,
+      "artifact": "artifacts/hushbringer-acceptance-review/verification-logs/candidate-build.log.gz",
+      "artifact_sha256": "e775f51a19e44bf673132d723cf8b1375193ab52df28051cb311f4a4e6ba31ca",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verified-final.json",
+      "original_sha256": "c74ede9415f699952e814132cc4798e9cb2f98b58b0252bb79753a6585ec905a",
+      "original_bytes": 413342,
+      "artifact": "artifacts/hushbringer-acceptance-review/verified-final.json.gz",
+      "artifact_sha256": "5b7b70a7081621186d45ac7ea2d245c088fd65579d4a614ba1f828b0c4c4b8e3",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/verify-final.py",
+      "original_sha256": "7050f7631a0fec0cd0fa5a80e5cebcf84bcf7af63f1cbd95e202f095219a13b5",
+      "original_bytes": 10742,
+      "artifact": "artifacts/hushbringer-acceptance-review/verify-final.py",
+      "artifact_sha256": "7050f7631a0fec0cd0fa5a80e5cebcf84bcf7af63f1cbd95e202f095219a13b5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/0.log",
+      "original_sha256": "18b88df67a861bccb9daad9d9adf935a3810c9c7812d4afec8ac34632c5cf24d",
+      "original_bytes": 6141,
+      "artifact": "artifacts/final-committed-worker-run/0.log.gz",
+      "artifact_sha256": "7fadcf70515649ac7bb5efadc7f925213aae819c031ec769f418fcceb338163b",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/1.log",
+      "original_sha256": "9d23573fe7c17dd7a8f54cf6d900e50d26a68c2e59a900eff664cd5cba7da20f",
+      "original_bytes": 80,
+      "artifact": "artifacts/final-committed-worker-run/1.log.gz",
+      "artifact_sha256": "e775f51a19e44bf673132d723cf8b1375193ab52df28051cb311f4a4e6ba31ca",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/2.log",
+      "original_sha256": "b23511dbd111e12ec2b5b6c7dcbb4369bc07ad37be763907b0db1bf291c40612",
+      "original_bytes": 167,
+      "artifact": "artifacts/final-committed-worker-run/2.log.gz",
+      "artifact_sha256": "ec58a83b80d00d5e663bd7eccaff6ca38ba1f6dfbf267466c89bfcc1b4de70c3",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/done",
+      "original_sha256": "37a40f08d8548dba289b9b0bb35bcf63b359f6d37ee86044ebc6b6da080b9ec1",
+      "original_bytes": 9,
+      "artifact": "artifacts/final-committed-worker-run/done",
+      "artifact_sha256": "37a40f08d8548dba289b9b0bb35bcf63b359f6d37ee86044ebc6b6da080b9ec1",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/receipt.json",
+      "original_sha256": "ef79837515925c6260d2b8d65d0d0dce5cc109f48ebd74ebb57b4eab6d783088",
+      "original_bytes": 3173,
+      "artifact": "artifacts/final-committed-worker-run/receipt.json",
+      "artifact_sha256": "ef79837515925c6260d2b8d65d0d0dce5cc109f48ebd74ebb57b4eab6d783088",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-acceptance-execution/accept.log",
+      "original_sha256": "470986773216a428fc631a66cf043315c4922adc1a3b6606dd6a6481149b0362",
+      "original_bytes": 191,
+      "artifact": "artifacts/final-acceptance-execution/accept.log.gz",
+      "artifact_sha256": "ff07e5aacf4b1c9424b0056b7b8b4675c0505693d71d91c5485102a6a2dd85c4",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/final-acceptance-execution/receipt.json",
+      "original_sha256": "1acf0612930d45c65c534fffdc330d1e3c597b983a0f2cb93f5300b806ab3df6",
+      "original_bytes": 3307,
+      "artifact": "artifacts/final-acceptance-execution/receipt.json",
+      "artifact_sha256": "1acf0612930d45c65c534fffdc330d1e3c597b983a0f2cb93f5300b806ab3df6",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/accept-command.json",
+      "original_sha256": "4fe11821d0c9e81c6524e6327fb3f1d9074610608550aa448ec0c6f3d9023cc2",
+      "original_bytes": 2883,
+      "artifact": "artifacts/hushbringer-final-comparison/accept-command.json",
+      "artifact_sha256": "4fe11821d0c9e81c6524e6327fb3f1d9074610608550aa448ec0c6f3d9023cc2",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/case.json",
+      "original_sha256": "5d9463b5c0ef8a6d4a70e838d39e1b8d8d70362bd42e820da2791c304afb1f89",
+      "original_bytes": 2126,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/case.json",
+      "artifact_sha256": "5d9463b5c0ef8a6d4a70e838d39e1b8d8d70362bd42e820da2791c304afb1f89",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-0.json",
+      "original_sha256": "4bbb1ce7a989e0ec9d59d9bc1866fe20f277b49f911525818853a70e66a1717e",
+      "original_bytes": 1754,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-0.json",
+      "artifact_sha256": "4bbb1ce7a989e0ec9d59d9bc1866fe20f277b49f911525818853a70e66a1717e",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-1.json",
+      "original_sha256": "4bbb1ce7a989e0ec9d59d9bc1866fe20f277b49f911525818853a70e66a1717e",
+      "original_bytes": 1754,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-1.json",
+      "artifact_sha256": "4bbb1ce7a989e0ec9d59d9bc1866fe20f277b49f911525818853a70e66a1717e",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/receipt.json",
+      "original_sha256": "b70c97ee4d6a918ab1942bebb47d7f7ad028104245dd363745b232ba41c5d12d",
+      "original_bytes": 698,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/receipt.json",
+      "artifact_sha256": "b70c97ee4d6a918ab1942bebb47d7f7ad028104245dd363745b232ba41c5d12d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/request.json",
+      "original_sha256": "31836afb3d5496f0106dc93363f43cbf445fd569497b53f7dcd0933a93a543fe",
+      "original_bytes": 1151,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/request.json",
+      "artifact_sha256": "31836afb3d5496f0106dc93363f43cbf445fd569497b53f7dcd0933a93a543fe",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/case.json",
+      "original_sha256": "22bd23b9b831c27f9e551b09bcfb264ed02df15aa61237fc4f8584994bbd13e6",
+      "original_bytes": 2289,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/case.json",
+      "artifact_sha256": "22bd23b9b831c27f9e551b09bcfb264ed02df15aa61237fc4f8584994bbd13e6",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-0.json",
+      "original_sha256": "7d58e9cd752b102bcd1ffc1c8d0315e9e2f3d041c4a98fcdfff23a45a103c47f",
+      "original_bytes": 1888,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-0.json",
+      "artifact_sha256": "7d58e9cd752b102bcd1ffc1c8d0315e9e2f3d041c4a98fcdfff23a45a103c47f",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-1.json",
+      "original_sha256": "7d58e9cd752b102bcd1ffc1c8d0315e9e2f3d041c4a98fcdfff23a45a103c47f",
+      "original_bytes": 1888,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-1.json",
+      "artifact_sha256": "7d58e9cd752b102bcd1ffc1c8d0315e9e2f3d041c4a98fcdfff23a45a103c47f",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/receipt.json",
+      "original_sha256": "e575d8771cb394be02e73064bc10de9468f5e870d39ec9d72b0b2ae552679f14",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/receipt.json",
+      "artifact_sha256": "e575d8771cb394be02e73064bc10de9468f5e870d39ec9d72b0b2ae552679f14",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/request.json",
+      "original_sha256": "553651534c059a2a040ff5b776c73415d54862753f3e4c7a41f5bd887d9dd04d",
+      "original_bytes": 1535,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/request.json",
+      "artifact_sha256": "553651534c059a2a040ff5b776c73415d54862753f3e4c7a41f5bd887d9dd04d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/case.json",
+      "original_sha256": "c819c5f1d6074de86f8207280aaea07f88a6199c359101f12afd53784832bdcb",
+      "original_bytes": 1566,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/case.json",
+      "artifact_sha256": "c819c5f1d6074de86f8207280aaea07f88a6199c359101f12afd53784832bdcb",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-0.json",
+      "original_sha256": "8d7560d3208e6447f7c6b26c6e712d2786b0467407e3c810b2058ea32b304468",
+      "original_bytes": 910,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-0.json",
+      "artifact_sha256": "8d7560d3208e6447f7c6b26c6e712d2786b0467407e3c810b2058ea32b304468",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-1.json",
+      "original_sha256": "8d7560d3208e6447f7c6b26c6e712d2786b0467407e3c810b2058ea32b304468",
+      "original_bytes": 910,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-1.json",
+      "artifact_sha256": "8d7560d3208e6447f7c6b26c6e712d2786b0467407e3c810b2058ea32b304468",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/receipt.json",
+      "original_sha256": "a980f0ded2cfaed8bac500381745dba3fb88c329e3b530716c7ceb8d62689c3a",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/receipt.json",
+      "artifact_sha256": "a980f0ded2cfaed8bac500381745dba3fb88c329e3b530716c7ceb8d62689c3a",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/request.json",
+      "original_sha256": "d384e03a007eb657ba3a08399f19e28fa01d0989281fa7780a86b49b6460b8c3",
+      "original_bytes": 822,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/request.json",
+      "artifact_sha256": "d384e03a007eb657ba3a08399f19e28fa01d0989281fa7780a86b49b6460b8c3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/case.json",
+      "original_sha256": "93205f052c9f324dfdfe276becd50afd081527e207f5a71ec7005f9ec8abf259",
+      "original_bytes": 2493,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/case.json",
+      "artifact_sha256": "93205f052c9f324dfdfe276becd50afd081527e207f5a71ec7005f9ec8abf259",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-0.json",
+      "original_sha256": "4b71d799eac228286b7a1f6b2a7c1b2a7242b41f003b950157870b5bfeffc6c5",
+      "original_bytes": 2206,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-0.json",
+      "artifact_sha256": "4b71d799eac228286b7a1f6b2a7c1b2a7242b41f003b950157870b5bfeffc6c5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-1.json",
+      "original_sha256": "4b71d799eac228286b7a1f6b2a7c1b2a7242b41f003b950157870b5bfeffc6c5",
+      "original_bytes": 2206,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-1.json",
+      "artifact_sha256": "4b71d799eac228286b7a1f6b2a7c1b2a7242b41f003b950157870b5bfeffc6c5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/receipt.json",
+      "original_sha256": "589c54ac42b4435be4f474093ed5945b6830b34056d4d491315a3abfbd3ea5a3",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/receipt.json",
+      "artifact_sha256": "589c54ac42b4435be4f474093ed5945b6830b34056d4d491315a3abfbd3ea5a3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/request.json",
+      "original_sha256": "fd0cce766888883a59238f1ed6c2275265908a060d0330515909beda0a4468d8",
+      "original_bytes": 1744,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/request.json",
+      "artifact_sha256": "fd0cce766888883a59238f1ed6c2275265908a060d0330515909beda0a4468d8",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/case.json",
+      "original_sha256": "f17e3fe49d41819c0d1af07db82ed7874b8c2ce1e841436c8adf150adc8e6c94",
+      "original_bytes": 1810,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/case.json",
+      "artifact_sha256": "f17e3fe49d41819c0d1af07db82ed7874b8c2ce1e841436c8adf150adc8e6c94",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-0.json",
+      "original_sha256": "2b01697d0aca060c33e9b271a0fbb54d071a2277f97aaf605f4c3203b711a94e",
+      "original_bytes": 1205,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-0.json",
+      "artifact_sha256": "2b01697d0aca060c33e9b271a0fbb54d071a2277f97aaf605f4c3203b711a94e",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-1.json",
+      "original_sha256": "2b01697d0aca060c33e9b271a0fbb54d071a2277f97aaf605f4c3203b711a94e",
+      "original_bytes": 1205,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-1.json",
+      "artifact_sha256": "2b01697d0aca060c33e9b271a0fbb54d071a2277f97aaf605f4c3203b711a94e",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/receipt.json",
+      "original_sha256": "58a66936ee0edbd816ab5fe51c9214d63e7f88c61bfc638146e535a4db8f328d",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/receipt.json",
+      "artifact_sha256": "58a66936ee0edbd816ab5fe51c9214d63e7f88c61bfc638146e535a4db8f328d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/request.json",
+      "original_sha256": "f639fd821aaae9330e080a9747b13504f6f2307b8ed6fde3c65cbae973fc56ca",
+      "original_bytes": 949,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/request.json",
+      "artifact_sha256": "f639fd821aaae9330e080a9747b13504f6f2307b8ed6fde3c65cbae973fc56ca",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/case.json",
+      "original_sha256": "6826099f9b01d76155c8900caada21c56adad7f2511b3b88478dbb3f43ac7768",
+      "original_bytes": 1733,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/case.json",
+      "artifact_sha256": "6826099f9b01d76155c8900caada21c56adad7f2511b3b88478dbb3f43ac7768",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-0.json",
+      "original_sha256": "0f5945dab82975c31381863cacdc8549757d2f0182a8f9bd24b61a02f6642457",
+      "original_bytes": 1203,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-0.json",
+      "artifact_sha256": "0f5945dab82975c31381863cacdc8549757d2f0182a8f9bd24b61a02f6642457",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-1.json",
+      "original_sha256": "0f5945dab82975c31381863cacdc8549757d2f0182a8f9bd24b61a02f6642457",
+      "original_bytes": 1203,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-1.json",
+      "artifact_sha256": "0f5945dab82975c31381863cacdc8549757d2f0182a8f9bd24b61a02f6642457",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/receipt.json",
+      "original_sha256": "d1d37dae8b9b57db0268e565beafa0ea049ac082855a6b4beefca0527715c262",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/receipt.json",
+      "artifact_sha256": "d1d37dae8b9b57db0268e565beafa0ea049ac082855a6b4beefca0527715c262",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/request.json",
+      "original_sha256": "a3722e899d004a5ede38c9741186ef1c204a08cccc3ca187d60547d864d72145",
+      "original_bytes": 1002,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/request.json",
+      "artifact_sha256": "a3722e899d004a5ede38c9741186ef1c204a08cccc3ca187d60547d864d72145",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/case.json",
+      "original_sha256": "403038737c4eb9b086c315fe9336a6a2bf7c3d2e29def32af9f17d000653656d",
+      "original_bytes": 2566,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/case.json",
+      "artifact_sha256": "403038737c4eb9b086c315fe9336a6a2bf7c3d2e29def32af9f17d000653656d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-0.json",
+      "original_sha256": "d517b511612e80827a28b2686da399c452460fa39076e1c6e98970f3b13922be",
+      "original_bytes": 2186,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-0.json",
+      "artifact_sha256": "d517b511612e80827a28b2686da399c452460fa39076e1c6e98970f3b13922be",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-1.json",
+      "original_sha256": "d517b511612e80827a28b2686da399c452460fa39076e1c6e98970f3b13922be",
+      "original_bytes": 2186,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-1.json",
+      "artifact_sha256": "d517b511612e80827a28b2686da399c452460fa39076e1c6e98970f3b13922be",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/receipt.json",
+      "original_sha256": "ce32db124facc1963473dddd0a1742f6e9ef0da9a505ad74863b1d3d88b42f2c",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/receipt.json",
+      "artifact_sha256": "ce32db124facc1963473dddd0a1742f6e9ef0da9a505ad74863b1d3d88b42f2c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/request.json",
+      "original_sha256": "d19863a322b9aefbc566518c00355ff606603fd3791a5feec26ca79bed79d20a",
+      "original_bytes": 1587,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/request.json",
+      "artifact_sha256": "d19863a322b9aefbc566518c00355ff606603fd3791a5feec26ca79bed79d20a",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/case.json",
+      "original_sha256": "9e23f5fdc4cd91965afbac817c67cc66f3bc74724177d23b3585a71c6a5a8504",
+      "original_bytes": 1793,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/case.json",
+      "artifact_sha256": "9e23f5fdc4cd91965afbac817c67cc66f3bc74724177d23b3585a71c6a5a8504",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-0.json",
+      "original_sha256": "23c27ef9deba66d6484e0d6506fae322dc286d1260e14062887b565cb9bea05d",
+      "original_bytes": 1605,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-0.json",
+      "artifact_sha256": "23c27ef9deba66d6484e0d6506fae322dc286d1260e14062887b565cb9bea05d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-1.json",
+      "original_sha256": "23c27ef9deba66d6484e0d6506fae322dc286d1260e14062887b565cb9bea05d",
+      "original_bytes": 1605,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-1.json",
+      "artifact_sha256": "23c27ef9deba66d6484e0d6506fae322dc286d1260e14062887b565cb9bea05d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/receipt.json",
+      "original_sha256": "22682677cabda34dade2f776f91acbb60b8e04b7df80cee0302b90b9db197fa0",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/receipt.json",
+      "artifact_sha256": "22682677cabda34dade2f776f91acbb60b8e04b7df80cee0302b90b9db197fa0",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/request.json",
+      "original_sha256": "28ba5f039f4921dcf7e6587500209b9964b4a2bae55e19d5348de6329b87c8fe",
+      "original_bytes": 1013,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/request.json",
+      "artifact_sha256": "28ba5f039f4921dcf7e6587500209b9964b4a2bae55e19d5348de6329b87c8fe",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/case.json",
+      "original_sha256": "72c64f7c4f5cea99fa063eac106403774f3be1db3c5945aee88f70d376ab570c",
+      "original_bytes": 2304,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/case.json",
+      "artifact_sha256": "72c64f7c4f5cea99fa063eac106403774f3be1db3c5945aee88f70d376ab570c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-0.json",
+      "original_sha256": "1feda17059a0cc7a4b0d573821f1a9e5f5e8bad30e3be0a7951d891b332ba665",
+      "original_bytes": 1893,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-0.json",
+      "artifact_sha256": "1feda17059a0cc7a4b0d573821f1a9e5f5e8bad30e3be0a7951d891b332ba665",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-1.json",
+      "original_sha256": "1feda17059a0cc7a4b0d573821f1a9e5f5e8bad30e3be0a7951d891b332ba665",
+      "original_bytes": 1893,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-1.json",
+      "artifact_sha256": "1feda17059a0cc7a4b0d573821f1a9e5f5e8bad30e3be0a7951d891b332ba665",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/receipt.json",
+      "original_sha256": "0d8c33f6f6b9edccb87b9aca559610ceae67867ead40ead90c802116a9cb2795",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/receipt.json",
+      "artifact_sha256": "0d8c33f6f6b9edccb87b9aca559610ceae67867ead40ead90c802116a9cb2795",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/request.json",
+      "original_sha256": "972b3d54a54534eb5573132ebdfaa95242d991f1c9fd6db7699522521fd1d263",
+      "original_bytes": 1534,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/request.json",
+      "artifact_sha256": "972b3d54a54534eb5573132ebdfaa95242d991f1c9fd6db7699522521fd1d263",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/case.json",
+      "original_sha256": "28686ad49caa6fac98c0beeaae24f7b61b8310f2d7bffc502b2d56419bd789de",
+      "original_bytes": 2479,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/case.json",
+      "artifact_sha256": "28686ad49caa6fac98c0beeaae24f7b61b8310f2d7bffc502b2d56419bd789de",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-0.json",
+      "original_sha256": "69ae284bc2cfd0008adeeb50c99a12c72e9fddf2f3450c56e9bf1f64ef538f91",
+      "original_bytes": 2175,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-0.json",
+      "artifact_sha256": "69ae284bc2cfd0008adeeb50c99a12c72e9fddf2f3450c56e9bf1f64ef538f91",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-1.json",
+      "original_sha256": "69ae284bc2cfd0008adeeb50c99a12c72e9fddf2f3450c56e9bf1f64ef538f91",
+      "original_bytes": 2175,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-1.json",
+      "artifact_sha256": "69ae284bc2cfd0008adeeb50c99a12c72e9fddf2f3450c56e9bf1f64ef538f91",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/receipt.json",
+      "original_sha256": "01e6b7e6f520aca0f826c96b50d3aebb0d7694855c13d884d3268675b4676cc4",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/receipt.json",
+      "artifact_sha256": "01e6b7e6f520aca0f826c96b50d3aebb0d7694855c13d884d3268675b4676cc4",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/request.json",
+      "original_sha256": "4d0957265822f5c181d0cc0ef078b55bd45b4774ac4d42e100118209d901cff5",
+      "original_bytes": 1544,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/request.json",
+      "artifact_sha256": "4d0957265822f5c181d0cc0ef078b55bd45b4774ac4d42e100118209d901cff5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline/campaign.json",
+      "original_sha256": "b61fa0e7f17138844944c9bbf8888ffc96551d4f890f57f1a40baf72fa68843a",
+      "original_bytes": 6696,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline/campaign.json",
+      "artifact_sha256": "b61fa0e7f17138844944c9bbf8888ffc96551d4f890f57f1a40baf72fa68843a",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/baseline.log",
+      "original_sha256": "919b7b8a5de30701c4dfaca4d0257a365f6a28001a2f03d0cb955d889a261a80",
+      "original_bytes": 789,
+      "artifact": "artifacts/hushbringer-final-comparison/baseline.log.gz",
+      "artifact_sha256": "2baef5eda0cfc329e5de6b0cf09a7ec7fe1b289eb3b352bc6e60f14593b29399",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/case.json",
+      "original_sha256": "5d9463b5c0ef8a6d4a70e838d39e1b8d8d70362bd42e820da2791c304afb1f89",
+      "original_bytes": 2126,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/case.json",
+      "artifact_sha256": "5d9463b5c0ef8a6d4a70e838d39e1b8d8d70362bd42e820da2791c304afb1f89",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-0.json",
+      "original_sha256": "a0a27363e81f48d5cd961597ffb151d6e73e16976750963424c1c773dfb77b80",
+      "original_bytes": 1489,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-0.json",
+      "artifact_sha256": "a0a27363e81f48d5cd961597ffb151d6e73e16976750963424c1c773dfb77b80",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-1.json",
+      "original_sha256": "a0a27363e81f48d5cd961597ffb151d6e73e16976750963424c1c773dfb77b80",
+      "original_bytes": 1489,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-1.json",
+      "artifact_sha256": "a0a27363e81f48d5cd961597ffb151d6e73e16976750963424c1c773dfb77b80",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/receipt.json",
+      "original_sha256": "c624d9c91ed04aa305f120b2b4489c5d0b1ead992f51187e27e7aec214358e3c",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/receipt.json",
+      "artifact_sha256": "c624d9c91ed04aa305f120b2b4489c5d0b1ead992f51187e27e7aec214358e3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/request.json",
+      "original_sha256": "31836afb3d5496f0106dc93363f43cbf445fd569497b53f7dcd0933a93a543fe",
+      "original_bytes": 1151,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/request.json",
+      "artifact_sha256": "31836afb3d5496f0106dc93363f43cbf445fd569497b53f7dcd0933a93a543fe",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/case.json",
+      "original_sha256": "22bd23b9b831c27f9e551b09bcfb264ed02df15aa61237fc4f8584994bbd13e6",
+      "original_bytes": 2289,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/case.json",
+      "artifact_sha256": "22bd23b9b831c27f9e551b09bcfb264ed02df15aa61237fc4f8584994bbd13e6",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-0.json",
+      "original_sha256": "4bb5849ad06bbedac4df549c077cb42f75217050c9c6d61f5ca877cc2a4e38e4",
+      "original_bytes": 1888,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-0.json",
+      "artifact_sha256": "4bb5849ad06bbedac4df549c077cb42f75217050c9c6d61f5ca877cc2a4e38e4",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-1.json",
+      "original_sha256": "4bb5849ad06bbedac4df549c077cb42f75217050c9c6d61f5ca877cc2a4e38e4",
+      "original_bytes": 1888,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-1.json",
+      "artifact_sha256": "4bb5849ad06bbedac4df549c077cb42f75217050c9c6d61f5ca877cc2a4e38e4",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/receipt.json",
+      "original_sha256": "744aac9fd3cbdfb5654240fd01194c8903ae7585ae9829f1080f6188111a3a14",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/receipt.json",
+      "artifact_sha256": "744aac9fd3cbdfb5654240fd01194c8903ae7585ae9829f1080f6188111a3a14",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/request.json",
+      "original_sha256": "553651534c059a2a040ff5b776c73415d54862753f3e4c7a41f5bd887d9dd04d",
+      "original_bytes": 1535,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/request.json",
+      "artifact_sha256": "553651534c059a2a040ff5b776c73415d54862753f3e4c7a41f5bd887d9dd04d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/case.json",
+      "original_sha256": "c819c5f1d6074de86f8207280aaea07f88a6199c359101f12afd53784832bdcb",
+      "original_bytes": 1566,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/case.json",
+      "artifact_sha256": "c819c5f1d6074de86f8207280aaea07f88a6199c359101f12afd53784832bdcb",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-0.json",
+      "original_sha256": "7f438cfa742552b48eccdfc5863895b9bd56f24a93baa5def34805ed53ac2e9d",
+      "original_bytes": 910,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-0.json",
+      "artifact_sha256": "7f438cfa742552b48eccdfc5863895b9bd56f24a93baa5def34805ed53ac2e9d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-1.json",
+      "original_sha256": "7f438cfa742552b48eccdfc5863895b9bd56f24a93baa5def34805ed53ac2e9d",
+      "original_bytes": 910,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-1.json",
+      "artifact_sha256": "7f438cfa742552b48eccdfc5863895b9bd56f24a93baa5def34805ed53ac2e9d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/receipt.json",
+      "original_sha256": "6d6352fe9ab583b001d0f60da5c910d18060bee4bd586ba7e32ea88751e8c424",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/receipt.json",
+      "artifact_sha256": "6d6352fe9ab583b001d0f60da5c910d18060bee4bd586ba7e32ea88751e8c424",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/request.json",
+      "original_sha256": "d384e03a007eb657ba3a08399f19e28fa01d0989281fa7780a86b49b6460b8c3",
+      "original_bytes": 822,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/request.json",
+      "artifact_sha256": "d384e03a007eb657ba3a08399f19e28fa01d0989281fa7780a86b49b6460b8c3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/case.json",
+      "original_sha256": "93205f052c9f324dfdfe276becd50afd081527e207f5a71ec7005f9ec8abf259",
+      "original_bytes": 2493,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/case.json",
+      "artifact_sha256": "93205f052c9f324dfdfe276becd50afd081527e207f5a71ec7005f9ec8abf259",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-0.json",
+      "original_sha256": "6e4897a7e48c6d33013f77ff1ec20c6ace85df7cd1c0f92c198ed7c9256d23ab",
+      "original_bytes": 2206,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-0.json",
+      "artifact_sha256": "6e4897a7e48c6d33013f77ff1ec20c6ace85df7cd1c0f92c198ed7c9256d23ab",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-1.json",
+      "original_sha256": "6e4897a7e48c6d33013f77ff1ec20c6ace85df7cd1c0f92c198ed7c9256d23ab",
+      "original_bytes": 2206,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-1.json",
+      "artifact_sha256": "6e4897a7e48c6d33013f77ff1ec20c6ace85df7cd1c0f92c198ed7c9256d23ab",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/receipt.json",
+      "original_sha256": "641845ce8a0e756b21fd2bfb55cb86f2826f2e813f4761cfb04a6a42aca82091",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/receipt.json",
+      "artifact_sha256": "641845ce8a0e756b21fd2bfb55cb86f2826f2e813f4761cfb04a6a42aca82091",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/request.json",
+      "original_sha256": "fd0cce766888883a59238f1ed6c2275265908a060d0330515909beda0a4468d8",
+      "original_bytes": 1744,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/request.json",
+      "artifact_sha256": "fd0cce766888883a59238f1ed6c2275265908a060d0330515909beda0a4468d8",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/case.json",
+      "original_sha256": "f17e3fe49d41819c0d1af07db82ed7874b8c2ce1e841436c8adf150adc8e6c94",
+      "original_bytes": 1810,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/case.json",
+      "artifact_sha256": "f17e3fe49d41819c0d1af07db82ed7874b8c2ce1e841436c8adf150adc8e6c94",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-0.json",
+      "original_sha256": "a4d3513192f5098db3fcc469fb0b44279a05ba67abea26c41f817d301963c448",
+      "original_bytes": 1205,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-0.json",
+      "artifact_sha256": "a4d3513192f5098db3fcc469fb0b44279a05ba67abea26c41f817d301963c448",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-1.json",
+      "original_sha256": "a4d3513192f5098db3fcc469fb0b44279a05ba67abea26c41f817d301963c448",
+      "original_bytes": 1205,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-1.json",
+      "artifact_sha256": "a4d3513192f5098db3fcc469fb0b44279a05ba67abea26c41f817d301963c448",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/receipt.json",
+      "original_sha256": "1ad35366ef337e639423b24901cd5b4ed3c9b23fd5a238e5f83f5191833a7009",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/receipt.json",
+      "artifact_sha256": "1ad35366ef337e639423b24901cd5b4ed3c9b23fd5a238e5f83f5191833a7009",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/request.json",
+      "original_sha256": "f639fd821aaae9330e080a9747b13504f6f2307b8ed6fde3c65cbae973fc56ca",
+      "original_bytes": 949,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/request.json",
+      "artifact_sha256": "f639fd821aaae9330e080a9747b13504f6f2307b8ed6fde3c65cbae973fc56ca",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/case.json",
+      "original_sha256": "6826099f9b01d76155c8900caada21c56adad7f2511b3b88478dbb3f43ac7768",
+      "original_bytes": 1733,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/case.json",
+      "artifact_sha256": "6826099f9b01d76155c8900caada21c56adad7f2511b3b88478dbb3f43ac7768",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-0.json",
+      "original_sha256": "9ac91f5467d9011fb8a9e91f4f18217732da8f6db229f1f2e77a5c63c4fd8216",
+      "original_bytes": 1203,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-0.json",
+      "artifact_sha256": "9ac91f5467d9011fb8a9e91f4f18217732da8f6db229f1f2e77a5c63c4fd8216",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-1.json",
+      "original_sha256": "9ac91f5467d9011fb8a9e91f4f18217732da8f6db229f1f2e77a5c63c4fd8216",
+      "original_bytes": 1203,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-1.json",
+      "artifact_sha256": "9ac91f5467d9011fb8a9e91f4f18217732da8f6db229f1f2e77a5c63c4fd8216",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/receipt.json",
+      "original_sha256": "2420837c68a8d145cdade88c0a1e025e4e32cfc7300841cdf05987118a5d0efe",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/receipt.json",
+      "artifact_sha256": "2420837c68a8d145cdade88c0a1e025e4e32cfc7300841cdf05987118a5d0efe",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/request.json",
+      "original_sha256": "a3722e899d004a5ede38c9741186ef1c204a08cccc3ca187d60547d864d72145",
+      "original_bytes": 1002,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/request.json",
+      "artifact_sha256": "a3722e899d004a5ede38c9741186ef1c204a08cccc3ca187d60547d864d72145",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/case.json",
+      "original_sha256": "403038737c4eb9b086c315fe9336a6a2bf7c3d2e29def32af9f17d000653656d",
+      "original_bytes": 2566,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/case.json",
+      "artifact_sha256": "403038737c4eb9b086c315fe9336a6a2bf7c3d2e29def32af9f17d000653656d",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-0.json",
+      "original_sha256": "a9f97651b69ba96dbe36889a3ea9e9ad2e2e2e108aeb878c8f3f256b57f2a7e1",
+      "original_bytes": 2186,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-0.json",
+      "artifact_sha256": "a9f97651b69ba96dbe36889a3ea9e9ad2e2e2e108aeb878c8f3f256b57f2a7e1",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-1.json",
+      "original_sha256": "a9f97651b69ba96dbe36889a3ea9e9ad2e2e2e108aeb878c8f3f256b57f2a7e1",
+      "original_bytes": 2186,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-1.json",
+      "artifact_sha256": "a9f97651b69ba96dbe36889a3ea9e9ad2e2e2e108aeb878c8f3f256b57f2a7e1",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/receipt.json",
+      "original_sha256": "ef9761066eadeb35bc9f8fcd1f26335adf9f5fcec0e750af94f7658121db6551",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/receipt.json",
+      "artifact_sha256": "ef9761066eadeb35bc9f8fcd1f26335adf9f5fcec0e750af94f7658121db6551",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/request.json",
+      "original_sha256": "d19863a322b9aefbc566518c00355ff606603fd3791a5feec26ca79bed79d20a",
+      "original_bytes": 1587,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/request.json",
+      "artifact_sha256": "d19863a322b9aefbc566518c00355ff606603fd3791a5feec26ca79bed79d20a",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/case.json",
+      "original_sha256": "9e23f5fdc4cd91965afbac817c67cc66f3bc74724177d23b3585a71c6a5a8504",
+      "original_bytes": 1793,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/case.json",
+      "artifact_sha256": "9e23f5fdc4cd91965afbac817c67cc66f3bc74724177d23b3585a71c6a5a8504",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-0.json",
+      "original_sha256": "15fa47a07f9db3b69210cb83f57f913bd93a74c8cf7a4e49aaa0b67970078d01",
+      "original_bytes": 1605,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-0.json",
+      "artifact_sha256": "15fa47a07f9db3b69210cb83f57f913bd93a74c8cf7a4e49aaa0b67970078d01",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-1.json",
+      "original_sha256": "15fa47a07f9db3b69210cb83f57f913bd93a74c8cf7a4e49aaa0b67970078d01",
+      "original_bytes": 1605,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-1.json",
+      "artifact_sha256": "15fa47a07f9db3b69210cb83f57f913bd93a74c8cf7a4e49aaa0b67970078d01",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/receipt.json",
+      "original_sha256": "8fd7fe2d77a1623ad7f88db256da918d67e382c83882a2aaa63d615513f18a68",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/receipt.json",
+      "artifact_sha256": "8fd7fe2d77a1623ad7f88db256da918d67e382c83882a2aaa63d615513f18a68",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/request.json",
+      "original_sha256": "28ba5f039f4921dcf7e6587500209b9964b4a2bae55e19d5348de6329b87c8fe",
+      "original_bytes": 1013,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/request.json",
+      "artifact_sha256": "28ba5f039f4921dcf7e6587500209b9964b4a2bae55e19d5348de6329b87c8fe",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/case.json",
+      "original_sha256": "72c64f7c4f5cea99fa063eac106403774f3be1db3c5945aee88f70d376ab570c",
+      "original_bytes": 2304,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/case.json",
+      "artifact_sha256": "72c64f7c4f5cea99fa063eac106403774f3be1db3c5945aee88f70d376ab570c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-0.json",
+      "original_sha256": "78d553a644d00fd74d618c479bacb34e763270963cbf3c4881f8eac55255c0e5",
+      "original_bytes": 1893,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-0.json",
+      "artifact_sha256": "78d553a644d00fd74d618c479bacb34e763270963cbf3c4881f8eac55255c0e5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-1.json",
+      "original_sha256": "78d553a644d00fd74d618c479bacb34e763270963cbf3c4881f8eac55255c0e5",
+      "original_bytes": 1893,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-1.json",
+      "artifact_sha256": "78d553a644d00fd74d618c479bacb34e763270963cbf3c4881f8eac55255c0e5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/receipt.json",
+      "original_sha256": "bf0b877d83a57e7d18c3e0e2d2ce47156d2fe252203aa5900b4ddff00f760163",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/receipt.json",
+      "artifact_sha256": "bf0b877d83a57e7d18c3e0e2d2ce47156d2fe252203aa5900b4ddff00f760163",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/request.json",
+      "original_sha256": "972b3d54a54534eb5573132ebdfaa95242d991f1c9fd6db7699522521fd1d263",
+      "original_bytes": 1534,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/request.json",
+      "artifact_sha256": "972b3d54a54534eb5573132ebdfaa95242d991f1c9fd6db7699522521fd1d263",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/case.json",
+      "original_sha256": "28686ad49caa6fac98c0beeaae24f7b61b8310f2d7bffc502b2d56419bd789de",
+      "original_bytes": 2479,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/case.json",
+      "artifact_sha256": "28686ad49caa6fac98c0beeaae24f7b61b8310f2d7bffc502b2d56419bd789de",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/corpus.json",
+      "artifact_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-0.json",
+      "original_sha256": "6fe942b9a040f96c037fdc59523880e413856219e421482fe8951a87c9684304",
+      "original_bytes": 2175,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-0.json",
+      "artifact_sha256": "6fe942b9a040f96c037fdc59523880e413856219e421482fe8951a87c9684304",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-1.json",
+      "original_sha256": "6fe942b9a040f96c037fdc59523880e413856219e421482fe8951a87c9684304",
+      "original_bytes": 2175,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-1.json",
+      "artifact_sha256": "6fe942b9a040f96c037fdc59523880e413856219e421482fe8951a87c9684304",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/receipt.json",
+      "original_sha256": "84f3493afee6ac72470c08a74bb009d3272b155ed8d3580898afe7b5a5c10fe0",
+      "original_bytes": 631,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/receipt.json",
+      "artifact_sha256": "84f3493afee6ac72470c08a74bb009d3272b155ed8d3580898afe7b5a5c10fe0",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/request.json",
+      "original_sha256": "4d0957265822f5c181d0cc0ef078b55bd45b4774ac4d42e100118209d901cff5",
+      "original_bytes": 1544,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/request.json",
+      "artifact_sha256": "4d0957265822f5c181d0cc0ef078b55bd45b4774ac4d42e100118209d901cff5",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-0.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-1.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-1.log.gz",
+      "artifact_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate/campaign.json",
+      "original_sha256": "6c8d5976eb6280fb199ffe13354b3abd5acd8543486e8d19805d22c6c7bcc3d3",
+      "original_bytes": 6623,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate/campaign.json",
+      "artifact_sha256": "6c8d5976eb6280fb199ffe13354b3abd5acd8543486e8d19805d22c6c7bcc3d3",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/candidate.log",
+      "original_sha256": "9dc994ade7814ca210936b88ce48b9b5f445ebb2e48b8e575a988025c340f281",
+      "original_bytes": 660,
+      "artifact": "artifacts/hushbringer-final-comparison/candidate.log.gz",
+      "artifact_sha256": "d77a17c154a86df4271dfc8ee40c4314a91d1af27760e8ce7da726e1ae6a8e56",
+      "encoding": "gzip"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/comparison.json",
+      "original_sha256": "293086c975a2fec7a651a115d4fd89ff005ccbe8f52b389d622942e497cbaf82",
+      "original_bytes": 3030,
+      "artifact": "artifacts/hushbringer-final-comparison/comparison.json",
+      "artifact_sha256": "293086c975a2fec7a651a115d4fd89ff005ccbe8f52b389d622942e497cbaf82",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/plan.json",
+      "original_sha256": "62273bd941f13b5d1587b1f098c7db4a61cd39c5f96fb0a2bd61db32c631a715",
+      "original_bytes": 791,
+      "artifact": "artifacts/hushbringer-final-comparison/plan.json",
+      "artifact_sha256": "62273bd941f13b5d1587b1f098c7db4a61cd39c5f96fb0a2bd61db32c631a715",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/review-approved.json",
+      "original_sha256": "859cb24e69b9cb52d7590a007eedaf668ce3b5db7f65fa63e14b5e59cf86ee9c",
+      "original_bytes": 2832,
+      "artifact": "artifacts/hushbringer-final-comparison/review-approved.json",
+      "artifact_sha256": "859cb24e69b9cb52d7590a007eedaf668ce3b5db7f65fa63e14b5e59cf86ee9c",
+      "encoding": "original"
+    },
+    {
+      "original_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/review-template.json",
+      "original_sha256": "7822723297650940d54693f8e8eec0d44161c6814008c734d5dd5c1f3c50dc03",
+      "original_bytes": 332,
+      "artifact": "artifacts/hushbringer-final-comparison/review-template.json",
+      "artifact_sha256": "7822723297650940d54693f8e8eec0d44161c6814008c734d5dd5c1f3c50dc03",
+      "encoding": "original"
+    }
+  ]
+}

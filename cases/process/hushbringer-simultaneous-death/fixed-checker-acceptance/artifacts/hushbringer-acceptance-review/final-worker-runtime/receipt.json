@@ -1,0 +1,271 @@
+{
+  "utc": "2026-09-05T23:30:24.919788+00:00",
+  "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+  "phase_revision": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "newly_compiled": true,
+  "build_json_sha256": "81eb62e305ee8d87d7e99ff31e2bcd382a226afded61236d48d51f6d148df6b9",
+  "runtime_cwd": "/home/ubuntu/repos/coworld-mtg",
+  "loader_libraries": {
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+    "/lib/x86_64-linux-gnu/libm.so.6": "df621c68dbfed7e843434ef2faedb9f4d4b0543ad161e9a55eaf4d4ce2443176",
+    "/lib/x86_64-linux-gnu/libc.so.6": "e01b1ce7be2987f3b8560e26d0df2623f9dd5cec17be923ae28a785bc0d32d50",
+    "/lib64/ld-linux-x86-64.so.2": "8d06f393f4a93bcf9b81145a259524d66a95522a646bf8d7e05b6ffdf2e63dcc"
+  },
+  "scenarios": [
+    {
+      "name": "hush-first",
+      "request_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/hush-first-request.json",
+      "request_sha256": "146b3ecb666d952de21543797466e18140cc784b04c6361d532e651bf5a1bffe",
+      "request_id": "c5223389806d6815890781faadfc621bc743de643d8a0df0db358f2f35bf108c",
+      "spirits": 0,
+      "repeatability": "exact two-run equality",
+      "commands": [
+        {
+          "command": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+            "case",
+            "execute",
+            "--request",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/hush-first-request.json",
+            "--output",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/hush-first-0-execution.json"
+          ],
+          "exit": 0,
+          "existing_successful_execution_checked_after_normalizing_serde_defaults": true,
+          "evidence_sha256": "e01b02bb54e292f5e73d40949cbe24703e9f618000a9c7377b2f3d5b39b9fdf6",
+          "evidence_id": "29afb4da889047c1924cb26b059ddb3fd1c350ce1097636a5fa1af229a263f6b",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+            "case",
+            "execute",
+            "--request",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/hush-first-request.json",
+            "--output",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/hush-first-1-execution.json"
+          ],
+          "exit": 0,
+          "existing_successful_execution_checked_after_normalizing_serde_defaults": false,
+          "evidence_sha256": "e01b02bb54e292f5e73d40949cbe24703e9f618000a9c7377b2f3d5b39b9fdf6",
+          "evidence_id": "29afb4da889047c1924cb26b059ddb3fd1c350ce1097636a5fa1af229a263f6b",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "observation": {
+        "life": [
+          20,
+          20
+        ],
+        "objects": [
+          {
+            "object_id": 1,
+            "name": "Hushbringer",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 2,
+            "name": "Doomed Traveler",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 3,
+            "name": "Wrath of God",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          }
+        ],
+        "labels": {
+          "hush": 1,
+          "traveler": 2,
+          "wrath": 3
+        }
+      }
+    },
+    {
+      "name": "traveler-first",
+      "request_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/traveler-first-request.json",
+      "request_sha256": "118faf91d250ff78ee5d8213836d1b1a9aab47e4b06f32f8dbd7acd25e80ac20",
+      "request_id": "bcb9713ddcab601ca723e7fd5da513c147a658010c52324ac937ea6573487fc7",
+      "spirits": 0,
+      "repeatability": "exact two-run equality",
+      "commands": [
+        {
+          "command": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+            "case",
+            "execute",
+            "--request",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/traveler-first-request.json",
+            "--output",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/traveler-first-0-execution.json"
+          ],
+          "exit": 0,
+          "existing_successful_execution_checked_after_normalizing_serde_defaults": false,
+          "evidence_sha256": "feafc70f0a1c954fd69a92b6906739ef99c1f37a5f7e5acd33094e249d46bc39",
+          "evidence_id": "5f7a6ca6862fb3caa57e642c17f9aea309701a8f2f985c7cce9234d348666404",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+            "case",
+            "execute",
+            "--request",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/traveler-first-request.json",
+            "--output",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/traveler-first-1-execution.json"
+          ],
+          "exit": 0,
+          "existing_successful_execution_checked_after_normalizing_serde_defaults": false,
+          "evidence_sha256": "feafc70f0a1c954fd69a92b6906739ef99c1f37a5f7e5acd33094e249d46bc39",
+          "evidence_id": "5f7a6ca6862fb3caa57e642c17f9aea309701a8f2f985c7cce9234d348666404",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "observation": {
+        "life": [
+          20,
+          20
+        ],
+        "objects": [
+          {
+            "object_id": 1,
+            "name": "Doomed Traveler",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 2,
+            "name": "Hushbringer",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 3,
+            "name": "Wrath of God",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          }
+        ],
+        "labels": {
+          "hush": 2,
+          "traveler": 1,
+          "wrath": 3
+        }
+      }
+    },
+    {
+      "name": "no-hush",
+      "request_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/no-hush-request.json",
+      "request_sha256": "80078dd0fdbfee214ef9dbd6a06fea167d3e362bc9b053414e94d092eec44299",
+      "request_id": "2b89fbb47abb85ca8e6eef26ebd12b096521c681bf5579f0976647c042a1a9ba",
+      "spirits": 1,
+      "repeatability": "exact two-run equality",
+      "commands": [
+        {
+          "command": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+            "case",
+            "execute",
+            "--request",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/no-hush-request.json",
+            "--output",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/no-hush-0-execution.json"
+          ],
+          "exit": 0,
+          "existing_successful_execution_checked_after_normalizing_serde_defaults": false,
+          "evidence_sha256": "27125915c88e898a276bc4b83499386fd383a269f660f27a69c053b5171d66e9",
+          "evidence_id": "ab4edfc80e1f681f5fd205f3e472cab1ddea1fa2e18d80c39e445f9f391f6945",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+            "case",
+            "execute",
+            "--request",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/no-hush-request.json",
+            "--output",
+            "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/final-worker-runtime/no-hush-1-execution.json"
+          ],
+          "exit": 0,
+          "existing_successful_execution_checked_after_normalizing_serde_defaults": false,
+          "evidence_sha256": "27125915c88e898a276bc4b83499386fd383a269f660f27a69c053b5171d66e9",
+          "evidence_id": "ab4edfc80e1f681f5fd205f3e472cab1ddea1fa2e18d80c39e445f9f391f6945",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "observation": {
+        "life": [
+          20,
+          20
+        ],
+        "objects": [
+          {
+            "object_id": 1,
+            "name": "Doomed Traveler",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 2,
+            "name": "Wrath of God",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 4,
+            "name": "Spirit",
+            "owner": "player",
+            "zone": "battlefield",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          }
+        ],
+        "labels": {
+          "traveler": 1,
+          "wrath": 2
+        }
+      }
+    }
+  ],
+  "scope": "Supplemental final-worker executions using the independently preserved original scenario requests. Frozen acceptance inputs, plan and case IDs are not modified; these are not added planned gates."
+}

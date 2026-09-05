@@ -1,0 +1,64 @@
+{
+  "started": "2026-09-05T23:22:04.711885+00:00",
+  "phase_revision": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/source.json",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "review_report": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/review-report.json",
+  "review_sha256": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2",
+  "harness_files_verified": 39,
+  "builder_sha256": "6a96deecaf9ad7355731d698678675b22e12f4b3e1a5b5dcc2ec9d59ab40ebb7",
+  "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+  "baseline_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "plan_sha256": "62273bd941f13b5d1587b1f098c7db4a61cd39c5f96fb0a2bd61db32c631a715",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "/home/ubuntu/repos/coworld-mtg/scripts/build-case-worker.py",
+        "--phase-checkout",
+        "/home/ubuntu/repos/phase-verifiable-loop",
+        "--output-dir",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/0.log",
+      "log_sha256": "18b88df67a861bccb9daad9d9adf935a3810c9c7812d4afec8ac34632c5cf24d"
+    },
+    {
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/attributed-baseline-build/worker",
+        "case",
+        "build-check",
+        "--build",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/1.log",
+      "log_sha256": "9d23573fe7c17dd7a8f54cf6d900e50d26a68c2e59a900eff664cd5cba7da20f"
+    },
+    {
+      "command": [
+        "python3",
+        "/home/ubuntu/repos/coworld-mtg/scripts/compare-case-workers.py",
+        "--coordinator",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/attributed-baseline-build/worker",
+        "--baseline",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "--candidate",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/worker",
+        "--plan",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-acceptance-plan.json",
+        "--output-dir",
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/final-committed-worker-run/2.log",
+      "log_sha256": "b23511dbd111e12ec2b5b6c7dcbb4369bc07ad37be763907b0db1bf291c40612"
+    }
+  ],
+  "acceptance_executed": false,
+  "finished": "2026-09-05T23:28:39.452180+00:00",
+  "candidate_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+  "comparison": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison",
+  "status": "comparison ready for independently bound approval; not accepted"
+}

@@ -153,3 +153,18 @@ it is not a proof that every game now follows every rule.
 The executed before/after results and final repair scope are recorded separately
 in the campaign artifacts. This narrative should only call the repair accepted
 after the independent implementation review and the acceptance receipt exist.
+
+
+The loop now has an [accepted record for this repair](../cases/evidence/hushbringer-simultaneous-death/case-note.md).
+A fresh build of the clean reviewed commit produced zero Spirits where the
+original worker produced one. The same preserved checker verified that result
+and all seven regression and two holdout cases. An independent reviewer
+rechecked all twenty bundles and both repeated executions, then bound approval
+to their exact identities. The acceptance command generated the attribution
+record and case note; the supporting planning failures, rejected repairs and
+test improvements remain linked in the process history.
+
+This is the useful claim for the post: one stated rule violation was repaired
+under an unchanged test of that claim, with a record of the evidence and the
+process improvements it caused. Production integration is checked separately,
+and the named unsupported behaviors remain visible.

@@ -1,0 +1,89 @@
+{
+  "utc": "2026-09-05T23:33:08.046168+00:00",
+  "reviewer": "/root/hushbringer_full_review_final",
+  "verdict": "APPROVE",
+  "findings": [],
+  "maintainer_simulation_gate": "PASS",
+  "cr_gate": "PASS",
+  "acceptance_command_executed": false,
+  "approval_scope": "This exact frozen plan, baseline/candidate receipt pair, all9 planned candidate gate receipts and their verified build/evidence identities only; root retains responsibility for running the acceptance command.",
+  "approval_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/hushbringer-final-comparison/review-approved.json",
+  "approval_raw_sha256": "859cb24e69b9cb52d7590a007eedaf668ce3b5db7f65fa63e14b5e59cf86ee9c",
+  "approval_typed_id": "d8bad66eaf09cb164b026b94d212917576caa43924cb2eff91c6237fad7afa74",
+  "plan_id": "a7805de648da28015f0f68f8e94e8edc1770eba15ab75b355563cd27ad451c2f",
+  "baseline_receipt_id": "b1fdc82c7d77868bca4d2a8eb1929490e907cbdb9104168fedee920b72f2efdb",
+  "candidate_receipt_id": "d507713a15163662544562d178249fd92539f2b326cb665320fc5140d062e35e",
+  "phase_revision": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "live_source_files_reverified": 2051,
+  "captured_phase_source_files_reverified": 2050,
+  "candidate_build_sha256": "81eb62e305ee8d87d7e99ff31e2bcd382a226afded61236d48d51f6d148df6b9",
+  "candidate_worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+  "committed_patch_sha256": "f35967418e623234a47a9dd4499a5516e05cd4fc16d898953e60465d1a87fc60",
+  "baseline_worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+  "implementation_review_sha256": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2",
+  "implementation_review_manifest_sha256": "9ef9d420b1c3b903a515faf931a3321ea59dfd2a26fb9e29292f7d0eb1512713",
+  "frozen_corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "frozen_plan_raw_sha256": "62273bd941f13b5d1587b1f098c7db4a61cd39c5f96fb0a2bd61db32c631a715",
+  "acceptance_verification": {
+    "bundles": 20,
+    "retained_executions": 40,
+    "repeatability": "All pairs exactly equal and complete",
+    "independent_checker_commands": 20,
+    "independent_build_check_commands": 2,
+    "baseline_target_spirits": 1,
+    "candidate_target_spirits": 0,
+    "baseline_other_cases_satisfied": 9,
+    "candidate_regression_gates": 7,
+    "candidate_holdout_gates": 2,
+    "all_reachability_guards_pass": true,
+    "all_values_independently_recalculated": true
+  },
+  "supplemental_final_worker": {
+    "fresh_executions": 6,
+    "scenarios": 3,
+    "spirit_counts": [
+      0,
+      0,
+      1
+    ],
+    "both_object_orders": true,
+    "repeatability": "Each scenario exactly equal across2 executions",
+    "runtime_receipt_sha256": "ad58838b28d252566bc1c407e68c18ae9518eb5fc32d121b92233ae120099af4"
+  },
+  "build_provenance": {
+    "fresh_compiler_artifacts": 206,
+    "all_normalized_artifact_descriptors_match": true,
+    "compiler": "rustc 1.97.0-nightly (0febdbab2 2026-04-18)\nbinary: rustc\ncommit-hash: 0febdbab2720dc0360cd294c67db88d6d06580d4\ncommit-date: 2026-04-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0-nightly\nLLVM version: 22.1.2",
+    "build_environment": {},
+    "harness_source_files": 39,
+    "build_detail_sha256": "7f407c9660e797a0572453f2cd7a9c6b19ebe0f0a0bfe8ed5839be7c04e52f05",
+    "historical_baseline_target": "Absent; no current byte identity claimed. Preserved baseline worker and immutable build source/receipt records verified."
+  },
+  "bound_gate_receipt_ids": {
+    "19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a": "d480bcd2492ba427b7b9aa2bd85a90bc60daf282bc706a09fdfe1b918b52b20c",
+    "29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967": "4dc944cfd4dcd05ccf2edd83f2870e6162f384aeee307db90b6d6497fbef06aa",
+    "3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9": "e5c129aea816cd9de0c56fc7e0e3983bd365723132fcf477c3877397586a1057",
+    "454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512": "39581cdd77c61709bd283670531703c43f875a28389f88990ab80dec96f21095",
+    "4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d": "336369c1c36713f8b4a4e1b10cd6bc52ebb2f36eee52b6fa49b02b1394009212",
+    "7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db": "c332459688c429726c2ab2f4fac803d6cfb6f24f9f94dda29ea4d1cecac246dd",
+    "7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b": "2a83f3624adf8a032eb8d8d208d6422a2db5e85a12db3a431dcf92316181264b",
+    "816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc": "99cbdc533351103b5b18361cabfbd088e9c11f4e3dbc7d2cb84b85c355abc74c",
+    "b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366": "030e097e2cca38cc4c9a90db06a941ccfdec5d86b3361ef0c6c62d647a700fa9"
+  },
+  "limitations": [
+    "All ten approved rule limitations remain: aggregate grouping, inherited-target grouping, direct delayed suppression, full cross-pause grouping, ambiguous origins, intrinsic merge/nested layer worlds, co-dying off-zone Any source availability, aggregate paid continuation, cast-created regeneration persistence, resumed duplicate dispatch.",
+    "Twenty ignored desired diagnostics are excluded. Exactly-two no-Hush resumed explicit-target payoff is narrow inherited compatibility; ordinary no-Hush control remains exactly one.",
+    "Seeded regeneration covers first application only. Empty tracked-choice life23 versus selected22 remains inherited compatibility.",
+    "Zero-opponent Battle is defensive-only; public terminal/legal/multiple-choice/attacked/phased siblings do not establish that zero-choice runtime branch. Inherited non-Siege pending-stack/present-protector behavior is unclaimed.",
+    "No parser/data/card coverage promotion or throughput claim. None fallback can rescan functioning sources; missing historical benchmark input remains unavailable."
+  ],
+  "test_scope": "Full implementation review independently reproduced original bug using e4 and selected12 exact primary/native tests plus3 R3 tests using preserved actual fdc9 integration binary via exact comment-only source lineage. Historical full suite and mutation evidence remains explicitly inherited through that lineage. This acceptance audit independently checks fresh final fa0eb worker build and frozen10-case comparison; it does not rerun full engine suites or expand repaired coverage.",
+  "artifacts": {
+    "verified_final_sha256": "c74ede9415f699952e814132cc4798e9cb2f98b58b0252bb79753a6585ec905a",
+    "build_detail_sha256": "7f407c9660e797a0572453f2cd7a9c6b19ebe0f0a0bfe8ed5839be7c04e52f05",
+    "corpus_expectations_sha256": "79e0b7032a60528b977833acf850ef7e4c3fd61ef39ae7192c782bd5100e47e3",
+    "execution_notes_sha256": "da8209e91aae944d2917ec4beed9ee34eabea873d4c782dfa9a11399d0a235b3"
+  }
+}

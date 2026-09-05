@@ -1,0 +1,176 @@
+{
+  "utc": "2026-09-05T23:31:52.186591+00:00",
+  "status": "PASS",
+  "records": {
+    "baseline": {
+      "build_json_sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff",
+      "cargo_messages_sha256": "c459676feed6eafbd9d49e5a7af5446813c36b14247043b7a2efc99a130daa9c",
+      "compiler_artifacts": 206,
+      "fresh_artifacts": 0,
+      "relevant_artifacts": [
+        {
+          "reason": "compiler-artifact",
+          "package_id": "git+https://github.com/nishu-builder/phase.git?rev=2dec6c88915db4697706234a7ba2fcedd97b1689#engine@0.24.0",
+          "manifest_path": "/home/ubuntu/.cargo/git/checkouts/phase-99151a824d73ac02/2dec6c8/crates/engine/Cargo.toml",
+          "target": {
+            "kind": [
+              "lib"
+            ],
+            "crate_types": [
+              "lib"
+            ],
+            "name": "engine",
+            "src_path": "/home/ubuntu/.cargo/git/checkouts/phase-99151a824d73ac02/2dec6c8/crates/engine/src/lib.rs",
+            "edition": "2021",
+            "doc": true,
+            "doctest": true,
+            "test": true
+          },
+          "profile": {
+            "opt_level": "0",
+            "debuginfo": 2,
+            "debug_assertions": true,
+            "overflow_checks": true,
+            "test": false
+          },
+          "features": [],
+          "filenames": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/target/debug/deps/libengine-d43b98c140e615f7.rlib",
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/target/debug/deps/libengine-d43b98c140e615f7.rmeta"
+          ],
+          "executable": null,
+          "fresh": false
+        },
+        {
+          "reason": "compiler-artifact",
+          "package_id": "path+file:///home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/source/crates/coworld-mtg-harness#0.1.0",
+          "manifest_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/source/crates/coworld-mtg-harness/Cargo.toml",
+          "target": {
+            "kind": [
+              "bin"
+            ],
+            "crate_types": [
+              "bin"
+            ],
+            "name": "coworld-mtg-harness",
+            "src_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/source/crates/coworld-mtg-harness/src/main.rs",
+            "edition": "2021",
+            "doc": true,
+            "doctest": false,
+            "test": true
+          },
+          "profile": {
+            "opt_level": "0",
+            "debuginfo": 2,
+            "debug_assertions": true,
+            "overflow_checks": true,
+            "test": false
+          },
+          "features": [],
+          "filenames": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/target/debug/coworld-mtg-harness"
+          ],
+          "executable": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/target/debug/coworld-mtg-harness",
+          "fresh": false
+        }
+      ],
+      "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+      "target_worker_sha256": null,
+      "target_note": "Historical baseline target removed; preserved immutable worker and compiler receipt verified, no current target-byte claim"
+    },
+    "candidate": {
+      "build_json_sha256": "81eb62e305ee8d87d7e99ff31e2bcd382a226afded61236d48d51f6d148df6b9",
+      "cargo_messages_sha256": "019aab45999a0c26905c8bc6cb2576349e551a4a0a01c3ba7b4de45753069bf6",
+      "compiler_artifacts": 206,
+      "fresh_artifacts": 0,
+      "relevant_artifacts": [
+        {
+          "reason": "compiler-artifact",
+          "package_id": "path+file:///home/ubuntu/repos/phase-verifiable-loop/crates/engine#0.24.0",
+          "manifest_path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/Cargo.toml",
+          "target": {
+            "kind": [
+              "lib"
+            ],
+            "crate_types": [
+              "lib"
+            ],
+            "name": "engine",
+            "src_path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/src/lib.rs",
+            "edition": "2021",
+            "doc": true,
+            "doctest": true,
+            "test": true
+          },
+          "profile": {
+            "opt_level": "0",
+            "debuginfo": 2,
+            "debug_assertions": true,
+            "overflow_checks": true,
+            "test": false
+          },
+          "features": [],
+          "filenames": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/target/debug/deps/libengine-1788e36e81e2a5dd.rlib",
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/target/debug/deps/libengine-1788e36e81e2a5dd.rmeta"
+          ],
+          "executable": null,
+          "fresh": false
+        },
+        {
+          "reason": "compiler-artifact",
+          "package_id": "path+file:///home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/source/crates/coworld-mtg-harness#0.1.0",
+          "manifest_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/source/crates/coworld-mtg-harness/Cargo.toml",
+          "target": {
+            "kind": [
+              "bin"
+            ],
+            "crate_types": [
+              "bin"
+            ],
+            "name": "coworld-mtg-harness",
+            "src_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/source/crates/coworld-mtg-harness/src/main.rs",
+            "edition": "2021",
+            "doc": true,
+            "doctest": false,
+            "test": true
+          },
+          "profile": {
+            "opt_level": "0",
+            "debuginfo": 2,
+            "debug_assertions": true,
+            "overflow_checks": true,
+            "test": false
+          },
+          "features": [],
+          "filenames": [
+            "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/target/debug/coworld-mtg-harness"
+          ],
+          "executable": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-candidate-build/target/debug/coworld-mtg-harness",
+          "fresh": false
+        }
+      ],
+      "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+      "target_worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+      "target_note": "Current target exists and was hashed"
+    }
+  },
+  "all_206_normalized_artifact_package_features_profiles_match": true,
+  "artifact_comparison_normalization": "Only build directory prefixes and the engine package source identity are normalized; registry package IDs, target kind/name, all profile fields and all features must be equal.",
+  "resolved_lock_diff": "--- baseline/Cargo.lock\n+++ candidate/Cargo.lock\n@@ -383,7 +383,6 @@\n [[package]]\n name = \"engine\"\n version = \"0.24.0\"\n-source = \"git+https://github.com/nishu-builder/phase.git?rev=2dec6c88915db4697706234a7ba2fcedd97b1689#2dec6c88915db4697706234a7ba2fcedd97b1689\"\n dependencies = [\n  \"im\",\n  \"indexmap\",\n",
+  "build_environment": {},
+  "compiler": "rustc 1.97.0-nightly (0febdbab2 2026-04-18)\nbinary: rustc\ncommit-hash: 0febdbab2720dc0360cd294c67db88d6d06580d4\ncommit-date: 2026-04-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0-nightly\nLLVM version: 22.1.2",
+  "fresh_build_log_sha256": "18b88df67a861bccb9daad9d9adf935a3810c9c7812d4afec8ac34632c5cf24d",
+  "invocation_ancestor_and_cargo_home_configs": [],
+  "reviewed_dependency_local_config": {
+    "path": "/home/ubuntu/repos/phase-verifiable-loop/.cargo/config.toml",
+    "sha256": "d0efb995770ad964d022f8c58a19a7e01ca5de25d1b6386bdf4f9dcb01fa30c5",
+    "content": "[alias]\nrelease-local = \"release --workspace --execute --no-confirm --no-publish --no-push\"\nwasm = \"build --package engine-wasm --target wasm32-unknown-unknown --profile wasm-dev\"\nwasm-release = \"build --package engine-wasm --target wasm32-unknown-unknown --release\"\ntest-all = \"nextest run --workspace --features engine/proptest\"\nclippy-strict = \"clippy --all-targets -- -D warnings\"\nexport-cards = \"run --profile tool --features cli --bin oracle-gen --\"\nserve = \"run --release --bin phase-server\"\ncoverage = \"run --profile tool --bin coverage-report -- data/\"\nparser-gaps = \"run --profile tool --bin parser-gap-analyzer -- data/\"\nrules-audit = \"run --profile tool --bin rules-audit --features audit --\"\nsemantic-audit = \"run --profile tool --features cli --bin oracle-gen -- semantic-audit\"\ncombo-verify = \"run --profile tool --features combo-verify --bin combo-verify -- data/\"\nscrape-feeds = \"run --release -p feed-scraper --\"\ntune-ai = \"run --release --features tune --bin ai-tune --\"\nai-gate = \"run --bin ai-gate --\"\nai-perf-gate = \"run --bin ai-perf-gate --\"\nengine-inventory = \"run --quiet -p engine-inventory-gen\"\n\n[env]\n# 16 MB stack for test threads \u2014 prevents stack overflow when Debug formatting\n# deeply nested recursive types (Effect \u2194 AbilityDefinition mutual recursion).\nRUST_MIN_STACK = \"16777216\"\n",
+    "applied": false,
+    "reason": "Build executes from the copied Coworld workspace; the Phase dependency directory is not an invocation ancestor. No build alias is invoked."
+  },
+  "reviewed_live_source_count": 2051,
+  "captured_phase_source_count": 2050,
+  "capture_scope": "Frozen builder captures Cargo.toml/Cargo.lock/rust-toolchain.toml and crates, excluding .cargo/config.toml. The 2050 source payloads exactly match the corresponding reviewed manifest entries; all2051 live reviewed files remain unchanged.",
+  "runtime_note": "No test compilation is inferred from this normal worker build. Prior full engine suites retain their explicitly documented comment-only source-lineage provenance."
+}

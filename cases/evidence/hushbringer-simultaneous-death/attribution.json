@@ -1,0 +1,1414 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "case": {
+    "title": "Hushbringer suppresses a death trigger even while dying",
+    "author": "codex-case-author",
+    "justification": {
+      "kind": "rules",
+      "citations": [
+        {
+          "source": "https://scryfall.com/card/eld/18/hushbringer",
+          "reference": "Ruling 2019-10-04; CR 603.10",
+          "statement": "A creature dying simultaneously with Hushbringer does not cause death abilities to trigger, including when Hushbringer also dies."
+        }
+      ]
+    },
+    "scenario": {
+      "seed": 42,
+      "life": [
+        20,
+        20
+      ],
+      "mana": [
+        [
+          "white",
+          "white",
+          "colorless",
+          "colorless"
+        ],
+        []
+      ],
+      "cards": [
+        {
+          "label": "hush",
+          "name": "Hushbringer",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0
+        },
+        {
+          "label": "traveler",
+          "name": "Doomed Traveler",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0
+        },
+        {
+          "label": "wrath",
+          "name": "Wrath of God",
+          "owner": "player",
+          "zone": "hand",
+          "tapped": false,
+          "plus_one_counters": 0
+        }
+      ],
+      "operations": [
+        {
+          "kind": "cast",
+          "card": "wrath",
+          "targets": [],
+          "finish": "resolve",
+          "x": null
+        }
+      ]
+    },
+    "guards": [
+      {
+        "id": "hush-died",
+        "predicate": {
+          "kind": "zone",
+          "object": "hush",
+          "equals": "graveyard"
+        }
+      },
+      {
+        "id": "traveler-died",
+        "predicate": {
+          "kind": "zone",
+          "object": "traveler",
+          "equals": "graveyard"
+        }
+      },
+      {
+        "id": "wrath-finished",
+        "predicate": {
+          "kind": "zone",
+          "object": "wrath",
+          "equals": "graveyard"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "id": "simultaneous-death-suppressed",
+        "predicate": {
+          "kind": "zone_count",
+          "seat": "player",
+          "zone": "battlefield",
+          "name": "Spirit",
+          "equals": 0
+        }
+      }
+    ]
+  },
+  "plan": {
+    "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+    "regression_case_ids": [
+      "29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967",
+      "3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9",
+      "4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d",
+      "b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366",
+      "7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b",
+      "816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc",
+      "19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a"
+    ],
+    "holdout_case_ids": [
+      "7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db",
+      "454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512"
+    ]
+  },
+  "baseline": {
+    "protocol": "coworld-improvement-v1",
+    "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+    "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+    "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+    "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+    "evidence_sha256": [
+      "c5c9e52d041ffe3327af2c3abedab83d0ab0296c70feda25349a12d931e6f4d2",
+      "c5c9e52d041ffe3327af2c3abedab83d0ab0296c70feda25349a12d931e6f4d2"
+    ],
+    "repeatability": "verified",
+    "result": {
+      "kind": "violated",
+      "assertion_ids": [
+        "simultaneous-death-suppressed"
+      ]
+    }
+  },
+  "candidate": {
+    "protocol": "coworld-improvement-v1",
+    "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+    "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+    "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+    "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+    "evidence_sha256": [
+      "564c45ed0b2d812997528c71993d4d91ad9670f8920b547e05c7f8512ab263cc",
+      "564c45ed0b2d812997528c71993d4d91ad9670f8920b547e05c7f8512ab263cc"
+    ],
+    "repeatability": "verified",
+    "result": {
+      "kind": "satisfied"
+    }
+  },
+  "baseline_execution": {
+    "protocol": "coworld-improvement-v1",
+    "request_id": "b1164dd7001cc66cf8e27a2980f9300c70300f2e8dd85d9fb459d4d28ea4006f",
+    "binary_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+    "declared_phase_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+    "outcome": {
+      "kind": "completed",
+      "observation": {
+        "life": [
+          20,
+          20
+        ],
+        "objects": [
+          {
+            "object_id": 1,
+            "name": "Hushbringer",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 2,
+            "name": "Doomed Traveler",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 3,
+            "name": "Wrath of God",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 5,
+            "name": "Spirit",
+            "owner": "player",
+            "zone": "battlefield",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          }
+        ],
+        "labels": {
+          "hush": 1,
+          "traveler": 2,
+          "wrath": 3
+        }
+      },
+      "steps": [
+        {
+          "operation_index": 0,
+          "state_sha256": "83e8983ab0dc7f3f24e22412a5529c02b3a6c9c32d857ee61b15f024e6c7e4aa"
+        }
+      ]
+    }
+  },
+  "candidate_execution": {
+    "protocol": "coworld-improvement-v1",
+    "request_id": "b1164dd7001cc66cf8e27a2980f9300c70300f2e8dd85d9fb459d4d28ea4006f",
+    "binary_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+    "declared_phase_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+    "outcome": {
+      "kind": "completed",
+      "observation": {
+        "life": [
+          20,
+          20
+        ],
+        "objects": [
+          {
+            "object_id": 1,
+            "name": "Hushbringer",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 2,
+            "name": "Doomed Traveler",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          },
+          {
+            "object_id": 3,
+            "name": "Wrath of God",
+            "owner": "player",
+            "zone": "graveyard",
+            "tapped": false,
+            "plus_one_counters": 0,
+            "prepared": false,
+            "cast_spell_offered_to": []
+          }
+        ],
+        "labels": {
+          "hush": 1,
+          "traveler": 2,
+          "wrath": 3
+        }
+      },
+      "steps": [
+        {
+          "operation_index": 0,
+          "state_sha256": "edc135397e3d84e56bf45611c68a5a61265e07e8a34bb4578d3c215d7ad4d9f5"
+        }
+      ]
+    }
+  },
+  "gates": [
+    {
+      "case": {
+        "title": "Lightning Helix gains life when its target remains legal",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/mkm/218/lightning-helix",
+              "reference": "Ruling 2024-02-02; CR 608.2b",
+              "statement": "If the only target becomes illegal, neither damage nor life gain occurs. With a legal target, both instructions occur."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "red",
+              "white"
+            ],
+            []
+          ],
+          "cards": [
+            {
+              "label": "helix",
+              "name": "Lightning Helix",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "helix",
+              "targets": [
+                {
+                  "kind": "player",
+                  "seat": "opponent"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "spell-resolved",
+            "predicate": {
+              "kind": "zone",
+              "object": "helix",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "caster-gains-three",
+            "predicate": {
+              "kind": "life",
+              "seat": "player",
+              "equals": 23
+            }
+          },
+          {
+            "id": "target-takes-three",
+            "predicate": {
+              "kind": "life",
+              "seat": "opponent",
+              "equals": 17
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "328e702919a05630a91ed0ca94dc1b32dbb68bc0a0b78a214dc8734085a50daa",
+          "328e702919a05630a91ed0ca94dc1b32dbb68bc0a0b78a214dc8734085a50daa"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Lightning Helix loses its target and its life gain",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/mkm/218/lightning-helix",
+              "reference": "Ruling 2024-02-02; CR 608.2b",
+              "statement": "If the only target becomes illegal, neither damage nor life gain occurs. With a legal target, both instructions occur."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "red",
+              "white"
+            ],
+            [
+              "white"
+            ]
+          ],
+          "cards": [
+            {
+              "label": "helix",
+              "name": "Lightning Helix",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "bear",
+              "name": "Grizzly Bears",
+              "owner": "opponent",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "swords",
+              "name": "Swords to Plowshares",
+              "owner": "opponent",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "irrelevant-land",
+              "name": "Forest",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "helix",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "commit",
+              "x": null
+            },
+            {
+              "kind": "pass_priority"
+            },
+            {
+              "kind": "cast",
+              "card": "swords",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "resolve_stack"
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "target-actually-exiled",
+            "predicate": {
+              "kind": "zone",
+              "object": "bear",
+              "equals": "exile"
+            }
+          },
+          {
+            "id": "helix-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "helix",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "no-life-without-target",
+            "predicate": {
+              "kind": "life",
+              "seat": "player",
+              "equals": 20
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "c283d6ee71149516fdb63bbe869c4639b356862eda01ca7f0ef49f298085e4b3",
+          "c283d6ee71149516fdb63bbe869c4639b356862eda01ca7f0ef49f298085e4b3"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Swords to Plowshares remembers counters after exile",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/msc/143/swords-to-plowshares",
+              "reference": "Ruling 2022-12-08; CR 608.2h",
+              "statement": "Life gain uses the creature power as it last existed on the battlefield, including counters."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "white"
+            ],
+            []
+          ],
+          "cards": [
+            {
+              "label": "swords",
+              "name": "Swords to Plowshares",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "bear",
+              "name": "Grizzly Bears",
+              "owner": "opponent",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 3
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "swords",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "target-actually-exiled",
+            "predicate": {
+              "kind": "zone",
+              "object": "bear",
+              "equals": "exile"
+            }
+          },
+          {
+            "id": "spell-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "swords",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "last-known-power-five",
+            "predicate": {
+              "kind": "life",
+              "seat": "opponent",
+              "equals": 25
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "7f01b5443cd2f1e344f6809c5ff63eb0919d7e0d8c21246765a5315628867dab",
+          "7f01b5443cd2f1e344f6809c5ff63eb0919d7e0d8c21246765a5315628867dab"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Young Pyromancer keeps the token from a countered spell",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/tdc/95/young-pyromancer",
+              "reference": "Ruling 2021-03-19; CR 603.2",
+              "statement": "The cast-triggered ability survives the countering of the spell that triggered it."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "red"
+            ],
+            [
+              "blue",
+              "blue"
+            ]
+          ],
+          "cards": [
+            {
+              "label": "pyromancer",
+              "name": "Young Pyromancer",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "shock",
+              "name": "Shock",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "counter",
+              "name": "Counterspell",
+              "owner": "opponent",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "shock",
+              "targets": [
+                {
+                  "kind": "player",
+                  "seat": "opponent"
+                }
+              ],
+              "finish": "commit",
+              "x": null
+            },
+            {
+              "kind": "pass_priority"
+            },
+            {
+              "kind": "cast",
+              "card": "counter",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "shock"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "resolve_stack"
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "counter-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "counter",
+              "equals": "graveyard"
+            }
+          },
+          {
+            "id": "shock-countered",
+            "predicate": {
+              "kind": "zone",
+              "object": "shock",
+              "equals": "graveyard"
+            }
+          },
+          {
+            "id": "shock-did-not-resolve",
+            "predicate": {
+              "kind": "life",
+              "seat": "opponent",
+              "equals": 20
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "cast-trigger-survives",
+            "predicate": {
+              "kind": "zone_count",
+              "seat": "player",
+              "zone": "battlefield",
+              "name": "Elemental",
+              "equals": 1
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "e3364b0c739944b232b3eaf48a5095ac6f2a0468d0df6393ba9d1dcee71f3d83",
+          "e3364b0c739944b232b3eaf48a5095ac6f2a0468d0df6393ba9d1dcee71f3d83"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Doomed Traveler creates a Spirit without Hushbringer",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/clu/59/doomed-traveler",
+              "reference": "Oracle death trigger; CR 603.6c",
+              "statement": "Doomed Traveler creates a Spirit after dying when no effect suppresses its trigger."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "white",
+              "white",
+              "colorless",
+              "colorless"
+            ],
+            []
+          ],
+          "cards": [
+            {
+              "label": "traveler",
+              "name": "Doomed Traveler",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "wrath",
+              "name": "Wrath of God",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "wrath",
+              "targets": [],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "resolve_stack"
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "traveler-died",
+            "predicate": {
+              "kind": "zone",
+              "object": "traveler",
+              "equals": "graveyard"
+            }
+          },
+          {
+            "id": "wrath-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "wrath",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "ordinary-death-triggers",
+            "predicate": {
+              "kind": "zone_count",
+              "seat": "player",
+              "zone": "battlefield",
+              "name": "Spirit",
+              "equals": 1
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "9be97c2e978b1b689c29931a34bf8010be73b51386639908d016753bc1fe7368",
+          "9be97c2e978b1b689c29931a34bf8010be73b51386639908d016753bc1fe7368"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Rancor cannot return from a battlefield it never reached",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/2x2/156/rancor",
+              "reference": "Ruling 2018-03-16; CR 608.2b, 603.6c",
+              "statement": "Rancor returns only after going from battlefield to graveyard. An Aura spell that loses its target never enters the battlefield."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "green"
+            ],
+            [
+              "black",
+              "colorless"
+            ]
+          ],
+          "cards": [
+            {
+              "label": "rancor",
+              "name": "Rancor",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "bear",
+              "name": "Grizzly Bears",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "doom",
+              "name": "Doom Blade",
+              "owner": "opponent",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "rancor",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "commit",
+              "x": null
+            },
+            {
+              "kind": "pass_priority"
+            },
+            {
+              "kind": "cast",
+              "card": "doom",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "resolve_stack"
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "target-died",
+            "predicate": {
+              "kind": "zone",
+              "object": "bear",
+              "equals": "graveyard"
+            }
+          },
+          {
+            "id": "removal-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "doom",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "aura-stays-in-graveyard",
+            "predicate": {
+              "kind": "zone",
+              "object": "rancor",
+              "equals": "graveyard"
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "765962f32645b874ed02a75fd7d16cd80030de00ef1bb8404c8e4fd4e7a419ce",
+          "765962f32645b874ed02a75fd7d16cd80030de00ef1bb8404c8e4fd4e7a419ce"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Rancor returns after its enchanted creature dies",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/2x2/156/rancor",
+              "reference": "Ruling 2018-03-16; CR 608.2b, 603.6c",
+              "statement": "Rancor returns only after going from battlefield to graveyard. An Aura spell that loses its target never enters the battlefield."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "green"
+            ],
+            [
+              "black",
+              "colorless"
+            ]
+          ],
+          "cards": [
+            {
+              "label": "rancor",
+              "name": "Rancor",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "bear",
+              "name": "Grizzly Bears",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "doom",
+              "name": "Doom Blade",
+              "owner": "opponent",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "rancor",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "pass_priority"
+            },
+            {
+              "kind": "cast",
+              "card": "doom",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "bear"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "resolve_stack"
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "target-died",
+            "predicate": {
+              "kind": "zone",
+              "object": "bear",
+              "equals": "graveyard"
+            }
+          },
+          {
+            "id": "removal-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "doom",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "aura-returns-to-hand",
+            "predicate": {
+              "kind": "zone",
+              "object": "rancor",
+              "equals": "hand"
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "ecd136dd12db4ddd838d979985e695c0a6bd91ee291c144495eb7e3d94549deb",
+          "ecd136dd12db4ddd838d979985e695c0a6bd91ee291c144495eb7e3d94549deb"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Removing Hushbringer before the deaths restores the trigger",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://scryfall.com/card/eld/18/hushbringer",
+              "reference": "Ruling 2019-10-04; CR 603.10",
+              "statement": "A creature dying simultaneously with Hushbringer does not cause death abilities to trigger, including when Hushbringer also dies."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "white",
+              "white",
+              "white",
+              "colorless",
+              "colorless"
+            ],
+            []
+          ],
+          "cards": [
+            {
+              "label": "hush",
+              "name": "Hushbringer",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "traveler",
+              "name": "Doomed Traveler",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "wrath",
+              "name": "Wrath of God",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "swords",
+              "name": "Swords to Plowshares",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "swords",
+              "targets": [
+                {
+                  "kind": "object",
+                  "label": "hush"
+                }
+              ],
+              "finish": "resolve",
+              "x": null
+            },
+            {
+              "kind": "cast",
+              "card": "wrath",
+              "targets": [],
+              "finish": "resolve",
+              "x": null
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "hush-died",
+            "predicate": {
+              "kind": "zone",
+              "object": "hush",
+              "equals": "exile"
+            }
+          },
+          {
+            "id": "traveler-died",
+            "predicate": {
+              "kind": "zone",
+              "object": "traveler",
+              "equals": "graveyard"
+            }
+          },
+          {
+            "id": "wrath-finished",
+            "predicate": {
+              "kind": "zone",
+              "object": "wrath",
+              "equals": "graveyard"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "earlier-removal-does-not-suppress",
+            "predicate": {
+              "kind": "zone_count",
+              "seat": "player",
+              "zone": "battlefield",
+              "name": "Spirit",
+              "equals": 1
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "3a86a4fcd2af77599b4eaf29926113ec112328947cc9033c2d6dc6f9023f046d",
+          "3a86a4fcd2af77599b4eaf29926113ec112328947cc9033c2d6dc6f9023f046d"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    },
+    {
+      "case": {
+        "title": "Hushbringer leaves Stonecoil Serpent entry counters intact",
+        "author": "codex-case-author",
+        "justification": {
+          "kind": "rules",
+          "citations": [
+            {
+              "source": "https://magic.wizards.com/en/news/feature/throne-eldraine-release-notes-2019-09-20",
+              "reference": "Hushbringer replacement-effect ruling; CR 614.1c",
+              "statement": "Trigger suppression does not suppress an enters-with-counters replacement effect."
+            },
+            {
+              "source": "https://scryfall.com/card/soc/356/stonecoil-serpent",
+              "reference": "Stonecoil Serpent Oracle text",
+              "statement": "Stonecoil Serpent enters with X +1/+1 counters."
+            }
+          ]
+        },
+        "scenario": {
+          "seed": 42,
+          "life": [
+            20,
+            20
+          ],
+          "mana": [
+            [
+              "colorless",
+              "colorless",
+              "colorless"
+            ],
+            []
+          ],
+          "cards": [
+            {
+              "label": "hush",
+              "name": "Hushbringer",
+              "owner": "player",
+              "zone": "battlefield",
+              "tapped": false,
+              "plus_one_counters": 0
+            },
+            {
+              "label": "serpent",
+              "name": "Stonecoil Serpent",
+              "owner": "player",
+              "zone": "hand",
+              "tapped": false,
+              "plus_one_counters": 0
+            }
+          ],
+          "operations": [
+            {
+              "kind": "cast",
+              "card": "serpent",
+              "targets": [],
+              "finish": "resolve",
+              "x": 3
+            }
+          ]
+        },
+        "guards": [
+          {
+            "id": "creature-entered",
+            "predicate": {
+              "kind": "zone",
+              "object": "serpent",
+              "equals": "battlefield"
+            }
+          }
+        ],
+        "assertions": [
+          {
+            "id": "replacement-counters-preserved",
+            "predicate": {
+              "kind": "plus_one_counters",
+              "object": "serpent",
+              "equals": 3
+            }
+          }
+        ]
+      },
+      "receipt": {
+        "protocol": "coworld-improvement-v1",
+        "case_id": "454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512",
+        "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+        "worker_sha256": "f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784",
+        "checker_sha256": "f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1",
+        "evidence_sha256": [
+          "4496b7192930b5f7be9120b4a09b35634e18b710da63bf906a3aa21afdf1a1a5",
+          "4496b7192930b5f7be9120b4a09b35634e18b710da63bf906a3aa21afdf1a1a5"
+        ],
+        "repeatability": "verified",
+        "result": {
+          "kind": "satisfied"
+        }
+      }
+    }
+  ],
+  "repair": {
+    "repository": "https://github.com/nishu-builder/phase.git",
+    "base_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+    "revision": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+    "patch_sha256": "f35967418e623234a47a9dd4499a5516e05cd4fc16d898953e60465d1a87fc60",
+    "baseline_build_sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff",
+    "candidate_build_sha256": "81eb62e305ee8d87d7e99ff31e2bcd382a226afded61236d48d51f6d148df6b9"
+  },
+  "review": {
+    "plan_id": "a7805de648da28015f0f68f8e94e8edc1770eba15ab75b355563cd27ad451c2f",
+    "baseline_receipt_id": "b1fdc82c7d77868bca4d2a8eb1929490e907cbdb9104168fedee920b72f2efdb",
+    "candidate_receipt_id": "d507713a15163662544562d178249fd92539f2b326cb665320fc5140d062e35e",
+    "reviewer": "/root/hushbringer_full_review_final",
+    "rationale": "I independently reviewed the full 30-path engine patch and all affected source/tests against the approved 868-line plan, actual repository CR, constructor/consumer inventories and mutation/native-path evidence. Maintainer-Simulation and CR gates pass with no outstanding findings; full implementation report SHA256 be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2. The repair captures event-time functioning trigger-suppression authority and source last-known information through scoped immediate, deferred-cost and native choice/SBA paths; it is not a card-name condition. I then verified the newly compiled clean Phase commit fa0ebfe88db224ebd32624bb96ef033d338c2d8c against all2051 reviewed live source hashes (manifest ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847); all2050 files captured by the unchanged builder match. Candidate worker SHA256 f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784 uses the same39 harness sources, compiler, builder and relevant build settings as original e4 baseline. All206 compiler artifacts were newly built; the resolved lock differs only in the expected engine source. Build detail audit SHA256 7f407c9660e797a0572453f2cd7a9c6b19ebe0f0a0bfe8ed5839be7c04e52f05. Using the unchanged f9 checker I independently verified all20 retained bundles, their exact case/corpus/worker/checker/evidence bindings and all40 repeated executions, and separately recalculated every reachability guard and observed assertion. Baseline creates1 Spirit while both Hushbringer and Doomed Traveler die; candidate creates0. All7 frozen regression and2 separately selected holdout cases satisfy with the same candidate worker/corpus/checker. Verification detail SHA256 c74ede9415f699952e814132cc4798e9cb2f98b58b0252bb79753a6585ec905a. Six additional fresh final-worker executions confirm both object orders produce0 and the no-Hush control produces1, with exact repeat equality and graveyard guards. This approval is limited to this exact plan and these bound receipt/build/evidence identities. Prior full-engine test evidence retains the implementation review's exact comment-only predecessor lineage; this worker build is fresh but is not a rerun of those full suites. The20 ignored desired diagnostics and all10 approved engine limitations remain excluded, as do parser/data coverage promotion, throughput and universal rules correctness. No acceptance command has been executed by this reviewer.",
+    "decision": "approve"
+  },
+  "acceptance": {
+    "kind": "accepted",
+    "plan_id": "a7805de648da28015f0f68f8e94e8edc1770eba15ab75b355563cd27ad451c2f",
+    "baseline_receipt_id": "b1fdc82c7d77868bca4d2a8eb1929490e907cbdb9104168fedee920b72f2efdb",
+    "candidate_receipt_id": "d507713a15163662544562d178249fd92539f2b326cb665320fc5140d062e35e",
+    "gate_receipt_ids": [
+      "4dc944cfd4dcd05ccf2edd83f2870e6162f384aeee307db90b6d6497fbef06aa",
+      "e5c129aea816cd9de0c56fc7e0e3983bd365723132fcf477c3877397586a1057",
+      "336369c1c36713f8b4a4e1b10cd6bc52ebb2f36eee52b6fa49b02b1394009212",
+      "030e097e2cca38cc4c9a90db06a941ccfdec5d86b3361ef0c6c62d647a700fa9",
+      "2a83f3624adf8a032eb8d8d208d6422a2db5e85a12db3a431dcf92316181264b",
+      "99cbdc533351103b5b18361cabfbd088e9c11f4e3dbc7d2cb84b85c355abc74c",
+      "d480bcd2492ba427b7b9aa2bd85a90bc60daf282bc706a09fdfe1b918b52b20c",
+      "c332459688c429726c2ab2f4fac803d6cfb6f24f9f94dda29ea4d1cecac246dd",
+      "39581cdd77c61709bd283670531703c43f875a28389f88990ab80dec96f21095"
+    ],
+    "review_id": "d8bad66eaf09cb164b026b94d212917576caa43924cb2eff91c6237fad7afa74"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "corpus_path": "/home/ubuntu/repos/coworld-mtg/cases/corpus/corpus.json",
+  "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "red"
+      ],
+      [
+        "blue",
+        "blue"
+      ]
+    ],
+    "cards": [
+      {
+        "label": "pyromancer",
+        "name": "Young Pyromancer",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "shock",
+        "name": "Shock",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "counter",
+        "name": "Counterspell",
+        "owner": "opponent",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "shock",
+        "targets": [
+          {
+            "kind": "player",
+            "seat": "opponent"
+          }
+        ],
+        "finish": "commit",
+        "x": null
+      },
+      {
+        "kind": "pass_priority"
+      },
+      {
+        "kind": "cast",
+        "card": "counter",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "shock"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      },
+      {
+        "kind": "resolve_stack"
+      }
+    ]
+  }
+}

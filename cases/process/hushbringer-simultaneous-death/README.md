@@ -134,3 +134,5 @@ The [final citation correction](v10-citation-correction/README.md) changes only 
 The [engine/corpus publication boundary](corpus-pin-boundary/README.md) adds the corpus lock to the Phase pin check. A deliberately stale revision passed the old gate; the new CLI regression rejects it and fails when the checker is reverted.
 
 The [third full implementation review](v10-clean-implementation-review/README.md) passes both gates with no outstanding findings. It verifies the corrected R3 fixture descriptions and all linked evidence. The exact reviewed source is committed; final committed-worker comparison and acceptance remain pending at this checkpoint.
+
+The [fixed-checker acceptance](fixed-checker-acceptance/README.md) records the actual clean committed-worker comparison, independent bound approval and successful acceptance command. The generated case note and attribution now appear in the accepted evidence catalog. Production integration remains a separate verification step.

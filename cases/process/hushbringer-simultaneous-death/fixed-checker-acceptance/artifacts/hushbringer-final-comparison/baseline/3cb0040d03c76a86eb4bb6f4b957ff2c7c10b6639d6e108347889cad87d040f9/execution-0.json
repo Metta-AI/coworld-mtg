@@ -1,0 +1,81 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "3c2df5975309808a58a1e3b072fb08eb0791d815575eb82cdfe45184bb828b63",
+  "binary_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "declared_phase_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        22
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Lightning Helix",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Grizzly Bears",
+          "owner": "opponent",
+          "zone": "exile",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 3,
+          "name": "Swords to Plowshares",
+          "owner": "opponent",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 4,
+          "name": "Forest",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "bear": 2,
+        "helix": 1,
+        "irrelevant-land": 4,
+        "swords": 3
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "9dc8a5b079107ecc256322bd6029ee988bdd90f8dda858d371aa63ec38a192dc"
+      },
+      {
+        "operation_index": 1,
+        "state_sha256": "11b18025ddcbe88bdf5c534e2eeb2a0987584a187d75131df48862b83935ae63"
+      },
+      {
+        "operation_index": 2,
+        "state_sha256": "92ca8457ddc18d40db2fe48a33a30006e79c38aecf3c4a2d67090bc812db1bb8"
+      },
+      {
+        "operation_index": 3,
+        "state_sha256": "92ca8457ddc18d40db2fe48a33a30006e79c38aecf3c4a2d67090bc812db1bb8"
+      }
+    ]
+  }
+}

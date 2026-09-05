@@ -1,0 +1,918 @@
+{
+  "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "card_records": {
+    "counterspell": {
+      "name": "Counterspell",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "Blue",
+          "Blue"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Instant"
+        ],
+        "subtypes": [],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Counter target spell.",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": null,
+          "description": "Counter target spell.",
+          "duration": null,
+          "effect": {
+            "target": {
+              "type": "StackSpell"
+            },
+            "type": "Counter"
+          },
+          "forward_result": false,
+          "kind": "Spell",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": null,
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "doom blade": {
+      "name": "Doom Blade",
+      "mana_cost": {
+        "generic": 1,
+        "shards": [
+          "Black"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Instant"
+        ],
+        "subtypes": [],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Destroy target nonblack creature.",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": null,
+          "description": "Destroy target nonblack creature.",
+          "duration": null,
+          "effect": {
+            "cant_regenerate": false,
+            "target": {
+              "controller": null,
+              "properties": [
+                {
+                  "color": "Black",
+                  "type": "NotColor"
+                }
+              ],
+              "type": "Typed",
+              "type_filters": [
+                "Creature"
+              ]
+            },
+            "type": "Destroy"
+          },
+          "forward_result": false,
+          "kind": "Spell",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": null,
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "doomed traveler": {
+      "name": "Doomed Traveler",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "White"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Creature"
+        ],
+        "subtypes": [
+          "Human",
+          "Soldier"
+        ],
+        "supertypes": []
+      },
+      "power": {
+        "type": "Fixed",
+        "value": 1
+      },
+      "toughness": {
+        "type": "Fixed",
+        "value": 1
+      },
+      "oracle_text": "When this creature dies, create a 1/1 white Spirit creature token with flying.",
+      "keywords": [],
+      "abilities": [],
+      "triggers": [
+        {
+          "batched": false,
+          "condition": null,
+          "constraint": null,
+          "damage_kind": "Any",
+          "description": "When ~ dies, create a 1/1 white Spirit creature token with flying.",
+          "destination": "Graveyard",
+          "execute": {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "colors": [
+                "White"
+              ],
+              "count": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "enters_attacking": false,
+              "keywords": [
+                "Flying"
+              ],
+              "name": "Spirit",
+              "owner": {
+                "type": "Controller"
+              },
+              "power": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "tapped": false,
+              "toughness": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "type": "Token",
+              "types": [
+                "Creature",
+                "Spirit"
+              ]
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          },
+          "mode": "ChangesZone",
+          "optional": false,
+          "origin": "Battlefield",
+          "phase": null,
+          "secondary": false,
+          "trigger_zones": [
+            "Graveyard"
+          ],
+          "valid_card": {
+            "type": "SelfRef"
+          },
+          "valid_source": null,
+          "valid_target": null
+        }
+      ],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "forest": {
+      "name": "Forest",
+      "mana_cost": {
+        "type": "NoCost"
+      },
+      "card_type": {
+        "core_types": [
+          "Land"
+        ],
+        "subtypes": [
+          "Forest"
+        ],
+        "supertypes": [
+          "Basic"
+        ]
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "({T}: Add {G}.)",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": {
+            "type": "Tap"
+          },
+          "description": null,
+          "duration": null,
+          "effect": {
+            "produced": {
+              "colors": [
+                "Green"
+              ],
+              "type": "Fixed"
+            },
+            "type": "Mana"
+          },
+          "forward_result": false,
+          "is_mana_ability": true,
+          "kind": "Activated",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": null,
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "grizzly bears": {
+      "name": "Grizzly Bears",
+      "mana_cost": {
+        "generic": 1,
+        "shards": [
+          "Green"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Creature"
+        ],
+        "subtypes": [
+          "Bear"
+        ],
+        "supertypes": []
+      },
+      "power": {
+        "type": "Fixed",
+        "value": 2
+      },
+      "toughness": {
+        "type": "Fixed",
+        "value": 2
+      },
+      "oracle_text": null,
+      "keywords": [],
+      "abilities": [],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "hushbringer": {
+      "name": "Hushbringer",
+      "mana_cost": {
+        "generic": 1,
+        "shards": [
+          "White"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Creature"
+        ],
+        "subtypes": [
+          "Faerie"
+        ],
+        "supertypes": []
+      },
+      "power": {
+        "type": "Fixed",
+        "value": 1
+      },
+      "toughness": {
+        "type": "Fixed",
+        "value": 2
+      },
+      "oracle_text": "Flying, lifelink\nCreatures entering or dying don't cause abilities to trigger.",
+      "keywords": [
+        "Flying",
+        "Lifelink"
+      ],
+      "abilities": [],
+      "triggers": [],
+      "static_abilities": [
+        {
+          "active_zones": [],
+          "affected": null,
+          "affected_zone": null,
+          "characteristic_defining": false,
+          "condition": null,
+          "description": "Creatures entering or dying don't cause abilities to trigger.",
+          "effect_zone": null,
+          "mode": {
+            "SuppressTriggers": {
+              "events": [
+                "EntersBattlefield",
+                "Dies"
+              ],
+              "source_filter": {
+                "controller": null,
+                "properties": [],
+                "type": "Typed",
+                "type_filters": [
+                  "Creature"
+                ]
+              }
+            }
+          },
+          "modifications": []
+        }
+      ],
+      "replacements": []
+    },
+    "lightning helix": {
+      "name": "Lightning Helix",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "Red",
+          "White"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Instant"
+        ],
+        "subtypes": [],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Lightning Helix deals 3 damage to any target and you gain 3 life.",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": null,
+          "description": "~ deals 3 damage to any target and you gain 3 life.",
+          "duration": null,
+          "effect": {
+            "amount": {
+              "type": "Fixed",
+              "value": 3
+            },
+            "target": {
+              "type": "Any"
+            },
+            "type": "DealDamage"
+          },
+          "forward_result": false,
+          "kind": "Spell",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "amount": {
+                "type": "Fixed",
+                "value": 3
+              },
+              "type": "GainLife"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          },
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "rancor": {
+      "name": "Rancor",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "Green"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Enchantment"
+        ],
+        "subtypes": [
+          "Aura"
+        ],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Enchant creature\nEnchanted creature gets +2/+0 and has trample.\nWhen this Aura is put into a graveyard from the battlefield, return it to its owner's hand.",
+      "keywords": [
+        {
+          "Enchant": {
+            "controller": null,
+            "properties": [],
+            "type": "Typed",
+            "type_filters": [
+              "Creature"
+            ]
+          }
+        }
+      ],
+      "abilities": [],
+      "triggers": [
+        {
+          "batched": false,
+          "condition": null,
+          "constraint": null,
+          "damage_kind": "Any",
+          "description": "When ~ is put into a graveyard from the battlefield, return it to its owner's hand.",
+          "destination": "Graveyard",
+          "execute": {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "destination": null,
+              "target": {
+                "type": "ParentTarget"
+              },
+              "type": "Bounce"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          },
+          "mode": "ChangesZone",
+          "optional": false,
+          "origin": "Battlefield",
+          "phase": null,
+          "secondary": false,
+          "trigger_zones": [
+            "Graveyard"
+          ],
+          "valid_card": {
+            "type": "SelfRef"
+          },
+          "valid_source": null,
+          "valid_target": null
+        }
+      ],
+      "static_abilities": [
+        {
+          "active_zones": [],
+          "affected": {
+            "controller": null,
+            "properties": [
+              {
+                "type": "EnchantedBy"
+              }
+            ],
+            "type": "Typed",
+            "type_filters": [
+              "Creature"
+            ]
+          },
+          "affected_zone": null,
+          "characteristic_defining": false,
+          "condition": null,
+          "description": "Enchanted creature gets +2/+0 and has trample.",
+          "effect_zone": null,
+          "mode": "Continuous",
+          "modifications": [
+            {
+              "type": "AddPower",
+              "value": 2
+            },
+            {
+              "type": "AddToughness",
+              "value": 0
+            },
+            {
+              "keyword": "Trample",
+              "type": "AddKeyword"
+            }
+          ]
+        }
+      ],
+      "replacements": []
+    },
+    "shock": {
+      "name": "Shock",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "Red"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Instant"
+        ],
+        "subtypes": [],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Shock deals 2 damage to any target.",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": null,
+          "description": "~ deals 2 damage to any target.",
+          "duration": null,
+          "effect": {
+            "amount": {
+              "type": "Fixed",
+              "value": 2
+            },
+            "target": {
+              "type": "Any"
+            },
+            "type": "DealDamage"
+          },
+          "forward_result": false,
+          "kind": "Spell",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": null,
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "stonecoil serpent": {
+      "name": "Stonecoil Serpent",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "X"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Artifact",
+          "Creature"
+        ],
+        "subtypes": [
+          "Snake"
+        ],
+        "supertypes": []
+      },
+      "power": {
+        "type": "Fixed",
+        "value": 0
+      },
+      "toughness": {
+        "type": "Fixed",
+        "value": 0
+      },
+      "oracle_text": "Reach, trample, protection from multicolored\nThis creature enters with X +1/+1 counters on it.",
+      "keywords": [
+        "Reach",
+        "Trample",
+        {
+          "Protection": "Multicolored"
+        }
+      ],
+      "abilities": [],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": [
+        {
+          "condition": null,
+          "description": "~ enters with X +1/+1 counters on it.",
+          "destination_zone": "Battlefield",
+          "event": "Moved",
+          "execute": {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "count": {
+                "qty": {
+                  "type": "CostXPaid"
+                },
+                "type": "Ref"
+              },
+              "counter_type": "P1P1",
+              "target": {
+                "type": "SelfRef"
+              },
+              "type": "PutCounter"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          },
+          "mode": {
+            "type": "Mandatory"
+          },
+          "valid_card": {
+            "type": "SelfRef"
+          }
+        }
+      ]
+    },
+    "swords to plowshares": {
+      "name": "Swords to Plowshares",
+      "mana_cost": {
+        "generic": 0,
+        "shards": [
+          "White"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Instant"
+        ],
+        "subtypes": [],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Exile target creature. Its controller gains life equal to its power.",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": null,
+          "description": "Exile target creature. Its controller gains life equal to its power.",
+          "duration": null,
+          "effect": {
+            "destination": "Exile",
+            "enter_tapped": false,
+            "enter_transformed": false,
+            "enters_attacking": false,
+            "origin": null,
+            "owner_library": false,
+            "target": {
+              "controller": null,
+              "properties": [],
+              "type": "Typed",
+              "type_filters": [
+                "Creature"
+              ]
+            },
+            "type": "ChangeZone"
+          },
+          "forward_result": false,
+          "kind": "Spell",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "amount": {
+                "qty": {
+                  "scope": {
+                    "type": "Target"
+                  },
+                  "type": "Power"
+                },
+                "type": "Ref"
+              },
+              "player": {
+                "type": "ParentTargetController"
+              },
+              "type": "GainLife"
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "sub_link": "SequentialSibling",
+            "target_prompt": null
+          },
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "wrath of god": {
+      "name": "Wrath of God",
+      "mana_cost": {
+        "generic": 2,
+        "shards": [
+          "White",
+          "White"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Sorcery"
+        ],
+        "subtypes": [],
+        "supertypes": []
+      },
+      "power": null,
+      "toughness": null,
+      "oracle_text": "Destroy all creatures. They can't be regenerated.",
+      "keywords": [],
+      "abilities": [
+        {
+          "condition": null,
+          "cost": null,
+          "description": "Destroy all creatures. They can't be regenerated.",
+          "duration": null,
+          "effect": {
+            "cant_regenerate": true,
+            "target": {
+              "controller": null,
+              "properties": [],
+              "type": "Typed",
+              "type_filters": [
+                "Creature"
+              ]
+            },
+            "type": "DestroyAll"
+          },
+          "forward_result": false,
+          "kind": "Spell",
+          "optional": false,
+          "optional_targeting": false,
+          "sub_ability": null,
+          "target_prompt": null
+        }
+      ],
+      "triggers": [],
+      "static_abilities": [],
+      "replacements": []
+    },
+    "young pyromancer": {
+      "name": "Young Pyromancer",
+      "mana_cost": {
+        "generic": 1,
+        "shards": [
+          "Red"
+        ],
+        "type": "Cost"
+      },
+      "card_type": {
+        "core_types": [
+          "Creature"
+        ],
+        "subtypes": [
+          "Human",
+          "Shaman"
+        ],
+        "supertypes": []
+      },
+      "power": {
+        "type": "Fixed",
+        "value": 2
+      },
+      "toughness": {
+        "type": "Fixed",
+        "value": 1
+      },
+      "oracle_text": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.",
+      "keywords": [],
+      "abilities": [],
+      "triggers": [
+        {
+          "batched": false,
+          "condition": null,
+          "constraint": null,
+          "damage_kind": "Any",
+          "description": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.",
+          "destination": null,
+          "execute": {
+            "condition": null,
+            "cost": null,
+            "description": null,
+            "duration": null,
+            "effect": {
+              "colors": [
+                "Red"
+              ],
+              "count": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "enters_attacking": false,
+              "keywords": [],
+              "name": "Elemental",
+              "owner": {
+                "type": "Controller"
+              },
+              "power": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "tapped": false,
+              "toughness": {
+                "type": "Fixed",
+                "value": 1
+              },
+              "type": "Token",
+              "types": [
+                "Creature",
+                "Elemental"
+              ]
+            },
+            "forward_result": false,
+            "kind": "Spell",
+            "optional": false,
+            "optional_targeting": false,
+            "sub_ability": null,
+            "target_prompt": null
+          },
+          "mode": "SpellCast",
+          "optional": false,
+          "origin": null,
+          "phase": null,
+          "secondary": false,
+          "trigger_zones": [
+            "Battlefield"
+          ],
+          "valid_card": {
+            "filters": [
+              {
+                "controller": null,
+                "properties": [],
+                "type": "Typed",
+                "type_filters": [
+                  "Instant"
+                ]
+              },
+              {
+                "controller": null,
+                "properties": [],
+                "type": "Typed",
+                "type_filters": [
+                  "Sorcery"
+                ]
+              }
+            ],
+            "type": "Or"
+          },
+          "valid_source": null,
+          "valid_target": {
+            "type": "Controller"
+          }
+        }
+      ],
+      "static_abilities": [],
+      "replacements": []
+    }
+  },
+  "review": "Inspected all 13 frozen typed card records. Hushbringer uses SuppressTriggers EntersBattlefield+Dies with Creature source filter; Traveler has Battlefield-to-Graveyard SelfRef trigger producing exactly one Spirit; Wrath is DestroyAll Creature with cannot-regenerate true. Stonecoil uses a mandatory moved-to-Battlefield replacement with CostXPaid counters. Helix sequential life gain, Swords last-known target power and controller, Pyromancer instant-or-sorcery cast trigger, and Rancor true Battlefield-to-Graveyard trigger match the selected scenario expectations. This audits frozen typed inputs; it does not establish parser or card-data coverage.",
+  "rules_sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "relevant_rules": [
+    "603.6c Leaves-the-battlefield abilities trigger when a permanent moves from the battlefield to another zone, or when a phased-in permanent leaves the game because its owner leaves the game. These are written as, but aren\u2019t limited to, \u201cWhen [this object] leaves the battlefield, . . .\u201d or \u201cWhenever [something] is put into a graveyard from the battlefield, . . . .\u201d (See also rule 603.10.) An ability that attempts to do something to the card that left the battlefield checks for it only in the first zone that it went to. An ability that triggers when a card is put into a certain zone \u201cfrom anywhere\u201d is never treated as a leaves-the-battlefield ability, even if an object is put into that zone from the battlefield.",
+    "603.10. Normally, objects that exist immediately after an event are checked to see if the event matched any trigger conditions, and continuous effects that exist at that time are used to determine what the trigger conditions are and what the objects involved in the event look like. However, some triggered abilities are exceptions to this rule; the game \u201clooks back in time\u201d to determine if those abilities trigger, using the existence of those abilities and the appearance of objects immediately prior to the event. The list of exceptions is as follows:",
+    "603.10a Some zone-change triggers look back in time. These are leaves-the-battlefield abilities, abilities that trigger when a player sacrifices a permanent, abilities that trigger when a card leaves a graveyard, and abilities that trigger when an object that all players can see is put into a hand or library.",
+    "608.2b If the spell or ability specifies targets, it checks whether the targets are still legal. A target that\u2019s no longer in the zone it was in when it was targeted is illegal. Other changes to the game state may cause a target to no longer be legal; for example, its characteristics may have changed or an effect may have changed the text of the spell. If the source of an ability has left the zone it was in, its last known information is used during this process. If all its targets, for every instance of the word \u201ctarget,\u201d are now illegal, the spell or ability doesn\u2019t resolve. It\u2019s removed from the stack and, if it\u2019s a spell, put into its owner\u2019s graveyard. Otherwise, the spell or ability will resolve normally. Illegal targets, if any, won\u2019t be affected by parts of a resolving spell\u2019s effect for which they\u2019re illegal. Other parts of the effect for which those targets are not illegal may still affect them. If the spell or ability creates any continuous effects that affect game rules (see rule 613.11), those effects don\u2019t apply to illegal targets. If part of the effect requires information about an illegal target, it fails to determine any such information. Any part of the effect that requires that information won\u2019t happen.",
+    "608.2h If an effect requires information from the game (such as the number of creatures on the battlefield), the answer is determined only once, when the effect is applied. If the effect requires information from a specific object, including the source of the ability itself, the effect uses the current information of that object if it\u2019s in the public zone it was expected to be in; if it\u2019s no longer in that zone, or if the effect has moved it from a public zone to a hidden zone, the effect uses the object\u2019s last known information. See rule 113.7a. If an ability states that an object does something, it\u2019s the object as it exists\u2014or as it most recently existed\u2014that does it, not the ability.",
+    "614.1c Effects that read \u201c[This permanent] enters with . . . ,\u201d \u201cAs [this permanent] enters . . . ,\u201d or \u201c[This permanent] enters as . . . \u201c are replacement effects."
+  ]
+}
