@@ -219,3 +219,17 @@ followed by `git apply`, and commit it with a `Case-Id: CASE_ID` trailer.
 Use that checkout with `build-case-worker.py --phase-checkout ...`.
 A reconstructed commit and rebuilt executable have new identities: run a new
 comparison and review rather than copying an old approval onto new receipts.
+
+Use the stable case ID in a `Case-Id:` commit trailer for both the harness
+changes a case motivated and its engine repair. The generated build records
+retain source identities independently of that convenience link. In either
+repository, find related work with:
+
+```sh
+git log --all --format='%h %s' --grep='Case-Id: CASE_ID'
+```
+
+Keep planning, rejected proposals and review artifacts alongside the experiment
+under distinct names. They explain how the obligation changed; they are not
+acceptance evidence by themselves. Only the accepted bundle's measured results,
+source bindings and review decision authorize its generated case note.

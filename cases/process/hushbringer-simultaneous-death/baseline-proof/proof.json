@@ -1,0 +1,11 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "source_revision": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "production_source_diff": "empty",
+  "artifacts": {
+    "baseline.log": "3bc666ab3b9ce2b75e8034363d5b92b7d2f977b65a03bb12a1de0a1a00ed12d9",
+    "primary-tests.rs": "4ba4fb50e45c7753fc494dcc11c66610fd3c7a7ccf4cfb430dcb8adeeb081412",
+    "integration-main.rs": "3c9de72738baaf5c2f4009a282f309776661182bc806b2be3483b212a3208438"
+  },
+  "result": "No-Hush control passed; both insertion orders failed the reached zero-Spirit assertion with actual one. This is baseline evidence, not repair acceptance."
+}
