@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AcceptancePlan",
+  "description": "Freeze this plan before repair. Hold-outs are separately selected cases, not a pass count.",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "holdout_case_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Sha256"
+      }
+    },
+    "regression_case_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Sha256"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "regression_case_ids",
+    "holdout_case_ids"
+  ],
+  "$defs": {
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

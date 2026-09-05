@@ -46,6 +46,14 @@ deduplicates findings into a scoreboard.
 See [the harness operations guide](docs/agent-improvement-harness-operations.md)
 for corpus, worker, replay, minimization, and aggregation commands.
 
+The [verifiable case loop](docs/verifiable-cases.md) adds typed rule scenarios,
+separate execution and checking, guarded reduction, and frozen before/after
+acceptance with independent review. Rust types generate its JSON Schemas and
+architecture diagrams. The focused card cases run without the full private
+runtime corpus. Accepted repairs automatically generate [case notes and a blog
+attribution index](cases/evidence/README.md) from their evidence. The active
+workspace and preserved builds are on [EC2](docs/ec2-workspace.md).
+
 ## Private runtime corpus
 
 The generated Phase card database and 17Lands-derived deck lists are not distributed in this public repository.

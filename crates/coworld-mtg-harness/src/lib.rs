@@ -5,6 +5,7 @@
 //! selected from Phase's exact legal-action surface through `phase-bridge`.
 
 mod aggregate;
+pub mod cases;
 mod corpus;
 mod invariants;
 mod io;

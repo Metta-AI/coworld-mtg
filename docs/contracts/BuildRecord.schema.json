@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BuildRecord",
+  "type": "object",
+  "properties": {
+    "binary_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "build_environment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "builder_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "cargo_lock_sha256": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compiler": {
+      "type": "string"
+    },
+    "harness_revision": {
+      "type": "string"
+    },
+    "harness_source_files": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Sha256"
+      }
+    },
+    "phase": {
+      "$ref": "#/$defs/PhaseBuild"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "binary_sha256",
+    "harness_revision",
+    "harness_source_files",
+    "phase",
+    "cargo_lock_sha256",
+    "command",
+    "builder_sha256",
+    "build_environment",
+    "compiler"
+  ],
+  "$defs": {
+    "PhaseBuild": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "pinned"
+            },
+            "repository": {
+              "type": "string"
+            },
+            "revision": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "repository",
+            "revision"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "base_revision": {
+              "type": "string"
+            },
+            "checkout": {
+              "type": "string"
+            },
+            "dirty_patch_sha256": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "kind": {
+              "type": "string",
+              "const": "checkout"
+            },
+            "patch_sha256": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "repository": {
+              "type": "string"
+            },
+            "revision": {
+              "type": "string"
+            },
+            "source_files": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/Sha256"
+              }
+            },
+            "worktree_clean": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "repository",
+            "checkout",
+            "base_revision",
+            "revision",
+            "source_files",
+            "dirty_patch_sha256",
+            "patch_sha256",
+            "worktree_clean"
+          ]
+        }
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

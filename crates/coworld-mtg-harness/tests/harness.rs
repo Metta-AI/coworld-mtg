@@ -1,8 +1,8 @@
 #![cfg(feature = "private-corpus-tests")]
 
 use coworld_mtg_harness::{
-    aggregate_results, materialize_corpus, mine_17lands, replay_trace_file, run_shard,
-    AggregateOptions, GameTerminal, GameTrace, MaterializeOptions, RunOptions,
+    aggregate_results, materialize_corpus, mine_17lands, minimize_trace, replay_trace_file,
+    run_shard, AggregateOptions, GameTerminal, GameTrace, MaterializeOptions, RunOptions,
 };
 use flate2::read::MultiGzDecoder;
 use serde_json::json;
@@ -126,6 +126,41 @@ async fn shard_replays_checkpoints_resumes_and_aggregates() {
     replay_trace_file(&options.manifest_uri, &trace_path)
         .await
         .unwrap();
+
+    assert!(minimize_trace(
+        &options.manifest_uri,
+        &trace_path,
+        &temp.path().join("clean-reduced.json")
+    )
+    .await
+    .unwrap_err()
+    .to_string()
+    .contains("no reproduced failure"));
+    let mut divergent = trace.clone();
+    divergent.transitions[7].state_hash = "corrupted hash".into();
+    fs::write(&trace_path, serde_json::to_vec(&divergent).unwrap()).unwrap();
+    let reduced = minimize_trace(
+        &options.manifest_uri,
+        &trace_path,
+        &temp.path().join("reduced.json"),
+    )
+    .await
+    .unwrap();
+    assert_eq!(
+        reduced.transitions.len(),
+        8,
+        "retain the actual divergence, not a stale action-budget count"
+    );
+    assert_eq!(
+        reduced.terminal,
+        GameTerminal::ActionBudgetExhausted { actions: 8 }
+    );
+    let error = replay_trace_file(&options.manifest_uri, &temp.path().join("reduced.json"))
+        .await
+        .unwrap_err();
+    assert!(error
+        .to_string()
+        .contains("state hash mismatch at transition 7"));
 
     let mut rejected = trace.clone();
     let attempted = rejected.transitions.pop().unwrap();

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AcceptanceDecision",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "baseline_receipt_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "candidate_receipt_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "gate_receipt_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sha256"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "const": "accepted"
+        },
+        "plan_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "review_id": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "plan_id",
+        "baseline_receipt_id",
+        "candidate_receipt_id",
+        "gate_receipt_ids",
+        "review_id"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "rejected"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "reasons"
+      ]
+    }
+  ],
+  "$defs": {
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

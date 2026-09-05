@@ -1,0 +1,85 @@
+{
+  "title": "Doomed Traveler creates a Spirit without Hushbringer",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/clu/59/doomed-traveler",
+        "reference": "Oracle death trigger; CR 603.6c",
+        "statement": "Doomed Traveler creates a Spirit after dying when no effect suppresses its trigger."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "white",
+        "white",
+        "colorless",
+        "colorless"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "traveler",
+        "name": "Doomed Traveler",
+        "owner": "player",
+        "zone": "battlefield"
+      },
+      {
+        "label": "wrath",
+        "name": "Wrath of God",
+        "owner": "player",
+        "zone": "hand"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "wrath",
+        "targets": [],
+        "finish": "resolve"
+      },
+      {
+        "kind": "resolve_stack"
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "traveler-died",
+      "predicate": {
+        "kind": "zone",
+        "object": "traveler",
+        "equals": "graveyard"
+      }
+    },
+    {
+      "id": "wrath-finished",
+      "predicate": {
+        "kind": "zone",
+        "object": "wrath",
+        "equals": "graveyard"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "ordinary-death-triggers",
+      "predicate": {
+        "kind": "zone_count",
+        "seat": "player",
+        "zone": "battlefield",
+        "name": "Spirit",
+        "equals": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "title": "Hushbringer leaves Stonecoil Serpent entry counters intact",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://magic.wizards.com/en/news/feature/throne-eldraine-release-notes-2019-09-20",
+        "reference": "Hushbringer replacement-effect ruling; CR 614.1c",
+        "statement": "Trigger suppression does not suppress an enters-with-counters replacement effect."
+      },
+      {
+        "source": "https://scryfall.com/card/soc/356/stonecoil-serpent",
+        "reference": "Stonecoil Serpent Oracle text",
+        "statement": "Stonecoil Serpent enters with X +1/+1 counters."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "colorless",
+        "colorless",
+        "colorless"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "hush",
+        "name": "Hushbringer",
+        "owner": "player",
+        "zone": "battlefield"
+      },
+      {
+        "label": "serpent",
+        "name": "Stonecoil Serpent",
+        "owner": "player",
+        "zone": "hand"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "serpent",
+        "targets": [],
+        "finish": "resolve",
+        "x": 3
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "creature-entered",
+      "predicate": {
+        "kind": "zone",
+        "object": "serpent",
+        "equals": "battlefield"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "replacement-counters-preserved",
+      "predicate": {
+        "kind": "plus_one_counters",
+        "object": "serpent",
+        "equals": 3
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 //! reproduce Magic rules; it translates deck/configuration input and exposes
 //! Phase's exact legal actions and viewer-filtered state to the host.
 
+mod scenario;
 mod view;
 
 use phase_engine::ai_support::{auto_pass_recommended, legal_actions_for_viewer, LegalActionsFull};

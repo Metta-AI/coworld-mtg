@@ -135,9 +135,12 @@ scripts/cargo.sh run --locked -p coworld-mtg-harness -- aggregate \
   --output artifacts/scoreboard.json
 ```
 
-Minimization keeps the smallest action prefix reaching the first reproducible
-hash/action failure. A semantic Phase fix still requires a rules-backed,
-discriminating Phase regression test as specified by the improvement loop.
+Legacy minimization tests at most 64 shorter prefixes and preserves the same
+reproduced failure or evidence divergence. Successful replay of a recorded hard
+failure means the failure reproduced. It is distinct from a clean execution.
+General setup/operation reduction and frozen repair acceptance are described in
+[the verifiable case guide](verifiable-cases.md). A semantic Phase fix still
+requires a rules-backed, discriminating Phase regression test.
 
 ## Artifact contract
 
@@ -148,7 +151,7 @@ discriminating Phase regression test as specified by the improvement loop.
   checkpoints, and terminal outcome/classification.
 - `findings.jsonl.gz`: normalized signature, provisional ownership
   classification, seed, detail, and source trace line.
-- `minimized/*.json`: portable traces for hard failures.
+- `failures/*.json`: complete portable traces for hard failures, before reduction.
 - `scoreboard.json`: aggregate counts and findings deduplicated by normalized
   signature. Its `soft_signals` object is explicitly non-conformance evidence.
 

@@ -9,6 +9,7 @@ publish = false
 private-corpus-tests = []
 
 [dependencies]
+loop-contract = { path = "../loop-contract" }
 anyhow.workspace = true
 clap.workspace = true
 csv.workspace = true

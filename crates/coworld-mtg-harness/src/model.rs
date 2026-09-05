@@ -9,6 +9,15 @@ pub const RESULT_SCHEMA: &str = "coworld-mtg-result-v1";
 pub const SCOREBOARD_SCHEMA: &str = "coworld-mtg-scoreboard-v1";
 pub const SOFT_SIGNAL_SCHEMA: &str = "coworld-mtg-17lands-soft-signals-v1";
 
+/// Replaying evidence successfully does not mean the recorded engine passed.
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum ReplayAssessment {
+    VerifiedExecution,
+    ReproducedFailure { signature: String, detail: String },
+    EvidenceDivergence { detail: String },
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Artifact {
     pub source: String,

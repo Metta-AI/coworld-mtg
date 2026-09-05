@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReductionReceipt",
+  "type": "object",
+  "properties": {
+    "budget": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    },
+    "evaluations": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    },
+    "original_cards": {
+      "type": "integer",
+      "format": "uint",
+      "minimum": 0
+    },
+    "original_case_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "original_operations": {
+      "type": "integer",
+      "format": "uint",
+      "minimum": 0
+    },
+    "predicate": {
+      "type": "string"
+    },
+    "reduced_cards": {
+      "type": "integer",
+      "format": "uint",
+      "minimum": 0
+    },
+    "reduced_case_id": {
+      "$ref": "#/$defs/Sha256"
+    },
+    "reduced_operations": {
+      "type": "integer",
+      "format": "uint",
+      "minimum": 0
+    },
+    "search": {
+      "$ref": "#/$defs/ReductionSearch"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "original_case_id",
+    "reduced_case_id",
+    "predicate",
+    "original_cards",
+    "reduced_cards",
+    "original_operations",
+    "reduced_operations",
+    "evaluations",
+    "budget",
+    "search"
+  ],
+  "$defs": {
+    "ReductionSearch": {
+      "type": "string",
+      "enum": [
+        "single_deletion_fixed_point",
+        "budget_exhausted"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
