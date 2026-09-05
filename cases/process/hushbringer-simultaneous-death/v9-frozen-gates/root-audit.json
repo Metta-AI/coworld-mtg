@@ -1,0 +1,64 @@
+{
+  "utc": "2026-09-05T18:08:10.458487+00:00",
+  "source_manifest_sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803",
+  "verification_receipt_sha256": "3213f1a81de720b460012b86cec2e18090f3db36f2c209b21c55a9d559dcec75",
+  "source_changes": [],
+  "checks": [
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/0.log",
+      "exit": 0,
+      "verified_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_results": []
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/1.log",
+      "exit": 0,
+      "verified_sha256": "c24aa089df4164ac420b42f8f274e429c5197e605db78499360876bf14457b92",
+      "test_results": [
+        "test result: ok. 91 passed; 0 failed; 20 ignored; 0 measured; 2978 filtered out; finished in 3.12s"
+      ]
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/2.log",
+      "exit": 0,
+      "verified_sha256": "c7429182f4e5752b3695d2f04f1812b8996884794889d7488dec20361bf0fa5b",
+      "test_results": []
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/3.log",
+      "exit": 0,
+      "verified_sha256": "4e2d8e3a2d1c8240209134f5e8ed765c544e803c04fa160a5125635a15482c9a",
+      "test_results": []
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/4.log",
+      "exit": 0,
+      "verified_sha256": "d9a81d76c5be03dcb97df350931d94e15955a85edcff4457f4b70aea03fd36db",
+      "test_results": [
+        "test result: ok. 16581 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 35.04s"
+      ]
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/5.log",
+      "exit": 0,
+      "verified_sha256": "a0a67a4e68d2461d5020ebb12fe619ac579bd265534202e6020ae6a1b3c6f4db",
+      "test_results": [
+        "test result: ok. 3067 passed; 0 failed; 22 ignored; 0 measured; 0 filtered out; finished in 41.01s"
+      ]
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/6.log",
+      "exit": 0,
+      "verified_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_results": []
+    },
+    {
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/7.log",
+      "exit": 101,
+      "verified_sha256": "70873183212e82b16f9878556f708d50b08404066d5193bcc2cfbbfbf614d7c5",
+      "test_results": [
+        "test result: FAILED. 2 passed; 18 failed; 0 ignored; 0 measured; 3069 filtered out; finished in 0.23s"
+      ]
+    }
+  ]
+}

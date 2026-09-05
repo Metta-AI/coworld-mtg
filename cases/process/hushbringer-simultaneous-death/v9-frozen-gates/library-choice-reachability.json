@@ -1,0 +1,64 @@
+{
+  "source_sha256": {
+    "crates/engine/src/game/effects/put_on_top.rs": "e7d548f276774467d3d7d89766304d3012810164860aa154ae9d0f7d234c4392",
+    "crates/engine/src/game/engine_resolution_choices.rs": "88425c7787d1afcdacc5d8789bafa99d712f7b837ed8455ca0b7b64b5e2bfa77",
+    "crates/engine/src/game/zones.rs": "740e37afea6f50ad08af2a27b9603ed06c576341370d6664ceb4a1080f35b6f3"
+  },
+  "production_constructor_search": "crates/engine/src/game/engine_tests.rs:5366:            effect_kind: EffectKind::PutAtLibraryPosition,\ncrates/engine/src/game/effects/put_on_top.rs:220:                    effect_kind: EffectKind::PutAtLibraryPosition,\ncrates/engine/src/game/effects/put_on_top.rs:271:            effect_kind: EffectKind::PutAtLibraryPosition,\n",
+  "trace": [
+    {
+      "path": "crates/engine/src/game/effects/put_on_top.rs",
+      "lines": [
+        195,
+        242
+      ],
+      "fact": "First real EffectZoneChoice constructor only permits source_zone Hand or Library; prompt zone is source_zone."
+    },
+    {
+      "path": "crates/engine/src/game/effects/put_on_top.rs",
+      "lines": [
+        258,
+        290
+      ],
+      "fact": "Second real constructor always sets zone Library."
+    },
+    {
+      "path": "crates/engine/src/game/engine_resolution_choices.rs",
+      "lines": [
+        3182,
+        3200
+      ],
+      "fact": "Every selected ObjectId must belong to cards and actual object.zone must equal prompt zone before dispatch."
+    },
+    {
+      "path": "crates/engine/src/game/engine_resolution_choices.rs",
+      "lines": [
+        3534,
+        3588
+      ],
+      "fact": "All three PutAtLibraryPosition arms wrap those already validated non-Battlefield choices."
+    },
+    {
+      "path": "crates/engine/src/game/zones.rs",
+      "lines": [
+        641,
+        697
+      ],
+      "fact": "Owner subjects include only Battlefield objects; lawful choices give empty subjects, no suppression capture/flush."
+    },
+    {
+      "path": "crates/engine/src/game/zones.rs",
+      "lines": [
+        723,
+        750
+      ],
+      "fact": "Member authority likewise requires current Battlefield membership; lawful choices bind None."
+    }
+  ],
+  "existing_public_controls": [
+    "library_position_choice_and_targeted_leaf_preserve_non_death_events",
+    "hand_library_choice_preserves_selected_cards_and_nondeath_payoff"
+  ],
+  "gate_issue": "An isolated removal of just these non-Battlefield-only wrappers cannot yield a meaningful public changed assertion. Injecting artificial WaitingFor or bypassing zone validation would not establish real production reach.",
+  "status": "sent to root for reviewed disposition; no production change proposed or made"
+}

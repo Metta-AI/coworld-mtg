@@ -1,0 +1,94 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "kind": "implementation_verification_checkpoint",
+  "created_utc": "2026-09-05T18:09:34.241637+00:00",
+  "status": "Frozen runtime verification; mutation evidence, independent implementation review and acceptance remain pending.",
+  "files": [
+    {
+      "path": "freeze-receipt.json",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/frozen-candidate-v9/receipt.json",
+      "sha256": "27319d986c0670ae8e204efe4e940d001102572e20e2667ae16af07b1e3edf4d"
+    },
+    {
+      "path": "source.json",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/frozen-candidate-v9/source.json",
+      "sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+    },
+    {
+      "path": "verification-receipt.json",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/receipt.json",
+      "sha256": "3213f1a81de720b460012b86cec2e18090f3db36f2c209b21c55a9d559dcec75"
+    },
+    {
+      "path": "root-audit.json",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-active-10-root-audit.json",
+      "sha256": "aab2ce0b5e76322d00262ca18d1b9fa0f7e99bb2c42077601e9d8f5fc905c2a4"
+    },
+    {
+      "path": "library-choice-reachability.json",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/library-choice-reachability.json",
+      "sha256": "1f489d62c8cca2744d8c51618e4a39d9af59c99a2e739b3d361c3315dccdc23f"
+    },
+    {
+      "path": "library-choice-disposition.json",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/library-choice-disposition.json",
+      "sha256": "39e8fe04988c190a0060d6743d30961f3ea8b2a1b097c42089d6033f5f771245"
+    },
+    {
+      "path": "0.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/0.log",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "1.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/1.log",
+      "sha256": "85d79784967919787f651537764562e4f3ce5a025aa8d8b61a165774b63f56eb",
+      "uncompressed_sha256": "c24aa089df4164ac420b42f8f274e429c5197e605db78499360876bf14457b92"
+    },
+    {
+      "path": "2.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/2.log",
+      "sha256": "000f658ca5f9c2e7933c86ce90fcf8396f26b90c2ba177af6975a9c67a077830",
+      "uncompressed_sha256": "c7429182f4e5752b3695d2f04f1812b8996884794889d7488dec20361bf0fa5b"
+    },
+    {
+      "path": "3.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/3.log",
+      "sha256": "7324bb67624974d7d1f24bfed219c929083f173ae6412a667fc973dcc631ac8f",
+      "uncompressed_sha256": "4e2d8e3a2d1c8240209134f5e8ed765c544e803c04fa160a5125635a15482c9a"
+    },
+    {
+      "path": "4.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/4.log",
+      "sha256": "bea633675a82c98039088c500d1904a1c945bf24c64bbd874ec44befa09badf7",
+      "uncompressed_sha256": "d9a81d76c5be03dcb97df350931d94e15955a85edcff4457f4b70aea03fd36db"
+    },
+    {
+      "path": "5.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/5.log",
+      "sha256": "7e71181ea793ae8e1305b2d1111f2ce792be096a44159c22be942bffbd379a42",
+      "uncompressed_sha256": "a0a67a4e68d2461d5020ebb12fe619ac579bd265534202e6020ae6a1b3c6f4db"
+    },
+    {
+      "path": "6.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/6.log",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "7.log.gz",
+      "source": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/active-10/7.log",
+      "sha256": "e0f1478c28e159e9ccac4aa55c9758dbfc29fb5921efd7fbe72ec7d0db06a98c",
+      "uncompressed_sha256": "70873183212e82b16f9878556f708d50b08404066d5193bcc2cfbbfbf614d7c5"
+    }
+  ],
+  "external_artifacts": [
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/frozen-candidate-v9/source.tar.gz",
+      "sha256": "3f7768a91a7456a5b0b7e6a5d9cb6f769eb8fd2c6ec0cfeec9fac559cb8cb1a5",
+      "bytes": 27743452,
+      "contains": "Complete2051-file source snapshot, including new untracked modules; retained on EC2."
+    }
+  ]
+}
