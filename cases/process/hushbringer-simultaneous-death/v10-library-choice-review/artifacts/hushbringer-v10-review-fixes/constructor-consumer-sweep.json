@@ -1,0 +1,1397 @@
+{
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "searches": {
+    "record_constructors": [
+      {
+        "file": "crates/engine/src/database/synthesis.rs",
+        "line": 11632,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_tests.rs",
+        "line": 45137,
+        "text": "            .push(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/derived_views.rs",
+        "line": 1573,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/effects/attach.rs",
+        "line": 2202,
+        "text": "        state.zone_changes_this_turn.push(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/effects/attach.rs",
+        "line": 2210,
+        "text": "        state.zone_changes_this_turn.push(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 12247,
+        "text": "        let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 18663,
+        "text": "            record: Box::new(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 19009,
+        "text": "            record: Box::new(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+        "line": 46,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+        "line": 194,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+        "line": 251,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+        "line": 321,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 1402,
+        "text": "    let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10269,
+        "text": "        let legendary_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10282,
+        "text": "        let artifact_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10295,
+        "text": "        let saga_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10308,
+        "text": "        let vanilla_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10452,
+        "text": "        let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10670,
+        "text": "        let token_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10682,
+        "text": "        let nontoken_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10694,
+        "text": "        let enchanted_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10753,
+        "text": "        let attacking_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10764,
+        "text": "        let blocking_record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 10833,
+        "text": "        let attacked_with_company = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/filter.rs",
+        "line": 11161,
+        "text": "        let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/game_object.rs",
+        "line": 1498,
+        "text": "    ) -> crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/game_object.rs",
+        "line": 1499,
+        "text": "        crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7077,
+        "text": "        let zubera = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7082,
+        "text": "        let non_zubera = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7087,
+        "text": "        let zubera_bounced = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7116,
+        "text": "        let p0_owned = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7122,
+        "text": "        let p0_owned_stolen = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7128,
+        "text": "        let p1_owned_stolen_by_p0 = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7134,
+        "text": "        let token = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7141,
+        "text": "        let nonpermanent = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7185,
+        "text": "        let dalek_a = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7191,
+        "text": "        let dalek_b = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7197,
+        "text": "        let non_dalek = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 7770,
+        "text": "        let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/quantity.rs",
+        "line": 10941,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/restrictions.rs",
+        "line": 3199,
+        "text": "            .push(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/restrictions.rs",
+        "line": 3318,
+        "text": "            .push(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/restrictions.rs",
+        "line": 3339,
+        "text": "            .push(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/restrictions.rs",
+        "line": 3393,
+        "text": "                .push(crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/stack.rs",
+        "line": 2493,
+        "text": ") -> crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/stack.rs",
+        "line": 2495,
+        "text": "    crate::types::game_state::ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/targeting.rs",
+        "line": 4001,
+        "text": "            let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/targeting.rs",
+        "line": 4050,
+        "text": "        let record = ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7026,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7135,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7279,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7303,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7591,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7666,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7782,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7800,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7820,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7907,
+        "text": "                record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 7922,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 14073,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 14092,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 14112,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 14135,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 14390,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 14408,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 8398,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 10354,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 15046,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 897,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 976,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 1064,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 1116,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 1167,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 1262,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+        "line": 1887,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_ordering_parity_tests.rs",
+        "line": 1034,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/triggers_push_first_contract_tests.rs",
+        "line": 45,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 2882,
+        "text": "                record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/types/events.rs",
+        "line": 1574,
+        "text": "            record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/types/events.rs",
+        "line": 1602,
+        "text": "                record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 645,
+        "text": "pub struct ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 832,
+        "text": "impl ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 835,
+        "text": "    ///   `ZoneChangeRecord { core_types: vec![..], ..ZoneChangeRecord::test_minimal(id, from, to) }`"
+      },
+      {
+        "file": "crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs",
+        "line": 79,
+        "text": "        .push(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs",
+        "line": 109,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+        "line": 172,
+        "text": "fn push_gy_left(state_read: &GameState, obj: ObjectId) -> ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+        "line": 176,
+        "text": "fn push_sacrificed(state_read: &GameState, obj: ObjectId) -> ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/tests/integration/loop_shortcut.rs",
+        "line": 65,
+        "text": "const GOLDEN_ON: &str = r#\"[StackPushed { object_id: ObjectId(3) }, ZoneChanged { object_id: ObjectId(3), from: Some(Hand), to: Stack, record: ZoneChangeRecord { trigger_suppression: None, object_id: ObjectId(3), name: \"Test Lifegain Kickoff\", core_types: [Sorcery], subtypes: [], supertypes: [], keywords: [], trigger_definitions: [], power: None, toughness: None, base_power: None, base_toughness: None, colors: [], mana_value: 0, controller: PlayerId(0), owner: PlayerId(0), from_zone: Some(Hand), cast_from_zone: None, played_from_zone: None, to_zone: Stack, attachments: [], linked_exile_snapshot: [], is_token: false, combat_status: ZoneChangeCombatStatus { attacking: false, blocking: false, blocked: false, attacking_alone: false, blocking_alone: false, defending_player: None }, co_departed: [], entered_incarnation: None, attached_to: None, turn_zone_change_index: 0, is_suspected: false } }, SpellCast { card_id: CardId(3), controller: PlayerId(0), object_id: ObjectId(3) }, PriorityPassed { player_id: PlayerId(1) }, LifeChanged { player_id: PlayerId(0), amount: 1 }, EffectResolved { kind: GainLife, source_id: ObjectId(3), subject: None }, ZoneChanged { object_id: ObjectId(3), from: Some(Stack), to: Graveyard, record: ZoneChangeRecord { trigger_suppression: None, object_id: ObjectId(3), name: \"Test Lifegain Kickoff\", core_types: [Sorcery], subtypes: [], supertypes: [], keywords: [], trigger_definitions: [], power: None, toughness: None, base_power: None, base_toughness: None, colors: [], mana_value: 0, controller: PlayerId(0), owner: PlayerId(0), from_zone: Some(Stack), cast_from_zone: None, played_from_zone: None, to_zone: Graveyard, attachments: [], linked_exile_snapshot: [], is_token: false, combat_status: ZoneChangeCombatStatus { attacking: false, blocking: false, blocked: false, attacking_alone: false, blocking_alone: false, defending_player: None }, co_departed: [], entered_incarnation: None, attached_to: None, turn_zone_change_index: 1, is_suspected: false } }, StackResolved { object_id: ObjectId(3) }, PriorityPassed { player_id: PlayerId(1) }, LifeChanged { player_id: PlayerId(1), amount: -1 }, EffectResolved { kind: LoseLife, source_id: ObjectId(1), subject: None }, StackResolved { object_id: ObjectId(4) }, PriorityPassed { player_id: PlayerId(1) }, LifeChanged { player_id: PlayerId(0), amount: 1 }, EffectResolved { kind: GainLife, source_id: ObjectId(2), subject: None }, StackResolved { object_id: ObjectId(5) }, GameOver { winner: Some(PlayerId(0)) }]\"#;"
+      },
+      {
+        "file": "crates/engine/tests/integration/madame_null_integration.rs",
+        "line": 86,
+        "text": "        record: Box::new(ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 246,
+        "text": "fn departure(outcome: &CastOutcome, id: ObjectId) -> &ZoneChangeRecord {"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 2907,
+        "text": "fn event_departure(events: &[GameEvent], id: ObjectId) -> &ZoneChangeRecord {"
+      }
+    ],
+    "selection_constructors": [
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 2059,
+        "text": "                        .map(|object_id| DeferredSacrificeSelection {"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 2306,
+        "text": "pub struct DeferredSacrificeSelection {"
+      }
+    ],
+    "component_consumers": [
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1152,
+        "text": "    if !pending.deferred_sacrificed_permanents.is_empty() {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1769,
+        "text": "        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1781,
+        "text": "    for selection in &pending.deferred_sacrificed_permanents {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1818,
+        "text": "    if pending.deferred_sacrificed_permanents.is_empty() {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1842,
+        "text": "    if pending.deferred_sacrificed_permanents.is_empty() {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1846,
+        "text": "    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1851,
+        "text": "        .deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1919,
+        "text": "    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 2049,
+        "text": "                u64::try_from(pending.deferred_sacrificed_permanents.len()).map_err(|_| {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 2054,
+        "text": "                .deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 9209,
+        "text": "        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 9320,
+        "text": "        let pre_payment_checks = if pending.deferred_sacrificed_permanents.is_empty() {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 9557,
+        "text": "        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 9614,
+        "text": "        let pre_payment_checks = if pending.deferred_sacrificed_permanents.is_empty() {"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 10552,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 15542,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 15673,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 15773,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 15862,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 15984,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19251,
+        "text": "            .deferred_sacrificed_permanents[0]"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19272,
+        "text": "            .deferred_sacrificed_permanents[0]"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19289,
+        "text": "        pending.deferred_sacrificed_permanents[0].component = None;"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19313,
+        "text": "            canonical.deferred_sacrificed_permanents[0].component,"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19323,
+        "text": "            p.deferred_sacrificed_permanents = ids"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19326,
+        "text": "                    let mut selected = canonical.deferred_sacrificed_permanents[0].clone();"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19332,
+        "text": "                validate_deferred_sacrifice_components(&p.deferred_sacrificed_permanents).is_ok()"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19350,
+        "text": "                    let mut selected = canonical.deferred_sacrificed_permanents[0].clone();"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19374,
+        "text": "                .deferred_sacrificed_permanents,"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19375,
+        "text": "            canonical.deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19382,
+        "text": "                    .remove(\"deferred_sacrificed_permanents\");"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19384,
+        "text": "                json[\"deferred_sacrificed_permanents\"] = serde_json::json!([]);"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19387,
+        "text": "            assert!(restored.deferred_sacrificed_permanents.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 19389,
+        "text": "                &restored.deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/src/game/engine_tests.rs",
+        "line": 6829,
+        "text": "        deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/engine_tests.rs",
+        "line": 7220,
+        "text": "        deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/game/mana_abilities.rs",
+        "line": 1082,
+        "text": "            .deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/src/game/visibility.rs",
+        "line": 1481,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 2425,
+        "text": "    pub deferred_sacrificed_permanents: Vec<DeferredSacrificeSelection>,"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 2513,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 12700,
+        "text": "                deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 13068,
+        "text": "            deferred_sacrificed_permanents: Vec::new(),"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 4404,
+        "text": "        .deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 4653,
+        "text": "                    object.get_mut(\"deferred_sacrificed_permanents\")"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 5487,
+        "text": "            .deferred_sacrificed_permanents"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 5492,
+        "text": "            pending.remove(\"deferred_sacrificed_permanents\");"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 5495,
+        "text": "                \"deferred_sacrificed_permanents\".into(),"
+      }
+    ],
+    "scope_consumers": [
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2156,
+        "text": "        assert!(runner.state().departure_suppression_scope.frames.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2159,
+        "text": "            .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2162,
+        "text": "        assert_eq!(runner.state().departure_suppression_scope.next_id, 0);"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2213,
+        "text": "        assert!(runner.state().departure_suppression_scope.frames.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2216,
+        "text": "            .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2219,
+        "text": "        assert_eq!(runner.state().departure_suppression_scope.next_id, 0);"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2337,
+        "text": "                assert!(state.departure_suppression_scope.frames.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2338,
+        "text": "                assert!(state.departure_suppression_scope.member_bindings.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2339,
+        "text": "                assert_eq!(state.departure_suppression_scope.next_id, 0);"
+      },
+      {
+        "file": "crates/engine/src/game/zone_pipeline.rs",
+        "line": 2296,
+        "text": "        assert!(state.departure_suppression_scope.frames.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/zone_pipeline.rs",
+        "line": 2297,
+        "text": "        assert!(state.departure_suppression_scope.member_bindings.is_empty());"
+      },
+      {
+        "file": "crates/engine/src/game/zone_pipeline.rs",
+        "line": 2298,
+        "text": "        assert_eq!(state.departure_suppression_scope.next_id, 0);"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 665,
+        "text": "            .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 672,
+        "text": "            state.departure_suppression_scope.boundary_flushes.0 += 1;"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 696,
+        "text": "    let scope = &mut state.departure_suppression_scope;"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 709,
+        "text": "    let scope = &mut state.departure_suppression_scope;"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 731,
+        "text": "        .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 766,
+        "text": "    let depth = state.departure_suppression_scope.member_bindings.len();"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 768,
+        "text": "        .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 773,
+        "text": "        state.departure_suppression_scope.member_bindings.len(),"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 777,
+        "text": "        .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 785,
+        "text": "    let scope = &mut state.departure_suppression_scope;"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 802,
+        "text": "            state.departure_suppression_scope.boundary_flushes.1 += 1;"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 862,
+        "text": "        .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 876,
+        "text": "            .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 884,
+        "text": "                    .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 913,
+        "text": "            .departure_suppression_scope"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1782,
+        "text": "        let scope = &state.departure_suppression_scope;"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1817,
+        "text": "                assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 0));"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1831,
+        "text": "                assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 0));"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1837,
+        "text": "        assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 1));"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1927,
+        "text": "        assert!(json.get(\"departure_suppression_scope\").is_none());"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 2011,
+        "text": "                assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 1));"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 2092,
+        "text": "        assert!(saved.get(\"departure_suppression_scope\").is_none());"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 6900,
+        "text": "    pub(crate) departure_suppression_scope: DepartureSuppressionScopeState,"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 9927,
+        "text": "            departure_suppression_scope: DepartureSuppressionScopeState::default(),"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 10725,
+        "text": "        clone.departure_suppression_scope = DepartureSuppressionScopeState::default();"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 10960,
+        "text": "        departure_suppression_scope: _,"
+      },
+      {
+        "file": "crates/engine/src/types/game_state.rs",
+        "line": 11279,
+        "text": "        // departure_suppression_scope is synchronous bookkeeping. Equality and"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 2460,
+        "text": "            .contains_key(\"departure_suppression_scope\"));"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 4493,
+        "text": "    assert!(json.get(\"departure_suppression_scope\").is_none());"
+      },
+      {
+        "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+        "line": 6453,
+        "text": "        .contains_key(\"departure_suppression_scope\"));"
+      }
+    ],
+    "before_helper": [
+      {
+        "file": "crates/engine/src/game/haunt.rs",
+        "line": 150,
+        "text": "        && !super::trigger_suppression::death_suppressed_before(state, record)"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 1112,
+        "text": "                super::trigger_suppression::death_suppressed_before(state, record)"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 2885,
+        "text": "                    || !super::trigger_suppression::death_suppressed_before(state, record))"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 161,
+        "text": "pub(super) fn death_suppressed_before(state: &GameState, record: &ZoneChangeRecord) -> bool {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 217,
+        "text": "            assert_eq!(death_suppressed_before(runner.state(), &record), live);"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 235,
+        "text": "                    assert_eq!(death_suppressed_before(runner.state(), &record), before);"
+      }
+    ],
+    "after_helper": [
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 1109,
+        "text": "                !self_arrival && super::trigger_suppression::death_suppressed_after(state, record)"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 169,
+        "text": "pub(super) fn death_suppressed_after(state: &GameState, record: &ZoneChangeRecord) -> bool {"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 218,
+        "text": "            assert_eq!(death_suppressed_after(runner.state(), &record), live);"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 236,
+        "text": "                    assert_eq!(death_suppressed_after(runner.state(), &record), after);"
+      }
+    ],
+    "ordinary_adapter": [
+      {
+        "file": "crates/engine/src/game/trigger_matchers.rs",
+        "line": 1205,
+        "text": "pub(super) fn match_for_ordinary_collection("
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 292,
+        "text": "            super::trigger_matchers::match_for_ordinary_collection("
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 773,
+        "text": "            if !super::trigger_matchers::match_for_ordinary_collection("
+      }
+    ],
+    "active_suppression": [
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 16,
+        "text": "pub(super) fn active_suppress_trigger_statics("
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 163,
+        "text": "        || legacy_death_suppressed(state, record, &active_suppress_trigger_statics(state)),"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 171,
+        "text": "        || legacy_death_suppressed(state, record, &active_suppress_trigger_statics(state)),"
+      },
+      {
+        "file": "crates/engine/src/game/trigger_suppression.rs",
+        "line": 213,
+        "text": "                active_suppress_trigger_statics(runner.state()).len(),"
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 1106,
+        "text": "    let active = active_suppress_trigger_statics(state);"
+      },
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 1414,
+        "text": "        active_suppress_trigger_statics(state)"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 675,
+        "text": "        let active = super::trigger_suppression::active_suppress_trigger_statics(state);"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 805,
+        "text": "        super::trigger_suppression::active_suppress_trigger_statics(state)"
+      }
+    ],
+    "owner": [
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1858,
+        "text": "        crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 2076,
+        "text": "    crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/change_zone.rs",
+        "line": 858,
+        "text": "    let paused = crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/change_zone.rs",
+        "line": 1553,
+        "text": "    let paused = crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+        "line": 550,
+        "text": "    crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/destroy.rs",
+        "line": 217,
+        "text": "    let paused = crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/destroy.rs",
+        "line": 364,
+        "text": "    let paused = crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 912,
+        "text": "        crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 5798,
+        "text": "    let outcome = crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/effects/sacrifice.rs",
+        "line": 280,
+        "text": "            let paused = crate::game::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3305,
+        "text": "                    if super::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3353,
+        "text": "                    if super::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3534,
+        "text": "                EffectKind::PutAtLibraryPosition => super::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3716,
+        "text": "                    if super::zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 88,
+        "text": "        let repeat = zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 2169,
+        "text": "        zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 6320,
+        "text": "        zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 6455,
+        "text": "        zones::with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/zone_pipeline.rs",
+        "line": 949,
+        "text": "    zones::with_departure_suppression(state, events, attempted, |state, events, owner| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 881,
+        "text": "        with_departure_suppression(state, events, &[object_id], |state, events, owner| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1805,
+        "text": "        let result: Result<(), ()> = with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1864,
+        "text": "        with_departure_suppression("
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1872,
+        "text": "                with_departure_suppression(state, events, &[second], |state, events, child| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1911,
+        "text": "        with_departure_suppression(&mut state, &mut events, &[], |state, events, _| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 4042,
+        "text": "        with_departure_suppression("
+      }
+    ],
+    "member": [
+      {
+        "file": "crates/engine/src/game/augment.rs",
+        "line": 203,
+        "text": "        let paused = crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 1865,
+        "text": "                    match crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/casting_costs.rs",
+        "line": 2083,
+        "text": "                crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/change_zone.rs",
+        "line": 903,
+        "text": "                match crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/change_zone.rs",
+        "line": 1574,
+        "text": "                match crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+        "line": 562,
+        "text": "                match crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/destroy.rs",
+        "line": 223,
+        "text": "                let outcome = crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/destroy.rs",
+        "line": 370,
+        "text": "                let paused = crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 954,
+        "text": "                    let result = crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 5807,
+        "text": "                    match crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/effects/sacrifice.rs",
+        "line": 286,
+        "text": "                        match crate::game::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3311,
+        "text": "                                match super::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3394,
+        "text": "                                match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3541,
+        "text": "                                super::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3557,
+        "text": "                                super::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3572,
+        "text": "                                super::zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/engine_resolution_choices.rs",
+        "line": 3722,
+        "text": "                                match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move("
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 790,
+        "text": "        if zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 835,
+        "text": "        let paused = zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1155,
+        "text": "                if zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1344,
+        "text": "            if zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1507,
+        "text": "        if zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1540,
+        "text": "        if zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1596,
+        "text": "        if zones::with_departure_member(state, events, owner, id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1731,
+        "text": "                if zones::with_departure_member(state, events, owner, battle_id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/sba.rs",
+        "line": 1850,
+        "text": "        if zones::with_departure_member(state, events, owner, saga_id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zone_pipeline.rs",
+        "line": 953,
+        "text": "            match zones::with_departure_member("
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 882,
+        "text": "            with_departure_member(state, events, owner, object_id, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1810,
+        "text": "                with_departure_member(state, events, owner, first, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1823,
+        "text": "                with_departure_member(state, events, owner, child, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1828,
+        "text": "                with_departure_member(state, events, owner, second, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1869,
+        "text": "                with_departure_member(state, events, owner, first, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1873,
+        "text": "                    with_departure_member(state, events, child, second, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1878,
+        "text": "                with_departure_member(state, events, owner, first, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 4047,
+        "text": "                with_departure_member(state, events, owner, first, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 4062,
+        "text": "                with_departure_member(state, events, owner, second, |state, events| {"
+      }
+    ],
+    "resolver_barrier": [
+      {
+        "file": "crates/engine/src/game/effects/mod.rs",
+        "line": 6001,
+        "text": "    crate::game::zones::without_departure_member(state, events, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 871,
+        "text": "        without_departure_member(state, events, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 889,
+        "text": "                without_departure_member(state, events, |state, events| {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 895,
+        "text": "        without_departure_member(state, events, |state, events| body(state, events, None));"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1824,
+        "text": "                    without_departure_member(state, events, |state, events| {"
+      }
+    ],
+    "old_marker": [
+      {
+        "file": "crates/engine/src/game/triggers.rs",
+        "line": 14787,
+        "text": "        crate::game::zones::mark_simultaneous_departures(&mut events, &[recover, creature]);"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1262,
+        "text": "pub fn mark_simultaneous_departures(events: &mut [GameEvent], group: &[ObjectId]) {"
+      },
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1325,
+        "text": "    mark_simultaneous_departures(slice, &departed);"
+      }
+    ],
+    "old_stamp": [
+      {
+        "file": "crates/engine/src/game/zones.rs",
+        "line": 1307,
+        "text": "pub fn stamp_simultaneous_from_slice(state: &GameState, slice: &mut [GameEvent]) {"
+      }
+    ]
+  },
+  "method": "Fresh raw text sweep; constructor expressions and production/test semantics classified separately in manual-constructor-boundary-audit.json. Function signatures and call patterns are not automatically proof."
+}

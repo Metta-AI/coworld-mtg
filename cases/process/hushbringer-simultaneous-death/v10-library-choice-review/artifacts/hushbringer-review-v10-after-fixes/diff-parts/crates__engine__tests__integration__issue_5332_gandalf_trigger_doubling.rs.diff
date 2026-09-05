@@ -1,0 +1,12 @@
+diff --git a/crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs b/crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs
+index 4204fb54b..b89d0ff97 100644
+--- a/crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs
++++ b/crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs
+@@ -107,6 +107,7 @@ fn gandalf_parsed_static_doubles_legendary_reentry_triggers() {
+         from: Some(Zone::Exile),
+         to: Zone::Battlefield,
+         record: Box::new(ZoneChangeRecord {
++            trigger_suppression: None,
+             object_id: norin,
+             name: "Norin the Wary".to_string(),
+             core_types: vec![CoreType::Creature],

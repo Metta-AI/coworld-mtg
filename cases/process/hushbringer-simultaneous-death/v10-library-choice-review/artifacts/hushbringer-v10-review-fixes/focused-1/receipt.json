@@ -1,0 +1,56 @@
+{
+  "config": {
+    "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+    "output": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/focused-1",
+    "commands": [
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "native_library_choice_",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ]
+    ]
+  },
+  "utc": "2026-09-05T21:20:51.198659+00:00",
+  "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+  "env": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "native_library_choice_",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/focused-1/0.log",
+      "log_sha256": "352794d051b007c9498c0347b7ee1f3d43115e0926ecbcfd933d75fa34d4fac2",
+      "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/source-archives/fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86.tar.gz",
+        "sha256": "40d359edd4fe2b795a18301b80c41bcb9e21159b08d9ee6c89d8fb9a41119619",
+        "manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86"
+      },
+      "changed": []
+    }
+  ],
+  "finished_utc": "2026-09-05T21:22:11.906672+00:00"
+}

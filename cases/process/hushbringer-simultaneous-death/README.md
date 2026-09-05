@@ -126,3 +126,5 @@ The [expanded handoff and snapshot checks](v10-expanded-handoffs/README.md) inde
 The [complete independent implementation review](v10-implementation-review/README.md) confirms the central before/after result but returns two findings: missing native library-choice controls and inaccurate moved rules citations. The failed gates, complete source-bound handoff and independent runtime evidence are preserved before a fresh fix round.
 
 The [private-corpus and browser follow-up](coworld-main-private-check/README.md) completes the previously skipped checks for published main. Both browser tests and the Rust workspace private-corpus suite pass with unchanged source; the repaired engine and its future matching corpus remain separate publication work.
+
+The [native library-choice fix and fresh full review](v10-library-choice-review/README.md) add nine public tests covering sixty cases. The maintainer gate now passes, while one incorrect choice-timing citation requires a final comment-only correction; all prior metadata versions and their corrections remain attributable.

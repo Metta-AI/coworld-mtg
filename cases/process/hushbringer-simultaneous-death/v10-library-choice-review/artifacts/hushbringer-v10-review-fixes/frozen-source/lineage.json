@@ -1,0 +1,39 @@
+{
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "prior_source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "prior_source_archive_sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+  "historical_lineage": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/proof-lineage.json",
+    "sha256": "2f1cd286117844d4edcac7029fe092c15b6f151841c1ee960ac5522b5ae1acf6",
+    "note": "Retain its exact historical mutation compilation identities; no old binary relabeled as built from review-fix source."
+  },
+  "changed": [
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "prior_sha256": "c5e12a1cad5cbc23a87e48c23e0ebd3f8f8878eb347c0172bd2bed718db6b56b",
+      "current_sha256": "6230ca37071c2b8eb32546f05133f111319cf82c0ec0833c04b5da34e301a454",
+      "delta": "Comment lines only; all non-comment source bytes identical"
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "prior_sha256": "88425c7787d1afcdacc5d8789bafa99d712f7b837ed8455ca0b7b64b5e2bfa77",
+      "current_sha256": "d6ec57bc6b231897e5c72dd392b98e240fce3b92cd13fd827e62e84c2e6b2085",
+      "delta": "Comment lines only; all non-comment source bytes identical"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "prior_sha256": "19c52bd041d233ce838a7de363447756e171e7118c4670bc70987684fa8931e0",
+      "current_sha256": "73e5862e83261a91b9c054df3bcb4718226274ed01a82c36269ce2b458f6854e",
+      "delta": "Comment lines only; all non-comment source bytes identical"
+    },
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "prior_sha256": "f035ccbcf48c6a9120d3f621c64d3a6c9f45c63af2a65192884ed3d2e93bbe96",
+      "current_sha256": "71a16f0c601736b79cfcbe0b97e51f810a7baef5f7b15b1d172240f0f37ab98a",
+      "delta": "Append-only 9 public tests and typed helper; original 7329 lines byte-identical"
+    }
+  ],
+  "unchanged_files": 2047,
+  "production_behavior_change": false,
+  "new_mutation_claims": false
+}

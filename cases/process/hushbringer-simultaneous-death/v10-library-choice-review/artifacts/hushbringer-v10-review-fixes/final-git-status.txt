@@ -1,0 +1,30 @@
+ M crates/engine/src/game/augment.rs
+ M crates/engine/src/game/casting_costs.rs
+ M crates/engine/src/game/derived_views.rs
+ M crates/engine/src/game/effects/change_zone.rs
+ M crates/engine/src/game/effects/choose_and_sacrifice_rest.rs
+ M crates/engine/src/game/effects/destroy.rs
+ M crates/engine/src/game/effects/mod.rs
+ M crates/engine/src/game/effects/sacrifice.rs
+ M crates/engine/src/game/engine.rs
+ M crates/engine/src/game/engine_resolution_choices.rs
+ M crates/engine/src/game/filter.rs
+ M crates/engine/src/game/game_object.rs
+ M crates/engine/src/game/haunt.rs
+ M crates/engine/src/game/mod.rs
+ M crates/engine/src/game/sba.rs
+ M crates/engine/src/game/stack.rs
+ M crates/engine/src/game/trigger_matchers.rs
+ M crates/engine/src/game/triggers.rs
+ M crates/engine/src/game/zone_pipeline.rs
+ M crates/engine/src/game/zones.rs
+ M crates/engine/src/types/events.rs
+ M crates/engine/src/types/game_state.rs
+ M crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs
+ M crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs
+ M crates/engine/tests/integration/loop_shortcut.rs
+ M crates/engine/tests/integration/madame_null_integration.rs
+ M crates/engine/tests/integration/main.rs
+ M crates/engine/tests/integration/oversimplify_per_player_fractal.rs
+?? crates/engine/src/game/trigger_suppression.rs
+?? crates/engine/tests/integration/trigger_suppression_event_timing.rs

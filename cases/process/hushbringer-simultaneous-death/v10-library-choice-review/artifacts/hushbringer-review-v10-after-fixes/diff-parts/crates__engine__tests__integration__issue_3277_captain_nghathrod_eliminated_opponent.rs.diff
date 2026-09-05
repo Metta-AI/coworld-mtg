@@ -1,0 +1,12 @@
+diff --git a/crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs b/crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs
+index 3df78a745..b27ba0bde 100644
+--- a/crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs
++++ b/crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs
+@@ -77,6 +77,7 @@ fn captain_nghathrod_end_step_skips_eliminated_opponent_graveyard() {
+         .state_mut()
+         .zone_changes_this_turn
+         .push(ZoneChangeRecord {
++            trigger_suppression: None,
+             object_id: milled_creature,
+             name: "Milled Bear".to_string(),
+             core_types: vec![CoreType::Creature],

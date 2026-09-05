@@ -1,0 +1,62 @@
+[
+  [
+    "CR 614.3 / CR 701.19b: If a regeneration replacement choice is pending, pause SBA evaluation.",
+    "CR 614.8 + CR 616.1: A pending regeneration replacement choice pauses SBA evaluation."
+  ],
+  [
+    "CR 701.19b: Route each destruction through the replacement pipeline",
+    "CR 614.8: Route each destruction through the replacement pipeline"
+  ],
+  [
+    "CR 701.19b: Regeneration prevented destruction \u2014 still counts as SBA performed.",
+    "CR 614.8: Regeneration replaced destruction \u2014 still counts as SBA performed."
+  ],
+  [
+    "CR 704.5y + CR 614.6: the older Role",
+    "CR 704.5z + CR 614.6: the older Role"
+  ],
+  [
+    "// CR 704.5v + CR 310.7: If a battle has defense 0 and isn't the source of an\n                    // ability that has triggered but not yet left the stack, it's put into its\n                    // owner's graveyard.",
+    "// CR 704.5v + CR 310.7: A zero-defense Siege goes to the graveyard\n                    // unless one of its abilities has triggered but not yet left the stack.\n                    // CR 704.5w + CR 310.8: Non-Sieges have no such exception; the\n                    // helper retains an inherited broader stack guard, documented below."
+  ],
+  [
+    "CR 704.5x + CR 704.5y + CR 310.9: Battle with no (or illegal) protector",
+    "CR 704.5x + CR 704.5y + CR 310.11: Battle with no (or illegal) protector"
+  ],
+  [
+    "/// CR 704.5v + CR 310.7: A battle with defense 0 is put into its owner's graveyard,\n/// unless it's the source of an ability that has triggered but not yet left the\n/// stack (e.g., the Siege's victory trigger).",
+    "/// CR 704.5v + CR 310.7: A zero-defense Siege is put into its owner's graveyard\n/// unless one of its abilities has triggered but not yet left the stack.\n/// CR 704.5w + CR 310.8: A zero-defense non-Siege has no pending-ability exception.\n/// The inherited implementation below nevertheless applies its stack guard to\n/// every Battle. This repair preserves that broader guard as a compatibility\n/// limitation; it does not implement the distinct non-Siege timing rule."
+  ],
+  [
+    "// CR 310.7: Don't SBA-destroy while one of this battle's triggered\n            // abilities is still on the stack (mirrors CR 714.4 Saga deferral).",
+    "// CR 310.7 supplies this exception for Sieges only. The inherited\n            // guard also defers non-Sieges with a triggered ability on the stack,\n            // despite CR 310.8; preserving that broader behavior is a known limit."
+  ],
+  [
+    "CR 704.5v + CR 614.6: zero-defense battle death must consult redirects.",
+    "CR 704.5v + CR 704.5w + CR 614.6: zero-defense moves consult redirects."
+  ],
+  [
+    "CR 704.5w + CR 704.5x + CR 310.10 + CR 310.11a: If a battle that isn't being",
+    "CR 704.5x + CR 704.5y + CR 310.11: If a battle that isn't being"
+  ],
+  [
+    "// Legal protectors for a Siege are opponents of the controller (CR 310.11a).\n        // For non-Siege battles with no battle type, CR 310.8a says the controller\n        // becomes the protector; we treat the controller as legal in that case.",
+    "// CR 310.12a: Only opponents of a Siege's controller can protect it.\n        // CR 704.5x: With no battle type, a missing protector becomes the controller.\n        // The inherited non-Siege branch accepts any already-present protector."
+  ],
+  [
+    "CR 310.10: Only applies to battles that aren't being attacked.",
+    "CR 310.11: Only applies to battles that aren't being attacked."
+  ],
+  [
+    "CR 310.8a: With no battle types, controller is the protector.",
+    "CR 704.5x: With no battle types, choose the controller as protector."
+  ],
+  [
+    "CR 310.10 / CR 704.5w + CR 614.6: No legal protector exists",
+    "CR 310.11 + CR 704.5x + CR 704.5y + CR 614.6: No legal protector exists"
+  ],
+  [
+    "CR 310.10 + CR 704.5w + CR 704.5x: multiple legal protectors",
+    "CR 310.11 + CR 704.5x + CR 704.5y: multiple legal protectors"
+  ]
+]

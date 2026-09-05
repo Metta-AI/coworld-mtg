@@ -1,0 +1,28 @@
+{
+  "utc": "2026-09-05T21:39:49.995318+00:00",
+  "source_unchanged": true,
+  "interim_bytes_preserved": true,
+  "corrections": [
+    "Replaced three stale native_unaffected_siblings and stale status in versioned final callsite map. Exact tests/branches now agree with native-library-public-map.json.",
+    "Replaced stale All83 manual-constructor reference in final common-boundary map. Final constructor audit distinguishes actual Self literal from enclosing excerpt.",
+    "Moved prior unresolved-review and verification references to historical metadata; current maintainer/map references consistently select final artifacts."
+  ],
+  "authoritative_maps": {
+    "constructor_audit": "manual-constructor-boundary-audit-final.json",
+    "callsite_map": "production-entry-callsite-map-final.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map-final.json",
+    "maintainer_matrix": "production-path-maintainer-map-v10-final.json",
+    "cr_audit": "cr-complete-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "canonical-integration-receipt.json"
+  },
+  "new_files": {
+    "production-entry-callsite-map-final.json": "be42f29a823d5f142c0b05524107bb1269b1525d3101adc503b8c19def1e4614",
+    "typed-common-boundary-map-final.json": "5f04e8d655a08b26457507813c8748babfa9b4464d2ba471a1efaef58b5f776b",
+    "production-path-maintainer-map-v10-final.json": "717d8960dd809f0efe489d3ba2c7eed3cc3ebeb7c7aed5ce37c9493be84d26ce",
+    "production-path-maintainer-map-v10-final.md": "e03eaf6adedfeeb957200efb46128d48cdab7219a3c06de67ce3db084a71e1cd",
+    "manual-constructor-boundary-audit-final.json": "2b91951f30139d9cda6ec206eb2095340e683ca648a2fc57de3f3cb071bddaec"
+  }
+}

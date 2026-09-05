@@ -1,0 +1,136 @@
+{
+  "utc": "2026-09-05T22:47:01.180448+00:00",
+  "role": "fresh independent complete /review-impl reviewer; no source edits, builds, commits, pushes, delegation or Coworld acceptance",
+  "review_complete": true,
+  "clean": false,
+  "overall": "requires fix",
+  "maintainer_simulation_gate": "PASS",
+  "cr_annotation_gate": "FAIL",
+  "gate_rationale": "All changed seams have concrete source-consistent production/first-branch/selected-authority/binding-time/live-vs-snapshot/storage/consumer/invalidation/hostile-fixture/serialized-surface rows. The remaining citation defect fails the separate mandatory CR gate; it does not create a missing seam row.",
+  "findings": [
+    {
+      "severity": "LOW",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "summary": "Resolution-time native Library choices cite the casting-time target rule.",
+      "cited": "115.1",
+      "actual_rule": "Targets are declared as part of putting a spell or ability on the stack.",
+      "actual_source": "Natural EffectZoneChoice branch after selected-card count/membership/current-zone validation; nontargeted resolution choice, followed by private-zone placement.",
+      "suggestion": "Replace CR115.1 with CR608.2d (and optionally115.10), retain the bounded ordering/private-zone compatibility text, and publish a source-bound corrected CR audit; do not rewrite this frozen evidence package.",
+      "source_sha256": "d6ec57bc6b231897e5c72dd392b98e240fce3b92cd13fd827e62e84c2e6b2085",
+      "id": "CR-NATIVE-LIBRARY-CHOICE",
+      "absolute_file": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/src/game/engine_resolution_choices.rs",
+      "why_it_matters": "The required semantic CR audit must establish the actual timing and authority of this branch;115.1 describes targets announced when a spell or ability is put on the stack, whereas these are nontargeted resolution-time choices."
+    }
+  ],
+  "scope": {
+    "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+    "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+    "candidate_patch_sha256": "05107514ea86bb22b324209ce937b2de80cfd88fd558edb7b058192418277484",
+    "plan_sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a",
+    "plan_lines_read": 868,
+    "plan_review_sha256": "15ec8a03f9780b996368b72039f051c279d0b833e0ca6e3e6b9f3745d92f6b97",
+    "full_candidate_review": "Read the full candidate patch, all new source/test modules and relevant surrounding production code, not just the comment/test follow-up. Full7732-line integration module and full248-line suppression module inspected. Independently traced natural production entry/branch, construction, finalization and consumption through workspace/client searches.",
+    "prior_review": "Both prior findings independently rechecked. Nine public native placement tests and original five CR groups resolve the prior findings. This review found one further incorrect citation in the newly expanded native comment.",
+    "no_expectation_weakening": "Independently archive-verified all2051 prior and current source members. Existing7329-line timing test module is an exact byte prefix; three changed production files differ only in comments;2047 other files unchanged versus885b predecessor. No diagnostic promoted or parser/card support changed.",
+    "upstream_and_coworld": "This is only the approved fixed-base repair review. No newer-upstream integration, committed-worker comparison approval, or Coworld acceptance."
+  },
+  "independent_source_audit": {
+    "sealed_archive_files": 2051,
+    "post_final_handoff_active_files": 2051,
+    "mismatches": 0,
+    "final_author_artifacts": 109,
+    "constructors": {
+      "actual": 82,
+      "production": 3,
+      "test": 79,
+      "named_actual": 81,
+      "self_actual": 1,
+      "raw_regex_hits": 92,
+      "nonconstructor_hits": 11,
+      "details": "Production constructors are live snapshot, synthetic LKI adapter, and token probe; all intentionally start with None. Test-only Self expression is840-870, prior840-872 was enclosing excerpt. Signatures/docs/raw-string occurrences are not constructors. No workspace/client drop point found."
+    },
+    "production_scope_calls": 51,
+    "common_boundary_rows": 11,
+    "maintainer_rows": 67,
+    "semantic_checks": [
+      "Real event ownership and actual attempted member authority precede physical moves; successful delivery controls departing records; nested/mixed/pause ownership remains bounded.",
+      "Separate selected sacrifice cost components retain their own binding/payment order; one completed selected action shares its event boundary.",
+      "Effective before-world snapshots, pending departure context, record incarnations/controllers and player-relative filters survive trigger enumeration without mixing selected-authority or live fallback worlds.",
+      "Ordinary after-event and lookback matcher distinctions preserved; generic suppression covers the supported event classes rather than names such as Hushbringer, Torpor Orb or Tocatli Honor Guard.",
+      "Serialized legacy None, effective Some(empty), nonempty suppression payloads, synthetic constructors, visibility and manual snapshot surfaces checked; no wire/schema promotion claimed.",
+      "Native Hand/direct Library/Dig-tracked Library controls reach both real constructors and Bottom/Nth/Top consumption naturally; private-zone paths are unaffected siblings, not departure-wrapper mutation kills."
+    ],
+    "cr_audit": {
+      "added_or_moved_cr_lines": 155,
+      "all_annotations_including_adjacent": 185,
+      "all_numeric_rule_texts_checked": true,
+      "compound_ranges_expanded": true,
+      "rulebook_sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+      "result": "Exactly one semantic mismatch at native resolution choice115.1. Versioned reviewed audit now records the finding honestly."
+    },
+    "metadata_supersession": "Independently verified final and reviewed maps preserve all67 production rows and equivalent Markdown. Stale native sibling reports and All83 constructor reference corrected. Interim manifests unchanged. Final handoff explicitly refuses clean CR/acceptance claims."
+  },
+  "independent_runtime": {
+    "original": {
+      "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+      "receipt_sha256": "7a54c44cd3825b7126c02cebbc0b0453ea83a39453c1583b27476f6e518d0c38",
+      "runs": 3,
+      "spirits": [
+        1,
+        1,
+        1
+      ],
+      "checks": "Own freshly constructed worker requests on preserved baseline worker; exact corpus,39 harness source files, pinned Phase base, actual CWD/env/loader identities retained. Hush-first, Traveler-first and no-Hush all reach Wrath/graveyard guards. Worker observation omits stack/priority, so none are inferred."
+    },
+    "candidate": {
+      "executable_sha256": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+      "receipt_sha256": "effeaab7247dfd35a6b5a61b8573f0d5266308f14116448cf916c59ecb2a0bbc",
+      "exact_primary_tests": 3,
+      "selected_each": 1,
+      "ignored_each": 0,
+      "spirits": [
+        0,
+        0,
+        1
+      ],
+      "native_tests": 9,
+      "native_parameter_cases": 60,
+      "checks": "Reviewer copied and independently hashed the newly compiled finalfdc9 canonical binary; Cargo fresh:false build record preserved. All12 exact tests independently pass with package CWD/env/loader identities bound. Original three primary tests reach Oracle/static functioning, graveyard, empty-stack and priority guards. No reviewer Cargo build or competing target."
+    }
+  },
+  "verification": {
+    "final_gates_review_sha256": "60b959e6e5c9873910d1b9e3018ddb044f674d89279c0b463029d95b5260052f",
+    "author_run": "Library16586pass7ignored; integration3172pass22ignored; module196pass20ignored; bins15pass; docs0executed7ignored; cross-source5pass. EngineClippy andfmt pass.",
+    "retained_failures": "Explicit ignored diagnostics2pass18fail, exact prior failure set independently compared. WorkspaceClippy fails only fixed-base manabrew-compat SetFullControl E0004; both implicated source files independently equal git base.",
+    "generation": "Exit0;35802 schema-valid entries and2870 token presets read from actual log. Two generated tracked source files restored byte-for-byte before canonical compilation; allactive2051 reverified after final handoff. Generated artifacts are validation, not support promotion."
+  },
+  "historical_mutation_provenance": {
+    "distinct_seams": 67,
+    "public": 56,
+    "private": 10,
+    "defensive": 1,
+    "immutable_path_hash_associations_independently_verified": 476,
+    "mutable_current_paths_checked_separately": 8,
+    "qualification": "No fresh finalfdc9 mutations claimed. Historical source archives/compile receipts/executables/logs retain actual identities and canonical reuse.65 other historical hashes on reused target paths remain per-run receipt claims, not presently rehashed bytes. Root archive-content verification is attributed; reviewer independently content-verified final/prior complete archives and hashed the476 immutable associations. First reached panic proves only assertions reached; later controls require separate runs. Aborted attempts retained; strengthened repeated campaigns do not increase67 distinct seam count."
+  },
+  "retained_scope_limits": [
+    "All previous ten named rule limits remain: aggregate grouping, inherited-target grouping, direct delayed suppression, full cross-pause grouping, ambiguous origins, intrinsic merge/nested layer worlds, co-dying off-zone Any source availability, aggregate paid continuation, cast-created regeneration persistence, and resumed duplicate dispatch.",
+    "The 20 ignored desired diagnostics remain diagnostic-only. Prior candidate was 2 pass/18 fail and fixed original was 0 pass/20 fail; final explicit execution must retain and compare those outcomes, never silently promote support.",
+    "The existing native resumed explicit-target no-Hush count of exactly two remains narrow compatibility, not the desired one. Seeded regeneration tests prove first-destruction interception only, not full shield lifetime.",
+    "Prior tracked-set empty-choice life23 versus selected22 remains measured original-production compatibility.",
+    "Zero legal Battle protector delivery has only a defensive lower-level mutation: shipped formats terminate before a legal nonterminal public zero-opponent path. Public healthy/legal/multiple-choice/terminal/attacked/phased controls remain separate.",
+    "Inherited broad non-Siege zero-defense stack guard and inherited non-Siege present-protector handling are not expanded or certified as complete rules behavior.",
+    "Legacy None snapshot fallback may rescan functioning sources, including no-suppressor contexts. Five Scute cross-source tests are batching behavior checks, not throughput evidence; historical /tmp/gamestate.json benchmark input is unavailable.",
+    "Known fixed-base workspace Clippy manabrew-compat SetFullControl E0004 remains out of scope. Upstream integration follows acceptance of the fixed-base experiment.",
+    "No parser/db/card support increase, no database fixture adaptation, no UI/card-data support promotion, and no throughput claim."
+  ],
+  "additional_native_limits": "No duplicate-choice rejection, generic private-filter enhancement, or new Library-to-Library rules support is claimed. Existing repeated fixed-index ordering and Library notification/incarnation conventions are explicit compatibility. Inherited CR115.1 comments in unchanged put_on_top.rs producers are outside the changed/moved/adjacent annotation scope; they do not validate the newly expanded incorrect comment.",
+  "artifacts": {
+    "final_input_manifest_sha256": "2270b14565cb5440ebc8d0645537ae85c8d80a43b26e3f2471da7feef4d72292",
+    "final_source_verification_sha256": "29274f5a1360a87a7d080422e70247ee4124a9ff940761f5ab9775437b687d33",
+    "final_handoff_sha256": "54644215dadafd430cae007d017b2b419d43f6a1cca1beae127745601eaf28ef",
+    "final_author_manifest_sha256": "757d2f8a2aef204e7838e10d63716f8ceec32d51e74f326b8d5118c750a7e95a",
+    "review_directory": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes"
+  }
+}

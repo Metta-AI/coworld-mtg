@@ -1,0 +1,274 @@
+{
+  "utc": "2026-09-05T21:03:14.026391+00:00",
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "rows": [
+    {
+      "id": "active-static-extraction",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "with_departure_suppression / finish_departure_suppression / collect_pending_triggers -> active_suppress_trigger_statics",
+      "first_reaching_branch": "Existing battlefield_active_statics first excludes inactive/phased/command-zone/condition-false sources; filter_map accepts only StaticMode::SuppressTriggers.",
+      "selected_authority": "Evaluated functioning static definition, source id, typed source filter and event kinds.",
+      "binding_time": "Once per owner before and after evaluation; once ordinary collection creates its borrowed live slice.",
+      "storage": "Ephemeral Vec<ActiveSuppressTriggerStatic>; no GameState cache.",
+      "consumer": "outcomes_for_live_subject, outcomes_for_record, legacy_death_suppressed and ETB predicate.",
+      "invalidation": "Rebuilt at those explicit worlds/collections; no live source cache survives owner return.",
+      "serialized_impact": "None directly; canonical enum outcomes alone enter event snapshot.",
+      "tests": [
+        "stripped_or_phased_suppressor_allows_the_same_reached_death",
+        "granted_suppression_and_granted_death_trigger_use_effective_abilities",
+        "controller_relative_and_conditional_suppression_bind_before_departure",
+        "two_suppression_controllers_and_between_event_control_rebind_are_distinct"
+      ],
+      "mutation_rows": [
+        "before-live-subject-authority",
+        "scope-before-flush",
+        "after-world-flush"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "before-subject-filter",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "Owner candidate loop -> outcomes_for_live_subject",
+      "first_reaching_branch": "Each distinct current live Battlefield candidate uses FilterContext::from_source and matches_target_filter.",
+      "selected_authority": "Effective live source/controller/condition and subject attachments/combat/types before departure.",
+      "binding_time": "After one owner-entry flush, before first member action.",
+      "storage": "Typed before vector per candidate ObjectId/incarnation.",
+      "consumer": "finish_departure_suppression writes event snapshot.before; selected before matcher consumers.",
+      "invalidation": "Later movement/attachment/combat cleanup cannot replace captured relations.",
+      "serialized_impact": "Only deduplicated stable enum outcomes.",
+      "tests": [
+        "stripped_or_phased_suppressor_allows_the_same_reached_death",
+        "granted_suppression_and_granted_death_trigger_use_effective_abilities",
+        "controller_relative_and_conditional_suppression_bind_before_departure",
+        "two_suppression_controllers_and_between_event_control_rebind_are_distinct",
+        "attachment_relative_suppression_binds_live_relation_before_departure",
+        "enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat"
+      ],
+      "mutation_rows": [
+        "before-live-subject-authority",
+        "scope-before-flush"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "after-record-filter",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "Owner close -> outcomes_for_record -> record_matches_suppressor",
+      "first_reaching_branch": "Actual claimed departure records only; after-world active list uses FilterContext::from_source with matches_target_filter_on_zone_change_record.",
+      "selected_authority": "Current functioning sources after completed group, filtered against actual event record.",
+      "binding_time": "One after-world flush after last actual group member, not after each leaf.",
+      "storage": "snapshot.after per exact claimed event.",
+      "consumer": "Any-origin nonself-arrival clause via death_suppressed_after.",
+      "invalidation": "Later source arrival/departure cannot override saved after.",
+      "serialized_impact": "Event-local enum vector retained.",
+      "tests": [
+        "dynamic_after_world_inverse_and_library_leaf_keep_runtime_positive_twins",
+        "after_history_authoritative_empty_allows_observer_despite_later_hush_arrival",
+        "after_history_captured_dies_blocks_observer_after_later_hush_departure"
+      ],
+      "mutation_rows": [
+        "after-world-flush",
+        "after-snapshot-some-to-live-fallback"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "stable-outcome-canonicalization",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "Both outcomes_for_live_subject and outcomes_for_record -> outcomes_matching",
+      "first_reaching_branch": "For each matching suppressor collect each kind once, then order by exhaustive EntersBattlefield,Dies,BecomesTargeted array.",
+      "selected_authority": "Typed existing SuppressedTriggerEvent variants, not string/rule-name tags.",
+      "binding_time": "During before/after capture.",
+      "storage": "Deduplicated deterministic Vec<SuppressedTriggerEvent>.",
+      "consumer": "TriggerSuppressionSnapshot serde and before/after predicates.",
+      "invalidation": "Fresh per world; no duplicate-source/order dependence.",
+      "serialized_impact": "Stable enum order, explicit empty vector remains authoritative.",
+      "tests": [
+        "types::events::tests::zone_change_suppression_preserves_missing_empty_and_captured_history",
+        "two_suppression_controllers_and_between_event_control_rebind_are_distinct"
+      ],
+      "mutation_rows": [
+        "record-snapshot-serde-drop"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "etb-live-compatibility",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "Ordinary collection outer and batch inner prefilters -> etb_event_is_suppressed_cached",
+      "first_reaching_branch": "matches!(ZoneChanged{to:Battlefield,..}) before invoking existing cached whole-event predicate.",
+      "selected_authority": "Current active typed suppressors and ETB record; global gate never decides creature-death timing.",
+      "binding_time": "At ordinary collection.",
+      "storage": "Borrowed active slice; no saved live cache.",
+      "consumer": "collect_pending_triggers and matching_batched_trigger_events.",
+      "invalidation": "Collection ends; later collection obtains fresh list.",
+      "serialized_impact": "No new serialized field.",
+      "tests": [
+        "enters_or_attacks_attack_and_combat_dependent_suppression_use_real_combat",
+        "batched_self_arrival_bypasses_broad_death_prefilter"
+      ],
+      "mutation_rows": [
+        "ordinary-global-death-gate",
+        "batched-global-death-gate"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "legacy-none-fallback-and-selected-history",
+      "file": "crates/engine/src/game/trigger_suppression.rs",
+      "production_entry": "death_suppressed_before / death_suppressed_after",
+      "first_reaching_branch": "Option::map_or_else: None executes legacy_death_suppressed(active_suppress_trigger_statics(state)); Some selects only the requested saved vector.",
+      "selected_authority": "None means unavailable history; Some(empty), Some(Dies) and asymmetric before/after are authoritative.",
+      "binding_time": "None at each helper invocation; Some at completed departure.",
+      "storage": "Existing optional snapshot; no memoization or new fallback cache.",
+      "consumer": "Before clause/Haunt/death-Unattach and after Any observer.",
+      "invalidation": "Same ObjectId reentry/later live sources cannot replace Some. None performs a live scan each call, even zero active sources.",
+      "serialized_impact": "None omission/default differs from serialized Some(empty); lookup leaves event payload unchanged.",
+      "tests": [
+        "game::trigger_suppression::tests::missing_history_fallback_and_authoritative_snapshot_sides_remain_distinct",
+        "repeated_object_id_retains_distinct_incarnation_and_event_suppression"
+      ],
+      "mutation_rows": [
+        "before-snapshot-some-to-live-fallback",
+        "after-snapshot-some-to-live-fallback"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "owner-creation-and-completion",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "Every owner call in production-entry-callsite-map.json -> with_departure_suppression",
+      "first_reaching_branch": "Distinct current live Battlefield candidates, no capturing ancestor; empty/noncapturing parent permits independent fresh owner.",
+      "selected_authority": "Selected ObjectId/current incarnation and evaluated before authority; opaque token valid only during closure.",
+      "binding_time": "Immediately before synchronous completed action starts; after captured once on closure return.",
+      "storage": "Serde-skipped frames, member masks, next_id plus claimed exact event offset/id/index.",
+      "consumer": "with_departure_member/leaf; finish_departure_suppression writes Some snapshots and actual peer set.",
+      "invalidation": "All normal/Err/pause returns pop frame/mask and reset allocator when empty; nested independent action under capturing ancestor stays unavailable.",
+      "serialized_impact": "No lexical token/frame serialized; completed event history persists.",
+      "tests": [
+        "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip",
+        "resolver_reentry_same_incarnation_cannot_claim_outer_departure"
+      ],
+      "mutation_rows": [
+        "owner-finalization",
+        "owner-allocator-reset",
+        "scope-capturing-ancestor-policy",
+        "member-error-closure-pop"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "normal-and-library-leaf-delivery",
+      "file": "crates/engine/src/game/zones.rs",
+      "production_entry": "move_object_to_zone / move_to_library_at_index -> with_departure_leaf",
+      "first_reaching_branch": "Actual Battlefield->different-zone move; use only top explicit member matching live incarnation. Standalone opens singleton only absent capturing ancestor.",
+      "selected_authority": "Exact physical member or standalone action; replacement/no-op has no fabricated claim.",
+      "binding_time": "At leaf entry, before mutable movement body.",
+      "storage": "Claimed event keys offset,ObjectId,turn_zone_change_index; top None callback mask consumes binding.",
+      "consumer": "finish_departure_suppression; all clause matchers later consume saved history.",
+      "invalidation": "Recursive child cannot inherit consumed member; no search beneath None; per-member layer flush remains absent.",
+      "serialized_impact": "Fresh actual singleton gets Some with empty peers; unavailable child remains None.",
+      "tests": [
+        "game::zones::tests::departure_scope_recursive_member_leaf_does_not_claim_ancestor",
+        "first_departing_granter_preserves_later_member_types_and_trigger"
+      ],
+      "mutation_rows": [
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "added-mid-leaf-flush"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "typed-event-and-lexical-schema",
+      "file": "crates/engine/src/types/game_state.rs",
+      "production_entry": "TriggerSuppressionSnapshot / DepartureSuppressionScopeState / ZoneChangeRecord / GameState::new / normalize_for_loop",
+      "first_reaching_branch": "Constructors default event history to None and lexical state empty; public capture alone finalizes actual records; deserialize skips lexical state.",
+      "selected_authority": "Two typed outcome vectors; optional provenance distinct from empty; ephemeral owner state not replay authority.",
+      "binding_time": "Snapshot on departure; default on legacy payload; loop normalization clears only transient owner machinery.",
+      "storage": "ZoneChangeRecord.trigger_suppression serialized optional; GameState.departure_suppression_scope serde(skip).",
+      "consumer": "All matchers; clone/equality/replay and loop detection retain persistent event/component state.",
+      "invalidation": "Owner closure empties state; normalization cannot preserve lexical ownership; old payload remains None.",
+      "serialized_impact": "Additive optional/default field, skip None; no enum parser change.",
+      "tests": [
+        "game::casting_costs::deferred_component_guard_tests::deferred_component_layout_clone_serde_and_loop_normalization_keep_provenance",
+        "game::zones::tests::departure_scope_empty_parent_allows_independent_capture_and_settled_roundtrip"
+      ],
+      "mutation_rows": [
+        "record-snapshot-serde-drop",
+        "component-serde-drop",
+        "owner-allocator-reset"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    },
+    {
+      "id": "manual-event-constructors",
+      "file": "crates/engine/src/types/game_state.rs",
+      "production_entry": "Three production ZoneChangeRecord constructor expressions: filter.rs:1402 synthetic LKI, game_object.rs:1499 live-object snapshot, stack.rs:2495 synthetic token probe. Complete final audit also records 79 test expressions (including one Self), 81 named literal expressions total, and all 11 nonconstructor raw occurrences.",
+      "first_reaching_branch": "Production filter LKI conversion, live GameObject snapshot creation, and stack token-spec probe construction each initialize None. Test-only constructors and struct updates are categorized separately; function return signatures, documentation and golden strings are not constructors.",
+      "selected_authority": "Mechanical None initialization cannot claim historical suppression; Some is used only explicit private/schema fixtures or finalized real departure.",
+      "binding_time": "Record creation before any owner finalization.",
+      "storage": "Existing ZoneChangeRecord alongside added optional field.",
+      "consumer": "Event consumers and serde.",
+      "invalidation": "Legacy/manual event construction remains None fallback unless completed owner stamps it.",
+      "serialized_impact": "Mechanical compatibility additions only; no changed old assertion under constructor exception.",
+      "tests": [
+        "full engine library/integration compile and runtime suites",
+        "snapshot serialization unit contract"
+      ],
+      "mutation_rows": [
+        "record-snapshot-serde-drop"
+      ],
+      "evidence_classification": "mechanical constructor coverage, not a public runtime mutation claim",
+      "constructor_audit": "manual-constructor-boundary-audit-final.json"
+    },
+    {
+      "id": "component-append-constructor-and-validation",
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "production_entry": "handle_sacrifice_for_cost / validate_deferred_sacrifice_components / validate_pending_deferred_sacrifice_components",
+      "first_reaching_branch": "Existing natural valid sacrifice selection; reject any nonempty legacy None or malformed canonical run before append/payment. Empty legacy queue succeeds.",
+      "selected_authority": "Opaque DeferredSacrificeComponentId is the append-start index for one selected cost invocation, never filter equality.",
+      "binding_time": "At completed selection before queue append; validation before every consumer/extension.",
+      "storage": "Each DeferredSacrificeSelection.component Some(id); canonical runs [0,0,2] preserve2+1 component grouping.",
+      "consumer": "pay_deferred_spell_sacrifices_at_commit contiguous component loop and both finalizers/public preflight.",
+      "invalidation": "Cancel/reannounce discards old malformed pending payload; no heuristic recovery/guessing; same cost/filter new invocation gets distinct id.",
+      "serialized_impact": "Option defaults None for old JSON; clone/equality/serde/loop normalization preserve Some.",
+      "tests": [
+        "deferred_components_mixed_cardinalities_keep_exact_peers",
+        "deferred_components_identical_filters_serde_and_both_finalizers",
+        "deferred_components_legacy_and_malformed_refuse_then_cancel_reannounce",
+        "deferred_components_empty_legacy_pending_resumes_normally"
+      ],
+      "mutation_rows": [
+        "component-binding-distinct-invocation",
+        "components-whole-queue",
+        "components-singleton",
+        "components-filter-grouping",
+        "component-guard-append"
+      ],
+      "evidence_classification": "production boundary; covered by named runtime/control evidence, no separate exact mutation claimed"
+    }
+  ],
+  "note": "Common/schema/mechanical boundaries supplement67 exact mutation rows and51 call sites. Exact source test names are verified, while full-suite evidence and individual mutation receipts keep their separate scopes. No separate mutation claim for an unmutated helper.",
+  "review_fix_lineage": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/frozen-source/lineage.json",
+  "supersedes": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/typed-common-boundary-map.json",
+    "sha256": "7c1b5b10046f79e0bf907d31d0cf2b384f5a5bf1fc88c3ae460a3d0a1769dd89",
+    "reason": "Replace stale All83/manual-constructor reference with the final exact production/test/Self/nonconstructor categories.",
+    "prior_bytes_preserved": true
+  },
+  "authoritative_maps": {
+    "constructor_audit": "manual-constructor-boundary-audit-final.json",
+    "callsite_map": "production-entry-callsite-map-final.json",
+    "native_library_map": "native-library-public-map.json",
+    "common_boundary_map": "typed-common-boundary-map-final.json",
+    "maintainer_matrix": "production-path-maintainer-map-v10-final.json",
+    "cr_audit": "cr-complete-audit.json",
+    "source_lineage": "frozen-source/lineage.json",
+    "verification": "verification-summary.json",
+    "canonical": "canonical-integration-receipt.json"
+  }
+}

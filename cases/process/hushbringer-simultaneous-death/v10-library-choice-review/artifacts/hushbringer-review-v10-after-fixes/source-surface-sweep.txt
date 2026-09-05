@@ -1,0 +1,390 @@
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/analysis/sim.rs:99:            // dies / landfall trigger axes. The `ZoneChangeRecord` carries the
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/analysis/sim.rs:261:    use crate::types::game_state::{CastPaymentMode, WaitingFor, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/analysis/sim.rs:267:        let mut record = ZoneChangeRecord::test_minimal(ObjectId(1), from, to);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/mod.rs:46:    StackEntryKind, TransientContinuousEffect, WaitingFor, ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/triggers.rs:28:    /// `Some(ct)` per element of `ZoneChangeRecord.core_types` so narrow and
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:319:pub struct TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:388:    /// `ZoneChangeRecord` (see `matches_target_filter_on_lki_snapshot`)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:645:pub struct ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:650:    pub trigger_suppression: Option<TriggerSuppressionSnapshot>,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:832:impl ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:835:    ///   `ZoneChangeRecord { core_types: vec![..], ..ZoneChangeRecord::test_minimal(id, from, to) }`
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:2306:pub struct DeferredSacrificeSelection {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:2425:    pub deferred_sacrificed_permanents: Vec<DeferredSacrificeSelection>,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:2513:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:6900:    pub(crate) departure_suppression_scope: DepartureSuppressionScopeState,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:7952:    pub created_tokens_this_turn: Vec<ZoneChangeRecord>,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:7965:    pub sacrificed_permanents_this_turn: Vec<ZoneChangeRecord>,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:7968:    pub zone_changes_this_turn: Vec<ZoneChangeRecord>,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:9927:            departure_suppression_scope: DepartureSuppressionScopeState::default(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:10725:        clone.departure_suppression_scope = DepartureSuppressionScopeState::default();
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:10960:        departure_suppression_scope: _,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:11279:        // departure_suppression_scope is synchronous bookkeeping. Equality and
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:12700:                deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/game_state.rs:13068:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:12:use super::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:767:        record: Box<ZoneChangeRecord>,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1574:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1576:                ..ZoneChangeRecord::test_minimal(ObjectId(5), Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1588:        use crate::types::game_state::TriggerSuppressionSnapshot;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1592:            Some(TriggerSuppressionSnapshot::default()),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1593:            Some(TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1602:                record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/events.rs:1604:                    ..ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_push_first_contract_tests.rs:12:use crate::types::game_state::{GameState, StackEntryKind, WaitingFor, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_push_first_contract_tests.rs:45:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_push_first_contract_tests.rs:49:            ..ZoneChangeRecord::test_minimal(object_id, Some(from), to)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/stack.rs:2486:/// CR 603.6a + CR 603.10: Build the faithful `ZoneChangeRecord` a produced
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/stack.rs:2493:) -> crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/stack.rs:2495:    crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/types/ability.rs:5382:    /// attachment controller. Resolved via the triggering `ZoneChangeRecord`'s
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:23:    SpellCastRecord, StackEntryKind, ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:1244:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:1402:    let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:2080:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:2421:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:3436:fn zone_change_pt_value(record: &ZoneChangeRecord, stat: PtStat, scope: PtValueScope) -> i32 {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:4450:///    `ZoneChangeRecord::combat_status`, because leaving a zone removes the
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:4460:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:4810:        // ZoneChangeRecord carries no modal field — conservative gap (CR 700.2
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:5587:    use crate::types::game_state::{AttachmentSnapshot, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:7666:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:7732:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:7901:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10253:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10269:        let legendary_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10272:            ..ZoneChangeRecord::test_minimal(ObjectId(42), Some(Zone::Library), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10282:        let artifact_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10284:            ..ZoneChangeRecord::test_minimal(ObjectId(43), Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10295:        let saga_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10298:            ..ZoneChangeRecord::test_minimal(ObjectId(44), Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10308:        let vanilla_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10310:            ..ZoneChangeRecord::test_minimal(ObjectId(45), Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10333:        use crate::types::game_state::{LKISnapshot, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10372:            ZoneChangeRecord::test_minimal(tapped_id, Some(Zone::Battlefield), Zone::Hand);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10378:            ZoneChangeRecord::test_minimal(untapped_id, Some(Zone::Battlefield), Zone::Hand);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10411:            ZoneChangeRecord::test_minimal(ObjectId(62), Some(Zone::Battlefield), Zone::Hand);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10436:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10452:        let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10458:            ..ZoneChangeRecord::test_minimal(ObjectId(7), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10502:    /// hand-built literal. The resulting `ZoneChangeRecord` must carry
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10670:        let token_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10673:            ..ZoneChangeRecord::test_minimal(ObjectId(42), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10682:        let nontoken_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10685:            ..ZoneChangeRecord::test_minimal(ObjectId(43), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10694:        let enchanted_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10701:            ..ZoneChangeRecord::test_minimal(ObjectId(44), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10739:        use crate::types::game_state::{ZoneChangeCombatStatus, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10753:        let attacking_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10762:            ..ZoneChangeRecord::test_minimal(ObjectId(42), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10764:        let blocking_record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10773:            ..ZoneChangeRecord::test_minimal(ObjectId(43), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10833:        let attacked_with_company = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:10842:            ..ZoneChangeRecord::test_minimal(ObjectId(44), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:11075:            .push(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:11161:        let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/filter.rs:11207:        // (Use the type-filter level here since ZoneChangeRecord doesn't expose
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_tests.rs:45137:            .push(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_tests.rs:45144:                ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:17:    DeferredSacrificeSelection, DistributionUnit, GameState, PayCostKind, PendingCast,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1152:    if !pending.deferred_sacrificed_permanents.is_empty() {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1736:    selections: &[DeferredSacrificeSelection],
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1769:        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1781:    for selection in &pending.deferred_sacrificed_permanents {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1818:    if pending.deferred_sacrificed_permanents.is_empty() {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1842:    if pending.deferred_sacrificed_permanents.is_empty() {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1846:    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1851:        .deferred_sacrificed_permanents
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:1919:    validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:2049:                u64::try_from(pending.deferred_sacrificed_permanents.len()).map_err(|_| {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:2054:                .deferred_sacrificed_permanents
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:2059:                        .map(|object_id| DeferredSacrificeSelection {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:9209:        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:9320:        let pre_payment_checks = if pending.deferred_sacrificed_permanents.is_empty() {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:9557:        validate_deferred_sacrifice_components(&pending.deferred_sacrificed_permanents)?;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:9614:        let pre_payment_checks = if pending.deferred_sacrificed_permanents.is_empty() {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:10552:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:15542:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:15673:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:15773:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:15862:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:15984:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19251:            .deferred_sacrificed_permanents[0]
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19272:            .deferred_sacrificed_permanents[0]
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19289:        pending.deferred_sacrificed_permanents[0].component = None;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19313:            canonical.deferred_sacrificed_permanents[0].component,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19323:            p.deferred_sacrificed_permanents = ids
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19326:                    let mut selected = canonical.deferred_sacrificed_permanents[0].clone();
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19332:                validate_deferred_sacrifice_components(&p.deferred_sacrificed_permanents).is_ok()
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19350:                    let mut selected = canonical.deferred_sacrificed_permanents[0].clone();
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19356:            let restored: Vec<DeferredSacrificeSelection> =
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19374:                .deferred_sacrificed_permanents,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19375:            canonical.deferred_sacrificed_permanents
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19382:                    .remove("deferred_sacrificed_permanents");
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19384:                json["deferred_sacrificed_permanents"] = serde_json::json!([]);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19387:            assert!(restored.deferred_sacrificed_permanents.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/casting_costs.rs:19389:                &restored.deferred_sacrificed_permanents
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:3:use crate::types::game_state::{ExileLink, ExileLinkKind, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:46:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:48:            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:194:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:196:            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:251:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:253:            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:321:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_exile_return_tests.rs:323:            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:453:    record: &crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:460:    record: &crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:491:    record: &crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:503:    // Prefer the event's LKI snapshot. `ZoneChangeRecord::test_minimal` leaves
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:664:    // trigger scan, but the ZoneChangeRecord preserves the LKI keyword set.
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:5394:    record: &crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:8269:        SpellCastRecord, StackEntry, StackEntryKind, WaitingFor, ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:8398:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:8402:                ..ZoneChangeRecord::test_minimal(object_id, Some(from), to)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:9391:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:10354:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:10359:                ..ZoneChangeRecord::test_minimal(object_id, None, Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:15046:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:15050:                ..ZoneChangeRecord::test_minimal(bird, Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:16865:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:16956:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers.rs:26190:    /// `ZoneChangeRecord.co_departed`. Before the fix the observer fired only for
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2156:        assert!(runner.state().departure_suppression_scope.frames.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2159:            .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2162:        assert_eq!(runner.state().departure_suppression_scope.next_id, 0);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2213:        assert!(runner.state().departure_suppression_scope.frames.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2216:            .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2219:        assert_eq!(runner.state().departure_suppression_scope.next_id, 0);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2337:                assert!(state.departure_suppression_scope.frames.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2338:                assert!(state.departure_suppression_scope.member_bindings.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:2339:                assert_eq!(state.departure_suppression_scope.next_id, 0);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/sba.rs:6009:    ) -> impl Iterator<Item = &crate::types::game_state::ZoneChangeRecord> {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:1066:    record: &crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:4869:        CastingVariant, GameState, StackEntry, StackEntryKind, ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:5896:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7026:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7030:                ..ZoneChangeRecord::test_minimal(object_id, Some(from), to)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7135:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7137:                ..ZoneChangeRecord::test_minimal(ObjectId(9), None, Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7238:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7279:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7284:                ..ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7303:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7309:                ..ZoneChangeRecord::test_minimal(munitions, None, Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7591:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7597:                ..ZoneChangeRecord::test_minimal(creature, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7629:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7666:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7672:                ..ZoneChangeRecord::test_minimal(creature, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7782:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7785:                ..ZoneChangeRecord::test_minimal(own_card, Some(Zone::Graveyard), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7800:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7803:                ..ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7820:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7824:                ..ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7907:                record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7922:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:7926:                ..ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14073:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14077:                ..ZoneChangeRecord::test_minimal(source, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14092:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14096:                ..ZoneChangeRecord::test_minimal(own_milled, Some(Zone::Library), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14112:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14116:                ..ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14135:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14139:                ..ZoneChangeRecord::test_minimal(opp_milled, Some(Zone::Library), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14390:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14394:                ..ZoneChangeRecord::test_minimal(source, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14408:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_matchers.rs:14412:                ..ZoneChangeRecord::test_minimal(opp_milled, Some(Zone::Library), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/mana_abilities.rs:1082:            .deferred_sacrificed_permanents
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1122:/// `ZoneChangeRecord` embeds the full card name and type line). The structured
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1165:/// The `ZoneChangeRecord` snapshots the card's real identity at move time, so
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1174:    record: &crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1481:            deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1607:        let mut record = crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1669:        let mut record = crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1772:        let mut record = crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/visibility.rs:1799:        let mut record = crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_ordering_parity_tests.rs:35:use crate::types::game_state::{GameState, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_ordering_parity_tests.rs:1034:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_ordering_parity_tests.rs:1036:            ..ZoneChangeRecord::test_minimal(ObjectId(id), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_ordering_parity_tests.rs:1047:        record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:12:    ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:114:        record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:897:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:901:            ..ZoneChangeRecord::test_minimal(land, Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:976:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:979:            ..ZoneChangeRecord::test_minimal(new_etb, Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1064:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1068:            ..ZoneChangeRecord::test_minimal(norin, Some(Zone::Exile), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1116:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1119:            ..ZoneChangeRecord::test_minimal(genesis, Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1167:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1170:            ..ZoneChangeRecord::test_minimal(greeter, Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1262:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1265:            ..ZoneChangeRecord::test_minimal(new_etb, Some(Zone::Hand), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1887:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1890:            ..ZoneChangeRecord::test_minimal(dying, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:1992:        record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/triggers_dedup_regression_tests.rs:2833:        record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/delayed_trigger.rs:922:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/delayed_trigger.rs:982:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/delayed_trigger.rs:1041:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/delayed_trigger.rs:1098:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/delayed_trigger.rs:1162:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/delayed_trigger.rs:2429:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/attach.rs:828:    use crate::types::game_state::{AttachmentSnapshot, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/attach.rs:2202:        state.zone_changes_this_turn.push(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/attach.rs:2208:            ..ZoneChangeRecord::test_minimal(zack, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/attach.rs:2210:        state.zone_changes_this_turn.push(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/attach.rs:2216:            ..ZoneChangeRecord::test_minimal(zack, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/change_zone.rs:1796:    use crate::types::game_state::{ExileLinkKind, StackEntry, StackEntryKind, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/change_zone.rs:3026:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/effect.rs:1189:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/effect.rs:1212:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/token.rs:6746:        let mut record = crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/endure.rs:289:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/endure.rs:316:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/endure.rs:359:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/endure.rs:398:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:26:    ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:1492:fn lki_snapshot_from_zone_change_record(record: &ZoneChangeRecord) -> LKISnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:11999:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:12247:        let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:12252:            ..ZoneChangeRecord::test_minimal(moved, Some(Zone::Graveyard), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:12279:                record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:12289:                record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:13917:                record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:13927:                record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:18663:            record: Box::new(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:18681:                ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:19009:            record: Box::new(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mod.rs:19011:                ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mana.rs:2352:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/mana.rs:2396:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/animate.rs:392:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/deal_damage.rs:2508:    use crate::types::game_state::{WaitingFor, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/effects/deal_damage.rs:4519:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zone_pipeline.rs:42:/// and is carried onto `ProposedEvent::ZoneChange.cause` / `ZoneChangeRecord`.
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zone_pipeline.rs:2235:        game_state::TriggerSuppressionSnapshot,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zone_pipeline.rs:2289:                Some(TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zone_pipeline.rs:2296:        assert!(state.departure_suppression_scope.frames.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zone_pipeline.rs:2297:        assert!(state.departure_suppression_scope.member_bindings.is_empty());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zone_pipeline.rs:2298:        assert_eq!(state.departure_suppression_scope.next_id, 0);
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:4:use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:8:    TriggerSuppressionSnapshot, ZoneChangeCombatStatus,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:665:            .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:672:            state.departure_suppression_scope.boundary_flushes.0 += 1;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:696:    let scope = &mut state.departure_suppression_scope;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:709:    let scope = &mut state.departure_suppression_scope;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:731:        .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:766:    let depth = state.departure_suppression_scope.member_bindings.len();
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:768:        .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:773:        state.departure_suppression_scope.member_bindings.len(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:777:        .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:785:    let scope = &mut state.departure_suppression_scope;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:802:            state.departure_suppression_scope.boundary_flushes.1 += 1;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:832:            record.trigger_suppression = Some(TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:862:        .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:876:            .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:884:                    .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:913:            .departure_suppression_scope
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1782:        let scope = &state.departure_suppression_scope;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1817:                assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 0));
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1831:                assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 0));
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1837:        assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 1));
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1921:            Some(TriggerSuppressionSnapshot::default())
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1927:        assert!(json.get("departure_suppression_scope").is_none());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:1985:                    Some(TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:2011:                assert_eq!(state.departure_suppression_scope.boundary_flushes, (1, 1));
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:2092:        assert!(saved.get("departure_suppression_scope").is_none());
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:2882:                record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:2884:                    ..ZoneChangeRecord::test_minimal(id, Some(Zone::Hand), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:4006:                    Some(TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/zones.rs:4093:            Some(TriggerSuppressionSnapshot::default())
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_index.rs:1113:    use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_index.rs:1234:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/derived_views.rs:1082:        ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/derived_views.rs:1573:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:1545:        // recorded by the `ZoneChangeRecord` snapshot — preserved per CR
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:3964:    /// `ZoneChangeRecord` snapshot — NOT the ability controller and
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:3979:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:4001:            let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:4003:                ..ZoneChangeRecord::test_minimal(ObjectId(7), from, to)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:4040:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:4050:        let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:4052:            ..ZoneChangeRecord::test_minimal(entering_creature_id, None, Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:5081:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/targeting.rs:5155:            record: Box::new(crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:5138:        DamageRecord, ExileLink, ExileLinkKind, ManaSpentSourceSnapshot, ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7077:        let zubera = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7080:            ..ZoneChangeRecord::test_minimal(ObjectId(10), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7082:        let non_zubera = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7085:            ..ZoneChangeRecord::test_minimal(ObjectId(11), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7087:        let zubera_bounced = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7090:            ..ZoneChangeRecord::test_minimal(ObjectId(12), Some(Zone::Battlefield), Zone::Hand)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7116:        let p0_owned = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7120:            ..ZoneChangeRecord::test_minimal(ObjectId(10), Some(Zone::Hand), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7122:        let p0_owned_stolen = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7126:            ..ZoneChangeRecord::test_minimal(ObjectId(11), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7128:        let p1_owned_stolen_by_p0 = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7132:            ..ZoneChangeRecord::test_minimal(ObjectId(12), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7134:        let token = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7139:            ..ZoneChangeRecord::test_minimal(ObjectId(13), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7141:        let nonpermanent = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7145:            ..ZoneChangeRecord::test_minimal(ObjectId(14), Some(Zone::Hand), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7185:        let dalek_a = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7189:            ..ZoneChangeRecord::test_minimal(ObjectId(10), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7191:        let dalek_b = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7195:            ..ZoneChangeRecord::test_minimal(ObjectId(11), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7197:        let non_dalek = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7201:            ..ZoneChangeRecord::test_minimal(ObjectId(12), Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7759:    // was attached to it" resolves against the ZoneChangeRecord's attachment
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7766:        use crate::types::game_state::{AttachmentSnapshot, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7770:        let record = ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:7788:            ..ZoneChangeRecord::test_minimal(dying_id, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:10467:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:10515:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:10941:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:10959:                ..ZoneChangeRecord::test_minimal(source, Some(Zone::Battlefield), Zone::Graveyard)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/quantity.rs:12186:            record: Box::new(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:524:    mut record: crate::types::game_state::ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3199:            .push(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3202:                ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3318:            .push(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3323:                ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3339:            .push(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3344:                ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3393:                .push(crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/restrictions.rs:3395:                    ..crate::types::game_state::ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/game_object.rs:1498:    ) -> crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/game_object.rs:1499:        crate::types::game_state::ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:4:    game_state::{GameState, ZoneChangeRecord},
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:81:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:129:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:143:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:154:    record: &ZoneChangeRecord,
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:161:pub(super) fn death_suppressed_before(state: &GameState, record: &ZoneChangeRecord) -> bool {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:169:pub(super) fn death_suppressed_after(state: &GameState, record: &ZoneChangeRecord) -> bool {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:181:    use crate::types::game_state::TriggerSuppressionSnapshot;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/trigger_suppression.rs:222:                    let snapshot = TriggerSuppressionSnapshot {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_tests.rs:6829:        deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_tests.rs:7220:        deferred_sacrificed_permanents: Vec::new(),
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_replacement.rs:4074:        use crate::types::game_state::ZoneChangeRecord;
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/game/engine_replacement.rs:4109:            .push(ZoneChangeRecord::test_minimal(
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/database/synthesis.rs:11605:    use crate::types::game_state::{GameState, StackEntryKind, WaitingFor, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/database/synthesis.rs:11632:            record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/src/database/synthesis.rs:11636:                ..ZoneChangeRecord::test_minimal(object_id, Some(Zone::Stack), Zone::Battlefield)
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/agency_coroner_suspected_cost_paid.rs:9://! `is_suspected` field on `LKISnapshot`/`ZoneChangeRecord` flips the suspected
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs:13:use engine::types::game_state::{GameState, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs:109:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/l02_bb1_activation_conditions.rs:25:use engine::types::game_state::{DamageRecord, GameState, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/l02_bb1_activation_conditions.rs:172:fn push_gy_left(state_read: &GameState, obj: ObjectId) -> ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/l02_bb1_activation_conditions.rs:176:fn push_sacrificed(state_read: &GameState, obj: ObjectId) -> ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs:15:use engine::types::game_state::{WaitingFor, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs:79:        .push(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/madame_null_integration.rs:35:use engine::types::game_state::{GameState, ZoneChangeRecord};
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/madame_null_integration.rs:86:        record: Box::new(ZoneChangeRecord {
+/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/source/crates/engine/tests/integration/loop_shortcut.rs:65:const GOLDEN_ON: &str = r#"[StackPushed { object_id: ObjectId(3) }, ZoneChanged { object_id: ObjectId(3), from: Some(Hand), to: Stack, record: ZoneChangeRecord { trigger_suppression: None, object_id: ObjectId(3), name: "Test Lifegain Kickoff", core_types: [Sorcery], subtypes: [], supertypes: [], keywords: [], trigger_definitions: [], power: None, toughness: None, base_power: None, base_toughness: None, colors: [], mana_value: 0, controller: PlayerId(0), owner: PlayerId(0), from_zone: Some(Hand), cast_from_zone: None, played_from_zone: None, to_zone: Stack, attachments: [], linked_exile_snapshot: [], is_token: false, combat_status: ZoneChangeCombatStatus { attacking: false, blocking: false, blocked: false, attacking_alone: false, blocking_alone: false, defending_player: None }, co_departed: [], entered_incarnation: None, attached_to: None, turn_zone_change_index: 0, is_suspected: false } }, SpellCast { card_id: CardId(3), controller: PlayerId(0), object_id: ObjectId(3) }, PriorityPassed { player_id: PlayerId(1) }, LifeChanged { player_id: PlayerId(0), amount: 1 }, EffectResolved { kind: GainLife, source_id: ObjectId(3), subject: None }, ZoneChanged { object_id: ObjectId(3), from: Some(Stack), to: Graveyard, record: ZoneChangeRecord { trigger_suppression: None, object_id: ObjectId(3), name: "Test Lifegain Kickoff", core_types: [Sorcery], subtypes: [], supertypes: [], keywords: [], trigger_definitions: [], power: None, toughness: None, base_power: None, base_toughness: None, colors: [], mana_value: 0, controller: PlayerId(0), owner: PlayerId(0), from_zone: Some(Stack), cast_from_zone: None, played_from_zone: None, to_zone: Graveyard, attachments: [], linked_exile_snapshot: [], is_token: false, combat_status: ZoneChangeCombatStatus { attacking: false, blocking: false, blocked: false, attacking_alone: false, blocking_alone: false, defending_player: None }, co_departed: [], entered_incarnation: None, attached_to: None, turn_zone_change_index: 1, is_suspected: false } }, StackResolved { object_id: ObjectId(3) }, PriorityPassed { player_id: PlayerId(1) }, LifeChanged { player_id: PlayerId(1), amount: -1 }, EffectResolved { kind: LoseLife, source_id: ObjectId(1), subject: None }, StackResolved { object_id: ObjectId(4) }, PriorityPassed { player_id: PlayerId(1) }, LifeChanged { player_id: PlayerId(0), amount: 1 }, EffectResolved { kind: GainLife, source_id: ObjectId(2), subject: None }, StackResolved { object_id: ObjectId(5) }, GameOver { winner: Some(PlayerId(0)) }]"#;

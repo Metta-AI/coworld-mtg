@@ -1,0 +1,12 @@
+diff --git a/crates/engine/src/game/derived_views.rs b/crates/engine/src/game/derived_views.rs
+index eb5dc8c65..362254aa4 100644
+--- a/crates/engine/src/game/derived_views.rs
++++ b/crates/engine/src/game/derived_views.rs
+@@ -1571,6 +1571,7 @@ mod tests {
+             from: Some(Zone::Library),
+             to: Zone::Hand,
+             record: Box::new(ZoneChangeRecord {
++                trigger_suppression: None,
+                 object_id: hidden_card,
+                 name: "Secret Card".to_string(),
+                 core_types: Vec::new(),

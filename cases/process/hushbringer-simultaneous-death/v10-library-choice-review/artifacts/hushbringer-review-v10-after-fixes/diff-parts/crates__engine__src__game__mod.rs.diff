@@ -1,0 +1,12 @@
+diff --git a/crates/engine/src/game/mod.rs b/crates/engine/src/game/mod.rs
+index 5c42431d7..7a8d8967d 100644
+--- a/crates/engine/src/game/mod.rs
++++ b/crates/engine/src/game/mod.rs
+@@ -156,6 +156,7 @@ pub mod topology;
+ pub mod transform;
+ pub mod trigger_index;
+ pub(crate) mod trigger_matchers;
++pub(crate) mod trigger_suppression;
+ pub mod triggers;
+ pub mod turn_control;
+ pub mod turns;

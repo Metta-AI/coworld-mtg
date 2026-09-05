@@ -1,0 +1,66 @@
+{
+  "utc": "2026-09-05T21:38:02.762291+00:00",
+  "canonical_build_receipt_sha256": "d3137166b94baeb8bdea6133018240edcaa9a022ad0c0b656ac711806c1392c1",
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "original_path": "/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/integration-7bdd4945820186df",
+  "original_stat": {
+    "size": 279329808,
+    "mtime_ns": 1788644170856391956,
+    "inode": 5697526
+  },
+  "immutable_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+  "sha256": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+  "build_command": [
+    "cargo",
+    "test",
+    "-p",
+    "engine",
+    "--test",
+    "integration",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cargo_invocation_cwd": "/home/ubuntu/repos/phase-verifiable-loop",
+  "cargo_runtime_package_cwd": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine",
+  "env_overlay": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "ldd": "\tlinux-vdso.so.1 (0x00007ffee7ba8000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x0000719ad3af3000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000719acb800000)\n\t/lib64/ld-linux-x86-64.so.2 (0x0000719ad3b1c000)\n",
+  "artifact": {
+    "reason": "compiler-artifact",
+    "package_id": "path+file:///home/ubuntu/repos/phase-verifiable-loop/crates/engine#0.24.0",
+    "manifest_path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/Cargo.toml",
+    "target": {
+      "kind": [
+        "test"
+      ],
+      "crate_types": [
+        "bin"
+      ],
+      "name": "integration",
+      "src_path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/tests/integration/main.rs",
+      "edition": "2021",
+      "doc": false,
+      "doctest": false,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "0",
+      "debuginfo": "line-tables-only",
+      "debug_assertions": true,
+      "overflow_checks": true,
+      "test": true
+    },
+    "features": [],
+    "filenames": [
+      "/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/integration-7bdd4945820186df"
+    ],
+    "executable": "/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps/integration-7bdd4945820186df",
+    "fresh": false
+  },
+  "runtime_note": "Canonical module/full-integration runs use Cargo and the original artifact; immutable copy preserves identical executable bytes. Independent direct runs should use the engine package cwd. The ldd record identifies non-bundled system runtime dependencies."
+}

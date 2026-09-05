@@ -1,0 +1,12 @@
+diff --git a/crates/engine/tests/integration/madame_null_integration.rs b/crates/engine/tests/integration/madame_null_integration.rs
+index baaaab813..236559c94 100644
+--- a/crates/engine/tests/integration/madame_null_integration.rs
++++ b/crates/engine/tests/integration/madame_null_integration.rs
+@@ -84,6 +84,7 @@ fn set_etb_event(state: &mut GameState, entering: ObjectId) {
+         from: Some(Zone::Hand),
+         to: Zone::Battlefield,
+         record: Box::new(ZoneChangeRecord {
++            trigger_suppression: None,
+             object_id: entering,
+             name: String::new(),
+             core_types: Vec::new(),

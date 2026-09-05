@@ -1,0 +1,25 @@
+{
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "rules_sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "added_or_moved_CR_lines": 155,
+  "all_added_or_moved_included": true,
+  "total_annotations": 185,
+  "all_annotation_source_texts_match": true,
+  "all_full_rule_texts_match_rulebook": true,
+  "method": "Independently enumerated every added/moved CR-bearing patch line; compared complete185-line map and source contexts, read every context and full referenced rules including compound/range expansions and affected adjacent functions. Semantic audit identifies115.1 mismatch despite existing successful numeric lookup.",
+  "prior_five_groups": "Resolved; no unrelated gameplay extension. Siege/non-Siege inherited guard explicitly bounded.",
+  "gate": "FAIL",
+  "findings": [
+    {
+      "severity": "LOW",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3528,
+      "summary": "Resolution-time native Library choices cite the casting-time target rule.",
+      "cited": "115.1",
+      "actual_rule": "Targets are declared as part of putting a spell or ability on the stack.",
+      "actual_source": "Natural EffectZoneChoice branch after selected-card count/membership/current-zone validation; nontargeted resolution choice, followed by private-zone placement.",
+      "suggestion": "Use115.10 and/or608.2d for nontargeted resolution-time choices, preserving the explicitly bounded existing ordering/notification behavior, and correct complete CR audit row184.",
+      "source_sha256": "d6ec57bc6b231897e5c72dd392b98e240fce3b92cd13fd827e62e84c2e6b2085"
+    }
+  ]
+}

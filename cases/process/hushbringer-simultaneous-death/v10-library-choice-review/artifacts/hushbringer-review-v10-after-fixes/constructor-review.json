@@ -1,0 +1,1136 @@
+{
+  "source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "raw_occurrences": 92,
+  "named_expressions": 81,
+  "Self_expressions": 1,
+  "total_expressions": 82,
+  "production_expressions": [
+    [
+      "crates/engine/src/game/filter.rs",
+      1402
+    ],
+    [
+      "crates/engine/src/game/game_object.rs",
+      1499
+    ],
+    [
+      "crates/engine/src/game/stack.rs",
+      2495
+    ]
+  ],
+  "test_expressions": 79,
+  "nonconstructor_occurrences": 11,
+  "manual_exclusions": [
+    [
+      "crates/engine/src/game/game_object.rs",
+      1498
+    ],
+    [
+      "crates/engine/src/game/stack.rs",
+      2493
+    ],
+    [
+      "crates/engine/src/types/game_state.rs",
+      645
+    ],
+    [
+      "crates/engine/src/types/game_state.rs",
+      832
+    ],
+    [
+      "crates/engine/src/types/game_state.rs",
+      835
+    ],
+    [
+      "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+      172
+    ],
+    [
+      "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+      176
+    ],
+    [
+      "crates/engine/tests/integration/loop_shortcut.rs",
+      65
+    ],
+    [
+      "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      246
+    ],
+    [
+      "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      2907
+    ]
+  ],
+  "raw_hits": [
+    {
+      "file": "crates/engine/tests/integration/loop_shortcut.rs",
+      "line": 65,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/loop_shortcut.rs",
+      "line": 65,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/madame_null_integration.rs",
+      "line": 86,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs",
+      "line": 79,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+      "line": 172,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/l02_bb1_activation_conditions.rs",
+      "line": 176,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs",
+      "line": 109,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 246,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2907,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/database/synthesis.rs",
+      "line": 11632,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/game_object.rs",
+      "line": 1498,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/game_object.rs",
+      "line": 1499,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3199,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3318,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3339,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3393,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7077,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7082,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7087,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7116,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7122,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7128,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7134,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7141,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7185,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7191,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7197,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7770,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 10941,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "line": 4001,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "line": 4050,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/derived_views.rs",
+      "line": 1573,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 2882,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 897,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 976,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1064,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1116,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1167,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1262,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1887,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_ordering_parity_tests.rs",
+      "line": 1034,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7026,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7135,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7279,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7303,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7591,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7666,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7782,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7800,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7820,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7907,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7922,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14073,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14092,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14112,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14135,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14390,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14408,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 46,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 194,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 251,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 321,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 8398,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 10354,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 15046,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_push_first_contract_tests.rs",
+      "line": 45,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 1402,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10269,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10282,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10295,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10308,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10452,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10670,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10682,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10694,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10753,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10764,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10833,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 11161,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/stack.rs",
+      "line": 2493,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/stack.rs",
+      "line": 2495,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/casting_tests.rs",
+      "line": 45137,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 12247,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 18663,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 19009,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "line": 2202,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "line": 2210,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "line": 1574,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "line": 1602,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 645,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 832,
+      "matched": "ZoneChangeRecord {"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 835,
+      "matched": "ZoneChangeRecord {"
+    }
+  ],
+  "test_module_gates": [
+    {
+      "file": "crates/engine/src/database/synthesis.rs",
+      "cfg_test_lines": [
+        [
+          4135,
+          "#[cfg(test)]"
+        ],
+        [
+          4356,
+          "#[cfg(test)]"
+        ],
+        [
+          7304,
+          "#[cfg(test)]"
+        ],
+        [
+          8218,
+          "#[cfg(test)]"
+        ],
+        [
+          8226,
+          "#[cfg(test)]"
+        ],
+        [
+          10063,
+          "#[cfg(test)]"
+        ],
+        [
+          10273,
+          "#[cfg(test)]"
+        ],
+        [
+          10377,
+          "#[cfg(test)]"
+        ],
+        [
+          10436,
+          "#[cfg(test)]"
+        ],
+        [
+          10495,
+          "#[cfg(test)]"
+        ],
+        [
+          10703,
+          "#[cfg(test)]"
+        ],
+        [
+          10808,
+          "#[cfg(test)]"
+        ],
+        [
+          10925,
+          "#[cfg(test)]"
+        ],
+        [
+          11029,
+          "#[cfg(test)]"
+        ],
+        [
+          11174,
+          "#[cfg(test)]"
+        ],
+        [
+          11314,
+          "#[cfg(test)]"
+        ],
+        [
+          11423,
+          "#[cfg(test)]"
+        ],
+        [
+          11590,
+          "#[cfg(test)]"
+        ],
+        [
+          11919,
+          "#[cfg(test)]"
+        ],
+        [
+          12616,
+          "#[cfg(test)]"
+        ],
+        [
+          13246,
+          "#[cfg(test)]"
+        ],
+        [
+          13418,
+          "#[cfg(test)]"
+        ],
+        [
+          13722,
+          "#[cfg(test)]"
+        ],
+        [
+          13828,
+          "#[cfg(test)]"
+        ],
+        [
+          13986,
+          "#[cfg(test)]"
+        ],
+        [
+          14070,
+          "#[cfg(test)]"
+        ],
+        [
+          14133,
+          "#[cfg(test)]"
+        ],
+        [
+          14255,
+          "#[cfg(test)]"
+        ],
+        [
+          14355,
+          "#[cfg(test)]"
+        ],
+        [
+          14427,
+          "#[cfg(test)]"
+        ],
+        [
+          14511,
+          "#[cfg(test)]"
+        ],
+        [
+          14737,
+          "#[cfg(test)]"
+        ],
+        [
+          14901,
+          "#[cfg(test)]"
+        ],
+        [
+          15126,
+          "#[cfg(test)]"
+        ],
+        [
+          15221,
+          "#[cfg(test)]"
+        ],
+        [
+          15524,
+          "#[cfg(test)]"
+        ],
+        [
+          15979,
+          "#[cfg(test)]"
+        ],
+        [
+          16052,
+          "#[cfg(test)]"
+        ],
+        [
+          16354,
+          "#[cfg(test)]"
+        ],
+        [
+          16499,
+          "#[cfg(test)]"
+        ],
+        [
+          16593,
+          "#[cfg(test)]"
+        ],
+        [
+          16753,
+          "#[cfg(test)]"
+        ],
+        [
+          16872,
+          "#[cfg(test)]"
+        ],
+        [
+          17217,
+          "#[cfg(test)]"
+        ],
+        [
+          17252,
+          "#[cfg(test)]"
+        ],
+        [
+          17501,
+          "#[cfg(test)]"
+        ],
+        [
+          17541,
+          "#[cfg(test)]"
+        ],
+        [
+          17681,
+          "#[cfg(test)]"
+        ],
+        [
+          17967,
+          "#[cfg(test)]"
+        ],
+        [
+          18449,
+          "#[cfg(test)]"
+        ],
+        [
+          18518,
+          "#[cfg(test)]"
+        ],
+        [
+          18633,
+          "#[cfg(test)]"
+        ],
+        [
+          18827,
+          "#[cfg(test)]"
+        ],
+        [
+          19158,
+          "#[cfg(test)]"
+        ],
+        [
+          19285,
+          "#[cfg(test)]"
+        ],
+        [
+          19415,
+          "#[cfg(test)]"
+        ],
+        [
+          19504,
+          "#[cfg(test)]"
+        ],
+        [
+          19816,
+          "#[cfg(test)]"
+        ],
+        [
+          20477,
+          "#[cfg(test)]"
+        ],
+        [
+          20789,
+          "#[cfg(test)]"
+        ],
+        [
+          21163,
+          "#[cfg(test)]"
+        ],
+        [
+          21778,
+          "#[cfg(test)]"
+        ],
+        [
+          22246,
+          "#[cfg(test)]"
+        ],
+        [
+          22691,
+          "#[cfg(test)]"
+        ],
+        [
+          22888,
+          "#[cfg(test)]"
+        ],
+        [
+          22996,
+          "#[cfg(test)]"
+        ],
+        [
+          23143,
+          "#[cfg(test)]"
+        ],
+        [
+          23587,
+          "#[cfg(test)]"
+        ],
+        [
+          23762,
+          "#[cfg(test)]"
+        ],
+        [
+          23924,
+          "#[cfg(test)]"
+        ],
+        [
+          24388,
+          "#[cfg(test)]"
+        ],
+        [
+          24604,
+          "#[cfg(test)]"
+        ],
+        [
+          24838,
+          "#[cfg(test)]"
+        ],
+        [
+          25064,
+          "#[cfg(test)]"
+        ],
+        [
+          25145,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/casting_tests.rs",
+      "cfg_test_lines": [],
+      "external_module_contexts": [
+        {
+          "file": "crates/engine/src/game/casting.rs",
+          "line": 1839,
+          "context": [
+            "        // objects are face-down permanents put onto the battlefield by effects, never cast",
+            "        // through spell payment, so they never build a `PaymentContext::Spell`. Guarded by",
+            "        // `build_spell_meta_for_foretold_card_is_not_face_down` (casting_tests.rs).",
+            "        is_face_down: obj.face_down && obj.back_face.is_some(),",
+            "    })"
+          ]
+        },
+        {
+          "file": "crates/engine/src/game/casting.rs",
+          "line": 17363,
+          "context": [
+            "",
+            "#[cfg(test)]",
+            "#[path = \"casting_tests.rs\"]",
+            "mod tests;"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/derived_views.rs",
+      "cfg_test_lines": [
+        [
+          1073,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "cfg_test_lines": [
+        [
+          819,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "cfg_test_lines": [
+        [
+          19,
+          "#[cfg(test)]"
+        ],
+        [
+          102,
+          "#[cfg(test)]"
+        ],
+        [
+          135,
+          "// so `heist.rs` stays implementation-only \u2014 no inline `#[cfg(test)]` token)."
+        ],
+        [
+          136,
+          "#[cfg(test)]"
+        ],
+        [
+          139,
+          "#[cfg(test)]"
+        ],
+        [
+          206,
+          "#[cfg(test)]"
+        ],
+        [
+          9837,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "cfg_test_lines": [],
+      "external_module_contexts": [
+        {
+          "file": "crates/engine/src/game/engine.rs",
+          "line": 9381,
+          "context": [
+            "",
+            "#[cfg(test)]",
+            "#[path = \"engine_exile_return_tests.rs\"]",
+            "mod exile_return_tests;",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "cfg_test_lines": [
+        [
+          2745,
+          "#[cfg(test)]"
+        ],
+        [
+          5574,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "cfg_test_lines": [
+        [
+          5123,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "cfg_test_lines": [
+        [
+          2257,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "cfg_test_lines": [
+        [
+          2340,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "cfg_test_lines": [
+        [
+          4856,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "cfg_test_lines": [
+        [
+          15,
+          "#[cfg(test)]"
+        ],
+        [
+          1104,
+          "#[cfg(test)]"
+        ],
+        [
+          8248,
+          "#[cfg(test)]"
+        ],
+        [
+          27236,
+          "#[cfg(test)]"
+        ],
+        [
+          27242,
+          "#[cfg(test)]"
+        ],
+        [
+          27246,
+          "#[cfg(test)]"
+        ],
+        [
+          27262,
+          "#[cfg(test)]"
+        ],
+        [
+          27268,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "cfg_test_lines": [],
+      "external_module_contexts": [
+        {
+          "file": "crates/engine/src/game/triggers.rs",
+          "line": 27237,
+          "context": [
+            "/// tuple, even when multiple zone-scan paths visit the same object.",
+            "#[cfg(test)]",
+            "#[path = \"triggers_dedup_regression_tests.rs\"]",
+            "mod dedup_regression_tests;",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/triggers_ordering_parity_tests.rs",
+      "cfg_test_lines": [],
+      "external_module_contexts": [
+        {
+          "file": "crates/engine/src/game/triggers.rs",
+          "line": 27243,
+          "context": [
+            "// sweep (C0-full allowlist parity) + the C1/C0-full discriminators (N-A..N-F).",
+            "#[cfg(test)]",
+            "#[path = \"triggers_ordering_parity_tests.rs\"]",
+            "mod ordering_parity_tests;",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/triggers_push_first_contract_tests.rs",
+      "cfg_test_lines": [],
+      "external_module_contexts": [
+        {
+          "file": "crates/engine/src/game/triggers.rs",
+          "line": 27263,
+          "context": [
+            "// prompt previously appeared with no stack entry for context.",
+            "#[cfg(test)]",
+            "#[path = \"triggers_push_first_contract_tests.rs\"]",
+            "mod push_first_contract_tests;",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "cfg_test_lines": [
+        [
+          3,
+          "#[cfg(test)]"
+        ],
+        [
+          670,
+          "        #[cfg(test)]"
+        ],
+        [
+          800,
+          "        #[cfg(test)]"
+        ],
+        [
+          1764,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "cfg_test_lines": [
+        [
+          1510,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "cfg_test_lines": [
+        [
+          370,
+          "    #[cfg(test)]"
+        ],
+        [
+          831,
+          "#[cfg(test)]"
+        ],
+        [
+          10957,
+          "#[cfg(test)]"
+        ],
+        [
+          11526,
+          "#[cfg(test)]"
+        ],
+        [
+          11698,
+          "#[cfg(test)]"
+        ]
+      ],
+      "external_module_contexts": []
+    }
+  ],
+  "bound_audit_sha256": "2b91951f30139d9cda6ec206eb2095340e683ca648a2fc57de3f3cb071bddaec",
+  "conclusion": "Three actual production expressions initialize None; completed GameObject native departure later receives owner snapshot. Filter LKI adapter and token probe are synthetic. Test update syntax inherits minimal None except explicit serde snapshot fixtures. No parser or client constructor introduced."
+}

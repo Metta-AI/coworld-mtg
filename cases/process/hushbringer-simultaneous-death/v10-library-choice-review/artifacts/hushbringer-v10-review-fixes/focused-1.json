@@ -1,0 +1,18 @@
+{
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "output": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/focused-1",
+  "commands": [
+    [
+      "cargo",
+      "test",
+      "-p",
+      "engine",
+      "--test",
+      "integration",
+      "native_library_choice_",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ]
+  ]
+}

@@ -1,0 +1,20 @@
+diff --git a/crates/engine/src/game/filter.rs b/crates/engine/src/game/filter.rs
+index 387e0e65d..029e1c148 100644
+--- a/crates/engine/src/game/filter.rs
++++ b/crates/engine/src/game/filter.rs
+@@ -1426,6 +1426,7 @@ pub fn matches_target_filter_on_lki_snapshot(
+         is_token: false,
+         combat_status: Default::default(),
+         co_departed: Vec::new(),
++        trigger_suppression: None,
+         attached_to: None,
+         entered_incarnation: None,
+         turn_zone_change_index: 0,
+@@ -11182,6 +11183,7 @@ mod tests {
+             is_token: false,
+             combat_status: Default::default(),
+             co_departed: Vec::new(),
++            trigger_suppression: None,
+             attached_to: None,
+             entered_incarnation: None,
+             turn_zone_change_index: 0,
