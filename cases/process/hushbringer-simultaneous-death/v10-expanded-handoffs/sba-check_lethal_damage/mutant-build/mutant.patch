@@ -1,0 +1,20 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -831,7 +831,7 @@
+         if live_battlefield_object(state, &id).is_none() {
+             continue;
+         }
+-        let paused = zones::with_departure_member(state, events, owner, id, |state, events| {
++        let paused = (|| {
+             let proposed = ProposedEvent::Destroy {
+                 object_id: id,
+                 source: None,
+@@ -943,7 +943,7 @@
+                 }
+             }
+             false
+-        });
++        })();
+         if paused {
+             return;
+         }

@@ -1,0 +1,32 @@
+{
+  "started": "2026-09-05T20:53:29.358181+00:00",
+  "command": [
+    "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+    "trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "28c4c21e0e9d11a93f8898e418ed0176c727640d27463c84d2e9ca46b558b121",
+  "source_manifest_sha256": "e7222637c1ae32c1e0787493371842daee881361aa183f6b9dad48c36483a127",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/before-snapshot-some-to-live-fallback/mutant-build/source.tar.gz",
+  "source_archive_sha256": "aed63a1fd30541b4153490609198928ed0248d1e695f557d4fbd5b3818134565",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/before-snapshot-some-to-live-fallback/mutant-build/receipt.json",
+  "compilation_receipt_sha256": "89f5e935fb7df1410cd12d78508da1b456c56221f9a01ef05b73819ee5f23714",
+  "mode": "fresh_mutant_Cargo_artifact",
+  "case": {
+    "test": "trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+    "role": "discriminator",
+    "failure_marker": "simultaneous-death-suppressed; hush_first=true",
+    "additional_failure_markers": [
+      "left: 1",
+      "right: 0"
+    ]
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/before-snapshot-some-to-live-fallback/mutant-build/linked-libraries.json",
+  "linked_libraries_sha256": "d3005bc59bbe4548b3eeef02af0075fe76cd3f384d21dc3de5a0d0a4f60c5140",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356"
+}

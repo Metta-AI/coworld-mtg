@@ -1,0 +1,28 @@
+{
+  "utc": "2026-09-05T20:47:56.661522+00:00",
+  "required_input": "/tmp/gamestate.json",
+  "exists": false,
+  "status": "unavailable; no historical timing measurement",
+  "unchanged_source_diagnostics": [
+    {
+      "file": "crates/engine/src/game/stack.rs",
+      "function_line": "fn real_scute_board_resolution_is_not_full_eval_per_token() {"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "function_line": "fn scute_swarm_throughput() {"
+    }
+  ],
+  "behavior_guard_command": [
+    "cargo",
+    "test",
+    "-p",
+    "engine",
+    "--lib",
+    "game::stack::tests::batch_resolve::cross_source_",
+    "--",
+    "--nocapture"
+  ],
+  "behavior_guard_result": "5 passed,0 ignored; semantic batching only",
+  "none_fallback_cost": "Each helper call on record.snapshot None enumerates live functioning battlefield statics, even with zero suppressors; Some(empty) and Some(Dies) avoid that fallback scan."
+}

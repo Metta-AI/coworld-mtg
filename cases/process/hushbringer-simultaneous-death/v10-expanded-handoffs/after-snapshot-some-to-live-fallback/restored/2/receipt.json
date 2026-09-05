@@ -1,0 +1,43 @@
+{
+  "started": "2026-09-05T20:54:52.724659+00:00",
+  "command": [
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+    "trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+  "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+  "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+  "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+  "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+  "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+  "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+  "case": {
+    "test": "trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit",
+    "role": "control",
+    "purpose": "Independently invoked unchanged-world public no-Hush sibling; exact one Spirit."
+  },
+  "entire_source_manifest_verified": true,
+  "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+  "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+  "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+  "finished": "2026-09-05T20:54:53.379306+00:00",
+  "exit": 0,
+  "counts": [
+    {
+      "status": "ok",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 3181
+    }
+  ],
+  "log_sha256": "48ab4a1804cfc28ae457d78b21d25206143597049d4e9b11054bc48a9ed11a04",
+  "evidence": [],
+  "after_history_evidence": [],
+  "source_and_executable_unchanged": true
+}

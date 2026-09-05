@@ -1,8 +1,12 @@
 # EC2 workspace
 
-The active checkout is on `nishadsingh-box-4` at
+The fixed-input experiment checkout is on `nishadsingh-box-4` at
 `/home/ubuntu/repos/coworld-mtg`, branch `codex/verifiable-improvement-loop`.
 The engine repair checkout is `/home/ubuntu/repos/phase-verifiable-loop`.
+The checkout used to integrate and publish current main is
+`/home/ubuntu/repos/coworld-mtg-publish`, branch `codex/publish-verifiable-loop`.
+It has its own Cargo target directory. Keep the experiment checkout and its
+preserved checker unchanged until the fixed-input comparison is accepted.
 The macOS checkout is a migration backup; run builds and experiments on EC2.
 
 ```sh

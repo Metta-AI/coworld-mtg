@@ -1,0 +1,50 @@
+{
+  "status": "confirmed against final handoff and corrected final map",
+  "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "file": "crates/engine/src/game/engine_resolution_choices.rs",
+  "lines": [
+    3534,
+    3541,
+    3554,
+    3557,
+    3572
+  ],
+  "map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/production-entry-callsite-map.json",
+  "problem": "Final map now honestly marks native Bottom and NthFromTop public tests unassigned and Top order/rejection/Library-origin obligations unresolved. The former false evidence claims were corrected, but the required runtime coverage remains incomplete.",
+  "evidence": [
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 4097,
+      "test": "hand_library_choice_preserves_selected_cards_and_nondeath_payoff",
+      "observed": "Natural Hand choice Count2, both selected-ID orders, Hush/no-Hush; Top only at4122; no final library vector/order or invalid action assertion."
+    },
+    {
+      "file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2840,
+      "test": "library_position_choice_and_targeted_leaf_preserve_non_death_events",
+      "observed": "Natural Hand Count1 or targeted Battlefield movement; Top only; asserts front() at2898. Does not reach Bottom/Nth handler."
+    },
+    {
+      "file": "crates/engine/src/game/effects/put_on_top.rs",
+      "line": 849,
+      "test": "test_resolve_puts_card_nth_from_top",
+      "observed": "Direct resolver with already populated targets; exact nth ordering but bypasses natural EffectZoneChoice and changed handler."
+    },
+    {
+      "file": "crates/engine/src/game/engine_tests.rs",
+      "line": 5278,
+      "test": "brainstorm_resolves_draw_then_put_two_cards_on_top",
+      "observed": "Existing public GameAction Cast/SelectCards proof of Top Count2 selected order; can support corrected Top row."
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_3321_volcanic_spite_optional.rs",
+      "line": 21,
+      "test": "volcanic_spite_prompts_optional_bottom_and_draw_after_damage",
+      "observed": "Stops at OptionalEffectChoice and does not select a card for the native Bottom handler."
+    }
+  ],
+  "searches": "All suppression module LibraryPosition sites are Top. Workspace game/tests NthFromTop search finds only unchanged direct resolver test for explicit nth behavior. Existing parser snapshots and scalar targeted UnexpectedlyAbsent exercise separate producer paths.",
+  "required_resolution": "Map each native first arm to actual natural-choice evidence, exact library ordering and selected/nonselected zone events with absent snapshot, plus applicable invalid-selection controls. Preserve unaffected no-owned-departure disposition; do not claim wrapper mutation kills.",
+  "severity": "MED",
+  "final_map_honesty": "Earlier evidence mismatch is not repeated in final map; this finding concerns remaining required coverage."
+}

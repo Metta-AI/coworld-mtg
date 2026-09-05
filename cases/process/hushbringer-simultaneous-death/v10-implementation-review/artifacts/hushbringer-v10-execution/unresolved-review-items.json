@@ -1,0 +1,36 @@
+{
+  "utc": "2026-09-05T21:07:12.804711+00:00",
+  "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "status": "implementation review/fix obligations remain; executor source ownership is ready for release",
+  "items": [
+    {
+      "id": "moved-and-adjacent-CR-annotations",
+      "status": "unresolved",
+      "evidence": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/reviewer-pre-read-cr-findings.json",
+        "sha256": "c5f0f1716e3159213401597e865c0c074507d0c6541e41c707d6ae5ebf8fd8b5"
+      },
+      "detail": "Novel-line audit deliberately excluded verbatim moved comments. Reviewer checked141 added/moved/adjacent annotations and found stale or misleading source-zone, regeneration, Role, battle-protector and zero-defense citations. No source correction was made in this handoff."
+    },
+    {
+      "id": "native-library-Bottom-and-Nth-controls",
+      "status": "unresolved",
+      "detail": "Three native member arms are mapped by source. Existing hand_library_choice_preserves_selected_cards_and_nondeath_payoff reaches Top only. No Bottom/Nth public branch/order/rejected-choice evidence is claimed."
+    },
+    {
+      "id": "native-library-Top-control-scope",
+      "status": "limited",
+      "detail": "Top test proves selected zones, one Hand departure each, empty peers/missing suppression, spare Hand, observer/Hush survival, life21/zeroSpirit in both selected orders. It does not assert library-vector ordering, invalid selection rejection or Library-origin movement."
+    },
+    {
+      "id": "final-implementation-review-and-committed-worker-acceptance",
+      "status": "parent-owned pending",
+      "detail": "No Phase commit, production pin, clean committed worker rebuild, two reproducible target runs or ten-case acceptance is claimed by this executor."
+    },
+    {
+      "id": "generation-final-input-applicability",
+      "status": "review qualification",
+      "detail": "Real v10 generation/restoration passed at19:23-19:29UTC before the later test-only fixture edits. Final production is byte-identical, but generation was not rerun after final appended controls; evaluate its exact source/input applicability rather than relabeling it final-source execution."
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "config": {
+    "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+    "output": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2",
+    "commands": [
+      [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_attacked_invalid_protector_is_unchanged_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_phased_out_invalid_protector_is_ignored_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_unattacked_phased_in_invalid_protector_selects_living_opponent",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ]
+    ],
+    "stop_on_failure": true
+  },
+  "utc": "2026-09-05T20:57:57.914677+00:00",
+  "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+  "env": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_attacked_invalid_protector_is_unchanged_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/1.log",
+      "log_sha256": "613de0343facda2067a91d4fed5b70e11a1d5e5ad14919b1238f8e4645339b59",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_phased_out_invalid_protector_is_ignored_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/2.log",
+      "log_sha256": "475d149c59213493dec2e2c239eff8eea200df384591939c56227d7ee1ba06f5",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_unattacked_phased_in_invalid_protector_selects_living_opponent",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/3.log",
+      "log_sha256": "e7db4fded845a74324bc21641f92efb53a0f89dfa4c488ed516cd25fe94a94d8",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/4.log",
+      "log_sha256": "d98e6bcf7a3214440e213d7b1e89dede0af89e56328a2c65f87d3faf335e31c0",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/5.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    }
+  ],
+  "finished_utc": "2026-09-05T20:59:07.026877+00:00"
+}

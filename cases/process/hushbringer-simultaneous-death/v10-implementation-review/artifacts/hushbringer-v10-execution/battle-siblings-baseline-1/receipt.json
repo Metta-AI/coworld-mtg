@@ -1,0 +1,131 @@
+{
+  "config": {
+    "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+    "output": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1",
+    "commands": [
+      [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_attacked_invalid_protector_is_unchanged_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_phased_out_invalid_protector_is_ignored_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_unattacked_phased_in_invalid_protector_selects_living_opponent",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ]
+    ],
+    "stop_on_failure": true
+  },
+  "utc": "2026-09-05T20:56:48.429424+00:00",
+  "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+  "env": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_manifest_sha256": "f9f50ca754fa4c6c7bd4cce98cc2113ac607195377e31e9b4f0b33a6cb376561",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/f9f50ca754fa4c6c7bd4cce98cc2113ac607195377e31e9b4f0b33a6cb376561.tar.gz",
+        "sha256": "c0cf617d0cb9bd2d398ea48c0286c7777429b86405ca87a7e825725d0bb898ff",
+        "manifest_sha256": "f9f50ca754fa4c6c7bd4cce98cc2113ac607195377e31e9b4f0b33a6cb376561"
+      },
+      "changed": [
+        "crates/engine/tests/integration/trigger_suppression_event_timing.rs"
+      ]
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--message-format=json",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing::public_battle_attacked_invalid_protector_is_unchanged_at_sba_boundary",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 101,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/1.log",
+      "log_sha256": "034a9ddd75d190d0a896c508cd3fb7dec538dc31a929b3c687778216ee626a40",
+      "source_manifest_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484.tar.gz",
+        "sha256": "7e9fb35c4ae392f6eb6f274f01f28dcc3400a8a9014f43f1ca4aca98bc6ead75",
+        "manifest_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484"
+      },
+      "changed": []
+    }
+  ],
+  "finished_utc": "2026-09-05T20:57:18.235693+00:00"
+}

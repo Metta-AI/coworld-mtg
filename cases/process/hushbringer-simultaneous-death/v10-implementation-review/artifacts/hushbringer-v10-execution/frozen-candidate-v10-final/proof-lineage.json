@@ -1,0 +1,25 @@
+{
+  "previous_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10/source.json",
+  "previous_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "previous_archive_sha256": "3bc0679cc156ef7a1ee3d8d57c9f341521681595632f32a3337c0846b27e7bc1",
+  "final_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "all2051_files_accounted": true,
+  "unchanged_files": 2050,
+  "changed_file": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+  "complete_previous_integration_module_prefix_identical": true,
+  "previous_fixture_prefix_sha256": "c484d8f343f2be859890b9bae33a719699721f1655e9f59774f65662da73e946",
+  "appended_bytes_sha256": "be07ddf98f8bb5a28552eef7f4e43111fce8781dc26bd54a7e5b54bd2bb22e25",
+  "appended_named_tests": [
+    "public_battle_attacked_invalid_protector_is_unchanged_at_sba_boundary",
+    "public_battle_phased_out_invalid_protector_is_ignored_at_sba_boundary",
+    "public_battle_unattacked_phased_in_invalid_protector_selects_living_opponent"
+  ],
+  "production_unchanged": true,
+  "existing_fixtures_and_helpers_unchanged": true,
+  "proof_compilation_policy": "All mutation records retain their actual frozen v9/overlay-1/v10 compilation source. Appending these independent Battle controls is certified by fresh exact test and full-matrix runs; no old binary is relabeled as final-source compilation.",
+  "baseline_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/receipt.json",
+  "baseline_receipt_sha256": "e020b392a4481c7afb4417d54fb37b0687ac9325681c6d5c23d3a0864abf511a",
+  "full_matrix_pass": 187,
+  "full_matrix_ignored": 20,
+  "new_exact_controls_pass": 3
+}

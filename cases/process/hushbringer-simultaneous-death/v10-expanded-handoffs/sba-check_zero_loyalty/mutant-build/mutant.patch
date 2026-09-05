@@ -1,0 +1,13 @@
+--- a/crates/engine/src/game/sba.rs
++++ b/crates/engine/src/game/sba.rs
+@@ -1536,9 +1536,7 @@
+             continue;
+         }
+         // CR 704.5i + CR 614.6: zero-loyalty death must consult Moved redirects.
+-        if zones::with_departure_member(state, events, owner, id, |state, events| {
+-            move_to_graveyard_via_pipeline(state, id, events)
+-        }) {
++        if (|| move_to_graveyard_via_pipeline(state, id, events))() {
+             return;
+         }
+         *any_performed = true;

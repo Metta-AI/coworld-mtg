@@ -1,0 +1,283 @@
+{
+  "config": {
+    "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+    "output": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2",
+    "commands": [
+      [
+        "cargo",
+        "clippy",
+        "-p",
+        "engine",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--bins"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--doc"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::stack::tests::batch_resolve::cross_source_",
+        "--",
+        "--nocapture"
+      ],
+      [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ]
+    ],
+    "stop_on_failure": false
+  },
+  "utc": "2026-09-05T20:59:17.081968+00:00",
+  "target": "/home/ubuntu/repos/phase-verifiable-loop/target",
+  "env": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "RUST_MIN_STACK": "16777216",
+    "RTK_DISABLED": "1"
+  },
+  "results": [
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "engine",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/0.log",
+      "log_sha256": "bde07346483a174535d25ee02217983b74f0345d4f1f47ecb7d34b7d27e89eda",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/1.log",
+      "log_sha256": "d5c82205cbc522b2f9e9cb3cbe50b32ad87d6cc619988e452272b66f70240345",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/2.log",
+      "log_sha256": "de53aa608a6c8e976bb98a986ff2cfcd744b6e7e5debef0a88cd263f65591973",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--bins"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/3.log",
+      "log_sha256": "e689f7209bc65127f4d7a5813b5e3b7055ac8c9dcd79efb074ffe4495049ce4b",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--doc"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/4.log",
+      "log_sha256": "1d386f91b82c9913eaf1a5fd39f8835e951e9cf4396e921144ca900180e1fae1",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::stack::tests::batch_resolve::cross_source_",
+        "--",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/5.log",
+      "log_sha256": "3ac78caa3a7b244e6209fc7b5606b8b04bcd0d15072fb4d77c39d4fbd99bdbe5",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 101,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/6.log",
+      "log_sha256": "50b20f3c3cdc0e697bb4dde688237be14f1067381c123d144ecd7f1b8acc1d19",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 101,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/7.log",
+      "log_sha256": "24f1e1e4c861ab473eef128acb645d0bb96f03191522d58c6377806605f64c32",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/8.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "source_archive": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/source-archives/885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b.tar.gz",
+        "sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+        "manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+      },
+      "changed": []
+    }
+  ],
+  "finished_utc": "2026-09-05T21:03:27.557228+00:00"
+}

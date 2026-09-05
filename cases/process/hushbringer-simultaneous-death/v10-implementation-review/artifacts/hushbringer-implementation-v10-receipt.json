@@ -1,0 +1,47 @@
+{
+  "utc": "2026-09-05T21:09:02.548107+00:00",
+  "status": "executor handoff complete; implementation is NOT complete pending explicit review/fix findings",
+  "report": "/home/ubuntu/coworld-migration-20260904/hushbringer-implementation-v10.md",
+  "report_sha256": "36e76c24a18559f997e06ecffd3a2e5b2d0bef044dfa56634181559b9c29e5ec",
+  "artifact_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-implementation-v10-manifest.json",
+  "artifact_manifest_sha256": "4f11be26f764b1cc4bfb30eb61902af85cfea1607a7d473ce2642bd00ccfa95e",
+  "sealed_artifact_count": 101,
+  "source_checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "branch": "codex/hushbringer-simultaneous-death",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/source.json",
+  "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/source.tar.gz",
+  "source_archive_sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+  "source_files_verified_unchanged": 2051,
+  "final_gate_receipt_sha256": "9eb28ed230eb11f1879f309eb4d0d6a0e16f1310047197a62c65a19b50dd478b",
+  "public_module": {
+    "passed": 187,
+    "ignored": 20
+  },
+  "full_library": {
+    "passed": 16586,
+    "ignored": 7
+  },
+  "full_integration": {
+    "passed": 3163,
+    "ignored": 22
+  },
+  "distinct_mutations": 67,
+  "mutation_evidence_classes": {
+    "public": 56,
+    "private": 10,
+    "defensive_battle": 1
+  },
+  "unresolved": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/unresolved-review-items.json",
+  "unresolved_sha256": "fc646b502d5c0a8a57704266eaf43fe5ec4f3a867d21993920b6177be5932a0a",
+  "source_ownership_released_to_root": true,
+  "commits_pushes_or_Coworld_edits": false,
+  "parent_owned_remaining": [
+    "independent full implementation review and fresh fix round",
+    "Phase commit and newer-main integration",
+    "clean committed worker rebuild and reproducible full case/corpus acceptance",
+    "attributed accepted repair publication/pin decisions"
+  ],
+  "final_import_audit_sha256": "d1c5a36e5710e0953fb11234e00ed2f7efdbababc553f3b67fefe8876276501d"
+}

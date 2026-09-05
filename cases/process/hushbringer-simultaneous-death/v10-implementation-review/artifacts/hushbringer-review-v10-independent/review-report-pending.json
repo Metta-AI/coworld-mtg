@@ -1,0 +1,155 @@
+{
+  "utc": "2026-09-05T21:04:51.088401+00:00",
+  "status": "review work recorded; final verdict expressly withheld pending final executor handoff",
+  "reviewer": "fresh independent implementation reviewer hushbringer_impl_review_v10",
+  "scope": "Phase repair only; no production/test source writes, commits, pushes, child delegation or Coworld acceptance",
+  "approved_plan_read_complete": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-v10.md",
+    "lines": 868,
+    "sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a"
+  },
+  "source": {
+    "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+    "reviewed_full_diff_including_untracked": true,
+    "untracked_production_module": "crates/engine/src/game/trigger_suppression.rs",
+    "integration_module_read_original_lines": 7159,
+    "append_read_complete": true,
+    "final_manifest": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+    "archive_and_checkout_members_verified": 2051
+  },
+  "originally_reported_bug_runtime": {
+    "independently_executed_original": true,
+    "original_spirits": {
+      "hush_first": 1,
+      "traveler_first": 1,
+      "no_hush": 1
+    },
+    "independently_executed_candidate_exact_tests": true,
+    "candidate_spirits": {
+      "hush_first": 0,
+      "traveler_first": 0,
+      "no_hush": 1
+    },
+    "candidate_each_selected": 1,
+    "candidate_each_ignored": 0,
+    "candidate_guards": "Full Oracle implementation, functioning suppression source, required graveyards, empty stack, restored priority",
+    "candidate_binary": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+    "original_binary": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+    "final_source_relation": "Candidate primary tests built on3016 snapshot; independently proved all old test bytes and production identical in final885b append-only snapshot. No claim77db is a final-source compilation."
+  },
+  "architecture_assessment": {
+    "right_seam": true,
+    "reusable_class": "Normal/library departures across Destroy, ChangeZone, bounce, sacrifice, chosen costs, resumed segments and applicable SBA iteration share explicit lexical owner/member provenance; typed suppression predicates remain behind existing functioning-static authority.",
+    "event_history": "Snapshot authority is presence-sensitive: Some(empty) prohibits live recomputation; None preserves explicitly bounded legacy/unavailable fallback. Before-world uses live attachment/combat relations; after-world uses completed group snapshot with boundary layer evaluation.",
+    "provenance": "Actual emitted event offset/ObjectId/turn-zone-change-index plus live incarnation stops event-range contamination and ID reuse. Independent resolver and consumed leaf barriers prevent accidental ancestor claims. Ordinary/delayed clause timing remains distinct.",
+    "deferred_costs": "One successful component append binds canonical contiguous IDs, shared commit separates components, guards precede append and both payment finalizers, public action boundary preserves actor authorization and allowed independent actions.",
+    "serialization": "Optional snapshot default/skipNone and optional component default preserve loading; unknown nonempty pending selections refuse payment with cancel/reannounce recovery. Lexical state skipped; no latch or AST support promotion.",
+    "known_limits": "Inherited cross-pause/aggregate/inherited-target/merge/offzone availability/regeneration creation and resumed duplicate-dispatch limitations remain explicit; not counted as supported repair behavior. Seven ignored docs unexecuted; unavailable historical Scute input does not become throughput evidence."
+  },
+  "mutation_assessment": {
+    "distinct_seams": 67,
+    "public_runtime": 56,
+    "private_schema_or_helper": 10,
+    "defensive_battle": 1,
+    "repeated_strengthened_checks_are_not_new_seams": true,
+    "canonical_reuse_not_restoration_compilation": true,
+    "full_matrix_abort_separate_from_focused_completion": true,
+    "first_panic_limits_preserved": true,
+    "immutable_nested_path_hash_checks": 476,
+    "immutable_nested_path_hash_failures": 0,
+    "scope_of_independent_archive_verification": "Independently checked canonical primary source and final candidate archives2051each. Verified retained evidence-path hashes; root full per-mutation archive-content audits remain attributed root evidence."
+  },
+  "parser_honesty": "Confirmed no parser/database or supported-coverage implementation change and no support-promotion claim; typed runtime fixtures are not parser-support proof.",
+  "complete_map_status": "Pending final map; provisional native-library first-branch/evidence mismatch remains open.",
+  "cr_audit_status": "Findings retained; all141 final added/moved CR-bearing lines and affected nearby comments checked. Old novelty-only audit cannot establish moved-comment gate.",
+  "evidence": [
+    {
+      "path": "/home/ubuntu/repos/phase-verifiable-loop/AGENTS.md",
+      "sha256": "728c0a332f4bb922a3c48b46b33014bf44f82ea09f5cc5c092076449e4673b05"
+    },
+    {
+      "path": "/home/ubuntu/repos/phase-verifiable-loop/.claude/skills/review-impl/SKILL.md",
+      "sha256": "a806b3751712527e3c74ee7ca5ce5f66a84117f578a706c2da47285f794780e1"
+    },
+    {
+      "path": "/home/ubuntu/repos/phase-verifiable-loop/.claude/skills/engine-implementer/SKILL.md",
+      "sha256": "24f1ea686bce1a663e8b663d1a7bcdadd35f8e0e40d2f10a9a6e32d1df4e2003"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-v10.md",
+      "sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-review-v10.md",
+      "sha256": "15ec8a03f9780b996368b72039f051c279d0b833e0ca6e3e6b9f3745d92f6b97"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations.md",
+      "sha256": "5dd081e88da433c2dbecadf52b85ccad2df24b7be03e6ec4cb8bf45a6abaf41a"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations.md",
+      "sha256": "fbde011009235c775433f31015ba76359dd1097cfebf820861a854c36776629d"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations.md",
+      "sha256": "febe717410490c50cd54fcb10baf5fe2db073c061ee451e3b29be2b63004c78f"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations.md",
+      "sha256": "5685cc1732c171a9b5891bbc862b9fdf43eb3b5a081915647e2d19db99b331ec"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+      "sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-completion-receipt.json",
+      "sha256": "f4742ee56a45aaf02a4a65cc16bfd77daf1f84ca382653e6edfe83b66d1d179e"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-completion-receipt.json",
+      "sha256": "441a4a15f7d57f5784ac710cf426c1344514b99ee3117c103944b5e553bfa954"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-archive-audit.json",
+      "sha256": "f0b9eeedadf71b8506aca0134aaa5e38e261114654a4983b0d8632288dbaba91"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/receipt.json",
+      "sha256": "4f25312c57e34f0ec380c394af3dedb2b6bf7a3714cb4868b562d67d25c7a210"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/candidate-runtime/receipt.json",
+      "sha256": "71b22a0689a4491905b9f742a12904d6cf9e1ebe71499e1f56f6335a04e08dde"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/source-prehandoff-verification.json",
+      "sha256": "0e4c6759ee427a323ef87d882f33057cf9bcfe6cbaf5de9883fa9f3ddf0f7925"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/final-source-delta-audit.json",
+      "sha256": "d9a5d7796eef805fa0bc14ec19c1fb53fcb8e21e89a9176b65b41b85aece1f70"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/independent-constructor-parser-audit.json",
+      "sha256": "8e4049772a0c1d9350a0b7a45a857c8bf8cc09415b358bbd8a566ea948bda5bf"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/all-added-moved-cr-audit.json",
+      "sha256": "cf19a2ea7788c644a9d33584b6fb07b810b4d9024a8df76eeb6aa8fc1f3daa56"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/cr-findings.json",
+      "sha256": "c5f0f1716e3159213401597e865c0c074507d0c6541e41c707d6ae5ebf8fd8b5"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/map-draft-file-audit.json",
+      "sha256": "897f033ef4b4cdac534ca84285e3d80a7e2058098e86bfb24b04fa699538c13d"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/native-library-map-finding.json",
+      "sha256": "242f6bddd6195a7c18e7312cbd997123b84b52baa9e88684dd06e5b52f191e9f"
+    }
+  ]
+}

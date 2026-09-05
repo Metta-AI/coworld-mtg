@@ -1,0 +1,4041 @@
+{
+  "id": "sba-check_unattached_auras",
+  "baseline": [
+    {
+      "started": "2026-09-05T20:41:05.496419+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:06.151041+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "f6d4ad52b2a4df3f78abd383188474f98dd430ba31f473e02d72b4983a89805e",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    1
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 1,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 2
+              },
+              "type": "CreatureDestroyed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    2
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 1
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 2
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 2,
+          "observer_departs": true,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:06.646217+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:07.282115+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "8a85f3fa94e1053200bfdba4eba28291c9fa24e47ba7f49ef3a43c50732bf45e",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    2
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 2,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 1
+              },
+              "type": "CreatureDestroyed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    1
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 1
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 1
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 1,
+          "observer_departs": true,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:07.773227+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:08.587013+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "4d956aed660e203ad365b630768d2354168eb73fbe75f9a58b30834e87043014",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 2
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 2,
+          "observer_departs": false,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:09.085440+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:09.721973+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "7e024819d5fd5601a585c685541e81b1680695b7b5c7c651ecaeb8d005e8f2a1",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 1
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 1,
+          "observer_departs": false,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:10.234832+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:10.889266+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "68adb6464b9228b6a5d5c2f4f17f496e3738643babb3e7b3aa7965f5b28f09ff",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 1,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 2
+              },
+              "type": "CreatureDestroyed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": true,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:11.406948+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:12.064461+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "564596fda5c44d732b4f4f7198cc260abf8c8c2b535cb0226e00a117d0726eaf",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 2,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 1
+              },
+              "type": "CreatureDestroyed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": true,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:12.574372+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:13.219711+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "1dbd967742be99a4489867e98ed8238ab1ee341be8e2bb69ea4396cd7920becc",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": false,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:41:13.719269+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:41:14.358339+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "c5faa0fb6915c26b23bd67398c59df4774663a18d1bcbbf95b397798b03a58d0",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": false,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    }
+  ],
+  "mutant_build": {
+    "source_manifest": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.json",
+    "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+    "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+    "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+    "mutant_patch_sha256": "3b834a398a9b9c072f0356666f2a371ae4cd1258ffb57f8eebaa640602b2b9a8",
+    "started": "2026-09-05T20:41:33.709792+00:00",
+    "command": [
+      "cargo",
+      "+nightly-2026-04-19",
+      "test",
+      "-p",
+      "engine",
+      "--test",
+      "integration",
+      "--message-format=json",
+      "--no-run"
+    ],
+    "checkout": "/home/ubuntu/repos/phase-hushbringer-mutations",
+    "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations",
+    "target": "/home/ubuntu/repos/phase-hushbringer-mutations/target",
+    "environment": {
+      "CARGO_BUILD_JOBS": "1",
+      "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations/target",
+      "RUSTFLAGS": null,
+      "CARGO_ENCODED_RUSTFLAGS": null,
+      "RUSTUP_TOOLCHAIN": null,
+      "RUST_MIN_STACK": null
+    },
+    "finished": "2026-09-05T20:42:19.437333+00:00",
+    "exit": 0,
+    "log_sha256": "8ba285f1ec9c690f1b510cc9369e9f3d121c674cb8d06055c968903a2bdfacd1",
+    "artifacts": [
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "custom-build"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "build-script-build",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/build.rs",
+          "edition": "2021",
+          "doc": false,
+          "doctest": false,
+          "test": false
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": 0,
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": true,
+        "executable": null,
+        "executable_sha256": null
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "engine",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/lib.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": null,
+        "executable_sha256": null
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "integration",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/tests/integration/main.rs",
+          "edition": "2021",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": true
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d"
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "set-check",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/set_check.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/set-check",
+        "executable_sha256": "e737ed6d70c3a9e7a19d5620d1b9268e05b05c409770459c7f0ce7e231b17d9b"
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "tokens-gen",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/tokens_gen.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": false,
+          "test": false
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/tokens-gen",
+        "executable_sha256": "e9eb1197f27b1c5963ce57f5b022beb5e1365270724e82b21ed0431b646cf1db"
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "card-data-validate",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/card_data_validate.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": false,
+          "test": false
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/card-data-validate",
+        "executable_sha256": "1d51b82c8a9695ed95836cbbba8c439d1f3b630775aa320f11f230bab83ab39d"
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "coverage-parse-diff",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/coverage_parse_diff.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/coverage-parse-diff",
+        "executable_sha256": "b9c82c0b8da88c95256e4ee682226b81d3ff3cef1d5987ac9d59efb43f1c76d4"
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "coverage-report",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/coverage_report.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": false,
+          "test": false
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/coverage-report",
+        "executable_sha256": "f8ccc474c50489d7f8362050cb85f447e397f94b026a3e9ae0a442b4b2708c36"
+      },
+      {
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "parser-gap-analyzer",
+          "src_path": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/src/bin/parser_gap_analyzer.rs",
+          "edition": "2021",
+          "doc": true,
+          "doctest": false,
+          "test": false
+        },
+        "profile": {
+          "opt_level": "0",
+          "debuginfo": "line-tables-only",
+          "debug_assertions": true,
+          "overflow_checks": true,
+          "test": false
+        },
+        "features": [],
+        "fresh": false,
+        "executable": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/parser-gap-analyzer",
+        "executable_sha256": "4a81157f7915214e0bc4c9054e008658b54291e78d9e09510fb523f522dad126"
+      }
+    ],
+    "build_scripts": [
+      {
+        "reason": "build-script-executed",
+        "package_id": "path+file:///home/ubuntu/repos/phase-hushbringer-mutations/crates/engine#0.24.0",
+        "linked_libs": [],
+        "linked_paths": [],
+        "cfgs": [],
+        "env": [],
+        "out_dir": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/build/engine-d4fc5f5dfa6fd822/out"
+      }
+    ],
+    "counts": [],
+    "source_unchanged": true
+  },
+  "mutant": [
+    {
+      "started": "2026-09-05T20:42:20.296689+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:20.966601+00:00",
+      "exit": 101,
+      "counts": [
+        {
+          "status": "FAILED",
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "96e28c4efa4f7761e39554d5b3b851cad9125bf3c3c2ef669b2f6243764cd14f",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 1,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 2
+              },
+              "type": "CreatureDestroyed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "turn_zone_change_index": 1
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": true,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:21.460374+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:22.095523+00:00",
+      "exit": 101,
+      "counts": [
+        {
+          "status": "FAILED",
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "5e75ccef5df5534e9a01b98fa2ddc6e5219d9583a083a8f56dadc5ca08bb9f1d",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 2,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 1
+              },
+              "type": "CreatureDestroyed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "turn_zone_change_index": 1
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": true,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:22.592344+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:23.236388+00:00",
+      "exit": 101,
+      "counts": [
+        {
+          "status": "FAILED",
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "8cd873e4c39303969ffcef669fcf1f38334626f56debbb9d7d70b788edda5a1c",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 2
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 2,
+          "observer_departs": false,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:23.728745+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:24.363039+00:00",
+      "exit": 101,
+      "counts": [
+        {
+          "status": "FAILED",
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "0105c159a09f9ecb93a5be9fbc7677866f4ab21e56d85a0eab44208b85505552",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 1
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 1,
+          "observer_departs": false,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:24.855173+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:25.494397+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "68adb6464b9228b6a5d5c2f4f17f496e3738643babb3e7b3aa7965f5b28f09ff",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 1,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 2
+              },
+              "type": "CreatureDestroyed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": true,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:25.995284+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:26.652183+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "564596fda5c44d732b4f4f7198cc260abf8c8c2b535cb0226e00a117d0726eaf",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 2,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 1
+              },
+              "type": "CreatureDestroyed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": true,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:27.154048+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:27.795734+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "1dbd967742be99a4489867e98ed8238ab1ee341be8e2bb69ea4396cd7920becc",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": false,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:28.293597+00:00",
+      "command": [
+        "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "d3ebd5febfadd883de5751c6cd8645cc6faf02190dc6cd676361b1bb3785ea1d",
+      "source_manifest_sha256": "80677f171847d9f595051b10db1682eb200b2cc4cbe1c5cf46db771bc8dc05da",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/source.tar.gz",
+      "source_archive_sha256": "61c907fe95aba2770086837a8bb656cd8683868fdb898762539821a65f0a6c75",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/receipt.json",
+      "compilation_receipt_sha256": "d9529f295696205ef84e1302a7f84295d3b784103c5ac7877c7080b73067e4af",
+      "mode": "fresh_mutant_Cargo_artifact",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/mutant-build/linked-libraries.json",
+      "linked_libraries_sha256": "81b4c3d4789ab6153e94a189f0e0f142eb9ae80503a9b230efe03bbec3e29e8c",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:28.933598+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "c5faa0fb6915c26b23bd67398c59df4774663a18d1bcbbf95b397798b03a58d0",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": false,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    }
+  ],
+  "restored": [
+    {
+      "started": "2026-09-05T20:42:29.611459+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:30.251580+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "f6d4ad52b2a4df3f78abd383188474f98dd430ba31f473e02d72b4983a89805e",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    1
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 1,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 2
+              },
+              "type": "CreatureDestroyed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    2
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 1
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 2
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 2,
+          "observer_departs": true,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:30.750418+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:31.389705+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "8a85f3fa94e1053200bfdba4eba28291c9fa24e47ba7f49ef3a43c50732bf45e",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    2
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 2,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 1
+              },
+              "type": "CreatureDestroyed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [
+                    1
+                  ],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 1
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 1
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 1,
+          "observer_departs": true,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:31.885611+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:32.522785+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "4d956aed660e203ad365b630768d2354168eb73fbe75f9a58b30834e87043014",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 2
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 2,
+          "observer_departs": false,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:33.014535+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:33.648178+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "7e024819d5fd5601a585c685541e81b1680695b7b5c7c651ecaeb8d005e8f2a1",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Enchantment"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "Test noncreature handoff subject",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [
+                    "Aura"
+                  ],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "amount": 1,
+                "player_id": 0
+              },
+              "type": "LifeChanged"
+            },
+            {
+              "data": {
+                "kind": "GainLife",
+                "source_id": 1
+              },
+              "type": "EffectResolved"
+            },
+            {
+              "data": {
+                "object_id": 7
+              },
+              "type": "StackResolved"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 21,
+          "observer": 1,
+          "observer_departs": false,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": true
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:34.151695+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:34.840163+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "8cc27a0b3a69648ff3bec73f791aed86970279a7ea3b6c756979f0c3cffd0cd3",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 2,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 2,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 1,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 2
+              },
+              "type": "CreatureDestroyed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": true,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:35.337865+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:35.973947+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "564596fda5c44d732b4f4f7198cc260abf8c8c2b535cb0226e00a117d0726eaf",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            },
+            {
+              "data": {
+                "from": "Battlefield",
+                "object_id": 1,
+                "record": {
+                  "attached_to": null,
+                  "attachments": [],
+                  "base_power": 1,
+                  "base_toughness": 1,
+                  "cast_from_zone": null,
+                  "co_departed": [],
+                  "colors": [],
+                  "combat_status": {
+                    "attacking": false,
+                    "attacking_alone": false,
+                    "blocked": false,
+                    "blocking": false,
+                    "blocking_alone": false,
+                    "defending_player": null
+                  },
+                  "controller": 0,
+                  "core_types": [
+                    "Creature"
+                  ],
+                  "entered_incarnation": null,
+                  "from_zone": "Battlefield",
+                  "is_suspected": false,
+                  "is_token": false,
+                  "keywords": [],
+                  "linked_exile_snapshot": [],
+                  "mana_value": 0,
+                  "name": "1/1 Vanilla",
+                  "object_id": 1,
+                  "owner": 0,
+                  "played_from_zone": null,
+                  "power": 1,
+                  "subtypes": [],
+                  "supertypes": [],
+                  "to_zone": "Graveyard",
+                  "toughness": 1,
+                  "trigger_definitions": [
+                    {
+                      "batched": false,
+                      "condition": null,
+                      "constraint": null,
+                      "damage_kind": "Any",
+                      "description": null,
+                      "destination": null,
+                      "execute": {
+                        "condition": null,
+                        "cost": null,
+                        "description": null,
+                        "duration": null,
+                        "effect": {
+                          "amount": {
+                            "type": "Fixed",
+                            "value": 1
+                          },
+                          "type": "GainLife"
+                        },
+                        "forward_result": false,
+                        "kind": "Spell",
+                        "optional": false,
+                        "optional_targeting": false,
+                        "sub_ability": null,
+                        "target_prompt": null
+                      },
+                      "mode": "ChangesZone",
+                      "optional": false,
+                      "origin": null,
+                      "phase": null,
+                      "secondary": false,
+                      "trigger_zones": [],
+                      "valid_card": null,
+                      "valid_source": null,
+                      "valid_target": null,
+                      "zone_change_clauses": [
+                        {
+                          "destination": "Graveyard",
+                          "origin": {
+                            "data": "Battlefield",
+                            "type": "Equals"
+                          },
+                          "valid_card": {
+                            "id": 2,
+                            "type": "SpecificObject"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "trigger_suppression": {
+                    "after": [],
+                    "before": []
+                  },
+                  "turn_zone_change_index": 0
+                },
+                "to": "Graveyard"
+              },
+              "type": "ZoneChanged"
+            },
+            {
+              "data": {
+                "object_id": 1
+              },
+              "type": "CreatureDestroyed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": true,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:36.472869+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:37.108096+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "1dbd967742be99a4489867e98ed8238ab1ee341be8e2bb69ea4396cd7920becc",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 2,
+          "observer_departs": false,
+          "reverse": false,
+          "subject": 1,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    },
+    {
+      "started": "2026-09-05T20:42:37.608719+00:00",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+      "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+      "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+      "source_archive": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/source.tar.gz",
+      "source_archive_sha256": "84e763a3a2ad5496462abdfe3bd8f6c7721ad09c1695966962093e00c316811f",
+      "compilation_receipt": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/receipt.json",
+      "compilation_receipt_sha256": "c3cc1dddad603210337215111d84f74797846cea7757067ff2f2c5b2c687c9c7",
+      "mode": "direct_preserved_canonical_artifact_after_exact_source_restoration",
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "entire_source_manifest_verified": true,
+      "linked_libraries": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-build/linked-libraries.json",
+      "linked_libraries_sha256": "66d150d2169117abfdd36ae898fb2b889015a8a0a11ea4f7ddbf150caf7b0e5f",
+      "runtime_input_manifest_sha256": "81135d139edb6918dc9ae71f6a1a9073115179ba75459686b55da6de83112356",
+      "finished": "2026-09-05T20:42:38.255358+00:00",
+      "exit": 0,
+      "counts": [
+        {
+          "status": "ok",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "filtered_out": 3181
+        }
+      ],
+      "log_sha256": "c5faa0fb6915c26b23bd67398c59df4774663a18d1bcbbf95b397798b03a58d0",
+      "evidence": [
+        {
+          "events": [
+            {
+              "data": {
+                "player_id": 1
+              },
+              "type": "PriorityPassed"
+            }
+          ],
+          "kind": "UnattachedAura",
+          "life": 20,
+          "observer": 1,
+          "observer_departs": false,
+          "reverse": true,
+          "subject": 2,
+          "subject_departs": false
+        }
+      ],
+      "after_history_evidence": [],
+      "source_and_executable_unchanged": true
+    }
+  ],
+  "classifications": [
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "classification": "designated_co_dying_payoff_failure"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_departs_reverse",
+        "subject_departs": true,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "classification": "designated_co_dying_payoff_failure"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_forward",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "classification": "expected_member_snapshot_failure_after_correct_payoff"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_departs_observer_survives_reverse",
+        "subject_departs": true,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "classification": "expected_member_snapshot_failure_after_correct_payoff"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_forward",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": false
+      },
+      "classification": "unaffected_control_pass"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_departs_reverse",
+        "subject_departs": false,
+        "observer_departs": true,
+        "reverse": true
+      },
+      "classification": "unaffected_control_pass"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_forward",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": false
+      },
+      "classification": "unaffected_control_pass"
+    },
+    {
+      "case": {
+        "test": "trigger_suppression_event_timing::sba_member_handoff_unattached_aura_has_runtime_observer_payoff_subject_survives_observer_survives_reverse",
+        "subject_departs": false,
+        "observer_departs": false,
+        "reverse": true
+      },
+      "classification": "unaffected_control_pass"
+    }
+  ],
+  "problems": [],
+  "status": "verified_required_discriminator_and_controls"
+}

@@ -1,0 +1,1442 @@
+{
+  "method": "Every CR-bearing added diff line, including verbatim moved/indented comments, plus complete untracked files; no dedup by comment identity",
+  "rows": [
+    {
+      "path": "crates/engine/src/game/casting_costs.rs",
+      "line": 1848,
+      "text": "+    // CR 601.2h + CR 608.2f: separate selected costs pay in their existing order;",
+      "ids": [
+        "601.2h",
+        "608.2f"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 880,
+      "text": "+                // CR 608.2c: snapshot the pre-move zone so the post-move check below",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 936,
+      "text": "+                                // CR 608.2c: carry the running count so the drain stamps",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 940,
+      "text": "+                                // CR 708.2a + CR 708.3: preserve the face-down profile so",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 945,
+      "text": "+                                // CR 614.12: preserve the moved-object type gate across a",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 954,
+      "text": "+                        // CR 614.12b + CR 614.1c + CR 614.13: stash the unprocessed targets",
+      "ids": [
+        "614.12b",
+        "614.1c",
+        "614.13"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 976,
+      "text": "+                                // CR 608.2c: carry the running count so the drain stamps",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 980,
+      "text": "+                                // CR 708.2a + CR 708.3: preserve the face-down profile so",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 985,
+      "text": "+                                // CR 614.12: preserve the moved-object type gate across a",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 991,
+      "text": "+                        // CR 608.2c: this object is paused mid-move on a replacement choice",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 999,
+      "text": "+                        // CR 614.12a: park (don't clobber) \u2014 a Devour as-enters sacrifice",
+      "ids": [
+        "614.12a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1560,
+      "text": "+                // CR 400.3: Each object's actual current zone is the source zone for the",
+      "ids": [
+        "400.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1572,
+      "text": "+                // CR 122.1 + CR 122.1h: each object enters with the resolved counters",
+      "ids": [
+        "122.1",
+        "122.1h"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1601,
+      "text": "+                        // CR 400.7 + CR 608.2c: Track hand-origin exiles separately so",
+      "ids": [
+        "400.7",
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1608,
+      "text": "+                        // CR 610.3: Consume ExileLink after successfully moving the object,",
+      "ids": [
+        "610.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1615,
+      "text": "+                        // CR 614.12a + CR 614.13: a Devour as-enters sacrifice surfaced its",
+      "ids": [
+        "614.12a",
+        "614.13"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1624,
+      "text": "+                        // CR 708.2a + CR 708.3: carry the face-down profile through the",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1639,
+      "text": "+                                // CR 122.1h: resumed members of a paused mass return still",
+      "ids": [
+        "122.1h"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1648,
+      "text": "+                                // CR 614.12: mass zone moves carry no moved-object type gate.",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1653,
+      "text": "+                        // CR 608.2c: record the replacement-paused member as in-flight (with",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1662,
+      "text": "+                        // CR 303.4f + CR 614.13a: returning an Aura to the battlefield",
+      "ids": [
+        "303.4f",
+        "614.13a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1686,
+      "text": "+                                // CR 122.1h: resumed members of a paused mass return still",
+      "ids": [
+        "122.1h"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1693,
+      "text": "+                                // CR 708.2a + CR 708.3: preserve the face-down profile so",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1698,
+      "text": "+                                // CR 614.12: mass zone moves carry no moved-object type gate.",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 939,
+      "text": "+                        // CR 708.2a + CR 708.3: thread the preserved face-down profile back",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 947,
+      "text": "+                        // CR 614.12: thread the moved-object type gate into the per-object",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 1006,
+      "text": "+                                    // CR 708.2a + CR 708.3: preserve the face-down profile",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 1010,
+      "text": "+                                    // CR 614.12: preserve the moved-object type gate",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 1037,
+      "text": "+                                    // CR 708.2a + CR 708.3: preserve the face-down profile",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 1041,
+      "text": "+                                    // CR 614.12: preserve the moved-object type gate",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 1047,
+      "text": "+                            // CR 608.2c: a further member paused mid-move on a replacement",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 1054,
+      "text": "+                            // CR 614.12a: park (don't clobber) \u2014 a Devour as-enters sacrifice",
+      "ids": [
+        "614.12a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 13045,
+      "text": "+            // CR 611.2a + CR 613.1b: temporary control must survive layer evaluation.",
+      "ids": [
+        "611.2a",
+        "613.1b"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/engine.rs",
+      "line": 245,
+      "text": "+    // CR 104.3a: pending payment cannot prevent an authorized concession.",
+      "ids": [
+        "104.3a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3380,
+      "text": "+                                    // CR 708.2a + CR 708.3: thread the face-down profile that",
+      "ids": [
+        "708.2a",
+        "708.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3388,
+      "text": "+                                    // CR 614.12: evaluate the moved-object type gate carried",
+      "ids": [
+        "614.12"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 95,
+      "text": "+                // CR 704.3 + CR 104.4a + CR 704.5a-c + CR 704.6c: Every player-loss",
+      "ids": [
+        "704.3",
+        "104.4a",
+        "704.5a",
+        "704.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 101,
+      "text": "+                // CR 704.5a-c + CR 704.6c: collect every player-loss SBA from this",
+      "ids": [
+        "704.5a",
+        "704.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 119,
+      "text": "+                    // If the game ended (a sole winner or a CR 104.4a draw), stop now.",
+      "ids": [
+        "104.4a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 125,
+      "text": "+                // CR 704.4: state-based actions pay no attention to what happens during",
+      "ids": [
+        "704.4"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 131,
+      "text": "+                // the loop while paused on a CR 616.1 replacement-order choice \u2014 e.g. a",
+      "ids": [
+        "616.1"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 135,
+      "text": "+                // (CR 704.5f) now would wrongly send the still-entering 0/0 to the",
+      "ids": [
+        "704.5f"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 147,
+      "text": "+                // CR 903.9a: A commander in graveyard or exile (since last SBA check) may",
+      "ids": [
+        "903.9a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 163,
+      "text": "+                    // CR 704.5f: A creature with toughness 0 or less is put into its owner's graveyard.",
+      "ids": [
+        "704.5f"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 172,
+      "text": "+                    // A zero-toughness move can park on a CR 616.1 choice. Do not let",
+      "ids": [
+        "616.1"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 179,
+      "text": "+                    // CR 704.5g: A creature with lethal damage marked on it is destroyed.",
+      "ids": [
+        "704.5g"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 189,
+      "text": "+                // CR 614.3 / CR 701.19b: If a regeneration replacement choice is pending, pause SBA evaluation.",
+      "ids": [
+        "614.3",
+        "701.19b"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 195,
+      "text": "+                    // CR 704.5j: If a player controls two or more legendary permanents with the same name,",
+      "ids": [
+        "704.5j"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 199,
+      "text": "+                    // CR 704.5m: If an Aura is attached to an illegal object or player, it is put into",
+      "ids": [
+        "704.5m"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 212,
+      "text": "+                    // CR 704.5n: If an Equipment or Fortification is attached to an illegal",
+      "ids": [
+        "704.5n"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 221,
+      "text": "+                    // CR 704.5z + CR 303.7a: If a permanent has more than one Role controlled",
+      "ids": [
+        "704.5z",
+        "303.7a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 236,
+      "text": "+                    // CR 704.5k: If two or more permanents have the world supertype, all but the one",
+      "ids": [
+        "704.5k"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 251,
+      "text": "+                    // CR 704.5i + CR 306.9: If a planeswalker has loyalty 0, it is put into its owner's graveyard.",
+      "ids": [
+        "704.5i",
+        "306.9"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 263,
+      "text": "+                    // CR 704.5v + CR 310.7: If a battle has defense 0 and isn't the source of an",
+      "ids": [
+        "704.5v",
+        "310.7"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 277,
+      "text": "+                    // CR 704.5p + CR 310.10: If a battle is somehow attached to a permanent, unattach it.",
+      "ids": [
+        "704.5p",
+        "310.10"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 280,
+      "text": "+                    // CR 704.5x + CR 704.5y + CR 310.9: Battle with no (or illegal) protector \u2014",
+      "ids": [
+        "704.5x",
+        "704.5y",
+        "310.9"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 293,
+      "text": "+                    // CR 704.5s + CR 714.4: If a Saga has lore counters >= its final chapter number,",
+      "ids": [
+        "704.5s",
+        "714.4"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 306,
+      "text": "+                    // CR 704.5q: +1/+1 and -1/-1 counters on the same permanent cancel in pairs.",
+      "ids": [
+        "704.5q"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 310,
+      "text": "+                // CR 704.5d: Tokens in zones other than the battlefield cease to exist.",
+      "ids": [
+        "704.5d"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 327,
+      "text": "+                    // CR 702.179a: A player controlling Start your engines! gets speed 1 if they had none.",
+      "ids": [
+        "702.179a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 335,
+      "text": "+                    // CR 702.131b: A player controlling an Ascend permanent with ten or more",
+      "ids": [
+        "702.131b"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 340,
+      "text": "+                // CR 704.5t: If a player's venture marker is on the bottommost room",
+      "ids": [
+        "704.5t"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 344,
+      "text": "+                // CR 704.6f / CR 312.7: In a Planechase game, if a phenomenon is face up",
+      "ids": [
+        "704.6f",
+        "312.7"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 355,
+      "text": "+                // CR 904.10 / CR 314.6: A face-up non-ongoing scheme with no scheme",
+      "ids": [
+        "904.10",
+        "314.6"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 856,
+      "text": "+                                // CR 704.5g + CR 614.6: the inner ZoneChange already",
+      "ids": [
+        "704.5g",
+        "614.6"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 874,
+      "text": "+                                    // CR 704.3: completing all SBAs may require a",
+      "ids": [
+        "704.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 876,
+      "text": "+                                    // (e.g. CR 614.12a Devour as-enters). Pause exactly",
+      "ids": [
+        "614.12a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 887,
+      "text": "+                                    // ZoneChange, which `zones::move_to_zone`'s CR 603.2g",
+      "ids": [
+        "603.2g"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 896,
+      "text": "+                                    // regeneration-shaped \u2014 CR 701.19a/b replaces",
+      "ids": [
+        "701.19a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 900,
+      "text": "+                                    // CR 400.7 new-object re-entry and deliberately does",
+      "ids": [
+        "400.7"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 908,
+      "text": "+                                    // incarnation epoch (CR 400.7), summoning sickness",
+      "ids": [
+        "400.7"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 909,
+      "text": "+                                    // (CR 302.6), counters, entered_battlefield_turn \u2014",
+      "ids": [
+        "302.6"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 911,
+      "text": "+                                    // CR 614.1c entry counters. If a real battlefield-",
+      "ids": [
+        "614.1c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 914,
+      "text": "+                                    // suppress the CR 614.1c tail re-application) or a",
+      "ids": [
+        "614.1c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 937,
+      "text": "+                    // CR 701.19b: Regeneration prevented destruction \u2014 still counts as SBA performed.",
+      "ids": [
+        "701.19b"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 1285,
+      "text": "+/// CR 704.5z + CR 303.7a: If a permanent has more than one Role controlled",
+      "ids": [
+        "704.5z",
+        "303.7a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 1600,
+      "text": "+/// CR 704.5p + CR 310.10: A battle can't be attached to players or permanents.",
+      "ids": [
+        "704.5p",
+        "310.10"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 2134,
+      "text": "+        // CR 104.3a + CR 104.2a: lawful concession ends the public game first.",
+      "ids": [
+        "104.3a",
+        "104.2a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "line": 2161,
+      "text": "+        // CR 310.11 + CR 704.5x: the private zero-choice delivery borrows its owner.",
+      "ids": [
+        "310.11",
+        "704.5x"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 1100,
+      "text": "+        // CR 603.10 + CR 603.6c: Timing belongs to the matching clause,",
+      "ids": [
+        "603.10",
+        "603.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 1105,
+      "text": "+                // card, rather than a creature dying (CR 603.6c).",
+      "ids": [
+        "603.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 2883,
+      "text": "+                // CR 603.10c: Only the death-caused fallback looks back here.",
+      "ids": [
+        "603.10c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/triggers.rs",
+      "line": 1424,
+      "text": "+        // CR 603.6a + CR 611.3: ETB causal suppression remains event-wide.",
+      "ids": [
+        "603.6a",
+        "611.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/triggers.rs",
+      "line": 11813,
+      "text": "+        // CR 611.2a + CR 613.4c: seed a real temporary layer effect, not derived P/T.",
+      "ids": [
+        "611.2a",
+        "613.4c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/triggers.rs",
+      "line": 12029,
+      "text": "+        // CR 611.2a + CR 613.4c: seed a real temporary layer effect, not derived P/T.",
+      "ids": [
+        "611.2a",
+        "613.4c"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/zone_pipeline.rs",
+      "line": 962,
+      "text": "+                    // CR 616.1: `move_object` already parked the surfaced prompt",
+      "ids": [
+        "616.1"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/zone_pipeline.rs",
+      "line": 971,
+      "text": "+                    // CR 303.4f: an aura-host choice flows through",
+      "ids": [
+        "303.4f"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/zones.rs",
+      "line": 640,
+      "text": "+/// CR 603.10: Capture suppression once at the actual action's boundaries.",
+      "ids": [
+        "603.10"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/zones.rs",
+      "line": 1255,
+      "text": "+/// one state-based-action destruction pass (CR 704.3), one mass bounce/exile \u2014",
+      "ids": [
+        "704.3"
+      ]
+    },
+    {
+      "path": "crates/engine/src/types/game_state.rs",
+      "line": 646,
+      "text": "+    /// CR 603.10: Evaluated suppression in the worlds immediately before and",
+      "ids": [
+        "603.10"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/oversimplify_per_player_fractal.rs",
+      "line": 172,
+      "text": "+    // CR 611.2a + CR 613.1b: use actual temporary control authority at the exit boundary.",
+      "ids": [
+        "611.2a",
+        "613.1b"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_suppression.rs",
+      "line": 19,
+      "text": "    // CR 702.26b + CR 604.1: `battlefield_active_statics` owns the phased-out /",
+      "ids": [
+        "702.26b",
+        "604.1"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_suppression.rs",
+      "line": 78,
+      "text": "/// CR 611.3 + CR 613.11: Evaluate functioning statics in the selected world.",
+      "ids": [
+        "611.3",
+        "613.11"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_suppression.rs",
+      "line": 89,
+      "text": "/// CR 603.10a: Before departure the live filter authority also sees the",
+      "ids": [
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_suppression.rs",
+      "line": 160,
+      "text": "/// CR 603.10a: Death and the dedicated look-back matchers use the before world.",
+      "ids": [
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/src/game/trigger_suppression.rs",
+      "line": 168,
+      "text": "/// CR 603.10 + CR 603.6c: From-anywhere observers use the after world.",
+      "ids": [
+        "603.10",
+        "603.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 134,
+      "text": "    // CR 603.10a: the functioning pre-event suppressor applies to simultaneous deaths.",
+      "ids": [
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 308,
+      "text": "        // CR 608.2c: separate written instructions use their own event worlds.",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 338,
+      "text": "            // CR 608.2f: all targets of one Destroy instruction depart together.",
+      "ids": [
+        "608.2f"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 385,
+      "text": "            // CR 603.6c + CR 603.10a: Any is post-event; explicit battlefield origin looks back.",
+      "ids": [
+        "603.6c",
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 477,
+      "text": "                // CR 603.2: matching several clauses of one trigger is one registration.",
+      "ids": [
+        "603.2"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 506,
+      "text": "        // CR 603.10a: co-departed observers and self triggers use the same pre-event world.",
+      "ids": [
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 600,
+      "text": "                // CR 603.7b: a suppressed occurrence does not fire or consume the listener.",
+      "ids": [
+        "603.7b"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 668,
+      "text": "                // CR 603.2 + CR 603.7b: any eligible alternate fires once and consumes once.",
+      "ids": [
+        "603.2",
+        "603.7b"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 818,
+      "text": "                // CR 101.4 + CR 608.2f: completed choices precede the simultaneous sacrifice sweep.",
+      "ids": [
+        "101.4",
+        "608.2f"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 892,
+      "text": "                // CR 608.2f + CR 704.3: each complete move instruction or SBA iteration is simultaneous.",
+      "ids": [
+        "608.2f",
+        "704.3"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1028,
+      "text": "                // CR 704.3: the ordinary lethal check and standalone Augment check share one SBA iteration.",
+      "ids": [
+        "704.3"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1108,
+      "text": "                // CR 702.55c + CR 603.10a: the exile payoff observes its linked subject's pre-death world.",
+      "ids": [
+        "702.55c",
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1216,
+      "text": "                // CR 603.12: unmatched reflexives are discarded after checking the creating resolution.",
+      "ids": [
+        "603.12"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1507,
+      "text": "    // CR 118.12a: completed payment skips the loss; decline applies the loss.",
+      "ids": [
+        "118.12a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1576,
+      "text": "        // CR 603.6c: a dying card's own destination-functioning from-anywhere trigger is not LTB.",
+      "ids": [
+        "603.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1620,
+      "text": "        // CR 611.3 + CR 702.26b: only functioning effective abilities can suppress this occurrence.",
+      "ids": [
+        "611.3",
+        "702.26b"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1706,
+      "text": "        // CR 603.10: normal destination triggers use the functioning post-event suppressor.",
+      "ids": [
+        "603.10"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1756,
+      "text": "    // CR 614.8 and CR 702.12b: a protected permanent survives the attempted destruction.",
+      "ids": [
+        "614.8",
+        "702.12b"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1868,
+      "text": "                    // CR 701.19c: cant-regenerate blocks application of the same installed shield.",
+      "ids": [
+        "701.19c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 1993,
+      "text": "            // CR 603.10c: death-caused fallback looks back; native unattachment is independently eligible.",
+      "ids": [
+        "603.10c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2046,
+      "text": "        // CR 400.7: reused storage ids identify different battlefield incarnations after a return.",
+      "ids": [
+        "400.7"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2138,
+      "text": "    // CR 603.7b: the open-ended listener survives cleanup and fires once next turn.",
+      "ids": [
+        "603.7b"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2197,
+      "text": "    // CR 603.7d: source/controller bind when the creating spell resolves, even after it leaves the stack.",
+      "ids": [
+        "603.7d"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2259,
+      "text": "            // CR 608.2f + CR 603.10a: members share their starting layer world until the action completes.",
+      "ids": [
+        "608.2f",
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2299,
+      "text": "            // CR 611.3 + CR 603.10a: controller-relative and conditional applicability are evaluated before the group.",
+      "ids": [
+        "611.3",
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2336,
+      "text": "    // CR 704.3: a later fixpoint iteration observes the new state after Hushbringer left.",
+      "ids": [
+        "704.3"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 2510,
+      "text": "    // CR 603.2c: desired payoff is once. Exactly two is narrowly retained baseline resumed-dispatch compatibility.",
+      "ids": [
+        "603.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 3116,
+      "text": "            // CR 608.2c: later instruction cannot rewrite the earlier death's world.",
+      "ids": [
+        "608.2c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 3298,
+      "text": "                // CR 603.10: Any uses the immediate after world; nondeath library movement retains its LTB payoff.",
+      "ids": [
+        "603.10"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 3711,
+      "text": "            // CR 508.1: declaring an attack remains an independent positive cause beside Hushbringer.",
+      "ids": [
+        "508.1"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 3888,
+      "text": "                // CR 701.21a: the current controller sacrifices into the owner's graveyard.",
+      "ids": [
+        "701.21a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 4014,
+      "text": "        // CR 608.2f: desired later-member starting world; intrinsic merge layer flush is a known separate limit.",
+      "ids": [
+        "608.2f"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 4818,
+      "text": "            // CR 104.3a: either authenticated player can concede during the cast.",
+      "ids": [
+        "104.3a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 5151,
+      "text": "    // CR 603.4 + CR 608.2h: the original intervening-if uses the entrant's exit LKI.",
+      "ids": [
+        "603.4",
+        "608.2h"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 5853,
+      "text": "            // CR 310.8 + CR 704.5w: this is the non-Siege zero-defense SBA.",
+      "ids": [
+        "310.8",
+        "704.5w"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 5952,
+      "text": "    // CR 704.3 + CR 603.10a: one SBA event includes the observer and",
+      "ids": [
+        "704.3",
+        "603.10a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 6496,
+      "text": "        // CR 310.11 + CR 310.12a: a Siege protector is a chosen legal opponent.",
+      "ids": [
+        "310.11",
+        "310.12a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 6521,
+      "text": "    // CR 704.5x: a battle without a battle type designates its controller.",
+      "ids": [
+        "704.5x"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 6541,
+      "text": "        // CR 104.3a: actor identity remains the conceding player, regardless of priority.",
+      "ids": [
+        "104.3a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 6578,
+      "text": "    // CR 104.2a: the last opposing side's departure is terminal before object SBAs.",
+      "ids": [
+        "104.2a"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 6965,
+      "text": "    // CR 603.6c: destination-functioning Any/SelfRef is distinct from a dies clause.",
+      "ids": [
+        "603.6c"
+      ]
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "line": 7142,
+      "text": "    // CR 603.10 + CR 603.6c: Any uses the occurrence's immediate after world,",
+      "ids": [
+        "603.10",
+        "603.6c"
+      ]
+    }
+  ],
+  "rule_text": {
+    "101.4": [
+      "101.4. If multiple players would make choices and/or take actions at the same time, the active player (the player whose turn it is) makes any choices required, then the next player in turn order (usually the player seated to the active player\u2019s left) makes any choices required, followed by the remaining nonactive players in turn order. Then the actions happen simultaneously. This rule is often referred to as the \u201cActive Player, Nonactive Player (APNAP) order\u201d rule."
+    ],
+    "104.2a": [
+      "104.2a A player still in the game wins the game if that player\u2019s opponents have all left the game. This happens immediately and overrides all effects that would preclude that player from winning the game."
+    ],
+    "104.3a": [
+      "104.3a A player can concede the game at any time. A player who concedes leaves the game immediately. That player loses the game."
+    ],
+    "104.4a": [
+      "104.4a If all the players remaining in a game lose simultaneously, the game is a draw."
+    ],
+    "118.12a": [
+      "118.12a Some spells, activated abilities, and triggered abilities read, \u201c[Do something] unless [a player does something else].\u201d This means the same thing as \u201c[A player may do something else]. If [that player doesn\u2019t], [do something].\u201d"
+    ],
+    "122.1": [
+      "122.1. A counter is a marker placed on an object or player that modifies its characteristics and/or interacts with a rule, ability, or effect. Counters are not objects and have no characteristics. Notably, a counter is not a token, and a token is not a counter. Counters with the same name or description are interchangeable."
+    ],
+    "122.1h": [
+      "122.1h One or more finality counters on a permanent create a single replacement effect that stops the permanent from going to the graveyard. That effect is \u201cIf this permanent would be put into a graveyard from the battlefield, exile it instead.\u201d"
+    ],
+    "302.6": [
+      "302.6. A creature\u2019s activated ability with the tap symbol or the untap symbol in its activation cost can\u2019t be activated unless the creature has been under its controller\u2019s control continuously since their most recent turn began. A creature can\u2019t attack unless it has been under its controller\u2019s control continuously since their most recent turn began. This rule is informally called the \u201csummoning sickness\u201d rule."
+    ],
+    "303.4f": [
+      "303.4f If an Aura is entering the battlefield under a player\u2019s control by any means other than by resolving as an Aura spell, and the effect putting it onto the battlefield doesn\u2019t specify the object or player the Aura will enchant, that player chooses what it will enchant as the Aura enters the battlefield. The player must choose a legal object or player according to the Aura\u2019s enchant ability and any other applicable effects."
+    ],
+    "303.7a": [
+      "303.7a If a permanent has more than one Role controlled by the same player attached to it, each of those Roles except the one with the most recent timestamp is put into its owner\u2019s graveyard. This is a state-based action. See rule 704."
+    ],
+    "306.9": [
+      "306.9. If a planeswalker\u2019s loyalty is 0, it\u2019s put into its owner\u2019s graveyard. (This is a state-based action. See rule 704.)"
+    ],
+    "310.10": [
+      "310.10. A battle can\u2019t be attached to players or permanents, even if it is also an Aura, Equipment, or Fortification. If a battle is somehow attached to a permanent, it becomes unattached. This is a state-based action (see rule 704)."
+    ],
+    "310.11": [
+      "310.11. If a battle that isn\u2019t being attacked has no player designated as its protector, or its protector is a player who can\u2019t be its protector, its controller chooses an appropriate player to be its protector. If no player can be chosen this way, the battle is put into its owner\u2019s graveyard. This is a state-based action (see rule 704)."
+    ],
+    "310.12a": [
+      "310.12a As a Siege enters the battlefield, its controller must choose its protector from among their opponents. Only an opponent of a Siege\u2019s controller can be its protector."
+    ],
+    "310.7": [
+      "310.7. If a Siege battle\u2019s defense is 0 and it isn\u2019t the source of an ability which has triggered but not yet left the stack, it\u2019s put into its owner\u2019s graveyard. (This is a state-based action. See rule 704.)"
+    ],
+    "310.8": [
+      "310.8. If a non-Siege battle\u2019s defense is 0, it\u2019s put into its owner\u2019s graveyard. (This is a state-based action. See rule 704.)"
+    ],
+    "310.9": [
+      "310.9. Each battle has a player designated as its protector."
+    ],
+    "312.7": [
+      "312.7. If a phenomenon card is face up in the command zone, and it isn\u2019t the source of a triggered ability that has triggered but not yet left the stack, the planar controller planeswalks the next time a player would receive priority. (This is a state-based action; see rule 704. See also rule 701.31, \u201cPlaneswalk.\u201d)"
+    ],
+    "314.6": [
+      "314.6. If a non-ongoing scheme card is face up in the command zone, and no triggered abilities of any scheme are on the stack or waiting to be put on the stack, that scheme card is turned face down and put on the bottom of its owner\u2019s scheme deck the next time a player would receive priority. (This is a state-based action. See rule 704.)"
+    ],
+    "400.3": [
+      "400.3. If an object would go to any library, graveyard, or hand other than its owner\u2019s, it goes to its owner\u2019s corresponding zone."
+    ],
+    "400.7": [
+      "400.7. An object that moves from one zone to another becomes a new object with no memory of, or relation to, its previous existence. This rule has the following exceptions."
+    ],
+    "508.1": [
+      "508.1. First, the active player declares attackers. This turn-based action doesn\u2019t use the stack. To declare attackers, the active player follows the steps below, in order. If at any point during the declaration of attackers, the active player is unable to comply with any of the steps listed below, the declaration is illegal; the game returns to the moment before the declaration (see rule 733, \u201cHandling Illegal Actions\u201d)."
+    ],
+    "601.2h": [
+      "601.2h The player pays the total cost. First, they pay all costs that don\u2019t involve random elements or moving objects from the library to a public zone, in any order. Then they pay all remaining costs in any order. Partial payments are not allowed. Unpayable costs can\u2019t be paid."
+    ],
+    "603.10": [
+      "603.10. Normally, objects that exist immediately after an event are checked to see if the event matched any trigger conditions, and continuous effects that exist at that time are used to determine what the trigger conditions are and what the objects involved in the event look like. However, some triggered abilities are exceptions to this rule; the game \u201clooks back in time\u201d to determine if those abilities trigger, using the existence of those abilities and the appearance of objects immediately prior to the event. The list of exceptions is as follows:"
+    ],
+    "603.10a": [
+      "603.10a Some zone-change triggers look back in time. These are leaves-the-battlefield abilities, abilities that trigger when a player sacrifices a permanent, abilities that trigger when a card leaves a graveyard, and abilities that trigger when an object that all players can see is put into a hand or library."
+    ],
+    "603.10c": [
+      "603.10c Abilities that trigger specifically when an object becomes unattached look back in time."
+    ],
+    "603.12": [
+      "603.12. A resolving spell or ability may allow or instruct a player to take an action and create a triggered ability that triggers \u201cwhen [a player] [does or doesn\u2019t]\u201d take that action or \u201cwhen [something happens] this way.\u201d These reflexive triggered abilities follow the rules for delayed triggered abilities (see rule 603.7), except that they\u2019re checked immediately after being created and trigger based on whether the trigger event or events occurred earlier during the resolution of the spell or ability that created them."
+    ],
+    "603.2": [
+      "603.2. Whenever a game event or game state matches a triggered ability\u2019s trigger event, that ability automatically triggers. The ability doesn\u2019t do anything at this point."
+    ],
+    "603.2c": [
+      "603.2c An ability triggers only once each time its trigger event occurs. However, it can trigger repeatedly if one event contains multiple occurrences."
+    ],
+    "603.2g": [
+      "603.2g An ability triggers only if its trigger event actually occurs. An event that\u2019s prevented or replaced won\u2019t trigger anything."
+    ],
+    "603.4": [
+      "603.4. A triggered ability may read \u201cWhen/Whenever/At [trigger event], if [condition], [effect].\u201d When the trigger event occurs, the ability checks whether the stated condition is true. The ability triggers only if it is; otherwise it does nothing. If the ability triggers, it checks the stated condition again as it resolves. If the condition isn\u2019t true at that time, the ability is removed from the stack and does nothing. Note that this mirrors the check for legal targets. This rule is referred to as the \u201cintervening \u2018if\u2019 clause\u201d rule. (The word \u201cif\u201d has only its normal English meaning anywhere else in the text of a card; this rule only applies to an \u201cif\u201d that immediately follows a trigger condition.)"
+    ],
+    "603.6a": [
+      "603.6a Enters-the-battlefield abilities trigger when a permanent enters the battlefield. These are written, \u201cWhen [this object] enters, . . . \u201c or \u201cWhenever a [type] enters, . . .\u201d Each time an event puts one or more permanents onto the battlefield, all permanents on the battlefield (including the newcomers) are checked for any enters-the-battlefield triggers that match the event."
+    ],
+    "603.6c": [
+      "603.6c Leaves-the-battlefield abilities trigger when a permanent moves from the battlefield to another zone, or when a phased-in permanent leaves the game because its owner leaves the game. These are written as, but aren\u2019t limited to, \u201cWhen [this object] leaves the battlefield, . . .\u201d or \u201cWhenever [something] is put into a graveyard from the battlefield, . . . .\u201d (See also rule 603.10.) An ability that attempts to do something to the card that left the battlefield checks for it only in the first zone that it went to. An ability that triggers when a card is put into a certain zone \u201cfrom anywhere\u201d is never treated as a leaves-the-battlefield ability, even if an object is put into that zone from the battlefield."
+    ],
+    "603.7b": [
+      "603.7b A delayed triggered ability will trigger only once\u2014the next time its trigger event occurs\u2014unless it has a stated duration, such as \u201cthis turn.\u201d If its trigger event occurs more than once simultaneously and the ability doesn\u2019t have a stated duration, the controller of the delayed triggered ability chooses which event causes the ability to trigger."
+    ],
+    "603.7d": [
+      "603.7d If a spell creates a delayed triggered ability, the source of that delayed triggered ability is that spell. The controller of that delayed triggered ability is the player who controlled that spell as it resolved."
+    ],
+    "604.1": [
+      "604.1. Static abilities do something all the time rather than being activated or triggered. They are written as statements, and they\u2019re simply true."
+    ],
+    "608.2c": [
+      "608.2c The controller of the spell or ability follows its instructions in the order written. However, replacement effects may modify these actions. In some cases, later text on the card may modify the meaning of earlier text (for example, \u201cDestroy target creature. It can\u2019t be regenerated\u201d or \u201cCounter target spell. If that spell is countered this way, put it on top of its owner\u2019s library instead of into its owner\u2019s graveyard.\u201d) Don\u2019t just apply effects step by step without thinking in these cases\u2014read the whole text and apply the rules of English to the text."
+    ],
+    "608.2f": [
+      "608.2f Some spells and abilities include actions taken on multiple players and/or objects. In most cases, each such action is processed simultaneously. If the action can\u2019t be processed simultaneously, it\u2019s instead processed considering each affected player or object individually. APNAP order is used to make the primary determination of the order of those actions. Secondarily, if the action is to be taken on both a player and an object they control or on multiple objects controlled by the same player, the player who controls the resolving spell or ability chooses the relative order of those actions."
+    ],
+    "608.2h": [
+      "608.2h If an effect requires information from the game (such as the number of creatures on the battlefield), the answer is determined only once, when the effect is applied. If the effect requires information from a specific object, including the source of the ability itself, the effect uses the current information of that object if it\u2019s in the public zone it was expected to be in; if it\u2019s no longer in that zone, or if the effect has moved it from a public zone to a hidden zone, the effect uses the object\u2019s last known information. See rule 113.7a. If an ability states that an object does something, it\u2019s the object as it exists\u2014or as it most recently existed\u2014that does it, not the ability."
+    ],
+    "610.3": [
+      "610.3. Some one-shot effects cause an object to change zones \u201cuntil\u201d a specified event occurs. A second one-shot effect is created immediately after the specified event. This second one-shot effect returns the object to its previous zone."
+    ],
+    "611.2a": [
+      "611.2a A continuous effect generated by the resolution of a spell or ability lasts as long as stated by the spell or ability creating it (such as \u201cuntil end of turn\u201d). If no duration is stated, it lasts until the end of the game."
+    ],
+    "611.3": [
+      "611.3. A continuous effect may be generated by the static ability of an object."
+    ],
+    "613.11": [
+      "613.11. Some continuous effects affect game rules rather than objects. For example, effects may modify a player\u2019s maximum hand size, or say that a creature must attack this turn if able. These effects are applied after all other continuous effects have been applied. Continuous effects that affect the costs of spells or abilities are applied according to the order specified in rule 601.2f. All other such effects are applied in timestamp order. See also the rules for timestamp order and dependency (rules 613.7 and 613.8)."
+    ],
+    "613.1b": [
+      "613.1b Layer 2: Control-changing effects are applied."
+    ],
+    "613.4c": [
+      "613.4c Layer 7c: Effects and counters that modify power and/or toughness (but don\u2019t set power and/or toughness to a specific number or value) are applied."
+    ],
+    "614.12": [
+      "614.12. Some replacement effects modify how a permanent enters the battlefield. (See rules 614.1c\u2013d.) Such effects may come from the permanent itself if they affect only that permanent (as opposed to a general subset of permanents that includes it). They may also come from other sources. To determine which replacement effects apply and how they apply, check the characteristics of the permanent as it would exist on the battlefield, taking into account replacement effects that have already modified how it enters the battlefield (see rule 616.1), continuous effects from the permanent\u2019s own static abilities that would apply to it once it\u2019s on the battlefield, and continuous effects that already exist and would apply to the permanent."
+    ],
+    "614.12a": [
+      "614.12a If a replacement effect that modifies how a permanent enters the battlefield requires a choice, that choice is made before the permanent enters the battlefield."
+    ],
+    "614.12b": [
+      "614.12b If multiple replacement effects that require choices from a player would modify how multiple permanents enter the battlefield simultaneously, that player may not make choices for those effects that would cause the combined costs of those effects to not be payable."
+    ],
+    "614.13": [
+      "614.13. An effect that modifies how a permanent enters the battlefield may cause other objects to change zones."
+    ],
+    "614.13a": [
+      "614.13a While applying an effect that modifies how a permanent enters the battlefield, you may have to choose a number of objects that will also change zones. You can\u2019t choose the object that will become that permanent or any other object entering the battlefield at the same time as that object."
+    ],
+    "614.1c": [
+      "614.1c Effects that read \u201c[This permanent] enters with . . . ,\u201d \u201cAs [this permanent] enters . . . ,\u201d or \u201c[This permanent] enters as . . . \u201c are replacement effects."
+    ],
+    "614.3": [
+      "614.3. There are no special restrictions on casting a spell or activating an ability that generates a replacement effect. Such effects last until they\u2019re used up or their duration has expired."
+    ],
+    "614.6": [
+      "614.6. If an event is replaced, it never happens. A modified event occurs instead, which may in turn trigger abilities. Note that the modified event may contain instructions that can\u2019t be carried out, in which case the impossible instruction is simply ignored."
+    ],
+    "614.8": [
+      "614.8. Regeneration is a destruction-replacement effect. The word \u201cinstead\u201d doesn\u2019t appear on the card but is implicit in the definition of regeneration. \u201cRegenerate [permanent]\u201d means \u201cThe next time [permanent] would be destroyed this turn, instead remove all damage marked on it and its controller taps it. If it\u2019s an attacking or blocking creature, remove it from combat.\u201d Abilities that trigger from damage being dealt still trigger even if the permanent regenerates. See rule 701.19."
+    ],
+    "616.1": [
+      "616.1. If two or more replacement and/or prevention effects are attempting to modify the way an event affects an object or player, the affected object\u2019s controller (or its owner if it has no controller) or the affected player chooses one to apply, following the steps listed below. If two or more players have to make these choices at the same time, choices are made in APNAP order (see rule 101.4)."
+    ],
+    "701.19a": [
+      "701.19a If the effect of a resolving spell or ability regenerates a permanent, it creates a replacement effect that protects the permanent the next time it would be destroyed this turn. In this case, \u201cRegenerate [permanent]\u201d means \u201cThe next time [permanent] would be destroyed this turn, instead remove all damage marked on it and its controller taps it. If it\u2019s an attacking or blocking creature, remove it from combat.\u201d"
+    ],
+    "701.19b": [
+      "701.19b If the effect of a static ability regenerates a permanent, it replaces destruction with an alternate effect each time that permanent would be destroyed. In this case, \u201cRegenerate [permanent]\u201d means \u201cInstead remove all damage marked on [permanent] and its controller taps it. If it\u2019s an attacking or blocking creature, remove it from combat.\u201d"
+    ],
+    "701.19c": [
+      "701.19c Neither activating an ability that creates a regeneration shield nor casting a spell that creates a regeneration shield is the same as regenerating a permanent. Effects that say that a permanent can\u2019t be regenerated don\u2019t preclude such abilities from being activated or such spells from being cast; rather, they cause regeneration shields to not be applied."
+    ],
+    "701.21a": [
+      "701.21a To sacrifice a permanent, its controller moves it from the battlefield directly to its owner\u2019s graveyard. A player can\u2019t sacrifice something that isn\u2019t a permanent, or something that\u2019s a permanent they don\u2019t control. Sacrificing a permanent doesn\u2019t destroy it, so regeneration or other effects that replace destruction can\u2019t affect this action."
+    ],
+    "702.12b": [
+      "702.12b A permanent with indestructible can\u2019t be destroyed. Such permanents aren\u2019t destroyed by lethal damage, and they ignore the state-based action that checks for lethal damage (see rule 704.5g)."
+    ],
+    "702.131b": [
+      "702.131b Ascend on a permanent represents a static ability. It means \u201cAny time you control ten or more permanents and you don\u2019t have the city\u2019s blessing, you get the city\u2019s blessing for the rest of the game.\u201d"
+    ],
+    "702.179a": [
+      "702.179a Start your engines! is a static ability. If a player controls a permanent with start your engines! and that player has no speed, their speed becomes 1. This is a state-based action. See rule 704."
+    ],
+    "702.26b": [
+      "702.26b If a permanent phases out, its status changes to \u201cphased out.\u201d Except for rules and effects that specifically mention phased-out permanents, a phased-out permanent is treated as though it does not exist. It can\u2019t affect or be affected by anything else in the game. A permanent that phases out is removed from combat. (See rule 506.4.)"
+    ],
+    "702.55c": [
+      "702.55c Triggered abilities of cards with haunt that refer to the haunted creature can trigger in the exile zone."
+    ],
+    "704.3": [
+      "704.3. Whenever a player would get priority (see rule 117, \u201cTiming and Priority\u201d), the game checks for any of the listed conditions for state-based actions, then performs all applicable state-based actions simultaneously as a single event. If any state-based actions are performed as a result of a check, the check is repeated; otherwise all triggered abilities that are waiting to be put on the stack are put on the stack, then the check is repeated. Once no more state-based actions have been performed as the result of a check and no triggered abilities are waiting to be put on the stack, the appropriate player gets priority. This process also occurs during the cleanup step (see rule 514), except that if no state-based actions are performed as the result of the step\u2019s first check and no triggered abilities are waiting to be put on the stack, then no player gets priority and the step ends."
+    ],
+    "704.4": [
+      "704.4. Unlike triggered abilities, state-based actions pay no attention to what happens during the resolution of a spell or ability."
+    ],
+    "704.5a": [
+      "704.5a If a player has 0 or less life, that player loses the game."
+    ],
+    "704.5d": [
+      "704.5d If a token is in a zone other than the battlefield, it ceases to exist."
+    ],
+    "704.5f": [
+      "704.5f If a creature has toughness 0 or less, it\u2019s put into its owner\u2019s graveyard. Regeneration can\u2019t replace this event."
+    ],
+    "704.5g": [
+      "704.5g If a creature has toughness greater than 0, it has damage marked on it, and the total damage marked on it is greater than or equal to its toughness, that creature has been dealt lethal damage and is destroyed. Regeneration can replace this event."
+    ],
+    "704.5i": [
+      "704.5i If a planeswalker has loyalty 0, it\u2019s put into its owner\u2019s graveyard."
+    ],
+    "704.5j": [
+      "704.5j If two or more legendary permanents with the same name are controlled by the same player, that player chooses one of them, and the rest are put into their owners\u2019 graveyards. This is called the \u201clegend rule.\u201d"
+    ],
+    "704.5k": [
+      "704.5k If two or more permanents have the supertype world, all except the one that has had the world supertype for the shortest amount of time are put into their owners\u2019 graveyards. In the event of a tie for the shortest amount of time, all are put into their owners\u2019 graveyards. This is called the \u201cworld rule.\u201d"
+    ],
+    "704.5m": [
+      "704.5m If an Aura is attached to an illegal object or player, or is not attached to an object or player, that Aura is put into its owner\u2019s graveyard."
+    ],
+    "704.5n": [
+      "704.5n If an Equipment or Fortification is attached to an illegal permanent or to a player, it becomes unattached from that permanent or player. It remains on the battlefield."
+    ],
+    "704.5p": [
+      "704.5p If a battle or creature is attached to an object or player, it becomes unattached and remains on the battlefield. Similarly, if any nonbattle, noncreature permanent that\u2019s neither an Aura, an Equipment, nor a Fortification is attached to an object or player, it becomes unattached and remains on the battlefield."
+    ],
+    "704.5q": [
+      "704.5q If a permanent has both a +1/+1 counter and a -1/-1 counter on it, N +1/+1 and N -1/-1 counters are removed from it, where N is the smaller of the number of +1/+1 and -1/-1 counters on it."
+    ],
+    "704.5s": [
+      "704.5s If the number of lore counters on a Saga permanent with one or more chapter abilities is greater than or equal to its final chapter number and it isn\u2019t the source of a chapter ability that has triggered but not yet left the stack, that Saga\u2019s controller sacrifices it. See rule 714, \u201cSaga Cards.\u201d"
+    ],
+    "704.5t": [
+      "704.5t If a player\u2019s venture marker is on the bottommost room of a dungeon card, and that dungeon card isn\u2019t the source of a room ability that has triggered but not yet left the stack, the dungeon card\u2019s owner removes it from the game. See rule 309, \u201cDungeons.\u201d"
+    ],
+    "704.5v": [
+      "704.5v If a Siege battle has defense 0 and it isn\u2019t the source of an ability that has triggered but not yet left the stack, it\u2019s put into its owner\u2019s graveyard."
+    ],
+    "704.5w": [
+      "704.5w If a non-Siege battle has defense 0, it\u2019s put into its owner\u2019s graveyard."
+    ],
+    "704.5x": [
+      "704.5x If a battle has no player in the game designated as its protector and no attacking creatures are currently attacking that battle, that battle\u2019s controller chooses an appropriate player to be its protector based on its battle type. If the battle has no battle type, its controller must be chosen. If no player can be chosen this way, the battle is put into its owner\u2019s graveyard. See rule 310, \u201cBattles.\u201d"
+    ],
+    "704.5y": [
+      "704.5y If a battle\u2019s protector is a player who can\u2019t be its protector, that battle\u2019s controller chooses an appropriate player to become its protector. If no player can be chosen this way, the battle is put into its owner\u2019s graveyard. See rule 310, \u201cBattles.\u201d"
+    ],
+    "704.5z": [
+      "704.5z If a permanent has more than one Role controlled by the same player attached to it, each of those Roles except the one with the most recent timestamp is put into its owner\u2019s graveyard."
+    ],
+    "704.6c": [
+      "704.6c In a Commander game, a player who\u2019s been dealt 21 or more combat damage by the same commander over the course of the game loses the game. See rule 903, \u201cCommander.\u201d"
+    ],
+    "704.6f": [
+      "704.6f In a Planechase game, if a phenomenon card is face up in the command zone, and it isn\u2019t the source of a triggered ability that has triggered but not yet left the stack, the planar controller planeswalks. See rule 901, \u201cPlanechase.\u201d"
+    ],
+    "708.2a": [
+      "708.2a If a face-up permanent is turned face down by a spell or ability that doesn\u2019t list any characteristics for that object, it becomes a 2/2 face-down creature with no text, no name, no subtypes, and no mana cost. A permanent that enters the battlefield face down also has these characteristics unless otherwise specified by the effect that put it onto the battlefield face down or allowed it to be cast face down. These values are the copiable values of that object\u2019s characteristics."
+    ],
+    "708.3": [
+      "708.3. Objects that are put onto the battlefield face down are turned face down before they enter the battlefield, so the permanent\u2019s enters-the-battlefield abilities won\u2019t trigger (if triggered) or have any effect (if static)."
+    ],
+    "714.4": [
+      "714.4. If the number of lore counters on a Saga permanent with one or more chapter abilities is greater than or equal to its final chapter number, and it isn\u2019t the source of a chapter ability that has triggered but not yet left the stack, that Saga\u2019s controller sacrifices it. This state-based action doesn\u2019t use the stack."
+    ],
+    "903.9a": [
+      "903.9a If a commander is in a graveyard or in exile and that object was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone. This is a state-based action. See rule 704."
+    ],
+    "904.10": [
+      "904.10. If a non-ongoing scheme card is face up in the command zone, and no triggered abilities of any scheme are on the stack or waiting to be put on the stack, that scheme card is turned face down and put on the bottom of its owner\u2019s scheme deck the next time a player would receive priority. (This is a state-based action. See rule 704.)"
+    ]
+  },
+  "missing": []
+}

@@ -1,0 +1,107 @@
+{
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "rules_sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "reviewed_added_or_moved_annotations": 138,
+  "method": "Reviewed every added CR-bearing line including verbatim indentation moves and all new modules, plus annotations in/adjacent to changed Role and battle-protector handoff functions per AGENTS.md. Numbers, subpart text and annotation meanings checked against checked-in rulebook.",
+  "prior_gate_limitation": "Executor final-source-audit-2 method expressly excluded verbatim moved comments; cannot establish required new-and-moved audit.",
+  "issues": [
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "lines": [
+        1560
+      ],
+      "status": "verbatim moved",
+      "cited": [
+        "400.3"
+      ],
+      "problem": "Annotation describes choosing each object actual source zone; cited rule redirects nonowner destination libraries/graveyards/hands and does not describe source-zone selection.",
+      "suggestion": "Remove the unrelated citation or cite a rule that governs the actual source/replacement decision."
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "lines": [
+        189
+      ],
+      "status": "verbatim moved",
+      "cited": [
+        "614.3",
+        "701.19b"
+      ],
+      "problem": "614.3 concerns restrictions/duration for spells and abilities creating replacement effects, not pending regeneration replacement choices. 701.19b describes static regeneration; it does not establish the choice pause.",
+      "suggestion": "Use the applicable regeneration and replacement-choice rules, such as 614.8 and 616.1, and distinguish static regeneration only if needed."
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "lines": [
+        1340
+      ],
+      "status": "existing adjacent to changed Role handoff",
+      "cited": [
+        "704.5y"
+      ],
+      "problem": "704.5y is illegal battle protector, while this code sends older Roles to graveyard. 704.5z is Role uniqueness.",
+      "suggestion": "Correct to 704.5z; keep 614.6 replacement reference."
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "lines": [
+        1639,
+        1689,
+        1690,
+        1702,
+        1713,
+        1722,
+        1753
+      ],
+      "status": "existing inside or immediately above changed battle-protector function",
+      "cited": [
+        "704.5w",
+        "704.5x",
+        "310.10",
+        "310.11a",
+        "310.8a"
+      ],
+      "problem": "310.10 is battle attachment, 704.5w is non-Siege zero defense, and 310.11a/310.8a do not exist in the checked-in rulebook. This function handles selecting/replacing protectors and the no-legal-protector departure.",
+      "suggestion": "Use 310.11 plus 704.5x/704.5y for protector choices, 310.12a for Siege opponents, and 704.5x for no-battle-type controller selection."
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "lines": [
+        263,
+        1548,
+        1574,
+        1590
+      ],
+      "status": "outer annotation verbatim moved; nearby zero-defense function receives changed member handoff",
+      "cited": [
+        "704.5v",
+        "310.7"
+      ],
+      "problem": "Text generalizes the zero-defense pending-trigger exception to every battle; the cited current rules specifically concern Siege battles, whereas non-Siege zero-defense rule is 704.5w/310.8 without that exception. The inherited implementation applies the stack guard to every battle.",
+      "suggestion": "Make the annotation accurately distinguish the Siege and non-Siege rules and explicitly describe inherited broader guard as a compatibility limit; do not silently broaden this repair into an unrelated behavior change."
+    }
+  ],
+  "non_findings": [
+    "Compound annotations are valid; no syntax finding.",
+    "Zero-defense existing implementation applies pending-trigger guard to all Battles; this inherited neighboring behavior is not changed by repair and is not silently approved as full CR compliance.",
+    "122.1h annotations explicitly identify Shilgengar finality counters and are relevant in context.",
+    "614.13a accompanying Aura-pause comment also explains retaining co-entry Devour snapshot; relevant in context."
+  ],
+  "final_source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "final_append_cr_rows": [
+    {
+      "line": 7248,
+      "text": "        // CR 310.9b: P0 can lawfully attack its own Siege protected by P1."
+    },
+    {
+      "line": 7263,
+      "text": "    // CR 104.3a: P1 lawfully leaves while another opposing player, P2, remains."
+    },
+    {
+      "line": 7302,
+      "text": "    // CR 310.11 + CR 704.5x: an attacked battle waits; CR 702.26b:"
+    }
+  ],
+  "final_append_cr_verification": "310.9b,104.3a,310.11,704.5x,702.26b resolved and describe the new hostile sibling fixtures.",
+  "reviewed_added_or_moved_annotations_final": 141
+}
