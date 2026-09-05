@@ -31,8 +31,9 @@ independently verified. Supplemental final-worker runs confirm both Hushbringer
 object orders and the no-Hushbringer control.
 
 The repair captures event-time trigger suppression and preserves the identity
-of simultaneous events and separate sacrifice-cost components. It passes
-three full independent implementation reviews after resolving their findings.
+of simultaneous events and separate sacrifice-cost components. It completed
+three full independent implementation reviews, resolving the earlier findings
+before the final clean verdict.
 The reviewed executable/test source passes 196 focused checks, 16,586 library
 tests, 3,172 integration tests and 15 binary tests. Engine Clippy, formatting
 and card generation passed. The final source differs from that broad-suite
