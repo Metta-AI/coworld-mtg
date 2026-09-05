@@ -1,8 +1,9 @@
 # Verifiable improvement loop: implementation checkpoint
 
 Checkpoint: 2026-09-05. The reusable harness is implemented. The Hushbringer
-repair is undergoing final verification and independent implementation review;
-there is no accepted repair receipt yet.
+repair has completed its first full independent implementation review, which
+returned two findings now assigned to a fresh executor. The harness and earlier
+evidence were pushed to main at 53dd0b6. There is no accepted repair receipt yet.
 
 The loop now carries an explicit case from a justified expectation through
 repeated execution, reduction, comparison and acceptance. Rust types generate
@@ -36,9 +37,21 @@ Verification also improved the experiment itself. Separate Cargo output
 directories prevent stale artifacts from crossing source checkouts. Removing
 eight required state-based-action handoffs did not fail the old unit suite;
 new public fixtures detected the missing gameplay effect. Independently named
-variants now prevent an early panic from hiding later controls. The final
-fixture snapshot passes 184 public checks and five private boundary checks.
-Targeted mutations and the final broad gates are still in progress.
+variants now prevent an early panic from hiding later controls. The reviewed
+fixture snapshot passes 187 public checks and five private boundary checks.
+All 67 targeted mutations have recorded discriminators: 56 public runtime,
+ten private/helper/schema, and one defensive Battle contract. Expanded checks
+run all 64 state-based-action variants independently so an early panic cannot
+hide later controls. Broad gates passed 16,586 library and 3,163 integration
+tests. The original base still has an unrelated workspace Clippy failure, and
+the explicit desired-diagnostic run retains eighteen failures.
+
+The [independent implementation review](../cases/process/hushbringer-simultaneous-death/v10-implementation-review/README.md)
+reproduced the original one-Spirit result in both simultaneous-death orders
+and the candidate zero-Spirit result, while the no-Hushbringer control remained
+one. It found missing natural library-choice coverage and inaccurate moved
+rules citations. Both failed gates and the complete handoff are retained; a
+passing central example did not erase the wider review obligations.
 
 The [case study](case-study-hushbringer.md) develops these findings into a blog
 narrative. It distinguishes authored rules cases from historical real-game
@@ -51,8 +64,9 @@ with ssh nishadsingh-box-4. Migration verified 3,902 files before local cleanup,
 and cleanup freed 12,964,511,744 bytes on the Mac. The
 [workspace guide](ec2-workspace.md) records the retained locations.
 
-Remaining steps are to complete the targeted proof runs, obtain an independent
+Remaining steps are to address the two review findings, obtain a fresh clean
 implementation review, commit the repair, compare the clean committed candidate
-against the fixed baseline, and generate the actual acceptance bundle. Both
-repositories have newer main commits; integration and verification of those
-changes will follow the fixed-input experiment before publication to main.
+against the fixed baseline, and generate the actual acceptance bundle. Coworld
+main already includes the harness and preserves its newer release and Phase
+pin. Integration of newer Phase commits and publication of the reviewed repair
+will follow the fixed-input experiment.

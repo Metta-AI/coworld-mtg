@@ -122,3 +122,5 @@ The [two final batching proofs](v10-batched-proofs/README.md) close the previous
 The [current-main harness integration check](coworld-main-integration/README.md) preserves the newer release/pin and validates the merged loop. Its separate campaign still observes the Hushbringer baseline violation; it does not replace the fixed-input repair comparison.
 
 The [expanded handoff and snapshot checks](v10-expanded-handoffs/README.md) independently execute all sixty-four SBA tuples plus six fallback/control cases. The generated table preserves the distinction between lost gameplay payoff, missing event authority and unaffected controls; all baseline/restored invocations pass.
+
+The [complete independent implementation review](v10-implementation-review/README.md) confirms the central before/after result but returns two findings: missing native library-choice controls and inaccurate moved rules citations. The failed gates, complete source-bound handoff and independent runtime evidence are preserved before a fresh fix round.

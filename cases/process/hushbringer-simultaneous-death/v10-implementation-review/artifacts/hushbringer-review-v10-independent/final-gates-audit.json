@@ -1,0 +1,193 @@
+{
+  "utc": "2026-09-05T21:05:38.845209+00:00",
+  "receipt_sha256": "9eb28ed230eb11f1879f309eb4d0d6a0e16f1310047197a62c65a19b50dd478b",
+  "gates": [
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "engine",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [],
+      "log_sha256": "bde07346483a174535d25ee02217983b74f0345d4f1f47ecb7d34b7d27e89eda",
+      "first_error": null
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [
+        "test result: ok. 16586 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 37.84s"
+      ],
+      "log_sha256": "d5c82205cbc522b2f9e9cb3cbe50b32ad87d6cc619988e452272b66f70240345",
+      "first_error": null
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [
+        "test result: ok. 3163 passed; 0 failed; 22 ignored; 0 measured; 0 filtered out; finished in 42.74s"
+      ],
+      "log_sha256": "de53aa608a6c8e976bb98a986ff2cfcd744b6e7e5debef0a88cd263f65591973",
+      "first_error": null
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--bins"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ],
+      "log_sha256": "e689f7209bc65127f4d7a5813b5e3b7055ac8c9dcd79efb074ffe4495049ce4b",
+      "first_error": null
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--doc"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [
+        "test result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ],
+      "log_sha256": "1d386f91b82c9913eaf1a5fd39f8835e951e9cf4396e921144ca900180e1fae1",
+      "first_error": null
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--lib",
+        "game::stack::tests::batch_resolve::cross_source_",
+        "--",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 16588 filtered out; finished in 0.13s"
+      ],
+      "log_sha256": "3ac78caa3a7b244e6209fc7b5606b8b04bcd0d15072fb4d77c39d4fbd99bdbe5",
+      "first_error": null
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--test",
+        "integration",
+        "trigger_suppression_event_timing",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 101,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [
+        "test result: FAILED. 2 passed; 18 failed; 0 ignored; 0 measured; 3165 filtered out; finished in 0.57s"
+      ],
+      "log_sha256": "50b20f3c3cdc0e697bb4dde688237be14f1067381c123d144ecd7f1b8acc1d19",
+      "first_error": "error: test failed, to rerun pass `-p engine --test integration`"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 101,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [],
+      "log_sha256": "24f1e1e4c861ab473eef128acb645d0bb96f03191522d58c6377806605f64c32",
+      "first_error": "error[E0004]: non-exhaustive patterns: `&engine::types::GameAction::SetFullControl { .. }` not covered"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "source": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "summaries": [],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "first_error": null
+    }
+  ],
+  "workspace_failure_attribution": {
+    "observed": "E0004 manabrew-compat action match omits already-existing SetFullControl variant",
+    "base_checks": {
+      "crates/manabrew-compat/src/lib.rs": {
+        "byte_identical_to_base": true,
+        "sha256": "1da55cae15b1458953fc54eb65a79d2c6deef19a4641df1aa02423c1cc280842"
+      },
+      "crates/engine/src/types/actions.rs": {
+        "byte_identical_to_base": true,
+        "sha256": "5f70f4a93aa17f236ac4fa8b6ae5910310256366a3f44dc1591bdff301a58d97"
+      },
+      "crates/manabrew-compat/Cargo.toml": {
+        "byte_identical_to_base": true,
+        "sha256": "d055e44905636665268645680893d911b2470b26b8d507e5f7c70f6c1ed4f899"
+      },
+      "crates/engine/Cargo.toml": {
+        "byte_identical_to_base": true,
+        "sha256": "6cb1be338d0d8b7d33709fb29c6b0d2bfb0a6412e865e5af5da69d0cd9b6610e"
+      },
+      "Cargo.toml": {
+        "byte_identical_to_base": true,
+        "sha256": "b8c83fee6fe4481488f01dd83a3adf2830090d5f80bbc714e96536cecba740e1"
+      },
+      ".cargo/config.toml": {
+        "byte_identical_to_base": true,
+        "sha256": "d0efb995770ad964d022f8c58a19a7e01ca5de25d1b6386bdf4f9dcb01fa30c5"
+      }
+    },
+    "interpretation": "Source evidence supports inherited workspace failure. No original-baseline workspace compilation was run by this reviewer, and full-workspace gate did not pass."
+  }
+}

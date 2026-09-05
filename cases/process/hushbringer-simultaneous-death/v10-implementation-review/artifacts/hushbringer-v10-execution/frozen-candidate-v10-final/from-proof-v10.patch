@@ -1,0 +1,176 @@
+--- a/crates/engine/tests/integration/trigger_suppression_event_timing.rs
++++ b/crates/engine/tests/integration/trigger_suppression_event_timing.rs
+@@ -7157,3 +7157,173 @@
+ fn after_history_captured_dies_blocks_observer_after_later_hush_departure() {
+     after_history_survives_later_hush_change_case(true);
+ }
++
++// Public hostile siblings for the unchanged battle-protector predicates.
++fn battle_protector_hostile_sibling_case(attacked: bool, phased: bool) {
++    use engine::game::combat::AttackTarget;
++    use engine::types::ability::ChosenAttribute;
++    use engine::types::player::PlayerId;
++    let p2 = PlayerId(2);
++    assert!(!(attacked && phased));
++    let mut s = GameScenario::new_n_player(3, 42);
++    s.at_phase(Phase::PreCombatMain);
++    let battle = s.add_vanilla(P0, 1, 1);
++    let attacker = s.add_vanilla(P0, 1, 1);
++    let phase_spell = typed_spell(
++        &mut s,
++        ability(Effect::PhaseOut {
++            target: specific(battle),
++        }),
++    );
++    let mut r = s.build();
++    {
++        let obj = r.state_mut().objects.get_mut(&battle).unwrap();
++        obj.card_types.core_types = vec![CoreType::Battle];
++        obj.card_types.subtypes = vec!["Siege".into()];
++        obj.base_card_types = obj.card_types.clone();
++        obj.base_power = None;
++        obj.power = None;
++        obj.base_toughness = None;
++        obj.toughness = None;
++        obj.base_defense = Some(3);
++        obj.defense = Some(3);
++        obj.counters.insert(CounterType::Defense, 3);
++        obj.chosen_attributes.push(ChosenAttribute::Player(P1));
++    }
++    let previous_turn = r.state().turn_number.saturating_sub(1);
++    r.state_mut()
++        .objects
++        .get_mut(&attacker)
++        .unwrap()
++        .entered_battlefield_turn = Some(previous_turn);
++    r.state_mut()
++        .objects
++        .get_mut(&attacker)
++        .unwrap()
++        .summoning_sick = false;
++    engine::game::layers::flush_layers(r.state_mut());
++    assert_eq!(r.state().objects[&battle].protector(), Some(P1));
++    assert!(engine::game::players::opponents(r.state(), P0).contains(&P1));
++    assert!(r.state().players.iter().all(|p| !p.is_eliminated));
++    assert!(r.state().eliminated_players.is_empty());
++    assert!(r.state().combat.is_none());
++    assert!(r.state().objects[&battle].merged_components.is_empty());
++    assert!(r.state().objects[&battle]
++        .replacement_definitions
++        .is_empty());
++    let incarnation = r.state().objects[&battle].incarnation;
++    for actor in [P0, P1, p2] {
++        engine::game::engine::apply(
++            r.state_mut(),
++            actor,
++            GameAction::SetFullControl {
++                mode: engine::types::game_state::FullControlMode::Locked,
++            },
++        )
++        .unwrap();
++    }
++    let mut events = vec![];
++    if phased {
++        let outcome = r.cast(phase_spell).target_object(battle).resolve();
++        events.extend(outcome.events().iter().cloned());
++        assert!(outcome.state().objects[&battle].is_phased_out());
++        outcome.assert_zone(&[phase_spell], Zone::Graveyard);
++    }
++    if attacked {
++        for _ in 0..12 {
++            if matches!(
++                r.state().waiting_for,
++                WaitingFor::DeclareAttackers { player: P0, .. }
++            ) {
++                break;
++            }
++            assert!(matches!(r.state().waiting_for, WaitingFor::Priority { .. }));
++            events.extend(r.act(GameAction::PassPriority).unwrap().events);
++        }
++        assert_eq!(r.state().phase, Phase::DeclareAttackers);
++        assert!(matches!(
++            r.state().waiting_for,
++            WaitingFor::DeclareAttackers { player: P0, .. }
++        ));
++        // CR 310.9b: P0 can lawfully attack its own Siege protected by P1.
++        events.extend(
++            r.declare_attackers(&[(attacker, AttackTarget::Battle(battle))])
++                .unwrap()
++                .events,
++        );
++        assert!(r
++            .state()
++            .combat
++            .as_ref()
++            .unwrap()
++            .attackers
++            .iter()
++            .any(|a| a.object_id == attacker && a.attack_target == AttackTarget::Battle(battle)));
++    }
++    // CR 104.3a: P1 lawfully leaves while another opposing player, P2, remains.
++    // Neither the battle's controller nor its stored protector is rewritten.
++    events.extend(
++        engine::game::engine::apply(r.state_mut(), P1, GameAction::Concede { player_id: P1 })
++            .unwrap()
++            .events,
++    );
++    assert!(!matches!(
++        r.state().waiting_for,
++        WaitingFor::GameOver { .. }
++    ));
++    if matches!(r.state().waiting_for, WaitingFor::Priority { .. }) {
++        events.extend(r.act(GameAction::PassPriority).unwrap().events);
++    }
++    assert!(r.state().players[1].is_eliminated);
++    assert_eq!(r.state().eliminated_players, vec![P1]);
++    assert!(!r.state().players[0].is_eliminated);
++    assert!(!r.state().players[2].is_eliminated);
++    assert_eq!(r.state().objects[&battle].controller, P0);
++    assert_eq!(r.state().objects[&battle].owner, P0);
++    assert_eq!(r.state().objects[&battle].is_phased_out(), phased);
++    let still_attacked = r.state().combat.as_ref().is_some_and(|combat| {
++        combat
++            .attackers
++            .iter()
++            .any(|a| a.object_id == attacker && a.attack_target == AttackTarget::Battle(battle))
++    });
++    assert_eq!(
++        still_attacked, attacked,
++        "actual battle attack survives the protector's concession"
++    );
++    assert_eq!(engine::game::players::opponents(r.state(), P0), vec![p2]);
++    println!(
++        "BATTLE_HOSTILE_SIBLING_EVIDENCE {}",
++        serde_json::json!({
++        "attacked":attacked,"phased":phased,"battle":battle,"attacker":attacker,
++        "protector":r.state().objects[&battle].protector(),"events":events,
++        "eliminated":r.state().eliminated_players,"combat":r.state().combat})
++    );
++    // CR 310.11 + CR 704.5x: an attacked battle waits; CR 702.26b:
++    // a phased-out battle is ignored. The ordinary phased-in twin selects P2.
++    assert_eq!(
++        r.state().objects[&battle].protector(),
++        Some(if attacked || phased { P1 } else { p2 })
++    );
++    assert!(!matches!(
++        r.state().waiting_for,
++        WaitingFor::BattleProtectorChoice { .. }
++    ));
++    assert_battle_no_departure(&r, battle, incarnation, &events);
++    assert!(r.state().stack.is_empty());
++}
++
++#[test]
++fn public_battle_attacked_invalid_protector_is_unchanged_at_sba_boundary() {
++    battle_protector_hostile_sibling_case(true, false);
++}
++
++#[test]
++fn public_battle_phased_out_invalid_protector_is_ignored_at_sba_boundary() {
++    battle_protector_hostile_sibling_case(false, true);
++}
++
++#[test]
++fn public_battle_unattacked_phased_in_invalid_protector_selects_living_opponent() {
++    battle_protector_hostile_sibling_case(false, false);
++}

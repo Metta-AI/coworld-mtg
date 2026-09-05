@@ -1,0 +1,78 @@
+{
+  "utc": "2026-09-05T20:55:10.483998+00:00",
+  "kind": "independent original-engine runtime, immutable pinned worker, no compilation",
+  "build_path": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/build.json",
+  "build_sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff",
+  "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "frozen_harness_sources_verified": 39,
+  "phase": {
+    "kind": "pinned",
+    "repository": "https://github.com/nishu-builder/phase.git",
+    "revision": "2dec6c88915db4697706234a7ba2fcedd97b1689"
+  },
+  "cwd": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "RUST_MIN_STACK": "16777216"
+  },
+  "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "results": [
+    {
+      "name": "hush-first",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/hush-first-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/hush-first-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "all_required_cards_graveyard": true,
+      "request_sha256": "06858b679a6587f9752248b47463f82bb549f99e3c907557e0247fcb5a99d56b",
+      "evidence_sha256": "48c2fbfb039b80cac03b7c6f2c95b9c1547f826608d2e7a383ff49cf94983e0c",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "traveler-first",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/traveler-first-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/traveler-first-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "all_required_cards_graveyard": true,
+      "request_sha256": "ed6920bcafcba3b95dfa77350ffab044621c447f47b1fe71e8a4b77fd238c939",
+      "evidence_sha256": "1ab6ebf199c3d3183f2f588d24253d802e16e4d96db5731c20ee58062904f342",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "no-hush",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/no-hush-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/no-hush-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "all_required_cards_graveyard": true,
+      "request_sha256": "acb8970a02b9009de578e73df6f41b11e20fbbadbd3624e94e8b72cae517be3f",
+      "evidence_sha256": "bc5cf3518704c6f4db7d80dfeb01f3cafb04fb328324634e3870c2fa42f32004",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Original bug runtime only; worker observations do not expose stack/priority. Candidate exact integration companions assert those guards."
+}

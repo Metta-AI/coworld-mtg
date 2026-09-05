@@ -1,0 +1,1024 @@
+{
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "stage": "independent implementation review with two findings; not accepted",
+  "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "copied": [
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-implementation-v10-manifest.json",
+      "original_sha256": "4f11be26f764b1cc4bfb30eb61902af85cfea1607a7d473ce2642bd00ccfa95e",
+      "original_bytes": 13379,
+      "archive_path": "artifacts/hushbringer-implementation-v10-manifest.json",
+      "archive_sha256": "4f11be26f764b1cc4bfb30eb61902af85cfea1607a7d473ce2642bd00ccfa95e"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-implementation-v10-receipt.json",
+      "original_sha256": "4605d3fe4b7e82d1ac1c783db1a97007c93c596921ab918af91c900d833ab8ae",
+      "original_bytes": 2343,
+      "archive_path": "artifacts/hushbringer-implementation-v10-receipt.json",
+      "archive_sha256": "4605d3fe4b7e82d1ac1c783db1a97007c93c596921ab918af91c900d833ab8ae"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-implementation-v10.md",
+      "original_sha256": "36e76c24a18559f997e06ecffd3a2e5b2d0bef044dfa56634181559b9c29e5ec",
+      "original_bytes": 17474,
+      "archive_path": "artifacts/hushbringer-implementation-v10.md",
+      "archive_sha256": "36e76c24a18559f997e06ecffd3a2e5b2d0bef044dfa56634181559b9c29e5ec"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-review-v10.md",
+      "original_sha256": "15ec8a03f9780b996368b72039f051c279d0b833e0ca6e3e6b9f3745d92f6b97",
+      "original_bytes": 27996,
+      "archive_path": "artifacts/hushbringer-plan-review-v10.md",
+      "archive_sha256": "15ec8a03f9780b996368b72039f051c279d0b833e0ca6e3e6b9f3745d92f6b97"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-v10.md",
+      "original_sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a",
+      "original_bytes": 241505,
+      "archive_path": "artifacts/hushbringer-plan-v10.md",
+      "archive_sha256": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/all-added-moved-cr-audit.json",
+      "original_sha256": "cf19a2ea7788c644a9d33584b6fb07b810b4d9024a8df76eeb6aa8fc1f3daa56",
+      "original_bytes": 64620,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/all-added-moved-cr-audit.json",
+      "archive_sha256": "cf19a2ea7788c644a9d33584b6fb07b810b4d9024a8df76eeb6aa8fc1f3daa56"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/candidate-runtime/oracle_wrath_hush_first_suppresses_simultaneous_traveler_death.log",
+      "original_sha256": "1f8f8ac9922956c77f69bb96391edf9ec7c879e38dea67e06567b2f652b422b7",
+      "original_bytes": 224,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-review-v10-independent/candidate-runtime/oracle_wrath_hush_first_suppresses_simultaneous_traveler_death.log.gz",
+      "archive_sha256": "679a905211bb4f15b930ca058cc1256383f0a31b9f00b87e179db74b1f294f5d"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/candidate-runtime/oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death.log",
+      "original_sha256": "087aab2390bfb2623f848b61c61beced789e38aec39c7786f384d5b498ae0893",
+      "original_bytes": 228,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-review-v10-independent/candidate-runtime/oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death.log.gz",
+      "archive_sha256": "97b873166e2675f7495d06b113ab9440e9c8ac9261e6a0fe1f44c61f93895e3c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/candidate-runtime/oracle_wrath_without_hush_creates_exactly_one_spirit.log",
+      "original_sha256": "48ab4a1804cfc28ae457d78b21d25206143597049d4e9b11054bc48a9ed11a04",
+      "original_bytes": 214,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-review-v10-independent/candidate-runtime/oracle_wrath_without_hush_creates_exactly_one_spirit.log.gz",
+      "archive_sha256": "df16aa5b0ad27a7b422faa8dc207c34de3f7af0bcbba0f8f636e1a898b86fc87"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/candidate-runtime/receipt.json",
+      "original_sha256": "71b22a0689a4491905b9f742a12904d6cf9e1ebe71499e1f56f6335a04e08dde",
+      "original_bytes": 6402,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/candidate-runtime/receipt.json",
+      "archive_sha256": "71b22a0689a4491905b9f742a12904d6cf9e1ebe71499e1f56f6335a04e08dde"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/cr-findings.json",
+      "original_sha256": "c5f0f1716e3159213401597e865c0c074507d0c6541e41c707d6ae5ebf8fd8b5",
+      "original_bytes": 5035,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/cr-findings.json",
+      "archive_sha256": "c5f0f1716e3159213401597e865c0c074507d0c6541e41c707d6ae5ebf8fd8b5"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/final-gates-audit.json",
+      "original_sha256": "7ecf241a5775acf4ba0e31357db4ca4c1ebbee08fc7980817d54ad99ba98903f",
+      "original_bytes": 6523,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/final-gates-audit.json",
+      "archive_sha256": "7ecf241a5775acf4ba0e31357db4ca4c1ebbee08fc7980817d54ad99ba98903f"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/final-source-delta-audit.json",
+      "original_sha256": "d9a5d7796eef805fa0bc14ec19c1fb53fcb8e21e89a9176b65b41b85aece1f70",
+      "original_bytes": 1273,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/final-source-delta-audit.json",
+      "archive_sha256": "d9a5d7796eef805fa0bc14ec19c1fb53fcb8e21e89a9176b65b41b85aece1f70"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/independent-constructor-parser-audit.json",
+      "original_sha256": "8e4049772a0c1d9350a0b7a45a857c8bf8cc09415b358bbd8a566ea948bda5bf",
+      "original_bytes": 36979,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/independent-constructor-parser-audit.json",
+      "archive_sha256": "8e4049772a0c1d9350a0b7a45a857c8bf8cc09415b358bbd8a566ea948bda5bf"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/map-draft-file-audit.json",
+      "original_sha256": "897f033ef4b4cdac534ca84285e3d80a7e2058098e86bfb24b04fa699538c13d",
+      "original_bytes": 7557,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/map-draft-file-audit.json",
+      "archive_sha256": "897f033ef4b4cdac534ca84285e3d80a7e2058098e86bfb24b04fa699538c13d"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/map-draft-reviewed.json",
+      "original_sha256": "2df3da2fe788524dab3caf7ca89f58f9a11d578bc524b74fe184e02284b6029c",
+      "original_bytes": 3035655,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/map-draft-reviewed.json",
+      "archive_sha256": "2df3da2fe788524dab3caf7ca89f58f9a11d578bc524b74fe184e02284b6029c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/native-library-map-finding.json",
+      "original_sha256": "e87c57dc92e8d0fb56d0fbfa4d462bfac97fbdbdb2cb6d578f5d0e291185ddee",
+      "original_bytes": 3029,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/native-library-map-finding.json",
+      "archive_sha256": "e87c57dc92e8d0fb56d0fbfa4d462bfac97fbdbdb2cb6d578f5d0e291185ddee"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/corpus.json",
+      "original_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+      "original_bytes": 78303,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/corpus.json",
+      "archive_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/hush-first-execution.json",
+      "original_sha256": "48c2fbfb039b80cac03b7c6f2c95b9c1547f826608d2e7a383ff49cf94983e0c",
+      "original_bytes": 1754,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/hush-first-execution.json",
+      "archive_sha256": "48c2fbfb039b80cac03b7c6f2c95b9c1547f826608d2e7a383ff49cf94983e0c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/hush-first-request.json",
+      "original_sha256": "06858b679a6587f9752248b47463f82bb549f99e3c907557e0247fcb5a99d56b",
+      "original_bytes": 1199,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/hush-first-request.json",
+      "archive_sha256": "06858b679a6587f9752248b47463f82bb549f99e3c907557e0247fcb5a99d56b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/hush-first.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/hush-first.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/ldd.txt",
+      "original_sha256": "b9522b665d2b07027254120c8a7661f9b1dcdb1110953fb244d53f4d15c6b512",
+      "original_bytes": 297,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/ldd.txt",
+      "archive_sha256": "b9522b665d2b07027254120c8a7661f9b1dcdb1110953fb244d53f4d15c6b512"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/no-hush-execution.json",
+      "original_sha256": "bc5cf3518704c6f4db7d80dfeb01f3cafb04fb328324634e3870c2fa42f32004",
+      "original_bytes": 1467,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/no-hush-execution.json",
+      "archive_sha256": "bc5cf3518704c6f4db7d80dfeb01f3cafb04fb328324634e3870c2fa42f32004"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/no-hush-request.json",
+      "original_sha256": "acb8970a02b9009de578e73df6f41b11e20fbbadbd3624e94e8b72cae517be3f",
+      "original_bytes": 1012,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/no-hush-request.json",
+      "archive_sha256": "acb8970a02b9009de578e73df6f41b11e20fbbadbd3624e94e8b72cae517be3f"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/no-hush.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/no-hush.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/receipt.json",
+      "original_sha256": "4f25312c57e34f0ec380c394af3dedb2b6bf7a3714cb4868b562d67d25c7a210",
+      "original_bytes": 3708,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/receipt.json",
+      "archive_sha256": "4f25312c57e34f0ec380c394af3dedb2b6bf7a3714cb4868b562d67d25c7a210"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/traveler-first-execution.json",
+      "original_sha256": "1ab6ebf199c3d3183f2f588d24253d802e16e4d96db5731c20ee58062904f342",
+      "original_bytes": 1754,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/traveler-first-execution.json",
+      "archive_sha256": "1ab6ebf199c3d3183f2f588d24253d802e16e4d96db5731c20ee58062904f342"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/traveler-first-request.json",
+      "original_sha256": "ed6920bcafcba3b95dfa77350ffab044621c447f47b1fe71e8a4b77fd238c939",
+      "original_bytes": 1199,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/traveler-first-request.json",
+      "archive_sha256": "ed6920bcafcba3b95dfa77350ffab044621c447f47b1fe71e8a4b77fd238c939"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/original-runtime/traveler-first.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-review-v10-independent/original-runtime/traveler-first.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/receipt.json",
+      "original_sha256": "d732e2a8c70e66c736d97432761595c8dfc19e1dacfb4542929df4ca6dd8decc",
+      "original_bytes": 10097,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/receipt.json",
+      "archive_sha256": "d732e2a8c70e66c736d97432761595c8dfc19e1dacfb4542929df4ca6dd8decc"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/review-report-pending.json",
+      "original_sha256": "d63521aa6bf9370bb198d69c77b9e587c06fcba587e957964ba7be9601237c66",
+      "original_bytes": 9471,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/review-report-pending.json",
+      "archive_sha256": "d63521aa6bf9370bb198d69c77b9e587c06fcba587e957964ba7be9601237c66"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/review-report.json",
+      "original_sha256": "ca93f2ca6e9dc7db1c4062f52dccc739997abf5cd387d3f11102b2da2b761548",
+      "original_bytes": 18430,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/review-report.json",
+      "archive_sha256": "ca93f2ca6e9dc7db1c4062f52dccc739997abf5cd387d3f11102b2da2b761548"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/review-report.md",
+      "original_sha256": "8765758f995305ce7a13c8b3696f2b6be6fab7b23e31058f7eefa3a14a7c1cdd",
+      "original_bytes": 6867,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/review-report.md",
+      "archive_sha256": "8765758f995305ce7a13c8b3696f2b6be6fab7b23e31058f7eefa3a14a7c1cdd"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-independent/source-prehandoff-verification.json",
+      "original_sha256": "0e4c6759ee427a323ef87d882f33057cf9bcfe6cbaf5de9883fa9f3ddf0f7925",
+      "original_bytes": 243,
+      "archive_path": "artifacts/hushbringer-review-v10-independent/source-prehandoff-verification.json",
+      "archive_sha256": "0e4c6759ee427a323ef87d882f33057cf9bcfe6cbaf5de9883fa9f3ddf0f7925"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations.md",
+      "original_sha256": "5685cc1732c171a9b5891bbc862b9fdf43eb3b5a081915647e2d19db99b331ec",
+      "original_bytes": 14730,
+      "archive_path": "artifacts/hushbringer-v10-batched-mutations.md",
+      "archive_sha256": "5685cc1732c171a9b5891bbc862b9fdf43eb3b5a081915647e2d19db99b331ec"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/audit-final-imports.py",
+      "original_sha256": "aaff6e0ec3bd32af33a98a42476cfe8c6d0d66b852a03d66ac3bae63e9c365ff",
+      "original_bytes": 3849,
+      "archive_path": "artifacts/hushbringer-v10-execution/audit-final-imports.py",
+      "archive_sha256": "aaff6e0ec3bd32af33a98a42476cfe8c6d0d66b852a03d66ac3bae63e9c365ff"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/audit-imported-evidence.py",
+      "original_sha256": "00a724eeb241953a8e3942a3842beebfb82bf922b5b847688b1a389031e2c032",
+      "original_bytes": 3733,
+      "archive_path": "artifacts/hushbringer-v10-execution/audit-imported-evidence.py",
+      "archive_sha256": "00a724eeb241953a8e3942a3842beebfb82bf922b5b847688b1a389031e2c032"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/audit-source.py",
+      "original_sha256": "66c0c947ee7e6af4e66a92605a15ab43308ecdf5a1596ae1afe50fc9d8251b13",
+      "original_bytes": 3551,
+      "archive_path": "artifacts/hushbringer-v10-execution/audit-source.py",
+      "archive_sha256": "66c0c947ee7e6af4e66a92605a15ab43308ecdf5a1596ae1afe50fc9d8251b13"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/0-after-source.json",
+      "original_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/0-after-source.json",
+      "archive_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/0-source.json",
+      "original_sha256": "f9f50ca754fa4c6c7bd4cce98cc2113ac607195377e31e9b4f0b33a6cb376561",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/0-source.json",
+      "archive_sha256": "f9f50ca754fa4c6c7bd4cce98cc2113ac607195377e31e9b4f0b33a6cb376561"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/0.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/1-after-source.json",
+      "original_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/1-after-source.json",
+      "archive_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/1-source.json",
+      "original_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/1-source.json",
+      "archive_sha256": "31626a07c5e762219c1373aaeb495cdd9e14275d4652c9b984c2a3e21353b484"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/1.log",
+      "original_sha256": "034a9ddd75d190d0a896c508cd3fb7dec538dc31a929b3c687778216ee626a40",
+      "original_bytes": 87282,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/1.log.gz",
+      "archive_sha256": "2f5ed2d13ee7a8259b2d3564d5aeef375032bb5a1f6c43860873796948aa00b5"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/done",
+      "original_sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2",
+      "original_bytes": 5,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/done",
+      "archive_sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-1/receipt.json",
+      "original_sha256": "e12a84f12911f659afbdb66ec2e3ca6f82368cc6a3dc562f4cd3e1e497053e25",
+      "original_bytes": 4264,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-1/receipt.json",
+      "archive_sha256": "e12a84f12911f659afbdb66ec2e3ca6f82368cc6a3dc562f4cd3e1e497053e25"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/0-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/0-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/0-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/0-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/0.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/0.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/1-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/1-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/1-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/1-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/1.log",
+      "original_sha256": "613de0343facda2067a91d4fed5b70e11a1d5e5ad14919b1238f8e4645339b59",
+      "original_bytes": 90055,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/1.log.gz",
+      "archive_sha256": "8255574e01c72791de08d2ffeb3775b49c4ee6705479b7e8850e835caedd1be0"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/2-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/2-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/2-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/2-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/2.log",
+      "original_sha256": "475d149c59213493dec2e2c239eff8eea200df384591939c56227d7ee1ba06f5",
+      "original_bytes": 91054,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/2.log.gz",
+      "archive_sha256": "7ce4b3c92668e97a4d356d6d65edccad04bb938e4cf0f0a1b085ab968961b104"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/3-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/3-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/3-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/3-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/3.log",
+      "original_sha256": "e7db4fded845a74324bc21641f92efb53a0f89dfa4c488ed516cd25fe94a94d8",
+      "original_bytes": 89136,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/3.log.gz",
+      "archive_sha256": "395f8e7e8b39cc87df9575d28ffd8cd114c51b50458d95f0abe6efdd8ebfd3f8"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/4-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/4-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/4-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/4-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/4.log",
+      "original_sha256": "d98e6bcf7a3214440e213d7b1e89dede0af89e56328a2c65f87d3faf335e31c0",
+      "original_bytes": 227417,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/4.log.gz",
+      "archive_sha256": "fb8cb3c4d96a4d31ec498825808e50641e4cd7841d16fc66b0662c59fff824c7"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/5-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/5-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/5-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/5-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/5.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/5.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/done",
+      "original_sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2",
+      "original_bytes": 5,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/done",
+      "archive_sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/battle-siblings-baseline-2/receipt.json",
+      "original_sha256": "e020b392a4481c7afb4417d54fb37b0687ac9325681c6d5c23d3a0864abf511a",
+      "original_bytes": 8215,
+      "archive_path": "artifacts/hushbringer-v10-execution/battle-siblings-baseline-2/receipt.json",
+      "archive_sha256": "e020b392a4481c7afb4417d54fb37b0687ac9325681c6d5c23d3a0864abf511a"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/build-boundary-audit.py",
+      "original_sha256": "0c03713a26d9ec81b5374683088f142d35f6bc52e381aab53997dc45ffebe314",
+      "original_bytes": 4181,
+      "archive_path": "artifacts/hushbringer-v10-execution/build-boundary-audit.py",
+      "archive_sha256": "0c03713a26d9ec81b5374683088f142d35f6bc52e381aab53997dc45ffebe314"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/build-entry-map.py",
+      "original_sha256": "7545a088dd53461042c251479762e82642b394448d6e8694d56be0cf6f69b04e",
+      "original_bytes": 5528,
+      "archive_path": "artifacts/hushbringer-v10-execution/build-entry-map.py",
+      "archive_sha256": "7545a088dd53461042c251479762e82642b394448d6e8694d56be0cf6f69b04e"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/build-final-maps.py",
+      "original_sha256": "d2b52fea8d728e427c0c88c0181eff6feba7bcca8d327f3f88ef946c87986c48",
+      "original_bytes": 21742,
+      "archive_path": "artifacts/hushbringer-v10-execution/build-final-maps.py",
+      "archive_sha256": "d2b52fea8d728e427c0c88c0181eff6feba7bcca8d327f3f88ef946c87986c48"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/before-source.json",
+      "original_sha256": "1a2fb100f40bc51c042eb7af721a58958d7a48c13b20d3e6df0168b2a2dc8734",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/before-source.json",
+      "archive_sha256": "1a2fb100f40bc51c042eb7af721a58958d7a48c13b20d3e6df0168b2a2dc8734"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/generated-source.json",
+      "original_sha256": "4a632a6fc3393da7ef129a3e789feb814816c9b5de814720c480fcdf73ea6a6c",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/generated-source.json",
+      "archive_sha256": "4a632a6fc3393da7ef129a3e789feb814816c9b5de814720c480fcdf73ea6a6c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/generation.exit",
+      "original_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "original_bytes": 2,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/generation.exit",
+      "archive_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/generation.log",
+      "original_sha256": "d53bbd7591e9e3626976e31e2cd1e684d41d1284ab62235981bc2b8426ff30c1",
+      "original_bytes": 3114,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/generation.log.gz",
+      "archive_sha256": "92a8e64474d6b0ca62087aefc3c07bab3fdd84dec396872a834097a9b227f2a2"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/generator-source.patch",
+      "original_sha256": "7c807b213990b70f413334da8356b74d60b85526f587dc281bafb618fbc3fdfa",
+      "original_bytes": 923984,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/generator-source.patch",
+      "archive_sha256": "7c807b213990b70f413334da8356b74d60b85526f587dc281bafb618fbc3fdfa"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/oracle-subtypes.json.before",
+      "original_sha256": "9b28e522611e1684254409ab20a360e284ee0dc0f00e8eadf93c071724df0472",
+      "original_bytes": 4822,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/oracle-subtypes.json.before",
+      "archive_sha256": "9b28e522611e1684254409ab20a360e284ee0dc0f00e8eadf93c071724df0472"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/oracle-subtypes.json.generated",
+      "original_sha256": "b8abc528906b7310d763dcbafb920724dc164054f38a8a7d4495b5d8dd6da019",
+      "original_bytes": 5015,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/oracle-subtypes.json.generated",
+      "archive_sha256": "b8abc528906b7310d763dcbafb920724dc164054f38a8a7d4495b5d8dd6da019"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/receipt.json",
+      "original_sha256": "0ce659bdccb27fb12efef887f4836ad4b66ee2674f6d97cb5f24dee500548f38",
+      "original_bytes": 1295,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/receipt.json",
+      "archive_sha256": "0ce659bdccb27fb12efef887f4836ad4b66ee2674f6d97cb5f24dee500548f38"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/restored-source.json",
+      "original_sha256": "1a2fb100f40bc51c042eb7af721a58958d7a48c13b20d3e6df0168b2a2dc8734",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/card-data-final/restored-source.json",
+      "archive_sha256": "1a2fb100f40bc51c042eb7af721a58958d7a48c13b20d3e6df0168b2a2dc8734"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/desired-diagnostics-comparison.json",
+      "original_sha256": "59f43715e98090d10dc916a8d84652ec4c111876d7168636184c47367000070c",
+      "original_bytes": 26171,
+      "archive_path": "artifacts/hushbringer-v10-execution/desired-diagnostics-comparison.json",
+      "archive_sha256": "59f43715e98090d10dc916a8d84652ec4c111876d7168636184c47367000070c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/0-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/0-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/0-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/0-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/0.log",
+      "original_sha256": "bde07346483a174535d25ee02217983b74f0345d4f1f47ecb7d34b7d27e89eda",
+      "original_bytes": 158,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/0.log.gz",
+      "archive_sha256": "4657a4be200c93f0fa264cd6904e751f5e5edf31e858dad052f33817727bf013"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/1-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/1-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/1-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/1-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/1.log",
+      "original_sha256": "d5c82205cbc522b2f9e9cb3cbe50b32ad87d6cc619988e452272b66f70240345",
+      "original_bytes": 1517838,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/1.log.gz",
+      "archive_sha256": "8f187eb5246c1d64c9a495ad0fd0d86916ab11b6deccbb9e87468119a1fa3bed"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/2-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/2-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/2-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/2-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/2.log",
+      "original_sha256": "de53aa608a6c8e976bb98a986ff2cfcd744b6e7e5debef0a88cd263f65591973",
+      "original_bytes": 305313,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/2.log.gz",
+      "archive_sha256": "6f4937cc4bd1be288dbb851b5fb710fc6c9f75f6f4428bbfa71e46118b72b79c"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/3-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/3-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/3-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/3-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/3.log",
+      "original_sha256": "e689f7209bc65127f4d7a5813b5e3b7055ac8c9dcd79efb074ffe4495049ce4b",
+      "original_bytes": 2214,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/3.log.gz",
+      "archive_sha256": "3a358f2c160593189014aa896e4f7d6a5fdf376194c525e80ab82d11dc7f6409"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/4-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/4-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/4-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/4-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/4.log",
+      "original_sha256": "1d386f91b82c9913eaf1a5fd39f8835e951e9cf4396e921144ca900180e1fae1",
+      "original_bytes": 1021,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/4.log.gz",
+      "archive_sha256": "5a439f5b37dc26e1c2b9cfcbcab8dacb1e38515015392a5fa6f5ff1d1c4709a3"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/5-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/5-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/5-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/5-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/5.log",
+      "original_sha256": "3ac78caa3a7b244e6209fc7b5606b8b04bcd0d15072fb4d77c39d4fbd99bdbe5",
+      "original_bytes": 774,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/5.log.gz",
+      "archive_sha256": "9ebe7b7b4dbd14e72792bdd4aeb58001bcd708c0ee1f58aa79313a113721fd30"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/6-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/6-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/6-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/6-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/6.log",
+      "original_sha256": "50b20f3c3cdc0e697bb4dde688237be14f1067381c123d144ecd7f1b8acc1d19",
+      "original_bytes": 9745,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/6.log.gz",
+      "archive_sha256": "314cb5382cd3fc714cc0180d4f4bf1c3df9c27071ad15fd44802c4f2f0675e0f"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/7-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/7-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/7-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/7-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/7.log",
+      "original_sha256": "24f1e1e4c861ab473eef128acb645d0bb96f03191522d58c6377806605f64c32",
+      "original_bytes": 1165,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/7.log.gz",
+      "archive_sha256": "b5cd445bd71449ce1f566530e3af927151623bf920271e10a95e96655c03bd4b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/8-after-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/8-after-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/8-source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/8-source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/8.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "encoding": "gzip",
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/8.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/done",
+      "original_sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2",
+      "original_bytes": 5,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/done",
+      "archive_sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/receipt.json",
+      "original_sha256": "9eb28ed230eb11f1879f309eb4d0d6a0e16f1310047197a62c65a19b50dd478b",
+      "original_bytes": 9950,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-gates-2/receipt.json",
+      "archive_sha256": "9eb28ed230eb11f1879f309eb4d0d6a0e16f1310047197a62c65a19b50dd478b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-imported-evidence-audit-attempt-1.json",
+      "original_sha256": "c8e410a3380c40224c88f6a5f8c0984d84dcab7c697aeefff4932080c50bc347",
+      "original_bytes": 149638,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-imported-evidence-audit-attempt-1.json",
+      "archive_sha256": "c8e410a3380c40224c88f6a5f8c0984d84dcab7c697aeefff4932080c50bc347"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-imported-evidence-audit.json",
+      "original_sha256": "d1c5a36e5710e0953fb11234e00ed2f7efdbababc553f3b67fefe8876276501d",
+      "original_bytes": 169612,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-imported-evidence-audit.json",
+      "archive_sha256": "d1c5a36e5710e0953fb11234e00ed2f7efdbababc553f3b67fefe8876276501d"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-source-audit-3/constructor-consumer-sweep.json",
+      "original_sha256": "ad6c5d354d1fe7a464b0ecbf26d974b641e29efd2ae1e85c92235c38e30f24ae",
+      "original_bytes": 55570,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-source-audit-3/constructor-consumer-sweep.json",
+      "archive_sha256": "ad6c5d354d1fe7a464b0ecbf26d974b641e29efd2ae1e85c92235c38e30f24ae"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-source-audit-3/cr-annotation-audit.json",
+      "original_sha256": "280d72b3d04f20d8e23585b4692914d50891a2ed09af1153b4c8705ce1c1c4f4",
+      "original_bytes": 35466,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-source-audit-3/cr-annotation-audit.json",
+      "archive_sha256": "280d72b3d04f20d8e23585b4692914d50891a2ed09af1153b4c8705ce1c1c4f4"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-source-audit-3/source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-source-audit-3/source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-verification-summary.json",
+      "original_sha256": "e8e79fc4fff2fa756af3d8e7e29cd1cf97a8a59bc8897bfe77b72533ede6b088",
+      "original_bytes": 10095,
+      "archive_path": "artifacts/hushbringer-v10-execution/final-verification-summary.json",
+      "archive_sha256": "e8e79fc4fff2fa756af3d8e7e29cd1cf97a8a59bc8897bfe77b72533ede6b088"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/freeze-final.py",
+      "original_sha256": "5769ce9fe4a4455ce883a05516a022bb9a594b638194b3c0188584e92cc083b8",
+      "original_bytes": 4426,
+      "archive_path": "artifacts/hushbringer-v10-execution/freeze-final.py",
+      "archive_sha256": "5769ce9fe4a4455ce883a05516a022bb9a594b638194b3c0188584e92cc083b8"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/candidate.patch",
+      "original_sha256": "503036bf37205272ad06ee9b0818a11217f4f0012244b22ef41b5703c716728b",
+      "original_bytes": 571838,
+      "archive_path": "artifacts/hushbringer-v10-execution/frozen-candidate-v10-final/candidate.patch",
+      "archive_sha256": "503036bf37205272ad06ee9b0818a11217f4f0012244b22ef41b5703c716728b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/from-proof-v10.patch",
+      "original_sha256": "fe9ff11de2b8e6620580c2c4e72daab5b546c0e5ae9a166eb375ed1ac20adbe7",
+      "original_bytes": 6950,
+      "archive_path": "artifacts/hushbringer-v10-execution/frozen-candidate-v10-final/from-proof-v10.patch",
+      "archive_sha256": "fe9ff11de2b8e6620580c2c4e72daab5b546c0e5ae9a166eb375ed1ac20adbe7"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/proof-lineage.json",
+      "original_sha256": "2f1cd286117844d4edcac7029fe092c15b6f151841c1ee960ac5522b5ae1acf6",
+      "original_bytes": 1775,
+      "archive_path": "artifacts/hushbringer-v10-execution/frozen-candidate-v10-final/proof-lineage.json",
+      "archive_sha256": "2f1cd286117844d4edcac7029fe092c15b6f151841c1ee960ac5522b5ae1acf6"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/receipt.json",
+      "original_sha256": "e04dca27ec05d580bbf08b0302d42cb3f6ff482839f8b8d2bfb9436d91403769",
+      "original_bytes": 1028,
+      "archive_path": "artifacts/hushbringer-v10-execution/frozen-candidate-v10-final/receipt.json",
+      "archive_sha256": "e04dca27ec05d580bbf08b0302d42cb3f6ff482839f8b8d2bfb9436d91403769"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/source.json",
+      "original_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+      "original_bytes": 277711,
+      "archive_path": "artifacts/hushbringer-v10-execution/frozen-candidate-v10-final/source.json",
+      "archive_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/generate-restore.py",
+      "original_sha256": "a8f6d51f496583be12135cfafaa9b67c274953f13fbbf483f24542c0cfc79a5f",
+      "original_bytes": 2449,
+      "archive_path": "artifacts/hushbringer-v10-execution/generate-restore.py",
+      "archive_sha256": "a8f6d51f496583be12135cfafaa9b67c274953f13fbbf483f24542c0cfc79a5f"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/historical-benchmark-unavailable.json",
+      "original_sha256": "5a74b89c6a5a4fddc655db98d868b068b86f897ae2bdbd2b84a90b2324a83066",
+      "original_bytes": 932,
+      "archive_path": "artifacts/hushbringer-v10-execution/historical-benchmark-unavailable.json",
+      "archive_sha256": "5a74b89c6a5a4fddc655db98d868b068b86f897ae2bdbd2b84a90b2324a83066"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/imported-evidence-audit.json",
+      "original_sha256": "f8fd6346ff74e071fd42f3ff1c7601afba252bb0c65447b076bb0e9f3596f816",
+      "original_bytes": 323364,
+      "archive_path": "artifacts/hushbringer-v10-execution/imported-evidence-audit.json",
+      "archive_sha256": "f8fd6346ff74e071fd42f3ff1c7601afba252bb0c65447b076bb0e9f3596f816"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/manual-constructor-boundary-audit.json",
+      "original_sha256": "03facc70407b6fa79da9086acfd35b06fcebf2920e6200e91f334a131948fe46",
+      "original_bytes": 32298,
+      "archive_path": "artifacts/hushbringer-v10-execution/manual-constructor-boundary-audit.json",
+      "archive_sha256": "03facc70407b6fa79da9086acfd35b06fcebf2920e6200e91f334a131948fe46"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/production-entry-callsite-map.json",
+      "original_sha256": "154219fc432858f26b0505cca8177c2aba2b3c767b7f87aeee20c805db8f7c85",
+      "original_bytes": 28847,
+      "archive_path": "artifacts/hushbringer-v10-execution/production-entry-callsite-map.json",
+      "archive_sha256": "154219fc432858f26b0505cca8177c2aba2b3c767b7f87aeee20c805db8f7c85"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/production-path-maintainer-map-v10.json",
+      "original_sha256": "d6b8f49c51496977fa6704e2e306e77496fa5d3b388d4c6a32f813a3107acfd0",
+      "original_bytes": 3221026,
+      "archive_path": "artifacts/hushbringer-v10-execution/production-path-maintainer-map-v10.json",
+      "archive_sha256": "d6b8f49c51496977fa6704e2e306e77496fa5d3b388d4c6a32f813a3107acfd0"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/production-path-maintainer-map-v10.md",
+      "original_sha256": "808e1a0c2294d4d19bea4576b0dbc209a34e04ef7b7030207d79747cb7e15234",
+      "original_bytes": 188240,
+      "archive_path": "artifacts/hushbringer-v10-execution/production-path-maintainer-map-v10.md",
+      "archive_sha256": "808e1a0c2294d4d19bea4576b0dbc209a34e04ef7b7030207d79747cb7e15234"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/reviewer-pre-read-cr-findings.json",
+      "original_sha256": "c5f0f1716e3159213401597e865c0c074507d0c6541e41c707d6ae5ebf8fd8b5",
+      "original_bytes": 5035,
+      "archive_path": "artifacts/hushbringer-v10-execution/reviewer-pre-read-cr-findings.json",
+      "archive_sha256": "c5f0f1716e3159213401597e865c0c074507d0c6541e41c707d6ae5ebf8fd8b5"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/run.py",
+      "original_sha256": "ab650ee333b0e8ead2ac5273837133e5f051c2ebce78f8a24c98aa4441dd76b3",
+      "original_bytes": 2460,
+      "archive_path": "artifacts/hushbringer-v10-execution/run.py",
+      "archive_sha256": "ab650ee333b0e8ead2ac5273837133e5f051c2ebce78f8a24c98aa4441dd76b3"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/typed-common-boundary-map.json",
+      "original_sha256": "02b5b65e4c5ba6e2888063e61e502134331e790e5470e3bfeaf597c9d63bc0b6",
+      "original_bytes": 17584,
+      "archive_path": "artifacts/hushbringer-v10-execution/typed-common-boundary-map.json",
+      "archive_sha256": "02b5b65e4c5ba6e2888063e61e502134331e790e5470e3bfeaf597c9d63bc0b6"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/unresolved-review-items.json",
+      "original_sha256": "fc646b502d5c0a8a57704266eaf43fe5ec4f3a867d21993920b6177be5932a0a",
+      "original_bytes": 2290,
+      "archive_path": "artifacts/hushbringer-v10-execution/unresolved-review-items.json",
+      "archive_sha256": "fc646b502d5c0a8a57704266eaf43fe5ec4f3a867d21993920b6177be5932a0a"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/upstream-integration-impact.json",
+      "original_sha256": "7b68b638604c644419afa2a7cf06ff3dff2a22d772c74352e2cf7289087cbcbc",
+      "original_bytes": 488,
+      "archive_path": "artifacts/hushbringer-v10-execution/upstream-integration-impact.json",
+      "archive_sha256": "7b68b638604c644419afa2a7cf06ff3dff2a22d772c74352e2cf7289087cbcbc"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations.md",
+      "original_sha256": "5dd081e88da433c2dbecadf52b85ccad2df24b7be03e6ec4cb8bf45a6abaf41a",
+      "original_bytes": 15336,
+      "archive_path": "artifacts/hushbringer-v9-library-mutations.md",
+      "archive_sha256": "5dd081e88da433c2dbecadf52b85ccad2df24b7be03e6ec4cb8bf45a6abaf41a"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-archive-audit.json",
+      "original_sha256": "f0b9eeedadf71b8506aca0134aaa5e38e261114654a4983b0d8632288dbaba91",
+      "original_bytes": 5855,
+      "archive_path": "artifacts/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-archive-audit.json",
+      "archive_sha256": "f0b9eeedadf71b8506aca0134aaa5e38e261114654a4983b0d8632288dbaba91"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-completion-receipt.json",
+      "original_sha256": "441a4a15f7d57f5784ac710cf426c1344514b99ee3117c103944b5e553bfa954",
+      "original_bytes": 1062,
+      "archive_path": "artifacts/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-completion-receipt.json",
+      "archive_sha256": "441a4a15f7d57f5784ac710cf426c1344514b99ee3117c103944b5e553bfa954"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations.md",
+      "original_sha256": "febe717410490c50cd54fcb10baf5fe2db073c061ee451e3b29be2b63004c78f",
+      "original_bytes": 40030,
+      "archive_path": "artifacts/hushbringer-v9-matcher-mutations.md",
+      "archive_sha256": "febe717410490c50cd54fcb10baf5fe2db073c061ee451e3b29be2b63004c78f"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-completion-receipt.json",
+      "original_sha256": "f4742ee56a45aaf02a4a65cc16bfd77daf1f84ca382653e6edfe83b66d1d179e",
+      "original_bytes": 1213,
+      "archive_path": "artifacts/hushbringer-v9-public-completion-receipt.json",
+      "archive_sha256": "f4742ee56a45aaf02a4a65cc16bfd77daf1f84ca382653e6edfe83b66d1d179e"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+      "original_sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18",
+      "original_bytes": 277056,
+      "archive_path": "artifacts/hushbringer-v9-public-root-audit-final.json",
+      "archive_sha256": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations.md",
+      "original_sha256": "fbde011009235c775433f31015ba76359dd1097cfebf820861a854c36776629d",
+      "original_bytes": 30906,
+      "archive_path": "artifacts/hushbringer-v9-r2-r3-mutations.md",
+      "archive_sha256": "fbde011009235c775433f31015ba76359dd1097cfebf820861a854c36776629d"
+    }
+  ],
+  "external": [
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/known-tokens.toml.before",
+      "original_sha256": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+      "original_bytes": 6213630,
+      "retention": "Retained on EC2; omitted from portable archive."
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/card-data-final/known-tokens.toml.generated",
+      "original_sha256": "1453a08584b55a483be503c439f1e549fb8263dd278ff0ecc67f454597fec158",
+      "original_bytes": 6182613,
+      "retention": "Retained on EC2; omitted from portable archive."
+    },
+    {
+      "original_path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/source.tar.gz",
+      "original_sha256": "5578959239ea2420af4c260decd5381ad778f6ce69722d86ec9eead594627f2b",
+      "original_bytes": 27757361,
+      "retention": "Retained on EC2; omitted from portable archive."
+    }
+  ]
+}

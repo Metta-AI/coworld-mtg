@@ -1,0 +1,702 @@
+{
+  "utc": "2026-09-05T21:04:23.143560+00:00",
+  "method": "Enumerates actual calls before each file cfg(test) module; mechanical function association plus explicit repeated-arm and common-owner mapping. Physical-seam JSON supplies branch/authority/mutation/test evidence for referenced IDs.",
+  "call_sites": [
+    {
+      "file": "crates/engine/src/game/augment.rs",
+      "line": 203,
+      "function": "check_standalone_augment_permanents",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "augment-handoff"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 1858,
+      "function": "pay_deferred_spell_sacrifices_at_commit",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-pay_deferred_spell_sacrifices_at_commit",
+        "components-whole-queue",
+        "components-singleton",
+        "components-filter-grouping"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 1865,
+      "function": "pay_deferred_spell_sacrifices_at_commit",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-pay_deferred_spell_sacrifices_at_commit",
+        "components-whole-queue",
+        "components-singleton",
+        "components-filter-grouping"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 2076,
+      "function": "handle_sacrifice_for_cost",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-handle_sacrifice_for_cost",
+        "component-guard-append",
+        "component-binding-distinct-invocation"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 2083,
+      "function": "handle_sacrifice_for_cost",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-handle_sacrifice_for_cost",
+        "component-guard-append",
+        "component-binding-distinct-invocation"
+      ],
+      "source_line": "crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 858,
+      "function": "resolve",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 903,
+      "function": "resolve",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1553,
+      "function": "resolve_all",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve_all"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1574,
+      "function": "resolve_all",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve_all"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "line": 550,
+      "function": "sacrifice_unchosen",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "keep-sweep"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "line": 562,
+      "function": "sacrifice_unchosen",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "keep-sweep"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 217,
+      "function": "resolve",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 223,
+      "function": "resolve",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve"
+      ],
+      "source_line": "let outcome = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 364,
+      "function": "resolve_all",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve_all"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 370,
+      "function": "resolve_all",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve_all"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 912,
+      "function": "drain_pending_change_zone_iteration",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "resumed-change-zone"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 954,
+      "function": "drain_pending_change_zone_iteration",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "resumed-change-zone"
+      ],
+      "source_line": "let result = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 5798,
+      "function": "perform_player_scope_sacrifices",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "player-scope-sacrifice"
+      ],
+      "source_line": "let outcome = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 5807,
+      "function": "perform_player_scope_sacrifices",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "player-scope-sacrifice"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 6001,
+      "function": "resolve_ability_chain",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "R2-resolver-barrier"
+      ],
+      "source_line": "crate::game::zones::without_departure_member(state, events, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/sacrifice.rs",
+      "line": 280,
+      "function": "resolve",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "all-eligible-sacrifice"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/sacrifice.rs",
+      "line": 286,
+      "function": "resolve",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "all-eligible-sacrifice"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3305,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-sacrifice"
+      ],
+      "source_line": "if super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3311,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-sacrifice"
+      ],
+      "source_line": "match super::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3353,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-change-bounce"
+      ],
+      "source_line": "if super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3394,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-change-bounce"
+      ],
+      "source_line": "match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3534,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "EffectKind::PutAtLibraryPosition => super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3541,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "super::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3557,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "super::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3572,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "super::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3716,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-pay-cost"
+      ],
+      "source_line": "if super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3722,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-pay-cost"
+      ],
+      "source_line": "match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move("
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 88,
+      "function": "check_state_based_actions",
+      "api": "with_departure_suppression",
+      "classification": "single SBA-iteration owner shared by all nine sub-checks and standalone Augment",
+      "physical_mutation_ids": [
+        "sba-check_zero_toughness",
+        "sba-check_lethal_damage",
+        "sba-check_unattached_auras",
+        "sba-check_role_uniqueness",
+        "sba-check_world_rule",
+        "sba-check_zero_loyalty",
+        "sba-check_zero_defense",
+        "sba-check_battle_protector",
+        "sba-check_saga_sacrifice",
+        "augment-handoff"
+      ],
+      "source_line": "let repeat = zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 789,
+      "function": "check_zero_toughness",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_zero_toughness"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 834,
+      "function": "check_lethal_damage",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_lethal_damage"
+      ],
+      "source_line": "let paused = zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1154,
+      "function": "check_unattached_auras",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_unattached_auras"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1343,
+      "function": "check_role_uniqueness",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_role_uniqueness"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1506,
+      "function": "check_world_rule",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_world_rule"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1539,
+      "function": "check_zero_loyalty",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_zero_loyalty"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1591,
+      "function": "check_zero_defense",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_zero_defense"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1726,
+      "function": "check_battle_protector",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_battle_protector"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, battle_id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1845,
+      "function": "check_saga_sacrifice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_saga_sacrifice"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, saga_id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zone_pipeline.rs",
+      "line": 949,
+      "function": "deliver_batch",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "shared-batch-delivery"
+      ],
+      "source_line": "zones::with_departure_suppression(state, events, attempted, |state, events, owner| {"
+    },
+    {
+      "file": "crates/engine/src/game/zone_pipeline.rs",
+      "line": 953,
+      "function": "deliver_batch",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "shared-batch-delivery"
+      ],
+      "source_line": "match zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 871,
+      "function": "with_departure_leaf",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "without_departure_member(state, events, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 881,
+      "function": "with_departure_leaf",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_suppression(state, events, &[object_id], |state, events, owner| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 882,
+      "function": "with_departure_leaf",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_member(state, events, owner, object_id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 889,
+      "function": "with_departure_leaf",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "without_departure_member(state, events, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 895,
+      "function": "with_departure_leaf",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "without_departure_member(state, events, |state, events| body(state, events, None));"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 933,
+      "function": "move_to_zone",
+      "api": "with_departure_leaf",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_leaf(state, events, object_id, to, |state, events, binding| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 1442,
+      "function": "move_to_library_at_index",
+      "api": "with_departure_leaf",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_leaf("
+    }
+  ],
+  "unmapped": [],
+  "native_unaffected_siblings": [
+    {
+      "id": "native-library-Bottom",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "member_line": 3541,
+      "first_branch": "Bottom under real SelectEffectZoneCards -> PutAtLibraryPosition using Hand/Library subjects; no Battlefield candidate is captured.",
+      "selected_authority": "Real selected cards and requested library order; live zone excludes ownership.",
+      "binding_time": "Completed public selection, empty departure owner; top-level native movement retains existing order.",
+      "storage": "Native library vector and ordinary nondeath ZoneChangeRecord; absent departure suppression history.",
+      "consumer": "move_to_library_position(false)",
+      "invalidation": "No Battlefield owner/member snapshot exists to leak; later independent creature death still gets its own snapshot.",
+      "serialized_impact": "Native nondeath event shape remains unchanged; no fabricated Some history.",
+      "test": null,
+      "controls": "Unresolved: no verified independently reaching public Bottom/Nth test assigned. Source shows non-Battlefield subjects cannot obtain departure ownership, but this is not runtime branch/order/rejection evidence.",
+      "classification": "unaffected by source reasoning; required public native-arm controls unresolved",
+      "status": "unresolved review obligation"
+    },
+    {
+      "id": "native-library-NthFromTop",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "member_line": 3557,
+      "first_branch": "NthFromTop under real SelectEffectZoneCards -> PutAtLibraryPosition using Hand/Library subjects; no Battlefield candidate is captured.",
+      "selected_authority": "Real selected cards and requested library order; live zone excludes ownership.",
+      "binding_time": "Completed public selection, empty departure owner; top-level native movement retains existing order.",
+      "storage": "Native library vector and ordinary nondeath ZoneChangeRecord; absent departure suppression history.",
+      "consumer": "move_to_library_at_index(n-1)",
+      "invalidation": "No Battlefield owner/member snapshot exists to leak; later independent creature death still gets its own snapshot.",
+      "serialized_impact": "Native nondeath event shape remains unchanged; no fabricated Some history.",
+      "test": null,
+      "controls": "Unresolved: no verified independently reaching public Bottom/Nth test assigned. Source shows non-Battlefield subjects cannot obtain departure ownership, but this is not runtime branch/order/rejection evidence.",
+      "classification": "unaffected by source reasoning; required public native-arm controls unresolved",
+      "status": "unresolved review obligation"
+    },
+    {
+      "id": "native-library-Top-default-reversed-iteration",
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "member_line": 3572,
+      "first_branch": "Top-default-reversed-iteration under real SelectEffectZoneCards -> PutAtLibraryPosition using Hand/Library subjects; no Battlefield candidate is captured.",
+      "selected_authority": "Real selected cards and requested library order; live zone excludes ownership.",
+      "binding_time": "Completed public selection, empty departure owner; top-level native movement retains existing order.",
+      "storage": "Native library vector and ordinary nondeath ZoneChangeRecord; absent departure suppression history.",
+      "consumer": "move_to_library_at_index(0)",
+      "invalidation": "No Battlefield owner/member snapshot exists to leak; later independent creature death still gets its own snapshot.",
+      "serialized_impact": "Native nondeath event shape remains unchanged; no fabricated Some history.",
+      "test": "trigger_suppression_event_timing::hand_library_choice_preserves_selected_cards_and_nondeath_payoff",
+      "controls": "Actual Top fixture loops Hush/no-Hush and selection order; asserts both selected cards in Library, one Hand departure each, empty peers and missing suppression, spare in Hand, observer surviving, exact life21 and zero Spirit. It does not assert library vector order, rejected selections or Library-origin movement.",
+      "classification": "unaffected native public sibling; no mutation-kill claim and not counted among67",
+      "status": "public Top movement/payoff compatibility only; broader order/rejection obligations unresolved"
+    }
+  ],
+  "scope_contract": "Only explicit live Battlefield ObjectId/incarnation candidates own actual emitted events. An unavailable nested world remains None; no fabricated empty snapshot. Closure return/Err/pause closes lexical state, while completed record history survives serde.",
+  "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+  "status": "all51 source call sites mapped; required native Bottom/Nth runtime siblings unresolved"
+}

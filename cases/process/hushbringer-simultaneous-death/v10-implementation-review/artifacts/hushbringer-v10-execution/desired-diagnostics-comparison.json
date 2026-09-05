@@ -1,0 +1,254 @@
+{
+  "utc": "2026-09-05T20:47:34.153237+00:00",
+  "original_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-execution/baseline-r3-8/6.log",
+  "original_log_sha256": "094417e0ae33531c12802581f6e1eb65e8d1729905497bebd0554ce005a6ef32",
+  "original_source_manifest_sha256": "f4f21b6c3c7e0e115a4c2f9e6af97ca9a385a328a720027db2904c651ca54d9b",
+  "original_receipt_sha256": "874718ce8e1212e0c86ce10a5dda03a12f4fd4fd692adcd0455b048d73f4e28e",
+  "fixed_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates/6.log",
+  "fixed_log_sha256": "802ab573680be6fc96aba621670e9eefd674b8c9e8af94cc076c23f4a83e7f46",
+  "fixed_source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "original_counts": {
+    "passed": 0,
+    "failed": 20
+  },
+  "fixed_counts": {
+    "passed": 2,
+    "failed": 18
+  },
+  "classification": "Explicit desired-behavior diagnostics; passing one order does not promote the excluded category. First panic bounds observed assertions and subsequent loop tuples are not inferred.",
+  "rows": [
+    {
+      "test": "trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1504:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling' (3208741) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1504:5:\nassertion `left == right` failed: desired sequential gain/payment payoff\n  left: 20\n right: 21\n\nthread 'trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection' (3208742) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1509:5:"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1514:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling' (3504886) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1514:5:\nassertion `left == right` failed: desired sequential gain/payment payoff\n  left: 20\n right: 21\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nFAILED"
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1509:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection' (3208742) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1509:5:\nassertion `left == right` failed: aggregate grouping; reverse=false\n  left: 1\n right: 0\n\nthread 'trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed' (3208743) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1509:5:"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1519:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection' (3504887) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1519:5:\nassertion `left == right` failed: aggregate grouping; reverse=false\n  left: 1\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed ... ok"
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1509:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed' (3208743) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1509:5:\nassertion `left == right` failed: aggregate grouping; reverse=true\n  left: 1\n right: 0\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush ... FAILED\ntest trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling ... FAILED"
+      },
+      "fixed": {
+        "status": "passed designated desired diagnostic"
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed' (3208744) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed' (3504889) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy' (3208745) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 2 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\n\nthread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush' (3208746) panicked at crates/engine/src/game/scenario.rs:3342:13:"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy' (3504890) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 2 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\nFAILED\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush' (3208746) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 1 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush' (3504891) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 1 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\nFAILED\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed' (3208747) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 1 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed' (3504892) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 1 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\nFAILED\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed' (3208748) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 2 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\ntest trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed ... FAILED"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3342:13:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed' (3504893) panicked at crates/engine/src/game/scenario.rs:3342:13:\nassertion `left == right` failed: object 2 expected in Battlefield, found in Graveyard\n  left: Graveyard\n right: Battlefield\nFAILED\ntest trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:2575:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression' (3208749) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2575:5:\nassertion `left == right` failed\n  left: 1\n right: 0\ntest trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:2585:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression' (3504894) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2585:5:\nassertion `left == right` failed\n  left: 1\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1374:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures' (3208750) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1374:5:\nassertion `left == right` failed\n  left: 1\n right: 0\ntest trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1384:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures' (3504895) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1384:5:\nassertion `left == right` failed\n  left: 1\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed ... ok"
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:1374:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed' (3208751) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:1374:5:\nassertion `left == right` failed\n  left: 1\n right: 0\n\nthread 'trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed' (3208752) panicked at crates/engine/src/game/scenario.rs:3353:9:"
+      },
+      "fixed": {
+        "status": "passed designated desired diagnostic"
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed' (3208752) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed ... FAILED\ntest trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed ... FAILED"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed' (3504897) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed' (3208753) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed' (3504898) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed' (3208754) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed' (3504899) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed' (3208755) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed' (3504900) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed' (3208756) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed' (3504901) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:4001:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world' (3208757) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4001:5:\nassertion `left == right` failed\n  left: []\n right: [ObjectId(1)]\ntest trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:4015:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world' (3504902) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:4015:9:\ndesired merged-group later member retains starting creature type\nFAILED\ntest trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed ... \nthread 'trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed' (3504903) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)"
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed",
+      "original": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed' (3208758) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\ntest trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/src/game/scenario.rs:3353:9:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed' (3504903) panicked at crates/engine/src/game/scenario.rs:3353:9:\nassertion `left == right` failed: P0 life delta: expected 0, got 2 (before 20, final 22)\n  left: 2\n right: 0\nFAILED\ntest trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:2501:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once' (3208759) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2501:5:\nassertion `left == right` failed: resumed payoff; hush=false, reverse=false, pause=true\n  left: 2\n right: 1\ntest trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:2511:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once' (3504904) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2511:5:\nassertion `left == right` failed: resumed payoff; hush=false, reverse=false, pause=true\n  left: 2\n right: 1\nFAILED\ntest trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed ... "
+      }
+    },
+    {
+      "test": "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed",
+      "original": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:2501:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed' (3208760) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2501:5:\nassertion `left == right` failed: resumed payoff; hush=false, reverse=true, pause=true\n  left: 2\n right: 1\ntest trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed ... FAILED\n"
+      },
+      "fixed": {
+        "location": "crates/engine/tests/integration/trigger_suppression_event_timing.rs:2511:5:",
+        "first_assertion_excerpt": "thread 'trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed' (3504905) panicked at crates/engine/tests/integration/trigger_suppression_event_timing.rs:2511:5:\nassertion `left == right` failed: resumed payoff; hush=false, reverse=true, pause=true\n  left: 2\n right: 1\nFAILED\n"
+      }
+    }
+  ],
+  "final_execution": {
+    "receipt": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/receipt.json",
+      "sha256": "9eb28ed230eb11f1879f309eb4d0d6a0e16f1310047197a62c65a19b50dd478b"
+    },
+    "log": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/6.log",
+      "sha256": "50b20f3c3cdc0e697bb4dde688237be14f1067381c123d144ecd7f1b8acc1d19"
+    },
+    "source_manifest_sha256": "885baf9780651ece1b38291acbcfa2ab2cb766defd3fe49671ace1ca40a73d0b",
+    "passed": 2,
+    "failed": 18,
+    "ignored": 0,
+    "unchanged_assertion_source_from_v10_proof": true
+  }
+}

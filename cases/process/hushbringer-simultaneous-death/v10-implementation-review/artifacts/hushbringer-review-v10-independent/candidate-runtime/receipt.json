@@ -1,0 +1,133 @@
+{
+  "utc": "2026-09-05T20:56:27.440221+00:00",
+  "kind": "independent exact integration runtime using immutable source-bound executable; no new compilation",
+  "canonical_receipt_sha256": "d0898b32212d288976284173caf7d11c460bb664e4d854c3c58449a547576e83",
+  "source_manifest_sha256": "3016d5db7d54e3be126e7e83b74e4080d11b52a8bb3ba2bc0da09ef601e1d0f2",
+  "archive_content_verified_files": 2051,
+  "checkout_before_after_verified_files": 2051,
+  "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+  "runtime_context": {
+    "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+    "variables": {
+      "CARGO": "/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/bin/cargo",
+      "CARGO_HOME": "/home/ubuntu/.cargo",
+      "CARGO_MANIFEST_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+      "CARGO_MANIFEST_PATH": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine/Cargo.toml",
+      "CARGO_PKG_AUTHORS": "",
+      "CARGO_PKG_DESCRIPTION": "",
+      "CARGO_PKG_HOMEPAGE": "",
+      "CARGO_PKG_LICENSE": "MIT OR Apache-2.0",
+      "CARGO_PKG_LICENSE_FILE": "",
+      "CARGO_PKG_NAME": "engine",
+      "CARGO_PKG_README": "",
+      "CARGO_PKG_REPOSITORY": "",
+      "CARGO_PKG_RUST_VERSION": "",
+      "CARGO_PKG_VERSION": "0.24.0",
+      "CARGO_PKG_VERSION_MAJOR": "0",
+      "CARGO_PKG_VERSION_MINOR": "24",
+      "CARGO_PKG_VERSION_PATCH": "0",
+      "CARGO_PKG_VERSION_PRE": "",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "LC_CTYPE": "C.UTF-8",
+      "LD_LIBRARY_PATH": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug:/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps:/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib:/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib",
+      "OUT_DIR": "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/build/engine-d4fc5f5dfa6fd822/out",
+      "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+      "RUSTUP_HOME": "/home/ubuntu/.rustup",
+      "RUSTUP_TOOLCHAIN": "nightly-2026-04-19-x86_64-unknown-linux-gnu",
+      "RUST_MIN_STACK": "16777216"
+    },
+    "override_audit": {},
+    "argv": [
+      "/home/ubuntu/repos/phase-hushbringer-mutations/target/debug/deps/integration-7bdd4945820186df",
+      "sba_member_handoff_",
+      "--list"
+    ],
+    "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917"
+  },
+  "linked_libraries": {
+    "command": [
+      "ldd",
+      "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration"
+    ],
+    "exit": 0,
+    "cwd": "/home/ubuntu/repos/phase-hushbringer-mutations/crates/engine",
+    "runtime_context_sha256": "1398868343220da56469d67b6560b1aa410a6a8d1298422ae79292efd2d4b001",
+    "log_sha256": "87db6fefe4c23611505e1a8407f6fcde59afa5a747a26731840085488bd527d4",
+    "executable": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+    "executable_sha256": "77db7d40780a2199d0a51f159869476c09ce8971ad07282ba95d88ae895f7917",
+    "files": [
+      {
+        "path": "/lib/x86_64-linux-gnu/libc.so.6",
+        "resolved_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "e01b1ce7be2987f3b8560e26d0df2623f9dd5cec17be923ae28a785bc0d32d50"
+      },
+      {
+        "path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "resolved_path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+      },
+      {
+        "path": "/lib64/ld-linux-x86-64.so.2",
+        "resolved_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "sha256": "8d06f393f4a93bcf9b81145a259524d66a95522a646bf8d7e05b6ffdf2e63dcc"
+      }
+    ]
+  },
+  "results": [
+    {
+      "name": "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "asserted_spirit_count": 0,
+      "guard_scope": "Full Oracle shape/functioning suppression, all required cards graveyard, empty stack, priority",
+      "log_sha256": "1f8f8ac9922956c77f69bb96391edf9ec7c879e38dea67e06567b2f652b422b7"
+    },
+    {
+      "name": "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "asserted_spirit_count": 0,
+      "guard_scope": "Full Oracle shape/functioning suppression, all required cards graveyard, empty stack, priority",
+      "log_sha256": "087aab2390bfb2623f848b61c61beced789e38aec39c7786f384d5b498ae0893"
+    },
+    {
+      "name": "oracle_wrath_without_hush_creates_exactly_one_spirit",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/canonical-integration",
+        "trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "asserted_spirit_count": 1,
+      "guard_scope": "Full Oracle shape/functioning suppression, all required cards graveyard, empty stack, priority",
+      "log_sha256": "48ab4a1804cfc28ae457d78b21d25206143597049d4e9b11054bc48a9ed11a04"
+    }
+  ]
+}
