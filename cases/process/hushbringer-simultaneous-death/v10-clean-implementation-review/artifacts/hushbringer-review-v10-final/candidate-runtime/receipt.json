@@ -1,0 +1,238 @@
+{
+  "utc": "2026-09-05T23:06:09.621449+00:00",
+  "method": "Independent direct execution of preserved canonical fdc9 artifact; exact citation-only successor lineage recorded separately",
+  "fresh_compilation": false,
+  "compiled_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "reviewed_source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "build_receipt_sha256": "d3137166b94baeb8bdea6133018240edcaa9a022ad0c0b656ac711806c1392c1",
+  "canonical_receipt_sha256": "e8e0d9441284eda1a95f848ae6721dfdea2da542fc6e3b485fde85b2554ead10",
+  "executable": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+  "executable_sha256": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+  "cwd": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine",
+  "environment": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "RUST_MIN_STACK": "16777216",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "CARGO_BUILD_JOBS": "1",
+    "RTK_DISABLED": "1",
+    "CARGO_MANIFEST_DIR": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine",
+    "CARGO_MANIFEST_PATH": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/Cargo.toml",
+    "RUSTUP_TOOLCHAIN": "nightly-2026-04-19-x86_64-unknown-linux-gnu",
+    "LD_LIBRARY_PATH": "/home/ubuntu/repos/phase-verifiable-loop/target/debug:/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps:/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib:/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib"
+  },
+  "loader": [
+    {
+      "path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+    },
+    {
+      "path": "/lib/x86_64-linux-gnu/libc.so.6",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "e01b1ce7be2987f3b8560e26d0df2623f9dd5cec17be923ae28a785bc0d32d50"
+    },
+    {
+      "path": "/lib64/ld-linux-x86-64.so.2",
+      "realpath": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "8d06f393f4a93bcf9b81145a259524d66a95522a646bf8d7e05b6ffdf2e63dcc"
+    }
+  ],
+  "results": [
+    {
+      "name": "oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::oracle_wrath_hush_first_suppresses_simultaneous_traveler_death",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 0,
+      "log_sha256": "70b7f337378a98c7362e3e4005edbcb16377894ee99ecbae4fe967322829fdbc"
+    },
+    {
+      "name": "oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::oracle_wrath_traveler_first_suppresses_simultaneous_traveler_death",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 0,
+      "log_sha256": "fd819aff55ed01bc43d2747dcb308eee6bd44e7b9f6134ceca3740bbdccc762a"
+    },
+    {
+      "name": "oracle_wrath_without_hush_creates_exactly_one_spirit",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::oracle_wrath_without_hush_creates_exactly_one_spirit",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 0,
+      "log_sha256": "2479a67c5fba179b1c5121f01f0bc1f211e3b8a7f8cb2e6af3c80a44dc5080be"
+    },
+    {
+      "name": "native_library_choice_hand_top_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_hand_top_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 4,
+      "log_sha256": "bf425107c615b2ba95c9f0399ac17cf6e3c4a320586b2865a730be049d27abe1"
+    },
+    {
+      "name": "native_library_choice_hand_bottom_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_hand_bottom_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 4,
+      "log_sha256": "d98b7e70ac5ba32384eea0939d3ecd4f82ef3a1b5f5338d651eccb012e4275bf"
+    },
+    {
+      "name": "native_library_choice_hand_nth_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_hand_nth_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 12,
+      "log_sha256": "685af81a8173fa5e3f65e676ffc49053863ebee329368267cd891ab2f54464c9"
+    },
+    {
+      "name": "native_library_choice_library_top_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_library_top_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 4,
+      "log_sha256": "193274f7632fbe4307e864ee9c2bc94a7cfee89c2b80b01c528cf41214a81d39"
+    },
+    {
+      "name": "native_library_choice_library_bottom_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_library_bottom_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 4,
+      "log_sha256": "84a2562e8c358accd96e82fab6ac3dcd5a50ceb86e163fcc17c075b5b325bffa"
+    },
+    {
+      "name": "native_library_choice_library_nth_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_library_nth_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 12,
+      "log_sha256": "694d2824e93ca5d8ea6cfdaf681fe0d2df8200d823a59fc44287a79f96227dba"
+    },
+    {
+      "name": "native_library_choice_dig_tracked_top_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_dig_tracked_top_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 4,
+      "log_sha256": "0dfc29879b497778924daeca8cec9a81ad39eb969ce22bbb71a8322e46cbda07"
+    },
+    {
+      "name": "native_library_choice_dig_tracked_bottom_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_dig_tracked_bottom_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 4,
+      "log_sha256": "fca88c17190f221636cd4b5c62b4ae001b8e2c9352a693a1b9635c08c8a14d8f"
+    },
+    {
+      "name": "native_library_choice_dig_tracked_nth_public_controls",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::native_library_choice_dig_tracked_nth_public_controls",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "selected": 1,
+      "passed": 1,
+      "ignored": 0,
+      "native_case_markers": 12,
+      "log_sha256": "83483cbe85931a77ec70bcf0563856ced9834c17d76d35254f10ffad20bb03cd"
+    }
+  ],
+  "native_cases_verified": 60,
+  "case_marker_parser_note": "Marker count recomputed from unchanged independently executed logs using actual NATIVE_LIBRARY_CHOICE_EVIDENCE prefix; no runtime outcome was altered."
+}

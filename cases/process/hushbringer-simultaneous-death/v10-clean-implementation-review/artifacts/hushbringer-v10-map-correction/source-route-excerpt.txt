@@ -1,0 +1,182 @@
+4984: fn resolve_committed_response(r: &mut GameRunner, spell: ObjectId) -> Vec<GameEvent> {
+4985:     let mut events = vec![];
+4986:     for _ in 0..30 {
+4987:         if r.state().objects[&spell].zone == Zone::Graveyard {
+4988:             assert!(matches!(r.state().waiting_for, WaitingFor::Priority { .. }));
+4989:             return events;
+4990:         }
+4991:         assert!(matches!(r.state().waiting_for, WaitingFor::Priority { .. }));
+4992:         events.extend(r.act(GameAction::PassPriority).unwrap().events);
+4993:     }
+4994:     panic!("public response did not resolve");
+4995: }
+4996: 
+4997: fn original_entry_lki_public_case(reenter: bool, buff: bool) {
+4998:     use engine::types::ability::{
+4999:         FilterProp, ObjectScope, PtStat, PtValueScope, QuantityRef, TriggerCondition,
+5000:     };
+5001:     use engine::types::game_state::{FullControlMode, StackEntryKind};
+5002:     let mut s = scenario();
+5003:     let entrant = s
+5004:         .add_creature_to_hand(P0, "Test original entrant", 1, 1)
+5005:         .id();
+5006:     let condition = TriggerCondition::ZoneChangeObjectMatchesFilter {
+5007:         origin: None,
+5008:         destination: Zone::Battlefield,
+5009:         filter: TargetFilter::Typed(TypedFilter::creature().properties(vec![FilterProp::AnyOf {
+5010:             props: vec![
+5011:                 FilterProp::PtComparison {
+5012:                     stat: PtStat::Power,
+5013:                     scope: PtValueScope::Current,
+5014:                     comparator: Comparator::GT,
+5015:                     value: QuantityExpr::Ref {
+5016:                         qty: QuantityRef::Power {
+5017:                             scope: ObjectScope::Source,
+5018:                         },
+5019:                     },
+5020:                 },
+5021:                 FilterProp::PtComparison {
+5022:                     stat: PtStat::Toughness,
+5023:                     scope: PtValueScope::Current,
+5024:                     comparator: Comparator::GT,
+5025:                     value: QuantityExpr::Ref {
+5026:                         qty: QuantityRef::Toughness {
+5027:                             scope: ObjectScope::Source,
+5028:                         },
+5029:                     },
+5030:                 },
+5031:             ],
+5032:         }])),
+5033:     };
+5034:     let observer = s
+5035:         .add_creature(P0, "Test entrant threshold observer", 2, 2)
+5036:         .with_trigger_definition(
+5037:             TriggerDefinition::new(TriggerMode::ChangesZone)
+5038:                 .destination(Zone::Battlefield)
+5039:                 .valid_card(specific(entrant))
+5040:                 .condition(condition)
+5041:                 .execute(gain(1)),
+5042:         )
+5043:         .id();
+5044:     let unrelated = s.add_vanilla(P0, 1, 1);
+5045:     let grant = s
+5046:         .add_creature(P0, "Test specific entrant static source", 0, 0)
+5047:         .as_enchantment()
+5048:         .with_static_definition(
+5049:             StaticDefinition::new(StaticMode::Continuous)
+5050:                 .affected(specific(if buff { entrant } else { unrelated }))
+5051:                 .modifications(vec![
+5052:                     ContinuousModification::AddPower { value: 2 },
+5053:                     ContinuousModification::AddToughness { value: 2 },
+5054:                 ]),
+5055:         )
+5056:         .id();
+5057:     let entry = typed_spell(
+5058:         &mut s,
+5059:         change(
+5060:             TargetFilter::And {
+5061:                 filters: vec![creature_filter(), specific(entrant)],
+5062:             },
+5063:             Zone::Hand,
+5064:             Zone::Battlefield,
+5065:         ),
+5066:     );
+5067:     let exit = typed_spell(
+5068:         &mut s,
+5069:         change(specific(entrant), Zone::Battlefield, Zone::Graveyard),
+5070:     );
+5071:     let remove_grant = typed_spell(
+5072:         &mut s,
+5073:         change(specific(grant), Zone::Battlefield, Zone::Exile),
+5074:     );
+5075:     let return_spell = typed_spell(
+5076:         &mut s,
+5077:         mass_change(specific(entrant), Zone::Graveyard, Zone::Battlefield),
+5078:     );
+5079:     let mut r = s.build();
+5080:     for actor in [P0, P1] {
+5081:         engine::game::engine::apply(
+5082:             r.state_mut(),
+5083:             actor,
+5084:             GameAction::SetFullControl {
+5085:                 mode: FullControlMode::Locked,
+5086:             },
+5087:         )
+5088:         .unwrap();
+5089:     }
+5090:     drop(r.cast(entry).target_object(entrant).commit());
+5091:     let events = resolve_committed_response(&mut r, entry);
+5092:     let entry_event=events.iter().find(|event|matches!(event,
+5093:         GameEvent::ZoneChanged {object_id,from:Some(Zone::Hand),to:Zone::Battlefield,..} if *object_id==entrant))
+5094:         .expect("real original entry");
+5095:     let GameEvent::ZoneChanged { record, .. } = entry_event else {
+5096:         unreachable!()
+5097:     };
+5098:     let original_incarnation = record.entered_incarnation.unwrap();
+5099:     assert_eq!(r.state().objects[&observer].power, Some(2));
+5100:     assert_eq!(r.state().objects[&entrant].base_power, Some(1));
+5101:     assert_eq!(
+5102:         r.state().objects[&entrant].power,
+5103:         Some(if buff { 3 } else { 1 })
+5104:     );
+5105:     let triggered = |state: &GameState| {
+5106:         state
+5107:             .stack
+5108:             .iter()
+5109:             .filter(|entry| {
+5110:                 entry.source_id == observer
+5111:                     && matches!(entry.kind, StackEntryKind::TriggeredAbility { .. })
+5112:             })
+5113:             .count()
+5114:     };
+5115:     assert_eq!(triggered(r.state()), usize::from(buff));
+5116:     if !buff {
+5117:         settle(&mut r);
+5118:         assert_eq!(r.life(P0), 20);
+5119:         assert_eq!(r.state().objects[&unrelated].power, Some(3));
+5120:         return;
+5121:     }
+5122:     assert_eq!(r.life(P0), 20, "original trigger remains unresolved");
+5123:     drop(r.cast(exit).target_object(entrant).commit());
+5124:     let exit_events = resolve_committed_response(&mut r, exit);
+5125:     assert_eq!(event_departure(&exit_events, entrant).power, Some(3));
+5126:     assert_eq!(r.state().lki_cache[&entrant].power, Some(3));
+5127:     assert_eq!(r.state().objects[&entrant].power, Some(1));
+5128:     assert_eq!(triggered(r.state()), 1);
+5129:     drop(r.cast(remove_grant).target_object(grant).commit());
+5130:     resolve_committed_response(&mut r, remove_grant);
+5131:     assert_eq!(r.state().objects[&grant].zone, Zone::Exile);
+5132:     if reenter {
+5133:         drop(r.cast(return_spell).commit());
+5134:         let return_events = resolve_committed_response(&mut r, return_spell);
+5135:         assert!(return_events.iter().any(|event| matches!(event,
+5136:             GameEvent::ZoneChanged {object_id,to:Zone::Battlefield,..} if *object_id==entrant)));
+5137:         assert_ne!(
+5138:             r.state().objects[&entrant].incarnation,
+5139:             original_incarnation
+5140:         );
+5141:         assert_eq!(r.state().objects[&entrant].power, Some(1));
+5142:         assert_eq!(
+5143:             triggered(r.state()),
+5144:             1,
+5145:             "new 1/1 entry creates no qualifying trigger"
+5146:         );
+5147:     }
+5148:     assert_eq!(r.state().objects[&unrelated].zone, Zone::Battlefield);
+5149:     assert_eq!(r.state().objects[&unrelated].power, Some(1));
+5150:     settle(&mut r);
+5151:     // CR 603.4 + CR 608.2h: the original intervening-if uses the entrant's exit LKI.
+5152:     assert_eq!(r.life(P0), 21);
+5153: }
+5154: #[test]
+5155: fn original_entry_lki_public_responses_preserve_original_condition() {
+5156:     original_entry_lki_public_case(false, true);
+5157: }
+5158: #[test]
+5159: fn original_entry_lki_public_same_id_reentry_preserves_original_condition() {
+5160:     original_entry_lki_public_case(true, true);
+5161: }
+5162: #[test]
+5163: fn original_entry_lki_public_unpumped_entry_does_not_trigger() {
+5164:     original_entry_lki_public_case(false, false);
+5165: }

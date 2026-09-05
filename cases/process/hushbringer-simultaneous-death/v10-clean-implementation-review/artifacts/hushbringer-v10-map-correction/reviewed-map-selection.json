@@ -1,0 +1,70 @@
+{
+  "utc": "2026-09-05T23:19:22.602435+00:00",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "authoritative_maps": {
+    "constructor_audit": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+    "callsite_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+    "native_library_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+    "common_boundary_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+    "maintainer_matrix": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+    "cr_audit": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+    "source_lineage": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+    "verification": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+    "canonical": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json"
+  },
+  "artifact_bindings": {
+    "constructor_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+      "sha256": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c"
+    },
+    "callsite_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+      "sha256": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9"
+    },
+    "native_library_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+      "sha256": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327"
+    },
+    "common_boundary_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+      "sha256": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee"
+    },
+    "maintainer_matrix": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+      "sha256": "2e3a5345919bfb8de107a37211a23cb18a590b393f7a5290f429f010165830f0"
+    },
+    "cr_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+    },
+    "source_lineage": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+      "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+    },
+    "verification": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+      "sha256": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+    },
+    "canonical": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+      "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+    }
+  },
+  "maintainer_markdown": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.md",
+    "sha256": "f1a148ae7c780b863e16c8e79f9dc84cacdfa097b394b603c5f5879b7840a114"
+  },
+  "supersedes": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/reviewed-map-selection.json",
+    "sha256": "88df3dcee02ea5e5c905f54b43dd8b7eacdb8cbe5419ae42f4a6df84d561a939"
+  },
+  "supersession_scope": "Current selection replaces only the maintainer matrix JSON/Markdown and its factual route prose. Every other selected citation-fix artifact is reused byte-for-byte at its original absolute path. Their embedded relative map references remain historical metadata; this selection is authoritative for current review.",
+  "source_changed": false,
+  "tests_changed": false,
+  "historical_evidence_changed": false,
+  "new_compilation": false,
+  "new_runtime_tests": false,
+  "acceptance": false,
+  "current_independent_review": "in progress by /root/hushbringer_full_review_final",
+  "review_instruction": "Review this full corrected matrix together with the unchanged selected citation-fix maps and unchanged ee906 source archive. No acceptance or new runtime/build result is asserted."
+}

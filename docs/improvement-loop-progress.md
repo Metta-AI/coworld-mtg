@@ -1,10 +1,10 @@
 # Verifiable improvement loop: implementation checkpoint
 
-Checkpoint: 2026-09-05. The reusable harness is implemented. The Hushbringer
-repair has completed two full independent implementation reviews. New native
-library-choice tests resolve the coverage finding. The remaining citation is
-corrected, and a fresh full independent review is underway. The harness, narrative and earlier evidence
-were pushed to main at 06cdb7d. There is no accepted repair receipt yet.
+Checkpoint: 2026-09-05. The reusable harness is implemented and on main.
+The Hushbringer repair passes its third full independent implementation review,
+including both the maintainer and rules gates. Its exact reviewed source is
+committed as fa0ebfe88db224ebd32624bb96ef033d338c2d8c and the final worker is
+building. There is no accepted repair receipt yet.
 
 The loop now carries an explicit case from a justified expectation through
 repeated execution, reduction, comparison and acceptance. Rust types generate
@@ -23,8 +23,8 @@ campaign does not produce an acceptance receipt. The current
 Ten authored scenarios exercise thirteen cards. The rebuilt original engine
 passes nine and violates the Hushbringer simultaneous-death case. A separately
 built, uncommitted candidate passes all ten under the preserved checker.
-That is promising before/after evidence, but the candidate does not satisfy the
-clean-commit and independent-review requirements for acceptance.
+That exploratory result remains distinct from the final reviewed and committed
+source. Its actual new worker must complete the same frozen comparison.
 
 The engine repair captures event-time trigger suppression and preserves the
 identity of each simultaneous event and each separate sacrifice-cost component.
@@ -68,8 +68,9 @@ with ssh nishadsingh-box-4. Migration verified 3,902 files before local cleanup,
 and cleanup freed 12,964,511,744 bytes on the Mac. The
 [workspace guide](ec2-workspace.md) records the retained locations.
 
-Remaining steps are to obtain a fresh clean implementation review, commit the repair, compare the clean committed candidate
-against the fixed baseline, and generate the actual acceptance bundle. Coworld
+Remaining steps are to finish the clean committed-worker build, compare it
+against the fixed baseline, and generate the actual acceptance bundle after
+independently bound approval. Coworld
 main already includes the harness and preserves its newer release and Phase
 pin. Integration of newer Phase commits and publication of the reviewed repair
 will follow the fixed-input experiment.
@@ -78,3 +79,16 @@ The published harness also passes the complete Rust workspace private-corpus
 suite and both browser tests. Its immutable 46-card corpus was verified and
 materialized on EC2. The eventual Phase pin update also requires a newly built,
 matching corpus archive because the server verifies their revision agreement.
+
+
+The [third complete implementation review](../cases/process/hushbringer-simultaneous-death/v10-clean-implementation-review/README.md)
+closes the remaining citation and factual map-description issues. It verifies
+the full source and evidence before returning two passing gates. Final worker
+compilation is separate from the preserved integration-binary checks.
+
+Preparing publication also exposed a missing preflight constraint: the server
+rejects a corpus built for another Phase revision, but the pin checker had not
+checked corpus.lock.json. That check and a CLI regression are now on main.
+The regression fails when the old checker is restored; its
+[case-attributed record](../cases/process/hushbringer-simultaneous-death/corpus-pin-boundary/README.md)
+retains the before/after evidence.

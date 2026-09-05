@@ -1,0 +1,1212 @@
+{
+  "utc": "2026-09-05T23:19:22.602435+00:00",
+  "source_manifest": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/source.json",
+    "sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847"
+  },
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "source_archive": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/source-archives/ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847.tar.gz",
+    "sha256": "c3bf3d53ed323a6de4374a2cba083ef4c8e19a8adcf54192ce8a4a5ea64fc862"
+  },
+  "current_source_files_verified": 2051,
+  "current_archive_members_verified": 2051,
+  "test_file": {
+    "path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+    "sha256": "71a16f0c601736b79cfcbe0b97e51f810a7baef5f7b15b1d172240f0f37ab98a"
+  },
+  "filter_file": {
+    "path": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/src/game/filter.rs",
+    "sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66"
+  },
+  "source_route_excerpt": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/source-route-excerpt.txt",
+    "sha256": "df2b156069e3db74b47bfb44c04173ea5a69a6851070f2f8c565fd8c8fdb2a58"
+  },
+  "filter_route_excerpt": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/filter-route-excerpt.txt",
+    "sha256": "d6951fdf6bbcab0a8ca51bb2202512434471d52a189c980b9db9c3dee9a39234"
+  },
+  "helper_source_range": {
+    "first_line": 4984,
+    "last_line": 5165,
+    "raw_source_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340"
+  },
+  "interpretation": [
+    "StaticDefinition::Continuous with AddPower/AddToughness 2 is installed before the public entry spell; it is not a temporary pump response.",
+    "The actual original-entry response route is Battlefield to Graveyard, then the grant goes Battlefield to Exile; it is not a bounce.",
+    "The reentry route additionally uses Graveyard to Battlefield ChangeZoneAll after removing the grant; same ObjectId, different incarnation, 1/1.",
+    "Power assertions are explicit; the paired AddPower/AddToughness modifications and 1/1 base establish the corresponding 3/3 and reset 1/1 characteristics.",
+    "Historical designated public mutant failures reach line 5152 with 20 versus 21. Later assertions or unrelated fixtures are not inferred from a panic.",
+    "The source route excerpt matches all six original phase archives exactly. Runtime and compilation claims retain those historical source/receipt identities."
+  ],
+  "historical_evidence": [
+    {
+      "row_id": "R3-original-entry-exit-lki",
+      "imported_audit": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+        "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+      },
+      "exact_transformation": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutation.json",
+        "sha256": "84e2288355f24f6e00b158026cf2e6befa95d41a04c8f4e7c8784df313c8336d"
+      },
+      "historical_evidence_payload_canonical_json_sha256": "c9fbdd976b4931a489a893cd89b0f727779321e7383e38513da346b2064a5d89",
+      "phases": [
+        {
+          "phase": "before",
+          "receipt": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/receipt.json",
+            "sha256": "322e641bed5155af0b77d98dba6829daf6dff8cf6b125f21d068c0ac3d020476"
+          },
+          "source_manifest": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/source.json",
+            "sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+          },
+          "source_archive": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/source.tar.gz",
+            "sha256": "324f3f95379aedd568f5be36cfe3e1d9d1afb869caa578820c5ced717ea83976"
+          },
+          "historical_test_file_sha256": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+          "historical_filter_file_sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66",
+          "helper_lines_4984_5165_identical_to_current": true,
+          "helper_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340",
+          "tests": [
+            {
+              "index": 0,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/0.log",
+                "sha256": "83e2c5baf6371354e56697c9f6cad23ef63cb0496202b0a1f9b9e0be163ff435"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/0.command.json",
+                "sha256": "ed3f001443d9d2101575a89776e9b50020af658b47465026d76cbe3af23064f1"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/0.receipt.json",
+                "sha256": "1904448382fa3af8e6a7a0722ccf926884664f0f4dd99f0e5e1391a4e1398a3f"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--lib",
+                "game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16587 filtered out; finished in 0.00s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 1,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/1.log",
+                "sha256": "b46838e742efa66a1b82644547c89c1a341d500b04c346ccd105cf6352d2e699"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/1.command.json",
+                "sha256": "a22d3a47d30bc29535d357b3709ebc0fea251d0b2c54bb872cdd8dac39dc3a6e"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/1.receipt.json",
+                "sha256": "c9dd614a3e516b8d9364b2b013c211f281613f8ec016e0e0283cce1b78e9e213"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.84s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 2,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/2.log",
+                "sha256": "b34085be2f8db59b2d55f1617254613bc0961a8687da0f782f60ea8cb2f0a18b"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/2.command.json",
+                "sha256": "226d3c07d77b37bc4b4adc42ebdbea8e26461b02ee437fd64d2e3432d7ce3497"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-before/2.receipt.json",
+                "sha256": "ea7891b6a2295ee71a3fdcc34b8527f8154d8f83507024d728a01ba0f0e6778a"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_unpumped_entry_does_not_trigger",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            }
+          ]
+        },
+        {
+          "phase": "mutant",
+          "receipt": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/receipt.json",
+            "sha256": "ed9595b8e4dfd1ad61449d91f86784d5999f62fd16d884643df9ad1e043726a1"
+          },
+          "source_manifest": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/source.json",
+            "sha256": "a1d5f3ece402cd09194847652265b6f50f5ad6829f2652a60d34208857999ff1"
+          },
+          "source_archive": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/source.tar.gz",
+            "sha256": "6ee855356e395ccd757065b4c7e986ec7756a3854e256e62d43ab213463ccfe2"
+          },
+          "historical_test_file_sha256": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+          "historical_filter_file_sha256": "ee0b92a20003887ccaafbf20f84cd1661c570b6b6c31c8b6d18cff691cd2a3e9",
+          "helper_lines_4984_5165_identical_to_current": true,
+          "helper_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340",
+          "tests": [
+            {
+              "index": 0,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/0.log",
+                "sha256": "266d2e8d71d6dd4e97c26c6ad52caa248c6a0c239fed387d67d513c8f8511caa"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/0.command.json",
+                "sha256": "9bcd9e96845654c4ae94891130b32a5d90c3444f886cea3c82665b6f330c4e1d"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/0.receipt.json",
+                "sha256": "2345ba7e7582ee381740cb6e3184351a14169884f59846a8f3e5666a4e762d25"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--lib",
+                "game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 101,
+              "historical_results": [
+                "FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 16587 filtered out; finished in 0.00s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 1,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/1.log",
+                "sha256": "e2b265eb09c8f37ef74379a601187a1a43c94df33e7a8c3cd29b1959731d3ca6"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/1.command.json",
+                "sha256": "29491ef9de0d2257708b162b451e395f846600728d1d6af82eef7d8fbe5e8f31"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/1.receipt.json",
+                "sha256": "5efc96e7d61fb6878ab8b7961403862f9f22a81d33203886365ba1ac948e7047"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 101,
+              "historical_results": [
+                "FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 2,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/2.log",
+                "sha256": "e0b7e334d737f5521002a81a07739200493ab7362813023c20ebf35fda44ff6d"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/2.command.json",
+                "sha256": "85f4e1d893caae88269f882617356609d5b596098e4e9de011f3d2f8dbcd40f4"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/2.receipt.json",
+                "sha256": "ec7d6424c8015aae47bf8d972c4e7ebbaa3db58b91de0794dff897b91404210c"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_unpumped_entry_does_not_trigger",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            }
+          ]
+        },
+        {
+          "phase": "restored",
+          "receipt": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/receipt.json",
+            "sha256": "f6c1cf70ae4bbe6ce24f6d0c5962cb11c289e9b01b9d00b109c69ec32c74edd4"
+          },
+          "source_manifest": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/source.json",
+            "sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+          },
+          "source_archive": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/source.tar.gz",
+            "sha256": "fcf705aa64bbfd6ca566926db3614dc695539a73a7767a429e87d8bd9a3a9043"
+          },
+          "historical_test_file_sha256": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+          "historical_filter_file_sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66",
+          "helper_lines_4984_5165_identical_to_current": true,
+          "helper_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340",
+          "tests": [
+            {
+              "index": 0,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/0.log",
+                "sha256": "66a491158638a22ee35b6b8ad0c4db04f7f9635edb3b7b47fdc9d4d9ce8ef76a"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/0.command.json",
+                "sha256": "42f2f1842e81936fe92e28ecdf5b60bf0a3fca0c47f273cb5e3d2c29644ff34b"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/0.receipt.json",
+                "sha256": "9c090ec23ab8b1fd3bf2fe2732ecacb2e9ce5f3a74311394b9d4114be252e008"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--lib",
+                "game::triggers::tests::zone_change_object_condition_entering_uses_exit_lki_after_leaving_battlefield",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16587 filtered out; finished in 0.00s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 1,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/1.log",
+                "sha256": "ca0d93711fdb0f9a9ba76c07450e6dfcb8c9f6604a106256bb9cfec11a03dc4f"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/1.command.json",
+                "sha256": "78ea4ecbbcdbd721091c5ea8ef87b42497ce27463cf2252c65ac8cd0e124a500"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/1.receipt.json",
+                "sha256": "28fc134d2accb404980d6254774399d9b5f84e61d3d6af5d114b8cc1f544d18a"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 2,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/2.log",
+                "sha256": "17ca99a313b88a612d3ed21f0964fd3a74336a5bcc05a457c7f70c3fbd004f8b"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/2.command.json",
+                "sha256": "15351572eea784fb9ad193e52b899d30c22a6b08a0f0cbef734b81db082e73ad"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-restored/2.receipt.json",
+                "sha256": "94197b7b2f23d5cc563d13b811adcc5b316963f8a61bbe6be288047667a0b61b"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_unpumped_entry_does_not_trigger",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "row_id": "R3-original-entry-incarnation",
+      "imported_audit": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+        "sha256": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+      },
+      "exact_transformation": {
+        "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutation.json",
+        "sha256": "048e5e3fcc712891d845c8350b61b8e1f88bf5f9634621ef779168c6e964a562"
+      },
+      "historical_evidence_payload_canonical_json_sha256": "0b997053ccdca82adfca27d3c503ef39f9182a441515c4b78f506584c1ceafb9",
+      "phases": [
+        {
+          "phase": "before",
+          "receipt": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/receipt.json",
+            "sha256": "d5d4e219df865bcbe6d859f25a972715907f2ac8c111a82e9193ac694c482aa1"
+          },
+          "source_manifest": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/source.json",
+            "sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+          },
+          "source_archive": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/source.tar.gz",
+            "sha256": "4f0df367c88f5a9b4d97924fa685b13ffbcea56610dd5ca9cb3047ebf67eea4c"
+          },
+          "historical_test_file_sha256": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+          "historical_filter_file_sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66",
+          "helper_lines_4984_5165_identical_to_current": true,
+          "helper_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340",
+          "tests": [
+            {
+              "index": 0,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/0.log",
+                "sha256": "7d6f19fdd0609acae9224f7a30c22c8bbc3a396708fffc2dbc6e1a3f31e0913c"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/0.command.json",
+                "sha256": "c88886963ddd31d9884e0e82a21145556a24a25ae3c86e7a13e62cbb07c74281"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/0.receipt.json",
+                "sha256": "43057806f8a355d7494953597fd533d3eb0313ffcee422f75bf46aca8a09c8aa"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--lib",
+                "game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16587 filtered out; finished in 0.00s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 1,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/1.log",
+                "sha256": "33dc81a4c622a896598fd2aca5d8aa9b2733873a1306ffb4974c33b7f4271a45"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/1.command.json",
+                "sha256": "b447b0b86e95c6bf1ada9d05122ff511f013c238c71775abccaa66a4da4ddb12"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/1.receipt.json",
+                "sha256": "d275ce90ff45fec1e7155fd4f795637e896624676563108c7aea3f1c274d8607"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_same_id_reentry_preserves_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 2,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/2.log",
+                "sha256": "6de747df0420ea630ce1c71f9804c5061866a0f76ed441d5045b01261292c8fd"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/2.command.json",
+                "sha256": "7b6bc7e12573dbea030fbb9a87cb72b2c2a40ec9f7acb98b627ff9aef5929795"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-before/2.receipt.json",
+                "sha256": "da0341783272bd31327f789287318594aea413e0c5b21c5834a345cc4794dab4"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            }
+          ]
+        },
+        {
+          "phase": "mutant",
+          "receipt": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/receipt.json",
+            "sha256": "8b43188e326079d6a71da3c775fd848f943f4e65e8d4fff20d668db09d727737"
+          },
+          "source_manifest": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/source.json",
+            "sha256": "4b02c8b8fa14bdbb651bb6a5616e1dc79e69927a31ce257026feef893e9899e3"
+          },
+          "source_archive": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/source.tar.gz",
+            "sha256": "adad57870148a5920fe6903213e84ce0480c77174db07fc2f29fae4cdee8bd09"
+          },
+          "historical_test_file_sha256": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+          "historical_filter_file_sha256": "f9a1f5c1477c78800ef248b6b55be2e09401bb6d774d64120e5d6978d374c355",
+          "helper_lines_4984_5165_identical_to_current": true,
+          "helper_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340",
+          "tests": [
+            {
+              "index": 0,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/0.log",
+                "sha256": "638ec9d5cd3dcc5097f0425cb8e5e580eef5b6876781f6d584023b0df89490d2"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/0.command.json",
+                "sha256": "52eba1c98c4bf5dd5a3c5b04f541a2e1f8ed827ee4b3c39c20c7051ac41fee92"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/0.receipt.json",
+                "sha256": "2d04043f0ecabddcbfee98b17e9a52c5514df35dda3f924f07a317fae69aacdc"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--lib",
+                "game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 101,
+              "historical_results": [
+                "FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 16587 filtered out; finished in 0.09s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 1,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/1.log",
+                "sha256": "3e0b334ebf8fcf0c148f56a581c1f42db38eb4a4ca21b73b80045bec63fd95db"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/1.command.json",
+                "sha256": "fd56a055e792b58de194a4194181a489d88a8be2ea05df22dcf40fb141baedff"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/1.receipt.json",
+                "sha256": "f78d7a582403c5f7a16d4c403d9ada0851df809c5ca063213b15cd089626694a"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_same_id_reentry_preserves_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 101,
+              "historical_results": [
+                "FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 2,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/2.log",
+                "sha256": "2c947fe19c7d7a3d97becbb526f3aa7a414ed4ac31d970ca899dd6312cbf2f31"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/2.command.json",
+                "sha256": "d9076e769adb92a479ef6dc25136f1491a5aa30c76fea959e549562eae522d2d"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/2.receipt.json",
+                "sha256": "727dba15a9bde3665b73ca08b5d2f05685f88db4fdf567140840b772fb89a328"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            }
+          ]
+        },
+        {
+          "phase": "restored",
+          "receipt": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/receipt.json",
+            "sha256": "e6851e0a1a098e47b1fa3854702c24e5f6a9144f887043327f59cd7efe424c8d"
+          },
+          "source_manifest": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/source.json",
+            "sha256": "46ac753dff4229b2b2841a86b5334f2595c4b76bef4be8a4941dd76756f5f803"
+          },
+          "source_archive": {
+            "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/source.tar.gz",
+            "sha256": "13f88114f811c5dcb1e109d1da6a6a8ef8b94699b460a6b0c1781dc469b5eb85"
+          },
+          "historical_test_file_sha256": "85f67b07f89f44b7bd7a5d6b3399bfbbfa62c2501ffc8a33b3c5739a3dd6ca11",
+          "historical_filter_file_sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66",
+          "helper_lines_4984_5165_identical_to_current": true,
+          "helper_bytes_sha256": "cc170e5a9bd436921697104b5535146b465651a3f1d10067a7a52debee7bf340",
+          "tests": [
+            {
+              "index": 0,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/0.log",
+                "sha256": "49fcedaf19fc4e149c150a260431036ef1b1597f7e169a05b0e93105be49338b"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/0.command.json",
+                "sha256": "80def2530282025793163b887f4ccd32badfc89ae018b671de74d5062ac562a5"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/0.receipt.json",
+                "sha256": "10ee4f51e34255108732a85c2ee0def27eca4972a128a600575b8c7ed840f203"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--lib",
+                "game::triggers::tests::zone_change_object_condition_uses_original_exit_lki_after_leave_and_reentry",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16587 filtered out; finished in 0.00s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 1,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/1.log",
+                "sha256": "e3cf10d086645e5436cd742a7f940bd67dbc7d4c69409e83952d8f7e748a37bc"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/1.command.json",
+                "sha256": "95f9982915c5e373a5e70d1ac33e088860b34e5448795c6813225655f4886ba5"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/1.receipt.json",
+                "sha256": "acba48ab3292bf534b3ab0d48fc1e0820fcf14bd8d86039180dcb2a5ca724183"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_same_id_reentry_preserves_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            },
+            {
+              "index": 2,
+              "log": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/2.log",
+                "sha256": "ff6026015e28b9402e64f26b623739b08011950ec399a57b7f1b8a602636dcb0"
+              },
+              "command": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/2.command.json",
+                "sha256": "24f93afc5117060fd9035e2f460c7b29401eee086979d6950bcbf64908e09f64"
+              },
+              "runtime_receipt": {
+                "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-restored/2.receipt.json",
+                "sha256": "5873a6c12e9506a80e9d5663b00b3513aee4e8bd4489688c441c56dcc6033a70"
+              },
+              "historical_command": [
+                "cargo",
+                "test",
+                "-p",
+                "engine",
+                "--message-format=json",
+                "--test",
+                "integration",
+                "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+                "--",
+                "--exact",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "historical_exit": 0,
+              "historical_results": [
+                "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3088 filtered out; finished in 0.01s"
+              ],
+              "new_runtime": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "new_compilation": false,
+  "new_runtime_tests": false,
+  "new_mutations": false,
+  "all_67_evidence_payload_checks": [
+    {
+      "row_id": "augment-handoff",
+      "old_canonical_json_sha256": "76bc31a26344de0e7763259731da85899aae1c35d45e1d9f8d81598f6c41ffde",
+      "new_canonical_json_sha256": "76bc31a26344de0e7763259731da85899aae1c35d45e1d9f8d81598f6c41ffde",
+      "identical": true
+    },
+    {
+      "row_id": "destroy-resolve",
+      "old_canonical_json_sha256": "2d457296c546c183ad36e545c3ae927e2cc5d23728d2118ba8dd015a47eaa0f4",
+      "new_canonical_json_sha256": "2d457296c546c183ad36e545c3ae927e2cc5d23728d2118ba8dd015a47eaa0f4",
+      "identical": true
+    },
+    {
+      "row_id": "destroy-resolve_all",
+      "old_canonical_json_sha256": "ace7081b86e1c4aa9f5355d5ee8fe15fae303dc5375ffc2d0ffbb51ebe60bce0",
+      "new_canonical_json_sha256": "ace7081b86e1c4aa9f5355d5ee8fe15fae303dc5375ffc2d0ffbb51ebe60bce0",
+      "identical": true
+    },
+    {
+      "row_id": "keep-sweep",
+      "old_canonical_json_sha256": "62dc833b827c8013f11141436f26754fd61257c0280373a319127de8e9dab1ae",
+      "new_canonical_json_sha256": "62dc833b827c8013f11141436f26754fd61257c0280373a319127de8e9dab1ae",
+      "identical": true
+    },
+    {
+      "row_id": "change-zone-resolve",
+      "old_canonical_json_sha256": "da6ebcafff7dc5dc9da2c5616d9243d62922e924ad0a136a8ffdf30d9159520c",
+      "new_canonical_json_sha256": "da6ebcafff7dc5dc9da2c5616d9243d62922e924ad0a136a8ffdf30d9159520c",
+      "identical": true
+    },
+    {
+      "row_id": "change-zone-resolve_all",
+      "old_canonical_json_sha256": "3c777cb0dcb67286eda64fb6b4d42fcdbd11e3c59777ff7fc0a6e29d15deb927",
+      "new_canonical_json_sha256": "3c777cb0dcb67286eda64fb6b4d42fcdbd11e3c59777ff7fc0a6e29d15deb927",
+      "identical": true
+    },
+    {
+      "row_id": "shared-batch-delivery",
+      "old_canonical_json_sha256": "7d617cfdf37679e28527f327a0cb847d0ca53298237265248568f2b177d94671",
+      "new_canonical_json_sha256": "7d617cfdf37679e28527f327a0cb847d0ca53298237265248568f2b177d94671",
+      "identical": true
+    },
+    {
+      "row_id": "resumed-change-zone",
+      "old_canonical_json_sha256": "96fe240ff3922a98c3df9f7cd34121f2481f515637c6c1335f9d765f8e404822",
+      "new_canonical_json_sha256": "96fe240ff3922a98c3df9f7cd34121f2481f515637c6c1335f9d765f8e404822",
+      "identical": true
+    },
+    {
+      "row_id": "all-eligible-sacrifice",
+      "old_canonical_json_sha256": "204ecc5aa80508951bc893a327aa9b6138fe7a8658cfa5fe3d208ae1a87ac8d3",
+      "new_canonical_json_sha256": "204ecc5aa80508951bc893a327aa9b6138fe7a8658cfa5fe3d208ae1a87ac8d3",
+      "identical": true
+    },
+    {
+      "row_id": "player-scope-sacrifice",
+      "old_canonical_json_sha256": "e53f74c97f307b12a071ebcfb0950050126f279b37a2007308523c73b30c4ca6",
+      "new_canonical_json_sha256": "e53f74c97f307b12a071ebcfb0950050126f279b37a2007308523c73b30c4ca6",
+      "identical": true
+    },
+    {
+      "row_id": "choice-sacrifice",
+      "old_canonical_json_sha256": "0c6a6823c10d038ee4b59c3850835cea0d6f2a6b860abb7751709054f046514b",
+      "new_canonical_json_sha256": "0c6a6823c10d038ee4b59c3850835cea0d6f2a6b860abb7751709054f046514b",
+      "identical": true
+    },
+    {
+      "row_id": "choice-change-bounce",
+      "old_canonical_json_sha256": "87522432159ebee940e5b498edd99d497f3fbe2cacda394706c5d5e8e5de4322",
+      "new_canonical_json_sha256": "87522432159ebee940e5b498edd99d497f3fbe2cacda394706c5d5e8e5de4322",
+      "identical": true
+    },
+    {
+      "row_id": "choice-pay-cost",
+      "old_canonical_json_sha256": "1918e47571578af76dde3ad036cce629d9d54d7589f337cb50e5f3272df9fcd4",
+      "new_canonical_json_sha256": "1918e47571578af76dde3ad036cce629d9d54d7589f337cb50e5f3272df9fcd4",
+      "identical": true
+    },
+    {
+      "row_id": "cost-member-handle_sacrifice_for_cost",
+      "old_canonical_json_sha256": "b9170919837889258b9d24ac31b6672dc8c287f8599bf8633f650407a7bf3d6c",
+      "new_canonical_json_sha256": "b9170919837889258b9d24ac31b6672dc8c287f8599bf8633f650407a7bf3d6c",
+      "identical": true
+    },
+    {
+      "row_id": "cost-member-pay_deferred_spell_sacrifices_at_commit",
+      "old_canonical_json_sha256": "a820f951a58e3c752132d279c485c6d4942fa8436c6d68ec6ca57d19c08757d1",
+      "new_canonical_json_sha256": "a820f951a58e3c752132d279c485c6d4942fa8436c6d68ec6ca57d19c08757d1",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_zero_toughness",
+      "old_canonical_json_sha256": "51705879aa5ddc577428c1a5af35838d3d93f9496505badc82157d9367eab532",
+      "new_canonical_json_sha256": "51705879aa5ddc577428c1a5af35838d3d93f9496505badc82157d9367eab532",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_lethal_damage",
+      "old_canonical_json_sha256": "b021875cc6fdbebd69a6bc8b908b0edeadfe86fb69dedd8467adcd26edbb1e1d",
+      "new_canonical_json_sha256": "b021875cc6fdbebd69a6bc8b908b0edeadfe86fb69dedd8467adcd26edbb1e1d",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_unattached_auras",
+      "old_canonical_json_sha256": "20c06ecfcd3aa656402e5d893039872b259b9eea3e4ad6c0624c949e2beb1e79",
+      "new_canonical_json_sha256": "20c06ecfcd3aa656402e5d893039872b259b9eea3e4ad6c0624c949e2beb1e79",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_role_uniqueness",
+      "old_canonical_json_sha256": "09827e479a014a51c405a6d3891d165caf09721992139b205b31a524efa53dcd",
+      "new_canonical_json_sha256": "09827e479a014a51c405a6d3891d165caf09721992139b205b31a524efa53dcd",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_world_rule",
+      "old_canonical_json_sha256": "7e9237f64a560f3555a7b2d5a3e7be784741fffb62fc67baa6bb0521409c5ff8",
+      "new_canonical_json_sha256": "7e9237f64a560f3555a7b2d5a3e7be784741fffb62fc67baa6bb0521409c5ff8",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_zero_loyalty",
+      "old_canonical_json_sha256": "3c8926ee8994a82af1fbddff23d1196bf3ce4f8e895bdd2d11e08f3e36fda6aa",
+      "new_canonical_json_sha256": "3c8926ee8994a82af1fbddff23d1196bf3ce4f8e895bdd2d11e08f3e36fda6aa",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_zero_defense",
+      "old_canonical_json_sha256": "c8443c046cdec28d4eff7a651b732edee51d2bcf435bbd09b2e6279416c4400b",
+      "new_canonical_json_sha256": "c8443c046cdec28d4eff7a651b732edee51d2bcf435bbd09b2e6279416c4400b",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_battle_protector",
+      "old_canonical_json_sha256": "535b6e6d610a63a76f717cd4ec68cff0035a2e88cc41d31775358bcb1869056f",
+      "new_canonical_json_sha256": "535b6e6d610a63a76f717cd4ec68cff0035a2e88cc41d31775358bcb1869056f",
+      "identical": true
+    },
+    {
+      "row_id": "sba-check_saga_sacrifice",
+      "old_canonical_json_sha256": "fd10f866ee0906b5a1e2a5afbe21419cf19428e160b3c1276f0dbd66f5fea139",
+      "new_canonical_json_sha256": "fd10f866ee0906b5a1e2a5afbe21419cf19428e160b3c1276f0dbd66f5fea139",
+      "identical": true
+    },
+    {
+      "row_id": "components-whole-queue",
+      "old_canonical_json_sha256": "d5bf59e327d452e5fcfdde6ff0b1ddec37f572c0e3939ad35833b10d118d0b14",
+      "new_canonical_json_sha256": "d5bf59e327d452e5fcfdde6ff0b1ddec37f572c0e3939ad35833b10d118d0b14",
+      "identical": true
+    },
+    {
+      "row_id": "components-singleton",
+      "old_canonical_json_sha256": "f49c1f3b02927bcf6019846def4a3746495f1b1225721da64aae401475b640cf",
+      "new_canonical_json_sha256": "f49c1f3b02927bcf6019846def4a3746495f1b1225721da64aae401475b640cf",
+      "identical": true
+    },
+    {
+      "row_id": "components-filter-grouping",
+      "old_canonical_json_sha256": "17a1b5d9442ff5a3524e4ca43e15f6e88ada9ac25298e837f1f56462dcad3ae4",
+      "new_canonical_json_sha256": "17a1b5d9442ff5a3524e4ca43e15f6e88ada9ac25298e837f1f56462dcad3ae4",
+      "identical": true
+    },
+    {
+      "row_id": "component-guard-normal-finalizer",
+      "old_canonical_json_sha256": "e4d6d8d2de135cdc598800154f8299461fd4162ee8892f18b067fb0dba05a089",
+      "new_canonical_json_sha256": "e4d6d8d2de135cdc598800154f8299461fd4162ee8892f18b067fb0dba05a089",
+      "identical": true
+    },
+    {
+      "row_id": "component-guard-phyrexian-finalizer",
+      "old_canonical_json_sha256": "2b6fb157366ed82b0d129115a5cf22b6488fe764373181fe6109cbaf6f91d348",
+      "new_canonical_json_sha256": "2b6fb157366ed82b0d129115a5cf22b6488fe764373181fe6109cbaf6f91d348",
+      "identical": true
+    },
+    {
+      "row_id": "component-guard-append",
+      "old_canonical_json_sha256": "232adb19d084778baf54edb22073d56832da6ca201bbaed9949cf1b19004226b",
+      "new_canonical_json_sha256": "232adb19d084778baf54edb22073d56832da6ca201bbaed9949cf1b19004226b",
+      "identical": true
+    },
+    {
+      "row_id": "owner-finalization",
+      "old_canonical_json_sha256": "52a68e05cf53e18d46154d80c8dc9ca5bd915dbba374aae735eddae42885bcc5",
+      "new_canonical_json_sha256": "52a68e05cf53e18d46154d80c8dc9ca5bd915dbba374aae735eddae42885bcc5",
+      "identical": true
+    },
+    {
+      "row_id": "after-world-flush",
+      "old_canonical_json_sha256": "88a59ad460b2845f7cc0f425fcae3391112c9bf149320589db874df8db2342ae",
+      "new_canonical_json_sha256": "88a59ad460b2845f7cc0f425fcae3391112c9bf149320589db874df8db2342ae",
+      "identical": true
+    },
+    {
+      "row_id": "haunt-adapter",
+      "old_canonical_json_sha256": "6397b193f0d637af999a9aae2b6b0a0f80961998db12273f3f85959293287673",
+      "new_canonical_json_sha256": "6397b193f0d637af999a9aae2b6b0a0f80961998db12273f3f85959293287673",
+      "identical": true
+    },
+    {
+      "row_id": "unattach-adapter",
+      "old_canonical_json_sha256": "e3bab6ab9200f480b625d6243eb450def9ea9b0041a1af08ebc2a506b9442a13",
+      "new_canonical_json_sha256": "e3bab6ab9200f480b625d6243eb450def9ea9b0041a1af08ebc2a506b9442a13",
+      "identical": true
+    },
+    {
+      "row_id": "component-binding-distinct-invocation",
+      "old_canonical_json_sha256": "7bf473f9885d629922c30bfe417c5ac3f2c5ac1e2469bca3d6aa8bc6c059422c",
+      "new_canonical_json_sha256": "7bf473f9885d629922c30bfe417c5ac3f2c5ac1e2469bca3d6aa8bc6c059422c",
+      "identical": true
+    },
+    {
+      "row_id": "component-serde-drop",
+      "old_canonical_json_sha256": "1d5b2a7bfb353966369e2edc3be1e13baf0dd47e896b71fff6c85e400b25e93e",
+      "new_canonical_json_sha256": "1d5b2a7bfb353966369e2edc3be1e13baf0dd47e896b71fff6c85e400b25e93e",
+      "identical": true
+    },
+    {
+      "row_id": "inline-migration-preflight",
+      "old_canonical_json_sha256": "1052c5be355d5c20d269c35ff009c08d86bda1df2a61315718eedd51260b211f",
+      "new_canonical_json_sha256": "1052c5be355d5c20d269c35ff009c08d86bda1df2a61315718eedd51260b211f",
+      "identical": true
+    },
+    {
+      "row_id": "concession-preflight-exception",
+      "old_canonical_json_sha256": "3b158096885c004b6f11b611867fa4d96a0e13de3110176ee3b3e8d74909286c",
+      "new_canonical_json_sha256": "3b158096885c004b6f11b611867fa4d96a0e13de3110176ee3b3e8d74909286c",
+      "identical": true
+    },
+    {
+      "row_id": "independent-debug-preflight-exceptions",
+      "old_canonical_json_sha256": "cac577533c69815c8de31e4a584d16e61c064e58977f448239882fc684f82c71",
+      "new_canonical_json_sha256": "cac577533c69815c8de31e4a584d16e61c064e58977f448239882fc684f82c71",
+      "identical": true
+    },
+    {
+      "row_id": "normal-leaf-authority",
+      "old_canonical_json_sha256": "8327b336f1599b18e498dad8228e42ebf24ac89f7d49e6645f02e60a20c1661d",
+      "new_canonical_json_sha256": "8327b336f1599b18e498dad8228e42ebf24ac89f7d49e6645f02e60a20c1661d",
+      "identical": true
+    },
+    {
+      "row_id": "library-leaf-authority",
+      "old_canonical_json_sha256": "f12480907246afba15167adeef1b577ce1219ead21bf7aea347262a308b528b0",
+      "new_canonical_json_sha256": "f12480907246afba15167adeef1b577ce1219ead21bf7aea347262a308b528b0",
+      "identical": true
+    },
+    {
+      "row_id": "added-mid-leaf-flush",
+      "old_canonical_json_sha256": "5ff721b64c565ae7e64f5810d2122eda7f42391581a783594fab300a262d5b73",
+      "new_canonical_json_sha256": "5ff721b64c565ae7e64f5810d2122eda7f42391581a783594fab300a262d5b73",
+      "identical": true
+    },
+    {
+      "row_id": "before-clause-gate",
+      "old_canonical_json_sha256": "f9f8f686cb6cd82d7e856642e4db4f891a18d40199db715ea95d065834a29de5",
+      "new_canonical_json_sha256": "f9f8f686cb6cd82d7e856642e4db4f891a18d40199db715ea95d065834a29de5",
+      "identical": true
+    },
+    {
+      "row_id": "any-clause-after-to-before",
+      "old_canonical_json_sha256": "02d4e5465872e0aa0ced7801e28c46c30e7b75e5287fead5a5b251faaf0d0fb3",
+      "new_canonical_json_sha256": "02d4e5465872e0aa0ced7801e28c46c30e7b75e5287fead5a5b251faaf0d0fb3",
+      "identical": true
+    },
+    {
+      "row_id": "ambiguous-origin-before-misclassification",
+      "old_canonical_json_sha256": "61b75c9ade86b11764a5c8813e02670494ba0c58a03117e25a13beef11fdb3e2",
+      "new_canonical_json_sha256": "61b75c9ade86b11764a5c8813e02670494ba0c58a03117e25a13beef11fdb3e2",
+      "identical": true
+    },
+    {
+      "row_id": "ambiguous-origin-after-approximation",
+      "old_canonical_json_sha256": "fdaf46a9d20221cf9caa98aa84fcb4fd1d269394ceed9ee610c98cf265bcfcf9",
+      "new_canonical_json_sha256": "fdaf46a9d20221cf9caa98aa84fcb4fd1d269394ceed9ee610c98cf265bcfcf9",
+      "identical": true
+    },
+    {
+      "row_id": "delayed-ambiguous-live-gate",
+      "old_canonical_json_sha256": "518b5d2947457093b43801c183fec985a031363ea844067bd43c36202e29967c",
+      "new_canonical_json_sha256": "518b5d2947457093b43801c183fec985a031363ea844067bd43c36202e29967c",
+      "identical": true
+    },
+    {
+      "row_id": "record-snapshot-serde-drop",
+      "old_canonical_json_sha256": "81585e846e6f97a9db4ea27811d03372878651d8dbfd99e78b5a29f663b512a8",
+      "new_canonical_json_sha256": "81585e846e6f97a9db4ea27811d03372878651d8dbfd99e78b5a29f663b512a8",
+      "identical": true
+    },
+    {
+      "row_id": "owner-allocator-reset",
+      "old_canonical_json_sha256": "aecc594f0804a8c9c8dfafe291b38fe0843be2b6bafe7501ed20c37c5878fe0e",
+      "new_canonical_json_sha256": "aecc594f0804a8c9c8dfafe291b38fe0843be2b6bafe7501ed20c37c5878fe0e",
+      "identical": true
+    },
+    {
+      "row_id": "ordinary-adapter",
+      "old_canonical_json_sha256": "bdbec1fc2d5b0c3c767262d6ef650b85c28b36befb80fbe26796d3688067c521",
+      "new_canonical_json_sha256": "bdbec1fc2d5b0c3c767262d6ef650b85c28b36befb80fbe26796d3688067c521",
+      "identical": true
+    },
+    {
+      "row_id": "batched-adapter",
+      "old_canonical_json_sha256": "138920952743aac8ce10c9278feb6614faa6ae8d45f85eee8ee92a5d8bf71eb3",
+      "new_canonical_json_sha256": "138920952743aac8ce10c9278feb6614faa6ae8d45f85eee8ee92a5d8bf71eb3",
+      "identical": true
+    },
+    {
+      "row_id": "ordinary-global-death-gate",
+      "old_canonical_json_sha256": "766a6583da25479cf6006c59dd5dc3372cf87422a99c72b5d9f4c9e8fb47b9c4",
+      "new_canonical_json_sha256": "766a6583da25479cf6006c59dd5dc3372cf87422a99c72b5d9f4c9e8fb47b9c4",
+      "identical": true
+    },
+    {
+      "row_id": "batched-global-death-gate",
+      "old_canonical_json_sha256": "9a783a145ede0452a715518c7a084714e4b5c6875a2022467221f814f0a58655",
+      "new_canonical_json_sha256": "9a783a145ede0452a715518c7a084714e4b5c6875a2022467221f814f0a58655",
+      "identical": true
+    },
+    {
+      "row_id": "self-arrival-exception",
+      "old_canonical_json_sha256": "3ead6526df0768e5fb04a9cfe27a29ccb157fe30bf3b9804e56344d800fdcfd3",
+      "new_canonical_json_sha256": "3ead6526df0768e5fb04a9cfe27a29ccb157fe30bf3b9804e56344d800fdcfd3",
+      "identical": true
+    },
+    {
+      "row_id": "before-live-subject-authority",
+      "old_canonical_json_sha256": "5f6a60b7267e7798179167733b0f29da64c1d6f9ec26166bf6395a99c2939296",
+      "new_canonical_json_sha256": "5f6a60b7267e7798179167733b0f29da64c1d6f9ec26166bf6395a99c2939296",
+      "identical": true
+    },
+    {
+      "row_id": "scope-before-flush",
+      "old_canonical_json_sha256": "04417df7f009b3101df3c584fa297b6d0bfa3d9637020cdae8041bf7dee85202",
+      "new_canonical_json_sha256": "04417df7f009b3101df3c584fa297b6d0bfa3d9637020cdae8041bf7dee85202",
+      "identical": true
+    },
+    {
+      "row_id": "scope-capturing-ancestor-policy",
+      "old_canonical_json_sha256": "f90a34cc7ad599b4a683aac18d23a3bc552f4d451305ef596acd2b64fb587b52",
+      "new_canonical_json_sha256": "f90a34cc7ad599b4a683aac18d23a3bc552f4d451305ef596acd2b64fb587b52",
+      "identical": true
+    },
+    {
+      "row_id": "leaf-top-barrier",
+      "old_canonical_json_sha256": "2f476c4d0c0e53a440356b44c5ff42220c07acd9493ff6f2c56ef4dd9d585fa1",
+      "new_canonical_json_sha256": "2f476c4d0c0e53a440356b44c5ff42220c07acd9493ff6f2c56ef4dd9d585fa1",
+      "identical": true
+    },
+    {
+      "row_id": "leaf-consumes-member",
+      "old_canonical_json_sha256": "ea138b39369598a77441fd61b10c04a0de802f2368a3876deff050228277fbd3",
+      "new_canonical_json_sha256": "ea138b39369598a77441fd61b10c04a0de802f2368a3876deff050228277fbd3",
+      "identical": true
+    },
+    {
+      "row_id": "member-error-closure-pop",
+      "old_canonical_json_sha256": "2f32bbdd65bd50d495b804939d6073479f44a3528d4262f1f00f56ba97328b6d",
+      "new_canonical_json_sha256": "2f32bbdd65bd50d495b804939d6073479f44a3528d4262f1f00f56ba97328b6d",
+      "identical": true
+    },
+    {
+      "row_id": "before-snapshot-some-to-live-fallback",
+      "old_canonical_json_sha256": "d4a40b2800727bf3d98adf7feb23e862ca2b06e020352b7c88780b54c375bc17",
+      "new_canonical_json_sha256": "d4a40b2800727bf3d98adf7feb23e862ca2b06e020352b7c88780b54c375bc17",
+      "identical": true
+    },
+    {
+      "row_id": "after-snapshot-some-to-live-fallback",
+      "old_canonical_json_sha256": "7f98ccb62076dae9800a5bdc6a91d55d9a5393bbab63cd118a0f53afe36b78e7",
+      "new_canonical_json_sha256": "7f98ccb62076dae9800a5bdc6a91d55d9a5393bbab63cd118a0f53afe36b78e7",
+      "identical": true
+    },
+    {
+      "row_id": "R2-resolver-barrier",
+      "old_canonical_json_sha256": "4c5ecfd6d22dc7d87a77f2f787c3370f68b21fd494a041ad6f66a5b4792f5101",
+      "new_canonical_json_sha256": "4c5ecfd6d22dc7d87a77f2f787c3370f68b21fd494a041ad6f66a5b4792f5101",
+      "identical": true
+    },
+    {
+      "row_id": "R3-original-entry-exit-lki",
+      "old_canonical_json_sha256": "c9fbdd976b4931a489a893cd89b0f727779321e7383e38513da346b2064a5d89",
+      "new_canonical_json_sha256": "c9fbdd976b4931a489a893cd89b0f727779321e7383e38513da346b2064a5d89",
+      "identical": true
+    },
+    {
+      "row_id": "R3-original-entry-incarnation",
+      "old_canonical_json_sha256": "0b997053ccdca82adfca27d3c503ef39f9182a441515c4b78f506584c1ceafb9",
+      "new_canonical_json_sha256": "0b997053ccdca82adfca27d3c503ef39f9182a441515c4b78f506584c1ceafb9",
+      "identical": true
+    },
+    {
+      "row_id": "R3-bounce-exit-controller",
+      "old_canonical_json_sha256": "8d430d9684aa60029829ceb1773fd9b7faf157dfb034affc9c5cee91afa7c9c4",
+      "new_canonical_json_sha256": "8d430d9684aa60029829ceb1773fd9b7faf157dfb034affc9c5cee91afa7c9c4",
+      "identical": true
+    },
+    {
+      "row_id": "R3-oversimplify-exit-controller",
+      "old_canonical_json_sha256": "5d3ccc876b2eb90fe82b347ac4165b018e5f278fd3411ff7d4e8fc4502c57b34",
+      "new_canonical_json_sha256": "5d3ccc876b2eb90fe82b347ac4165b018e5f278fd3411ff7d4e8fc4502c57b34",
+      "identical": true
+    }
+  ]
+}

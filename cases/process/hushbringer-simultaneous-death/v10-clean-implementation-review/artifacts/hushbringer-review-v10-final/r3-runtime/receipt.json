@@ -1,0 +1,84 @@
+{
+  "utc": "2026-09-05T23:17:43.300769+00:00",
+  "purpose": "Independently validate actual current R3 entry-LKI fixtures while correcting stale authoritative map description",
+  "fresh_compilation": false,
+  "compiled_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "reviewed_source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "executable": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+  "executable_sha256": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+  "cwd": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine",
+  "environment": {
+    "PATH": "/home/ubuntu/.cargo/bin:/home/ubuntu/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "RUST_MIN_STACK": "16777216",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/phase-verifiable-loop/target",
+    "CARGO_BUILD_JOBS": "1",
+    "RTK_DISABLED": "1",
+    "CARGO_MANIFEST_DIR": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine",
+    "CARGO_MANIFEST_PATH": "/home/ubuntu/repos/phase-verifiable-loop/crates/engine/Cargo.toml",
+    "RUSTUP_TOOLCHAIN": "nightly-2026-04-19-x86_64-unknown-linux-gnu",
+    "LD_LIBRARY_PATH": "/home/ubuntu/repos/phase-verifiable-loop/target/debug:/home/ubuntu/repos/phase-verifiable-loop/target/debug/deps:/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib:/home/ubuntu/.rustup/toolchains/nightly-2026-04-19-x86_64-unknown-linux-gnu/lib"
+  },
+  "runtime_loader": [
+    {
+      "path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+    },
+    {
+      "path": "/lib/x86_64-linux-gnu/libc.so.6",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "e01b1ce7be2987f3b8560e26d0df2623f9dd5cec17be923ae28a785bc0d32d50"
+    },
+    {
+      "path": "/lib64/ld-linux-x86-64.so.2",
+      "realpath": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "8d06f393f4a93bcf9b81145a259524d66a95522a646bf8d7e05b6ffdf2e63dcc"
+    }
+  ],
+  "results": [
+    {
+      "test": "original_entry_lki_public_responses_preserve_original_condition",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::original_entry_lki_public_responses_preserve_original_condition",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "passed": 1,
+      "ignored": 0,
+      "log_sha256": "d8240cf6754b7f037c3e98f12923a6ff1346759d3a679efec19271469071c94d"
+    },
+    {
+      "test": "original_entry_lki_public_same_id_reentry_preserves_original_condition",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::original_entry_lki_public_same_id_reentry_preserves_original_condition",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "passed": 1,
+      "ignored": 0,
+      "log_sha256": "00299d41fcf4c8db3ec6efd037f7534b60113c0d57c0c9fca9ad9b93680e250a"
+    },
+    {
+      "test": "original_entry_lki_public_unpumped_entry_does_not_trigger",
+      "command": [
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+        "trigger_suppression_event_timing::original_entry_lki_public_unpumped_entry_does_not_trigger",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "passed": 1,
+      "ignored": 0,
+      "log_sha256": "bb27b6bc5b64f0bb2b4b7a8859b97b71a7137031c3ab4862cce90026a6ada2ce"
+    }
+  ]
+}

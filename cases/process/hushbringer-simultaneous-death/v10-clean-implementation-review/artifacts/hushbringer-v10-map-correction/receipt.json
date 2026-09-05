@@ -1,0 +1,46 @@
+{
+  "sealed_utc": "2026-09-05T23:19:30.893296+00:00",
+  "status": "sealed metadata-only correction; independent full review pending",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "source_archive": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/source-archives/ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847.tar.gz",
+    "sha256": "c3bf3d53ed323a6de4374a2cba083ef4c8e19a8adcf54192ce8a4a5ea64fc862"
+  },
+  "artifact_manifest": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/manifest.json",
+    "sha256": "d2d753c2310393fe73dca4bc6fddd9c7be49a8826a8092e2565708678f602ccf"
+  },
+  "artifact_count": 19,
+  "handoff": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/handoff.json",
+    "sha256": "f0e5744103cef14322ae87d625cbe8fb3ae4218bc4c85cbec4a7297d61fe3709"
+  },
+  "handoff_markdown": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/handoff.md",
+    "sha256": "69e249b58482e7919850c04199c1ef3a258c574605ab05bb6849cffe20d980be"
+  },
+  "corrected_map": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+    "sha256": "2e3a5345919bfb8de107a37211a23cb18a590b393f7a5290f429f010165830f0"
+  },
+  "corrected_markdown": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.md",
+    "sha256": "f1a148ae7c780b863e16c8e79f9dc84cacdfa097b394b603c5f5879b7840a114"
+  },
+  "authoritative_selection": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/reviewed-map-selection.json",
+    "sha256": "2b23a1700df9eaf91eeea860ea632751878d03fbad6f37324195db16f5abe78c"
+  },
+  "exact_delta": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/exact-delta.json",
+    "sha256": "e3cd3808c5886b01ff5c0235ab5497bf7748c630769ba531ce02bb4afc238367"
+  },
+  "source_unchanged": true,
+  "historical_evidence_unchanged": true,
+  "new_compilation": false,
+  "new_runtime_tests": false,
+  "acceptance": false,
+  "source_ownership": "root; not acquired by artifact author",
+  "manifest_scope": "All package files except manifest.json and receipt.json. Receipt binds manifest; its hash is reported separately.",
+  "permissions": "New package files 0444, directories 0555. No permissions or bytes changed on old artifacts or source."
+}

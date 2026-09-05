@@ -1,0 +1,86 @@
+{
+  "authoritative_selector": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/reviewed-map-selection.json",
+    "sha256": "2b23a1700df9eaf91eeea860ea632751878d03fbad6f37324195db16f5abe78c"
+  },
+  "handoff": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/handoff.json",
+    "sha256": "f0e5744103cef14322ae87d625cbe8fb3ae4218bc4c85cbec4a7297d61fe3709"
+  },
+  "sealed_package_manifest_sha256": "d2d753c2310393fe73dca4bc6fddd9c7be49a8826a8092e2565708678f602ccf",
+  "sealed_package_files": 19,
+  "checked_bindings": {
+    "constructor_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+      "sha256": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c"
+    },
+    "callsite_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+      "sha256": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9"
+    },
+    "native_library_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+      "sha256": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327"
+    },
+    "common_boundary_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+      "sha256": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee"
+    },
+    "maintainer_matrix": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+      "sha256": "2e3a5345919bfb8de107a37211a23cb18a590b393f7a5290f429f010165830f0"
+    },
+    "cr_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+    },
+    "source_lineage": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+      "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+    },
+    "verification": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+      "sha256": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+    },
+    "canonical": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+      "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+    }
+  },
+  "delta": [
+    {
+      "row": 63,
+      "id": "R3-original-entry-exit-lki",
+      "field": "first_reaching_branch",
+      "old": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "new": "After the static-buffed public Hand-to-Battlefield entry, the unresolved original trigger is answered with Battlefield-to-Graveyard ChangeZone, then the grant is exiled before the original trigger resolves. At original trigger resolution, filter.rs:1489-1501 sees the entrant outside Battlefield, skips the live-object branch, and evaluates the matching cached 3/3 exit LKI against the live 2/2 observer. The designated public exit-LKI mutant reaches the final life assertion at trigger_suppression_event_timing.rs:5152 and fails with 20 instead of 21."
+    },
+    {
+      "row": 63,
+      "id": "R3-original-entry-exit-lki",
+      "field": "production_entry",
+      "old": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "new": "Functioning static +2/+2 is established before a public typed ChangeZone spell moves the 1/1 entrant from Hand to Battlefield as 3/3. The 2/2 observer's original entry trigger remains unresolved while public ChangeZone responses move the entrant from Battlefield to Graveyard and then exile the static grant from Battlefield. The original exit LKI is 3/3; the live entrant has reset to 1/1. Resolving the original trigger yields life 21. The separate no-buff sibling applies the static grant to an unrelated creature, creates no qualifying original entry trigger, and remains at life 20."
+    },
+    {
+      "row": 64,
+      "id": "R3-original-entry-incarnation",
+      "field": "first_reaching_branch",
+      "old": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "new": "Following the corrected static-grant entry, Graveyard departure, and grant-exile route of R3-original-entry-exit-lki, public Graveyard-to-Battlefield ChangeZoneAll returns the same ObjectId as a new 1/1 incarnation before the original trigger resolves. At that resolution, filter.rs:1489-1501 sees Battlefield but rejects the new incarnation against the original event's entered_incarnation, so it evaluates the original cached 3/3 exit LKI rather than the new live 1/1. The designated public incarnation mutant reaches the final life assertion at trigger_suppression_event_timing.rs:5152 and fails with 20 instead of 21."
+    },
+    {
+      "row": 64,
+      "id": "R3-original-entry-incarnation",
+      "field": "production_entry",
+      "old": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "new": "The same corrected route as R3-original-entry-exit-lki starts with a functioning static +2/+2 grant before public Hand-to-Battlefield entry, leaves the original observer trigger unresolved, responds with Battlefield-to-Graveyard ChangeZone, and then exiles the grant from Battlefield. Before resolving the original trigger, a public ChangeZoneAll response returns the entrant from Graveyard to Battlefield with the same ObjectId and a different incarnation as 1/1. That new 1/1 entry creates no qualifying trigger. The original trigger still compares its original 3/3 exit LKI to the live 2/2 observer and yields life 21."
+    }
+  ],
+  "all_67_evidence_payloads_unchanged": true,
+  "all_other_row_fields_unchanged": true,
+  "source_archive_sha256": "c3bf3d53ed323a6de4374a2cba083ef4c8e19a8adcf54192ce8a4a5ea64fc862",
+  "source_archive_files_verified": 2051,
+  "final_live_source_files_verified": 2051,
+  "review": "Corrected routes agree with actual current fixture/helper and filter source, linked mutant runtime failures and three independently rerun exact public R3 tests. Metadata finding resolved without source or evidence edits."
+}

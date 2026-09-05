@@ -1,0 +1,91 @@
+{
+  "utc": "2026-09-05T23:06:07.240080+00:00",
+  "method": "Independent direct original binary execution; no new compilation",
+  "worker_sha256": "e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98",
+  "build_receipt_sha256": "54f5a3f7207af81b12d562537b1089886c2717275f1d579b8fd0828dba2cb5ff",
+  "cwd": "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/source",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "RUST_MIN_STACK": "16777216"
+  },
+  "loader": [
+    {
+      "path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+    },
+    {
+      "path": "/lib/x86_64-linux-gnu/libm.so.6",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "df621c68dbfed7e843434ef2faedb9f4d4b0543ad161e9a55eaf4d4ce2443176"
+    },
+    {
+      "path": "/lib/x86_64-linux-gnu/libc.so.6",
+      "realpath": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "e01b1ce7be2987f3b8560e26d0df2623f9dd5cec17be923ae28a785bc0d32d50"
+    },
+    {
+      "path": "/lib64/ld-linux-x86-64.so.2",
+      "realpath": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "8d06f393f4a93bcf9b81145a259524d66a95522a646bf8d7e05b6ffdf2e63dcc"
+    }
+  ],
+  "results": [
+    {
+      "name": "hush-first",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/hush-first-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/hush-first-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "graveyard_guards": true,
+      "request_sha256": "146b3ecb666d952de21543797466e18140cc784b04c6361d532e651bf5a1bffe",
+      "execution_sha256": "81e0c3be22678f9f419d95bb58ad37c1a8a4150ef5a63c213fadcb4f1c1cda14",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "traveler-first",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/traveler-first-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/traveler-first-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "graveyard_guards": true,
+      "request_sha256": "118faf91d250ff78ee5d8213836d1b1a9aab47e4b06f32f8dbd7acd25e80ac20",
+      "execution_sha256": "2a4e6099712afc37107cf784d7b1683c9fed09cb24de5494fb33927a1daceffa",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "no-hush",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg/tmp/verifiable-loop/isolated-baseline-build/worker",
+        "case",
+        "execute",
+        "--request",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/no-hush-request.json",
+        "--output",
+        "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/original-runtime/no-hush-execution.json"
+      ],
+      "exit": 0,
+      "spirit_count": 1,
+      "graveyard_guards": true,
+      "request_sha256": "80078dd0fdbfee214ef9dbd6a06fea167d3e362bc9b053414e94d092eec44299",
+      "execution_sha256": "f3bc3d9b91387eee7693a2d4cf54856f4e99538910a608d6fc7e70807d7e3a9b",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

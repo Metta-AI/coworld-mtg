@@ -1,0 +1,1268 @@
+{
+  "record_raw_hits": 92,
+  "actual_constructors": 82,
+  "production_constructors": 3,
+  "test_constructors": 79,
+  "record_constructors": [
+    {
+      "file": "crates/engine/src/database/synthesis.rs",
+      "line": 11632,
+      "scope": "test",
+      "actual_body_sha256": "218d0f3a26222bb9f4eed75a51370d384f2e91f9fdc3b91b4de1d011878782e1",
+      "body": "{\n                name: name.to_string(),\n                core_types: vec![CoreType::Creature],\n                subtypes: vec![],\n                ..ZoneChangeRecord::test_minimal(object_id, Some(Zone::Stack), Zone::Battlefield)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/casting_tests.rs",
+      "line": 45137,
+      "scope": "test",
+      "actual_body_sha256": "5fe1c67cfc1848d75a2b8155d7e99f3d0b84e6667e623223fda98f9eb1042e31",
+      "body": "{\n                name: format!(\"Milled Card {i}\"),\n                core_types: vec![CoreType::Creature],\n                mana_value: 1,\n                controller: owner,\n                owner,\n                is_token: false,\n                ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                    ObjectId(40_000 + i as u64),\n                    Some(Zone::Hand),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/derived_views.rs",
+      "line": 1573,
+      "scope": "test",
+      "actual_body_sha256": "9c77f03ca9dd45df27749c6977459a0a0fabeac55c769fd4f0c9701933aa904f",
+      "body": "{\n                trigger_suppression: None,\n                object_id: hidden_card,\n                name: \"Secret Card\".to_string(),\n                core_types: Vec::new(),\n                subtypes: Vec::new(),\n                supertypes: Vec::new(),\n                keywords: Vec::new(),\n                trigger_definitions: Vec::new(),\n                power: None,\n                toughness: None,\n                base_power: None,\n                base_toughness: None,\n                colors: Vec::new(),\n                mana_value: 0,\n                controller: PlayerId(1),\n                owner: PlayerId(1),\n                from_zone: Some(Zone::Library),\n                cast_from_zone: None,\n                played_from_zone: None,\n                to_zone: Zone::Hand,\n                attachments: Vec::new(),\n                linked_exile_snapshot: Vec::new(),\n                is_token: false,\n                combat_status: Default::default(),\n                co_departed: Vec::new(),\n                attached_to: None,\n                entered_incarnation: None,\n                turn_zone_change_index: 0,\n                is_suspected: false,\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "line": 2202,
+      "scope": "test",
+      "actual_body_sha256": "08082007f38684049ce85fc2e926287e775e1b542c16ede12a268a8b3f0e3e7d",
+      "body": "{\n            attachments: vec![AttachmentSnapshot {\n                object_id: old_equipment,\n                controller: PlayerId(0),\n                kind: AttachmentKind::Equipment,\n            }],\n            ..ZoneChangeRecord::test_minimal(zack, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/effects/attach.rs",
+      "line": 2210,
+      "scope": "test",
+      "actual_body_sha256": "cdd51c3a9c3465c249b915fc220b8940e7839fc98bb96d7c38a1eabd6237fb64",
+      "body": "{\n            attachments: vec![AttachmentSnapshot {\n                object_id: new_equipment,\n                controller: PlayerId(0),\n                kind: AttachmentKind::Equipment,\n            }],\n            ..ZoneChangeRecord::test_minimal(zack, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 12247,
+      "scope": "test",
+      "actual_body_sha256": "45aa849f30cb6c7f250922e5b10970d4d6984b03c0c2c559268705f2e4137296",
+      "body": "{\n            name: \"Eight Mana Creature\".to_string(),\n            mana_value: 8,\n            controller: PlayerId(0),\n            owner: PlayerId(0),\n            ..ZoneChangeRecord::test_minimal(moved, Some(Zone::Graveyard), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 18663,
+      "scope": "test",
+      "actual_body_sha256": "3fc7ceef3b745c890b3d333c2824273fe801fd3dbac21405d480589f75d40da3",
+      "body": "{\n                linked_exile_snapshot: vec![\n                    LinkedExileSnapshot {\n                        exiled_id: exiled_a,\n                        owner: PlayerId(0),\n                        mana_value: 2,\n                    },\n                    LinkedExileSnapshot {\n                        exiled_id: exiled_b,\n                        owner: PlayerId(0),\n                        mana_value: 3,\n                    },\n                    LinkedExileSnapshot {\n                        exiled_id: exiled_c,\n                        owner: PlayerId(1),\n                        mana_value: 4,\n                    },\n                ],\n                ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                    source,\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 19009,
+      "scope": "test",
+      "actual_body_sha256": "a7bd1777c1138982003f22257c4b05d1d066dc58604add5e9315d3ee266a3261",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                    entering,\n                    Some(Zone::Hand),\n                    Zone::Battlefield,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 46,
+      "scope": "test",
+      "actual_body_sha256": "cc374c2cdb22590020e24899e40f610d72e49dce27373e5032b88f7376783b76",
+      "body": "{\n            name: \"Banishing Light\".to_string(),\n            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 194,
+      "scope": "test",
+      "actual_body_sha256": "531b2e4aedc58bbdfb79160088abe2c59a8dde7cfcc2227f571479bebf6f9003",
+      "body": "{\n            name: \"Deep-Cavern Bat\".to_string(),\n            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 251,
+      "scope": "test",
+      "actual_body_sha256": "379e9878c680d9fa748884078ba77f90648f4be917bdd7ef95d6deff271b8b22",
+      "body": "{\n            name: \"Source\".to_string(),\n            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/engine_exile_return_tests.rs",
+      "line": 321,
+      "scope": "test",
+      "actual_body_sha256": "379e9878c680d9fa748884078ba77f90648f4be917bdd7ef95d6deff271b8b22",
+      "body": "{\n            name: \"Source\".to_string(),\n            ..ZoneChangeRecord::test_minimal(source_id, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 1402,
+      "scope": "production",
+      "actual_body_sha256": "0218f3e2475fe5f42254e6e95b7b01f39a0c89b886b9441594c413e23242903e",
+      "body": "{\n        object_id,\n        name: lki.name.clone(),\n        core_types: lki.card_types.clone(),\n        subtypes: lki.subtypes.clone(),\n        supertypes: lki.supertypes.clone(),\n        keywords: lki.keywords.clone(),\n        trigger_definitions: Vec::new(),\n        power: lki.power,\n        toughness: lki.toughness,\n        // CR 208.4b + CR 613.4b: Carry base P/T into the synthesized record so\n        // the base-scope `PtComparison` arm reads the LKI base value.\n        base_power: lki.base_power,\n        base_toughness: lki.base_toughness,\n        colors: lki.colors.clone(),\n        mana_value: lki.mana_value,\n        controller: lki.controller,\n        owner: lki.owner,\n        from_zone: None,\n        cast_from_zone: None,\n        played_from_zone: None,\n        to_zone: Zone::Battlefield,\n        attachments: vec![],\n        linked_exile_snapshot: vec![],\n        is_token: false,\n        combat_status: Default::default(),\n        co_departed: Vec::new(),\n        trigger_suppression: None,\n        attached_to: None,\n        entered_incarnation: None,\n        turn_zone_change_index: 0,\n        // CR 701.60b: Carry suspected status from the LKI snapshot so\n        // `FilterProp::Suspected` reads the cost-paid look-back value.\n        is_suspected: lki.is_suspected,\n    }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10269,
+      "scope": "test",
+      "actual_body_sha256": "0e2482ec86d9d99fc309e4dab74828b3a1ec88030e0065d4625989476184d43a",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            supertypes: vec![Supertype::Legendary],\n            ..ZoneChangeRecord::test_minimal(ObjectId(42), Some(Zone::Library), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10282,
+      "scope": "test",
+      "actual_body_sha256": "e4618ac37465303d06fb6690362a5fc45e455ad8c1c35bff1c91a24552a204c5",
+      "body": "{\n            core_types: vec![CoreType::Artifact],\n            ..ZoneChangeRecord::test_minimal(ObjectId(43), Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10295,
+      "scope": "test",
+      "actual_body_sha256": "8ff865d1af8ffc0ddada123d46f3b1f8ba7369384504f3c9359db7c975f18b86",
+      "body": "{\n            core_types: vec![CoreType::Enchantment],\n            subtypes: vec![\"Saga\".into()],\n            ..ZoneChangeRecord::test_minimal(ObjectId(44), Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10308,
+      "scope": "test",
+      "actual_body_sha256": "92b77a0a97025fe93c5fb85a4c797678e3d7a2402b1ac716e44f34b3961e1a3b",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            ..ZoneChangeRecord::test_minimal(ObjectId(45), Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10452,
+      "scope": "test",
+      "actual_body_sha256": "71a2f4df93b849a1336d6aa8300474146876a9ffddc79029f3dd13840fbdae9d",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            power: Some(2),\n            toughness: Some(2),\n            base_power: Some(1),\n            base_toughness: Some(1),\n            ..ZoneChangeRecord::test_minimal(ObjectId(7), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10670,
+      "scope": "test",
+      "actual_body_sha256": "8c23d5597f77209edacec61606b8367248d1ba5c04d29b8a8a8020f73161d362",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            is_token: true,\n            ..ZoneChangeRecord::test_minimal(ObjectId(42), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10682,
+      "scope": "test",
+      "actual_body_sha256": "24d27789fc5ffa84d311fc3249fb1c81c002659b7a093d6a0adb0ef1753bd6a3",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            is_token: false,\n            ..ZoneChangeRecord::test_minimal(ObjectId(43), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10694,
+      "scope": "test",
+      "actual_body_sha256": "b4a7e4a6658fb6fa2dec0b2b2670a44d295259463a2db6cbc3bf1f22808f7e4a",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            attachments: vec![AttachmentSnapshot {\n                object_id: ObjectId(100),\n                controller: PlayerId(0),\n                kind: AttachmentKind::Aura,\n            }],\n            ..ZoneChangeRecord::test_minimal(ObjectId(44), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10753,
+      "scope": "test",
+      "actual_body_sha256": "969e2e449515ecce1e01a1dfd4ac0872372ca25a52f0d71dcef820a6a6c15458",
+      "body": "{\n            combat_status: ZoneChangeCombatStatus {\n                attacking: true,\n                blocking: false,\n                blocked: false,\n                attacking_alone: true,\n                blocking_alone: false,\n                defending_player: Some(PlayerId(0)),\n            },\n            ..ZoneChangeRecord::test_minimal(ObjectId(42), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10764,
+      "scope": "test",
+      "actual_body_sha256": "93fdc8bf7f0df4b2b5992f69916042e88757ddd79149da35b77954362a755eec",
+      "body": "{\n            combat_status: ZoneChangeCombatStatus {\n                attacking: false,\n                blocking: true,\n                blocked: false,\n                attacking_alone: false,\n                blocking_alone: true,\n                defending_player: None,\n            },\n            ..ZoneChangeRecord::test_minimal(ObjectId(43), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 10833,
+      "scope": "test",
+      "actual_body_sha256": "c06699ee456cd6db1b7be2af5e62663b63e0acc9302b1053111b212aaba1946b",
+      "body": "{\n            combat_status: ZoneChangeCombatStatus {\n                attacking: true,\n                blocking: false,\n                blocked: false,\n                attacking_alone: false,\n                blocking_alone: false,\n                defending_player: Some(PlayerId(0)),\n            },\n            ..ZoneChangeRecord::test_minimal(ObjectId(44), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/filter.rs",
+      "line": 11161,
+      "scope": "test",
+      "actual_body_sha256": "c44616b0c8bf7727a37979cfd4c6b4896fdda4d27ec6b0a8fc9a59cc2b2f1bef",
+      "body": "{\n            object_id: ObjectId(99),\n            name: \"Mistform Ultimus\".to_string(),\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Illusion\".to_string()],\n            supertypes: vec![],\n            keywords: vec![Keyword::Changeling],\n            trigger_definitions: Vec::new(),\n            power: Some(2),\n            toughness: Some(3),\n            base_power: Some(2),\n            base_toughness: Some(3),\n            colors: vec![],\n            mana_value: 5,\n            controller: PlayerId(0),\n            owner: PlayerId(0),\n            from_zone: Some(Zone::Battlefield),\n            cast_from_zone: None,\n            played_from_zone: None,\n            to_zone: Zone::Graveyard,\n            attachments: vec![],\n            linked_exile_snapshot: vec![],\n            is_token: false,\n            combat_status: Default::default(),\n            co_departed: Vec::new(),\n            trigger_suppression: None,\n            attached_to: None,\n            entered_incarnation: None,\n            turn_zone_change_index: 0,\n            is_suspected: false,\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/game_object.rs",
+      "line": 1499,
+      "scope": "production",
+      "actual_body_sha256": "fa13009ed1968a0e7fb48322716f7e3e302e1e22de2399599fe9ee628cb74078",
+      "body": "{\n            object_id,\n            name: self.name.clone(),\n            core_types: self.card_types.core_types.clone(),\n            subtypes: self.card_types.subtypes.clone(),\n            supertypes: self.card_types.supertypes.clone(),\n            keywords: self.keywords.clone(),\n            trigger_definitions: self.trigger_definitions.iter_all().cloned().collect(),\n            power: self.power,\n            toughness: self.toughness,\n            // CR 208.4b + CR 613.4b: Snapshot the layer-7b base values the same\n            // way `power`/`toughness` capture the post-layer-7 current values,\n            // so `PtComparison { scope: Base }` look-back filters read the\n            // event-time base (a base-1/1 with a +1/+1 counter records base 1,\n            // current 2).\n            base_power: self.base_power,\n            base_toughness: self.base_toughness,\n            // CR 709.4b: Off the stack, a split card's colors are the combined\n            // colors of both halves (`effective_colors` no-ops for single-face).\n            colors: self.effective_colors(),\n            // CR 202.3d + CR 202.3e: On the stack, X equals the announced value\n            // and a split spell's mana value is the chosen half; off the stack a\n            // split card's mana value is the combined value of both halves.\n            mana_value: self.effective_mana_value(),\n            controller: self.controller,\n            owner: self.owner,\n            from_zone: from,\n            cast_from_zone: self.cast_from_zone,\n            played_from_zone: self.played_from_zone,\n            to_zone: to,\n            attachments: Vec::new(),\n            linked_exile_snapshot: Vec::new(),\n            // CR 111.1: Token-ness is a stable identity of the object,\n            // snapshotted for post-LTB trigger-filter evaluation (e.g.,\n            // \"whenever a creature token dies\").\n            is_token: self.is_token,\n            combat_status: Default::default(),\n            co_departed: Vec::new(),\n            trigger_suppression: None,\n            attached_to: self.attached_to,\n            // CR 400.7: filled in by `move_to_zone` from the live object AFTER the\n            // battlefield-entry incarnation bump; `None` here (pre-entry snapshot).\n            entered_incarnation: None,\n            turn_zone_change_index: 0,\n            // CR 701.60b: Snapshot suspected status at the moment of the move,\n            // before `move_to_zone` resets the live flag \u2014 so an LTB / cost-paid\n            // look-back (\"the sacrificed creature was suspected\") reads it.\n            is_suspected: self.is_suspected,\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7077,
+      "scope": "test",
+      "actual_body_sha256": "5775288adc0ec19b627fd5e5fc9ccab6f9d5cd694ebf3a3e2393bbd130991e21",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Zubera\".to_string(), \"Spirit\".to_string()],\n            ..ZoneChangeRecord::test_minimal(ObjectId(10), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7082,
+      "scope": "test",
+      "actual_body_sha256": "d66f8440750c55ba0186c1f109be227d4cef1891cdaeb6d858a849db2f21d44d",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Human\".to_string()],\n            ..ZoneChangeRecord::test_minimal(ObjectId(11), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7087,
+      "scope": "test",
+      "actual_body_sha256": "996142dceac9fd1d8733b5ae0b3fc7228af3ad88df3a9ece05d422de3dbd599a",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Zubera\".to_string()],\n            ..ZoneChangeRecord::test_minimal(ObjectId(12), Some(Zone::Battlefield), Zone::Hand)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7116,
+      "scope": "test",
+      "actual_body_sha256": "5ad5c4a16ecb8c95ce6ca73184bdfa423506d14369efa18ca87c578d77156d17",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            owner: PlayerId(0),\n            controller: PlayerId(0),\n            ..ZoneChangeRecord::test_minimal(ObjectId(10), Some(Zone::Hand), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7122,
+      "scope": "test",
+      "actual_body_sha256": "1c9c90b18a084b9580eb7a10718c04f2c9a2e797931bfb7c5e21069d0a977a93",
+      "body": "{\n            core_types: vec![CoreType::Artifact],\n            owner: PlayerId(0),\n            controller: PlayerId(1),\n            ..ZoneChangeRecord::test_minimal(ObjectId(11), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7128,
+      "scope": "test",
+      "actual_body_sha256": "67f7052ffd74d12f24812ba23d8d2da1dfe5a59e6fc20ea29197f167908cf21d",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            owner: PlayerId(1),\n            controller: PlayerId(0),\n            ..ZoneChangeRecord::test_minimal(ObjectId(12), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7134,
+      "scope": "test",
+      "actual_body_sha256": "ab01a7e8bcdfc10aa3727601509b9d738d353f2368fdc36e45361c068bc477fe",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            owner: PlayerId(0),\n            controller: PlayerId(0),\n            is_token: true,\n            ..ZoneChangeRecord::test_minimal(ObjectId(13), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7141,
+      "scope": "test",
+      "actual_body_sha256": "4ef3af38130bbe63d6e3cb342ed896d997aefd0682988360b8e7283771ed33f3",
+      "body": "{\n            core_types: vec![CoreType::Instant],\n            owner: PlayerId(0),\n            controller: PlayerId(0),\n            ..ZoneChangeRecord::test_minimal(ObjectId(14), Some(Zone::Hand), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7185,
+      "scope": "test",
+      "actual_body_sha256": "6e234b2f897da214e5eb93a960160148afc1e95572d03f8a4319efce81a29426",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Dalek\".to_string()],\n            power: Some(3),\n            ..ZoneChangeRecord::test_minimal(ObjectId(10), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7191,
+      "scope": "test",
+      "actual_body_sha256": "02092c0db3790d9023e791b3d99288f7e4abe1e917f79be681a51a516f9967bb",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Dalek\".to_string()],\n            power: Some(3),\n            ..ZoneChangeRecord::test_minimal(ObjectId(11), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7197,
+      "scope": "test",
+      "actual_body_sha256": "e762a97579b069ebeaa7ff3eed73a8a78c4a62898201694d6657e1f1e10f7f95",
+      "body": "{\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![\"Human\".to_string()],\n            power: Some(7),\n            ..ZoneChangeRecord::test_minimal(ObjectId(12), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 7770,
+      "scope": "test",
+      "actual_body_sha256": "7b262bb99d4c702b2d0ecbd4afa8a8eee28cd08224838ada1114a6083ed780f3",
+      "body": "{\n            attachments: vec![\n                AttachmentSnapshot {\n                    object_id: ObjectId(301),\n                    controller: PlayerId(0),\n                    kind: AttachmentKind::Aura,\n                },\n                AttachmentSnapshot {\n                    object_id: ObjectId(302),\n                    controller: PlayerId(0),\n                    kind: AttachmentKind::Aura,\n                },\n                AttachmentSnapshot {\n                    object_id: ObjectId(303),\n                    controller: PlayerId(1),\n                    kind: AttachmentKind::Aura,\n                },\n            ],\n            ..ZoneChangeRecord::test_minimal(dying_id, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/quantity.rs",
+      "line": 10941,
+      "scope": "test",
+      "actual_body_sha256": "ff28c6cbbf4965249fce477d5205af2e78f7ef9df3c4f487e37d710aaa281e93",
+      "body": "{\n                linked_exile_snapshot: vec![\n                    crate::types::game_state::LinkedExileSnapshot {\n                        exiled_id: exiled_a,\n                        owner: PlayerId(0),\n                        mana_value: 2,\n                    },\n                    crate::types::game_state::LinkedExileSnapshot {\n                        exiled_id: exiled_b,\n                        owner: PlayerId(0),\n                        mana_value: 3,\n                    },\n                    crate::types::game_state::LinkedExileSnapshot {\n                        exiled_id: exiled_c,\n                        owner: PlayerId(1),\n                        mana_value: 4,\n                    },\n                ],\n                ..ZoneChangeRecord::test_minimal(source, Some(Zone::Battlefield), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3199,
+      "scope": "test",
+      "actual_body_sha256": "805a968dba09bf70aead0e15ea37cc08e7dc34759a5b9ba31847ef9b0877fac1",
+      "body": "{\n                name: \"Grizzly Bears\".to_string(),\n                core_types: vec![CoreType::Creature],\n                ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                    ObjectId(99),\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3318,
+      "scope": "test",
+      "actual_body_sha256": "ca2dc340de2d69f40b4ba06c21fdf2116981683bc95ee2a385d10017934f29a8",
+      "body": "{\n                name: \"Skeleton\".to_string(),\n                core_types: vec![CoreType::Creature],\n                subtypes: vec![\"Skeleton\".to_string()],\n                controller: PlayerId(0),\n                ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                    ObjectId(99),\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3339,
+      "scope": "test",
+      "actual_body_sha256": "0a6a9e4c5279ee384a3abdef7927b128be6e0d5ad8f8a3ff14760309a0a0141b",
+      "body": "{\n                name: \"Vampire\".to_string(),\n                core_types: vec![CoreType::Creature],\n                subtypes: vec![\"Vampire\".to_string()],\n                controller: PlayerId(0),\n                ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                    ObjectId(100),\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/restrictions.rs",
+      "line": 3393,
+      "scope": "test",
+      "actual_body_sha256": "b5cd8f0d41ef2a7de9f44e9ae0ce0f322bf8cecc7ce561210ccb753f24aadce0",
+      "body": "{\n                    name: format!(\"Card {}\", i),\n                    ..crate::types::game_state::ZoneChangeRecord::test_minimal(\n                        ObjectId(100 + i),\n                        Some(Zone::Graveyard),\n                        Zone::Exile,\n                    )\n                }"
+    },
+    {
+      "file": "crates/engine/src/game/stack.rs",
+      "line": 2495,
+      "scope": "production",
+      "actual_body_sha256": "c86037060676e4c1cc40f2884e1636b4f7af2fda5637c634bc560877b53c3795",
+      "body": "{\n        object_id: PROBE_ID,\n        name: ch.display_name.clone(),\n        core_types: ch.core_types.clone(),\n        subtypes: ch.subtypes.clone(),\n        supertypes: ch.supertypes.clone(),\n        keywords: ch.keywords.clone(),\n        trigger_definitions: Vec::new(),\n        power: ch.power,\n        toughness: ch.toughness,\n        base_power: ch.power,\n        base_toughness: ch.toughness,\n        colors: ch.colors.clone(),\n        mana_value,\n        controller: spec.controller,\n        owner: spec.controller,\n        from_zone: None,\n        cast_from_zone: None,\n        played_from_zone: None,\n        to_zone: Zone::Battlefield,\n        attachments: Vec::new(),\n        linked_exile_snapshot: Vec::new(),\n        is_token: true,\n        combat_status: Default::default(),\n        co_departed: Vec::new(),\n        trigger_suppression: None,\n        attached_to: None,\n        entered_incarnation: None,\n        turn_zone_change_index: 0,\n        // A freshly created token is never suspected (CR 701.60b).\n        is_suspected: false,\n    }"
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "line": 4001,
+      "scope": "test",
+      "actual_body_sha256": "4400c003de0fde4b7dce754abc1621d664f574ad59c334144edcbd42ff6106e1",
+      "body": "{\n                controller: PlayerId(1),\n                ..ZoneChangeRecord::test_minimal(ObjectId(7), from, to)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/targeting.rs",
+      "line": 4050,
+      "scope": "test",
+      "actual_body_sha256": "485acf2b0bcfe1fa512fecbbae525c36d7c9a220640f2b5cb90306affc360f09",
+      "body": "{\n            controller: PlayerId(1),\n            ..ZoneChangeRecord::test_minimal(entering_creature_id, None, Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7026,
+      "scope": "test",
+      "actual_body_sha256": "65e23a3b19db9226dc3d9efe26d6ad9d2bcefd389d2bd2d69d416dca9f2ac15a",
+      "body": "{\n                name: \"Test Object\".to_string(),\n                core_types,\n                subtypes: subtypes.into_iter().map(str::to_string).collect(),\n                ..ZoneChangeRecord::test_minimal(object_id, Some(from), to)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7135,
+      "scope": "test",
+      "actual_body_sha256": "b62b18e794f17f1b3499cfce7e9c5dd371e4c42767249089a86d8a921c2da1d6",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                ..ZoneChangeRecord::test_minimal(ObjectId(9), None, Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7279,
+      "scope": "test",
+      "actual_body_sha256": "3266a397f86cbb2fa0d33e14f5b175b1149bb3064f7f3322fe0b587c99fdc2c9",
+      "body": "{\n                core_types: vec![CoreType::Artifact],\n                controller: PlayerId(0),\n                owner: PlayerId(0),\n                is_token: false,\n                ..ZoneChangeRecord::test_minimal(\n                    nontoken_artifact,\n                    Some(Zone::Hand),\n                    Zone::Battlefield,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7303,
+      "scope": "test",
+      "actual_body_sha256": "8a5aa1641309b3bb9a1b1c318cac1cae83494c73445b8daa3d1a596f327329c9",
+      "body": "{\n                name: \"Munitions\".to_string(),\n                core_types: vec![CoreType::Artifact],\n                controller: PlayerId(0),\n                owner: PlayerId(0),\n                is_token: true,\n                ..ZoneChangeRecord::test_minimal(munitions, None, Zone::Battlefield)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7591,
+      "scope": "test",
+      "actual_body_sha256": "67a5d420b70826d8b4c08532a8691eb78ae4e0ff929678293280835ea111132d",
+      "body": "{\n                attachments: vec![AttachmentSnapshot {\n                    object_id: skullclamp,\n                    controller: PlayerId(0),\n                    kind: AttachmentKind::Equipment,\n                }],\n                ..ZoneChangeRecord::test_minimal(creature, Some(Zone::Battlefield), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7666,
+      "scope": "test",
+      "actual_body_sha256": "3e71e654e3d08a7bff5819f0e8f629b50070f91de07a7600bfb3d575bade62e9",
+      "body": "{\n                attachments: vec![AttachmentSnapshot {\n                    object_id: aura,\n                    controller: PlayerId(0),\n                    kind: AttachmentKind::Aura,\n                }],\n                ..ZoneChangeRecord::test_minimal(creature, Some(Zone::Battlefield), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7782,
+      "scope": "test",
+      "actual_body_sha256": "6b4d547e73167bff5ab48e1a115bd913befe9a52b3c45a5a740b5c119a9046c9",
+      "body": "{\n                controller: PlayerId(0),\n                owner: PlayerId(0),\n                ..ZoneChangeRecord::test_minimal(own_card, Some(Zone::Graveyard), Zone::Battlefield)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7800,
+      "scope": "test",
+      "actual_body_sha256": "8c744a3dc14979b84dbb991b57fa76effa3225eb18be7841d6530c75f1935f9f",
+      "body": "{\n                controller: PlayerId(1),\n                owner: PlayerId(1),\n                ..ZoneChangeRecord::test_minimal(\n                    opponent_card,\n                    Some(Zone::Graveyard),\n                    Zone::Battlefield,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7820,
+      "scope": "test",
+      "actual_body_sha256": "4fe716e7f9b078b71748461af9cfe4eefbf3687d3027644546252a7ff68dddc6",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(1),\n                owner: PlayerId(1),\n                ..ZoneChangeRecord::test_minimal(\n                    opponent_creature,\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7907,
+      "scope": "test",
+      "actual_body_sha256": "df7586ae2384a98030bee711589424d0224b6e7e50c8cc6361432a7e877bbd4d",
+      "body": "{\n                    power: Some(5),\n                    toughness: Some(5),\n                    ..*record\n                }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 7922,
+      "scope": "test",
+      "actual_body_sha256": "66a1039f87ac185deba8054a34c911590da9054a92e43478837419806a1a0c97",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                power: Some(2),\n                toughness: Some(2),\n                ..ZoneChangeRecord::test_minimal(\n                    ObjectId(501),\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14073,
+      "scope": "test",
+      "actual_body_sha256": "fc4e78eb4701bb8d83edd575fcaf0045bc0df578941e65379cfcb4c23dc7bf12",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(0),\n                owner: PlayerId(0),\n                ..ZoneChangeRecord::test_minimal(source, Some(Zone::Battlefield), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14092,
+      "scope": "test",
+      "actual_body_sha256": "4c799df6c399bbbe16cac2f4e48d271490326a479d1ad67d59fb9a8cb3e31b12",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(0),\n                owner: PlayerId(0),\n                ..ZoneChangeRecord::test_minimal(own_milled, Some(Zone::Library), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14112,
+      "scope": "test",
+      "actual_body_sha256": "0eb39fe9e0e138f18ef069261c66b7ca19c8dce527e8b73cd19fc43cc443db22",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(1),\n                owner: PlayerId(1),\n                ..ZoneChangeRecord::test_minimal(\n                    opp_dying,\n                    Some(Zone::Battlefield),\n                    Zone::Graveyard,\n                )\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14135,
+      "scope": "test",
+      "actual_body_sha256": "8844bfc238b4fd36576025d67bacca36243ca5d76e9fb8766dab1ff25f59b8ea",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(1),\n                owner: PlayerId(1),\n                ..ZoneChangeRecord::test_minimal(opp_milled, Some(Zone::Library), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14390,
+      "scope": "test",
+      "actual_body_sha256": "fc4e78eb4701bb8d83edd575fcaf0045bc0df578941e65379cfcb4c23dc7bf12",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(0),\n                owner: PlayerId(0),\n                ..ZoneChangeRecord::test_minimal(source, Some(Zone::Battlefield), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 14408,
+      "scope": "test",
+      "actual_body_sha256": "8844bfc238b4fd36576025d67bacca36243ca5d76e9fb8766dab1ff25f59b8ea",
+      "body": "{\n                core_types: vec![CoreType::Creature],\n                controller: PlayerId(1),\n                owner: PlayerId(1),\n                ..ZoneChangeRecord::test_minimal(opp_milled, Some(Zone::Library), Zone::Graveyard)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 8398,
+      "scope": "test",
+      "actual_body_sha256": "65e23a3b19db9226dc3d9efe26d6ad9d2bcefd389d2bd2d69d416dca9f2ac15a",
+      "body": "{\n                name: \"Test Object\".to_string(),\n                core_types,\n                subtypes: subtypes.into_iter().map(str::to_string).collect(),\n                ..ZoneChangeRecord::test_minimal(object_id, Some(from), to)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 10354,
+      "scope": "test",
+      "actual_body_sha256": "f1fa960ea30bfb570dc18fddedd4b9967017b49350d36cfad4968ebd9f58e005",
+      "body": "{\n                name: \"Test Token\".to_string(),\n                core_types,\n                subtypes: subtypes.into_iter().map(str::to_string).collect(),\n                is_token: true,\n                ..ZoneChangeRecord::test_minimal(object_id, None, Zone::Battlefield)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers.rs",
+      "line": 15046,
+      "scope": "test",
+      "actual_body_sha256": "d08f3ccefa73fcad101ea00984ff64b3181624cbf8b2823b6ff694dde2ed5ce6",
+      "body": "{\n                name: \"Bird\".to_string(),\n                core_types: vec![CoreType::Creature],\n                keywords: vec![Keyword::Flying],\n                ..ZoneChangeRecord::test_minimal(bird, Some(Zone::Hand), Zone::Battlefield)\n            }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 897,
+      "scope": "test",
+      "actual_body_sha256": "ad0d71b1235fd4d5465eef41c245ffc41768877e242aba3dd3558ebaf5caf2a1",
+      "body": "{\n            name: \"Mountain\".to_string(),\n            core_types: vec![CoreType::Land],\n            subtypes: vec![\"Mountain\".to_string()],\n            ..ZoneChangeRecord::test_minimal(land, Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 976,
+      "scope": "test",
+      "actual_body_sha256": "540b1569b926624efaa8765cf0bb39fd6a9d93d8e55c55e3de86bb1e7aaac8fa",
+      "body": "{\n            name: \"Entering Creature\".to_string(),\n            core_types: vec![CoreType::Creature],\n            ..ZoneChangeRecord::test_minimal(new_etb, Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1064,
+      "scope": "test",
+      "actual_body_sha256": "b300a6244234be91c7852c7ea2afc6dc027e177290a2c87952a76cf0d3a6bdf3",
+      "body": "{\n            name: \"Norin the Wary\".to_string(),\n            core_types: vec![CoreType::Creature],\n            supertypes: vec![Supertype::Legendary],\n            ..ZoneChangeRecord::test_minimal(norin, Some(Zone::Exile), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1116,
+      "scope": "test",
+      "actual_body_sha256": "40cfa6105a455e98f3a9940ff333eb1b51724dde598256a4db0acf9a6a253d55",
+      "body": "{\n            name: \"Genesis Chamber\".to_string(),\n            core_types: vec![CoreType::Artifact],\n            ..ZoneChangeRecord::test_minimal(genesis, Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1167,
+      "scope": "test",
+      "actual_body_sha256": "809d58785bf0b3e7f5b54433b0ee2b1899c83410c119bc57af4d7c36fc061b71",
+      "body": "{\n            name: \"Gala Greeters\".to_string(),\n            core_types: vec![CoreType::Creature],\n            ..ZoneChangeRecord::test_minimal(greeter, Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1262,
+      "scope": "test",
+      "actual_body_sha256": "540b1569b926624efaa8765cf0bb39fd6a9d93d8e55c55e3de86bb1e7aaac8fa",
+      "body": "{\n            name: \"Entering Creature\".to_string(),\n            core_types: vec![CoreType::Creature],\n            ..ZoneChangeRecord::test_minimal(new_etb, Some(Zone::Hand), Zone::Battlefield)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_dedup_regression_tests.rs",
+      "line": 1887,
+      "scope": "test",
+      "actual_body_sha256": "8dcdec37a9083ee566ce4ab0600675de97f6b63a6ce3d565772c7ce13b7d9a2e",
+      "body": "{\n            name: \"Dying Creature\".to_string(),\n            core_types: vec![CoreType::Creature],\n            ..ZoneChangeRecord::test_minimal(dying, Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_ordering_parity_tests.rs",
+      "line": 1034,
+      "scope": "test",
+      "actual_body_sha256": "53cdad9b423c9912a939610025d626ca9e83fd0a1cd7f6a430df9d2f705b597d",
+      "body": "{\n            co_departed: co.iter().map(|&x| ObjectId(x)).collect(),\n            ..ZoneChangeRecord::test_minimal(ObjectId(id), Some(Zone::Battlefield), Zone::Graveyard)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/triggers_push_first_contract_tests.rs",
+      "line": 45,
+      "scope": "test",
+      "actual_body_sha256": "9c70e1dcc45e1efe213f2706842eade2de44e20883fe72d8a0fbde056bf17fb2",
+      "body": "{\n            name: \"Test Source\".to_string(),\n            core_types: vec![CoreType::Enchantment],\n            subtypes: vec![],\n            ..ZoneChangeRecord::test_minimal(object_id, Some(from), to)\n        }"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 2882,
+      "scope": "test",
+      "actual_body_sha256": "259571ba7642a063e0e8b4b479f16c5e8f5c46b66d5fdfaf261aa7b30e0174c0",
+      "body": "{\n                    name: \"Card\".to_string(),\n                    ..ZoneChangeRecord::test_minimal(id, Some(Zone::Hand), Zone::Graveyard)\n                }"
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "line": 1574,
+      "scope": "test",
+      "actual_body_sha256": "2e6db9b0f349f446d28c8729befd72d0570d7dfd43ecd3e32a0b97bdec61dd52",
+      "body": "{\n                name: \"Test\".to_string(),\n                ..ZoneChangeRecord::test_minimal(ObjectId(5), Some(Zone::Hand), Zone::Battlefield)\n            }"
+    },
+    {
+      "file": "crates/engine/src/types/events.rs",
+      "line": 1602,
+      "scope": "test",
+      "actual_body_sha256": "5a7af4be55047c18b362ea859b6d7c149fea12a16e26e25463cbabc75d6e29fd",
+      "body": "{\n                    trigger_suppression: snapshot.clone(),\n                    ..ZoneChangeRecord::test_minimal(\n                        ObjectId(5),\n                        Some(Zone::Battlefield),\n                        Zone::Graveyard,\n                    )\n                }"
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs",
+      "line": 79,
+      "scope": "test",
+      "actual_body_sha256": "85a6dc98fde437ef9778788ba7d477595718840a96ce743ae94b0406173bcce3",
+      "body": "{\n            trigger_suppression: None,\n            object_id: milled_creature,\n            name: \"Milled Bear\".to_string(),\n            core_types: vec![CoreType::Creature],\n            subtypes: vec![],\n            supertypes: vec![],\n            keywords: vec![],\n            trigger_definitions: vec![],\n            power: Some(2),\n            toughness: Some(2),\n            base_power: Some(2),\n            base_toughness: Some(2),\n            colors: vec![],\n            mana_value: 2,\n            controller: P1,\n            owner: P1,\n            from_zone: Some(Zone::Library),\n            cast_from_zone: None,\n            played_from_zone: None,\n            to_zone: Zone::Graveyard,\n            attachments: vec![],\n            linked_exile_snapshot: vec![],\n            is_token: false,\n            combat_status: Default::default(),\n            co_departed: Vec::new(),\n            attached_to: None,\n            entered_incarnation: None,\n            turn_zone_change_index: 0,\n            is_suspected: false,\n        }"
+    },
+    {
+      "file": "crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs",
+      "line": 109,
+      "scope": "test",
+      "actual_body_sha256": "fbfd87986c1c3ebf76f47b8f6382ce717f90c5fc52703a7abe57db4e73e54acd",
+      "body": "{\n            trigger_suppression: None,\n            object_id: norin,\n            name: \"Norin the Wary\".to_string(),\n            core_types: vec![CoreType::Creature],\n            supertypes: vec![Supertype::Legendary],\n            subtypes: Vec::new(),\n            keywords: Vec::new(),\n            power: None,\n            toughness: None,\n            base_power: None,\n            base_toughness: None,\n            colors: Vec::new(),\n            mana_value: 0,\n            controller: P0,\n            owner: P0,\n            from_zone: Some(Zone::Exile),\n            cast_from_zone: None,\n            played_from_zone: None,\n            to_zone: Zone::Battlefield,\n            attachments: Vec::new(),\n            linked_exile_snapshot: Vec::new(),\n            is_token: false,\n            combat_status: Default::default(),\n            trigger_definitions: Vec::new(),\n            co_departed: Vec::new(),\n            attached_to: None,\n            entered_incarnation: None,\n            turn_zone_change_index: 0,\n            is_suspected: false,\n        }"
+    },
+    {
+      "file": "crates/engine/tests/integration/madame_null_integration.rs",
+      "line": 86,
+      "scope": "test",
+      "actual_body_sha256": "fec06c9e6ca88d0b6abaaebec5888a3db1912d93ffd596c836d09542f6010b0a",
+      "body": "{\n            trigger_suppression: None,\n            object_id: entering,\n            name: String::new(),\n            core_types: Vec::new(),\n            subtypes: Vec::new(),\n            supertypes: Vec::new(),\n            keywords: Vec::new(),\n            power: None,\n            toughness: None,\n            base_power: None,\n            base_toughness: None,\n            colors: Vec::new(),\n            mana_value: 0,\n            controller: PlayerId(0),\n            owner: PlayerId(0),\n            from_zone: Some(Zone::Hand),\n            cast_from_zone: None,\n            played_from_zone: None,\n            to_zone: Zone::Battlefield,\n            attachments: Vec::new(),\n            linked_exile_snapshot: Vec::new(),\n            is_token: false,\n            combat_status: Default::default(),\n            trigger_definitions: Vec::new(),\n            co_departed: Vec::new(),\n            attached_to: None,\n            entered_incarnation: None,\n            turn_zone_change_index: 0,\n            is_suspected: false,\n        }"
+    },
+    {
+      "file": "crates/engine/src/types/game_state.rs",
+      "line": 840,
+      "scope": "test",
+      "actual_body_sha256": "c443201050fb67fca46079467a1bac034501e22b2ca0342d6864deefe6625740",
+      "body": "{\n            object_id,\n            name: String::new(),\n            core_types: Vec::new(),\n            subtypes: Vec::new(),\n            supertypes: Vec::new(),\n            keywords: Vec::new(),\n            trigger_definitions: Vec::new(),\n            power: None,\n            toughness: None,\n            base_power: None,\n            base_toughness: None,\n            colors: Vec::new(),\n            mana_value: 0,\n            controller: PlayerId(0),\n            owner: PlayerId(0),\n            from_zone: from,\n            cast_from_zone: None,\n            played_from_zone: None,\n            to_zone: to,\n            attachments: Vec::new(),\n            linked_exile_snapshot: Vec::new(),\n            is_token: false,\n            combat_status: ZoneChangeCombatStatus::default(),\n            co_departed: Vec::new(),\n            trigger_suppression: None,\n            attached_to: None,\n            entered_incarnation: None,\n            turn_zone_change_index: 0,\n            is_suspected: false,\n        }"
+    }
+  ],
+  "physical_callsites": 51,
+  "callsites": [
+    {
+      "file": "crates/engine/src/game/augment.rs",
+      "line": 203,
+      "function": "check_standalone_augment_permanents",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "augment-handoff"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 1858,
+      "function": "pay_deferred_spell_sacrifices_at_commit",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-pay_deferred_spell_sacrifices_at_commit",
+        "components-whole-queue",
+        "components-singleton",
+        "components-filter-grouping"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 1865,
+      "function": "pay_deferred_spell_sacrifices_at_commit",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-pay_deferred_spell_sacrifices_at_commit",
+        "components-whole-queue",
+        "components-singleton",
+        "components-filter-grouping"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 2076,
+      "function": "handle_sacrifice_for_cost",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-handle_sacrifice_for_cost",
+        "component-guard-append",
+        "component-binding-distinct-invocation"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/casting_costs.rs",
+      "line": 2083,
+      "function": "handle_sacrifice_for_cost",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "cost-member-handle_sacrifice_for_cost",
+        "component-guard-append",
+        "component-binding-distinct-invocation"
+      ],
+      "source_line": "crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 858,
+      "function": "resolve",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 903,
+      "function": "resolve",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1553,
+      "function": "resolve_all",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve_all"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/change_zone.rs",
+      "line": 1574,
+      "function": "resolve_all",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "change-zone-resolve_all"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "line": 550,
+      "function": "sacrifice_unchosen",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "keep-sweep"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "line": 562,
+      "function": "sacrifice_unchosen",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "keep-sweep"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 217,
+      "function": "resolve",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 223,
+      "function": "resolve",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve"
+      ],
+      "source_line": "let outcome = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 364,
+      "function": "resolve_all",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve_all"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/destroy.rs",
+      "line": 370,
+      "function": "resolve_all",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "destroy-resolve_all"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 912,
+      "function": "drain_pending_change_zone_iteration",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "resumed-change-zone"
+      ],
+      "source_line": "crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 954,
+      "function": "drain_pending_change_zone_iteration",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "resumed-change-zone"
+      ],
+      "source_line": "let result = crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 5798,
+      "function": "perform_player_scope_sacrifices",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "player-scope-sacrifice"
+      ],
+      "source_line": "let outcome = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 5807,
+      "function": "perform_player_scope_sacrifices",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "player-scope-sacrifice"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/effects/mod.rs",
+      "line": 6001,
+      "function": "resolve_ability_chain",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "R2-resolver-barrier"
+      ],
+      "source_line": "crate::game::zones::without_departure_member(state, events, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/effects/sacrifice.rs",
+      "line": 280,
+      "function": "resolve",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "all-eligible-sacrifice"
+      ],
+      "source_line": "let paused = crate::game::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/effects/sacrifice.rs",
+      "line": 286,
+      "function": "resolve",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "all-eligible-sacrifice"
+      ],
+      "source_line": "match crate::game::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3305,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-sacrifice"
+      ],
+      "source_line": "if super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3311,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-sacrifice"
+      ],
+      "source_line": "match super::zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3353,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-change-bounce"
+      ],
+      "source_line": "if super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3394,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-change-bounce"
+      ],
+      "source_line": "match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3534,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "EffectKind::PutAtLibraryPosition => super::zones::with_departure_suppression(",
+      "native_map_ids": [
+        "native-library-bottom",
+        "native-library-nth",
+        "native-library-top"
+      ],
+      "tests": [
+        "native_library_choice_hand_bottom_public_controls",
+        "native_library_choice_library_bottom_public_controls",
+        "native_library_choice_dig_tracked_bottom_public_controls",
+        "native_library_choice_hand_nth_public_controls",
+        "native_library_choice_library_nth_public_controls",
+        "native_library_choice_dig_tracked_nth_public_controls",
+        "native_library_choice_hand_top_public_controls",
+        "native_library_choice_library_top_public_controls",
+        "native_library_choice_dig_tracked_top_public_controls"
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3541,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "super::zones::with_departure_member(",
+      "native_map_ids": [
+        "native-library-bottom"
+      ],
+      "tests": [
+        "native_library_choice_hand_bottom_public_controls",
+        "native_library_choice_library_bottom_public_controls",
+        "native_library_choice_dig_tracked_bottom_public_controls"
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3557,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "super::zones::with_departure_member(",
+      "native_map_ids": [
+        "native-library-nth"
+      ],
+      "tests": [
+        "native_library_choice_hand_nth_public_controls",
+        "native_library_choice_library_nth_public_controls",
+        "native_library_choice_dig_tracked_nth_public_controls"
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3572,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "mapped unaffected native private-zone PutAtLibraryPosition sibling",
+      "physical_mutation_ids": [],
+      "source_line": "super::zones::with_departure_member(",
+      "native_map_ids": [
+        "native-library-top"
+      ],
+      "tests": [
+        "native_library_choice_hand_top_public_controls",
+        "native_library_choice_library_top_public_controls",
+        "native_library_choice_dig_tracked_top_public_controls"
+      ]
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3716,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-pay-cost"
+      ],
+      "source_line": "if super::zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/engine_resolution_choices.rs",
+      "line": 3722,
+      "function": "handle_resolution_choice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "choice-pay-cost"
+      ],
+      "source_line": "match super::zones::with_departure_member(state, events, owner, *card_id, |state, events| effects::change_zone::process_one_zone_move("
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 88,
+      "function": "check_state_based_actions",
+      "api": "with_departure_suppression",
+      "classification": "single SBA-iteration owner shared by all nine sub-checks and standalone Augment",
+      "physical_mutation_ids": [
+        "sba-check_zero_toughness",
+        "sba-check_lethal_damage",
+        "sba-check_unattached_auras",
+        "sba-check_role_uniqueness",
+        "sba-check_world_rule",
+        "sba-check_zero_loyalty",
+        "sba-check_zero_defense",
+        "sba-check_battle_protector",
+        "sba-check_saga_sacrifice",
+        "augment-handoff"
+      ],
+      "source_line": "let repeat = zones::with_departure_suppression("
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 790,
+      "function": "check_zero_toughness",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_zero_toughness"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 835,
+      "function": "check_lethal_damage",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_lethal_damage"
+      ],
+      "source_line": "let paused = zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1155,
+      "function": "check_unattached_auras",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_unattached_auras"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1344,
+      "function": "check_role_uniqueness",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_role_uniqueness"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1507,
+      "function": "check_world_rule",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_world_rule"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1540,
+      "function": "check_zero_loyalty",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_zero_loyalty"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1596,
+      "function": "check_zero_defense",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_zero_defense"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1731,
+      "function": "check_battle_protector",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_battle_protector"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, battle_id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/sba.rs",
+      "line": 1850,
+      "function": "check_saga_sacrifice",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "sba-check_saga_sacrifice"
+      ],
+      "source_line": "if zones::with_departure_member(state, events, owner, saga_id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zone_pipeline.rs",
+      "line": 949,
+      "function": "deliver_batch",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "shared-batch-delivery"
+      ],
+      "source_line": "zones::with_departure_suppression(state, events, attempted, |state, events, owner| {"
+    },
+    {
+      "file": "crates/engine/src/game/zone_pipeline.rs",
+      "line": 953,
+      "function": "deliver_batch",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "shared-batch-delivery"
+      ],
+      "source_line": "match zones::with_departure_member("
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 871,
+      "function": "with_departure_leaf",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "without_departure_member(state, events, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 881,
+      "function": "with_departure_leaf",
+      "api": "with_departure_suppression",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_suppression(state, events, &[object_id], |state, events, owner| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 882,
+      "function": "with_departure_leaf",
+      "api": "with_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_member(state, events, owner, object_id, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 889,
+      "function": "with_departure_leaf",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "without_departure_member(state, events, |state, events| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 895,
+      "function": "with_departure_leaf",
+      "api": "without_departure_member",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "without_departure_member(state, events, |state, events| body(state, events, None));"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 933,
+      "function": "move_to_zone",
+      "api": "with_departure_leaf",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_leaf(state, events, object_id, to, |state, events, binding| {"
+    },
+    {
+      "file": "crates/engine/src/game/zones.rs",
+      "line": 1442,
+      "function": "move_to_library_at_index",
+      "api": "with_departure_leaf",
+      "classification": "physical owner/member/leaf/resolver call site",
+      "physical_mutation_ids": [
+        "owner-finalization",
+        "after-world-flush",
+        "normal-leaf-authority",
+        "library-leaf-authority",
+        "added-mid-leaf-flush",
+        "owner-allocator-reset",
+        "scope-before-flush",
+        "scope-capturing-ancestor-policy",
+        "leaf-top-barrier",
+        "leaf-consumes-member",
+        "member-error-closure-pop"
+      ],
+      "source_line": "with_departure_leaf("
+    }
+  ],
+  "manual_review_note": "Declaration/impl, return signature and raw string occurrences were excluded explicitly; cfg(test) external modules classified from includes. All three production constructor expressions default to unavailable None; struct-update fixtures inherit their fixture default. All 51 physical owner/member/leaf/barrier callsites found independently and reconciled."
+}

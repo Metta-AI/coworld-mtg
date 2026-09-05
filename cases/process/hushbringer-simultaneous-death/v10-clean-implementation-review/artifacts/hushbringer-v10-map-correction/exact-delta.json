@@ -1,0 +1,136 @@
+{
+  "old_map": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-path-maintainer-map.json",
+    "sha256": "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6"
+  },
+  "new_map": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+    "sha256": "2e3a5345919bfb8de107a37211a23cb18a590b393f7a5290f429f010165830f0"
+  },
+  "scope": "Four route-prose fields; current package metadata only outside rows. No source, test or historical evidence edits.",
+  "row_changes": [
+    {
+      "json_pointer": "/rows/63/production_entry",
+      "row_id": "R3-original-entry-exit-lki",
+      "field": "production_entry",
+      "old": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "new": "Functioning static +2/+2 is established before a public typed ChangeZone spell moves the 1/1 entrant from Hand to Battlefield as 3/3. The 2/2 observer's original entry trigger remains unresolved while public ChangeZone responses move the entrant from Battlefield to Graveyard and then exile the static grant from Battlefield. The original exit LKI is 3/3; the live entrant has reset to 1/1. Resolving the original trigger yields life 21. The separate no-buff sibling applies the static grant to an unrelated creature, creates no qualifying original entry trigger, and remains at life 20."
+    },
+    {
+      "json_pointer": "/rows/63/first_reaching_branch",
+      "row_id": "R3-original-entry-exit-lki",
+      "field": "first_reaching_branch",
+      "old": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "new": "After the static-buffed public Hand-to-Battlefield entry, the unresolved original trigger is answered with Battlefield-to-Graveyard ChangeZone, then the grant is exiled before the original trigger resolves. At original trigger resolution, filter.rs:1489-1501 sees the entrant outside Battlefield, skips the live-object branch, and evaluates the matching cached 3/3 exit LKI against the live 2/2 observer. The designated public exit-LKI mutant reaches the final life assertion at trigger_suppression_event_timing.rs:5152 and fails with 20 instead of 21."
+    },
+    {
+      "json_pointer": "/rows/64/production_entry",
+      "row_id": "R3-original-entry-incarnation",
+      "field": "production_entry",
+      "old": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "new": "The same corrected route as R3-original-entry-exit-lki starts with a functioning static +2/+2 grant before public Hand-to-Battlefield entry, leaves the original observer trigger unresolved, responds with Battlefield-to-Graveyard ChangeZone, and then exiles the grant from Battlefield. Before resolving the original trigger, a public ChangeZoneAll response returns the entrant from Graveyard to Battlefield with the same ObjectId and a different incarnation as 1/1. That new 1/1 entry creates no qualifying trigger. The original trigger still compares its original 3/3 exit LKI to the live 2/2 observer and yields life 21."
+    },
+    {
+      "json_pointer": "/rows/64/first_reaching_branch",
+      "row_id": "R3-original-entry-incarnation",
+      "field": "first_reaching_branch",
+      "old": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "new": "Following the corrected static-grant entry, Graveyard departure, and grant-exile route of R3-original-entry-exit-lki, public Graveyard-to-Battlefield ChangeZoneAll returns the same ObjectId as a new 1/1 incarnation before the original trigger resolves. At that resolution, filter.rs:1489-1501 sees Battlefield but rejects the new incarnation against the original event's entered_incarnation, so it evaluates the original cached 3/3 exit LKI rather than the new live 1/1. The designated public incarnation mutant reaches the final life assertion at trigger_suppression_event_timing.rs:5152 and fails with 20 instead of 21."
+    }
+  ],
+  "complete_json_semantic_delta": [
+    {
+      "json_pointer": "/authoritative_maps/callsite_map",
+      "old": "production-entry-callsite-map.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/canonical",
+      "old": "historical-canonical-reference.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/common_boundary_map",
+      "old": "typed-common-boundary-map.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/constructor_audit",
+      "old": "constructor-audit.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/cr_audit",
+      "old": "cr-audit.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/maintainer_matrix",
+      "old": "production-path-maintainer-map.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/native_library_map",
+      "old": "native-library-public-map.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/source_lineage",
+      "old": "frozen-source/lineage.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json"
+    },
+    {
+      "json_pointer": "/authoritative_maps/verification",
+      "old": "verification-summary.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json"
+    },
+    {
+      "json_pointer": "/rows/63/first_reaching_branch",
+      "old": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "new": "After the static-buffed public Hand-to-Battlefield entry, the unresolved original trigger is answered with Battlefield-to-Graveyard ChangeZone, then the grant is exiled before the original trigger resolves. At original trigger resolution, filter.rs:1489-1501 sees the entrant outside Battlefield, skips the live-object branch, and evaluates the matching cached 3/3 exit LKI against the live 2/2 observer. The designated public exit-LKI mutant reaches the final life assertion at trigger_suppression_event_timing.rs:5152 and fails with 20 instead of 21."
+    },
+    {
+      "json_pointer": "/rows/63/production_entry",
+      "old": "Public entry trigger responds with typed temporary +2/+2 then bounce; original entered incarnation no longer on Battlefield.",
+      "new": "Functioning static +2/+2 is established before a public typed ChangeZone spell moves the 1/1 entrant from Hand to Battlefield as 3/3. The 2/2 observer's original entry trigger remains unresolved while public ChangeZone responses move the entrant from Battlefield to Graveyard and then exile the static grant from Battlefield. The original exit LKI is 3/3; the live entrant has reset to 1/1. Resolving the original trigger yields life 21. The separate no-buff sibling applies the static grant to an unrelated creature, creates no qualifying original entry trigger, and remains at life 20."
+    },
+    {
+      "json_pointer": "/rows/64/first_reaching_branch",
+      "old": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "new": "Following the corrected static-grant entry, Graveyard departure, and grant-exile route of R3-original-entry-exit-lki, public Graveyard-to-Battlefield ChangeZoneAll returns the same ObjectId as a new 1/1 incarnation before the original trigger resolves. At that resolution, filter.rs:1489-1501 sees Battlefield but rejects the new incarnation against the original event's entered_incarnation, so it evaluates the original cached 3/3 exit LKI rather than the new live 1/1. The designated public incarnation mutant reaches the final life assertion at trigger_suppression_event_timing.rs:5152 and fails with 20 instead of 21."
+    },
+    {
+      "json_pointer": "/rows/64/production_entry",
+      "old": "Same public entry-trigger response followed by actual leave and same-ID reentry with a new incarnation.",
+      "new": "The same corrected route as R3-original-entry-exit-lki starts with a functioning static +2/+2 grant before public Hand-to-Battlefield entry, leaves the original observer trigger unresolved, responds with Battlefield-to-Graveyard ChangeZone, and then exiles the grant from Battlefield. Before resolving the original trigger, a public ChangeZoneAll response returns the entrant from Graveyard to Battlefield with the same ObjectId and a different incarnation as 1/1. That new 1/1 entry creates no qualifying trigger. The original trigger still compares its original 3/3 exit LKI to the live 2/2 observer and yields life 21."
+    },
+    {
+      "json_pointer": "/status",
+      "old": "All 67 historical physical mutation rows retained with original build identities: 56 public, 10 private, 1 defensive. Citation corrected; fresh independent review pending.",
+      "new": "Four factual route-prose fields in two rows corrected; all 67 historical mutation evidence payloads and their original build identities retained. Same frozen source. Ongoing fresh independent full review and final committed-worker acceptance remain pending."
+    },
+    {
+      "json_pointer": "/supersedes/path",
+      "old": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/production-path-maintainer-map-v10-reviewed.json",
+      "new": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-path-maintainer-map.json"
+    },
+    {
+      "json_pointer": "/supersedes/reason",
+      "old": "Full selected prior map retained with current citation-only source/status bindings; prior bytes remain immutable.",
+      "new": "Only four current route-prose fields corrected in two rows, plus current package timestamp/status/selection references. All historical evidence and source/build identities are unchanged."
+    },
+    {
+      "json_pointer": "/supersedes/sha256",
+      "old": "c9ff6f2c51063ed8444c7a872f1d43278dc36f4db6c8fa499d1ab3a3746fadad",
+      "new": "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6"
+    },
+    {
+      "json_pointer": "/utc",
+      "old": "2026-09-05T22:56:21.295150+00:00",
+      "new": "2026-09-05T23:19:22.602435+00:00"
+    }
+  ],
+  "unchanged_rows": 65,
+  "evidence_payloads_unchanged": 67,
+  "markdown_changes": "Original complete rendering retained with only its current header and the same four JSON field renderings replaced."
+}

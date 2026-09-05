@@ -1,0 +1,529 @@
+{
+  "inputs": {
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-path-maintainer-map.json": "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/handoff.json": "7067e751025eec10148722e7e121f93c5948ba7b6a8099fb180199fee88d02f2"
+  },
+  "refs": [
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-after-fixes/review-report.json",
+      "expected": [
+        "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd"
+      ],
+      "actual": "ac01ff8a142b7c5bf4ab34b28e3032276b541c4ab023cc35caf530afb844dbcd",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-batched-mutations/audited-results.json",
+      "expected": [
+        "e266178778d3d94b3200d846c9aa881e9efe8e6da331ed291a4999363037d596"
+      ],
+      "actual": "e266178778d3d94b3200d846c9aa881e9efe8e6da331ed291a4999363037d596",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+      "expected": [
+        "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c"
+      ],
+      "actual": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "expected": [
+        "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+      ],
+      "actual": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/format-receipt.json",
+      "expected": [
+        "9e3342a1f7bfb1d93fcf455f5686532fe0edf682b8b193a3a5771ae56fc0232e"
+      ],
+      "actual": "9e3342a1f7bfb1d93fcf455f5686532fe0edf682b8b193a3a5771ae56fc0232e",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/candidate.patch",
+      "expected": [
+        "bce8afb1b9dee80de513227b394581be59d3a0c67bc5feb85fb3807e9c0028e7"
+      ],
+      "actual": "bce8afb1b9dee80de513227b394581be59d3a0c67bc5feb85fb3807e9c0028e7",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/citation-fix.patch",
+      "expected": [
+        "0d33f09cbdf6a255aff33b590b6a762efa012630eeda90729d2775f9346130d4"
+      ],
+      "actual": "0d33f09cbdf6a255aff33b590b6a762efa012630eeda90729d2775f9346130d4",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+      "expected": [
+        "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+      ],
+      "actual": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/receipt.json",
+      "expected": [
+        "fe4d5c640b5f70b0774fcbd95d0c43e65498b8a343087ba6aaaa664d3205d848"
+      ],
+      "actual": "fe4d5c640b5f70b0774fcbd95d0c43e65498b8a343087ba6aaaa664d3205d848",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+      "expected": [
+        "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+      ],
+      "actual": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+      "expected": [
+        "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327"
+      ],
+      "actual": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+      "expected": [
+        "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9"
+      ],
+      "actual": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-path-maintainer-map.json",
+      "expected": [
+        "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6"
+      ],
+      "actual": "16e3f2ca08ccf6f34ef81a2bd7f01b190515d9fd36941f18a71c7dd4cbcec5e6",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/rule-check.json",
+      "expected": [
+        "dc11a01cf728981e43196c2b9d570babbdf9cc0e7f42812a702cd1f18ae8bd1e"
+      ],
+      "actual": "dc11a01cf728981e43196c2b9d570babbdf9cc0e7f42812a702cd1f18ae8bd1e",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+      "expected": [
+        "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee"
+      ],
+      "actual": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+      "expected": [
+        "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+      ],
+      "actual": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-imported-evidence-audit.json",
+      "expected": [
+        "d1c5a36e5710e0953fb11234e00ed2f7efdbababc553f3b67fefe8876276501d"
+      ],
+      "actual": "d1c5a36e5710e0953fb11234e00ed2f7efdbababc553f3b67fefe8876276501d",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-verification-summary.json",
+      "expected": [
+        "e8e79fc4fff2fa756af3d8e7e29cd1cf97a8a59bc8897bfe77b72533ede6b088"
+      ],
+      "actual": "e8e79fc4fff2fa756af3d8e7e29cd1cf97a8a59bc8897bfe77b72533ede6b088",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/frozen-candidate-v10-final/proof-lineage.json",
+      "expected": [
+        "2f1cd286117844d4edcac7029fe092c15b6f151841c1ee960ac5522b5ae1acf6"
+      ],
+      "actual": "2f1cd286117844d4edcac7029fe092c15b6f151841c1ee960ac5522b5ae1acf6",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/imported-evidence-audit.json",
+      "expected": [
+        "f8fd6346ff74e071fd42f3ff1c7601afba252bb0c65447b076bb0e9f3596f816"
+      ],
+      "actual": "f8fd6346ff74e071fd42f3ff1c7601afba252bb0c65447b076bb0e9f3596f816",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/unresolved-review-items.json",
+      "expected": [
+        "fc646b502d5c0a8a57704266eaf43fe5ec4f3a867d21993920b6177be5932a0a"
+      ],
+      "actual": "fc646b502d5c0a8a57704266eaf43fe5ec4f3a867d21993920b6177be5932a0a",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration",
+      "expected": [
+        "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf"
+      ],
+      "actual": "d4cd42e9718570a16acedb3d44c90e0d9f2b3ffcba9841da132baedfde0ea9bf",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/canonical-integration-receipt.json",
+      "expected": [
+        "e8e0d9441284eda1a95f848ae6721dfdea2da542fc6e3b485fde85b2554ead10"
+      ],
+      "actual": "e8e0d9441284eda1a95f848ae6721dfdea2da542fc6e3b485fde85b2554ead10",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/complete-constructor-regex-hits.json",
+      "expected": [
+        "97e6328ed9a9badb03a93e448e102f2b8f8cdfbb5744c93e988bd50aef9f9465"
+      ],
+      "actual": "97e6328ed9a9badb03a93e448e102f2b8f8cdfbb5744c93e988bd50aef9f9465",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/cr-reviewed-audit.json",
+      "expected": [
+        "a352fe942cbbe6064300a71e38905f1f5850118381df5b6f284823e73679da11"
+      ],
+      "actual": "a352fe942cbbe6064300a71e38905f1f5850118381df5b6f284823e73679da11",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/focused-1/receipt.json",
+      "expected": [
+        "8dc4bbfbccdec1196894aa58e15542d10c59f79ea152389ba2204011af34fed1"
+      ],
+      "actual": "8dc4bbfbccdec1196894aa58e15542d10c59f79ea152389ba2204011af34fed1",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/frozen-source/lineage.json",
+      "expected": [
+        "bd75bb9af3c1a28318290be0e7c231ee158dfd2fd994a77eac67e4fb6c935836"
+      ],
+      "actual": "bd75bb9af3c1a28318290be0e7c231ee158dfd2fd994a77eac67e4fb6c935836",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/handoff.json",
+      "expected": [
+        "54644215dadafd430cae007d017b2b419d43f6a1cca1beae127745601eaf28ef"
+      ],
+      "actual": "54644215dadafd430cae007d017b2b419d43f6a1cca1beae127745601eaf28ef",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/manual-constructor-boundary-audit-final.json",
+      "expected": [
+        "2b91951f30139d9cda6ec206eb2095340e683ca648a2fc57de3f3cb071bddaec"
+      ],
+      "actual": "2b91951f30139d9cda6ec206eb2095340e683ca648a2fc57de3f3cb071bddaec",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/native-library-public-map.json",
+      "expected": [
+        "6026cc33c74ec961ac2b565d84f63c166d6270c7a9085d16ad7756513920b185"
+      ],
+      "actual": "6026cc33c74ec961ac2b565d84f63c166d6270c7a9085d16ad7756513920b185",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/production-entry-callsite-map-reviewed.json",
+      "expected": [
+        "65ca6f78e4729e9815f6601239370235f9fc7b92713e5e10658e27a578a697be"
+      ],
+      "actual": "65ca6f78e4729e9815f6601239370235f9fc7b92713e5e10658e27a578a697be",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/production-path-maintainer-map-v10-reviewed.json",
+      "expected": [
+        "c9ff6f2c51063ed8444c7a872f1d43278dc36f4db6c8fa499d1ab3a3746fadad"
+      ],
+      "actual": "c9ff6f2c51063ed8444c7a872f1d43278dc36f4db6c8fa499d1ab3a3746fadad",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/typed-common-boundary-map-reviewed.json",
+      "expected": [
+        "0ed7f3ea4bdc0a4cede05c4f92f79f4ac19a776571e5450294b1f202f7bac55b"
+      ],
+      "actual": "0ed7f3ea4bdc0a4cede05c4f92f79f4ac19a776571e5450294b1f202f7bac55b",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-review-fixes/verification-summary.json",
+      "expected": [
+        "90889073212466f229c7478d115659fe21f93b681ac76a49c33e623037848938"
+      ],
+      "actual": "90889073212466f229c7478d115659fe21f93b681ac76a49c33e623037848938",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/after-snapshot-some-to-live-fallback/outcome.json",
+      "expected": [
+        "8106a65a88ee1d03a48c03de80a463bfe40b25a48b5e47a5352627a821e90c48"
+      ],
+      "actual": "8106a65a88ee1d03a48c03de80a463bfe40b25a48b5e47a5352627a821e90c48",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/before-snapshot-some-to-live-fallback/outcome.json",
+      "expected": [
+        "5ea5daff7f527d95036af307894f9697ad4b7af79bc81a811090cc96c91bdfed"
+      ],
+      "actual": "5ea5daff7f527d95036af307894f9697ad4b7af79bc81a811090cc96c91bdfed",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/root-archive-audit.json",
+      "expected": [
+        "f0b9eeedadf71b8506aca0134aaa5e38e261114654a4983b0d8632288dbaba91"
+      ],
+      "actual": "f0b9eeedadf71b8506aca0134aaa5e38e261114654a4983b0d8632288dbaba91",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_lethal_damage/outcome.json",
+      "expected": [
+        "0cc229e547c3f3d871d93a1590e1da6d711677c45aa61079bcfa9a3b4e8b5d8c"
+      ],
+      "actual": "0cc229e547c3f3d871d93a1590e1da6d711677c45aa61079bcfa9a3b4e8b5d8c",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_role_uniqueness/outcome.json",
+      "expected": [
+        "3fd832d4ede93e94fd96fac854253ebe7b8948dfa040c75f2c12f36a2b40bee1"
+      ],
+      "actual": "3fd832d4ede93e94fd96fac854253ebe7b8948dfa040c75f2c12f36a2b40bee1",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_saga_sacrifice/outcome.json",
+      "expected": [
+        "ed8f71645b0a1be1b85a7127daef275cbb87fd2450a3c6f625c418567bb6f37d"
+      ],
+      "actual": "ed8f71645b0a1be1b85a7127daef275cbb87fd2450a3c6f625c418567bb6f37d",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_unattached_auras/outcome.json",
+      "expected": [
+        "236d5c22bb8ba78b644758fd15f2d86828d8a94738c3b3e7d558eb32457c03ff"
+      ],
+      "actual": "236d5c22bb8ba78b644758fd15f2d86828d8a94738c3b3e7d558eb32457c03ff",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_world_rule/outcome.json",
+      "expected": [
+        "601da9adeccf484c2ced2a50e6812b980abbe98172e0e6a03434c37420777f3a"
+      ],
+      "actual": "601da9adeccf484c2ced2a50e6812b980abbe98172e0e6a03434c37420777f3a",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_defense/outcome.json",
+      "expected": [
+        "0b12a58aa98ef6aeb0300f57f5b3a419e650cdfae4a6eebc878fe8f80d2d33a8"
+      ],
+      "actual": "0b12a58aa98ef6aeb0300f57f5b3a419e650cdfae4a6eebc878fe8f80d2d33a8",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_loyalty/outcome.json",
+      "expected": [
+        "5ef14df242af25ccf3b689ccbbbb96affcdf63007136244984041dd06eb0e4ab"
+      ],
+      "actual": "5ef14df242af25ccf3b689ccbbbb96affcdf63007136244984041dd06eb0e4ab",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/expanded-v10-root-attempt-1/sba-check_zero_toughness/outcome.json",
+      "expected": [
+        "db7cc88654d6dc0553d489de819aa6f2a55b3161064ee6df3c715f4d081417c4"
+      ],
+      "actual": "db7cc88654d6dc0553d489de819aa6f2a55b3161064ee6df3c715f4d081417c4",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/lexical-battle-v10-attempt-1/results.json",
+      "expected": [
+        "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d"
+      ],
+      "actual": "73fd0fd034cfe09fe84e1939bbdfdcb0387df5fa6c359bfd9a7a93d2c6007d5d",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/original-nineteen-proof-index.json",
+      "expected": [
+        "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526"
+      ],
+      "actual": "eba94ec9c4255a431f42fe771fbe2b8823cef25650de991ff4a7e22297cfc526",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-library-mutations/production-path-maintainer-map-final.json",
+      "expected": [
+        "6452f834293d21a56a39a47a625b290ead1dbe0454c54132e85728a5c961c90a"
+      ],
+      "actual": "6452f834293d21a56a39a47a625b290ead1dbe0454c54132e85728a5c961c90a",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-matcher-mutations/audited-results.json",
+      "expected": [
+        "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58"
+      ],
+      "actual": "3a99952a542bdaf98922e9b1e5c092c0ad2561e18b99ae163197ab392f1bfe58",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-mid-leaf-focused/receipt.json",
+      "expected": [
+        "354540b4494a8d094b62732cf65e99fecf4112dd52ed1a220996a3d963a8df5e"
+      ],
+      "actual": "354540b4494a8d094b62732cf65e99fecf4112dd52ed1a220996a3d963a8df5e",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-public-root-audit-final.json",
+      "expected": [
+        "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18"
+      ],
+      "actual": "519e2e272528546ec20a037f4581f0296c41e1a1b05572d45dfefd84e78a9d18",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R2-resolver-barrier-mutation.json",
+      "expected": [
+        "639fdedf715cfcadf470c4f3b3802685c380a1e49a27d2907a90d280bca566fb"
+      ],
+      "actual": "639fdedf715cfcadf470c4f3b3802685c380a1e49a27d2907a90d280bca566fb",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-bounce-exit-controller-mutation.json",
+      "expected": [
+        "4200c61835bd000aa9636f0235ca406f73c479f1f712d27c212b671a3b970e58"
+      ],
+      "actual": "4200c61835bd000aa9636f0235ca406f73c479f1f712d27c212b671a3b970e58",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutation.json",
+      "expected": [
+        "84e2288355f24f6e00b158026cf2e6befa95d41a04c8f4e7c8784df313c8336d"
+      ],
+      "actual": "84e2288355f24f6e00b158026cf2e6befa95d41a04c8f4e7c8784df313c8336d",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutation.json",
+      "expected": [
+        "048e5e3fcc712891d845c8350b61b8e1f88bf5f9634621ef779168c6e964a562"
+      ],
+      "actual": "048e5e3fcc712891d845c8350b61b8e1f88bf5f9634621ef779168c6e964a562",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-oversimplify-exit-controller-mutation.json",
+      "expected": [
+        "54b593081800cbf567b7561bcf6a02299f0767a36456e3eb229fc764ea0f991e"
+      ],
+      "actual": "54b593081800cbf567b7561bcf6a02299f0767a36456e3eb229fc764ea0f991e",
+      "matches": true,
+      "classification": "immutable-evidence"
+    },
+    {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/audited-results.json",
+      "expected": [
+        "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522"
+      ],
+      "actual": "6123afad5b7244548d50f37012ef5179ea492aad43b58c35c35ad4e5a624e522",
+      "matches": true,
+      "classification": "immutable-evidence"
+    }
+  ]
+}

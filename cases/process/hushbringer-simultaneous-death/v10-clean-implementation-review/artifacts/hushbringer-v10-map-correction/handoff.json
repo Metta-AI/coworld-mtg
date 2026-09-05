@@ -1,0 +1,199 @@
+{
+  "role": "Existing artifact author correcting factual maintainer metadata during an independent full review",
+  "status": "Metadata correction sealed for independent review; no source/test change or new implementation round.",
+  "utc": "2026-09-05T23:19:22.602435+00:00",
+  "checkout": "/home/ubuntu/repos/phase-verifiable-loop",
+  "branch": "codex/hushbringer-simultaneous-death",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "source_manifest_sha256": "ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847",
+  "source_freeze": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/receipt.json",
+    "sha256": "fe4d5c640b5f70b0774fcbd95d0c43e65498b8a343087ba6aaaa664d3205d848"
+  },
+  "source_archive": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/source-archives/ee906941362b78f3ad170fc733a4ca34ee28fcd571f7fafe14f3c900e7204847.tar.gz",
+    "sha256": "c3bf3d53ed323a6de4374a2cba083ef4c8e19a8adcf54192ce8a4a5ea64fc862"
+  },
+  "source_changed": false,
+  "tests_changed": false,
+  "source_files_verified": 2051,
+  "prior_handoff": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/handoff.json",
+    "sha256": "7067e751025eec10148722e7e121f93c5948ba7b6a8099fb180199fee88d02f2"
+  },
+  "prior_handoff_markdown": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/handoff.md",
+    "sha256": "b9fd10177c17df0c6e281f60313cb622bce1f068d3b01df32aec9aa82be7532f"
+  },
+  "prior_source_manifest_sha256": "fdc9dac52471ca15ab794f43d8f0f2608abab27af3b33e84581860e6105c7b86",
+  "complete_candidate_diff": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/candidate.patch",
+    "sha256": "bce8afb1b9dee80de513227b394581be59d3a0c67bc5feb85fb3807e9c0028e7"
+  },
+  "same_source_lineage": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+    "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+  },
+  "factual_correction": {
+    "rows": [
+      "R3-original-entry-exit-lki",
+      "R3-original-entry-incarnation"
+    ],
+    "fields": [
+      "production_entry",
+      "first_reaching_branch"
+    ],
+    "field_count": 4,
+    "description": "Static +2/+2 before real public entry, unresolved original trigger, real Battlefield-to-Graveyard ChangeZone response, exile of the grant, and optional Graveyard-to-Battlefield same-ID new-incarnation 1/1. Original exit LKI 3/3 versus observer 2/2; payoff 21, no-buff sibling 20.",
+    "exact_delta": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/exact-delta.json",
+      "sha256": "e3cd3808c5886b01ff5c0235ab5497bf7748c630769ba531ce02bb4afc238367"
+    },
+    "full_patch": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/exact-delta.patch",
+      "sha256": "ac87f90a31c6c11127c628ff0024627bfa4298aeadfdc581385cfa75bb4e1e69"
+    }
+  },
+  "maintainer_matrix": {
+    "artifact": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+      "sha256": "2e3a5345919bfb8de107a37211a23cb18a590b393f7a5290f429f010165830f0"
+    },
+    "markdown": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.md",
+      "sha256": "f1a148ae7c780b863e16c8e79f9dc84cacdfa097b394b603c5f5879b7840a114"
+    },
+    "rows": 67,
+    "historical_public_mutations": 56,
+    "historical_private_mutations": 10,
+    "historical_defensive_mutations": 1,
+    "historical_evidence_payloads_unchanged": 67,
+    "qualification": "Historical runtime/build/mutation evidence retains its original source and executable identity. Current source differs from fdc9 only by the exact citation token at engine_resolution_choices.rs:3528, proven by frozen-source/lineage.json. No runtime, compilation, or mutation experiment was run on the current source identity.",
+    "current_independent_verdict": "pending ongoing independent full review"
+  },
+  "authoritative_maps": {
+    "constructor_audit": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+    "callsite_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+    "native_library_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+    "common_boundary_map": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+    "maintainer_matrix": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+    "cr_audit": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+    "source_lineage": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+    "verification": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+    "canonical": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json"
+  },
+  "authoritative_map_bindings": {
+    "constructor_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/constructor-audit.json",
+      "sha256": "129c4d3a017404e39a9efb27cceaf0bf3e50665db81af0653f4c9486ea95cb9c"
+    },
+    "callsite_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/production-entry-callsite-map.json",
+      "sha256": "e26a11c06ddfe934686a0ead92430dc3d96cc2956ebc42b4b3673c50a95849e9"
+    },
+    "native_library_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/native-library-public-map.json",
+      "sha256": "a697b7b10fdab0197942ce28459bce647311a8be8c6d750abb2c5ec596cd0327"
+    },
+    "common_boundary_map": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/typed-common-boundary-map.json",
+      "sha256": "fd6394c4b9a3d64e97621878940fc9df43ca2c08192d0287a0d5627217af47ee"
+    },
+    "maintainer_matrix": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/production-path-maintainer-map.json",
+      "sha256": "2e3a5345919bfb8de107a37211a23cb18a590b393f7a5290f429f010165830f0"
+    },
+    "cr_audit": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+    },
+    "source_lineage": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/frozen-source/lineage.json",
+      "sha256": "09127010719b16049f09f5dccfd0030502d913478b03abb2ba529d4ec0dc225e"
+    },
+    "verification": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+      "sha256": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+    },
+    "canonical": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+      "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+    }
+  },
+  "authoritative_selection": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/reviewed-map-selection.json",
+    "sha256": "2b23a1700df9eaf91eeea860ea632751878d03fbad6f37324195db16f5abe78c"
+  },
+  "source_and_evidence_verification": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/source-evidence-audit.json",
+    "sha256": "0db748d40270f1262d5e5d4df94fdc65ca71cac182dcdb77bb3efedc7a619a9c"
+  },
+  "preservation": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/preservation-audit.json",
+    "sha256": "b9c818a4862d7e27a29897289ca88d172530750fc155db560f6f12500116758a"
+  },
+  "map_consistency": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-map-correction/final-map-consistency-audit.json",
+    "sha256": "9ecd41e47ca2fcf0cb8aa84e12d51c7825f2fbac618f7fc7a8202b4b65391153"
+  },
+  "verification": {
+    "current_round": "Source/archive/hash and exact map-delta verification only. No compilation, runtime tests, generation, mutations or source formatting executed.",
+    "unchanged_prior_verification": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/verification-summary.json",
+      "sha256": "d7ac92e613ecc114c52688240a58e1cee7784bc56513cdf82b7069fb71be6bb2"
+    },
+    "new_compilation": false,
+    "new_runtime_tests": false,
+    "new_mutations": false,
+    "new_card_generation": false,
+    "new_formatter_execution": false
+  },
+  "historical_canonical": {
+    "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/historical-canonical-reference.json",
+    "sha256": "5a60f2211bfa56f935b11ef67d8385d9a9b9ad3ac3ad737631936d786611259d"
+  },
+  "parser_gate": "No parser source, variants, data, support assertions, allowlists, corpus coverage or card support changed. No current-round generation or support claim; historical generation evidence is explicitly reused.",
+  "risks_and_retained_limits": [
+    "All previous ten named rule limits remain: aggregate grouping, inherited-target grouping, direct delayed suppression, full cross-pause grouping, ambiguous origins, intrinsic merge/nested layer worlds, co-dying off-zone Any source availability, aggregate paid continuation, cast-created regeneration persistence, and resumed duplicate dispatch.",
+    "The 20 ignored desired diagnostics remain diagnostic-only. Prior fdc9 explicit execution was 2 pass/18 fail with the same prior candidate failure set; fixed original was 0 pass/20 fail. These are reused historical outcomes through exact comment-only lineage, not a new execution or support promotion.",
+    "The existing native resumed explicit-target no-Hush count of exactly two remains narrow compatibility, not the desired one. Seeded regeneration tests prove first-destruction interception only, not full shield lifetime.",
+    "Prior tracked-set empty-choice life23 versus selected22 remains measured original-production compatibility.",
+    "Zero legal Battle protector delivery has only a defensive lower-level mutation: shipped formats terminate before a legal nonterminal public zero-opponent path. Public healthy/legal/multiple-choice/terminal/attacked/phased controls remain separate.",
+    "Inherited broad non-Siege zero-defense stack guard and inherited non-Siege present-protector handling are not expanded or certified as complete rules behavior.",
+    "Legacy None snapshot fallback may rescan functioning sources, including no-suppressor contexts. Five Scute cross-source tests are batching behavior checks, not throughput evidence; historical /tmp/gamestate.json benchmark input is unavailable.",
+    "Known fixed-base workspace Clippy manabrew-compat SetFullControl E0004 remains out of scope. Upstream integration follows acceptance of the fixed-base experiment.",
+    "No parser/db/card support increase, no database fixture adaptation, no UI/card-data support promotion, and no throughput claim."
+  ],
+  "cr_audit": {
+    "artifact": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/cr-audit.json",
+      "sha256": "c2249bb86bc18db7626385558a1b4b62d29897d61ddce4a390e4a5841a7abf58"
+    },
+    "annotation_count": 185,
+    "current_round_changes": 0,
+    "qualification": "Unchanged citation-fix author audit; independent reviewer controls the current full-review verdict."
+  },
+  "reported_metadata_finding": {
+    "status": "corrected by artifact author; awaiting independent review",
+    "source_or_test_defect_claim": false,
+    "linked_public_exit_lki_mutant_log": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-exit-lki-mutant/1.log",
+      "sha256": "e2b265eb09c8f37ef74379a601187a1a43c94df33e7a8c3cd29b1959731d3ca6"
+    },
+    "linked_public_incarnation_mutant_log": {
+      "path": "/home/ubuntu/coworld-migration-20260904/hushbringer-v9-r2-r3-mutations/R3-original-entry-incarnation-mutant/1.log",
+      "sha256": "3e0b334ebf8fcf0c148f56a581c1f42db38eb4a4ca21b73b80045bec63fd95db"
+    }
+  },
+  "implementation_ready_for_acceptance": false,
+  "acceptance": false,
+  "current_independent_review": "in progress by /root/hushbringer_full_review_final",
+  "pending_followup": [
+    "Independent full reviewer audits the corrected authoritative inputs against the same frozen source.",
+    "Root retains final clean committed-worker compilation, frozen-checker acceptance and Git ownership."
+  ],
+  "source_ownership": "Not acquired for this metadata-only task; remains with root. No source writes occurred.",
+  "commits": false,
+  "pushes": false,
+  "old_sealed_artifacts_modified": false
+}
