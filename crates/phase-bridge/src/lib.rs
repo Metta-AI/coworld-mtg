@@ -40,7 +40,7 @@ pub use view::{
 };
 
 /// The exact Phase fork revision used by this adapter.
-pub const PHASE_REVISION: &str = "b5f468588240df079cad95b94467038ffa6d0282";
+pub const PHASE_REVISION: &str = "54227f4527a0b45b01eb3f819d262ee49b665810";
 
 pub const SPECTATOR_ID: u8 = u8::MAX;
 

@@ -10,7 +10,7 @@ private-corpus-tests = []
 
 [dependencies]
 loop-contract = { path = "../loop-contract" }
-phase-engine = { package = "engine", git = "https://github.com/nishu-builder/phase.git", rev = "b5f468588240df079cad95b94467038ffa6d0282" }
+phase-engine = { package = "engine", git = "https://github.com/nishu-builder/phase.git", rev = "54227f4527a0b45b01eb3f819d262ee49b665810" }
 rand-chacha-phase = { package = "rand_chacha", version = "0.9", features = ["serde"] }
 serde.workspace = true
 serde_json.workspace = true
