@@ -136,3 +136,9 @@ The [engine/corpus publication boundary](corpus-pin-boundary/README.md) adds the
 The [third full implementation review](v10-clean-implementation-review/README.md) passes both gates with no outstanding findings. It verifies the corrected R3 fixture descriptions and all linked evidence. The exact reviewed source is committed; final committed-worker comparison and acceptance remain pending at this checkpoint.
 
 The [fixed-checker acceptance](fixed-checker-acceptance/README.md) records the actual clean committed-worker comparison, independent bound approval and successful acceptance command. The generated case note and attribution now appear in the accepted evidence catalog. Production integration remains a separate verification step.
+
+The [production integration](production-integration/README.md) preserves newer
+Phase main, passes the merged engine's full gates, and publishes the repaired
+engine with a matching private corpus. Coworld's complete checks and a separate
+ten-case campaign pass. These receipts retain the original acceptance identity
+and distinguish unchanged serialized corpus payloads from a fresh parser export.

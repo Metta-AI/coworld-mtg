@@ -1,0 +1,22 @@
+{
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "upstream": "1cf344efe83c871a362bf04e8444e820124c21f8",
+  "repair": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "index_tree": "7cdb208cc3187341e478c577cdc775ed6a66a5dc",
+  "repair_paths": 30,
+  "upstream_paths": 31,
+  "overlap": [
+    "crates/engine/src/game/casting_costs.rs",
+    "crates/engine/src/game/effects/mod.rs",
+    "crates/engine/src/game/trigger_matchers.rs",
+    "crates/engine/tests/integration/main.rs"
+  ],
+  "overlap_verification": "Exact upstream patch applies cleanly to repaired files and reproduces all four automatic-merge files byte for byte",
+  "other_changed_files": "Exactly corresponding repair or upstream bytes; no manual resolution",
+  "source_manifest_sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+  "source_files": 3257,
+  "format": "pass",
+  "diff_check": "pass",
+  "runtime_verification": "pending",
+  "commit": "pending"
+}

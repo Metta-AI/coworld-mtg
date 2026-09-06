@@ -64,9 +64,13 @@ ssh nishadsingh-box-4. Migration verified 3,902 files before local cleanup and
 freed 12,964,511,744 bytes on the Mac. The [workspace guide](ec2-workspace.md)
 records the retained locations.
 
-Remaining publication work is to verify the clean automatic integration with
-newer Phase commits, publish that engine revision, and update Coworld's Phase
-pin together with its matching private corpus archive. The integration is
-running its full checks in a separate checkout. Existing published harness
-source already passed the Rust private-corpus suite and both browser tests;
-those checks will run again for the new production pin.
+The repair is now integrated with newer Phase main at 54227f4527a0b45b01eb3f819d262ee49b665810.
+Coworld pins that revision together with a matching content-addressed private
+corpus archive, verified after upload. The integrated engine passes workspace
+Clippy, formatting, 19,783 engine tests and card generation.
+Coworld's complete check script passes, including private-corpus and browser
+tests. A separate production campaign passes all ten authored cases twice.
+The [publication record](../cases/process/hushbringer-simultaneous-death/production-integration/README.md)
+keeps these checks distinct from the original accepted experiment. The private
+corpus retains its earlier serialized payloads; this publication validates their
+compatibility rather than claiming a fresh parser export.

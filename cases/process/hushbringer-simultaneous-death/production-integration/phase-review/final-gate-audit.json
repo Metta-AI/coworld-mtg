@@ -1,0 +1,224 @@
+{
+  "utc": "2026-09-06T04:12:50.536410+00:00",
+  "reviewer": "/root/hushbringer_main_integration_review",
+  "findings": [],
+  "source_tree": "7cdb208cc3187341e478c577cdc775ed6a66a5dc",
+  "source_files_reverified": 3257,
+  "source_manifest_sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+  "source_unchanged": true,
+  "index_unchanged_from_checkpoint": true,
+  "checkpoint_receipt_sha256": "f7cb10b90aaf8b3c09510e8689f28a8440f7512e8cf2c8616e9663a033317e26",
+  "checkpoint_artifacts_rehashed": 10,
+  "verification_receipt_sha256": "e28b2a86c160fa7e2d3862c5a28f24dc9cd01edf533f21c5c4ae3ad062ff726d",
+  "verification_script_sha256": "8264847917efe8e0eabd591ee17fbe52287819aaa11f4eb605056bc5846aabe4",
+  "verification_commands": [
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "started": "2026-09-05T23:28:48.774668+00:00",
+      "finished": "2026-09-05T23:45:04.172712+00:00",
+      "log": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-0.log",
+      "log_sha256": "d0ad8716db56bc9cd1b373a157271975c95a1bc9830cd22f125b8c227dab8e2b"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "engine",
+        "--locked"
+      ],
+      "exit": 0,
+      "started": "2026-09-05T23:45:04.173007+00:00",
+      "finished": "2026-09-05T23:53:17.624976+00:00",
+      "log": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-1.log",
+      "log_sha256": "f58231b1da0d4d07f71707d786c0093cc01a4c0ae81e3e6b007445bf5e355154"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/gen-card-data.sh"
+      ],
+      "exit": 0,
+      "started": "2026-09-05T23:53:17.627658+00:00",
+      "finished": "2026-09-06T00:12:43.513671+00:00",
+      "log": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-2.log",
+      "log_sha256": "53829b374dfeb00ef57b34eadc57d3bf0aec5a0a0cc8a9948e8041ac298ab24a"
+    }
+  ],
+  "full_individual_test_rows_reconciled": [
+    {
+      "suite": "unittests src/lib.rs (target/debug/deps/engine-75616de5304a0381)",
+      "passed": 16592,
+      "ignored": 7,
+      "failed": 0,
+      "measured": 0,
+      "filtered_out": 0,
+      "individual_result_rows_reconciled": true
+    },
+    {
+      "suite": "unittests src/bin/coverage_parse_diff.rs (target/debug/deps/coverage_parse_diff-24467f1f92b3e311)",
+      "passed": 6,
+      "ignored": 0,
+      "failed": 0,
+      "measured": 0,
+      "filtered_out": 0,
+      "individual_result_rows_reconciled": true
+    },
+    {
+      "suite": "unittests src/bin/set_check.rs (target/debug/deps/set_check-288b0c0e0c171241)",
+      "passed": 9,
+      "ignored": 0,
+      "failed": 0,
+      "measured": 0,
+      "filtered_out": 0,
+      "individual_result_rows_reconciled": true
+    },
+    {
+      "suite": "tests/integration/main.rs (target/debug/deps/integration-491a5623890bf244)",
+      "passed": 3176,
+      "ignored": 22,
+      "failed": 0,
+      "measured": 0,
+      "filtered_out": 0,
+      "individual_result_rows_reconciled": true
+    },
+    {
+      "suite": "engine",
+      "passed": 0,
+      "ignored": 7,
+      "failed": 0,
+      "measured": 0,
+      "filtered_out": 0,
+      "individual_result_rows_reconciled": true
+    }
+  ],
+  "ignored_names_comparison": [
+    {
+      "suite": "unittests src/lib.rs (target/debug/deps/engine-75616de5304a0381)",
+      "historical_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/1.log",
+      "historical_log_sha256": "d5c82205cbc522b2f9e9cb3cbe50b32ad87d6cc619988e452272b66f70240345",
+      "names": [
+        "game::combat::tests::combat_tax_profile_gate_go_wide_board",
+        "game::stack::tests::batch_resolve::real_scute_board_resolution_is_not_full_eval_per_token",
+        "game::triggers::tests::ltb_observer_cross_pause_co_departed_deferred",
+        "game::triggers::tests::scute_swarm_throughput",
+        "parser::oracle_ir::feature::pool_structure_census::census",
+        "parser::swallow_check::tests::optional_you_may_accepts_awaken_blood_avatar_additional_cost",
+        "parser::swallow_check::tests::optional_you_may_accepts_narset_attack_cast_copy"
+      ],
+      "exact_same_ignored_names": true
+    },
+    {
+      "suite": "tests/integration/main.rs (target/debug/deps/integration-491a5623890bf244)",
+      "historical_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/2.log",
+      "historical_log_sha256": "de53aa608a6c8e976bb98a986ff2cfcd744b6e7e5debef0a88cd263f65591973",
+      "names": [
+        "squirrel_perf_probe::probe_declare_blockers",
+        "squirrel_perf_probe::probe_squirrel_board",
+        "trigger_suppression_event_timing::known_gap_aggregate_paid_continuation_should_resume_sequential_sibling",
+        "trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection",
+        "trigger_suppression_event_timing::known_gap_aggregate_payment_should_group_completed_selection_reversed",
+        "trigger_suppression_event_timing::known_gap_ambiguous_registered_delayed_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_hush_reversed",
+        "trigger_suppression_event_timing::known_gap_cast_created_regeneration_shield_should_survive_to_destroy_traveler_reversed",
+        "trigger_suppression_event_timing::known_gap_cross_pause_batch_should_share_full_group_suppression",
+        "trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures",
+        "trigger_suppression_event_timing::known_gap_inherited_target_sacrifice_should_group_both_departures_reversed",
+        "trigger_suppression_event_timing::known_gap_legacy_direct_delayed_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_dies_or_exiled_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_dies_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_enters_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_legacy_when_leaves_filtered_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_merged_intrinsic_flush_should_preserve_later_member_world",
+        "trigger_suppression_event_timing::known_gap_restricted_registered_delayed_should_be_suppressed",
+        "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once",
+        "trigger_suppression_event_timing::known_gap_resumed_change_zone_no_hush_should_pay_once_reversed"
+      ],
+      "exact_same_ignored_names": true
+    },
+    {
+      "suite": "engine",
+      "historical_log": "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-execution/final-gates-2/4.log",
+      "historical_log_sha256": "1d386f91b82c9913eaf1a5fd39f8835e951e9cf4396e921144ca900180e1fae1",
+      "names": [
+        "crates/engine/src/game/scenario_db.rs - game::scenario_db (line 8)",
+        "crates/engine/src/parser/oracle_nom/bridge.rs - parser::oracle_nom::bridge::split_once_on_lower (line 58)",
+        "crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::scan_at_word_boundaries (line 889)",
+        "crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::scan_preceded (line 1112)",
+        "crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::scan_split_at_phrase (line 1074)",
+        "crates/engine/src/parser/oracle_nom/primitives.rs - parser::oracle_nom::primitives::split_once_on (line 1147)",
+        "crates/engine/src/testing.rs - testing::assert_engine_eq (line 15)"
+      ],
+      "exact_same_ignored_names": true
+    }
+  ],
+  "suppression_suite": {
+    "passed": 196,
+    "ignored": 20
+  },
+  "upstream_boundary_tests_passed": [
+    "casting_affordability_action_consistency::targeted_auto_cast_enters_mana_payment_for_costed_tap_mana_ability",
+    "casting_affordability_action_consistency::targeted_cast_with_no_payable_mandatory_cost_branch_is_not_offered",
+    "kozilek_broken_reality_manifest_from_hands::kozilek_cast_trigger_manifests_two_from_each_targeted_players_hand",
+    "scroll_of_fate_manifest_from_hand::scroll_of_fate_activated_ability_manifests_a_chosen_noncreature_hand_card",
+    "power_up_keyword::marvel_boy_triggers_only_on_power_up_activation"
+  ],
+  "card_generation": {
+    "indexed_records": 35802,
+    "token_presets_log": 2870,
+    "current_card_data_sha256": "43f7a32de97a23c14c9507bf56a9cd56d92674a4a770227194e9e63771f1a22d",
+    "indexed_records_independently_counted": true,
+    "generated_inputs_restored_and_rehashed": [
+      {
+        "path": "crates/engine/data/known-tokens.toml",
+        "before": "0406a551ad1e70e25c91c868d70845de47918086bdfb6dc7bf5c16f100bd12fc",
+        "generated": "1453a08584b55a483be503c439f1e549fb8263dd278ff0ecc67f454597fec158"
+      },
+      {
+        "path": "crates/engine/data/oracle-subtypes.json",
+        "before": "9b28e522611e1684254409ab20a360e284ee0dc0f00e8eadf93c071724df0472",
+        "generated": "b8abc528906b7310d763dcbafb920724dc164054f38a8a7d4495b5d8dd6da019"
+      }
+    ],
+    "generated_intermediate_hashes": "Recorded by the root verifier; superseded generated input bytes are not independently rehashed here. Restored current bytes independently match the original source manifest."
+  },
+  "independent_noncompiling_checks": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-format-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "original_fixed_experiment_binaries_and_plan_rehashed": true,
+  "source_only_checkpoint_preserved": true,
+  "extra_compilation": false
+}

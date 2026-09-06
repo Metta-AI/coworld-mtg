@@ -1,0 +1,70 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "55b0bab7da61ec3a8fb59a711118fc9e38cdc844fd7bec88a4c5f1cb4b1ae2d4",
+  "binary_sha256": "b125d632e9a93b375f095e1bd1e5bc31df996f9615d87bdb803adf411d75d9a9",
+  "declared_phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        20
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Rancor",
+          "owner": "player",
+          "zone": "hand",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Grizzly Bears",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 3,
+          "name": "Doom Blade",
+          "owner": "opponent",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "bear": 2,
+        "doom": 3,
+        "rancor": 1
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "e6a35f3f62e7e1eb9bdb308d3defb094ce03027942b5cc53e99a955c8c4ef75c"
+      },
+      {
+        "operation_index": 1,
+        "state_sha256": "188d83d0a3229a8a4361c8d9a75d2188f9c6822cf9736286e6c1162235f2e8e2"
+      },
+      {
+        "operation_index": 2,
+        "state_sha256": "4a79006d1cb5d699ebfacdef4912e04916429b4b5a3d3fbe25506a3d350daa87"
+      },
+      {
+        "operation_index": 3,
+        "state_sha256": "4a79006d1cb5d699ebfacdef4912e04916429b4b5a3d3fbe25506a3d350daa87"
+      }
+    ]
+  }
+}

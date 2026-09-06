@@ -1,0 +1,26 @@
+{
+  "utc": "2026-09-05T23:43:29.204394+00:00",
+  "reviewer": "/root/hushbringer_main_integration_review",
+  "review_kind": "Interim source-only integration review; validation pending",
+  "findings": [],
+  "source_tree": "7cdb208cc3187341e478c577cdc775ed6a66a5dc",
+  "source_manifest_sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+  "source_files_reverified_at_close": 3257,
+  "source_unchanged": true,
+  "runtime_verification": "Root-owned combined gates are still running; no completed combined Clippy/test/card-generation result is certified in this interim receipt. Root will request independent receipt review when complete.",
+  "reviewed_repair_identity": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "approval_scope": "No new experiment or final merged-source acceptance approval. Source preservation and integration semantics only.",
+  "writes_confined_to": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review",
+  "artifacts": {
+    "evidence-identity-audit.json": "0aa1c0c8f671db31b2be071d56c37e0283f6656a261f7bb652a1d5218b032c3d",
+    "independent-preservation-audit.json": "0bb7df9bbed3495082fba49e1d7dd60458e36fa753ee8c8fc117fd6cd0c0e7be",
+    "index-entries.txt": "faf3ab03076a4d95afb68cc9491cce012d868ce8759405ed5d2cc7a709461ff4",
+    "preservation-audit.py": "87291e11991082102c4efc8203b5d338b8d24715de7eb0aa322622604661e330",
+    "repair-integrated.patch": "457395709304ef66bd6c150e610f13a751f3ef07eaa07958e8876898f0f9c60b",
+    "source-review.json": "405d6a21d29597423a5152b43bb8260e7db16e824136c504b2fa051f8b1215e8",
+    "source-review.md": "0e5c20aa39082f51306e5d94487b7ace187646fbf00b6e47812a5287c78bdb48",
+    "tree-audit.json": "f9fff7c5d872b997c7281863a66a5bb1dd5c2cc2703a57d43583697287a2699a",
+    "upstream-integration.patch": "c2afe21548b546ad78c04fd13d0dc88d977f174336f3a78cd161fbf5937997e0",
+    "whole-tree-parent-audit.json": "7f498de71fbee499b194f50999678ab449cbd1c2bc978b0ee205a580c7c21bc5"
+  }
+}

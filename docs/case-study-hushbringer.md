@@ -150,11 +150,6 @@ preserved checker to evaluate both workers. The case, corpus and expectation
 cannot change between them. Acceptance is evidence about those stated cases;
 it is not a proof that every game now follows every rule.
 
-The executed before/after results and final repair scope are recorded separately
-in the campaign artifacts. This narrative should only call the repair accepted
-after the independent implementation review and the acceptance receipt exist.
-
-
 The loop now has an [accepted record for this repair](../cases/evidence/hushbringer-simultaneous-death/case-note.md).
 A fresh build of the clean reviewed commit produced zero Spirits where the
 original worker produced one. The same preserved checker verified that result
@@ -168,3 +163,9 @@ This is the useful claim for the post: one stated rule violation was repaired
 under an unchanged test of that claim, with a record of the evidence and the
 process improvements it caused. Production integration is checked separately,
 and the named unsupported behaviors remain visible.
+
+The [production publication checks](../cases/process/hushbringer-simultaneous-death/production-integration/README.md)
+also pass. They integrate the repair with newer engine work, pair the engine
+pin with a compatible private corpus, and exercise the application and all ten
+authored cases. Keeping this publication record separate preserves the exact
+checker and workers behind the original acceptance claim.

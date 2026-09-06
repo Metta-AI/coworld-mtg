@@ -1,0 +1,62 @@
+{
+  "utc": "2026-09-05T23:40:09.983177+00:00",
+  "reviewer": "/root/hushbringer_main_integration_review",
+  "scope": "Independent source integration review of automatic merge only",
+  "status": "Source review complete; combined validation pending",
+  "findings": [],
+  "source_tree": "7cdb208cc3187341e478c577cdc775ed6a66a5dc",
+  "source_manifest_sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+  "reviewed_surface": {
+    "complete_upstream_integration_diff_paths": 31,
+    "repair_paths_preserved": 30,
+    "overlap_files": 4,
+    "upstream_only_paths": 27,
+    "repair_only_paths": 26,
+    "prior_full_repair_review_inherited_sha256": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2"
+  },
+  "semantic_checks": [
+    {
+      "path": "crates/engine/src/game/casting_costs.rs",
+      "line": 6358,
+      "assessment": "Upstream removes only the obsolete manual-mana-ability precondition from pay_and_push_adventure. Existing feasibility and auto-tap gates route to the same PendingCast payment authority. Repair component validation, append identity, component slicing, and both finalizers remain intact. Upstream clone-only discard/exile/life affordability previews do not add sacrifice provenance or bypass validation; CancelCast remains explicitly authorized by the repaired preflight."
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 6406,
+      "assessment": "ChooseFromZone Each owns its existing APNAP iteration and accumulated tracked set; excluding it from a second per-player fanout retains one continuation. The repair without_departure_member resolver boundary and completed departure owners remain in place. Hand/library Manifest entry through morph and zone_pipeline has no Battlefield departure subject. Manifest fixture object_source None preserves its original library-top behavior."
+    },
+    {
+      "path": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 547,
+      "assessment": "PowerUp adds a KeywordAbilityActivated registry key using the existing keyword matcher. The repaired ordinary-collection dispatcher delegates this mode unchanged; death suppression applies only to matching Battlefield-to-Graveyard zone-change clauses. Marvel Boy activation and ETB modes remain separate."
+    },
+    {
+      "path": "crates/engine/tests/integration/main.rs",
+      "line": 48,
+      "assessment": "All three upstream modules and the repair trigger_suppression_event_timing module are retained exactly once, with their source files preserved from the appropriate parent. No duplicate or omitted registration was introduced."
+    }
+  ],
+  "scope_boundaries": [
+    "This integration source is not the fixed fa0eb accepted worker experiment. The upstream parser, Manifest, action affordance, CI and adapter changes retain upstream provenance. No new Hushbringer parser or card-coverage claim follows from merging them.",
+    "The fixed experiment retains repair revision fa0ebfe88db224ebd32624bb96ef033d338c2d8c, baseline worker e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98, checker f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1, candidate worker f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784 and the frozen original corpus.",
+    "All ten approved limitations and ignored diagnostics remain; merged-source validation cannot broaden those claims or relabel historical runtime/build evidence.",
+    "No source, build, test, evidence input, commit or publication mutation was performed by this reviewer. Only fresh review artifacts were written."
+  ],
+  "inputs": {
+    "/home/ubuntu/repos/phase-hushbringer-publish/AGENTS.md": "728c0a332f4bb922a3c48b46b33014bf44f82ea09f5cc5c092076449e4673b05",
+    "/home/ubuntu/repos/phase-hushbringer-publish/CLAUDE.md": "728c0a332f4bb922a3c48b46b33014bf44f82ea09f5cc5c092076449e4673b05",
+    "/home/ubuntu/repos/phase-hushbringer-publish/.claude/skills/review-impl/SKILL.md": "a806b3751712527e3c74ee7ca5ce5f66a84117f578a706c2da47285f794780e1",
+    "/home/ubuntu/repos/phase-hushbringer-publish/.cargo/config.toml": "d0efb995770ad964d022f8c58a19a7e01ca5de25d1b6386bdf4f9dcb01fa30c5",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-review-v10-final/review-report.json": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-acceptance-review/acceptance-review.json": "e810b0f4371c427f512e474d28a032ddac5b27521e042dbe7a289986dcdc1ae0",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-v10.md": "90ae9f6e71f08661db71cce7805b334b5df2a8cf28ccd525f521f8be7a89d04a",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-plan-review-v10.md": "15ec8a03f9780b996368b72039f051c279d0b833e0ca6e3e6b9f3745d92f6b97",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-implementation-v10.md": "36e76c24a18559f997e06ecffd3a2e5b2d0bef044dfa56634181559b9c29e5ec",
+    "/home/ubuntu/coworld-migration-20260904/hushbringer-v10-citation-fix/handoff.json": "7067e751025eec10148722e7e121f93c5948ba7b6a8099fb180199fee88d02f2",
+    "/home/ubuntu/coworld-migration-20260904/final-acceptance-execution/receipt.json": "1acf0612930d45c65c534fffdc330d1e3c597b983a0f2cb93f5300b806ab3df6",
+    "/home/ubuntu/repos/phase-verifiable-loop/docs/MagicCompRules.txt": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+    "/home/ubuntu/coworld-migration-20260904/phase-main-integration/source.json": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+    "/home/ubuntu/coworld-migration-20260904/phase-main-integration/merge-audit.json": "60ecf8dadd5bb7fd37665f923d119901db128f9ab1082953c5b603541f5e6931",
+    "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verify.py": "8264847917efe8e0eabd591ee17fbe52287819aaa11f4eb605056bc5846aabe4"
+  }
+}

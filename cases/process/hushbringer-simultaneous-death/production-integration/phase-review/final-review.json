@@ -1,0 +1,97 @@
+{
+  "utc": "2026-09-06T05:09:50.962548+00:00",
+  "reviewer": "/root/hushbringer_main_integration_review",
+  "verdict": "CLEAN",
+  "findings": [],
+  "scope": "Independent source-integration review and completed combined-gate receipt audit for automatic merge tree only",
+  "source_tree": "7cdb208cc3187341e478c577cdc775ed6a66a5dc",
+  "source_manifest_sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+  "source_files_reverified": 3257,
+  "source_unchanged": true,
+  "source_review_checkpoint_sha256": "405d6a21d29597423a5152b43bb8260e7db16e824136c504b2fa051f8b1215e8",
+  "source_review_receipt_sha256": "f7cb10b90aaf8b3c09510e8689f28a8440f7512e8cf2c8616e9663a033317e26",
+  "gate_audit_sha256": "4849ca54504d2c17a5b83296b36526204b20462fe8ba17055425cfa89e372f14",
+  "root_verification_receipt_sha256": "e28b2a86c160fa7e2d3862c5a28f24dc9cd01edf533f21c5c4ae3ad062ff726d",
+  "reviewed_surface": {
+    "complete_upstream_integration_diff_paths": 31,
+    "repair_paths_preserved": 30,
+    "overlap_files": 4,
+    "upstream_only_paths": 27,
+    "repair_only_paths": 26,
+    "prior_full_repair_review_inherited_sha256": "be29698badceaa2add9f90213642feb4e91d6682535b79a97f61f712d5d6a7a2"
+  },
+  "semantic_checks": [
+    {
+      "path": "crates/engine/src/game/casting_costs.rs",
+      "line": 6358,
+      "assessment": "Upstream removes only the obsolete manual-mana-ability precondition from pay_and_push_adventure. Existing feasibility and auto-tap gates route to the same PendingCast payment authority. Repair component validation, append identity, component slicing, and both finalizers remain intact. Upstream clone-only discard/exile/life affordability previews do not add sacrifice provenance or bypass validation; CancelCast remains explicitly authorized by the repaired preflight."
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "line": 6406,
+      "assessment": "ChooseFromZone Each owns its existing APNAP iteration and accumulated tracked set; excluding it from a second per-player fanout retains one continuation. The repair without_departure_member resolver boundary and completed departure owners remain in place. Hand/library Manifest entry through morph and zone_pipeline has no Battlefield departure subject. Manifest fixture object_source None preserves its original library-top behavior."
+    },
+    {
+      "path": "crates/engine/src/game/trigger_matchers.rs",
+      "line": 547,
+      "assessment": "PowerUp adds a KeywordAbilityActivated registry key using the existing keyword matcher. The repaired ordinary-collection dispatcher delegates this mode unchanged; death suppression applies only to matching Battlefield-to-Graveyard zone-change clauses. Marvel Boy activation and ETB modes remain separate."
+    },
+    {
+      "path": "crates/engine/tests/integration/main.rs",
+      "line": 48,
+      "assessment": "All three upstream modules and the repair trigger_suppression_event_timing module are retained exactly once, with their source files preserved from the appropriate parent. No duplicate or omitted registration was introduced."
+    }
+  ],
+  "verified_results": {
+    "workspace_all_target_clippy": "pass; complete workspace including manabrew-compat",
+    "library": {
+      "passed": 16592,
+      "failed": 0,
+      "ignored": 7
+    },
+    "integration": {
+      "passed": 3176,
+      "failed": 0,
+      "ignored": 22
+    },
+    "binaries": {
+      "passed": 15,
+      "failed": 0,
+      "ignored": 0
+    },
+    "doctests": {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 7
+    },
+    "individual_test_rows_reconciled": true,
+    "ignored_names_equal_historical_gate_logs": true,
+    "suppression_suite": {
+      "passed": 196,
+      "ignored": 20
+    },
+    "generator": {
+      "exit": 0,
+      "indexed_records": 35802,
+      "token_presets": 2870,
+      "current_indexed_records_independently_counted": true,
+      "both_generated_source_inputs_restored_and_rehashed": true
+    },
+    "independent_format_check": "pass",
+    "independent_staged_diff_check": "pass"
+  },
+  "scope_boundaries": [
+    "This integration source is not the fixed fa0eb accepted worker experiment. The upstream parser, Manifest, action affordance, CI and adapter changes retain upstream provenance. No new Hushbringer parser or card-coverage claim follows from merging them.",
+    "The fixed experiment retains repair revision fa0ebfe88db224ebd32624bb96ef033d338c2d8c, baseline worker e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98, checker f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1, candidate worker f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784 and the frozen original corpus.",
+    "All ten approved limitations and ignored diagnostics remain; merged-source validation cannot broaden those claims or relabel historical runtime/build evidence.",
+    "No source, build, test, evidence input, commit or publication mutation was performed by this reviewer. Only fresh review artifacts were written."
+  ],
+  "prior_approval_and_evidence": "The accepted fixed experiment remains bound to repair fa0ebfe88db224ebd32624bb96ef033d338c2d8c, baseline e4e8cb9d6024592745a0da533bcd86001c8115184a1ddcf0163c1f3f04494d98, checker f9faf4b72b5f3df0342290a0ee30ac3207c799c6032ec2679090fc37bc656dd1, and candidate f5b0de9436da31a00aaf7a1d28b92bd4288bd47077412970e0c3585f0cce1784. Their preserved bytes and frozen plan were rehashed; no new experiment was run or old experiment relabeled.",
+  "limitations": [
+    "All previously approved rules limitations and ignored diagnostics remain. No parser/card support promotion or throughput claim arises from this review.",
+    "Combined generation executed with its regenerated token/subtype inputs; the verifier restored both originals. Current restored bytes were independently rehashed. Intermediate generated-input hashes are the verifier records, not a second independent rehash of superseded bytes.",
+    "This reviewer independently inspected and hashed root-executed compilation/test/generation evidence; no extra compilation was performed. Only formatting/diff checks were independently rerun.",
+    "Merge commit, publication, and any downstream application-pin validation remain root-owned."
+  ],
+  "source_only_checkpoint_preserved": true
+}

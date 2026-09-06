@@ -1,0 +1,83 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "d83ee248474d1d0a2b17e0a7deab3376d5dd56c59196d2c1956b9c5cefa128f1",
+  "binary_sha256": "b125d632e9a93b375f095e1bd1e5bc31df996f9615d87bdb803adf411d75d9a9",
+  "declared_phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        21,
+        20
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Hushbringer",
+          "owner": "player",
+          "zone": "exile",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Doomed Traveler",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 3,
+          "name": "Wrath of God",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 4,
+          "name": "Swords to Plowshares",
+          "owner": "player",
+          "zone": "graveyard",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 6,
+          "name": "Spirit",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "hush": 1,
+        "swords": 4,
+        "traveler": 2,
+        "wrath": 3
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "4d911f268f4ec65497b04deaac06fb65e521520ec7c48e76c9428fbf1e93b03f"
+      },
+      {
+        "operation_index": 1,
+        "state_sha256": "3ba11ee7598c6b95cde4e51ba079a6441b5c793221e0aa430640b37f57db6773"
+      }
+    ]
+  }
+}

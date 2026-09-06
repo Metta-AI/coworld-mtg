@@ -1,0 +1,28 @@
+Merge the verified Hushbringer event-timing repair into current main
+
+The accepted repair records trigger suppression at the event boundary, so
+Hushbringer dying alongside Doomed Traveler still suppresses that death
+trigger. It preserves separate sacrifice-cost components, event-time source
+identity and last-known information instead of flattening distinct events.
+
+Integrate reviewed repair fa0ebfe88db224ebd32624bb96ef033d338c2d8c with
+main 1cf344efe83c871a362bf04e8444e820124c21f8. The automatic merge has
+no manual source resolutions. An independent whole-tree audit verifies
+preservation of both parents, including all four overlapping files.
+
+Validation on the merged source: workspace/all-target Clippy with warnings
+denied; 16,592 library, 3,176 integration and 15 binary tests; formatting;
+and card generation validating 35,802 indexed records and 2,870 token
+presets. The two tracked generated inputs were restored to the reviewed
+bytes after generation, and all 3,257 source-file hashes were rechecked.
+Existing ignored diagnostic cases and named unsupported behaviors remain
+explicit. These are integration checks, separate from the original accepted
+fixed-checker baseline/candidate comparison retained in Coworld.
+
+The repair completed three full independent implementation-review rounds,
+resolving the earlier findings before the final clean review. The published
+Coworld evidence links the originating case, rejected attempts, 67 targeted
+mutation discriminators, exact worker builds and generated attribution.
+
+Case-Id: 01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa
+Acceptance-Id: 66ef2e974d5dfb7f59f93f98405dcd6d9dd7b17fb9fab9df0fc3491dfdf6aba4

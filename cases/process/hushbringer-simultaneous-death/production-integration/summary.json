@@ -1,0 +1,44 @@
+{
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "coworld_pin_commit": "86ac6bc82bd8440846a6be3f5f7f761d6c66d04f",
+  "engine_passed": 19783,
+  "engine_results": {
+    "library": {
+      "passed": 16592,
+      "failed": 0,
+      "ignored": 7
+    },
+    "binary_1": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0
+    },
+    "binary_2": {
+      "passed": 9,
+      "failed": 0,
+      "ignored": 0
+    },
+    "integration": {
+      "passed": 3176,
+      "failed": 0,
+      "ignored": 22
+    },
+    "doctests": {
+      "passed": 0,
+      "failed": 0,
+      "ignored": 7
+    }
+  },
+  "production_campaign": {
+    "case_count": 10,
+    "satisfied": 10,
+    "repeatability": "verified",
+    "checker_and_worker_sha256": "b125d632e9a93b375f095e1bd1e5bc31df996f9615d87bdb803adf411d75d9a9"
+  },
+  "corpus": {
+    "archive_sha256": "d5f0e466cb3d42367a94d8a9ca24a1ca306f4c2c686f6f649901585adbf886b7",
+    "card_count": 46,
+    "qualification": "New deterministic archive with matching manifest; existing serialized card/deck payloads preserved, not represented as a fresh parser export"
+  },
+  "scope": "Production integration health checks; original fixed-checker acceptance remains unchanged"
+}

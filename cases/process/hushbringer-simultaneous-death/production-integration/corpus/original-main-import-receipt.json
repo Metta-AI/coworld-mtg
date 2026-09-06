@@ -1,0 +1,16 @@
+{
+  "utc": "2026-09-05T21:46:05.921773+00:00",
+  "archive_uri": "s3://observatory-private/cogames/coworlds/coworld-mtg/corpora/v1/a12f8a218f7be72299280042cf5b1ac13d532aeeb9eb1bd8f927045ef332ef5c/coworld-mtg-corpus-v1.tar.zst",
+  "archive_sha256": "a12f8a218f7be72299280042cf5b1ac13d532aeeb9eb1bd8f927045ef332ef5c",
+  "bytes": 24452,
+  "phase_revision": "b5f468588240df079cad95b94467038ffa6d0282",
+  "card_count": 46,
+  "payloads_match_original_experiment_corpus": {
+    "decks/fractal_convergence.json": true,
+    "phase-card-data.json": true,
+    "decks/lorehold_excavation.json": true
+  },
+  "materialized_only": "/home/ubuntu/repos/coworld-mtg-publish/.private/corpus",
+  "transport": "Streamed existing S3 archive using local AWS credentials directly into EC2; no credential copying or local artifact file.",
+  "manifest_sha256": "81dfdcc9eebd71a452cee6a9619fda269c88c6b2e9071d08878aacaac1cc21f4"
+}

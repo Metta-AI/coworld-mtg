@@ -1,0 +1,95 @@
+diff --git a/crates/engine/src/game/casting_costs.rs b/crates/engine/src/game/casting_costs.rs
+index e65e64c8d..644c0182a 100644
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -6286,7 +6286,6 @@ pub(super) fn pay_and_push_adventure(
+     let auto_payment_needs_input = payment_mode == CastPaymentMode::Auto
+         && cost.mana_value() > 0
+         && !super::casting::can_pay_cost_after_auto_tap(state, player, object_id, cost)
+-        && super::casting::has_manual_mana_ability_for_spell_payment(state, player, object_id)
+         && super::casting::can_feasibly_pay_mana_cost(state, player, Some(object_id), cost);
+     if has_x || convoke_mode.is_some() || manual_payment || auto_payment_needs_input {
+         let mut pending = PendingCast::new(object_id, card_id, ability, cost.clone());
+diff --git a/crates/engine/src/game/effects/mod.rs b/crates/engine/src/game/effects/mod.rs
+index 79543ae2f..8b777fd2b 100644
+--- a/crates/engine/src/game/effects/mod.rs
++++ b/crates/engine/src/game/effects/mod.rs
+@@ -6361,8 +6361,21 @@ fn resolve_chain_body(
+     // rider (Court of Cunning — "each mill two … mills ten instead") clears
+     // `multi_target` and changes the effect's target filter, which would
+     // otherwise skip this branch and resolve only the first chosen player.
++    // CR 101.4: An effect that ALREADY iterates the chosen player targets on
++    // its own (`ChooseFromZone { zone_owner: EachTargetedPlayer }`) is not a
++    // single-player-recipient handler, so it needs no missing iteration layer —
++    // and must not get one: splitting it per player would give each iteration
++    // its own chain tracked set, breaking the single accumulated "this way" set
++    // its sub-chain reads (Kozilek, the Broken Reality).
+     if ability.multi_target.is_some()
+         && effect_target_filter(&ability.effect) == Some(&TargetFilter::Player)
++        && !matches!(
++            ability.effect,
++            Effect::ChooseFromZone {
++                zone_owner: crate::types::ability::ZoneOwner::Each(_),
++                ..
++            }
++        )
+     {
+         let chosen_players: Vec<PlayerId> = ability
+             .targets
+@@ -12000,6 +12013,7 @@ mod tests {
+             Effect::Manifest {
+                 target: TargetFilter::ParentTargetController,
+                 count: QuantityExpr::Fixed { value: 1 },
++                object_source: None,
+                 profile: None,
+                 enters_under: None,
+             },
+diff --git a/crates/engine/src/game/trigger_matchers.rs b/crates/engine/src/game/trigger_matchers.rs
+index 011887782..d8a50f2ec 100644
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -543,8 +543,14 @@ pub fn build_trigger_registry() -> HashMap<TriggerMode, TriggerMatcher> {
+ 
+     // CR 702.49a: Ninjutsu activation trigger
+     r.insert(TriggerMode::NinjutsuActivated, match_ninjutsu_activated);
+-    // CR 702.107a + CR 702.142b + CR 702.177a: keyword ability activation triggers
+-    for tag in [AbilityTag::Boast, AbilityTag::Exhaust, AbilityTag::Outlast] {
++    // CR 702.107a + CR 702.142b + CR 702.177a + CR 702.193a:
++    // keyword ability activation triggers
++    for tag in [
++        AbilityTag::Boast,
++        AbilityTag::Exhaust,
++        AbilityTag::Outlast,
++        AbilityTag::PowerUp,
++    ] {
+         r.insert(
+             TriggerMode::KeywordAbilityActivated(tag),
+             match_keyword_ability_activated,
+diff --git a/crates/engine/tests/integration/main.rs b/crates/engine/tests/integration/main.rs
+index a625046b0..ec866bafd 100644
+--- a/crates/engine/tests/integration/main.rs
++++ b/crates/engine/tests/integration/main.rs
+@@ -45,6 +45,7 @@ mod captain_america_throw;
+ mod cascade_intervening_if_pipeline;
+ mod case_solve_condition;
+ mod cast_during_resolution_pipeline;
++mod casting_affordability_action_consistency;
+ mod cda_counted_quantities_pt;
+ mod chain_of_smog_copy;
+ mod chandra_revolution_doesnt_untap_slot;
+@@ -534,6 +535,7 @@ mod kaysa_green_anthem;
+ mod knighthood_first_strike_grant;
+ mod knollspine_dragon_target_damage_draw;
+ mod kodama_anti_recursion_intervening_if;
++mod kozilek_broken_reality_manifest_from_hands;
+ mod krark_clan_ironworks_castability;
+ mod krark_thumb_coin_flip;
+ mod kutzils_flanker_mode_one_counter;
+@@ -645,6 +647,7 @@ mod saruman_white_hand_amass;
+ mod sba_lethal_damage_redirect_single_application;
+ mod scarab_god_regression;
+ mod screaming_nemesis_life_lock;
++mod scroll_of_fate_manifest_from_hand;
+ mod season_points_budget_modal;
+ mod seasoned_dungeoneer_initiative_room_trigger;
+ mod selenia_vigilance_grant;

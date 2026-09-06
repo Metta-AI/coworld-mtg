@@ -1,0 +1,47 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "request_id": "a8032b28c0cbde82d3458a88e1c6ee005e84e2ee4e330d1087a583dbe916f472",
+  "binary_sha256": "b125d632e9a93b375f095e1bd1e5bc31df996f9615d87bdb803adf411d75d9a9",
+  "declared_phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "outcome": {
+    "kind": "completed",
+    "observation": {
+      "life": [
+        20,
+        20
+      ],
+      "objects": [
+        {
+          "object_id": 1,
+          "name": "Hushbringer",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 0,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        },
+        {
+          "object_id": 2,
+          "name": "Stonecoil Serpent",
+          "owner": "player",
+          "zone": "battlefield",
+          "tapped": false,
+          "plus_one_counters": 3,
+          "prepared": false,
+          "cast_spell_offered_to": []
+        }
+      ],
+      "labels": {
+        "hush": 1,
+        "serpent": 2
+      }
+    },
+    "steps": [
+      {
+        "operation_index": 0,
+        "state_sha256": "1b87f48b1d1a7a60038b9575b1a1f4143dcfb4c8182619fcacfb7e888a5e40e3"
+      }
+    ]
+  }
+}

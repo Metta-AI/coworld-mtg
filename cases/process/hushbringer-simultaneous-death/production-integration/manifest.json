@@ -1,0 +1,626 @@
+{
+  "schema": "coworld-process-artifact-manifest-v1",
+  "case_id": "01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa",
+  "files": {
+    "phase/verification-receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-receipt.json",
+      "bytes": 2279,
+      "sha256": "e28b2a86c160fa7e2d3862c5a28f24dc9cd01edf533f21c5c4ae3ad062ff726d"
+    },
+    "phase/verification-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-0.log",
+      "bytes": 9687,
+      "sha256": "d0ad8716db56bc9cd1b373a157271975c95a1bc9830cd22f125b8c227dab8e2b"
+    },
+    "phase/verification-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-1.log",
+      "bytes": 1829252,
+      "sha256": "f58231b1da0d4d07f71707d786c0093cc01a4c0ae81e3e6b007445bf5e355154"
+    },
+    "phase/verification-2.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verification-2.log",
+      "bytes": 5045,
+      "sha256": "53829b374dfeb00ef57b34eadc57d3bf0aec5a0a0cc8a9948e8041ac298ab24a"
+    },
+    "phase/source.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/source.json",
+      "bytes": 418549,
+      "sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406"
+    },
+    "phase/merge-audit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/merge-audit.json",
+      "bytes": 950,
+      "sha256": "60ecf8dadd5bb7fd37665f923d119901db128f9ab1082953c5b603541f5e6931"
+    },
+    "phase/upstream-overlap.patch": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/upstream-overlap.patch",
+      "bytes": 4665,
+      "sha256": "c273cf10f4964e2d4c3d7fa3fea1593cb184bde0de7a31244e4b3cc4ab410140"
+    },
+    "phase/verify.py": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/verify.py",
+      "bytes": 2980,
+      "sha256": "8264847917efe8e0eabd591ee17fbe52287819aaa11f4eb605056bc5846aabe4"
+    },
+    "phase/commit-receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/commit-receipt.json",
+      "bytes": 2251,
+      "sha256": "d1be3c7dcf298491e0c9a3d82936b91b0f6275b342b3230dabbc6d9abdf377b7"
+    },
+    "phase/merge-commit-message.txt": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration/merge-commit-message.txt",
+      "bytes": 1684,
+      "sha256": "490b011546b7c4780026daea06ed99c47837abbb4d2810e82434ec235c92adb4"
+    },
+    "phase-review/evidence-identity-audit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/evidence-identity-audit.json",
+      "bytes": 881,
+      "sha256": "0aa1c0c8f671db31b2be071d56c37e0283f6656a261f7bb652a1d5218b032c3d"
+    },
+    "phase-review/final-diff-check.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "phase-review/final-format-check.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-format-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "phase-review/final-gate-audit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-gate-audit.json",
+      "bytes": 10612,
+      "sha256": "4849ca54504d2c17a5b83296b36526204b20462fe8ba17055425cfa89e372f14"
+    },
+    "phase-review/final-manifest.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-manifest.json",
+      "bytes": 2026,
+      "sha256": "3f996a2f3080cb6defe998f19115b9518860f8a6289bedbdd234ccb3871b1c0f"
+    },
+    "phase-review/final-review-receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-review-receipt.json",
+      "bytes": 1077,
+      "sha256": "cc70047a91cc0924143c41b0ad36bc5d65fda975afd16301693f197c67f4a95d"
+    },
+    "phase-review/final-review.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-review.json",
+      "bytes": 6309,
+      "sha256": "849d2b3ce71872e342dc45c65e2b456d300125035ac333a3a26f915083b68800"
+    },
+    "phase-review/final-review.md": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final-review.md",
+      "bytes": 880,
+      "sha256": "125da0657a1c2aa2b508f3b6a05e4f7c688ba25009e486e301c1c5751068463e"
+    },
+    "phase-review/final_audit.py": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/final_audit.py",
+      "bytes": 8071,
+      "sha256": "6275d3e15ec689d892180de41d64539a0321050ffd9cc3b92f2f0bd29182fae2"
+    },
+    "phase-review/independent-preservation-audit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/independent-preservation-audit.json",
+      "bytes": 17237,
+      "sha256": "0bb7df9bbed3495082fba49e1d7dd60458e36fa753ee8c8fc117fd6cd0c0e7be"
+    },
+    "phase-review/index-entries.txt": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/index-entries.txt",
+      "bytes": 343764,
+      "sha256": "faf3ab03076a4d95afb68cc9491cce012d868ce8759405ed5d2cc7a709461ff4"
+    },
+    "phase-review/preservation-audit.py": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/preservation-audit.py",
+      "bytes": 3955,
+      "sha256": "87291e11991082102c4efc8203b5d338b8d24715de7eb0aa322622604661e330"
+    },
+    "phase-review/repair-integrated.patch": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/repair-integrated.patch",
+      "bytes": 591466,
+      "sha256": "457395709304ef66bd6c150e610f13a751f3ef07eaa07958e8876898f0f9c60b"
+    },
+    "phase-review/source-review-receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/source-review-receipt.json",
+      "bytes": 1978,
+      "sha256": "f7cb10b90aaf8b3c09510e8689f28a8440f7512e8cf2c8616e9663a033317e26"
+    },
+    "phase-review/source-review.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/source-review.json",
+      "bytes": 5861,
+      "sha256": "405d6a21d29597423a5152b43bb8260e7db16e824136c504b2fa051f8b1215e8"
+    },
+    "phase-review/source-review.md": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/source-review.md",
+      "bytes": 358,
+      "sha256": "0e5c20aa39082f51306e5d94487b7ace187646fbf00b6e47812a5287c78bdb48"
+    },
+    "phase-review/tree-audit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/tree-audit.json",
+      "bytes": 264,
+      "sha256": "f9fff7c5d872b997c7281863a66a5bb1dd5c2cc2703a57d43583697287a2699a"
+    },
+    "phase-review/upstream-integration.patch": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/upstream-integration.patch",
+      "bytes": 129360,
+      "sha256": "c2afe21548b546ad78c04fd13d0dc88d977f174336f3a78cd161fbf5937997e0"
+    },
+    "phase-review/whole-tree-parent-audit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-integration-review/whole-tree-parent-audit.json",
+      "bytes": 498,
+      "sha256": "7f498de71fbee499b194f50999678ab449cbd1c2bc978b0ee205a580c7c21bc5"
+    },
+    "corpus/prepared-pin.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-publication-corpus/prepared-pin.json",
+      "bytes": 3058,
+      "sha256": "b9de6a897f1fd46d258d1fcbaf080517c1056afa55be121d93cf318e0ec88969"
+    },
+    "corpus/upload-receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-publication-corpus/upload-receipt.json",
+      "bytes": 522,
+      "sha256": "f2966fd12cb1b57eebd9c2e32805f43c54b09676de0b9d38e535410e58cd0397"
+    },
+    "corpus/pin-cargo-update.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-publication-corpus/pin-cargo-update.log",
+      "bytes": 478,
+      "sha256": "51099ca5bb3c1f63c95968a25f6bbe88244162696579ffad573d904235abf91c"
+    },
+    "corpus/original-main-import-receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-publication-corpus/original-main-import-receipt.json",
+      "bytes": 903,
+      "sha256": "f4f407a7b7adfab1d7adbedcde0acd17099ece16104efe70b75c1db8c406d9cb"
+    },
+    "corpus/raw-source-inputs.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/phase-main-publication-corpus/raw-source-inputs.json",
+      "bytes": 671015,
+      "sha256": "ec055425cdab248922d7c44a7e6516bbd01e74707327367b7770ab90445649a3"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/case.json",
+      "bytes": 2126,
+      "sha256": "5d9463b5c0ef8a6d4a70e838d39e1b8d8d70362bd42e820da2791c304afb1f89"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-0.json",
+      "bytes": 1489,
+      "sha256": "066cd2477728ce79a6166db9fe0b8943e9b98afa1514db83bf351934b825df01"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/execution-1.json",
+      "bytes": 1489,
+      "sha256": "066cd2477728ce79a6166db9fe0b8943e9b98afa1514db83bf351934b825df01"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/receipt.json",
+      "bytes": 631,
+      "sha256": "9221aeb1b37263fdcdb8a6d72b65d592df5313b27cea357ea8ea9fbd2d5ec2df"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/request.json",
+      "bytes": 1159,
+      "sha256": "46adac118d1681c7133ca97f63d221f9849829bef4c7a5536b3364a19e61084e"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/01edd604679d89888ad9bb3bd13ca1c531fbbdd1c65f98341e7ce2a5a57d09aa/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/case.json",
+      "bytes": 2289,
+      "sha256": "22bd23b9b831c27f9e551b09bcfb264ed02df15aa61237fc4f8584994bbd13e6"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-0.json",
+      "bytes": 1888,
+      "sha256": "bbbd0bd6174f8eb463cf558dc8752ee5face40ce144393ad49b86813128ebe9c"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/execution-1.json",
+      "bytes": 1888,
+      "sha256": "bbbd0bd6174f8eb463cf558dc8752ee5face40ce144393ad49b86813128ebe9c"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/receipt.json",
+      "bytes": 631,
+      "sha256": "869824cea143b3847f0ea73c662aa8b0be3e1e93ac5473bdb09056139fbfaa29"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/request.json",
+      "bytes": 1543,
+      "sha256": "9b2832c9334d0bae90b80702f0763aa441d1fca4f32bee798b3c291b1a7a47fa"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/19e61869d1fd6ee075becbfff8ab5233132c3a6fe33134d0aa27437c9d86616a/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/case.json",
+      "bytes": 1566,
+      "sha256": "c819c5f1d6074de86f8207280aaea07f88a6199c359101f12afd53784832bdcb"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-0.json",
+      "bytes": 910,
+      "sha256": "d0c4e4fd5e352d8c209bbb9f2ffc84b1c5f4169a5148ad4661ee6faa34a2ccc4"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/execution-1.json",
+      "bytes": 910,
+      "sha256": "d0c4e4fd5e352d8c209bbb9f2ffc84b1c5f4169a5148ad4661ee6faa34a2ccc4"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/receipt.json",
+      "bytes": 631,
+      "sha256": "357f1fe2e489b2f996c5f88cb56955bea6951b663c0accc2384ba5459250745d"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/request.json",
+      "bytes": 830,
+      "sha256": "e4b7e4ee5a1c090ff6c2b66c9ba5d54da27ba97889d8c1d9b503047a254d7d98"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/29de70628e65267abb50880e52218b236f0cd01bf16c8c09cf1618adff544967/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/case.json",
+      "bytes": 2493,
+      "sha256": "93205f052c9f324dfdfe276becd50afd081527e207f5a71ec7005f9ec8abf259"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-0.json",
+      "bytes": 2206,
+      "sha256": "8d7b0f5b90a43b2b8d7f899400598894f36b396ee6853ba99b8ff175d3d3f304"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/execution-1.json",
+      "bytes": 2206,
+      "sha256": "8d7b0f5b90a43b2b8d7f899400598894f36b396ee6853ba99b8ff175d3d3f304"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/receipt.json",
+      "bytes": 631,
+      "sha256": "c834b3fd6000dfce68245e1a2fc59abc235f9e5ccb749d5ce2942c66458928e9"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/request.json",
+      "bytes": 1752,
+      "sha256": "ea533ccc257e497b0b0e03608cab728b332bbde26aedc60121db387ed9fea121"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/3cb0040d03c76a86eb4bb6f4b957ff2c7c10b6639d6e108347889cad87d040f9/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/case.json",
+      "bytes": 1810,
+      "sha256": "f17e3fe49d41819c0d1af07db82ed7874b8c2ce1e841436c8adf150adc8e6c94"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-0.json",
+      "bytes": 1205,
+      "sha256": "05f1fcf9ae6c5c39663dba515cbb60175cf6115832b76e2706a879051d657d9b"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/execution-1.json",
+      "bytes": 1205,
+      "sha256": "05f1fcf9ae6c5c39663dba515cbb60175cf6115832b76e2706a879051d657d9b"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/receipt.json",
+      "bytes": 631,
+      "sha256": "9c7759f51f09ebe3d41d10a624502d1e463f441f535c780bc54147a474e59b71"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/request.json",
+      "bytes": 957,
+      "sha256": "a858d670b732a56b9d43b18934450103033ac4f48423d56ec2c3096ca33c8f92"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/454d3e00b1bf825aa1f19f6501c9d096de30dff426bdcbe2b95978518e9f3512/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/case.json",
+      "bytes": 1733,
+      "sha256": "6826099f9b01d76155c8900caada21c56adad7f2511b3b88478dbb3f43ac7768"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-0.json",
+      "bytes": 1203,
+      "sha256": "aeaec1ad4bc06c78687f080c9f61c5c9c8fe129f3e7db3a6a2fc38a07c27b48b"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/execution-1.json",
+      "bytes": 1203,
+      "sha256": "aeaec1ad4bc06c78687f080c9f61c5c9c8fe129f3e7db3a6a2fc38a07c27b48b"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/receipt.json",
+      "bytes": 631,
+      "sha256": "2557f0d8a02b62819f55973274897aae6828d5e3ea93dbc5c19bf7ae4787c02d"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/request.json",
+      "bytes": 1010,
+      "sha256": "9eb024d230607072df4fed8c682950675a34493689d4ec74c7f5a124ee8f23ab"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/4c10da113ad94461054f7c391fad097ca7f6c0a21b603b7cc93d03ec5199da9d/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/case.json",
+      "bytes": 2566,
+      "sha256": "403038737c4eb9b086c315fe9336a6a2bf7c3d2e29def32af9f17d000653656d"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-0.json",
+      "bytes": 2186,
+      "sha256": "33cf75feaa1a7151c577405bd95a3b8225ae6116db3e37f9585cba188790dc2a"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/execution-1.json",
+      "bytes": 2186,
+      "sha256": "33cf75feaa1a7151c577405bd95a3b8225ae6116db3e37f9585cba188790dc2a"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/receipt.json",
+      "bytes": 631,
+      "sha256": "0d25c49f5e583b05369c06476793ae74ac413dbe743e7977245d6d73408ed6e0"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/request.json",
+      "bytes": 1595,
+      "sha256": "8d1fd8a041d082afd9b1dca144966e294db153fcb071dba1a4f47c4602c55a29"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7e24ad79064c7144e7d947cdc71e59085be84f468efdbee8172e526e02f2b6db/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/case.json",
+      "bytes": 1793,
+      "sha256": "9e23f5fdc4cd91965afbac817c67cc66f3bc74724177d23b3585a71c6a5a8504"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-0.json",
+      "bytes": 1605,
+      "sha256": "fbbb49dfbf7ca4b27dddbebb12a050aa382f350b7653a5f7f03c38e9102f2514"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/execution-1.json",
+      "bytes": 1605,
+      "sha256": "fbbb49dfbf7ca4b27dddbebb12a050aa382f350b7653a5f7f03c38e9102f2514"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/receipt.json",
+      "bytes": 631,
+      "sha256": "22d887735b8515231b01ba0fd63ffaa66f0fb7b62c48ca6b538bcb9074e78ea2"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/request.json",
+      "bytes": 1021,
+      "sha256": "cb72dd50511ea3785ba3413fa93feb2eb35dcbc53f6d86464ba37bbca772b36d"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/7f9527c7d6ff1ac3b478c581100180cc844973ed9f61bdd3a305daf8d7244c8b/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/case.json",
+      "bytes": 2304,
+      "sha256": "72c64f7c4f5cea99fa063eac106403774f3be1db3c5945aee88f70d376ab570c"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-0.json",
+      "bytes": 1893,
+      "sha256": "391d17901a7fda645139ffe78a297fc4209a4791ffb9046d47da72f5af610cb6"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/execution-1.json",
+      "bytes": 1893,
+      "sha256": "391d17901a7fda645139ffe78a297fc4209a4791ffb9046d47da72f5af610cb6"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/receipt.json",
+      "bytes": 631,
+      "sha256": "2c4aa8dffc1103a4eed7368487b1bea9fe5482ad98a835c94216495a0a03a1de"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/request.json",
+      "bytes": 1542,
+      "sha256": "d52760f7e44f7aaa97adc1342325a4e39e7e985abb755da9a8eb6c104b6fa6db"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/816630598b10a1f0acb9bdaf710f4ec37d1668d72796156972db9c78173f10bc/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/case.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/case.json",
+      "bytes": 2479,
+      "sha256": "28686ad49caa6fac98c0beeaae24f7b61b8310f2d7bffc502b2d56419bd789de"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/corpus.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/corpus.json",
+      "bytes": 78303,
+      "sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-0.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-0.json",
+      "bytes": 2175,
+      "sha256": "fd3f9d3a47ddc0b11bb9a23e8a626dcce220ef0ad7e1385b863b878b271bd214"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-1.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/execution-1.json",
+      "bytes": 2175,
+      "sha256": "fd3f9d3a47ddc0b11bb9a23e8a626dcce220ef0ad7e1385b863b878b271bd214"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/receipt.json",
+      "bytes": 631,
+      "sha256": "9ff62338c333666b082dd091ba8ee2c0968815851fd890b0e443ae8f4a7f16e6"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/request.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/request.json",
+      "bytes": 1552,
+      "sha256": "f81bc5081375c7714783164d4a519f4c79d9c54887917d92d88d7feb00febc23"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-0.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-1.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/b01d18fdb026136222e89758643dd5a9ddb513ce09192cba26394a064e44a366/worker-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coworld/campaign/campaign.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign/campaign.json",
+      "bytes": 6623,
+      "sha256": "12c3f6c16cf9f4a1731dd7532182c43c892968b4eb54ef5761db7c11a1f283e1"
+    },
+    "coworld/corpus-install.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/corpus-install.log",
+      "bytes": 135,
+      "sha256": "c38a459b0cda520232c54611cc7336203f3aa6115d57988e16e66d209be4829e"
+    },
+    "coworld/production-campaign.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/production-campaign.log",
+      "bytes": 660,
+      "sha256": "9dc994ade7814ca210936b88ce48b9b5f445ebb2e48b8e575a988025c340f281"
+    },
+    "coworld/receipt.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/receipt.json",
+      "bytes": 2212,
+      "sha256": "a0c9e489ffac3f3303675d82c695ec6b3f94d72db203505569ac3a2e5d868189"
+    },
+    "coworld/repository-check.log": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/repository-check.log",
+      "bytes": 35613,
+      "sha256": "463ac05ff02ac1b0c2f7a5b66fbc21f0bd48999c607fb514d0c05f2c6be7d884"
+    },
+    "coworld/source.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/source.json",
+      "bytes": 936042,
+      "sha256": "e4cd14fbcd05b19cee651996a939908e09eefffd474f937efb89c4c43e7bd93d"
+    },
+    "coworld/verified": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/verified",
+      "bytes": 9,
+      "sha256": "37a40f08d8548dba289b9b0bb35bcf63b359f6d37ee86044ebc6b6da080b9ec1"
+    },
+    "coworld/verify-production-pin.py": {
+      "source": "/home/ubuntu/coworld-migration-20260904/verify-production-pin.py",
+      "bytes": 2775,
+      "sha256": "ea600303624f623bf7e2acc1e864e9d87dd1a86f706b9f0c739f81aa3a4e3332"
+    },
+    "corpus/prepare-production-pin.py": {
+      "source": "/home/ubuntu/coworld-migration-20260904/prepare-production-pin.py",
+      "bytes": 3898,
+      "sha256": "554c333b4f7d83e6d978bf3043b3fe1453fafdf2aea162be610d71985cbeb4d9"
+    },
+    "coworld/pin-commit.json": {
+      "source": "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-commit.json",
+      "bytes": 584,
+      "sha256": "c3f95dee305f297a1f1066077c08fee83dd1435551350961bd6cdbf0eb51de6b"
+    }
+  }
+}

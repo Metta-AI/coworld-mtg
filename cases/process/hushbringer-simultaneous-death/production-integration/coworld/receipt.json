@@ -1,0 +1,61 @@
+{
+  "started": "2026-09-06T04:52:10.392311+00:00",
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "status": "passed",
+  "source_manifest_sha256": "e4cd14fbcd05b19cee651996a939908e09eefffd474f937efb89c4c43e7bd93d",
+  "private_corpus_manifest_sha256": "0af1801b1e65bc87771726a52c50e89f29995a68589d423540f68c12d5972232",
+  "commands": [
+    {
+      "name": "corpus-install",
+      "command": [
+        "bash",
+        "scripts/fetch-corpus.sh"
+      ],
+      "exit": 0,
+      "started": "2026-09-06T04:52:10.393347+00:00",
+      "finished": "2026-09-06T04:52:10.509334+00:00",
+      "log_sha256": "c38a459b0cda520232c54611cc7336203f3aa6115d57988e16e66d209be4829e"
+    },
+    {
+      "name": "repository-check",
+      "command": [
+        "bash",
+        "scripts/check.sh"
+      ],
+      "exit": 0,
+      "started": "2026-09-06T04:52:10.696276+00:00",
+      "finished": "2026-09-06T05:04:18.637431+00:00",
+      "log_sha256": "463ac05ff02ac1b0c2f7a5b66fbc21f0bd48999c607fb514d0c05f2c6be7d884"
+    },
+    {
+      "name": "production-campaign",
+      "command": [
+        "/home/ubuntu/repos/coworld-mtg-publish/target/debug/coworld-mtg-harness",
+        "case",
+        "campaign",
+        "--case-dir",
+        "/home/ubuntu/repos/coworld-mtg-publish/cases/cards",
+        "--corpus",
+        "/home/ubuntu/repos/coworld-mtg-publish/cases/corpus/corpus.json",
+        "--worker",
+        "/home/ubuntu/repos/coworld-mtg-publish/target/debug/coworld-mtg-harness",
+        "--output-dir",
+        "/home/ubuntu/coworld-migration-20260904/coworld-production-pin-check/campaign"
+      ],
+      "exit": 0,
+      "started": "2026-09-06T05:04:18.830030+00:00",
+      "finished": "2026-09-06T05:04:31.085222+00:00",
+      "log_sha256": "9dc994ade7814ca210936b88ce48b9b5f445ebb2e48b8e575a988025c340f281"
+    }
+  ],
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_TARGET_DIR": "/home/ubuntu/repos/coworld-mtg-publish/target"
+  },
+  "source_changes": [],
+  "worker_sha256": "b125d632e9a93b375f095e1bd1e5bc31df996f9615d87bdb803adf411d75d9a9",
+  "finished": "2026-09-06T05:04:31.271743+00:00"
+}

@@ -1,0 +1,419 @@
+{
+  "utc": "2026-09-05T23:37:36.638274+00:00",
+  "base": "2dec6c88915db4697706234a7ba2fcedd97b1689",
+  "upstream": "1cf344efe83c871a362bf04e8444e820124c21f8",
+  "repair": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "head": "1cf344efe83c871a362bf04e8444e820124c21f8",
+  "merge_head": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+  "overlap": [
+    "crates/engine/src/game/casting_costs.rs",
+    "crates/engine/src/game/effects/mod.rs",
+    "crates/engine/src/game/trigger_matchers.rs",
+    "crates/engine/tests/integration/main.rs"
+  ],
+  "repair_only": 26,
+  "upstream_only": 27,
+  "tracked_entries": 3259,
+  "source_files": 3257,
+  "directory_symlinks": {
+    ".agents/skills": "../.claude/skills",
+    ".codex/skills": "../.claude/skills"
+  },
+  "source_manifest_sha256": "e028b74adbe94b2157054eee622a691ab90cdb8bc26cbd7361d5d33e17a87406",
+  "source_matches_manifest": true,
+  "unmerged_index_entries": false,
+  "unstaged_source_changes": false,
+  "index_entries_sha256": "faf3ab03076a4d95afb68cc9491cce012d868ce8759405ed5d2cc7a709461ff4",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "b5f13e5cc0f8ed2f5c8d487176ef9edb697affc7d153ec33cfdaf0588efdc54f"
+    },
+    {
+      "path": "client/src/adapter/types.ts",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "ba656e728cace63274f55fdc509e02f938d4838ed2e38d31af79be411b57ebd5"
+    },
+    {
+      "path": "crates/engine/src/ai_support/mod.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "c411c1c32e7a8d4ef8cdd8a38e3b32d6027c8875a482d333fe7d15a49245828d"
+    },
+    {
+      "path": "crates/engine/src/game/ability_rw.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "10b4e8034f5f3af835cf039386fe648b90c8cba710211c63f9d427ab86b5e409"
+    },
+    {
+      "path": "crates/engine/src/game/ability_scan.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "bebad3af636b7e6d213a941be467cf81aabbfc9acaf31daaac3c42f9e0d9a42f"
+    },
+    {
+      "path": "crates/engine/src/game/augment.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "2043b2204e22607e7c1a087803e15a7c366eb6545b5da443bd15c2d44fe82460"
+    },
+    {
+      "path": "crates/engine/src/game/casting.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "31c879082b8d5a7c037a14eda8e4aeaff0cb689d0349871251e9b54e8a754b19"
+    },
+    {
+      "path": "crates/engine/src/game/casting_costs.rs",
+      "category": "overlap",
+      "sha256": "6198f25df46c113cbb089272dff48ac52f03ba56014037d9ffaa9512d1c9ee43",
+      "patch_sha256": "02eab82a237b2b2a8d78ea903ba32ba3bbdcc5ef06d4e4952a183d98276695bf",
+      "hunks": [
+        {
+          "header": "@@ -6286,7 +6286,6 @@ pub(super) fn pay_and_push_adventure(",
+          "repair_line": 6358,
+          "unique_exact_context": true
+        }
+      ],
+      "exact_in_memory_reconstruction": true
+    },
+    {
+      "path": "crates/engine/src/game/casting_tests.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "58570abb1e28b711c60713d14235189311e7b591440bbfc35dfb7b6a95def28a"
+    },
+    {
+      "path": "crates/engine/src/game/derived_views.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "1bd7797b61555a7396ea07dcd342d70323664a2b3246499cdaafa13b770d7775"
+    },
+    {
+      "path": "crates/engine/src/game/effects/change_zone.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "6230ca37071c2b8eb32546f05133f111319cf82c0ec0833c04b5da34e301a454"
+    },
+    {
+      "path": "crates/engine/src/game/effects/choose_and_sacrifice_rest.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "8b889373a9238b46a169044b3405a5efb7b7dfcf378209da2726f09dde5d1bcc"
+    },
+    {
+      "path": "crates/engine/src/game/effects/choose_from_zone.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "3946884dae96949d381ffb89cfeac430ea8d1c508309bff1ae10f3aee6c5d54a"
+    },
+    {
+      "path": "crates/engine/src/game/effects/destroy.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "4e406bbd6cf734adf91b1f4b700ee9b19745b44b50dbbb44af46bc098b6b5006"
+    },
+    {
+      "path": "crates/engine/src/game/effects/manifest.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "90592ec1ccdcac3dd7c838846ca813faeda1c3381d5dfed37c18facfbdf097c0"
+    },
+    {
+      "path": "crates/engine/src/game/effects/mod.rs",
+      "category": "overlap",
+      "sha256": "867823c8efd0c193ad7051811e9754978b4a14588e5a2ed53b223a32c1c20752",
+      "patch_sha256": "80fd3648c90f103640cb0607dcc1b87c56926bc49997140fcc008eacff128124",
+      "hunks": [
+        {
+          "header": "@@ -6361,8 +6361,21 @@ fn resolve_chain_body(",
+          "repair_line": 6395,
+          "unique_exact_context": true
+        },
+        {
+          "header": "@@ -12000,6 +12013,7 @@ mod tests {",
+          "repair_line": 12047,
+          "unique_exact_context": true
+        }
+      ],
+      "exact_in_memory_reconstruction": true
+    },
+    {
+      "path": "crates/engine/src/game/effects/sacrifice.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "81b55a267e6538f47c406bae9e6dceb0915c187e7d684dc80ffd30b238417d27"
+    },
+    {
+      "path": "crates/engine/src/game/engine.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "e58c0f6ff1d62bb6d0c78b2cbe45a880681766369a4c92cf60124ecfca8d1822"
+    },
+    {
+      "path": "crates/engine/src/game/engine_resolution_choices.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "253815c97ce827680554c901a9225401b07cd57be8be2c389e9d3c095aaf786d"
+    },
+    {
+      "path": "crates/engine/src/game/filter.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "8be0212e2d35255eb269b4d1b3a8c494c54c233eca4c11d9cc58c2f28a750f66"
+    },
+    {
+      "path": "crates/engine/src/game/game_object.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "a5737473ca1011bacdeefdde53866c67ed3079ab212101c11e5fe31f1f456abc"
+    },
+    {
+      "path": "crates/engine/src/game/haunt.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "2a4226407c86adca02220dab2bd95ec9b4f4817c125f7861005980a6fa7a1e3a"
+    },
+    {
+      "path": "crates/engine/src/game/mana_sources.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "8002262766674c078c9393320708f143edb415f2d50b92fc21f16cb0702150ae"
+    },
+    {
+      "path": "crates/engine/src/game/mod.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "4d5c083a86163f7706dbc10466d4ad8804ad9cfe74bebfc48ea8896a9a3e32c1"
+    },
+    {
+      "path": "crates/engine/src/game/sba.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "73e5862e83261a91b9c054df3bcb4718226274ed01a82c36269ce2b458f6854e"
+    },
+    {
+      "path": "crates/engine/src/game/scenario.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "f537de8744a5ceef2ba1a4f92d5bc0a951a97d9570cd2ef8c84d2423ee340973"
+    },
+    {
+      "path": "crates/engine/src/game/stack.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "228b8f8082d1775f75e336f25f304648a5f3c0704d5b8339c9087a8ff9777cb9"
+    },
+    {
+      "path": "crates/engine/src/game/trigger_matchers.rs",
+      "category": "overlap",
+      "sha256": "49e2420fa08834dcfa60fce6c192ead8cca40ff324ee6c34a6f8eff828f5635f",
+      "patch_sha256": "6fe57b8232c83d6dd2f5ca32085ec17c003126016cc66293416a1837dbacfb10",
+      "hunks": [
+        {
+          "header": "@@ -543,8 +543,14 @@ pub fn build_trigger_registry() -> HashMap<TriggerMode, TriggerMatcher> {",
+          "repair_line": 544,
+          "unique_exact_context": true
+        }
+      ],
+      "exact_in_memory_reconstruction": true
+    },
+    {
+      "path": "crates/engine/src/game/trigger_suppression.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "7cdd1c1bd1afdcabd3de79ad950a06d8f50bd43a145048b80c64303fe33325cd"
+    },
+    {
+      "path": "crates/engine/src/game/triggers.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "05cc6b381dc6637312e4f7559f764355c3485b25185136fdde6107d5881c4903"
+    },
+    {
+      "path": "crates/engine/src/game/zone_pipeline.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "ecc6dbd6f0385c72ab2238dc700692c60255f041628985e4ac6cf5db301a8e72"
+    },
+    {
+      "path": "crates/engine/src/game/zones.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "cc34cdff1f6d753a29e89bcb9e2076d67d9680e2286111b0f2375b6a892b2aa9"
+    },
+    {
+      "path": "crates/engine/src/parser/oracle_effect/imperative.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "1aaf401409845d995887c966db66648b0ea5bb90cfe199333e28ceca468841b9"
+    },
+    {
+      "path": "crates/engine/src/parser/oracle_effect/mod.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "8877f114d699c0b9eccd6cf92b6645336eaccee80a4fb4b424aee7bb74347a6f"
+    },
+    {
+      "path": "crates/engine/src/parser/oracle_effect/sequence.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "d6a646e12bf16e1ccace44fec60d12ca993f7aad9d837659e7f51a0191e2a7df"
+    },
+    {
+      "path": "crates/engine/src/parser/oracle_effect/tests.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "141eed0f1eabb81fae86aebf2fae442df1f4f930c88ad4b67a84cb18c204d026"
+    },
+    {
+      "path": "crates/engine/src/parser/oracle_ir/ast.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "70237508607ce58075e715837379316ea0ef3e9bbdeed92e1bffcdb63c3abe0a"
+    },
+    {
+      "path": "crates/engine/src/types/ability.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "2b4840730d5a46d462ae629a35be7dbb9b34a4f901dd071a28b4053b59b26529"
+    },
+    {
+      "path": "crates/engine/src/types/events.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "ebfd1027f45468d12a9f97bc2f057b9c457166e09ba824a61b028343beaa20c9"
+    },
+    {
+      "path": "crates/engine/src/types/game_state.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "065812c4cf63c11a1bb724f7997b07346c76a2480eceebfa0bb30ec7a02c3828"
+    },
+    {
+      "path": "crates/engine/tests/integration/casting_affordability_action_consistency.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "c6d31402b0e89914e9439ab1a3c8a45d719f113171fda67fed63ca2079a93dd4"
+    },
+    {
+      "path": "crates/engine/tests/integration/issue_2890_reality_shift.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "453136d346f2613d36db75a680ccd3673677a5022ad756e086c8bbeaec482a56"
+    },
+    {
+      "path": "crates/engine/tests/integration/issue_3277_captain_nghathrod_eliminated_opponent.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "e9c899abb333a2ee836dde07e3770963eaa9829f5a47143100aefcd9125a3172"
+    },
+    {
+      "path": "crates/engine/tests/integration/issue_5332_gandalf_trigger_doubling.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "3e165ca76c8fec0c94eea3894df7b2020d1ca8bf5dee14e060f01ba63196c5ae"
+    },
+    {
+      "path": "crates/engine/tests/integration/kaya_spirits_justice_per_opponent_exile.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "858a98d2c47ab0d9939092a73673c3756b0f74d7bde6415c02db2e5b217a8a05"
+    },
+    {
+      "path": "crates/engine/tests/integration/kozilek_broken_reality_manifest_from_hands.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "15bf8a35eeccd7ef21a34d54676ff6ca6f291b82f3dc019630a1bcf03246b53b"
+    },
+    {
+      "path": "crates/engine/tests/integration/loop_shortcut.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "f1b7a337c26554bc0c7b82b39c524f5cd1ebbac80195b751984b920f31b5b134"
+    },
+    {
+      "path": "crates/engine/tests/integration/madame_null_integration.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "07e4406f5333bfc1ee4bd91e0a95819920ad0300776178bd18c720653f416c69"
+    },
+    {
+      "path": "crates/engine/tests/integration/main.rs",
+      "category": "overlap",
+      "sha256": "dda8661e8dafbd4f95359e4fa2e70fbc69e8bdb7c869c149c7f34b9ffb2bb634",
+      "patch_sha256": "65aae7a434b3e0c9424fcfcffb82d0739114ca7871c3dc503314e5161e0e7fe3",
+      "hunks": [
+        {
+          "header": "@@ -45,6 +45,7 @@ mod captain_america_throw;",
+          "repair_line": 45,
+          "unique_exact_context": true
+        },
+        {
+          "header": "@@ -534,6 +535,7 @@ mod kaysa_green_anthem;",
+          "repair_line": 535,
+          "unique_exact_context": true
+        },
+        {
+          "header": "@@ -645,6 +647,7 @@ mod saruman_white_hand_amass;",
+          "repair_line": 647,
+          "unique_exact_context": true
+        }
+      ],
+      "exact_in_memory_reconstruction": true
+    },
+    {
+      "path": "crates/engine/tests/integration/oversimplify_per_player_fractal.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "c0f3c1512a23df4005facfb0b605558022fa605766e30a827a11f03f0e2a6b51"
+    },
+    {
+      "path": "crates/engine/tests/integration/power_up_keyword.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "cc6aa0ef5d9cba5adbcbd020b5c4009b06bfcb2c4a9e1f448eb6d122a343c555"
+    },
+    {
+      "path": "crates/engine/tests/integration/scroll_of_fate_manifest_from_hand.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "defa2db45e1b73db2ae63bec3018453cace6d25f2ae7583c7aa606bd3cde01e2"
+    },
+    {
+      "path": "crates/engine/tests/integration/trigger_suppression_event_timing.rs",
+      "category": "repair_only",
+      "parent": "fa0ebfe88db224ebd32624bb96ef033d338c2d8c",
+      "sha256": "71a16f0c601736b79cfcbe0b97e51f810a7baef5f7b15b1d172240f0f37ab98a"
+    },
+    {
+      "path": "crates/manabrew-compat/src/lib.rs",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "c8adb2eafdb2bf6b9ad649a4feb7c29843b4ef9e2bee4d0571c104090cd55fa3"
+    },
+    {
+      "path": "scripts/coverage-regression-check.sh",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "22cc89482396ff38c9fda50431e29d06cba18df9a1f16bd9153e813a6c190730"
+    },
+    {
+      "path": "scripts/draw-replacement-corpus.tsv",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "028c33aeeb8220decef4273f1d5a8c1d4f0b3ba4b787725dbadd0984db7eb071"
+    },
+    {
+      "path": "scripts/zone-authority-baseline.txt",
+      "category": "upstream_only",
+      "parent": "1cf344efe83c871a362bf04e8444e820124c21f8",
+      "sha256": "4682884fb7fa19a137436530a227c32d026c3b6d2037acfd8bc624093bebca3d"
+    }
+  ],
+  "setup_note": "Initial assertion assumed the 3257-file manifest included all 3259 tracked entries. Independent check established the two remaining entries are directory symlinks; both were then verified against index blobs. No source mismatch occurred."
+}

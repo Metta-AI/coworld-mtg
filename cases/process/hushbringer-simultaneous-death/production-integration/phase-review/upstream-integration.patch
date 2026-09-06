@@ -1,0 +1,2974 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 170b49d1c..8f248e573 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -337,10 +337,57 @@ jobs:
+         # PR #2802 ratchet deadlock). PR and merge_group runs remain blocking.
+         continue-on-error: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+         run: |
++          args=(--fail-on-engine)
++          if [ "${{ github.event_name }}" = "pull_request" ]; then
++            # A fork can legitimately diverge from phase-rs/main's parser
++            # diagnostics. Engine support still gates against the published
++            # baseline here; the next step ratchets diagnostics against this
++            # PR's exact base using the same current MTGJSON corpus.
++            args+=(--skip-diagnostic-ratchet)
++          fi
+           ./scripts/coverage-regression-check.sh \
+             "https://data.phase-rs.dev/preview/coverage-data.json" \
+             data/coverage-data.json \
+-            --fail-on-engine
++            "${args[@]}"
++
++      - name: Diagnostic regression check vs PR base
++        if: github.event_name == 'pull_request'
++        run: |
++          BASE="${{ github.event.pull_request.base.sha }}"
++          git fetch --no-tags --depth=1 origin "$BASE"
++
++          base_root="$(mktemp -d)"
++          base_tree="$base_root/tree"
++          cleanup_base() {
++            git worktree remove --force "$base_tree" 2>/dev/null || true
++            rm -rf "$base_root"
++          }
++          trap cleanup_base EXIT
++
++          git worktree add --detach "$base_tree" "$BASE"
++          mkdir -p "$base_tree/data/mtgjson"
++          ln -s "$GITHUB_WORKSPACE/data/mtgjson/AtomicCards.json" \
++            "$base_tree/data/mtgjson/AtomicCards.json"
++
++          export CARGO_TARGET_DIR="$RUNNER_TEMP/base-coverage-target"
++          cargo run \
++            --manifest-path "$base_tree/Cargo.toml" \
++            --profile tool \
++            --features cli \
++            --bin oracle-gen -- \
++            "$base_tree/data/" --stats \
++            > "$base_tree/data/card-data.json"
++          cargo run \
++            --manifest-path "$base_tree/Cargo.toml" \
++            --profile tool \
++            --features cli \
++            --bin coverage-report -- \
++            "$base_tree/data/" --all \
++            > "$RUNNER_TEMP/base-coverage-data.json"
++
++          ./scripts/coverage-regression-check.sh \
++            "$RUNNER_TEMP/base-coverage-data.json" \
++            data/coverage-data.json
+ 
+       - name: Parse-detail diff vs base baseline
+         # PR-only review aid (NEVER blocks — continue-on-error): surfaces the
+diff --git a/client/src/adapter/types.ts b/client/src/adapter/types.ts
+index 6a1db58e6..f45057566 100644
+--- a/client/src/adapter/types.ts
++++ b/client/src/adapter/types.ts
+@@ -687,6 +687,8 @@ export type CastChoice = { type: "Cast" } | { type: "Decline" };
+ 
+ export type AutoMayChoice = { type: "Accept" } | { type: "Decline" };
+ 
++export type FullControlMode = "Off" | "Held" | "Locked";
++
+ export type MayTriggerOrigin =
+   | { type: "Printed"; trigger_index: number }
+   | { type: "Keyword"; keyword: string };
+@@ -1918,6 +1920,7 @@ export type GameAction =
+       };
+     }
+   | { type: "CancelAutoPass" }
++  | { type: "SetFullControl"; data: { mode: FullControlMode } }
+   | { type: "SetPhaseStops"; data: { stops: PhaseStop[] } }
+   | { type: "SetPriorityYield"; data: { op: PriorityYieldOp } }
+   | { type: "SetMayTriggerAutoChoice"; data: { op: MayTriggerAutoChoiceOp } }
+diff --git a/crates/engine/src/ai_support/mod.rs b/crates/engine/src/ai_support/mod.rs
+index 0925dbb29..f9d620ce2 100644
+--- a/crates/engine/src/ai_support/mod.rs
++++ b/crates/engine/src/ai_support/mod.rs
+@@ -1512,6 +1512,14 @@ fn target_selection_actions_without_simulation(state: &GameState) -> Option<Vec<
+         actions.push(GameAction::ChooseTarget { target: None });
+     }
+ 
++    // CR 601.2i: If a cast cannot be completed after target selection begins,
++    // the player must be able to reverse the casting process. The validated
++    // candidate path already adds this action; keep it on the target-selection
++    // fast path as well so transport clients never receive an inescapable cast.
++    if state.waiting_for.has_pending_cast() {
++        actions.push(GameAction::CancelCast);
++    }
++
+     Some(actions)
+ }
+ 
+@@ -5141,12 +5149,13 @@ mod tests {
+ 
+         assert_eq!(counters.state_clone_for_legality, 0);
+         assert_eq!(counters.priority_cast_probe_builds, 0);
+-        assert_eq!(actions.len(), 26);
++        assert_eq!(actions.len(), 27);
+         assert!(spell_costs.is_empty());
+         assert!(grouped.is_empty());
+         assert!(actions
+             .iter()
+             .any(|action| matches!(action, GameAction::ChooseTarget { target: None })));
++        assert!(actions.contains(&GameAction::CancelCast));
+     }
+ 
+     #[test]
+@@ -5244,7 +5253,13 @@ mod tests {
+             crate::game::perf_counters::snapshot().state_clone_for_legality,
+             0
+         );
+-        assert_eq!(actions, vec![GameAction::ChooseTarget { target: None }]);
++        assert_eq!(
++            actions,
++            vec![
++                GameAction::ChooseTarget { target: None },
++                GameAction::CancelCast
++            ]
++        );
+     }
+ 
+     /// False-positive sweep (CR 103.5 / TL:R 906.6a): the simultaneous
+diff --git a/crates/engine/src/game/ability_rw.rs b/crates/engine/src/game/ability_rw.rs
+index 17791c6ce..8aa38c5c5 100644
+--- a/crates/engine/src/game/ability_rw.rs
++++ b/crates/engine/src/game/ability_rw.rs
+@@ -4595,6 +4595,7 @@ fn rw_effect(
+         Effect::Manifest {
+             target: _,
+             count,
++            object_source,
+             enters_under: _,
+             profile: _,
+         } => {
+@@ -4603,6 +4604,15 @@ fn rw_effect(
+             p.writes_membership_external_census.merge(Census::Any);
+             p.writes_membership_external_zones.merge(ZoneSpan::Any);
+             p.merge(rw_quantity_expr(count));
++            // CR 701.40a: `object_source` (Some) names already-chosen objects
++            // being manifested — a membership WRITE target. The membership
++            // write is already maximal-conservative (Census/Zone Any) above;
++            // flag its D5 / member-bound referents (mirrors the `Cloak` arm
++            // below).
++            if let Some(src) = object_source {
++                flag_legacy_write_target(&mut p, src);
++                flag_member_bound_write_target(&mut p, src);
++            }
+             (p, None)
+         }
+         Effect::ManifestDread => {
+diff --git a/crates/engine/src/game/ability_scan.rs b/crates/engine/src/game/ability_scan.rs
+index d261845e3..efec5cf5b 100644
+--- a/crates/engine/src/game/ability_scan.rs
++++ b/crates/engine/src/game/ability_scan.rs
+@@ -1354,12 +1354,16 @@ fn scan_effect(x: &Effect) -> Axes {
+         Effect::Manifest {
+             target,
+             count,
++            object_source,
+             enters_under,
+             profile: _,
+         } => {
+             let mut acc = Axes::NONE;
+             acc = acc.or(scan_target_filter(target));
+             acc = acc.or(scan_quantity_expr(count));
++            if let Some(filter) = object_source {
++                acc = acc.or(scan_target_filter(filter));
++            }
+             if let Some(x) = enters_under {
+                 acc = acc.or(scan_controller_ref(x));
+             }
+diff --git a/crates/engine/src/game/casting.rs b/crates/engine/src/game/casting.rs
+index 3507fba1c..70b99759d 100644
+--- a/crates/engine/src/game/casting.rs
++++ b/crates/engine/src/game/casting.rs
+@@ -12027,10 +12027,6 @@ fn preview_pending_cast_for_mandatory_additional_cost(
+         },
+         |ability_def| build_resolved_from_def(ability_def, prepared.object_id, player),
+     );
+-    if !build_target_slots(state, &ability).ok()?.is_empty() {
+-        return None;
+-    }
+-
+     let mut pending = PendingCast::new(
+         prepared.object_id,
+         prepared.card_id,
+@@ -12064,6 +12060,15 @@ fn mandatory_additional_cost_preview_shape_is_supported(cost: &AbilityCost) -> b
+             filter: None,
+             ..
+         } => true,
++        AbilityCost::PayLife {
++            amount: QuantityExpr::Fixed { .. },
++        }
++        | AbilityCost::Discard {
++            count: QuantityExpr::Fixed { .. },
++            filter: None,
++            self_scope: crate::types::ability::DiscardSelfScope::FromHand,
++            ..
++        } => true,
+         AbilityCost::Mana { .. }
+         | AbilityCost::ManaDynamic { .. }
+         | AbilityCost::Tap
+@@ -12108,18 +12113,190 @@ fn preview_mandatory_additional_cost_branch(
+     if !mandatory_additional_cost_preview_shape_is_supported(cost) {
+         return MandatoryAdditionalCostPreview::NotApplicable;
+     }
+-    match casting_costs::additional_cost_declaration_is_offerable(
+-        state,
+-        player,
+-        pending,
+-        cost.clone(),
+-    ) {
+-        Ok(true) => MandatoryAdditionalCostPreview::ApplicablePayable,
+-        Ok(false) => MandatoryAdditionalCostPreview::ApplicableUnpayable,
+-        Err(_) => MandatoryAdditionalCostPreview::NotApplicable,
++
++    // CR 118.3 + CR 601.2f/h: The additional cost and the spell's mana cost
++    // must be payable together, not merely in isolation. Fixed mana additions
++    // already use a combined total. For the supported resource costs, reserve
++    // each possible payment selection in a cloned state before checking the
++    // remaining mana path. This catches shared-resource conflicts such as
++    // exiling the same graveyard cards that a costed mana ability would need.
++    // Lock the total against the pre-payment state per CR 601.2f; moving
++    // resources during 601.2h must not retroactively change cost modifiers.
++    let locked_mana_total =
++        recompute_pending_mana_total(state, player, pending, pending.ability.chosen_x);
++    let jointly_payable = match cost {
++        AbilityCost::Mana { .. } => casting_costs::additional_cost_declaration_is_offerable(
++            state,
++            player,
++            pending,
++            cost.clone(),
++        )
++        .ok(),
++        AbilityCost::Exile {
++            count,
++            zone: Some(Zone::Graveyard),
++            filter: None,
++        } => {
++            let eligible = find_eligible_exile_for_cost_targets(
++                state,
++                player,
++                pending.object_id,
++                ExileCostSourceZone::Graveyard,
++                None,
++            );
++            mandatory_object_cost_selection_leaves_mana_path(
++                state,
++                player,
++                pending,
++                &eligible,
++                *count as usize,
++                Zone::Exile,
++                &locked_mana_total,
++            )
++        }
++        AbilityCost::Discard {
++            count: QuantityExpr::Fixed { value },
++            filter: None,
++            self_scope: crate::types::ability::DiscardSelfScope::FromHand,
++            ..
++        } => {
++            let eligible = find_eligible_discard_targets(state, player, pending.object_id, None);
++            mandatory_object_cost_selection_leaves_mana_path(
++                state,
++                player,
++                pending,
++                &eligible,
++                (*value).max(0) as usize,
++                Zone::Graveyard,
++                &locked_mana_total,
++            )
++        }
++        AbilityCost::PayLife {
++            amount: QuantityExpr::Fixed { value },
++        } => {
++            let mut simulated = state.clone();
++            let mut events = Vec::new();
++            let paid = super::life_costs::pay_life_as_cast_or_activation_cost(
++                &mut simulated,
++                player,
++                (*value).max(0) as u32,
++                &mut events,
++            );
++            Some(
++                matches!(paid, super::life_costs::PayLifeCostResult::Paid { .. })
++                    && mandatory_additional_cost_mana_path_exists(
++                        &simulated,
++                        player,
++                        pending.object_id,
++                        &locked_mana_total,
++                    ),
++            )
++        }
++        _ => None,
++    };
++
++    match jointly_payable {
++        Some(true) => MandatoryAdditionalCostPreview::ApplicablePayable,
++        Some(false) => MandatoryAdditionalCostPreview::ApplicableUnpayable,
++        None => MandatoryAdditionalCostPreview::NotApplicable,
++    }
++}
++
++fn mandatory_additional_cost_mana_path_exists(
++    state: &GameState,
++    player: PlayerId,
++    source_id: ObjectId,
++    total: &ManaCost,
++) -> bool {
++    total.is_without_paying_mana()
++        || can_feasibly_pay_mana_cost(state, player, Some(source_id), total)
++}
++
++struct MandatoryObjectCostSearch<'a> {
++    state: &'a GameState,
++    player: PlayerId,
++    source_id: ObjectId,
++    eligible: &'a [ObjectId],
++    count: usize,
++    destination: Zone,
++    locked_mana_total: &'a ManaCost,
++}
++
++impl MandatoryObjectCostSearch<'_> {
++    fn has_mana_path(&self, start: usize, chosen: &mut Vec<ObjectId>) -> bool {
++        if chosen.len() == self.count {
++            let mut simulated = self.state.clone();
++            let mut events = Vec::new();
++            for object_id in chosen.iter().copied() {
++                // allow-raw-zone: reserves a resource in an affordability-preview clone, not gameplay state
++                super::zones::move_to_zone(
++                    &mut simulated,
++                    object_id,
++                    self.destination,
++                    &mut events,
++                );
++            }
++            return mandatory_additional_cost_mana_path_exists(
++                &simulated,
++                self.player,
++                self.source_id,
++                self.locked_mana_total,
++            );
++        }
++
++        let remaining = self.count - chosen.len();
++        for index in start..=self.eligible.len() - remaining {
++            chosen.push(self.eligible[index]);
++            if self.has_mana_path(index + 1, chosen) {
++                return true;
++            }
++            chosen.pop();
++        }
++        false
+     }
+ }
+ 
++fn mandatory_object_cost_selection_leaves_mana_path(
++    state: &GameState,
++    player: PlayerId,
++    pending: &PendingCast,
++    eligible: &[ObjectId],
++    count: usize,
++    destination: Zone,
++    locked_mana_total: &ManaCost,
++) -> Option<bool> {
++    if eligible.len() < count {
++        return Some(false);
++    }
++
++    // Legal-action generation is a hot path. Preserve the legacy candidate
++    // rather than expanding an adversarially large N-choose-K search. Real
++    // fixed discard/exile costs are normally one or two cards; this bound
++    // covers those ordinary states while keeping the preview deterministic.
++    const MAX_SELECTIONS: usize = 512;
++    let smaller_side = count.min(eligible.len() - count);
++    let mut selection_count = 1usize;
++    for index in 0..smaller_side {
++        selection_count = selection_count.saturating_mul(eligible.len() - index) / (index + 1);
++        if selection_count > MAX_SELECTIONS {
++            return None;
++        }
++    }
++
++    Some(
++        MandatoryObjectCostSearch {
++            state,
++            player,
++            source_id: pending.object_id,
++            eligible,
++            count,
++            destination,
++            locked_mana_total,
++        }
++        .has_mana_path(0, &mut Vec::with_capacity(count)),
++    )
++}
++
+ fn preview_mandatory_additional_cost(
+     state: &GameState,
+     player: PlayerId,
+@@ -12916,21 +13093,6 @@ pub(super) fn can_feasibly_pay_mana_cost(
+     can_feasibly_pay_mana_cost_with_probe(state, player, source_id, cost, None)
+ }
+ 
+-pub(super) fn has_manual_mana_ability_for_spell_payment(
+-    state: &GameState,
+-    player: PlayerId,
+-    source_id: ObjectId,
+-) -> bool {
+-    let spell_meta = build_spell_meta(state, player, source_id);
+-    let spell_ctx = spell_meta.as_ref().map(PaymentContext::Spell);
+-    super::mana_sources::has_activatable_non_tap_mana_ability_for_payment(
+-        state,
+-        player,
+-        Some(source_id),
+-        spell_ctx.as_ref(),
+-    )
+-}
+-
+ pub(super) fn can_feasibly_pay_mana_cost_with_probe(
+     state: &GameState,
+     player: PlayerId,
+diff --git a/crates/engine/src/game/casting_costs.rs b/crates/engine/src/game/casting_costs.rs
+index 84030e862..cb5c503ac 100644
+--- a/crates/engine/src/game/casting_costs.rs
++++ b/crates/engine/src/game/casting_costs.rs
+@@ -6358,7 +6358,6 @@ pub(super) fn pay_and_push_adventure(
+     let auto_payment_needs_input = payment_mode == CastPaymentMode::Auto
+         && cost.mana_value() > 0
+         && !super::casting::can_pay_cost_after_auto_tap(state, player, object_id, cost)
+-        && super::casting::has_manual_mana_ability_for_spell_payment(state, player, object_id)
+         && super::casting::can_feasibly_pay_mana_cost(state, player, Some(object_id), cost);
+     if has_x || convoke_mode.is_some() || manual_payment || auto_payment_needs_input {
+         let mut pending = PendingCast::new(object_id, card_id, ability, cost.clone());
+diff --git a/crates/engine/src/game/casting_tests.rs b/crates/engine/src/game/casting_tests.rs
+index 7d5030148..9d6ca3cd2 100644
+--- a/crates/engine/src/game/casting_tests.rs
++++ b/crates/engine/src/game/casting_tests.rs
+@@ -8583,6 +8583,187 @@ fn cast_spell_action(spell: ObjectId, card_id: u64) -> GameAction {
+     }
+ }
+ 
++fn create_rubble_rouser_mana_source(state: &mut GameState, card_id: u64) -> ObjectId {
++    let source = create_object(
++        state,
++        CardId(card_id),
++        PlayerId(0),
++        "Rubble Rouser".to_string(),
++        Zone::Battlefield,
++    );
++    let obj = state.objects.get_mut(&source).unwrap();
++    obj.card_types.core_types.push(CoreType::Creature);
++    obj.has_mana_ability = true;
++    obj.entered_battlefield_turn = Some(1);
++    Arc::make_mut(&mut obj.abilities).push(
++        AbilityDefinition::new(
++            AbilityKind::Activated,
++            Effect::Mana {
++                produced: ManaProduction::Fixed {
++                    colors: vec![ManaColor::Red],
++                    contribution: ManaContribution::Base,
++                },
++                restrictions: vec![],
++                grants: vec![],
++                expiry: None,
++                target: None,
++            },
++        )
++        .cost(AbilityCost::Composite {
++            costs: vec![
++                AbilityCost::Tap,
++                AbilityCost::Exile {
++                    count: 1,
++                    zone: Some(Zone::Graveyard),
++                    filter: None,
++                },
++            ],
++        }),
++    );
++    source
++}
++
++fn create_graveyard_cards(
++    state: &mut GameState,
++    first_card_id: u64,
++    count: usize,
++) -> Vec<ObjectId> {
++    (0..count)
++        .map(|index| {
++            create_object(
++                state,
++                CardId(first_card_id + index as u64),
++                PlayerId(0),
++                format!("Graveyard card {index}"),
++                Zone::Graveyard,
++            )
++        })
++        .collect()
++}
++
++#[test]
++fn stoneglider_is_not_offered_when_exile_branch_consumes_mana_ability_resource() {
++    let mut state = setup_game_at_main_phase();
++    let spell = create_stoneglider_preview_fixture(&mut state, 40_090);
++    create_tap_mana_source(
++        &mut state,
++        "Plains",
++        ManaProduction::Fixed {
++            colors: vec![ManaColor::White],
++            contribution: ManaContribution::Base,
++        },
++    );
++    create_tap_mana_source(
++        &mut state,
++        "Mountain",
++        ManaProduction::Fixed {
++            colors: vec![ManaColor::Red],
++            contribution: ManaContribution::Base,
++        },
++    );
++    let rubble_rouser = create_rubble_rouser_mana_source(&mut state, 40_093);
++    create_graveyard_cards(&mut state, 40_094, 2);
++
++    let mana_ability = &state.objects[&rubble_rouser].abilities[0];
++    assert!(super::super::mana_abilities::is_mana_ability(mana_ability));
++    assert!(mana_ability
++        .cost
++        .as_ref()
++        .unwrap()
++        .is_payable_for_mana_ability(&state, PlayerId(0), rubble_rouser));
++    assert!(super::super::mana_abilities::can_activate_mana_ability_now(
++        &state,
++        PlayerId(0),
++        rubble_rouser,
++        0,
++        mana_ability,
++    ));
++    assert!(
++        can_feasibly_pay_mana_cost(
++            &state,
++            PlayerId(0),
++            Some(spell),
++            &state.objects[&spell].mana_cost,
++        ),
++        "before paying the additional cost, Rubble Rouser appears to supply the third mana"
++    );
++    assert!(
++        !normal_cast_is_offered(&state, spell),
++        "the cast must be suppressed because exiling both graveyard cards leaves Rubble Rouser unable to pay the printed cost"
++    );
++}
++
++#[test]
++fn stoneglider_is_offered_when_exile_branch_can_preserve_mana_ability_resource() {
++    let mut state = setup_game_at_main_phase();
++    let spell = create_stoneglider_preview_fixture(&mut state, 40_080);
++    let plains = create_tap_mana_source(
++        &mut state,
++        "Plains",
++        ManaProduction::Fixed {
++            colors: vec![ManaColor::White],
++            contribution: ManaContribution::Base,
++        },
++    );
++    let mountain = create_tap_mana_source(
++        &mut state,
++        "Mountain",
++        ManaProduction::Fixed {
++            colors: vec![ManaColor::Red],
++            contribution: ManaContribution::Base,
++        },
++    );
++    let rubble_rouser = create_rubble_rouser_mana_source(&mut state, 40_083);
++    let graveyard_cards = create_graveyard_cards(&mut state, 40_084, 3);
++
++    assert!(
++        normal_cast_is_offered(&state, spell),
++        "one graveyard card can remain for Rubble Rouser after the two-card additional cost"
++    );
++
++    apply_as_current(&mut state, cast_spell_action(spell, 40_080))
++        .expect("CastSpell must reach the additional-cost branch decision");
++    apply_as_current(&mut state, GameAction::DecideOptionalCost { pay: true })
++        .expect("choosing the graveyard-exile branch must reach object selection");
++    apply_as_current(
++        &mut state,
++        GameAction::SelectCards {
++            cards: graveyard_cards[..2].to_vec(),
++        },
++    )
++    .expect("preserving one graveyard card must leave a complete mana-payment path");
++    apply_as_current(
++        &mut state,
++        GameAction::ActivateAbility {
++            source_id: rubble_rouser,
++            ability_index: 0,
++        },
++    )
++    .expect("Rubble Rouser must remain activatable during mana payment");
++    apply_as_current(
++        &mut state,
++        GameAction::SelectCards {
++            cards: vec![graveyard_cards[2]],
++        },
++    )
++    .expect("exiling the preserved card for Rubble Rouser must finalize the cast");
++
++    apply_as_current(&mut state, GameAction::TapLandForMana { object_id: plains })
++        .expect("Plains must pay the white shard");
++    apply_as_current(
++        &mut state,
++        GameAction::TapLandForMana {
++            object_id: mountain,
++        },
++    )
++    .expect("Mountain must pay the remaining generic mana and finalize the cast");
++    apply_as_current(&mut state, GameAction::PassPriority)
++        .expect("the funded mana-payment step must finalize the cast");
++
++    assert_eq!(state.objects[&spell].zone, Zone::Stack);
++    assert_eq!(state.objects[&graveyard_cards[2]].zone, Zone::Exile);
++}
++
+ #[test]
+ fn stoneglider_is_not_offered_when_neither_additional_cost_branch_is_payable() {
+     let mut state = setup_game_at_main_phase();
+@@ -8788,12 +8969,27 @@ fn mandatory_additional_cost_preview_classifier_is_deliberately_narrow() {
+         zone: Some(Zone::Graveyard),
+         filter: None,
+     };
++    let fixed_pay_life = AbilityCost::PayLife {
++        amount: QuantityExpr::Fixed { value: 2 },
++    };
++    let fixed_hand_discard = AbilityCost::Discard {
++        count: QuantityExpr::Fixed { value: 1 },
++        filter: None,
++        selection: crate::types::ability::CardSelectionMode::Chosen,
++        self_scope: crate::types::ability::DiscardSelfScope::FromHand,
++    };
+     assert!(mandatory_additional_cost_preview_shape_is_supported(
+         &fixed_mana
+     ));
+     assert!(mandatory_additional_cost_preview_shape_is_supported(
+         &graveyard_exile
+     ));
++    assert!(mandatory_additional_cost_preview_shape_is_supported(
++        &fixed_pay_life
++    ));
++    assert!(mandatory_additional_cost_preview_shape_is_supported(
++        &fixed_hand_discard
++    ));
+ 
+     let excluded = [
+         AbilityCost::Mana {
+@@ -8833,9 +9029,6 @@ fn mandatory_additional_cost_preview_classifier_is_deliberately_narrow() {
+         AbilityCost::OneOf {
+             costs: vec![fixed_mana],
+         },
+-        AbilityCost::PayLife {
+-            amount: QuantityExpr::Fixed { value: 2 },
+-        },
+     ];
+     for cost in excluded {
+         assert!(
+@@ -8854,8 +9047,10 @@ fn choice_preview_is_not_applicable_when_either_branch_is_unsupported() {
+         AbilityCost::Mana {
+             cost: ManaCost::generic(2),
+         },
+-        AbilityCost::PayLife {
+-            amount: QuantityExpr::Fixed { value: 50 },
++        AbilityCost::Exile {
++            count: 1,
++            zone: None,
++            filter: None,
+         },
+     ));
+     add_mana(&mut state, PlayerId(0), ManaType::Colorless, 1);
+@@ -8927,7 +9122,7 @@ fn target_constraints_make_the_preview_fail_closed_at_the_legal_action_boundary(
+ }
+ 
+ #[test]
+-fn required_pay_life_keeps_the_existing_life_gate() {
++fn required_pay_life_is_preview_supported_and_remains_unoffered_when_unpayable() {
+     let mut state = setup_game_at_main_phase();
+     state.players[0].life = 1;
+     let spell = create_generic_creature_in_hand(
+@@ -8944,13 +9139,13 @@ fn required_pay_life_keeps_the_existing_life_gate() {
+     add_mana(&mut state, PlayerId(0), ManaType::Colorless, 1);
+ 
+     assert!(
+-        !mandatory_additional_cost_preview_shape_is_supported(
++        mandatory_additional_cost_preview_shape_is_supported(
+             match state.objects[&spell].additional_cost.as_ref().unwrap() {
+                 AdditionalCost::Required(cost) => cost,
+                 other => panic!("expected Required cost, got {other:?}"),
+             }
+         ),
+-        "PayLife must remain outside the new preview classifier"
++        "fixed PayLife must participate in targeted-spell affordability previews"
+     );
+     assert!(
+         !normal_cast_is_offered(&state, spell),
+diff --git a/crates/engine/src/game/effects/choose_from_zone.rs b/crates/engine/src/game/effects/choose_from_zone.rs
+index 6097e0bbe..f20007245 100644
+--- a/crates/engine/src/game/effects/choose_from_zone.rs
++++ b/crates/engine/src/game/effects/choose_from_zone.rs
+@@ -4,7 +4,7 @@ use crate::game::filter::{matches_target_filter, FilterContext};
+ use crate::game::players;
+ use crate::types::ability::{
+     ChooseFromZoneConstraint, Chooser, Effect, EffectError, EffectKind, ForEachCategoryAction,
+-    ResolvedAbility, TargetFilter, TargetRef, ZoneOwner,
++    PerPlayerScope, ResolvedAbility, TargetFilter, TargetRef, ZoneOwner,
+ };
+ use crate::types::card_type::CoreType;
+ use crate::types::events::GameEvent;
+@@ -52,17 +52,10 @@ pub fn resolve(
+     // accumulating each pick into the chain's tracked set. Routed here before
+     // the single-pool path so the per-player prompts never collapse into one
+     // candidate scan. Building block for Breach the Multiverse.
+-    // CR 102.2: `EachOpponent` is the same iteration with the controller
++    // CR 102.3: `Each(OtherPlayers)` is the same iteration with the controller
+     // excluded ("for each OTHER player" — Kaya, Spirits' Justice).
+-    if matches!(zone_owner, ZoneOwner::EachPlayer | ZoneOwner::EachOpponent) {
+-        let players = if matches!(zone_owner, ZoneOwner::EachOpponent) {
+-            crate::game::players::apnap_order(state)
+-                .into_iter()
+-                .filter(|&p| p != ability.controller)
+-                .collect()
+-        } else {
+-            crate::game::players::apnap_order(state)
+-        };
++    if let ZoneOwner::Each(scope) = zone_owner {
++        let players = per_player_iteration_population(state, ability, scope);
+         // No pick has accumulated yet — the first one must start a fresh set.
+         return prompt_next_each_player(state, ability, players, false, events);
+     }
+@@ -447,15 +440,29 @@ pub(crate) fn resolve_random_in_chain(
+         _ => return false,
+     };
+ 
+-    let cards = resolve_candidate_cards(
++    // CR 608.2d: `Each` has no single candidate pool, and a per-player random
++    // pick is unbuilt. No parse produces the combination (of the 43 cards whose
++    // text carries per-player wording, none say "at random"), so rather than
++    // build speculative machinery the pool authority rejects the owner up front
++    // and this arm keeps the rejection loud instead of reading it as an empty
++    // pool. Release behavior is a no-op resolution, as before.
++    let cards = match resolve_candidate_cards(
+         state,
+         ability,
+         zone,
+         &additional_zones,
+         zone_owner,
+         filter.as_ref(),
+-    )
+-    .unwrap_or_default();
++    ) {
++        Ok(cards) => cards,
++        Err(_) => {
++            debug_assert!(
++                !matches!(zone_owner, ZoneOwner::Each(_)),
++                "a random ChooseFromZone with a per-player zone owner has no resolution path"
++            );
++            Vec::new()
++        }
++    };
+ 
+     // CR 609.3: An empty pool (or count 0) does nothing; the chain then skips
+     // any continuation that depends on the missing pick.
+@@ -542,7 +549,13 @@ fn prompt_next_each_player(
+         // CR 101.4 + CR 608.2c: For "for each player, choose ...", the spell's controller is
+         // the chooser regardless of whose zone is scanned (Breach the
+         // Multiverse). `Chooser::Opponent` would route to an opponent; honor it.
+-        let choosing_player = resolve_chooser(state, ability, chooser);
++        // `Chooser::OwningPlayer` binds the choice to THIS iteration's owner —
++        // each player picks from their own (hidden) zone (Kozilek, the Broken
++        // Reality: "target players each manifest two cards from their hands").
++        let choosing_player = match chooser {
++            Chooser::OwningPlayer => owner,
++            _ => resolve_chooser(state, ability, chooser),
++        };
+ 
+         state.waiting_for = WaitingFor::ChooseFromZoneChoice {
+             player: choosing_player,
+@@ -667,6 +680,17 @@ fn collect_player_zone_cards(
+ /// 2. The latest non-empty tracked set from any prior publish in this game.
+ /// 3. Explicit `TargetRef::Object` targets on the ability.
+ /// 4. Direct zone scan (`zone` + `additional_zones`).
++///
++/// CR 101.4: a per-player [`ZoneOwner::Each`] has no single pool at all — it
++/// resolves one prompt per player through `prompt_next_each_player` — so it is
++/// rejected here rather than deeper in the owner resolution. The rejection has
++/// to precede the tracked-set fast paths above: those return before the owner
++/// is ever read, which would otherwise hand a per-player choice the whole
++/// global or prior-chain set. No caller reaches this with `Each` on a supported
++/// path (`resolve` returns to the per-player iteration first, and
++/// `resolve_with_choosing_player` is only entered from below that return), so
++/// the arm exists to keep an unsupported combination loud instead of silently
++/// answered.
+ fn resolve_candidate_cards(
+     state: &GameState,
+     ability: &ResolvedAbility,
+@@ -675,6 +699,12 @@ fn resolve_candidate_cards(
+     zone_owner: ZoneOwner,
+     filter: Option<&TargetFilter>,
+ ) -> Result<Vec<ObjectId>, EffectError> {
++    if matches!(zone_owner, ZoneOwner::Each(_)) {
++        return Err(EffectError::MissingParam(
++            "ChooseFromZone Each resolves per-player and has no single candidate pool".to_string(),
++        ));
++    }
++
+     if let Some(cards) = chain_tracked_set_cards(state) {
+         return Ok(cards);
+     }
+@@ -776,6 +806,45 @@ fn collect_direct_zone_cards(
+         .collect())
+ }
+ 
++/// CR 101.4: The players a [`ZoneOwner::Each`] iteration walks, in APNAP order.
++/// One authority for every population leaf, so a new leaf is a match arm here
++/// rather than a new `ZoneOwner` sibling.
++fn per_player_iteration_population(
++    state: &GameState,
++    ability: &ResolvedAbility,
++    scope: PerPlayerScope,
++) -> Vec<PlayerId> {
++    let apnap = crate::game::players::apnap_order(state);
++    match scope {
++        PerPlayerScope::AllPlayers => apnap,
++        // CR 102.3: "each OTHER player" is every player but the controller.
++        // Deliberately not `players::opponents`: that set is team-relative and
++        // excludes a teammate, whom this wording includes.
++        PerPlayerScope::OtherPlayers => apnap
++            .into_iter()
++            .filter(|&p| p != ability.controller)
++            .collect(),
++        // CR 115.1: the iterated set is the ability's CHOSEN `Player` targets.
++        // CR 601.2c: an "up to N" selection may be empty — the loop then
++        // disposes immediately and the parked continuation runs with an empty
++        // tracked set.
++        PerPlayerScope::TargetedPlayers => {
++            let chosen: Vec<PlayerId> = ability
++                .targets
++                .iter()
++                .filter_map(|t| match t {
++                    TargetRef::Player(pid) => Some(*pid),
++                    _ => None,
++                })
++                .collect();
++            apnap
++                .into_iter()
++                .filter(|pid| chosen.contains(pid))
++                .collect()
++        }
++    }
++}
++
+ fn resolve_zone_owner(
+     state: &GameState,
+     ability: &ResolvedAbility,
+@@ -800,9 +869,11 @@ fn resolve_zone_owner(
+         // CR 101.4: `EachPlayer` / `EachOpponent` resolve a *set* of zone
+         // owners, not one — they are handled by `prompt_next_each_player`, which
+         // scans each iterated player's zone directly and never routes here.
+-        ZoneOwner::EachPlayer | ZoneOwner::EachOpponent => Err(EffectError::MissingParam(
+-            "ChooseFromZone EachPlayer/EachOpponent resolves per-player, not via single owner"
+-                .to_string(),
++        // CR 101.4: `Each` resolves a *set* of zone owners, not one — it is
++        // handled by `prompt_next_each_player`, which scans each iterated
++        // player's zone directly and never routes here.
++        ZoneOwner::Each(_) => Err(EffectError::MissingParam(
++            "ChooseFromZone Each resolves per-player, not via a single owner".to_string(),
+         )),
+         // CR 400.1: `AllOwners` scans a zone shared across EVERY owner, not a
+         // single one — it is handled by the early return in
+@@ -870,6 +941,18 @@ fn resolve_chooser(state: &GameState, ability: &ResolvedAbility, chooser: Choose
+                 .next()
+                 .unwrap_or(ability.controller)
+         }
++        // CR 608.2c: the resolved zone owner makes the choice. Under an
++        // `Each*` zone owner the per-iteration loop passes the iterated owner
++        // directly (`prompt_next_each_player`) and never routes here; the
++        // single-owner forms resolve through the shared zone-owner authority,
++        // failing closed to the controller (CR 608.2d: an impossible choice is
++        // not offered).
++        Chooser::OwningPlayer => match &ability.effect {
++            Effect::ChooseFromZone { zone_owner, .. } => {
++                resolve_zone_owner(state, ability, *zone_owner).unwrap_or(ability.controller)
++            }
++            _ => ability.controller,
++        },
+     }
+ }
+ 
+@@ -2798,7 +2881,7 @@ mod tests {
+                 count: 1,
+                 zone: Zone::Battlefield,
+                 additional_zones: Vec::new(),
+-                zone_owner: ZoneOwner::EachOpponent,
++                zone_owner: ZoneOwner::Each(PerPlayerScope::OtherPlayers),
+                 filter: None,
+                 chooser: Chooser::Controller,
+                 up_to: true,
+@@ -2880,7 +2963,7 @@ mod tests {
+                 count: 1,
+                 zone: Zone::Battlefield,
+                 additional_zones: Vec::new(),
+-                zone_owner: ZoneOwner::EachOpponent,
++                zone_owner: ZoneOwner::Each(PerPlayerScope::OtherPlayers),
+                 filter: None,
+                 chooser: Chooser::Controller,
+                 up_to: true,
+diff --git a/crates/engine/src/game/effects/manifest.rs b/crates/engine/src/game/effects/manifest.rs
+index 65a093200..dd7e3929e 100644
+--- a/crates/engine/src/game/effects/manifest.rs
++++ b/crates/engine/src/game/effects/manifest.rs
+@@ -1,5 +1,5 @@
+ use crate::game::quantity::resolve_quantity_with_targets;
+-use crate::types::ability::{Effect, EffectError, EffectKind, ResolvedAbility};
++use crate::types::ability::{Effect, EffectError, EffectKind, ResolvedAbility, TargetFilter};
+ use crate::types::events::GameEvent;
+ use crate::types::game_state::GameState;
+ 
+@@ -19,15 +19,17 @@ pub fn resolve(
+     ability: &ResolvedAbility,
+     events: &mut Vec<GameEvent>,
+ ) -> Result<(), EffectError> {
+-    let (target, count, profile, enters_under) = match &ability.effect {
++    let (target, count, object_source, profile, enters_under) = match &ability.effect {
+         Effect::Manifest {
+             target,
+             count,
++            object_source,
+             profile,
+             enters_under,
+         } => (
+             target.clone(),
+             resolve_quantity_with_targets(state, count, ability).max(0) as usize,
++            object_source.clone(),
+             profile.clone(),
+             enters_under.clone(),
+         ),
+@@ -54,26 +56,99 @@ pub fn resolve(
+     // manifest default (CR 701.40a).
+     let profile = profile.unwrap_or_else(crate::types::ability::FaceDownProfile::vanilla_2_2);
+ 
+-    // CR 701.40e: Manifest cards one at a time
+-    for _ in 0..count {
+-        // CR 701.40a: Resolve the top card of the library owner's library, then
+-        // manifest it through the shared morph infrastructure, routing the
+-        // effect-specified profile and the optional controller override.
+-        let object_id = match crate::game::morph::top_library_object(state, player) {
+-            Ok(id) => id,
+-            // The library owner has no cards left — stop manifesting.
+-            Err(_) => break,
+-        };
+-        crate::game::morph::manifest_card(
+-            state,
+-            player,
+-            object_id,
+-            ability.source_id,
+-            profile.clone(),
+-            controller,
+-            events,
+-        )
+-        .map_err(|e| EffectError::MissingParam(format!("{e}")))?;
++    match object_source {
++        // CR 701.40a + CR 101.4: Manifest the chain's accumulated TRACKED SET —
++        // the per-player picks an `Each*`-owned `ChooseFromZone` collected
++        // ("up to two target players each manifest two cards from their
++        // hands", Kozilek, the Broken Reality). Unlike Cloak's tracked-set arm
++        // (Expose the Culprit), the members live in non-battlefield zones
++        // (their owners' hands), so `manifest_card` is a real move with no
++        // exile dance. `controller: None` keeps the CR 701.40a owner default —
++        // each card enters under the control of the player who chose it from
++        // their own hand.
++        Some(TargetFilter::TrackedSet { .. }) => {
++            // CR 608.2c: bind the `TrackedSetId(0)` sentinel to the chain's
++            // published pick set (mirrors the Cloak arm).
++            let member_ids: Vec<crate::types::identifiers::ObjectId> =
++                match crate::game::targeting::resolve_tracked_set_sentinel(
++                    state,
++                    TargetFilter::TrackedSet {
++                        id: crate::types::identifiers::TrackedSetId(0),
++                    },
++                ) {
++                    TargetFilter::TrackedSet { id } => state
++                        .tracked_object_sets
++                        .get(&id)
++                        .cloned()
++                        .unwrap_or_default(),
++                    _ => Vec::new(),
++                };
++            // CR 608.2c: the chain's referent now changes hands — the picks
++            // have been read, and what follows ("for each card manifested this
++            // way") must count the MANIFESTED cards, not the chosen ones. Rebind
++            // to a fresh chain set so the shared post-effect publisher records
++            // exactly the manifest results; leaving the pick set in place would
++            // double-count every card (mirrors the fresh-set rebind in
++            // `choose_from_zone::drain_active_per_player_zone_choice`).
++            super::publish_fresh_tracked_set(state, Vec::new());
++            for object_id in member_ids {
++                crate::game::morph::manifest_card(
++                    state,
++                    player,
++                    object_id,
++                    ability.source_id,
++                    profile.clone(),
++                    controller,
++                    events,
++                )
++                .map_err(|e| EffectError::MissingParam(format!("{e}")))?;
++            }
++        }
++        // CR 701.40a: Manifest explicit objects forwarded onto
++        // `ability.targets` by a parent `ChooseFromZone` (Scroll of Fate's
++        // "manifest a card from your hand"). Those cards live in a
++        // non-battlefield zone, so `manifest_card` is a real move (CR 608.2c —
++        // later instructions read the earlier selection). Mirrors the
++        // `Cloak.object_source` branch, minus the ward profile.
++        Some(filter) => {
++            let object_ids = super::effect_object_targets(&filter, &ability.targets);
++            for object_id in object_ids {
++                crate::game::morph::manifest_card(
++                    state,
++                    player,
++                    object_id,
++                    ability.source_id,
++                    profile.clone(),
++                    controller,
++                    events,
++                )
++                .map_err(|e| EffectError::MissingParam(format!("{e}")))?;
++            }
++        }
++        // CR 701.40e: Manifest cards one at a time
++        None => {
++            for _ in 0..count {
++                // CR 701.40a: Resolve the top card of the library owner's
++                // library, then manifest it through the shared morph
++                // infrastructure, routing the effect-specified profile and the
++                // optional controller override.
++                let object_id = match crate::game::morph::top_library_object(state, player) {
++                    Ok(id) => id,
++                    // The library owner has no cards left — stop manifesting.
++                    Err(_) => break,
++                };
++                crate::game::morph::manifest_card(
++                    state,
++                    player,
++                    object_id,
++                    ability.source_id,
++                    profile.clone(),
++                    controller,
++                    events,
++                )
++                .map_err(|e| EffectError::MissingParam(format!("{e}")))?;
++            }
++        }
+     }
+ 
+     events.push(GameEvent::EffectResolved {
+@@ -100,6 +175,7 @@ mod tests {
+             Effect::Manifest {
+                 target: TargetFilter::Controller,
+                 count: QuantityExpr::Fixed { value: count },
++                object_source: None,
+                 profile: None,
+                 enters_under: None,
+             },
+@@ -118,6 +194,7 @@ mod tests {
+             Effect::Manifest {
+                 target: target_filter,
+                 count: QuantityExpr::Fixed { value: count },
++                object_source: None,
+                 profile: None,
+                 enters_under: None,
+             },
+@@ -415,6 +492,7 @@ mod tests {
+             Effect::Manifest {
+                 target: TargetFilter::TriggeringPlayer,
+                 count: QuantityExpr::Fixed { value: 2 },
++                object_source: None,
+                 profile: Some(profile),
+                 enters_under: Some(crate::types::ability::ControllerRef::You),
+             },
+diff --git a/crates/engine/src/game/effects/mod.rs b/crates/engine/src/game/effects/mod.rs
+index 1c9c050bb..9e60c4273 100644
+--- a/crates/engine/src/game/effects/mod.rs
++++ b/crates/engine/src/game/effects/mod.rs
+@@ -6395,8 +6395,21 @@ fn resolve_chain_body(
+     // rider (Court of Cunning — "each mill two … mills ten instead") clears
+     // `multi_target` and changes the effect's target filter, which would
+     // otherwise skip this branch and resolve only the first chosen player.
++    // CR 101.4: An effect that ALREADY iterates the chosen player targets on
++    // its own (`ChooseFromZone { zone_owner: EachTargetedPlayer }`) is not a
++    // single-player-recipient handler, so it needs no missing iteration layer —
++    // and must not get one: splitting it per player would give each iteration
++    // its own chain tracked set, breaking the single accumulated "this way" set
++    // its sub-chain reads (Kozilek, the Broken Reality).
+     if ability.multi_target.is_some()
+         && effect_target_filter(&ability.effect) == Some(&TargetFilter::Player)
++        && !matches!(
++            ability.effect,
++            Effect::ChooseFromZone {
++                zone_owner: crate::types::ability::ZoneOwner::Each(_),
++                ..
++            }
++        )
+     {
+         let chosen_players: Vec<PlayerId> = ability
+             .targets
+@@ -12034,6 +12047,7 @@ mod tests {
+             Effect::Manifest {
+                 target: TargetFilter::ParentTargetController,
+                 count: QuantityExpr::Fixed { value: 1 },
++                object_source: None,
+                 profile: None,
+                 enters_under: None,
+             },
+diff --git a/crates/engine/src/game/mana_sources.rs b/crates/engine/src/game/mana_sources.rs
+index 0bf4ab04b..9b37fe8ec 100644
+--- a/crates/engine/src/game/mana_sources.rs
++++ b/crates/engine/src/game/mana_sources.rs
+@@ -1101,54 +1101,6 @@ pub(crate) fn feasible_mana_capacity(
+     }
+ }
+ 
+-/// CR 117.1d + CR 601.2g: True when cost payment can involve a currently
+-/// activatable non-tap mana ability that auto-tap cannot choose for the player
+-/// (Treasure/Spawn/KCI-style sacrifice mana, Lion's Eye Diamond discard mana,
+-/// pay-life mana abilities, etc.).
+-pub(crate) fn has_activatable_non_tap_mana_ability_for_payment(
+-    state: &GameState,
+-    controller: PlayerId,
+-    exclude: Option<ObjectId>,
+-    payment_context: Option<&PaymentContext<'_>>,
+-) -> bool {
+-    state.battlefield.iter().any(|&object_id| {
+-        if Some(object_id) == exclude {
+-            return false;
+-        }
+-        let Some(obj) = state.objects.get(&object_id) else {
+-            return false;
+-        };
+-        if obj.zone != Zone::Battlefield || obj.controller != controller {
+-            return false;
+-        }
+-        obj.abilities.iter().enumerate().any(|(idx, ability)| {
+-            if ability.kind != AbilityKind::Activated || !mana_abilities::is_mana_ability(ability) {
+-                return false;
+-            }
+-            if has_tap_component(&ability.cost) {
+-                return false;
+-            }
+-            if !mana_abilities::can_activate_mana_ability_now(
+-                state, controller, object_id, idx, ability,
+-            ) {
+-                return false;
+-            }
+-            if !activation_condition_satisfied(state, controller, object_id, idx, ability) {
+-                return false;
+-            }
+-            match &*ability.effect {
+-                Effect::Mana { restrictions, .. } => mana_ability_allowed_for_payment(
+-                    restrictions,
+-                    state,
+-                    object_id,
+-                    payment_context,
+-                ),
+-                _ => false,
+-            }
+-        })
+-    })
+-}
+-
+ /// CR 117.1d + CR 601.2g: One activation's producible mana shape for the
+ /// castability gate's colored-shard coverage check (issue #583 / #1234).
+ #[derive(Debug, Clone)]
+diff --git a/crates/engine/src/game/scenario.rs b/crates/engine/src/game/scenario.rs
+index 90086760c..a9e37f6e8 100644
+--- a/crates/engine/src/game/scenario.rs
++++ b/crates/engine/src/game/scenario.rs
+@@ -599,6 +599,40 @@ impl GameScenario {
+         builder
+     }
+ 
++    /// CR 301.1: Add an artifact to the battlefield with abilities parsed from
++    /// Oracle text. Mirrors [`Self::add_land_from_oracle`]; needed when an
++    /// artifact's own registered activated ability is under test.
++    pub fn add_artifact_from_oracle(
++        &mut self,
++        player: PlayerId,
++        name: &str,
++        oracle_text: &str,
++    ) -> CardBuilder<'_> {
++        let card_id = CardId(self.state.next_object_id);
++        let id = create_object(
++            &mut self.state,
++            card_id,
++            player,
++            name.to_string(),
++            Zone::Battlefield,
++        );
++        let ts = self.state.next_timestamp();
++        let entered_turn = self.state.turn_number.saturating_sub(1);
++        let obj = self.state.objects.get_mut(&id).unwrap();
++        obj.card_types.core_types.push(CoreType::Artifact);
++        obj.base_card_types = obj.card_types.clone();
++        obj.timestamp = ts;
++        obj.entered_battlefield_turn = Some(entered_turn);
++        obj.summoning_sick = false;
++
++        let mut builder = CardBuilder {
++            state: &mut self.state,
++            id,
++        };
++        builder.from_oracle_text(oracle_text);
++        builder
++    }
++
+     /// Add a creature to hand with abilities parsed from Oracle text.
+     pub fn add_creature_to_hand_from_oracle(
+         &mut self,
+diff --git a/crates/engine/src/game/trigger_matchers.rs b/crates/engine/src/game/trigger_matchers.rs
+index 159fb5f4f..742442e27 100644
+--- a/crates/engine/src/game/trigger_matchers.rs
++++ b/crates/engine/src/game/trigger_matchers.rs
+@@ -544,8 +544,14 @@ pub fn build_trigger_registry() -> HashMap<TriggerMode, TriggerMatcher> {
+ 
+     // CR 702.49a: Ninjutsu activation trigger
+     r.insert(TriggerMode::NinjutsuActivated, match_ninjutsu_activated);
+-    // CR 702.107a + CR 702.142b + CR 702.177a: keyword ability activation triggers
+-    for tag in [AbilityTag::Boast, AbilityTag::Exhaust, AbilityTag::Outlast] {
++    // CR 702.107a + CR 702.142b + CR 702.177a + CR 702.193a:
++    // keyword ability activation triggers
++    for tag in [
++        AbilityTag::Boast,
++        AbilityTag::Exhaust,
++        AbilityTag::Outlast,
++        AbilityTag::PowerUp,
++    ] {
+         r.insert(
+             TriggerMode::KeywordAbilityActivated(tag),
+             match_keyword_ability_activated,
+diff --git a/crates/engine/src/parser/oracle_effect/imperative.rs b/crates/engine/src/parser/oracle_effect/imperative.rs
+index 5fbf5fcfc..6d4b44cf9 100644
+--- a/crates/engine/src/parser/oracle_effect/imperative.rs
++++ b/crates/engine/src/parser/oracle_effect/imperative.rs
+@@ -35,10 +35,10 @@ use crate::types::ability::{
+     CategoryChooserScope, ChoiceType, Chooser, ContinuousModification, ControlWindow,
+     ControllerRef, CopyRetargetPermission, CounterAdjustment, DigSource, DoorLockOp, Duration,
+     Effect, EffectScope, FaceDownProfile, FilterProp, GrantedAbilityScope, LibraryPosition,
+-    MultiTargetSpec, OutsideGameSourcePool, PlayerScope, PreventionAmount, PreventionScope, PtStat,
+-    PtValue, QuantityExpr, QuantityRef, ReassembleControlMode, SearchSelectionConstraint,
+-    StaticDefinition, StickerTicketCostPayment, TapStateChange, TargetFilter, TargetSelectionMode,
+-    TypeFilter, TypedFilter, ZoneOwner,
++    MultiTargetSpec, OutsideGameSourcePool, PerPlayerScope, PlayerScope, PreventionAmount,
++    PreventionScope, PtStat, PtValue, QuantityExpr, QuantityRef, ReassembleControlMode,
++    SearchSelectionConstraint, StaticDefinition, StickerTicketCostPayment, TapStateChange,
++    TargetFilter, TargetSelectionMode, TypeFilter, TypedFilter, ZoneOwner,
+ };
+ use crate::types::card_type::CoreType;
+ use crate::types::phase::Phase;
+@@ -4132,7 +4132,7 @@ pub(super) fn parse_for_each_player_choose_from_zone(
+         return Some(ChooseImperativeAst::FromZone {
+             count,
+             zones,
+-            zone_owner: ZoneOwner::EachPlayer,
++            zone_owner: ZoneOwner::Each(PerPlayerScope::AllPlayers),
+             filter,
+             chooser,
+             up_to,
+@@ -4229,11 +4229,13 @@ fn parse_controlled_battlefield_body(
+ /// optionally zero via "up to one"), accumulated into the chain's tracked set,
+ /// then ALL chosen permanents are exiled (`ChangeZoneAll { TrackedSet }`).
+ ///
+-/// "for each player" iterates every player (`ZoneOwner::EachPlayer`); "for each
+-/// other player" excludes the controller (`ZoneOwner::EachOpponent`). Emitted as
+-/// a `ChooseFromZone { EachPlayer/EachOpponent }` clause with the mass-exile as
+-/// its `sub_ability`, mirroring how the choose-only cards chain a separate
+-/// "exile those" sentence.
++/// CR 101.4: "for each player" iterates every player in APNAP order
++/// (`PerPlayerScope::AllPlayers`). CR 102.3: "for each other player" is the same
++/// walk with the controller removed (`PerPlayerScope::OtherPlayers`) — every
++/// player except you, teammates included, which is why this is not the
++/// team-relative opponent set. Emitted as a `ChooseFromZone { Each(..) }` clause
++/// with the mass-exile as its `sub_ability`, mirroring how the choose-only cards
++/// chain a separate "exile those" sentence.
+ pub(super) fn parse_for_each_player_exile_controlled(
+     lower: &str,
+     ctx: &mut ParseContext,
+@@ -4242,12 +4244,21 @@ pub(super) fn parse_for_each_player_exile_controlled(
+ 
+     let (after_prefix, iter_scope) = alt((
+         value(
+-            ZoneOwner::EachOpponent,
++            ZoneOwner::Each(PerPlayerScope::OtherPlayers),
+             tag::<_, _, E>("for each other player, "),
+         ),
+-        value(ZoneOwner::EachOpponent, tag("for each other player ")),
+-        value(ZoneOwner::EachPlayer, tag("for each player, ")),
+-        value(ZoneOwner::EachPlayer, tag("for each player ")),
++        value(
++            ZoneOwner::Each(PerPlayerScope::OtherPlayers),
++            tag("for each other player "),
++        ),
++        value(
++            ZoneOwner::Each(PerPlayerScope::AllPlayers),
++            tag("for each player, "),
++        ),
++        value(
++            ZoneOwner::Each(PerPlayerScope::AllPlayers),
++            tag("for each player "),
++        ),
+     ))
+     .parse(lower)
+     .ok()?;
+@@ -6418,6 +6429,7 @@ pub(super) fn lower_put_ast(ast: PutImperativeAst) -> Effect {
+         } => Effect::Manifest {
+             target,
+             count,
++            object_source: None,
+             profile,
+             enters_under,
+         },
+@@ -9367,10 +9379,37 @@ pub(super) fn parse_imperative_family_ast(
+                 Some(ImperativeFamilyAst::Manifest {
+                     target,
+                     count,
++                    from_zone: None,
+                     enters_under,
+                 })
+             } else {
+-                None
++                // CR 701.40a: "manifest a card from your hand" (Scroll of
++                // Fate) — the manifest twin of the cloak from-hand form below:
++                // the controller chooses a hand card, lowered to a
++                // `ChooseFromZone` parent + `Manifest` sub-chain in
++                // `lower_imperative_family_ast`.
++                let from_hand = all_consuming((
++                    tag::<_, _, OracleError<'_>>("manifest "),
++                    alt((tag("a card"), tag("one card"))),
++                    tag(" from your hand"),
++                    opt(tag(".")),
++                ))
++                .parse(lower.trim())
++                .is_ok();
++
++                if from_hand {
++                    Some(ImperativeFamilyAst::Manifest {
++                        target: TargetFilter::Controller,
++                        count: QuantityExpr::Fixed { value: 1 },
++                        from_zone: Some(Zone::Hand),
++                        // CR 110.2a: the imperative "you" subject manifests, so
++                        // the card enters under the instruction controller's
++                        // control.
++                        enters_under: Some(ControllerRef::You),
++                    })
++                } else {
++                    None
++                }
+             }
+         }
+         // CR 701.58a: "cloak the top card of your library" / "cloak the top N
+@@ -11189,6 +11228,44 @@ pub(super) fn lower_imperative_family_ast(ast: ImperativeFamilyAst) -> ParsedEff
+                 },
+             ))
+         }
++        // CR 701.40a: "manifest a card from your hand" (Scroll of Fate). The
++        // manifest twin of the cloak from-hand arm below: the controller
++        // chooses a card from their hand — delegated to the `ChooseFromZone`
++        // building block — then manifests it. The `Manifest` sub-ability reads
++        // the chosen card from `object_source` (`ParentTarget`, resolved
++        // against the `ability.targets` the choose forwards — CR 608.2c: later
++        // instructions read the earlier selection). Intercepted here because a
++        // bare Effect cannot express the parent + sub chain — only
++        // `ParsedEffectClause` can.
++        ImperativeFamilyAst::Manifest {
++            target,
++            count,
++            from_zone: Some(zone),
++            enters_under,
++        } => {
++            let mut clause = parsed_clause(Effect::ChooseFromZone {
++                count: 1,
++                zone,
++                additional_zones: Vec::new(),
++                zone_owner: ZoneOwner::Controller,
++                filter: None,
++                chooser: Chooser::Controller,
++                up_to: false,
++                selection: crate::types::ability::CardSelectionMode::Chosen,
++                constraint: None,
++            });
++            clause.sub_ability = Some(Box::new(AbilityDefinition::new(
++                AbilityKind::Spell,
++                Effect::Manifest {
++                    target,
++                    count,
++                    object_source: Some(TargetFilter::ParentTarget),
++                    profile: None,
++                    enters_under,
++                },
++            )));
++            clause
++        }
+         // CR 701.58a: "cloak a card from your hand" (Vannifar). The controller
+         // chooses a card from their hand — delegated to the `ChooseFromZone`
+         // building block — then cloaks it (CR 701.58a). The `Cloak` sub-ability
+@@ -11315,13 +11392,19 @@ fn lower_imperative_family_effect(ast: ImperativeFamilyAst) -> Effect {
+         // carries no effect-specified face-down profile; `enters_under` records
+         // the instruction-controller default. The put-form manifest may also
+         // seed an effect-specified profile (see `lower_put_ast`).
++        // CR 701.40a: Manifest the top card(s) of a library. The from-hand
++        // form (`from_zone: Some`) is intercepted upstream in
++        // `lower_imperative_family_ast` (Cloak pattern); only the library-top
++        // source reaches here.
+         ImperativeFamilyAst::Manifest {
+             target,
+             count,
+             enters_under,
++            ..
+         } => Effect::Manifest {
+             target,
+             count,
++            object_source: None,
+             profile: None,
+             enters_under,
+         },
+diff --git a/crates/engine/src/parser/oracle_effect/mod.rs b/crates/engine/src/parser/oracle_effect/mod.rs
+index 240b85bb5..8d00d88ca 100644
+--- a/crates/engine/src/parser/oracle_effect/mod.rs
++++ b/crates/engine/src/parser/oracle_effect/mod.rs
+@@ -100,14 +100,14 @@ use crate::types::ability::{
+     DoubleTarget, Duration, Effect, EffectOutcomeSignal, EffectScope, FilterProp, GameRestriction,
+     GuessSubject, IntensityScope, IterationKindBinding, LibraryPosition, ManaProduction,
+     ManaSpendPermission, MultiTargetSpec, NumberDistinctness, ObjectProperty, ObjectScope,
+-    OriginConstraint, PlayPermissionInvalidation, PlayerFilter, PlayerRelation, PlayerScope,
+-    PreventionAmount, PreventionScope, ProhibitedActivity, PtValue, QuantityExpr, QuantityRef,
+-    ReplacementCondition, ReplacementDefinition, RestrictionExpiry, RestrictionPlayerScope,
+-    RevealUntilDisposition, RoundingMode, SharedQuality, SharedQualityRelation, SkipScope,
+-    SpellStackToGraveyardReplacement, StaticCondition, StaticDefinition, StepSkipTarget,
+-    SubAbilityLink, TapStateChange, TargetFilter, TargetSelectionMode, ThisWayCause,
+-    TrackedAnaphorSource, TriggerCondition, TriggerDefinition, TypeFilter, TypedFilter,
+-    UnlessPayModifier, UntilCondition, ZoneOwner,
++    OriginConstraint, PerPlayerScope, PlayPermissionInvalidation, PlayerFilter, PlayerRelation,
++    PlayerScope, PreventionAmount, PreventionScope, ProhibitedActivity, PtValue, QuantityExpr,
++    QuantityRef, ReplacementCondition, ReplacementDefinition, RestrictionExpiry,
++    RestrictionPlayerScope, RevealUntilDisposition, RoundingMode, SharedQuality,
++    SharedQualityRelation, SkipScope, SpellStackToGraveyardReplacement, StaticCondition,
++    StaticDefinition, StepSkipTarget, SubAbilityLink, TapStateChange, TargetFilter,
++    TargetSelectionMode, ThisWayCause, TrackedAnaphorSource, TriggerCondition, TriggerDefinition,
++    TypeFilter, TypedFilter, UnlessPayModifier, UntilCondition, ZoneOwner,
+ };
+ #[cfg(test)]
+ use crate::types::ability::{AttackScope, AttackSubject};
+@@ -17486,10 +17486,96 @@ fn lower_subject_predicate_ast(
+                 return parsed_clause(Effect::Manifest {
+                     target: subject.affected,
+                     count,
++                    object_source: None,
+                     profile: None,
+                     enters_under: None,
+                 });
+             }
++            // CR 701.40a + CR 101.4 + CR 608.2c: "<target players> [each]
++            // manifest[s] <N> card[s] from their hand[s]" (Kozilek, the Broken
++            // Reality). Each targeted player picks the cards from their OWN
++            // hidden hand during resolution: a `ChooseFromZone` iterated over
++            // the chosen player targets (`ZoneOwner::Each(PerPlayerScope::TargetedPlayers)`),
++            // each iteration's choice made by that owner
++            // (`Chooser::OwningPlayer`), accumulating the picks into the
++            // chain's tracked set. The `Manifest` sub-ability then manifests
++            // the accumulated set — each card under its chooser's control
++            // (CR 701.40a owner default) — and a trailing "for each card
++            // manifested this way" rider reads `TrackedSetSize`. Gated to the
++            // targeted-player subject; other from-hand subjects stay honest
++            // gaps.
++            if matches!(subject.affected, TargetFilter::Player) {
++                if let Ok((after_verb, _)) =
++                    alt((tag::<_, _, OracleError<'_>>("manifest "), tag("manifests ")))
++                        .parse(pred_lower.as_str())
++                {
++                    if let Ok((after_count, n)) = nom_primitives::parse_number.parse(after_verb) {
++                        let from_their_hand = all_consuming((
++                            alt((tag::<_, _, OracleError<'_>>(" cards"), tag(" card"))),
++                            tag(" from their hand"),
++                            opt(tag("s")),
++                            opt(tag(".")),
++                        ))
++                        .parse(after_count)
++                        .is_ok();
++                        if from_their_hand {
++                            // CR 115.1 + CR 601.2c: the
++                            // `EachTargetedPlayer` choose declares the player
++                            // slots itself (see `Effect::target_filter`) and
++                            // iterates them in APNAP order, accumulating every
++                            // player's picks into ONE chain tracked set that
++                            // the manifest sub-chain then consumes.
++                            let mut clause = parsed_clause(Effect::ChooseFromZone {
++                                count: n,
++                                zone: Zone::Hand,
++                                additional_zones: Vec::new(),
++                                // CR 115.1 + CR 101.4: the shared
++                                // multi-target PLAYER fan-out already
++                                // resolves this chain once per chosen
++                                // player in APNAP order, narrowing
++                                // `targets` to that one player — so the
++                                // per-iteration zone is simply "the
++                                // targeted player's".
++                                zone_owner: crate::types::ability::ZoneOwner::Each(
++                                    PerPlayerScope::TargetedPlayers,
++                                ),
++                                filter: None,
++                                chooser: crate::types::ability::Chooser::OwningPlayer,
++                                up_to: false,
++                                selection: crate::types::ability::CardSelectionMode::Chosen,
++                                constraint: None,
++                            });
++                            clause.sub_ability = Some(Box::new(AbilityDefinition::new(
++                                AbilityKind::Spell,
++                                Effect::Manifest {
++                                    target: subject.affected.clone(),
++                                    count: QuantityExpr::Fixed { value: n as i32 },
++                                    object_source: Some(TargetFilter::TrackedSet {
++                                        id: crate::types::identifiers::TrackedSetId(0),
++                                    }),
++                                    profile: None,
++                                    enters_under: None,
++                                },
++                            )));
++                            // CR 115.1d: the subject phrase's target count
++                            // ("up to two target players") opens both slots.
++                            clause.multi_target = multi_target.clone();
++                            clause.optional = subject.is_optional;
++                            return clause;
++                        }
++                    }
++                }
++            }
++            // NOTE (issue #6505, review follow-up): the predicate is lowered with
++            // NO parse-time relative-scope pin. An earlier revision pinned
++            // `relative_player_scope = ScopedPlayer` around this whole call, which
++            // re-scoped EVERY "they control" predicate (Sacrifice / Bounce /
++            // PutCounter / UntapAll …) — including non-ChangeZone effects the
++            // runtime `scoped_player` stamp does not cover, leaving them latently
++            // broken. The `ScopedPlayer` rebind is now applied post-lowering to the
++            // moved-object ChangeZone/ChangeZoneAll leg ALONE (see the resolution-
++            // pick rewrite in the player-target wrapper below), so sibling
++            // predicates keep their original scope.
+             let mut clause = lower_imperative_clause(&text, ctx);
+             // CR 608.2c + CR 109.4 + CR 115.1: "target <filter>'s controller/owner
+             // <verb>s it" (Arcum Dagsson, Mercy Killing). `parse_subject_application`
+diff --git a/crates/engine/src/parser/oracle_effect/sequence.rs b/crates/engine/src/parser/oracle_effect/sequence.rs
+index 88cf08d9f..2e3d82c75 100644
+--- a/crates/engine/src/parser/oracle_effect/sequence.rs
++++ b/crates/engine/src/parser/oracle_effect/sequence.rs
+@@ -10221,7 +10221,7 @@ mod tests {
+     #[test]
+     fn breach_multiverse_assembles_per_player_reanimation_chain() {
+         use super::super::parse_effect_chain;
+-        use crate::types::ability::ZoneOwner;
++        use crate::types::ability::{PerPlayerScope, ZoneOwner};
+ 
+         let def = parse_effect_chain(
+             "Each player mills ten cards. For each player, choose a creature or planeswalker card in that player's graveyard. Put those cards onto the battlefield under your control. Then each creature you control becomes a Phyrexian in addition to its other types.",
+@@ -10279,7 +10279,7 @@ mod tests {
+         assert_eq!(*zone, Zone::Graveyard);
+         assert_eq!(
+             *zone_owner,
+-            ZoneOwner::EachPlayer,
++            ZoneOwner::Each(PerPlayerScope::AllPlayers),
+             "BLOCKER: 'for each player ... in that player's graveyard' must iterate every player"
+         );
+         assert_eq!(
+diff --git a/crates/engine/src/parser/oracle_effect/tests.rs b/crates/engine/src/parser/oracle_effect/tests.rs
+index 51c9d3c77..5598c2bca 100644
+--- a/crates/engine/src/parser/oracle_effect/tests.rs
++++ b/crates/engine/src/parser/oracle_effect/tests.rs
+@@ -3,7 +3,7 @@ use crate::parser::parse_oracle_text;
+ use crate::types::ability::CardPlayMode::{Cast, Play};
+ use crate::types::ability::CastFromZoneDriver::{DuringResolution, LingeringPermission};
+ use crate::types::ability::{
+-    AttachmentKind, CastManaObjectScope, CastManaSpentMetric, ExcessRecipient,
++    AttachmentKind, CardSelectionMode, CastManaObjectScope, CastManaSpentMetric, ExcessRecipient,
+     ForEachCategoryAction, PerpetualModification,
+ };
+ use crate::types::card_type::CoreType;
+@@ -10961,6 +10961,154 @@ fn effect_cloak_a_card_from_your_hand_lowers_to_choose_from_zone_then_cloak() {
+     );
+ }
+ 
++#[test]
++fn effect_manifest_a_card_from_your_hand_lowers_to_choose_from_zone_then_manifest() {
++    // CR 701.40a: Scroll of Fate's "Manifest a card from your hand" is NOT a
++    // library-top manifest — it is the manifest twin of Vannifar's cloak form
++    // above: a ChooseFromZone{Hand} parent whose Manifest sub-ability
++    // manifests the chosen object. Reverting the from-hand parser alt() drops
++    // it to Effect::Unimplemented → this fails.
++    let def = parse_effect_chain("Manifest a card from your hand", AbilityKind::Spell);
++    assert!(
++        matches!(
++            def.effect.as_ref(),
++            Effect::ChooseFromZone {
++                count: 1,
++                zone: Zone::Hand,
++                ..
++            }
++        ),
++        "expected ChooseFromZone{{Hand,count:1}} parent, got: {:?}",
++        def.effect
++    );
++    let sub = def
++        .sub_ability
++        .as_ref()
++        .expect("from-hand manifest must chain a Manifest sub-ability");
++    assert!(
++        matches!(
++            sub.effect.as_ref(),
++            Effect::Manifest {
++                object_source: Some(TargetFilter::ParentTarget),
++                enters_under: Some(ControllerRef::You),
++                ..
++            }
++        ),
++        "sub-ability must be Manifest with an explicit object_source and the \
++         CR 110.2a manifester-controls entry (enters_under: You), got: {:?}",
++        sub.effect
++    );
++}
++
++#[test]
++fn kozilek_target_players_each_manifest_two_from_their_hands_parses() {
++    // CR 701.40a: "up to two target players each manifest two cards from
++    // their hands" (Kozilek, the Broken Reality). The subject machinery
++    // already captures the up-to-two player multi-target and the
++    // "For each card manifested this way, you draw a card" rider
++    // (repeat_for: TrackedSetSize); only the per-player from-hand manifest
++    // predicate must lower to a real effect chain. Reverting the predicate
++    // arm drops it to Effect::Unimplemented → this fails.
++    let parsed = parse_oracle_text(
++        "When you cast this spell, up to two target players each manifest two cards from their hands. For each card manifested this way, you draw a card.",
++        "Kozilek, the Broken Reality",
++        &[],
++        &["Creature".to_string()],
++        &["Eldrazi".to_string()],
++    );
++    let trigger = parsed
++        .triggers
++        .first()
++        .expect("the cast trigger must parse");
++    let execute = trigger
++        .execute
++        .as_ref()
++        .expect("the cast trigger must carry a body");
++
++    // CR 115.1 + CR 101.4 + CR 608.2c: the head is the per-player hand
++    // choose — two cards, from HAND, iterated over the chosen player TARGETS,
++    // each pick made by that player (not the caster).
++    assert!(
++        matches!(
++            execute.effect.as_ref(),
++            Effect::ChooseFromZone {
++                count: 2,
++                zone: Zone::Hand,
++                zone_owner: ZoneOwner::Each(PerPlayerScope::TargetedPlayers),
++                chooser: Chooser::OwningPlayer,
++                up_to: false,
++                // CR 608.2d: each player CHOOSES — a regression to a random
++                // or non-choice selection mode must fail here.
++                selection: CardSelectionMode::Chosen,
++                ..
++            }
++        ),
++        "expected the per-player from-hand choose, got: {:?}",
++        execute.effect
++    );
++    // CR 115.1d: both "up to two target players" slots.
++    assert_eq!(
++        execute.multi_target,
++        Some(MultiTargetSpec::up_to(QuantityExpr::Fixed { value: 2 })),
++        "the up-to-two player target slots must survive onto the clause"
++    );
++
++    // CR 701.40a: the sub-chain manifests the accumulated picks.
++    let manifest = execute
++        .sub_ability
++        .as_ref()
++        .expect("the choose must chain a Manifest sub-ability");
++    assert!(
++        matches!(
++            manifest.effect.as_ref(),
++            Effect::Manifest {
++                target: TargetFilter::Player,
++                count: QuantityExpr::Fixed { value: 2 },
++                // CR 608.2c: the manifest must consume THIS chain's picks —
++                // the `TrackedSetId(0)` sentinel the choose publishes into.
++                object_source: Some(TargetFilter::TrackedSet {
++                    id: TrackedSetId(0)
++                }),
++                enters_under: None,
++                ..
++            }
++        ),
++        "the sub-ability must manifest the chain's tracked picks under their \
++         own owners' control, got: {:?}",
++        manifest.effect
++    );
++
++    // CR 608.2c: the pre-existing "for each card manifested this way, you
++    // draw a card" rider still rides behind the manifest, counting the
++    // chain's tracked set.
++    let draw = manifest
++        .sub_ability
++        .as_ref()
++        .expect("the draw rider must survive behind the manifest");
++    assert!(
++        matches!(
++            draw.effect.as_ref(),
++            Effect::Draw {
++                count: QuantityExpr::Fixed { value: 1 },
++                target: TargetFilter::Controller,
++                ..
++            }
++        ),
++        "expected the one-card draw rider, got: {:?}",
++        draw.effect
++    );
++    assert!(
++        matches!(
++            draw.repeat_for,
++            Some(QuantityExpr::Ref {
++                qty: QuantityRef::TrackedSetSize
++            })
++        ),
++        "the rider must repeat once per tracked (manifested) card, got: {:?}",
++        draw.repeat_for
++    );
++}
++
+ #[test]
+ fn turn_face_up_then_conditional_put_keeps_follow_up_clause() {
+     // CR 406.3 + CR 701.20a: Clone Shell / Summoner's Egg dies-trigger effect. The
+@@ -11107,6 +11255,7 @@ fn effect_put_top_onto_battlefield_face_down_lowers_to_manifest() {
+     let Effect::Manifest {
+         target,
+         count,
++        object_source: None,
+         profile,
+         enters_under,
+     } = &*def.effect
+@@ -11130,6 +11279,7 @@ fn effect_put_top_onto_battlefield_face_down_lowers_to_manifest() {
+             Effect::Manifest {
+                 target: TargetFilter::Controller,
+                 count: QuantityExpr::Fixed { value: 1 },
++                object_source: None,
+                 profile: Some(_),
+                 enters_under: None,
+             }
+@@ -11172,6 +11322,7 @@ fn effect_direct_manifest_top_library_parses_controller_override_only_for_impera
+             Effect::Manifest {
+                 target: TargetFilter::Controller,
+                 count: QuantityExpr::Fixed { value: 1 },
++                object_source: None,
+                 enters_under: Some(ControllerRef::You),
+                 profile: None,
+             }
+@@ -11186,6 +11337,7 @@ fn effect_direct_manifest_top_library_parses_controller_override_only_for_impera
+             Effect::Manifest {
+                 target: TargetFilter::Controller,
+                 count: QuantityExpr::Fixed { value: 2 },
++                object_source: None,
+                 enters_under: Some(ControllerRef::You),
+                 profile: None,
+             }
+@@ -11208,6 +11360,7 @@ fn effect_direct_manifest_top_library_parses_controller_override_only_for_impera
+             Effect::Manifest {
+                 target: TargetFilter::TriggeringPlayer,
+                 count: QuantityExpr::Fixed { value: 1 },
++                object_source: None,
+                 enters_under: Some(ControllerRef::You),
+                 profile: None,
+             }
+@@ -11224,6 +11377,7 @@ fn effect_direct_manifest_top_library_parses_controller_override_only_for_impera
+             Effect::Manifest {
+                 target: TargetFilter::Controller,
+                 count: QuantityExpr::Fixed { value: 1 },
++                object_source: None,
+                 enters_under: Some(ControllerRef::You),
+                 profile: None,
+             }
+diff --git a/crates/engine/src/parser/oracle_ir/ast.rs b/crates/engine/src/parser/oracle_ir/ast.rs
+index 4d933f1d6..ba207124e 100644
+--- a/crates/engine/src/parser/oracle_ir/ast.rs
++++ b/crates/engine/src/parser/oracle_ir/ast.rs
+@@ -589,6 +589,13 @@ pub(crate) enum ImperativeFamilyAst {
+     Manifest {
+         target: TargetFilter,
+         count: QuantityExpr,
++        /// CR 701.40a: Source discriminant, mirroring `Cloak.from_zone`:
++        /// `None` manifests the top `count` cards of `target`'s library;
++        /// `Some(zone)` manifests a card the controller chooses from that zone
++        /// (Scroll of Fate's "manifest a card from your hand"), which lowers
++        /// to a `ChooseFromZone` parent + `Manifest { object_source }`
++        /// sub-chain.
++        from_zone: Option<Zone>,
+         /// CR 110.2a: Direct imperative manifest defaults to the instruction's
+         /// controller; subject-predicate forms leave this unset so the subject's
+         /// library owner controls the manifested card.
+diff --git a/crates/engine/src/types/ability.rs b/crates/engine/src/types/ability.rs
+index 121879811..b88f83e2a 100644
+--- a/crates/engine/src/types/ability.rs
++++ b/crates/engine/src/types/ability.rs
+@@ -46,11 +46,43 @@ pub enum Chooser {
+     /// An opponent of the controller makes the choice (CR 608.2e).
+     /// In 2-player, the single opponent. In multiplayer, controller chooses which opponent.
+     Opponent,
++    /// CR 608.2c + CR 101.4: The player whose zone is being scanned makes the
++    /// choice — the per-iteration owner under an `Each*` zone owner (each
++    /// targeted player picks from their OWN hand, hidden from everyone else:
++    /// Kozilek, the Broken Reality), or the single resolved zone owner
++    /// otherwise.
++    OwningPlayer,
++}
++
++/// CR 101.4 + CR 102.3 + CR 115.1: Which players a [`ZoneOwner::Each`]
++/// iteration walks, in APNAP order. This is the population axis of the
++/// per-player iteration — the machinery (one parked choice per player,
++/// accumulating into the chain's tracked set) is identical for every leaf, so
++/// the population is a parameter rather than a sibling variant.
++#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
++pub enum PerPlayerScope {
++    /// CR 101.4: every player in the game.
++    #[default]
++    AllPlayers,
++    /// CR 102.3: every player OTHER than the ability's controller — the
++    /// population of "for each other player" (Kaya, Spirits' Justice).
++    /// Deliberately NOT "each opponent": CR 102.3 makes a teammate one of the
++    /// "other players on their team" while excluding them from that player's
++    /// opponents, so in a team format a teammate belongs in this population and
++    /// would be wrongly dropped by `players::opponents`. An opponent-scoped
++    /// population is a different leaf, to be added here (resolved through
++    /// `players::opponents`) when a card's wording asks for one.
++    OtherPlayers,
++    /// CR 115.1: every player chosen as a `Player` target of the resolving
++    /// ability. CR 601.2c: an "up to N" selection may be empty, which disposes
++    /// the iteration immediately.
++    TargetedPlayers,
+ }
+ 
+ /// CR 400.1 + CR 608.2c: Which player's zone supplies cards for a direct
+ /// zone choice during resolution.
+ #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
++#[serde(from = "ZoneOwnerRepr", into = "ZoneOwnerRepr")]
+ pub enum ZoneOwner {
+     /// The controller of the spell/ability owns the referenced zone.
+     #[default]
+@@ -64,21 +96,14 @@ pub enum ZoneOwner {
+     /// pool is "permanents owned by the voter". For Battlefield, filters
+     /// by `obj.owner` (ownership) rather than `obj.controller` (control).
+     ScopedPlayer,
+-    /// CR 101.4 + CR 608.2c: Every player owns a referenced zone, iterated in
+-    /// APNAP order. A `ChooseFromZone { zone_owner: EachPlayer }` parks one
+-    /// choice per player, drawing candidates from THAT player's zone, and
+-    /// accumulates each pick into the resolution chain's tracked object set.
+-    /// Building block for Breach the Multiverse ("For each player, choose a
+-    /// creature or planeswalker card in that player's graveyard").
+-    EachPlayer,
+-    /// CR 101.4 + CR 102.2 + CR 608.2c: Every OPPONENT of the controller owns a
+-    /// referenced zone, iterated in APNAP order (the controller is excluded).
+-    /// The each-opponent leaf of the per-player iteration axis — same
+-    /// accumulate-into-tracked-set machinery as [`ZoneOwner::EachPlayer`], but
+-    /// the controller's own permanents are never offered. Building block for
+-    /// Kaya, Spirits' Justice's −2 ("For each other player, exile up to one
+-    /// target creature that player controls").
+-    EachOpponent,
++    /// CR 101.4 + CR 608.2c: A per-player iteration — one choice per player of
++    /// the named population, parked in APNAP order, each pick accumulating into
++    /// the resolution chain's tracked object set. The population is the
++    /// variant's own parameter rather than a separate sibling per population
++    /// (Breach the Multiverse iterates every player; Kaya, Spirits' Justice
++    /// every other player; Kozilek, the Broken Reality the chosen player
++    /// targets).
++    Each(PerPlayerScope),
+     /// CR 400.1 + CR 607.2a: The referenced zone is scanned across ALL owners —
+     /// ownership imposes no restriction, and the effect's `TargetFilter`
+     /// performs every bit of scoping. Used when the candidate pool's membership
+@@ -90,7 +115,7 @@ pub enum ZoneOwner {
+     /// regardless of who owns each card — and Koh typically exiles *opponents'*
+     /// creatures, so gating to the controller's own exiled cards empties the
+     /// pool. This is the single-pool owner-agnostic leaf of the scope axis:
+-    /// distinct from [`ZoneOwner::EachPlayer`]/[`ZoneOwner::EachOpponent`],
++    /// distinct from [`ZoneOwner::Each(PerPlayerScope::AllPlayers)`]/[`ZoneOwner::Each(PerPlayerScope::OtherPlayers)`],
+     /// which iterate one prompt per player and accumulate into a tracked set —
+     /// this raises ONE prompt over the whole-zone union. Mirrors the
+     /// `ScopedPlayer`-on-Battlefield branch in `collect_direct_zone_cards`
+@@ -99,6 +124,107 @@ pub enum ZoneOwner {
+     AllOwners,
+ }
+ 
++/// Serialized form of [`ZoneOwner`], carrying the pre-parameterization unit
++/// names so stored data (game states, generated card data) written before the
++/// per-player population became a parameter still deserializes. Only the
++/// parameterized `Each` form is ever WRITTEN; the three legacy names are
++/// read-only inputs that map onto it.
++#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
++enum ZoneOwnerRepr {
++    Controller,
++    TargetedPlayer,
++    Opponent,
++    ScopedPlayer,
++    Each(PerPlayerScope),
++    AllOwners,
++    // ---- legacy names (deserialize-only) ----
++    EachPlayer,
++    EachOpponent,
++    EachTargetedPlayer,
++}
++
++impl From<ZoneOwnerRepr> for ZoneOwner {
++    fn from(repr: ZoneOwnerRepr) -> Self {
++        match repr {
++            ZoneOwnerRepr::Controller => ZoneOwner::Controller,
++            ZoneOwnerRepr::TargetedPlayer => ZoneOwner::TargetedPlayer,
++            ZoneOwnerRepr::Opponent => ZoneOwner::Opponent,
++            ZoneOwnerRepr::ScopedPlayer => ZoneOwner::ScopedPlayer,
++            ZoneOwnerRepr::Each(scope) => ZoneOwner::Each(scope),
++            ZoneOwnerRepr::AllOwners => ZoneOwner::AllOwners,
++            ZoneOwnerRepr::EachPlayer => ZoneOwner::Each(PerPlayerScope::AllPlayers),
++            // The legacy name said "Opponent", but the only wording that ever
++            // produced it is "for each other player" — CR 102.3 keeps those
++            // apart, so the migration maps it onto the population it always had.
++            ZoneOwnerRepr::EachOpponent => ZoneOwner::Each(PerPlayerScope::OtherPlayers),
++            ZoneOwnerRepr::EachTargetedPlayer => ZoneOwner::Each(PerPlayerScope::TargetedPlayers),
++        }
++    }
++}
++
++impl From<ZoneOwner> for ZoneOwnerRepr {
++    fn from(owner: ZoneOwner) -> Self {
++        match owner {
++            ZoneOwner::Controller => ZoneOwnerRepr::Controller,
++            ZoneOwner::TargetedPlayer => ZoneOwnerRepr::TargetedPlayer,
++            ZoneOwner::Opponent => ZoneOwnerRepr::Opponent,
++            ZoneOwner::ScopedPlayer => ZoneOwnerRepr::ScopedPlayer,
++            ZoneOwner::Each(scope) => ZoneOwnerRepr::Each(scope),
++            ZoneOwner::AllOwners => ZoneOwnerRepr::AllOwners,
++        }
++    }
++}
++
++#[cfg(test)]
++mod zone_owner_migration_tests {
++    use super::*;
++
++    /// The three pre-parameterization unit names must still deserialize onto
++    /// the parameterized `Each` form — stored game states and generated card
++    /// data written before the refactor carry them.
++    #[test]
++    fn legacy_per_player_zone_owner_names_migrate_onto_the_parameterized_form() {
++        for (legacy, expected) in [
++            (
++                "\"EachPlayer\"",
++                ZoneOwner::Each(PerPlayerScope::AllPlayers),
++            ),
++            (
++                "\"EachOpponent\"",
++                ZoneOwner::Each(PerPlayerScope::OtherPlayers),
++            ),
++            (
++                "\"EachTargetedPlayer\"",
++                ZoneOwner::Each(PerPlayerScope::TargetedPlayers),
++            ),
++        ] {
++            let parsed: ZoneOwner = serde_json::from_str(legacy)
++                .unwrap_or_else(|e| panic!("legacy {legacy} must still deserialize: {e}"));
++            assert_eq!(parsed, expected, "legacy {legacy} maps onto {expected:?}");
++        }
++    }
++
++    /// Only the parameterized form is ever written, and it round-trips.
++    #[test]
++    fn parameterized_zone_owner_round_trips_and_is_the_only_written_form() {
++        let owner = ZoneOwner::Each(PerPlayerScope::TargetedPlayers);
++        let json = serde_json::to_string(&owner).expect("serialize");
++        assert_eq!(
++            json, "{\"Each\":\"TargetedPlayers\"}",
++            "the parameterized form is what gets written"
++        );
++        assert_eq!(
++            serde_json::from_str::<ZoneOwner>(&json).expect("round trip"),
++            owner
++        );
++        // The non-iterating leaves are unchanged unit names.
++        assert_eq!(
++            serde_json::to_string(&ZoneOwner::Controller).expect("serialize"),
++            "\"Controller\""
++        );
++    }
++}
++
+ /// CR 105.1 + CR 205.2: A fixed, closed enumeration whose members an effect
+ /// iterates over once each ("for each color, …", "for each card type, …").
+ ///
+@@ -11981,6 +12107,11 @@ pub enum Effect {
+     Manifest {
+         target: TargetFilter,
+         count: QuantityExpr,
++        /// CR 701.40a: The objects to manifest. `None` is the library-top
++        /// source. `Some(filter)` names objects selected by an upstream
++        /// `ChooseFromZone` effect, such as Scroll of Fate's hand selection.
++        #[serde(default, skip_serializing_if = "Option::is_none")]
++        object_source: Option<TargetFilter>,
+         /// CR 708.2a: Effect-specified face-down characteristics override
+         /// ("They're 2/2 Cyberman artifact creatures."). `None` = the vanilla
+         /// 2/2 manifest default (CR 701.40a). The put-clause seeds
+@@ -13386,6 +13517,17 @@ impl Effect {
+ 
+     pub fn target_filter(&self) -> Option<&TargetFilter> {
+         match self {
++            // CR 115.1 + CR 601.2c: a `ChooseFromZone` is normally a resolution
++            // CHOICE with no stack-declared target — EXCEPT the
++            // `EachTargetedPlayer` iteration, whose iterated set IS the
++            // ability's chosen player targets ("up to two target players each
++            // manifest two cards from their hands"). That form must declare the
++            // player slots so the targets exist to iterate.
++            Effect::ChooseFromZone {
++                zone_owner: ZoneOwner::Each(PerPlayerScope::TargetedPlayers),
++                ..
++            } => Some(&TargetFilter::Player),
++            Effect::ChooseFromZone { .. } => None,
+             // --- Effects with a `target: TargetFilter` field ---
+             Effect::DealDamage { target, .. }
+             | Effect::Draw { target, .. }
+@@ -13723,7 +13865,6 @@ impl Effect {
+             // target) picked at resolution time via
+             // `WaitingFor::ReturnAsAuraTarget`. No stack-push target slot.
+             | Effect::ReturnAsAura { .. }
+-            | Effect::ChooseFromZone { .. }
+             | Effect::ForEachCategory { .. }
+             | Effect::ChooseAndSacrificeRest { .. }
+             | Effect::EachPlayerCopyChosen { .. }
+@@ -20519,12 +20660,12 @@ mod tests {
+         assert!(OriginConstraint::Any.matches_from(&Some(Zone::Battlefield)));
+     }
+ 
+-    /// CR 101.4 + CR 608.2c (issue #3302): `ZoneOwner::EachPlayer` is a shared
++    /// CR 101.4 + CR 608.2c (issue #3302): `ZoneOwner::Each(PerPlayerScope::AllPlayers)` is a shared
+     /// serialized engine type (card-data export, WASM/IPC transport). A
+     /// serialize→deserialize round-trip must reproduce the exact variant so a
+-    /// Breach the Multiverse `ChooseFromZone { zone_owner: EachPlayer }` survives
+-    /// the wire. Every variant is checked so adding `EachPlayer` did not perturb
+-    /// the others' tags.
++    /// Breach the Multiverse `ChooseFromZone { zone_owner: Each(AllPlayers) }`
++    /// survives the wire. Every variant is checked so parameterizing the
++    /// per-player population did not perturb the other variants' tags.
+     #[test]
+     fn zone_owner_serde_round_trips_each_variant() {
+         for owner in [
+@@ -20532,8 +20673,9 @@ mod tests {
+             ZoneOwner::TargetedPlayer,
+             ZoneOwner::Opponent,
+             ZoneOwner::ScopedPlayer,
+-            ZoneOwner::EachPlayer,
+-            ZoneOwner::EachOpponent,
++            ZoneOwner::Each(PerPlayerScope::AllPlayers),
++            ZoneOwner::Each(PerPlayerScope::OtherPlayers),
++            ZoneOwner::Each(PerPlayerScope::TargetedPlayers),
+             ZoneOwner::AllOwners,
+         ] {
+             let json = serde_json::to_string(&owner).expect("ZoneOwner serializes");
+@@ -20541,14 +20683,18 @@ mod tests {
+                 serde_json::from_str(&json).expect("ZoneOwner deserializes");
+             assert_eq!(round_tripped, owner, "round-trip must preserve {owner:?}");
+         }
+-        // The new variant's external tag is its identifier (default enum repr).
++        // The per-player form now carries its population as a parameter, so
++        // its wire shape is the tagged `Each` variant. The pre-parameterization
++        // unit name still DESERIALIZES onto it (see
++        // `zone_owner_migration_tests`), which is what keeps stored data
++        // readable.
+         assert_eq!(
+-            serde_json::to_string(&ZoneOwner::EachPlayer).unwrap(),
+-            "\"EachPlayer\""
++            serde_json::to_string(&ZoneOwner::Each(PerPlayerScope::AllPlayers)).unwrap(),
++            "{\"Each\":\"AllPlayers\"}"
+         );
+         assert_eq!(
+             serde_json::from_str::<ZoneOwner>("\"EachPlayer\"").unwrap(),
+-            ZoneOwner::EachPlayer
++            ZoneOwner::Each(PerPlayerScope::AllPlayers)
+         );
+     }
+ 
+diff --git a/crates/engine/tests/integration/casting_affordability_action_consistency.rs b/crates/engine/tests/integration/casting_affordability_action_consistency.rs
+new file mode 100644
+index 000000000..e6cc66311
+--- /dev/null
++++ b/crates/engine/tests/integration/casting_affordability_action_consistency.rs
+@@ -0,0 +1,166 @@
++//! Regression coverage for castability/payment consistency at targeted spells.
++//!
++//! Coworld surfaced two ways a cast could be offered at priority and then become
++//! impossible only after its final target was chosen:
++//! - the mana total was feasible through a costed mana ability that auto-tap
++//!   could not resolve without a player choice;
++//! - every branch of a mandatory discard-or-life additional cost was already
++//!   unpayable before the cast began.
++
++use engine::ai_support::legal_actions_for_viewer;
++use engine::game::scenario::{GameScenario, P0, P1};
++use engine::types::ability::{
++    AbilityCost, AbilityDefinition, AbilityKind, AdditionalCost, CardSelectionMode,
++    DiscardSelfScope, Effect, ManaContribution, ManaProduction, QuantityExpr, TargetRef,
++};
++use engine::types::actions::GameAction;
++use engine::types::game_state::{CastPaymentMode, WaitingFor};
++use engine::types::mana::{ManaColor, ManaCost, ManaCostShard};
++use engine::types::phase::Phase;
++use engine::types::zones::Zone;
++
++fn add_targeted_spell(
++    scenario: &mut GameScenario,
++    mana_cost: ManaCost,
++    additional_cost: Option<AdditionalCost>,
++) -> engine::types::ObjectId {
++    let mut spell = scenario.add_spell_to_hand_from_oracle(
++        P0,
++        "Targeted Red Spell",
++        true,
++        "Destroy target creature.",
++    );
++    spell.with_mana_cost(mana_cost);
++    if let Some(cost) = additional_cost {
++        spell.with_additional_cost(cost);
++    }
++    spell.id()
++}
++
++#[test]
++fn targeted_auto_cast_enters_mana_payment_for_costed_tap_mana_ability() {
++    let mut scenario = GameScenario::new();
++    scenario.at_phase(Phase::PreCombatMain);
++
++    let ability = AbilityDefinition::new(
++        AbilityKind::Activated,
++        Effect::Mana {
++            produced: ManaProduction::Fixed {
++                colors: vec![ManaColor::Red],
++                contribution: ManaContribution::Base,
++            },
++            restrictions: vec![],
++            grants: vec![],
++            expiry: None,
++            target: None,
++        },
++    )
++    .cost(AbilityCost::Composite {
++        costs: vec![
++            AbilityCost::Tap,
++            AbilityCost::Exile {
++                count: 1,
++                zone: Some(Zone::Graveyard),
++                filter: None,
++            },
++        ],
++    });
++    let mana_source = {
++        let mut source = scenario.add_creature(P0, "Costed Mana Source", 1, 4);
++        source.with_ability_definition(ability);
++        source.id()
++    };
++    scenario.add_creature_to_graveyard(P0, "Mana Fuel", 1, 1);
++
++    let target = scenario.add_creature(P1, "Target Creature", 2, 2).id();
++    let spell = add_targeted_spell(
++        &mut scenario,
++        ManaCost::Cost {
++            shards: vec![ManaCostShard::Red],
++            generic: 0,
++        },
++        None,
++    );
++    let mut runner = scenario.build();
++    let card_id = runner.state().objects[&spell].card_id;
++
++    // CR 601.2g + CR 605.3a: the spell is castable because the player gets a
++    // mana-ability window before paying, even though auto-tap cannot choose the
++    // graveyard card required by the source's activation cost.
++    runner
++        .act(GameAction::CastSpell {
++            object_id: spell,
++            card_id,
++            targets: vec![],
++            payment_mode: CastPaymentMode::Auto,
++        })
++        .expect("the feasible cast must begin");
++    assert!(matches!(
++        runner.state().waiting_for,
++        WaitingFor::TargetSelection { .. }
++    ));
++
++    let (target_actions, _, _) = legal_actions_for_viewer(runner.state(), P0);
++    assert!(
++        target_actions.contains(&GameAction::CancelCast),
++        "CR 601.2i: target selection must preserve the cast rollback action"
++    );
++
++    runner
++        .act(GameAction::ChooseTarget {
++            target: Some(TargetRef::Object(target)),
++        })
++        .expect("choosing the final target must not reject a previously offered cast");
++    assert!(
++        matches!(runner.state().waiting_for, WaitingFor::ManaPayment { .. }),
++        "CR 601.2g: costed mana production requires an interactive payment window"
++    );
++
++    let (_, _, by_object) = legal_actions_for_viewer(runner.state(), P0);
++    assert!(
++        by_object.get(&mana_source).is_some_and(|actions| actions.iter().any(
++            |action| matches!(action, GameAction::ActivateAbility { source_id, .. } if *source_id == mana_source)
++        )),
++        "the costed mana ability must be available during mana payment"
++    );
++}
++
++#[test]
++fn targeted_cast_with_no_payable_mandatory_cost_branch_is_not_offered() {
++    let mut scenario = GameScenario::new();
++    scenario.at_phase(Phase::PreCombatMain);
++    scenario.with_life(P0, 2);
++    scenario.add_creature(P1, "Target Creature", 2, 2);
++
++    let spell = add_targeted_spell(
++        &mut scenario,
++        ManaCost::Cost {
++            shards: vec![],
++            generic: 0,
++        },
++        Some(AdditionalCost::Choice(
++            AbilityCost::Discard {
++                count: QuantityExpr::Fixed { value: 1 },
++                filter: None,
++                selection: CardSelectionMode::Chosen,
++                self_scope: DiscardSelfScope::FromHand,
++            },
++            AbilityCost::PayLife {
++                amount: QuantityExpr::Fixed { value: 3 },
++            },
++        )),
++    );
++
++    let runner = scenario.build();
++    let (actions, _, _) = legal_actions_for_viewer(runner.state(), P0);
++
++    // CR 118.3 + CR 601.2h: the source spell cannot discard itself and the
++    // player has only 2 life, so neither mandatory branch is payable. Targeting
++    // does not defer or weaken that resource precondition.
++    assert!(
++        !actions.iter().any(
++            |action| matches!(action, GameAction::CastSpell { object_id, .. } if *object_id == spell)
++        ),
++        "a targeted spell with no payable mandatory-cost branch must not be offered"
++    );
++}
+diff --git a/crates/engine/tests/integration/issue_2890_reality_shift.rs b/crates/engine/tests/integration/issue_2890_reality_shift.rs
+index 96a5e54c4..96d960640 100644
+--- a/crates/engine/tests/integration/issue_2890_reality_shift.rs
++++ b/crates/engine/tests/integration/issue_2890_reality_shift.rs
+@@ -131,6 +131,7 @@ fn reality_shift_manifest_resolves_via_effect_context_object_snapshot() {
+         Effect::Manifest {
+             target: engine::types::ability::TargetFilter::ParentTargetController,
+             count: QuantityExpr::Fixed { value: 1 },
++            object_source: None,
+             profile: None,
+             enters_under: None,
+         },
+diff --git a/crates/engine/tests/integration/kaya_spirits_justice_per_opponent_exile.rs b/crates/engine/tests/integration/kaya_spirits_justice_per_opponent_exile.rs
+index 1a87d9195..f8f7da136 100644
+--- a/crates/engine/tests/integration/kaya_spirits_justice_per_opponent_exile.rs
++++ b/crates/engine/tests/integration/kaya_spirits_justice_per_opponent_exile.rs
+@@ -35,7 +35,7 @@
+ 
+ use engine::game::scenario::{GameRunner, GameScenario};
+ use engine::parser::oracle::parse_oracle_text;
+-use engine::types::ability::{Effect, ZoneOwner};
++use engine::types::ability::{Effect, PerPlayerScope, ZoneOwner};
+ use engine::types::actions::GameAction;
+ use engine::types::game_state::{CastPaymentMode, WaitingFor};
+ use engine::types::identifiers::ObjectId;
+@@ -131,7 +131,7 @@ fn scan_minus_two_chain(parsed: &engine::parser::oracle::ParsedAbilities) -> (bo
+     while let Some(def) = node {
+         match &*def.effect {
+             Effect::ChooseFromZone {
+-                zone_owner: ZoneOwner::EachOpponent,
++                zone_owner: ZoneOwner::Each(PerPlayerScope::OtherPlayers),
+                 ..
+             } => found_each_opponent = true,
+             Effect::Unimplemented { .. } => found_unimplemented = true,
+@@ -220,7 +220,7 @@ fn non_target_form_still_parses_to_each_opponent_exile_chain() {
+     let mut found_chain = false;
+     while let Some(def) = node {
+         if let Effect::ChooseFromZone {
+-            zone_owner: ZoneOwner::EachOpponent,
++            zone_owner: ZoneOwner::Each(PerPlayerScope::OtherPlayers),
+             up_to: true,
+             ..
+         } = &*def.effect
+diff --git a/crates/engine/tests/integration/kozilek_broken_reality_manifest_from_hands.rs b/crates/engine/tests/integration/kozilek_broken_reality_manifest_from_hands.rs
+new file mode 100644
+index 000000000..d3208c29d
+--- /dev/null
++++ b/crates/engine/tests/integration/kozilek_broken_reality_manifest_from_hands.rs
+@@ -0,0 +1,268 @@
++//! Card-level regression for **Kozilek, the Broken Reality** —
++//! "When you cast this spell, up to two target players each manifest two
++//! cards from their hands. For each card manifested this way, you draw a
++//! card."
++//!
++//! Drives the REAL registered cast trigger end to end: the creature is built
++//! from its printed Oracle text, cast through `GameAction::CastSpell`, the
++//! cast trigger's up-to-two player targets are chosen through
++//! `GameAction::SelectTargets`, and each targeted player answers their OWN
++//! `WaitingFor::ChooseFromZoneChoice` in APNAP order — the exact path the
++//! client takes.
++//!
++//! DISCRIMINATORS (anti-hollow-win):
++//! - each player's choice prompt offers ONLY that player's hand (P0's prompt
++//!   never contains P1's cards and vice versa — the per-iteration
++//!   `ZoneOwner::Each(PerPlayerScope::TargetedPlayers)` scoping).
++//! - each manifested card enters under ITS OWN player's control — the
++//!   opponent's manifests must NOT land under the caster's control
++//!   (CR 701.40a: the manifesting player puts the card onto the battlefield).
++//! - the "for each card manifested this way" rider draws exactly the number
++//!   of accumulated picks (4), read from the chain's tracked set.
++//!
++//! CR 701.40a: Manifest — face-down 2/2 creature.
++//! CR 101.4: multiple players making choices do so in APNAP order.
++//! CR 601.2c + CR 115.1d: "up to two target players" is a multi-target
++//! selection bound when the trigger goes on the stack.
++
++use engine::game::scenario::{GameScenario, P0, P1};
++use engine::types::ability::TargetRef;
++use engine::types::actions::GameAction;
++use engine::types::game_state::{CastPaymentMode, WaitingFor};
++use engine::types::phase::Phase;
++use engine::types::zones::Zone;
++
++const KOZILEK_ORACLE: &str = "When you cast this spell, up to two target players each manifest two cards from their hands. For each card manifested this way, you draw a card.\nOther colorless creatures you control get +3/+2.";
++
++#[test]
++fn kozilek_cast_trigger_manifests_two_from_each_targeted_players_hand() {
++    let mut scenario = GameScenario::new();
++    scenario.at_phase(Phase::PreCombatMain);
++
++    // P0's hand: Kozilek plus two pickable cards (creature + noncreature mix).
++    let koz = scenario
++        .add_creature_to_hand_from_oracle(P0, "Kozilek, the Broken Reality", 9, 9, KOZILEK_ORACLE)
++        .id();
++    let a1 = scenario.add_creature_to_hand(P0, "P0 Pick One", 3, 3).id();
++    let a2 = scenario
++        .add_spell_to_hand_from_oracle(P0, "P0 Pick Two", false, "Draw a card.")
++        .id();
++    // P1's hand: two pickable cards.
++    let b1 = scenario.add_creature_to_hand(P1, "P1 Pick One", 4, 4).id();
++    let b2 = scenario.add_creature_to_hand(P1, "P1 Pick Two", 1, 1).id();
++    // P0 needs library cards for the four rider draws.
++    for i in 0..6 {
++        scenario.add_card_to_library_top(P0, &format!("P0 Library {i}"));
++    }
++
++    let mut runner = scenario.build();
++
++    let koz_card_id = runner.state().objects[&koz].card_id;
++    runner
++        .act(GameAction::CastSpell {
++            object_id: koz,
++            card_id: koz_card_id,
++            targets: vec![],
++            payment_mode: CastPaymentMode::Auto,
++        })
++        .expect("cast Kozilek, the Broken Reality");
++
++    // The cast trigger goes on the stack and asks for its up-to-two player
++    // targets. A parse regression (Unimplemented body) never raises the
++    // selection — the loop below then panics.
++    let mut chosen = 0;
++    for _ in 0..16 {
++        match runner.state().waiting_for.clone() {
++            WaitingFor::TriggerTargetSelection {
++                target_slots,
++                selection,
++                ..
++            } => {
++                // CR 115.1d: answer one "up to two target players" slot at a
++                // time, picking P0 first and P1 second.
++                let want = if chosen == 0 { P0 } else { P1 };
++                let slot = &target_slots[selection.current_slot];
++                let choice = slot
++                    .legal_targets
++                    .iter()
++                    .find(|t| **t == TargetRef::Player(want))
++                    .cloned();
++                assert!(
++                    choice.is_some(),
++                    "player {want:?} must be a legal target of the cast trigger, got {:?}",
++                    slot.legal_targets
++                );
++                runner
++                    .act(GameAction::ChooseTarget { target: choice })
++                    .expect("choosing a targeted player must be accepted");
++                chosen += 1;
++                if chosen == 2 {
++                    break;
++                }
++            }
++            _ => {
++                runner
++                    .act(GameAction::PassPriority)
++                    .expect("advance toward the cast trigger's target selection");
++            }
++        }
++    }
++    assert_eq!(
++        chosen,
++        2,
++        "the cast trigger must offer both player target slots, got {:?}",
++        runner.state().waiting_for
++    );
++
++    // Resolve the trigger: each targeted player picks two of their OWN hand
++    // cards, in APNAP order.
++    let mut p0_chose = false;
++    let mut p1_chose = false;
++    // CR 101.4: record the order the prompts arrive in — the active player
++    // (P0) must be asked first.
++    let mut prompt_order: Vec<engine::types::player::PlayerId> = Vec::new();
++    for _ in 0..24 {
++        if p0_chose && p1_chose {
++            break;
++        }
++        match runner.state().waiting_for.clone() {
++            WaitingFor::ChooseFromZoneChoice { player, cards, .. } => {
++                prompt_order.push(player);
++                if player == P0 {
++                    // DISCRIMINATOR — P0's prompt offers only P0's hand.
++                    assert!(
++                        cards.contains(&a1) && cards.contains(&a2),
++                        "P0's own hand cards must be offered, got {cards:?}"
++                    );
++                    assert!(
++                        !cards.contains(&b1) && !cards.contains(&b2),
++                        "P1's hand must NOT appear in P0's choice, got {cards:?}"
++                    );
++                    runner
++                        .act(GameAction::SelectCards {
++                            cards: vec![a1, a2],
++                        })
++                        .expect("P0 picks both hand cards");
++                    p0_chose = true;
++                } else {
++                    assert_eq!(player, P1, "only the two targeted players choose");
++                    // DISCRIMINATOR — P1's prompt offers only P1's hand.
++                    assert!(
++                        cards.contains(&b1) && cards.contains(&b2),
++                        "P1's own hand cards must be offered, got {cards:?}"
++                    );
++                    assert!(
++                        !cards.contains(&a1) && !cards.contains(&a2),
++                        "P0's hand must NOT appear in P1's choice, got {cards:?}"
++                    );
++                    runner
++                        .act(GameAction::SelectCards {
++                            cards: vec![b1, b2],
++                        })
++                        .expect("P1 picks both hand cards");
++                    p1_chose = true;
++                }
++            }
++            _ => {
++                runner
++                    .act(GameAction::PassPriority)
++                    .expect("advance toward the per-player hand choices");
++            }
++        }
++    }
++    assert!(
++        p0_chose && p1_chose,
++        "both targeted players must get their own hand choice, got {:?}",
++        runner.state().waiting_for
++    );
++    // DISCRIMINATOR — CR 101.4: simultaneous choices are made in APNAP order,
++    // so the active player is prompted FIRST. Branching on `player` alone
++    // would accept either order; this pins it.
++    assert_eq!(
++        prompt_order,
++        vec![P0, P1],
++        "the per-player hand choices must arrive in APNAP order (active player first)"
++    );
++
++    // Let the manifest + draw tail finish.
++    runner.advance_until_stack_empty();
++
++    // All four picks are manifested face-down creatures.
++    for (id, label) in [(a1, "a1"), (a2, "a2"), (b1, "b1"), (b2, "b2")] {
++        let obj = &runner.state().objects[&id];
++        assert_eq!(
++            obj.zone,
++            Zone::Battlefield,
++            "{label} must be manifested onto the battlefield"
++        );
++        assert!(obj.face_down, "{label} must be face down");
++        assert_eq!(obj.base_power, Some(2), "{label} is a printed-over 2/2");
++        assert_eq!(obj.base_toughness, Some(2), "{label} is a printed-over 2/2");
++    }
++    // DISCRIMINATOR — control follows the manifesting player (CR 701.40a), and
++    // Kozilek's own static ("Other colorless creatures you control get +3/+2")
++    // proves it independently of the `controller` field: a face-down card is
++    // colorless (CR 202.2b), so the CASTER's two manifests are pumped to 5/4
++    // while the opponent's stay 2/2. A resolver that put every manifest under
++    // the caster's control would pump all four.
++    assert_eq!(
++        runner.state().objects[&a1].controller,
++        P0,
++        "P0's manifests enter under P0's control"
++    );
++    assert_eq!(
++        runner.state().objects[&b1].controller,
++        P1,
++        "P1's manifests enter under P1's control — not the caster's"
++    );
++    assert_eq!(runner.state().objects[&b2].controller, P1);
++    assert_eq!(
++        (
++            runner.state().objects[&a1].power,
++            runner.state().objects[&a1].toughness
++        ),
++        (Some(5), Some(4)),
++        "the caster's colorless manifest gets Kozilek's +3/+2"
++    );
++    assert_eq!(
++        (
++            runner.state().objects[&b1].power,
++            runner.state().objects[&b1].toughness
++        ),
++        (Some(2), Some(2)),
++        "the opponent's manifest is NOT pumped — it is not a creature P0 controls"
++    );
++
++    // Kozilek itself resolved onto the battlefield.
++    assert_eq!(
++        runner.state().objects[&koz].zone,
++        Zone::Battlefield,
++        "Kozilek resolves normally after its cast trigger"
++    );
++
++    // DISCRIMINATOR — the rider drew one card per manifested card: 4 draws.
++    // P0's hand: emptied by the cast (Kozilek) and both picks, then +4 draws.
++    let p0 = runner
++        .state()
++        .players
++        .iter()
++        .find(|p| p.id == P0)
++        .expect("P0 exists");
++    assert_eq!(
++        p0.hand.len(),
++        4,
++        "P0 draws exactly one card per manifested card (4), got hand {:?}",
++        p0.hand
++    );
++    let p1 = runner
++        .state()
++        .players
++        .iter()
++        .find(|p| p.id == P1)
++        .expect("P1 exists");
++    assert_eq!(
++        p1.hand.len(),
++        0,
++        "P1's hand is emptied by their two picks and draws nothing"
++    );
++}
+diff --git a/crates/engine/tests/integration/main.rs b/crates/engine/tests/integration/main.rs
+index c993d1414..cc35f216f 100644
+--- a/crates/engine/tests/integration/main.rs
++++ b/crates/engine/tests/integration/main.rs
+@@ -45,6 +45,7 @@ mod captain_america_throw;
+ mod cascade_intervening_if_pipeline;
+ mod case_solve_condition;
+ mod cast_during_resolution_pipeline;
++mod casting_affordability_action_consistency;
+ mod cda_counted_quantities_pt;
+ mod chain_of_smog_copy;
+ mod chandra_revolution_doesnt_untap_slot;
+@@ -534,6 +535,7 @@ mod kaysa_green_anthem;
+ mod knighthood_first_strike_grant;
+ mod knollspine_dragon_target_damage_draw;
+ mod kodama_anti_recursion_intervening_if;
++mod kozilek_broken_reality_manifest_from_hands;
+ mod krark_clan_ironworks_castability;
+ mod krark_thumb_coin_flip;
+ mod kutzils_flanker_mode_one_counter;
+@@ -645,6 +647,7 @@ mod saruman_white_hand_amass;
+ mod sba_lethal_damage_redirect_single_application;
+ mod scarab_god_regression;
+ mod screaming_nemesis_life_lock;
++mod scroll_of_fate_manifest_from_hand;
+ mod season_points_budget_modal;
+ mod seasoned_dungeoneer_initiative_room_trigger;
+ mod selenia_vigilance_grant;
+diff --git a/crates/engine/tests/integration/power_up_keyword.rs b/crates/engine/tests/integration/power_up_keyword.rs
+index 84d68dac7..8d1817ae0 100644
+--- a/crates/engine/tests/integration/power_up_keyword.rs
++++ b/crates/engine/tests/integration/power_up_keyword.rs
+@@ -12,7 +12,7 @@
+ //! this turn.
+ //! CR 106.6: tag-scoped mana spend restriction (Quinjet).
+ //! CR 500.7 + CR 514.2: Kang's extra-turn power-up prohibition.
+-//! CR 603.1b: Marvel Boy's dual-condition trigger.
++//! CR 603.2c: Marvel Boy's dual-condition trigger fires once for each event.
+ 
+ use engine::types::ability::AbilityTag;
+ use engine::types::actions::GameAction;
+@@ -593,11 +593,12 @@ fn set_tagged_mana(runner: &mut GameRunner, player: PlayerId, n: usize) {
+ // 6. Marvel Boy trigger — fires on power-up activation only.
+ // ---------------------------------------------------------------------------
+ 
+-/// CR 602.1 + CR 603.1b: "whenever you activate a power-up ability" triggers.
++/// CR 602.1 + CR 603.2c: "whenever you activate a power-up ability" triggers
++/// once for each qualifying activation event.
+ ///
+ /// Revert-failing assertion: activating a power-up ability puts a +1/+1 counter
+-/// on Marvel Boy; activating a NON-power-up ability does not. If the trigger arm
+-/// is reverted, the parser drops the condition and no counter ever lands.
++/// on Marvel Boy; activating a NON-power-up ability does not. If the trigger
++/// registry entry is reverted, Marvel Boy is marked unsupported before play.
+ #[test]
+ fn marvel_boy_triggers_only_on_power_up_activation() {
+     let mut scenario = GameScenario::new();
+@@ -609,7 +610,7 @@ fn marvel_boy_triggers_only_on_power_up_activation() {
+             "Marvel Boy",
+             2,
+             2,
+-            "Whenever you activate a power-up ability, put a +1/+1 counter on Marvel Boy.",
++            "Whenever another creature you control enters and whenever you activate a power-up ability, put a +1/+1 counter on Marvel Boy.",
+         )
+         .id();
+     let hero = scenario
+@@ -633,6 +634,10 @@ fn marvel_boy_triggers_only_on_power_up_activation() {
+ 
+     let mut runner = scenario.build();
+ 
++    assert!(
++        !runner.state().objects[&marvel].has_unimplemented_mechanics(),
++        "the production Marvel Boy Oracle must be fully supported"
++    );
+     let before = p1p1_on(&runner, marvel);
+ 
+     // Activate the NON-power-up ability first: must NOT trigger Marvel Boy.
+@@ -655,9 +660,10 @@ fn marvel_boy_triggers_only_on_power_up_activation() {
+     refill_colorless(&mut runner, P0, 1);
+     runner.activate(hero, power_idx).resolve();
+     runner.advance_until_stack_empty();
+-    assert!(
+-        p1p1_on(&runner, marvel) > before,
+-        "a power-up activation must trigger Marvel Boy (+1/+1 counter)"
++    assert_eq!(
++        p1p1_on(&runner, marvel),
++        before + 1,
++        "CR 603.2c: one power-up activation event must trigger Marvel Boy exactly once"
+     );
+ }
+ 
+diff --git a/crates/engine/tests/integration/scroll_of_fate_manifest_from_hand.rs b/crates/engine/tests/integration/scroll_of_fate_manifest_from_hand.rs
+new file mode 100644
+index 000000000..8a8443344
+--- /dev/null
++++ b/crates/engine/tests/integration/scroll_of_fate_manifest_from_hand.rs
+@@ -0,0 +1,187 @@
++//! Card-level regression for **Scroll of Fate** —
++//! "{T}: Manifest a card from your hand."
++//!
++//! Drives the REAL registered ability end to end (maintainer round 1: no
++//! synthetic `parse_effect_chain` + generic resolver): the artifact is built
++//! from its printed Oracle text, its activated ability is activated through
++//! `GameAction::ActivateAbility`, the `{T}` cost is paid (CR 602.2b), the
++//! ability resolves off the stack, and the interactive
++//! `WaitingFor::ChooseFromZoneChoice` is answered through
++//! `GameAction::SelectCards` — the exact path the client takes.
++//!
++//! DISCRIMINATORS (anti-hollow-win):
++//! - the chosen hand card is a NONCREATURE (a plain sorcery): CR 701.40a must
++//!   still convert it to a face-down vanilla 2/2 CREATURE. Omitting the
++//!   noncreature conversion fails the full-profile assertions below.
++//! - the complete manifest profile is pinned: empty name, exactly the
++//!   `[Creature]` core type (the printed Sorcery type is hidden), no
++//!   subtypes/supertypes, 2/2, `ManaCost::NoCost`, and NO keywords — a lazy
++//!   reuse of cloak's `cloaked_2_2` (ward {2}, CR 701.58a) fails here.
++//! - the distinguishable library-top card B is UNTOUCHED: a hollow
++//!   library-top fix would manifest B and leave A in hand.
++//!
++//! CR 701.40a: Manifest — face-down 2/2 creature with no text, no name, no
++//! subtypes, and no mana cost.
++//! CR 608.2c: the Manifest sub-ability reads the chosen card the choose
++//! forwarded.
++
++use engine::game::scenario::{GameScenario, P0};
++use engine::types::actions::GameAction;
++use engine::types::card_type::CoreType;
++use engine::types::game_state::WaitingFor;
++use engine::types::keywords::Keyword;
++use engine::types::mana::{ManaCost, ManaCostShard};
++use engine::types::phase::Phase;
++use engine::types::zones::Zone;
++
++#[test]
++fn scroll_of_fate_activated_ability_manifests_a_chosen_noncreature_hand_card() {
++    let mut scenario = GameScenario::new();
++    scenario.at_phase(Phase::PreCombatMain);
++
++    // NONCREATURE hand card: a plain sorcery with no creature side.
++    let hand_a = scenario
++        .add_spell_to_hand_from_oracle(P0, "Plain Sorcery A", false, "Draw a card.")
++        .with_mana_cost(ManaCost::Cost {
++            shards: vec![ManaCostShard::Blue],
++            generic: 2,
++        })
++        .with_keyword(Keyword::Flash)
++        .id();
++    // A distinguishable card sitting on top of P0's library — the library-top
++    // source a hollow (library-top) fix would wrongly manifest instead.
++    let library_b = scenario.add_card_to_library_top(P0, "Library Card B");
++    // The REAL card: battlefield artifact with its registered activated
++    // ability parsed from the printed Oracle text.
++    let scroll = scenario
++        .add_artifact_from_oracle(P0, "Scroll of Fate", "{T}: Manifest a card from your hand.")
++        .id();
++
++    let mut runner = scenario.build();
++
++    // PRODUCTION STEP: activate the registered ability — index 0 is the
++    // card's only ability. A parse regression (Unimplemented) makes the
++    // activation illegal and this expect panics.
++    runner
++        .act(GameAction::ActivateAbility {
++            source_id: scroll,
++            ability_index: 0,
++        })
++        .expect("Scroll of Fate's registered ability must be activatable");
++
++    // CR 602.2b: the {T} activation cost is paid on activation, before
++    // resolution.
++    assert!(
++        runner.state().objects[&scroll].tapped,
++        "activating {{T}}: … must tap Scroll of Fate"
++    );
++
++    // Let the ability resolve off the stack (CR 608): pass priority until the
++    // resolution raises the interactive choose.
++    let mut reached_choice = false;
++    for _ in 0..16 {
++        match &runner.state().waiting_for {
++            WaitingFor::ChooseFromZoneChoice { player, cards, .. } => {
++                // PRODUCTION STEP: the choose offers the hand card (A), never
++                // the library card (B).
++                assert_eq!(*player, P0, "the controller makes the choose");
++                assert!(
++                    cards.contains(&hand_a),
++                    "the hand card must be offered, got {cards:?}"
++                );
++                assert!(
++                    !cards.contains(&library_b),
++                    "the library-top card must NOT be a from-hand candidate"
++                );
++                reached_choice = true;
++                break;
++            }
++            _ => {
++                runner
++                    .act(GameAction::PassPriority)
++                    .expect("pass priority toward the ability's resolution");
++            }
++        }
++    }
++    assert!(
++        reached_choice,
++        "resolving Scroll of Fate's ability must raise ChooseFromZoneChoice, got {:?}",
++        runner.state().waiting_for
++    );
++
++    // PRODUCTION STEP: answer with A through the same handler the client uses.
++    runner
++        .act(GameAction::SelectCards {
++            cards: vec![hand_a],
++        })
++        .expect("selecting the offered hand card must be a legal answer");
++
++    // DISCRIMINATOR — the CHOSEN noncreature hand card A is manifested with
++    // the COMPLETE CR 701.40a profile.
++    let a = &runner.state().objects[&hand_a];
++    assert_eq!(
++        a.zone,
++        Zone::Battlefield,
++        "A must be manifested onto the battlefield"
++    );
++    assert!(a.face_down, "A must be face down");
++    assert_eq!(a.name, "", "a face-down card has no name (CR 701.40a)");
++    assert_eq!(
++        a.card_types.core_types,
++        vec![CoreType::Creature],
++        "the face-down body is exactly a Creature — the printed Sorcery type \
++         is hidden (CR 708.2a)"
++    );
++    assert!(
++        a.card_types.supertypes.is_empty() && a.card_types.subtypes.is_empty(),
++        "a face-down card has no super-/subtypes (CR 701.40a), got {:?}",
++        a.card_types
++    );
++    assert_eq!(a.power, Some(2), "manifested A is a 2/2");
++    assert_eq!(a.toughness, Some(2), "manifested A is a 2/2");
++    assert_eq!(
++        a.mana_cost,
++        ManaCost::NoCost,
++        "a face-down card has no mana cost (CR 701.40a)"
++    );
++    assert!(
++        a.color.is_empty(),
++        "a manifested card is colorless (CR 701.40a + CR 202.2b), got {:?}",
++        a.color
++    );
++    assert!(
++        a.abilities.is_empty(),
++        "a manifested card has no abilities (CR 701.40a), got {:?}",
++        a.abilities
++    );
++    // DISCRIMINATOR — manifest is NOT cloak: no keywords at all, in
++    // particular no ward {2} (CR 701.58a).
++    assert!(
++        a.keywords.is_empty(),
++        "a manifested card has no abilities/keywords (CR 701.40a), got {:?}",
++        a.keywords
++    );
++
++    // A LEFT the hand.
++    let p0 = runner
++        .state()
++        .players
++        .iter()
++        .find(|p| p.id == P0)
++        .expect("P0 exists");
++    assert!(
++        !p0.hand.contains(&hand_a),
++        "the manifested card must leave the hand"
++    );
++
++    // DISCRIMINATOR — the library-top card B is UNTOUCHED (still face up,
++    // still on top of the library).
++    let b = &runner.state().objects[&library_b];
++    assert_eq!(b.zone, Zone::Library, "B must stay in the library");
++    assert!(!b.face_down, "B must remain face up");
++    assert_eq!(
++        p0.library.front(),
++        Some(&library_b),
++        "B must remain on top of the library"
++    );
++}
+diff --git a/crates/manabrew-compat/src/lib.rs b/crates/manabrew-compat/src/lib.rs
+index 6d2978042..6a285247c 100644
+--- a/crates/manabrew-compat/src/lib.rs
++++ b/crates/manabrew-compat/src/lib.rs
+@@ -1807,6 +1807,7 @@ pub fn convert_available_action(action: &GameAction, id: String) -> AvailableAct
+         }
+         GameAction::SetAutoPass { .. }
+         | GameAction::CancelAutoPass
++        | GameAction::SetFullControl { .. }
+         | GameAction::SetPhaseStops { .. }
+         | GameAction::SetPriorityYield { .. }
+         | GameAction::SetMayTriggerAutoChoice { .. }
+diff --git a/scripts/coverage-regression-check.sh b/scripts/coverage-regression-check.sh
+index 29eb9ef4f..0510855a6 100755
+--- a/scripts/coverage-regression-check.sh
++++ b/scripts/coverage-regression-check.sh
+@@ -26,11 +26,14 @@
+ #                        unexpected wording changes.
+ #
+ # Usage:
+-#   scripts/coverage-regression-check.sh <baseline> <current> [--fail-on-engine]
++#   scripts/coverage-regression-check.sh <baseline> <current> [options]
+ #
+ #   <baseline>  path OR https URL to main-branch coverage-data.json
+ #   <current>   path to the newly produced coverage-data.json
+ #   --fail-on-engine  exit 1 if REGRESSED (engine) bucket is non-empty
++#   --skip-diagnostic-ratchet
++#                     report support deltas only; use when diagnostics are
++#                     checked separately against the exact PR base
+ #
+ # The coverage-data.json layout comes from `coverage-report` (see
+ # crates/engine/src/bin/coverage_report.rs): .cards[] with .card_name,
+@@ -46,9 +49,21 @@ fi
+ BASELINE="$1"
+ CURRENT="$2"
+ FAIL_ON_ENGINE=0
+-if [[ "${3:-}" == "--fail-on-engine" ]]; then
+-    FAIL_ON_ENGINE=1
+-fi
++SKIP_DIAGNOSTIC_RATCHET=0
++for option in "${@:3}"; do
++    case "$option" in
++        --fail-on-engine)
++            FAIL_ON_ENGINE=1
++            ;;
++        --skip-diagnostic-ratchet)
++            SKIP_DIAGNOSTIC_RATCHET=1
++            ;;
++        *)
++            echo "Unknown option: $option" >&2
++            exit 2
++            ;;
++    esac
++done
+ 
+ tmpdir=$(mktemp -d)
+ trap 'rm -rf "$tmpdir"' EXIT
+@@ -188,6 +203,10 @@ if [[ "$FAIL_ON_ENGINE" -eq 1 && "$engine_count" -gt 0 ]]; then
+     exit 1
+ fi
+ 
++if [[ "$SKIP_DIAGNOSTIC_RATCHET" -eq 1 ]]; then
++    exit 0
++fi
++
+ # Diagnostic count ratchet (D-09): flag regressions in diagnostic categories.
+ # Tolerates proportional increases when total_cards grew (new MTGJSON cards with
+ # pre-existing gap patterns are not a parser regression).
+diff --git a/scripts/draw-replacement-corpus.tsv b/scripts/draw-replacement-corpus.tsv
+index ec2a8dd04..c5fc38a71 100644
+--- a/scripts/draw-replacement-corpus.tsv
++++ b/scripts/draw-replacement-corpus.tsv
+@@ -27,6 +27,7 @@ abundance	Draw	Optional	none	Choose	-	IndividualDraw
+ alhammarret's archive	Draw	Mandatory	none	Draw	nested-draw	IndividualDraw
+ archmage ascension	Draw	Optional	none	SearchLibrary	-	IndividualDraw
+ asmodeus the archfiend	Draw	Mandatory	none	ExileTop	-	IndividualDraw
++bard, king of dale	Draw	Mandatory	none	Draw	nested-draw	IndividualDraw
+ blood scrivener	Draw	Mandatory	none	Draw	nested-draw	IndividualDraw
+ breathstealer's crypt	Draw	Mandatory	none	Draw	nested-draw	IndividualDraw
+ chains of mephistopheles	Draw	Mandatory	none	Discard	nested-draw	IndividualDraw
+diff --git a/scripts/zone-authority-baseline.txt b/scripts/zone-authority-baseline.txt
+index 7facb4775..c7bd4cac6 100644
+--- a/scripts/zone-authority-baseline.txt
++++ b/scripts/zone-authority-baseline.txt
+@@ -24,6 +24,7 @@ crates/engine/src/game/augment.rs	combine_card_with_host	mover	1
+ crates/engine/src/game/augment.rs	combine_card_with_host	zone-assign	1
+ crates/engine/src/game/casting.rs	handle_cancel_cast	mover	1
+ crates/engine/src/game/casting.rs	handle_foretell	mover	1
++crates/engine/src/game/casting.rs	has_mana_path	exempt	1
+ crates/engine/src/game/casting_costs.rs	finalize_cast_with_phyrexian_choices_inner	mover	1
+ crates/engine/src/game/casting_costs.rs	finish_exile_selection_for_cost	mover	1
+ crates/engine/src/game/casting_costs.rs	handle_behold_for_cost	mover	1
