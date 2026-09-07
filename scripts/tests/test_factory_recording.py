@@ -201,7 +201,7 @@ class DomainFeedbackTests(RecorderFixture):
         self.card = {"object": "card", "id": "fixture-printing", "oracle_id": "fixture-oracle",
                      "name": "Constructed control fixture", "layout": "normal", "games": ["paper"],
                      "legalities": {"vintage": "legal"}, "type_line": "Artifact",
-                     "oracle_text": "{T}: Add {G}."}
+                     "oracle_text": "{T}: Add {G}.", "reserved": False}
         self.case_id = self.case(self.card)
         self.build_id = self.build()
         self.cfg = {"cases": [{"case_id": self.case_id, "source_contract": oracle.source_contracts(self.card)}],
@@ -276,6 +276,17 @@ class DomainFeedbackTests(RecorderFixture):
                        if e["payload"]["kind"] == "execution_started")
         request = factory.artifact_json(self.replay, started["request_id"])
         different = {**self.card, "oracle_text": "{T}: Add {R}."}
+        request["input_sha256"] = self.replay.artifact(json.dumps(different).encode(), raw=True)
+        started["request_id"] = self.replay.artifact(request)
+        with self.assertRaisesRegex(ValueError, "input differs"):
+            factory.verify_domain(self.replay, self.cfg)
+
+    def test_numeric_value_cannot_replace_a_boolean_source_field(self):
+        started = next(e["payload"] for e in self.replay.value["events"]
+                       if e["payload"]["kind"] == "execution_started")
+        request = factory.artifact_json(self.replay, started["request_id"])
+        different = {**self.card, "reserved": 0}
+        self.assertEqual(different, self.card, "Python equality must exercise the type-confusion case")
         request["input_sha256"] = self.replay.artifact(json.dumps(different).encode(), raw=True)
         started["request_id"] = self.replay.artifact(request)
         with self.assertRaisesRegex(ValueError, "input differs"):

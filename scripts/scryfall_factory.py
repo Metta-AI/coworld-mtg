@@ -312,7 +312,9 @@ def verify_domain(replay, cfg):
             if finished["status"] != expected_status:
                 raise ValueError("execution status contradicts its worker exit or observation")
             input_data = artifact_json(replay, request["input_sha256"])
-            if input_data != card:
+            # Python equality conflates booleans and numbers; source fields keep their JSON types.
+            if (json.dumps(input_data, sort_keys=True, allow_nan=False) !=
+                    json.dumps(card, sort_keys=True, allow_nan=False)):
                 raise ValueError("exact worker input differs from its case")
             if (request["build_id"] != started["build_id"] or request["case_id"] != case_id or
                     request["worker_sha256"] != build["binary_sha256"] or
