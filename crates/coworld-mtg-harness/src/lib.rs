@@ -10,6 +10,7 @@ mod corpus;
 mod invariants;
 mod io;
 mod model;
+pub mod oracle_probe;
 mod runner;
 mod soft_signals;
 

@@ -17,6 +17,13 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Parse raw Scryfall JSONL with Phase; emits observations without expectations.
+    OracleProbe {
+        #[arg(long)]
+        input: PathBuf,
+        #[arg(long)]
+        output: PathBuf,
+    },
     /// Typed, reproducible scenario and repair evaluation loop.
     Case(coworld_mtg_harness::cases::CaseArgs),
     /// Materialize and cross-check an immutable corpus manifest.
@@ -161,6 +168,9 @@ struct ImproveArgs {
 async fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Command::OracleProbe { input, output } => {
+            coworld_mtg_harness::oracle_probe::inspect_file(&input, &output)?
+        }
         Command::Case(args) => coworld_mtg_harness::cases::dispatch(args)?,
         Command::Materialize(args) => {
             let manifest = materialize_corpus(&MaterializeOptions {

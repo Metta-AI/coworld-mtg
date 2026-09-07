@@ -4,6 +4,9 @@
 //! reproduce Magic rules; it translates deck/configuration input and exposes
 //! Phase's exact legal actions and viewer-filtered state to the host.
 
+mod oracle;
+pub use oracle::{inspect_oracle_card, OracleInspection};
+
 mod scenario;
 mod view;
 
