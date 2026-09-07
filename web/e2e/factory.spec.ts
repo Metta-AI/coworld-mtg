@@ -206,3 +206,47 @@ test("a satisfied candidate case retains its recorded rejection beside the befor
   await expect(comparison).toContainText("No decision recorded for this change at this point.");
   await expect(comparison).not.toContainText("Recorded decision: rejected");
 });
+
+test("tagged source-ingestion results stay distinct from evaluator claims and Scryfall cards", async ({ page }) => {
+  const csv = "game,casts\n1,111\n2,222\n", csvId = digest(csv);
+  const output = JSON.stringify({ observation: { schema: "software-factory-result-v1", summary: "Synthetic miner output, not a full game replay.", data: { rows: 2, card_frequency: [] } } });
+  const outputId = digest(output);
+  const evaluation = JSON.stringify({ schema: "software-factory-result-v1", summary: "Synthetic extraction measurements", data: { expected_casts: 2, observed_casts: 0, evaluated_rows: [{ row: 1, column: "synthetic_turn_1_casts", observed_casts: 0 }, { row: 2, column: "synthetic_turn_2_casts", observed_casts: 0 }], unobserved_state: ["targets", "priority", "hidden cards"] } });
+  const evaluationId = digest(evaluation);
+  const replay = {
+    ...structuredClone(initial),
+    artifacts: {
+      [csvId]: { path: "source.csv", media_type: "text/csv", hash_mode: "bytes" },
+      [caseId]: initial.artifacts[caseId],
+      [outputId]: { path: "output.json", media_type: "application/json", hash_mode: "bytes" },
+      [evaluationId]: { path: "coverage.json", media_type: "application/json", hash_mode: "bytes" },
+    },
+    events: [
+      { sequence: 0, elapsed_ms: 0, stage: "sources", payload: { kind: "source_imported", source: { snapshot_id: csvId, provider: "Synthetic partial source", url: "https://example.test/data.csv", retrieved_at: "test fixture", description: "Synthetic per-turn summary fixture; not a full ordered action replay." } } },
+      { sequence: 1, elapsed_ms: 100, stage: "cases", payload: { kind: "case_registered", case_id: caseId, title: "Synthetic source ingestion case", derivation: { kind: "source_derived", source_ids: [csvId], source_records: [{ source_id: csvId, record_id: "data-rows:1-2" }], recipe: "Test-only source extraction", seed: null } } },
+      { sequence: 2, elapsed_ms: 200, stage: "feedback", payload: { kind: "execution_started", execution_id: "test-miner", case_id: caseId, request_id: caseId, build_id: caseId, change_id: null } },
+      { sequence: 3, elapsed_ms: 300, stage: "feedback", payload: { kind: "execution_finished", execution_id: "test-miner", status: "completed", evidence_id: outputId, trace_ids: [], detail: "Synthetic native measurement" } },
+      { sequence: 4, elapsed_ms: 400, stage: "feedback", payload: { kind: "feedback_recorded", feedback: { feedback_id: evaluationId, case_id: caseId, execution_ids: ["test-miner"], evaluator: "synthetic extraction evaluator", evaluator_version: "test-only", adapter: "opaque", declared_strength: "strong", method: "Test fixture comparison", bounded_claim: "Extraction coverage only; no gameplay correctness claim.", result: "violated", summary: "Synthetic evaluator recorded missing casts" } } },
+    ],
+  };
+  await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [] } }));
+  await page.goto(url);
+  await page.locator("#replay-file").setInputFiles({ name: "synthetic-ingestion.portable.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify({ replay, artifact_contents: { [csvId]: csv, [caseId]: caseText, [outputId]: output, [evaluationId]: evaluation } })) });
+  await expect(page.getByRole("heading", { name: "Synthetic source ingestion case", exact: true })).toBeVisible();
+  await expect(page.locator(".feedback-card")).toContainText("violated");
+  await expect(page.locator(".feedback-card")).toContainText("observed casts");
+  await expect(page.locator(".execution-column").first()).toContainText("0 recorded rows (empty array)");
+  await expect(page.locator(".execution-column").first()).toContainText("not a full game replay");
+  await expect(page.locator(".feedback-card")).toContainText("synthetic_turn_2_casts");
+  await page.screenshot({ path: "test-results/factory-generic-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: "test-results/factory-generic-mobile.png", fullPage: true });
+  await page.getByRole("tab", { name: "Source & lineage" }).click();
+  await expect(page.locator("#case-content")).toContainText("Recorded source selector");
+  await expect(page.locator("#case-content")).toContainText("data-rows:1-2");
+  await expect(page.locator("#case-content")).not.toContainText("Raw Scryfall record");
+  await expect(page.locator("#case-content")).not.toContainText("No Oracle text");
+  await page.getByRole("tab", { name: "Changes & decision" }).click();
+  await expect(page.getByText("No decision recorded at this point", { exact: true })).toBeVisible();
+});

@@ -1,4 +1,5 @@
 import "./styles.css";
+import { isScryfallRecord, renderGenericSourceRecord, renderRecordedResult } from "./record-view";
 import {
   array, artifactReferences, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
   portableBlockers, preferredRun, recordedRunContext,
@@ -139,7 +140,8 @@ function renderExecutions(selected: CaseView, candidate: boolean): string {
     const evidence = artifactValue(finish?.evidence_id);
     const outcome = object(evidence.outcome);
     const observation = evidence.observation ?? outcome.observation;
-    return `<article class="execution-card"><div class="card-top"><code>${esc(p.execution_id)}</code>${badge("execution " + (finish?.status || "running"), toneFor(finish?.status))}</div>${candidate ? renderExecutionDecision(string(p.change_id), selected.events) : ""}${finish?.evidence_id ? `<div class="evidence-integrity">${statusMarkup(string(finish.evidence_id))}<span>Evidence content</span></div>` : ""}<div class="execution-links">${hashButton(p.build_id, "Build")}${hashButton(p.request_id, "Input")}${hashButton(finish?.evidence_id, "Evidence")}${array(finish?.trace_ids).map((id, i) => hashButton(id, "Trace " + (i + 1))).join("")}</div>${finish?.detail ? `<p>${esc(finish.detail)}</p>` : ""}${observation ? renderObservation(object(observation)) : outcome.reason ? `<pre>${esc(pretty(outcome.reason))}</pre>` : `<p class="subtle">${finish?.evidence_id ? evidenceHint(string(finish.evidence_id)) : "No execution evidence recorded yet."}</p>`}</article>`;
+    const standaloneResult = observation ? null : renderRecordedResult(evidence);
+    return `<article class="execution-card"><div class="card-top"><code>${esc(p.execution_id)}</code>${badge("execution " + (finish?.status || "running"), toneFor(finish?.status))}</div>${candidate ? renderExecutionDecision(string(p.change_id), selected.events) : ""}${finish?.evidence_id ? `<div class="evidence-integrity">${statusMarkup(string(finish.evidence_id))}<span>Evidence content</span></div>` : ""}<div class="execution-links">${hashButton(p.build_id, "Build")}${hashButton(p.request_id, "Input")}${hashButton(finish?.evidence_id, "Evidence")}${array(finish?.trace_ids).map((id, i) => hashButton(id, "Trace " + (i + 1))).join("")}</div>${finish?.detail ? `<p>${esc(finish.detail)}</p>` : ""}${observation ? renderObservation(object(observation)) : standaloneResult !== null ? standaloneResult : outcome.reason ? `<pre>${esc(pretty(outcome.reason))}</pre>` : `<p class="subtle">${finish?.evidence_id ? evidenceHint(string(finish.evidence_id)) : "No execution evidence recorded yet."}</p>`}</article>`;
   }).join("") : `<p class="column-empty">No ${candidate ? "candidate" : "baseline"} execution recorded at this point.</p>`}</section>`;
 }
 function renderExecutionDecision(changeId: string, events: FactoryEvent[]): string {
@@ -158,6 +160,8 @@ function evidenceHint(id: string): string {
 // Adapter views display recorded values. Evaluation and acceptance remain producer decisions.
 function renderEvaluationDetails(id: string): string {
   const receipt = artifactValue(id);
+  const recordedResult = renderRecordedResult(receipt);
+  if (recordedResult !== null) return recordedResult;
   const evaluations = array(receipt.evaluations).map(object);
   const rows = evaluations.flatMap((evaluation, trial) => array(evaluation.abilities).map(object).map(ability => ({
     trial: trial + 1, paragraph: Number(ability.source_paragraph_index ?? 0) + 1,
@@ -176,6 +180,8 @@ function renderParsedAbilities(parsed: Fields): string {
   return `<div class="parsed-abilities"><span class="eyebrow">PARSED ABILITIES</span>${abilities.map((ability, index) => `<div class="parsed-ability"><div><strong>Ability ${index + 1} · ${esc(ability.kind)}</strong>${typeof ability.is_mana_ability === "boolean" ? badge("mana ability: " + (ability.is_mana_ability ? "yes" : "no")) : ""}</div><p>${esc(ability.description || "No description recorded")}</p><span>Effect: ${esc(object(ability.effect).type || "not recorded")}${object(ability.sub_ability).effect ? " → " + esc(object(object(ability.sub_ability).effect).type) : ""}</span></div>`).join("")}</div>`;
 }
 function renderObservation(observation: Fields): string {
+  const recordedResult = renderRecordedResult(observation);
+  if (recordedResult !== null) return recordedResult;
   return `<div class="observation">${renderParsedAbilities(object(observation.parsed))}${Array.isArray(observation.life) ? `<div class="life-readings">${observation.life.map((life, index) => `<span>Player ${index + 1}<strong>${esc(life)} <small>life</small></strong></span>`).join("")}</div>` : ""}${Array.isArray(observation.objects) ? `<div class="observed-objects">${observation.objects.slice(0, 12).map(raw => { const card = object(raw); return `<div><strong>${esc(card.name || card.object_id)}</strong><span>${esc(label(card.zone))}${card.tapped === true ? " · tapped" : ""}${Number(card.plus_one_counters) > 0 ? " · " + esc(card.plus_one_counters) + " counters" : ""}</span></div>`; }).join("")}</div>` : ""}<details><summary>Raw observation</summary><pre>${esc(pretty(observation))}</pre></details></div>`;
 }
 
@@ -189,26 +195,29 @@ function renderLineage(selected: CaseView): string {
       const source = object(event.payload.source), id = string(source.snapshot_id);
       const sourceData = artifactValue(id);
       const records = array(derivation.source_records).filter(ref => object(ref).source_id === id);
-      return `<article class="source-card"><div class="card-top"><span class="eyebrow">${esc(source.provider)}</span>${statusMarkup(id)}</div><h4>${esc(source.description || "Source snapshot")}</h4><dl class="detail-list"><dt>Retrieved</dt><dd>${esc(source.retrieved_at || "Not recorded")}</dd><dt>Source</dt><dd>${safeLink(source.url, string(source.url))}</dd><dt>Snapshot</dt><dd>${hashButton(id)}</dd></dl>${records.map(ref => renderSourceRecord(sourceData, string(object(ref).record_id))).join("")}${sourceData.oracle_text || sourceData.card_faces ? renderCardRecord(sourceData) : ""}</article>`;
+      return `<article class="source-card"><div class="card-top"><span class="eyebrow">${esc(source.provider)}</span>${statusMarkup(id)}</div><h4>${esc(source.description || "Source snapshot")}</h4><dl class="detail-list"><dt>Retrieved</dt><dd>${esc(source.retrieved_at || "Not recorded")}</dd><dt>Source</dt><dd>${safeLink(source.url, string(source.url))}</dd><dt>Snapshot</dt><dd>${hashButton(id)}</dd></dl>${records.map(ref => renderSourceRecord(sourceData, string(object(ref).record_id))).join("")}${isScryfallRecord(sourceData) ? renderCardRecord(sourceData) : ""}</article>`;
     }).join("") || empty("No external source linked", "This case's visible derivation does not reference an imported source snapshot.")}
   `;
 }
 function renderSourceRecord(source: Fields, recordId: string): string {
   const candidates = [...array(source.records), ...array(source.data), ...array(source.cards), source];
-  const record = candidates.map(object).find(item => item.id === recordId || item.oracle_id === recordId);
-  if (record) return renderCardRecord(record);
+  const record = candidates.map(object).find(item => item.id === recordId || item.oracle_id === recordId || item.record_id === recordId);
+  if (record) return renderSourceData(record);
   const matching = Object.entries(state.replay?.artifacts ?? {}).filter(([, artifact]) => artifact.path.includes(recordId));
   for (const [id] of matching) {
     const loaded = artifactValue(id);
-    if (Object.keys(loaded).length) return renderCardRecord(loaded);
+    if (Object.keys(loaded).length) return renderSourceData(loaded);
   }
   // A snapshot descriptor can link a separate artifact containing the selected records.
   for (const id of artifactReferences(source)) {
     const linked = artifactValue(id);
-    const found = [...array(linked.records), ...array(linked.data), linked].map(object).find(item => item.id === recordId || item.oracle_id === recordId);
-    if (found) return renderCardRecord(found);
+    const found = [...array(linked.records), ...array(linked.data), linked].map(object).find(item => item.id === recordId || item.oracle_id === recordId || item.record_id === recordId);
+    if (found) return renderSourceData(found);
   }
-  return `<div class="source-record-missing"><span>Source record</span><code>${esc(recordId)}</code><p class="subtle">Raw record is not available in the loaded snapshot. Inspect the source artifact for its retrieval details.</p></div>`;
+  return `<div class="source-record-missing"><span>Recorded source selector</span><code>${esc(recordId)}</code><p class="subtle">Inspect the linked source artifact for this selector. No matching structured record is embedded in the loaded snapshot.</p></div>`;
+}
+function renderSourceData(record: Fields): string {
+  return isScryfallRecord(record) ? renderCardRecord(record) : renderGenericSourceRecord(record);
 }
 function renderCardRecord(card: Fields): string {
   const faces = array(card.card_faces).length ? array(card.card_faces).map(object) : [card];
