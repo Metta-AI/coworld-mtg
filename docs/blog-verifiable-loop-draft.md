@@ -2,9 +2,9 @@
 
 Darkwater Egg is an unassuming Magic card. Its activated ability adds blue and black mana, then draws a card. That last clause is enough to make it useful for testing a rules engine.
 
-In the rules snapshot used by our September 7, 2026 experiment, an activated mana ability cannot have a cost or effect that moves a card to or from a library. Drawing a card crosses that boundary. Our baseline parser classified Darkwater Egg's ability as a mana ability anyway.
+In the [rules snapshot](https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt) used by our September 7, 2026 experiment, an activated mana ability cannot have a cost or effect that moves a card to or from a library. Drawing a card crosses that boundary. Our baseline parser classified Darkwater Egg's ability as a mana ability anyway.
 
-We did not start by writing a Darkwater Egg test. We downloaded Scryfall's Oracle Cards snapshot, audited every row, and searched for a family of card definitions that could expose this disagreement. The resulting work item carries the original card record, the rule version, the selection recipe, the executable's identity, two recorded observations, and the evaluator's expected and observed values.
+We did not start by writing a Darkwater Egg test. We downloaded [Scryfall's Oracle Cards snapshot](https://api.scryfall.com/bulk-data/oracle_cards), audited every row, and searched for a family of card definitions that could expose this disagreement. The resulting work item carries the original card record, the rule version, the selection recipe, the executable's identity, two recorded observations, and the evaluator's expected and observed values.
 
 That is the part we want to make repeatable: a path from real inputs to a bounded, inspectable reason to change software.
 
@@ -50,7 +50,7 @@ The domain adapter supplies the meaning: how to derive a case, invoke the target
 
 That separation puts a limit on what the infrastructure claims. Matching hashes establish content identity. They do not prove that an external evaluator interpreted the rules correctly. The generic runtime's validation is distinct from rerunning the installed domain evaluator and reviewing its policy. Labeling feedback “strong” describes the authority and scope of its claim; it does not make that claim infallible.
 
-The viewer reads the same typed records. Its pipeline comes from the [generated lifecycle graph](contracts/factory-lifecycle.mmd), rather than a second implementation of how work ought to proceed. As the replay cursor advances, cases enter the queue, executions acquire evidence, and feedback appears. The interface distinguishes weak nominations from stronger evaluations and shows the producer's recorded decision when one exists.
+The viewer reads the same typed records. Its pipeline uses the stage definitions recorded by the producer. The [generated lifecycle graph](contracts/factory-lifecycle.mmd) comes from those same definitions. As the replay cursor advances, cases enter the queue, executions acquire evidence, and feedback appears. The interface distinguishes weak nominations from stronger evaluations and shows the producer's recorded decision when one exists.
 
 For the current Darkwater Egg case, a reader can open the raw Scryfall record, read the Oracle text, inspect the two parser outputs, and compare the evaluator's expected and observed classification. Source hashes and missing evidence are visible. A passing feedback record does not cause the viewer to announce that a repair has been accepted.
 

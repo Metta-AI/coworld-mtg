@@ -122,6 +122,26 @@ exact UTF-8 strings, preserving whitespace and byte-order marks. Executables and
 the full bulk archive remain separate retained inputs with recorded identities.
 Interrupted, superseded and rejected work stays separate from successful runs.
 
+## Share a run
+
+A shareable directory preserves the exact replay and artifact identities. Large
+publisher-owned source documents can stay at the recorded source URL:
+
+```sh
+python3 scripts/share_factory_replay.py package tmp/runs/example \
+  --output tmp/shared/example --runtime target/debug/factory-runtime \
+  --external '<recorded-source-sha256>=<recorded-https-url>'
+python3 scripts/share_factory_replay.py hydrate tmp/shared/example \
+  --runtime target/debug/factory-runtime
+```
+
+The package includes `external-artifacts.json` for explicitly designated source
+artifacts. Hydration downloads missing bytes into a staging directory, verifies
+the complete run, and atomically adds the verified artifacts. Existing files
+remain immutable. After hydration the ordinary viewer, domain verification and
+portable export commands work unchanged. Portable export is the fully contained
+format for local offline viewing.
+
 ## Adapting another factory
 
 Keep the replay, artifact store, viewer and process recorder. Replace the source

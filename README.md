@@ -54,7 +54,7 @@ architecture diagrams. The focused card cases run without the full private
 runtime corpus. The newer [software factory](docs/software-factory.md) discovers
 cases from real Scryfall snapshots and records executions, feedback, changes,
 reviews, and decisions as portable replay files. Its viewer follows the same
-typed events that the runner writes. Earlier [case notes](cases/evidence/README.md)
+typed events that the runner writes. The [article draft](docs/blog-verifiable-loop-draft.md) develops the real-data example. Earlier [case notes](cases/evidence/README.md)
 remain historical artifacts. The active workspace and preserved builds are on
 [EC2](docs/ec2-workspace.md).
 
