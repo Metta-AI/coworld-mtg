@@ -11,7 +11,8 @@ export default defineConfig({
       input: {
         player: resolve(import.meta.dirname, "player.html"),
         global: resolve(import.meta.dirname, "global.html"),
-        replay: resolve(import.meta.dirname, "replay.html")
+        replay: resolve(import.meta.dirname, "replay.html"),
+        factory: resolve(import.meta.dirname, "factory.html")
       }
     }
   },
