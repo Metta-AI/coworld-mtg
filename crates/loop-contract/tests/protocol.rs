@@ -182,6 +182,11 @@ fn acceptance_requires_frozen_expectations_independent_review_and_real_gates() {
 #[test]
 fn worker_request_schema_excludes_expected_results() {
     let files = contract_artifacts();
+    assert_eq!(
+        files["factory-lifecycle.mmd"],
+        include_str!("../../../docs/contracts/factory-lifecycle.mmd"),
+        "the checked-in lifecycle must match the replay topology export"
+    );
     let schema = &files["ExecutionRequest.schema.json"];
     assert!(!schema.contains("assertions"));
     assert!(!schema.contains("equals"));

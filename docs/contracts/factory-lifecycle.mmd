@@ -1,0 +1,22 @@
+flowchart LR
+    sources["Source data"]
+    cases["Cases"]
+    execute["Execution"]
+    feedback["Feedback"]
+    reduce["Reduction"]
+    changes["Discrete changes"]
+    gates["Frozen acceptance checks"]
+    review["Independent review"]
+    decisions["Recorded decisions"]
+    sources --> cases
+    cases --> execute
+    execute --> feedback
+    feedback --> reduce
+    feedback --> changes
+    feedback --> review
+    feedback --> decisions
+    reduce --> execute
+    changes --> gates
+    gates --> execute
+    gates --> review
+    review --> decisions

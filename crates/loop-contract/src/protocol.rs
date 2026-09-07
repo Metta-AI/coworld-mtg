@@ -264,5 +264,33 @@ pub fn contract_artifacts() -> BTreeMap<String, String> {
     boundary!(FactoryEvent, Coordinator, ReplayStore);
     files.insert("architecture.mmd".into(), graph);
     files.insert("message-flow.mmd".into(), sequence);
+
+    // Use the replay's serialized stage identities, labels, and edges so the
+    // static documentation and live viewer share one lifecycle definition.
+    let stage_id = |stage: FactoryStage| match serde_json::to_value(stage)
+        .expect("factory stage serializes")
+    {
+        serde_json::Value::String(id) => id,
+        _ => unreachable!("factory stages serialize as names"),
+    };
+    let stages = factory_stages();
+    let mut lifecycle = String::from("flowchart LR\n");
+    for stage in &stages {
+        lifecycle.push_str(&format!(
+            "    {}[\"{}\"]\n",
+            stage_id(stage.id),
+            stage.title.replace('"', "#quot;")
+        ));
+    }
+    for stage in &stages {
+        for next in &stage.next {
+            lifecycle.push_str(&format!(
+                "    {} --> {}\n",
+                stage_id(stage.id),
+                stage_id(*next)
+            ));
+        }
+    }
+    files.insert("factory-lifecycle.mmd".into(), lifecycle);
     files
 }
