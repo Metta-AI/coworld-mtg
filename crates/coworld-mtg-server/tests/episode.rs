@@ -87,14 +87,15 @@ fn replay_mode_serves_a_finite_recording() {
         }));
         wait_healthz(port).await;
 
-        let page = reqwest::get(format!("http://127.0.0.1:{port}/client/replay"))
+        let page = reqwest::get(format!("http://{}/client/replay", test_address(port)))
             .await
             .unwrap();
         assert!(page.status().is_success());
 
-        let (socket, _) = tokio_tungstenite::connect_async(format!("ws://127.0.0.1:{port}/replay"))
-            .await
-            .unwrap();
+        let (socket, _) =
+            tokio_tungstenite::connect_async(format!("ws://{}/replay", test_address(port)))
+                .await
+                .unwrap();
         let (_, mut read) = socket.split();
         assert_eq!(next_type(&mut read).await, "replay_meta");
         assert_eq!(next_type(&mut read).await, "state");
@@ -273,8 +274,8 @@ async fn run_completed_match_with_seed(
         std::future::pending(),
     ));
     wait_healthz(port).await;
-    let slot0 = format!("ws://127.0.0.1:{port}/player?slot=0&token=tokA");
-    let slot1 = format!("ws://127.0.0.1:{port}/player?slot=1&token=tokB");
+    let slot0 = format!("ws://{}/player?slot=0&token=tokA", test_address(port));
+    let slot1 = format!("ws://{}/player?slot=1&token=tokB", test_address(port));
     let player0 = tokio::spawn(async move { goldfish::run_url(&slot0).await });
     let player1 = if mute_slot_1 {
         tokio::spawn(async move {
@@ -382,7 +383,7 @@ fn assert_reports(reports: &[goldfish::GoldfishReport; 2]) {
 
 async fn wait_healthz(port: u16) {
     for _ in 0..100 {
-        if let Ok(response) = reqwest::get(format!("http://127.0.0.1:{port}/healthz")).await {
+        if let Ok(response) = reqwest::get(format!("http://{}/healthz", test_address(port))).await {
             if response.status().is_success() {
                 return;
             }
@@ -393,7 +394,7 @@ async fn wait_healthz(port: u16) {
 }
 
 fn set_common_env(port: u16) {
-    std::env::set_var("COGAME_HOST", "127.0.0.1");
+    std::env::set_var("COGAME_HOST", test_bind().to_string());
     std::env::set_var("COGAME_PORT", port.to_string());
     std::env::set_var(
         "COGAME_CORPUS_DIR",
@@ -401,8 +402,34 @@ fn set_common_env(port: u16) {
     );
 }
 
+fn test_bind() -> std::net::IpAddr {
+    let address = std::env::var("COWORLD_TEST_BIND").unwrap_or_else(|_| "127.0.0.1".into());
+    let address: std::net::Ipv4Addr = address
+        .parse()
+        .expect("COWORLD_TEST_BIND must be an IPv4 address");
+    assert!(
+        address.is_loopback(),
+        "Test servers must bind a loopback address"
+    );
+    std::net::IpAddr::V4(address)
+}
+
+fn test_address(port: u16) -> std::net::SocketAddr {
+    std::net::SocketAddr::new(test_bind(), port)
+}
+
 fn free_port() -> u16 {
-    std::net::TcpListener::bind("127.0.0.1:0")
+    if let Ok(port) = std::env::var("COWORLD_TEST_PORT") {
+        let port: u16 = port
+            .parse()
+            .expect("COWORLD_TEST_PORT must be a valid port");
+        assert_ne!(
+            port, 0,
+            "An explicit test port must be reserved and nonzero"
+        );
+        return port;
+    }
+    std::net::TcpListener::bind(test_address(0))
         .unwrap()
         .local_addr()
         .unwrap()

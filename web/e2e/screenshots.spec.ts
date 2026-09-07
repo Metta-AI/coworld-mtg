@@ -8,11 +8,15 @@ import net from "node:net";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const binSuffix = process.platform === "win32" ? ".exe" : "";
+const testBind = process.env.COWORLD_TEST_BIND || "127.0.0.1";
+if (net.isIP(testBind) !== 4 || !testBind.startsWith("127.")) throw new Error("COWORLD_TEST_BIND must be an IPv4 loopback address");
+const testHost = testBind;
+const targetDir = resolve(repoRoot, process.env.CARGO_TARGET_DIR || "target");
 const shots = process.env.SHOT_DIR ?? mkdtempSync(join(tmpdir(), "coworld-mtg-shots-"));
 
 test.beforeAll(() => {
   mkdirSync(shots, { recursive: true });
-  execFileSync(join(repoRoot, "scripts", "cargo.sh"), ["build", "--quiet", "-p", "coworld-mtg-server", "-p", "goldfish"], {
+  execFileSync(join(repoRoot, "scripts", "cargo.sh"), ["build", "--locked", "--quiet", "-p", "coworld-mtg-server", "-p", "goldfish"], {
     cwd: repoRoot,
     stdio: "inherit",
     env: {
@@ -28,7 +32,7 @@ test("capture player and global views", async ({ page, context }) => {
   const harness = await startHarness();
   try {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(`http://127.0.0.1:${harness.port}/client/player?slot=0&token=tokA`);
+    await page.goto(`http://${testHost}:${harness.port}/client/player?slot=0&token=tokA`);
     const continueButton = page.getByRole("button", { name: "Tap to continue", exact: true });
     await expect(continueButton).toBeVisible({ timeout: 20_000 });
     await continueButton.click();
@@ -45,7 +49,7 @@ test("capture player and global views", async ({ page, context }) => {
 
     const globalPage = await context.newPage();
     await globalPage.setViewportSize({ width: 1440, height: 900 });
-    await globalPage.goto(`http://127.0.0.1:${harness.port}/client/global`);
+    await globalPage.goto(`http://${testHost}:${harness.port}/client/global`);
     await globalPage.waitForTimeout(2000);
     await globalPage.screenshot({ path: join(shots, "4-global.png") });
 
@@ -74,7 +78,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
   );
   const env: NodeJS.ProcessEnv = {
     ...process.env,
-    COGAME_HOST: "127.0.0.1",
+    COGAME_HOST: testBind,
     COGAME_PORT: String(port),
     COGAME_CORPUS_DIR: join(repoRoot, ".private", "corpus"),
     COGAME_CONFIG_URI: config,
@@ -83,15 +87,15 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
     COGAME_WEB_DIST: join(repoRoot, "web", "dist")
   };
   delete env.COGAME_LOAD_REPLAY_URI;
-  const server = spawn(join(repoRoot, "target", "debug", `coworld-mtg-server${binSuffix}`), {
+  const server = spawn(join(targetDir, "debug", `coworld-mtg-server${binSuffix}`), {
     cwd: repoRoot,
     env,
     stdio: ["ignore", "ignore", "ignore"]
   });
   await waitHealthz(port);
   const goldfish = spawn(
-    join(repoRoot, "target", "debug", `goldfish${binSuffix}`),
-    ["--url", `ws://127.0.0.1:${port}/player?slot=1&token=tokB`],
+    join(targetDir, "debug", `goldfish${binSuffix}`),
+    ["--url", `ws://${testHost}:${port}/player?slot=1&token=tokB`],
     { cwd: repoRoot, env: process.env, stdio: ["ignore", "ignore", "ignore"] }
   );
   return {
@@ -109,7 +113,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
 async function waitHealthz(port: number): Promise<void> {
   for (let attempt = 0; attempt < 120; attempt += 1) {
     try {
-      const response = await fetch(`http://127.0.0.1:${port}/healthz`);
+      const response = await fetch(`http://${testHost}:${port}/healthz`);
       if (response.ok) return;
     } catch {
       await new Promise((r) => setTimeout(r, 50));
@@ -119,8 +123,13 @@ async function waitHealthz(port: number): Promise<void> {
 }
 
 async function freePort(): Promise<number> {
+  if (process.env.COWORLD_TEST_PORT !== undefined) {
+    const port = Number(process.env.COWORLD_TEST_PORT);
+    if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("COWORLD_TEST_PORT must be a reserved nonzero port");
+    return port;
+  }
   const server = net.createServer();
-  await new Promise<void>((r) => server.listen(0, "127.0.0.1", r));
+  await new Promise<void>((r) => server.listen(0, testBind, r));
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("no port");
   const port = address.port;

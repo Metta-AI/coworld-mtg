@@ -8,9 +8,13 @@ import net from "node:net";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const binSuffix = process.platform === "win32" ? ".exe" : "";
+const testBind = process.env.COWORLD_TEST_BIND || "127.0.0.1";
+if (net.isIP(testBind) !== 4 || !testBind.startsWith("127.")) throw new Error("COWORLD_TEST_BIND must be an IPv4 loopback address");
+const testHost = testBind;
+const targetDir = resolve(repoRoot, process.env.CARGO_TARGET_DIR || "target");
 
 test.beforeAll(() => {
-  execFileSync(join(repoRoot, "scripts", "cargo.sh"), ["build", "--quiet", "-p", "coworld-mtg-server"], {
+  execFileSync(join(repoRoot, "scripts", "cargo.sh"), ["build", "--locked", "--quiet", "-p", "coworld-mtg-server"], {
     cwd: repoRoot,
     stdio: "inherit",
     env: rustEnv()
@@ -22,8 +26,8 @@ test("two browser seats render Phase and submit a Phase preference action", asyn
   const harness = await startHarness();
   const opponent = await context.newPage();
   try {
-    await page.goto(`http://127.0.0.1:${harness.port}/client/player?slot=0&token=tokA`);
-    await opponent.goto(`http://127.0.0.1:${harness.port}/client/player?slot=1&token=tokB`);
+    await page.goto(`http://${testHost}:${harness.port}/client/player?slot=0&token=tokA`);
+    await opponent.goto(`http://${testHost}:${harness.port}/client/player?slot=1&token=tokB`);
 
     await dismissOpeningRoll(page);
     await dismissOpeningRoll(opponent);
@@ -83,7 +87,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
   );
   const env: NodeJS.ProcessEnv = {
     ...process.env,
-    COGAME_HOST: "127.0.0.1",
+    COGAME_HOST: testBind,
     COGAME_PORT: String(port),
     COGAME_CORPUS_DIR: join(repoRoot, ".private", "corpus"),
     COGAME_CONFIG_URI: config,
@@ -94,7 +98,7 @@ async function startHarness(): Promise<{ port: number; stop: () => Promise<void>
   };
   delete env.COGAME_LOAD_REPLAY_URI;
 
-  const server = spawn(join(repoRoot, "target", "debug", `coworld-mtg-server${binSuffix}`), {
+  const server = spawn(join(targetDir, "debug", `coworld-mtg-server${binSuffix}`), {
     cwd: repoRoot,
     env,
     stdio: ["ignore", "pipe", "pipe"]
@@ -126,7 +130,7 @@ function collectOutput(name: string, child: ChildProcess): void {
 async function waitHealthz(port: number): Promise<void> {
   for (let attempt = 0; attempt < 120; attempt += 1) {
     try {
-      const response = await fetch(`http://127.0.0.1:${port}/healthz`);
+      const response = await fetch(`http://${testHost}:${port}/healthz`);
       if (response.ok) {
         return;
       }
@@ -153,8 +157,13 @@ async function stopProcess(child: ChildProcess): Promise<void> {
 }
 
 async function freePort(): Promise<number> {
+  if (process.env.COWORLD_TEST_PORT !== undefined) {
+    const port = Number(process.env.COWORLD_TEST_PORT);
+    if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("COWORLD_TEST_PORT must be a reserved nonzero port");
+    return port;
+  }
   const server = net.createServer();
-  await new Promise<void>((resolveListen) => server.listen(0, "127.0.0.1", resolveListen));
+  await new Promise<void>((resolveListen) => server.listen(0, testBind, resolveListen));
   const address = server.address();
   if (!address || typeof address === "string") {
     throw new Error("failed to allocate port");

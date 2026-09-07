@@ -63,7 +63,8 @@ async fn corpus_manifest_is_content_addressed_and_cross_checks_scryfall() {
     first_options.scryfall = Some(scryfall_path.to_string_lossy().into_owned());
     first_options.scryfall_snapshot = Some("fixture-2026-07-13".to_owned());
     let first = materialize_corpus(&first_options).await.unwrap();
-    assert_eq!(first.validation.phase_cards, 46);
+    assert_eq!(first.validation.phase_cards, 50);
+    assert_eq!(first.validation.phase_oracle_ids, 46);
     assert_eq!(first.validation.matched_oracle_ids, 1);
     assert_eq!(first.validation.matched_faces, 1);
     assert_eq!(first.validation.scryfall_layouts["normal"], 1);
@@ -76,6 +77,36 @@ async fn corpus_manifest_is_content_addressed_and_cross_checks_scryfall() {
     second_options.output_dir = temp.path().join("corpus-b");
     let second = materialize_corpus(&second_options).await.unwrap();
     assert_eq!(first.manifest_id, second.manifest_id);
+}
+
+#[test]
+fn private_deck_snapshots_keep_the_published_composition() {
+    use sha2::{Digest, Sha256};
+    for (name, expected_sha256) in [
+        (
+            "lorehold_excavation",
+            "3e317d8de3a728c9c35ac0dd5042d16f625c9465ff7b2f521000c1060a150659",
+        ),
+        (
+            "fractal_convergence",
+            "31be43762945dfcb0a4465b19eedb32b38c9ebd85307a17bfe9742782c0c0310",
+        ),
+    ] {
+        let bytes = fs::read(repo_path(&format!(".private/corpus/decks/{name}.json"))).unwrap();
+        assert_eq!(
+            format!("{:x}", Sha256::digest(&bytes)),
+            expected_sha256,
+            "The Prepare closure must not change the published deck snapshot"
+        );
+        let deck: serde_json::Value = serde_json::from_slice(&bytes).unwrap();
+        let count: u64 = deck["cards"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|entry| entry["count"].as_u64().unwrap())
+            .sum();
+        assert_eq!(count, 40);
+    }
 }
 
 #[tokio::test]

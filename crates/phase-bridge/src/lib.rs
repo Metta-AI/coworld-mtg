@@ -753,7 +753,7 @@ mod tests {
     #[cfg(feature = "private-corpus-tests")]
     fn private_decks_enter_phase_mulligan_with_exact_legal_actions() {
         let runtime = private_runtime();
-        assert_eq!(runtime.card_count(), 46);
+        assert_eq!(runtime.card_count(), 50);
 
         let decks = private_decks();
         let (mut game, initial) = runtime.new_limited_game(decks, 4242).unwrap();
@@ -781,6 +781,117 @@ mod tests {
         }
 
         assert!(game.legal_actions(0).0.len() + game.legal_actions(1).0.len() > 0);
+    }
+
+    #[test]
+    #[cfg(feature = "private-corpus-tests")]
+    fn private_prepare_faces_hydrate_and_a_prepared_copy_resolves() {
+        use phase_engine::game::scenario::{GameScenario, P0};
+        use phase_engine::game::scenario_db::GameScenarioDbExt;
+        use phase_engine::types::ability::TargetRef;
+        use phase_engine::types::game_state::{StackEntryKind, WaitingFor};
+        use phase_engine::types::mana::{ManaType, ManaUnit};
+        use phase_engine::types::phase::Phase;
+
+        let runtime = private_runtime();
+        let mut setup = GameScenario::new();
+        setup.at_phase(Phase::PreCombatMain);
+        // These are the four Prepare front/back pairs in the private deck corpus.
+        // Loading each real front and rehydrating must find its generated back face.
+        let pairs = [
+            ("Emeritus of Abundance", "Regrowth"),
+            ("Emeritus of Truce", "Swords to Plowshares"),
+            ("Kirol, History Buff", "Pack a Punch"),
+            ("Strife Scholar", "Awaken the Ages"),
+        ];
+        let fronts: Vec<_> = pairs
+            .iter()
+            .map(|(front, _)| setup.add_real_card(P0, front, Zone::Hand, &runtime.cards))
+            .collect();
+        let target = setup.add_real_card(P0, "Forest", Zone::Graveyard, &runtime.cards);
+        setup.with_mana_pool(
+            P0,
+            (0..12)
+                .map(|_| ManaUnit::new(ManaType::Green, ObjectId(0), false, vec![]))
+                .collect(),
+        );
+        let mut runner = setup.build();
+        rehydrate_game_from_card_db(runner.state_mut(), &runtime.cards);
+        for (front, (_, expected_back)) in fronts.iter().zip(pairs) {
+            let card = &runner.state().objects[front];
+            assert_eq!(
+                card.back_face.as_ref().map(|face| face.name.as_str()),
+                Some(expected_back)
+            );
+            assert!(card.prepared.is_none(), "A card in hand is not prepared");
+        }
+
+        let emeritus = fronts[0];
+        runner
+            .cast(emeritus)
+            .try_resolve()
+            .expect("Cast the real Emeritus of Abundance");
+        assert_eq!(runner.state().objects[&emeritus].zone, Zone::Battlefield);
+        assert!(
+            runner.state().objects[&emeritus].prepared.is_some(),
+            "Emeritus must enter prepared through spell resolution"
+        );
+        assert_eq!(runner.state().objects[&target].zone, Zone::Graveyard);
+        let prepared_action = GameAction::CastPreparedCopy { source: emeritus };
+        let game = PhaseGame {
+            state: runner.state().clone(),
+            cards: runtime.cards.clone(),
+        };
+        let (flat, _, grouped) = game.legal_actions(0);
+        assert!(
+            action_is_offered(&prepared_action, &flat, &grouped),
+            "Phase must offer the prepared cast to its controller"
+        );
+        runner
+            .act(prepared_action)
+            .expect("Cast the hydrated Regrowth copy");
+        for _ in 0..8 {
+            match &runner.state().waiting_for {
+                WaitingFor::TargetSelection { .. } => {
+                    runner
+                        .act(GameAction::ChooseTarget {
+                            target: Some(TargetRef::Object(target)),
+                        })
+                        .expect("Target the real Forest in the graveyard");
+                }
+                WaitingFor::ManaPayment { .. } => {
+                    runner
+                        .act(GameAction::PassPriority)
+                        .expect("Pay the prepared spell mana cost");
+                }
+                WaitingFor::Priority { .. } => break,
+                other => panic!("Unexpected prepared casting prompt: {other:?}"),
+            }
+        }
+        assert!(matches!(
+            runner.state().waiting_for,
+            WaitingFor::Priority { .. }
+        ));
+        assert!(
+            runner
+                .state()
+                .stack
+                .iter()
+                .any(|entry| matches!(entry.kind, StackEntryKind::Spell { .. })),
+            "The prepared copy must reach the spell stack"
+        );
+        assert!(
+            runner.state().objects[&emeritus].prepared.is_none(),
+            "Casting the copy consumes prepared state"
+        );
+        runner.advance_until_stack_empty();
+        assert_eq!(
+            runner.state().objects[&target].zone,
+            Zone::Hand,
+            "The real Regrowth copy returns Forest to hand"
+        );
+        assert_eq!(runner.state().objects[&emeritus].zone, Zone::Battlefield);
+        assert!(runner.state().stack.is_empty());
     }
 
     #[test]
