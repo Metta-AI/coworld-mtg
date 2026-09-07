@@ -287,6 +287,221 @@ def freeze_plan(snapshot_dir, discovery_dir, output_dir):
     return plan
 
 
+COLOR_SYMBOLS = {"White": "W", "Blue": "U", "Black": "B", "Red": "R", "Green": "G", "Colorless": "C"}
+AST_ADAPTER_VERSION = 1
+
+
+def exact_keys(value, allowed, label, required=()):
+    if not isinstance(value, dict):
+        raise SourceError(label + " is not an object")
+    extra = set(value) - set(allowed)
+    missing = set(required) - set(value)
+    if extra or missing:
+        raise SourceError(f"{label} has unsupported fields {sorted(extra)} or missing fields {sorted(missing)}")
+
+
+def fixed_count(value):
+    exact_keys(value, {"type", "value"}, "fixed count", {"type", "value"})
+    if value["type"] != "Fixed" or type(value["value"]) is not int or value["value"] < 0:
+        raise SourceError("count is not a fixed nonnegative integer")
+    return value["value"]
+
+
+def normalize_ast_cost(value):
+    result = {"generic_mana": 0, "colored_mana": [], "tap": False, "mill_cards": 0, "sacrifice_self": False}
+    seen = set()
+
+    def add(cost):
+        if not isinstance(cost, dict):
+            raise SourceError("cost is not an object")
+        kind = cost.get("type")
+        if kind == "Composite":
+            exact_keys(cost, {"type", "costs"}, "composite cost", {"type", "costs"})
+            if not isinstance(cost["costs"], list) or not cost["costs"]:
+                raise SourceError("composite cost is empty or malformed")
+            for item in cost["costs"]:
+                add(item)
+            return
+        if kind in seen and kind != "Mana":
+            raise SourceError("duplicate cost primitive")
+        seen.add(kind)
+        if kind == "Tap":
+            exact_keys(cost, {"type"}, "tap cost", {"type"})
+            result["tap"] = True
+        elif kind == "Mill":
+            exact_keys(cost, {"type", "count"}, "mill cost", {"type", "count"})
+            if type(cost["count"]) is not int or cost["count"] <= 0:
+                raise SourceError("mill cost is not a positive fixed integer")
+            result["mill_cards"] = cost["count"]
+        elif kind == "Sacrifice":
+            exact_keys(cost, {"type", "count", "target"}, "sacrifice cost", {"type", "count", "target"})
+            if type(cost["count"]) is not int or cost["count"] != 1 or cost["target"] != {"type": "SelfRef"}:
+                raise SourceError("sacrifice cost does not unambiguously sacrifice this permanent")
+            result["sacrifice_self"] = True
+        elif kind == "Mana":
+            exact_keys(cost, {"type", "cost"}, "mana cost", {"type", "cost"})
+            inner = cost["cost"]
+            exact_keys(inner, {"type", "generic", "shards"}, "mana cost data", {"type", "generic", "shards"})
+            if inner["type"] != "Cost" or type(inner["generic"]) is not int or inner["generic"] < 0:
+                raise SourceError("unsupported mana cost")
+            # No colored-cost AST representation has been independently observed;
+            # such source-qualified cases block rather than guessing its schema.
+            if inner["shards"] != []:
+                raise SourceError("colored/complex mana cost AST is outside the frozen adapter")
+            result["generic_mana"] += inner["generic"]
+        else:
+            raise SourceError("unsupported AST cost primitive: " + str(kind))
+    add(value)
+    return result
+
+
+def normalize_source_cost(cost):
+    symbols = cost["mana_symbols"]
+    return {
+        "generic_mana": sum(int(s) for s in symbols if s.isdigit()),
+        "colored_mana": sorted(s for s in symbols if not s.isdigit()),
+        "tap": cost["tap"], "mill_cards": cost["mill_cards"], "sacrifice_self": cost["sacrifice_self"],
+    }
+
+
+def normalize_mana(produced):
+    if not isinstance(produced, dict):
+        raise SourceError("mana production is not an object")
+    kind = produced.get("type")
+    if kind == "Fixed":
+        exact_keys(produced, {"type", "colors"}, "fixed mana", {"type", "colors"})
+        colors = produced["colors"]
+        if not isinstance(colors, list) or not colors or any(color not in COLOR_SYMBOLS for color in colors):
+            raise SourceError("unknown fixed mana color")
+        return {"kind": "mana", "symbols": sorted(COLOR_SYMBOLS[color] for color in colors)}
+    if kind == "Colorless":
+        exact_keys(produced, {"type", "count"}, "colorless mana", {"type", "count"})
+        count = fixed_count(produced["count"])
+        if not 0 < count <= 100:
+            raise SourceError("colorless mana count outside the bounded adapter")
+        return {"kind": "mana", "symbols": ["C"] * count}
+    if kind == "AnyOneColor":
+        exact_keys(produced, {"type", "count", "color_options"}, "any-color mana", {"type", "count", "color_options"})
+        options = produced["color_options"]
+        if not isinstance(options, list) or sorted(options) != ["Black", "Blue", "Green", "Red", "White"]:
+            raise SourceError("any-color mana does not offer exactly all five colors")
+        if fixed_count(produced["count"]) != 1:
+            raise SourceError("any-color mana count is outside the observed bounded schema")
+        return {"kind": "mana", "any_color": True, "amount": 1}
+    raise SourceError("unsupported mana production AST: " + str(kind))
+
+
+def normalize_effect(effect):
+    if not isinstance(effect, dict):
+        raise SourceError("effect is not an object")
+    kind = effect.get("type")
+    if kind == "Mana":
+        exact_keys(effect, {"type", "produced"}, "mana effect", {"type", "produced"})
+        return normalize_mana(effect["produced"])
+    if kind in ("Draw", "Mill"):
+        exact_keys(effect, {"type", "count", "target"}, "library-moving effect", {"type", "count", "target"})
+        if effect["target"] != {"type": "Controller"}:
+            raise SourceError("library movement is not explicitly for the controller")
+        return {"kind": kind.lower(), "amount": fixed_count(effect["count"])}
+    raise SourceError("unsupported AST effect: " + str(kind))
+
+
+def normalize_ability_chain(root):
+    allowed = {"activation_restrictions", "condition", "cost", "description", "duration",
+               "effect", "forward_result", "is_mana_ability", "kind", "optional",
+               "optional_targeting", "sub_ability", "sub_link", "target_prompt"}
+    required = {"condition", "cost", "duration", "effect", "forward_result", "kind",
+                "optional", "optional_targeting", "sub_ability", "target_prompt"}
+    effects, node, root_cost = [], root, None
+    for index in range(32):
+        exact_keys(node, allowed, "ability node", required)
+        if node["kind"] != ("Activated" if index == 0 else "Spell"):
+            raise SourceError("effect chain is not an activated root followed by spell effects")
+        if node["condition"] is not None or node["duration"] is not None or node["target_prompt"] is not None:
+            raise SourceError("conditional, duration-dependent or targeted ability node")
+        if any(node[key] is not False for key in ("forward_result", "optional", "optional_targeting")):
+            raise SourceError("optional/forwarding ability semantics are outside the adapter")
+        restrictions = node.get("activation_restrictions", [])
+        if restrictions not in ([], [{"type": "AsInstant"}]):
+            raise SourceError("unsupported activation restriction")
+        if index == 0:
+            if node.get("sub_link") not in (None, "SequentialSibling"):
+                raise SourceError("unsupported root link")
+            root_cost = normalize_ast_cost(node["cost"])
+        else:
+            if node["cost"] is not None or node.get("sub_link") != "SequentialSibling":
+                raise SourceError("sub-ability is not an unconditional sequential effect")
+            if restrictions:
+                raise SourceError("activation restriction on a sub-effect")
+        effects.append(normalize_effect(node["effect"]))
+        node = node["sub_ability"]
+        if node is None:
+            return root_cost, effects
+    raise SourceError("effect chain exceeds the bounded adapter")
+
+
+def evaluate_card(raw_card, inspection):
+    """Evaluate one actual inspection; source-qualified alignment failures block."""
+    contract = source_contracts(raw_card)
+    result = {
+        "schema_version": 1, "scope": ORACLE_RECIPE["scope"],
+        "oracle_id": raw_card.get("oracle_id"), "printing_id": raw_card.get("id"),
+        "source_contract": contract, "strong_gate": contract["strong_gate"],
+        "verdict": "inconclusive", "gate_blocked": contract["strong_gate"],
+        "reasons": [], "abilities": [], "adapter_version": AST_ADAPTER_VERSION,
+        "evaluator_sha256": file_sha256(Path(__file__)),
+        "inspection_sha256": sha256(canonical(inspection)),
+        "phase_revision": inspection.get("phase_revision") if isinstance(inspection, dict) else None,
+    }
+    if not contract["strong_gate"]:
+        result["reasons"].append("source grammar does not fully qualify this card; queue entry remains inconclusive")
+        return result
+    try:
+        if not isinstance(inspection, dict) or inspection.get("status") != "parsed":
+            raise SourceError("inspection did not successfully parse this source record")
+        if inspection.get("oracle_id") != raw_card.get("oracle_id") or inspection.get("card_id") != raw_card.get("id"):
+            raise SourceError("inspection identity does not match the pinned source record")
+        parsed = inspection.get("parsed")
+        exact_keys(parsed, {"abilities", "extractedKeywords", "replacements", "statics", "triggers"},
+                   "ParsedAbilities", {"abilities", "extractedKeywords", "replacements", "statics", "triggers"})
+        if any(parsed[field] != [] for field in ("extractedKeywords", "replacements", "statics", "triggers")):
+            raise SourceError("AST contains extra abilities or rules outside complete source coverage")
+        abilities = parsed["abilities"]
+        if not isinstance(abilities, list) or len(abilities) != len(contract["abilities"]):
+            raise SourceError("own activated-ability count differs between source and AST")
+        for index, (expected, actual) in enumerate(zip(contract["abilities"], abilities)):
+            entry = {"ast_ability_index": index, "source_paragraph_index": expected["paragraph_index"],
+                     "expected_is_mana_ability": expected["expected_is_mana_ability"],
+                     "observed_is_mana_ability": None, "ast_alignment": "not_aligned",
+                     "verdict": "inconclusive", "reasons": []}
+            result["abilities"].append(entry)
+            try:
+                cost, effects = normalize_ability_chain(actual)
+                expected_effects = [dict(effect) for effect in expected["effects"]]
+                for effect in expected_effects:
+                    if "symbols" in effect:
+                        effect["symbols"] = sorted(effect["symbols"])
+                if cost != normalize_source_cost(expected["cost"]):
+                    raise SourceError("AST costs do not exactly align with independently parsed source costs")
+                if effects != expected_effects:
+                    raise SourceError("AST sequential effects do not exactly align with independently parsed source effects")
+                entry["ast_alignment"] = "aligned"
+                entry["normalized_ast"] = {"cost": cost, "effects": effects}
+                observed = actual.get("is_mana_ability")
+                if type(observed) is not bool:
+                    raise SourceError("missing actual boolean classification observation")
+                entry["observed_is_mana_ability"] = observed
+                entry["verdict"] = "pass" if observed == expected["expected_is_mana_ability"] else "fail"
+            except (SourceError, TypeError, KeyError) as exc:
+                entry["reasons"].append(str(exc))
+        verdicts = [entry["verdict"] for entry in result["abilities"]]
+        result["verdict"] = "inconclusive" if "inconclusive" in verdicts else "fail" if "fail" in verdicts else "pass"
+        result["gate_blocked"] = result["verdict"] != "pass"
+    except (SourceError, TypeError, KeyError) as exc:
+        result["reasons"].append(str(exc))
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -294,8 +509,15 @@ def main():
     plan.add_argument("--snapshot-dir", type=Path, required=True)
     plan.add_argument("--discovery-dir", type=Path, required=True)
     plan.add_argument("--output-dir", type=Path, required=True)
+    evaluate = commands.add_parser("evaluate")
+    evaluate.add_argument("--card", type=Path, required=True)
+    evaluate.add_argument("--inspection", type=Path, required=True)
     args = parser.parse_args()
-    print(json.dumps(freeze_plan(args.snapshot_dir, args.discovery_dir, args.output_dir), indent=2, sort_keys=True))
+    if args.command == "freeze-plan":
+        result = freeze_plan(args.snapshot_dir, args.discovery_dir, args.output_dir)
+    else:
+        result = evaluate_card(json.loads(args.card.read_bytes()), json.loads(args.inspection.read_bytes()))
+    print(json.dumps(result, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

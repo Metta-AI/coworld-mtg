@@ -124,5 +124,139 @@ class FrozenPlanTests(unittest.TestCase):
                     oracle.freeze_plan(snapshot, root / "discovery", root / "plan")
 
 
+def ast_ability(cost, produced, following=None, classified=True):
+    return {
+        "kind": "Activated", "cost": cost, "effect": {"type": "Mana", "produced": produced},
+        "condition": None, "duration": None, "description": None, "forward_result": False,
+        "optional": False, "optional_targeting": False, "target_prompt": None,
+        "sub_ability": following, "is_mana_ability": classified,
+    }
+
+
+def draw_node():
+    return {
+        "kind": "Spell", "cost": None,
+        "effect": {"type": "Draw", "count": {"type": "Fixed", "value": 1}, "target": {"type": "Controller"}},
+        "condition": None, "duration": None, "description": None, "forward_result": False,
+        "optional": False, "optional_targeting": False, "target_prompt": None,
+        "sub_ability": None, "sub_link": "SequentialSibling",
+    }
+
+
+def inspection(raw, abilities):
+    return {"status": "parsed", "card_id": raw["id"], "oracle_id": raw["oracle_id"],
+            "phase_revision": "offline-test-revision",
+            "parsed": {"abilities": abilities, "extractedKeywords": [], "replacements": [],
+                       "statics": [], "triggers": []}}
+
+
+class ASTAlignmentTests(unittest.TestCase):
+    def egg(self):
+        raw = card(text="{2}, {T}, Sacrifice this artifact: Add {U}{B}. Draw a card. (Activate only as an instant.)")
+        cost = {"type": "Composite", "costs": [
+            {"type": "Mana", "cost": {"type": "Cost", "generic": 2, "shards": []}},
+            {"type": "Tap"}, {"type": "Sacrifice", "count": 1, "target": {"type": "SelfRef"}}]}
+        node = ast_ability(cost, {"type": "Fixed", "colors": ["Blue", "Black"]}, draw_node())
+        node["activation_restrictions"] = [{"type": "AsInstant"}]
+        return raw, inspection(raw, [node])
+
+    def test_mana_then_draw_aligns_before_classification_is_compared(self):
+        raw, observed = self.egg()
+        result = oracle.evaluate_card(raw, observed)
+        self.assertEqual(result["verdict"], "fail")
+        self.assertEqual(result["abilities"][0]["ast_alignment"], "aligned")
+        self.assertFalse(result["abilities"][0]["expected_is_mana_ability"])
+        self.assertTrue(result["abilities"][0]["observed_is_mana_ability"])
+        observed["parsed"]["abilities"][0]["is_mana_ability"] = False
+        result = oracle.evaluate_card(raw, observed)
+        self.assertEqual(result["verdict"], "pass")
+        self.assertFalse(result["gate_blocked"])
+
+    def test_mill_cost_with_no_draw_subeffect_is_not_mistaken_for_mana_only(self):
+        raw = card()
+        node = ast_ability({"type": "Composite", "costs": [{"type": "Tap"}, {"type": "Mill", "count": 1}]},
+                           {"type": "Colorless", "count": {"type": "Fixed", "value": 1}})
+        result = oracle.evaluate_card(raw, inspection(raw, [node]))
+        self.assertEqual(result["verdict"], "fail")
+        self.assertEqual(result["abilities"][0]["ast_alignment"], "aligned")
+        node["cost"]["costs"][1]["count"] = 2
+        result = oracle.evaluate_card(raw, inspection(raw, [node]))
+        self.assertEqual(result["verdict"], "inconclusive")
+        self.assertTrue(result["strong_gate"])
+        self.assertTrue(result["gate_blocked"])
+
+    def test_any_color_requires_all_five_options_and_exact_count(self):
+        raw, observed = self.egg()
+        raw["oracle_text"] = "{2}, {T}, Sacrifice this artifact: Add one mana of any color. Draw a card."
+        produced = {"type": "AnyOneColor", "count": {"type": "Fixed", "value": 1},
+                    "color_options": ["White", "Blue", "Black", "Red", "Green"]}
+        observed["parsed"]["abilities"][0]["effect"]["produced"] = produced
+        self.assertEqual(oracle.evaluate_card(raw, observed)["verdict"], "fail")
+        produced["color_options"].remove("Red")
+        self.assertEqual(oracle.evaluate_card(raw, observed)["verdict"], "inconclusive")
+
+    def test_source_qualified_gates_are_not_dropped_when_alignment_fails(self):
+        import copy
+        raw, observed = self.egg()
+        mutations = [
+            lambda a: a.update(sub_ability=None),
+            lambda a: a.update(optional=True),
+            lambda a: a.update(condition={"type": "SomeCondition"}),
+            lambda a: a["sub_ability"].update(sub_link="IfPaid"),
+            lambda a: a["sub_ability"]["effect"].update(target={"type": "Opponent"}),
+            lambda a: a.update(is_mana_ability=None),
+            lambda a: a.update(unrecognized_effect_semantics=True),
+        ]
+        for mutate in mutations:
+            with self.subTest(mutation=mutate):
+                changed = copy.deepcopy(observed)
+                mutate(changed["parsed"]["abilities"][0])
+                result = oracle.evaluate_card(raw, changed)
+                self.assertEqual(result["verdict"], "inconclusive")
+                self.assertTrue(result["strong_gate"])
+                self.assertTrue(result["gate_blocked"])
+
+    def test_identity_parse_and_ability_count_failures_block(self):
+        import copy
+        raw, observed = self.egg()
+        for change in [{"status": "failed"}, {"oracle_id": "wrong"}, {"card_id": "wrong"}]:
+            changed = dict(observed, **change)
+            result = oracle.evaluate_card(raw, changed)
+            self.assertEqual(result["verdict"], "inconclusive")
+            self.assertTrue(result["gate_blocked"])
+        changed = copy.deepcopy(observed)
+        changed["parsed"]["abilities"] = []
+        self.assertEqual(oracle.evaluate_card(raw, changed)["verdict"], "inconclusive")
+
+    def test_simple_control_requires_correct_cost_and_mana_color(self):
+        raw = card(text="{T}: Add {G}.")
+        node = ast_ability({"type": "Tap"}, {"type": "Fixed", "colors": ["Green"]})
+        result = oracle.evaluate_card(raw, inspection(raw, [node]))
+        self.assertEqual(result["verdict"], "pass")
+        self.assertTrue(result["abilities"][0]["expected_is_mana_ability"])
+        node["effect"]["produced"]["colors"] = ["Red"]
+        self.assertEqual(oracle.evaluate_card(raw, inspection(raw, [node]))["verdict"], "inconclusive")
+
+    def test_multiple_abilities_align_individually_in_source_order(self):
+        raw = card(text="{T}: Add {G}.\n{1}, {T}: Add {C}. Draw a card.")
+        first = ast_ability({"type": "Tap"}, {"type": "Fixed", "colors": ["Green"]})
+        second = ast_ability(
+            {"type": "Composite", "costs": [
+                {"type": "Mana", "cost": {"type": "Cost", "generic": 1, "shards": []}}, {"type": "Tap"}]},
+            {"type": "Colorless", "count": {"type": "Fixed", "value": 1}}, draw_node(), classified=False)
+        self.assertEqual(oracle.evaluate_card(raw, inspection(raw, [first, second]))["verdict"], "pass")
+        swapped = oracle.evaluate_card(raw, inspection(raw, [second, first]))
+        self.assertEqual(swapped["verdict"], "inconclusive")
+        self.assertTrue(swapped["gate_blocked"])
+
+    def test_unsupported_source_cannot_be_promoted_by_convincing_ast(self):
+        raw, observed = self.egg()
+        raw["oracle_text"] = "{T}: Add {G}. When you spend this mana, draw a card."
+        result = oracle.evaluate_card(raw, observed)
+        self.assertEqual(result["verdict"], "inconclusive")
+        self.assertFalse(result["strong_gate"])
+        self.assertEqual(result["abilities"], [])
+
+
 if __name__ == "__main__":
     unittest.main()
