@@ -192,19 +192,67 @@ that the session consumed the prompt or authored the report.
 
 ## Adapting another factory
 
-Keep the replay, artifact store, viewer and process recorder. Replace the source
-adapter, worker invocation, evaluator and acceptance policy. A compiler repair
-factory could register an existing source file, use compiler warnings as weak
-feedback, and use independently frozen differential tests as strong feedback.
-A data-conversion factory could use production records, parse errors, round-trip
-contracts and held-out formats.
+The reusable boundary is the replay, artifact store, viewer and recording kernel.
+`FactoryBuild` has no Phase fields; cases can be arbitrary retained inputs;
+`FeedbackAdapter::Opaque` and `DecisionPolicy::External` carry another evaluator's
+records. The standalone runtime does not depend on the Phase bridge. Domain
+adapters still supply acquisition, worker invocation, evaluation and acceptance
+logic; the common layer does not choose edits or schedule an autonomous search.
 
-Feedback strength names the authority of a bounded claim. Several weak checks
-cannot overrule a failed strong gate. A discrete change points to motivating
-feedback; feedback points to executions and cases; case derivation points to
-source records. That chain supplies attribution for a later blog post.
+The following CSV-to-JSON repair factory is a **hypothetical adapter mapping**,
+not another measured run. It needs no new common schema:
 
-The common layer does not select edits, interpret Magic, or certify arbitrary
-external policies. Planning and repair remain agent-orchestrated. Domain adapters
-define correctness; the common layer makes execution and decisions inspectable.
-A non-MTG parser fixture exercises this separation in contract and recorder tests.
+| Factory concept | What this adapter would record |
+| --- | --- |
+| Target and build | Converter repository and baseline revision in `ProgramTarget`; candidate source, executable hash, build command/environment and optional source attestation in `FactoryBuild`. |
+| Source and cases | Retained source files and acquisition metadata; one input file or selected record per case. `SourceDerived` identifies source hashes, record selectors and the selection recipe. Hand-authored tests remain `Authored`. |
+| Weak feedback | A type-inference warning or unusual output shape, linked to the input and execution. It nominates an investigation; it does not establish a conversion defect. |
+| Strong feedback | An installed checker compares the exact output with a frozen schema rule, such as preserving a column declared to contain string identifiers. The receipt states that bounded claim and checker version. |
+| Discrete change | A patch hash and the feedback that motivated it. Candidate executions reference that change and its build. |
+| Frozen gates | A target case plus separately selected regression and holdout cases, frozen before candidate execution. Unsupported or missing observations remain inconclusive. |
+| Review and decision | Review bound to the exact plan and before/after receipts; an external policy artifact and attestation bound to the recorded decision, scope, plan and change. |
+| Compute and explanation | Measured execution costs and agent-work records. The viewer follows decision → feedback → execution/build → case → source, with change motivation as an explicit link. |
+
+A compiler adapter could instead retain source programs and compiler builds.
+Differential output is a strong check only within a frozen language subset with
+a pinned reference and relevant preconditions established, such as excluding undefined behavior;
+otherwise disagreement is a useful weak signal or an inconclusive result.
+Several weak signals do not satisfy a missing strong acceptance gate.
+
+Start the adapter with `Replay.create`, retain inputs through `artifact`, register
+cases through `event`, then use `build`, `run_jsonl` and `feedback`. Keep expected
+results in the evaluator, outside the worker request. The Python runner currently
+uses Unix process limits and expects one finite JSONL observation of at most
+16 MiB. Other protocols need a wrapper or their own executor that emits the same
+execution records. Put flags and other behavior-changing inputs in the retained
+case/request, and have a fixed worker wrapper consume them. The current JSONL
+request records the input and executable hashes, not its arbitrary argument
+callback's full command line. A new adapter must preserve and audit any additional
+invocation configuration. For interpreted programs, the interpreter's binary hash alone
+does not identify the target: retain the program's source and invocation in the
+build attestation and verify that binding. Original domain data, including
+floating-point values, can remain byte artifacts instead of canonical contracts.
+
+### What verification establishes
+
+Native verification checks the envelope, artifact hashes, references, ordering
+and structural acceptance requirements. For opaque feedback it does not recompute
+the evaluator or establish that a nested observation matches the retained worker
+output. A new adapter needs an installed domain verifier that checks those bytes,
+request/build identities, evaluator dependencies and frozen expectations before
+recomputing feedback and policy decisions. The Scryfall adapter supplies that
+extra audit for its own protocol; importing a replay never executes supplied code.
+
+Hashes bind content, not source authenticity, reviewer independence or execution
+truth. Those claims also require the operator's collection and review procedures.
+A `strong` label is a declared level of support for a stated claim, not proof by
+itself. The viewer displays recorded decisions; successful native verification
+alone does not authorize a change or certify an external policy.
+
+The current accepted-decision contract describes a repaired violation: a violated
+baseline target, a satisfied candidate, all disjoint regression and holdout gates,
+and a matching approving review. A performance adapter can use a genuine frozen
+budget as its target requirement. Pure utility ranking without such a requirement
+is outside this acceptance shape; do not invent a baseline violation to fit it.
+The non-MTG parser fixtures establish that the envelope can represent another
+domain. They do not establish a second production improvement result.
