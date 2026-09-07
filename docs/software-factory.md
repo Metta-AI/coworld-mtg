@@ -3,7 +3,7 @@
 A factory run records where a case came from, which program ran it, what each
 evaluator established, what changed, and why a decision followed. The viewer
 reads those records directly. A prose case study is an interpretation of a
-replay, rather than the evidence format.
+replay whose underlying records remain inspectable.
 
 | Boundary | Responsibility |
 | --- | --- |
@@ -17,6 +17,20 @@ Rust types generate the JSON Schemas and architecture diagram in
 [`docs/contracts`](contracts). Stage topology comes from `factory_stages()`;
 the viewer does not carry a separate lifecycle. JSON fits the existing artifact,
 browser and command-line boundaries without adding a second representation.
+
+## Measured outcomes
+
+The [17Lands importer run](../replays/17lands-coverage-20260907-03/replay.json)
+records an accepted source-coverage repair: the baseline read 92 public game rows
+but returned an empty card-frequency list; the candidate preserved the frozen
+primary, regression and holdout casts. Its terminal manifest contains 73 events,
+95 artifacts and 14 worker executions. The accepted claim concerns ingestion and
+mapping of source observations, not gameplay order or card-rule correctness.
+
+The separate Scryfall investigation found eight repeated classification failures,
+six satisfied development controls and 27 inconclusive development cases. Its
+Phase engine repairs remain ongoing. The accepted ingestion decision does not
+establish that those classification failures have been repaired.
 
 ## The Scryfall adapter
 
@@ -207,19 +221,20 @@ records. The standalone runtime does not depend on the Phase bridge. Domain
 adapters still supply acquisition, worker invocation, evaluation and acceptance
 logic; the common layer does not choose edits or schedule an autonomous search.
 
-The following CSV-to-JSON repair factory is a **hypothetical adapter mapping**,
-not another measured run. It needs no new common schema:
+The accepted 17Lands ingestion repair uses these existing records with actual
+CSV input, while the Scryfall adapter uses raw card JSON. The concrete importer
+mapping requires no new common schema:
 
-| Factory concept | What this adapter would record |
+| Factory concept | What the 17Lands adapter records |
 | --- | --- |
-| Target and build | Converter repository and baseline revision in `ProgramTarget`; candidate source, executable hash, build command/environment and optional source attestation in `FactoryBuild`. |
-| Source and cases | Retained source files and acquisition metadata; one input file or selected record per case. `SourceDerived` identifies source hashes, record selectors and the selection recipe. Hand-authored tests remain `Authored`. |
-| Weak feedback | A type-inference warning or unusual output shape, linked to the input and execution. It nominates an investigation; it does not establish a conversion defect. |
-| Strong feedback | An installed checker compares the exact output with a frozen schema rule, such as preserving a column declared to contain string identifiers. The receipt states that bounded claim and checker version. |
+| Target and build | Coworld importer repository and baseline revision in `ProgramTarget`; candidate source, executable hash, build command/environment and optional source attestation in `FactoryBuild`. |
+| Source and cases | Retained public CSV partitions and official mapping; `SourceDerived` identifies source hashes, row selectors and the frozen selection recipe. Hand-authored fixtures remain distinct. |
+| Weak feedback | Recorded human-game workload nominates the input. That observational signal does not establish a rules defect or complete game replay. |
+| Strong feedback | An installed, hash-pinned evaluator compares exact cast occurrences and mapped Arena identities with native output, within its frozen source-coverage claim. |
 | Discrete change | A patch hash and the feedback that motivated it. Candidate executions reference that change and its build. |
-| Frozen gates | A target case plus separately selected regression and holdout cases, frozen before candidate execution. Unsupported or missing observations remain inconclusive. |
+| Frozen gates | Primary rows 1–46, regression rows 47–92 and newly acquired holdout rows 93–108, frozen before candidate execution. Unsupported or missing observations remain inconclusive. |
 | Review and decision | Review bound to the exact plan and before/after receipts; an external policy artifact and attestation bound to the recorded decision, scope, plan and change. |
-| Compute and explanation | Measured execution costs and agent-work records. The viewer follows decision → feedback → execution/build → case → source, with change motivation as an explicit link. |
+| Compute and explanation | Fourteen measured worker executions. The viewer follows decision → feedback → execution/build → case → source, with change motivation as an explicit link. Separate agent-work records can retain available token measurements. |
 
 A compiler adapter could instead retain source programs and compiler builds.
 Differential output is a strong check only within a frozen language subset with
@@ -248,8 +263,8 @@ and structural acceptance requirements. For opaque feedback it does not recomput
 the evaluator or establish that a nested observation matches the retained worker
 output. A new adapter needs an installed domain verifier that checks those bytes,
 request/build identities, evaluator dependencies and frozen expectations before
-recomputing feedback and policy decisions. The Scryfall adapter supplies that
-extra audit for its own protocol; importing a replay never executes supplied code.
+recomputing feedback and policy decisions. The Scryfall and 17Lands adapters supply that
+extra audit for their respective protocols; importing a replay never executes supplied code.
 
 Hashes bind content, not source authenticity, reviewer independence or execution
 truth. Those claims also require the operator's collection and review procedures.
@@ -262,8 +277,9 @@ baseline target, a satisfied candidate, all disjoint regression and holdout gate
 and a matching approving review. A performance adapter can use a genuine frozen
 budget as its target requirement. Pure utility ranking without such a requirement
 is outside this acceptance shape; do not invent a baseline violation to fit it.
-The non-MTG parser fixtures establish that the envelope can represent another
-domain. They do not establish a second production improvement result.
+Generic parser fixtures exercise the contracts without Phase-specific fields.
+The accepted 17Lands run adds a measured native CSV-ingestion repair, separate
+from the ongoing rules-engine investigation.
 
 
 ### Real 17Lands importer coverage adapter
@@ -274,18 +290,38 @@ the Phase revision in its minimal manifest is a loader compatibility pin. It is
 not the source revision being repaired. The observed discovery failure read 92
 real public game rows but produced an empty card-frequency list. Independent
 source parsing found 1,426 listed cast occurrences, 230 Arena IDs and 229 official
-names (two IDs map to Lightning Strike). These counts concern source ingestion.
-They do not establish a successful repair or gameplay correctness.
+names (two IDs map to Lightning Strike). The controlled candidate preserves the
+source coverage and has a recorded
+[accepted decision](../replays/17lands-coverage-20260907-03/artifacts/15f6bba8dafa697ec5245ebf2d9a36b7ef92a67515bc46355a04794370d9b31e)
+after independent review. Acceptance covers this ingestion claim; it does not
+establish gameplay correctness.
+
+| Frozen case | Rows | Expected casts | Recorded result |
+| --- | ---: | ---: | --- |
+| Primary | 1–46 | 679 | Baseline violated; candidate satisfied, each twice. |
+| Regression | 47–92 | 747 | Baseline violated; candidate satisfied, each twice. |
+| Holdout | 93–108 | 276 | Candidate satisfied twice; no baseline execution. |
+| Informational aggregate | 1–92 | 1,426 | Baseline violated; candidate satisfied, each twice. |
+
+The [completed replay](../replays/17lands-coverage-20260907-03/replay.json) has
+73 events, 95 artifacts and 14 executions. Only primary, regression and holdout
+are acceptance gates. The [independent result review](../replays/17lands-coverage-20260907-03/artifacts/228cb35173efe3bba8fcc4bbfe62a843ddfc79eae4767a082e82e96b61f66a1b)
+checked retained source slices, raw outputs, source/build/patch identities and
+feedback bindings before the decision was recorded; it did not rebuild or
+re-execute the native programs.
 
 The frozen experiment uses exact public CSV bytes and the official `cards.csv`
 mapping. Primary rows 1–46 and regression rows 47–92 are disjoint. The holdout is
 the first 16 newly completed rows after those 92, selected from a longer prefix
-of the same archive before candidate results and withheld from the miner
-implementation agent. Acquisition checks the new prefix's first 65,536 bytes
+of the same archive before candidate results. The operator attests that the
+rows were withheld from the miner implementation agent; non-exposure is not
+independently established by their hashes. Acquisition checks the new prefix's first 65,536 bytes
 against the retained prefix, and records ETag, Last-Modified, byte ranges and
 hashes. The whole-92 case is an additional reproduction measurement that overlaps
-the two known partitions; its counts must not be added to theirs. Holdout success
-would cover unseen rows of this archive, not unseen formats or rules semantics.
+the two known partitions; its counts must not be added to theirs. The measured
+holdout result covers those new rows of this archive, not unseen formats or
+rules semantics. Acquisition time and source authority also remain explicit
+caller attestations.
 
 `seventeenlands_coverage.py` independently enumerates exact per-turn cast columns,
 pipe positions, Arena IDs and official names. It excludes totals, zone snapshots
@@ -314,8 +350,11 @@ commits, patch and executable hashes, Cargo lock hash, source-file hashes before
 and after compilation, compiler identity, command and environment. The before and
 after maps must equal the retained source map; a baseline has the empty patch
 hash, and a candidate binds its distinct clean commit to the proposed patch.
-Retain the source archive and actual builder logs separately. These are explicit
-caller attestations, not independent proof of reproducible compilation.
+The accepted comparison uses clean Coworld baseline `0d045477305fde4617cba844289e88a909869ed9`
+and candidate `33d332f5ad4055f2204073c091eddded33eac70d`, with their exact full diff
+retained as the proposed change. Source archives and actual builder logs are
+retained separately. These are explicit caller attestations, not independent
+proof of reproducible compilation.
 
 ```sh
 python3 scripts/seventeenlands_factory.py prepare --source-dir SOURCE_FREEZE_DIR \
@@ -348,3 +387,6 @@ publish its original completion/importer receipts, private bootstrap manifest or
 materialized corpus. Attribute [17Lands public datasets](https://www.17lands.com/public_datasets)
 under CC BY 4.0, record slicing as a modification, and retain the non-endorsement
 notice. Wide game rows omit global action order, targets, priority and hidden state.
+The two source-only preparation drafts with malformed cancellation metadata stay
+private as exact failed-preparation evidence. A diagnostic in the valid terminal
+run names their hashes; they are not exposed as valid replay manifests.

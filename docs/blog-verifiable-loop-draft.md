@@ -1,68 +1,72 @@
 # A software factory that keeps its evidence
 
-Darkwater Egg is an unassuming Magic card. Its activated ability adds blue and black mana, then draws a card. That last clause is enough to make it useful for testing a rules engine.
+Our importer read 92 real game rows, exited successfully, and returned an empty card-frequency list. The input contained 1,426 listed casts. A successful process had silently lost the information we wanted from it.
 
-In the [rules snapshot](https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt) used by our September 7, 2026 experiment, an activated mana ability cannot have a cost or effect that moves a card to or from a library. Drawing a card crosses that boundary. Our baseline engine classified Darkwater Egg's ability as a mana ability anyway.
+The rows came from a public [17Lands dataset](https://www.17lands.com/public_datasets). Coworld's native miner could count these wide CSV rows, but it did not extract their numbered per-turn cast columns and resolve the Arena card IDs through the official mapping. We repaired that ingestion path and recorded an [accepted decision](../replays/17lands-coverage-20260907-03/artifacts/15f6bba8dafa697ec5245ebf2d9a36b7ef92a67515bc46355a04794370d9b31e) after checking the original failures, frozen regression and holdout inputs, and an independent review.
 
-We did not start by writing a Darkwater Egg test. We downloaded [Scryfall's Oracle Cards snapshot](https://api.scryfall.com/bulk-data/oracle_cards), audited every row, and searched for a family of card definitions that could expose this disagreement. The resulting work item carries the original card record, the rule version, the selection recipe, the executable's identity, two recorded observations, and the evaluator's expected and observed values.
+The accepted claim is precise: the importer preserves the listed cast occurrences, their source identities and mapped names in the frozen CSV partitions. The records do not establish complete gameplay order or correct execution of Magic's rules.
 
-That is the part we want to make repeatable: a path from real inputs to a bounded, inspectable reason to change software.
+The useful result is both the repair and the record explaining it. The [completed replay](../replays/17lands-coverage-20260907-03/replay.json) contains 73 events and 95 artifacts: source identities, cases, executions, feedback, a patch, builds, a frozen plan, review and decision. The viewer reads these records directly. This article describes the result; the replay carries the evidence needed to inspect it.
 
-We are building this in [Coworld MTG](https://github.com/Metta-AI/coworld-mtg), which uses the Rust engine Phase to interpret Magic. The software factory around it records discovery, execution, feedback, proposed changes, checks, reviews, and decisions. Its current output is an evidence replay that a person can inspect while the work is happening.
+We are building this in [Coworld MTG](https://github.com/Metta-AI/coworld-mtg). Its software factory can investigate both the Phase rules engine and the software used to prepare and inspect inputs. This particular change targets Coworld's native CSV importer. The Phase pin in its minimal input manifest serves the existing loader's compatibility check; it is not the source revision being repaired.
 
-**This draft describes the measured baseline. The Phase repair is still undergoing plan review; no candidate result or accepted repair is claimed here.**
+Before running the candidate, we retained the exact CSV bytes and official `cards.csv` mapping, wrote an independent source-coverage evaluator, and froze the case partition. The evaluator counts each pipe-separated occurrence in the declared cast columns. It keeps the row, column, pipe position, raw and parsed Arena ID, turn, and active and casting player. Repeated casts remain separate. The resulting name frequencies combine IDs that share an official name: the known 92 rows contain 230 Arena IDs but 229 names, because two IDs map to Lightning Strike.
 
-The source population matters. We audited **38,633 rows** from a saved Scryfall bulk download. A declared filter retained 29,530 normal-layout, paper-printing representatives legal or restricted in Vintage. The acquisition receipt keeps the archive hash, retrieval details, source dates, and pinned Comprehensive Rules version. A later download produces a different input identity.
+The first 92 rows were already known to the implementer. We split them into disjoint primary and regression cases, then acquired a longer compressed prefix of the same archive. Its first 65,536 bytes matched the earlier prefix exactly. We selected the first 16 newly completed rows, preserving their raw byte slices, and froze them before candidate observations. The acquisition receipt records the HTTP response identifiers, source hashes and slicing recipe. The operator attests that these new rows were withheld from the implementer; their non-exposure is not something a content hash proves.
 
-A broad text scan nominated **47 cards** whose activated abilities might combine mana production with library movement. We added **10 mechanically selected simple-mana controls** from the same source population, giving the run **57 queued cases**.
+The measured results are small enough to show in full:
 
-These cases are actual card definitions. They are not observations of people playing Magic, and this run does not reconstruct games from a human transcript. The executable input is the selected source card. Keeping that distinction clear lets us say exactly what a result establishes.
+| Case | Source rows | Expected cast occurrences | Baseline | Candidate |
+| --- | ---: | ---: | --- | --- |
+| Primary | 1–46 | 679 | Empty frequency list, twice | Coverage satisfied, twice |
+| Regression | 47–92 | 747 | Empty frequency list, twice | Coverage satisfied, twice |
+| Holdout | 93–108 | 276 | Not executed | Coverage satisfied, twice |
+| Informational aggregate | 1–92 | 1,426 | Empty frequency list, twice | Coverage satisfied, twice |
 
-The broad scan is deliberately permissive. A paragraph can mention drawing cards without drawing one itself. It can quote a token's ability or describe an effect that happens later. A match is useful weak feedback: it explains why the factory spent compute on that card. It is not yet evidence that Phase is wrong.
+The aggregate overlaps the two known partitions. It reproduces the original 92-row failure and repair; it is not another independent gate or another 92 unique games. The acceptance plan requires the primary, regression and holdout cases. The holdout tests ingestion of previously unseen rows from the same archive, not a different format or population.
 
-The stronger check has a separate job. Before testing a repair, we froze a small source grammar for complete cost and effect sentences. It derives an expected classification from the source text and the pinned rule, then aligns that interpretation with the actual syntax tree produced by Phase. Unsupported sentences and failed alignments remain inconclusive.
+There were 14 separate worker executions: six baseline and eight candidate. Each retained its exact input manifest, command arguments, raw output, process result, executable identity and measured wall time. The worker received source data and invocation parameters. Expected coverage stayed with the evaluator.
 
-For Darkwater Egg, the recorded source and syntax tree align. The evaluator expects `is_mana_ability = false`; the baseline engine reports `true`. The two isolated worker executions reproduce that disagreement. The same frozen check finds violations in the other four Eggs, Chromatic Sphere, Deranged Assistant, and Millikin. The last two matter because they put library movement in the activation cost rather than the effect.
+The baseline used the legacy arguments it supported. The candidate additionally received an explicit public-replay schema and the official mapping path and hash. That invocation difference is recorded. The experiment checks the new ingestion capability with the frozen source and mapping; it does not hide a changed command behind a before-and-after score.
 
-The measured development baseline is small enough to state directly:
+We also built a controlled baseline from a clean Coworld commit before applying the miner change. The candidate was built from a distinct clean commit, and its recorded patch is the exact diff from that baseline. Retained source archives, before-and-after file hashes, Cargo lock, compiler identity, command, environment and executable hashes make those claims inspectable. The independent reviewer checked them against Git objects and retained bytes. Compilation linkage remains a caller attestation: the review did not independently rebuild the executable and prove reproducibility.
 
-| Development cohort | Recorded result |
+The strong feedback checks source coverage. It recomputes expected occurrences from the retained CSV and official mapping, decodes the native output bytes, and compares them with the recorded observation. Unknown source or normalization schemas, missing rows, unresolved IDs and unsupported observations remain inconclusive. A provided unknown normalization schema cannot turn a differing frequency list into a confident failure. The known baseline's empty list, under its supported report schema, does independently establish the measured loss.
+
+Repeatability also has a defined scope. The two coverage projections must agree after excluding the temporary mapping-file path. Their raw bytes remain available even when that path makes their file hashes differ. Unrelated workload statistics do not become acceptance gates accidentally.
+
+The [independent result review](../replays/17lands-coverage-20260907-03/artifacts/228cb35173efe3bba8fcc4bbfe62a843ddfc79eae4767a082e82e96b61f66a1b) inspected source slices, artifact identities, raw outputs, build and patch bindings, and the frozen plan. It recommended approval without material findings. The subsequent decision binds that exact review to the before-and-after primary receipts and the required regression and holdout receipts. A successful test count or a green viewer element cannot substitute for that recorded decision.
+
+The same distinction between signals and claims matters when the factory examines the rules engine. In a separate experiment, we audited 38,633 rows from an actual [Scryfall Oracle Cards snapshot](https://api.scryfall.com/bulk-data/oracle_cards). A declared source filter retained 29,530 representatives. A broad text scan nominated 47 cards that might combine mana production with library movement; ten mechanically selected simple-mana controls brought the queue to 57 cases.
+
+Darkwater Egg gives a concrete example. Its activated ability adds mana and draws a card. Under CR605.1a in the [pinned rules snapshot](https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt), moving a card to or from a library prevents that ability from being a mana ability. The baseline Phase parser nevertheless reported `is_mana_ability = true`.
+
+A text match was only a weak nomination. The stronger evaluator first established that the full source sentence fitted its frozen grammar and aligned with Phase's actual syntax tree. Two separate executions then reproduced the classification disagreement. The [retained Scryfall baseline](../replays/scryfall-mana-20260907-02/replay.json) records eight such violations, six satisfied controls and 27 inconclusive development cases. A later inspector made false boolean values explicit while preserving the source cohort and evaluator.
+
+The Scryfall acceptance plan has 18 frozen gates: eight development failures, six development controls and four held-out controls. No qualified library-moving card fell in holdout, so those four controls cannot establish held-out repair performance for the motivating family. The Phase repairs are ongoing. The accepted 17Lands ingestion decision does not imply that these classification failures have been repaired, or that payment, priority, replacement effects and resolution behave correctly.
+
+These two investigations use different inputs and different notions of correctness. One worker consumes public CSV game records; another consumes raw card definitions. Both fit the same typed factory boundary:
+
+| Recorded relationship | What it explains |
 | --- | --- |
-| Eight source-qualified library-moving cards | Eight repeated classification violations |
-| Six simple-mana controls | Six passing classifications |
-| Twenty-seven other nominated cards | Inconclusive under the frozen evaluator |
+| Target and build | Which program and executable were evaluated, with source and build provenance. |
+| Source and case ancestry | Which retained inputs produced the case, including selection and reduction recipes. |
+| Weak nomination | Why an input warranted investigation or compute. |
+| Strong feedback | Which bounded claim an identified evaluator checked, and whether the evidence satisfied it. |
+| Proposed change | The exact patch and the feedback that motivated it. |
+| Frozen plan, review and decision | Which checks were required and why this particular change was accepted or rejected. |
+| Compute | Recorded execution cost; missing measurements remain unknown. |
 
-The acceptance plan contains **18 frozen strong gates**: the eight development failures, the six development controls, and four held-out controls reserved for candidate evaluation. A failing gate cannot be removed to improve the score.
+Rust contracts define those records. The recorder stores immutable artifacts, updates live snapshots atomically and runs bounded worker processes. The standalone runtime validates and serves the replay. Domain adapters supply source interpretation, worker invocation, evaluators and acceptance policy. A compiler adapter could use source programs and a frozen reference-language subset; its unsupported programs would still need an explicit uncertainty outcome. The common layer does not need Magic-specific fields to represent that work.
 
-There is an important limitation in that split. No source-qualified library-moving card landed in holdout. The four held-out controls can check that a repair preserves those ordinary classifications. They cannot establish held-out repair performance for the family that motivated the change. The replay retains that gap alongside the positive evidence.
+The viewer uses the producer's stage topology, also available as a [generated lifecycle graph](contracts/factory-lifecycle.mmd). Moving the replay cursor shows cases entering the queue, execution evidence arriving, feedback being recorded and decisions following review. Errors, cancellations and inconclusive evaluations have separate meanings. A passing feedback receipt is displayed as feedback; acceptance appears when the producer records an accepted decision.
 
-This is also classification assurance, with a narrow grammar and a particular rules snapshot. It does not certify runtime behavior during payment, priority, replacement effects, or resolution. A parser result can be correct while the engine later executes the ability incorrectly. Those claims need their own production-path cases and observations.
+Attribution follows the stored references automatically. The 17Lands decision leads to its review and frozen gates. Those lead to feedback and executions, then to builds, cases and source slices. The patch names the failures that motivated it. That chain lets a reader inspect where the improvement came from without treating a hand-written case post as the evidence store. The same structure can retain rejected patches, reduced cases and superseded attempts as the loop continues.
 
-We keep the execution boundary simple. The worker receives a card definition and reports what Phase produced. It does not receive the expected classification. The evaluator runs after the worker and compares recorded output with the frozen expectation. Each measurement uses two separate processes, with their inputs, outputs, exit results, and measured wall time retained.
+The measuring system has its own history. Real source numbers exposed an integer-only metadata assumption; source data now remains in byte-preserving artifacts. An output audit required nested observations to be checked against retained native bytes. Two source-only 17Lands preparation drafts had malformed cancellation metadata. Their exact invalid files remain private failed-preparation evidence, with an explicit diagnostic in the valid run. They are not presented as successfully verified replay manifests.
 
-The measuring software needed corrections too. The first preparation attempt rejected numeric fields in real Scryfall records; source data now stays in byte-preserving artifacts. A later inspection showed that the display serializer omitted false classification flags. We retained that baseline attempt and repeated it with an inspector that explicitly records the engine's boolean. The evaluator and case cohort stayed fixed. An evidence audit then caught a second route to a misleading result: an edited observation could disagree with its retained raw output. Verification now decodes the output bytes before checking the observation. Those attempts and their explanations belong in the replay history, because improvements to the measuring system also need an origin.
+There are limits at each boundary. Hashes bind bytes; they do not establish source authority, reviewer independence, unexposed holdouts or compiler execution by themselves. The generic runtime checks structure and identities. The installed, hash-matched domain verifier recomputes the claim. Review assesses the interpretation and remaining trust assumptions. A declared strength of “strong” has meaning only with that stated scope and evidence.
 
-The build identity needs similar care. An executable can report the revision pinned by its enclosing workspace even when it was built against an overridden checkout. We record that declared identity separately from the attested source revision, source snapshot, patch, and binary hash. A comparison between baseline and candidate should identify the programs that actually ran.
+The public replay package retains bounded CSV slices, the official mapping and the artifacts needed to follow the accepted decision. It attributes the [17Lands public data](https://www.17lands.com/public_datasets) under CC BY 4.0, describes slicing as a modification and carries the non-endorsement notice. Compressed prefixes and executables have separately retained identities; a prefix hash is not a full-archive hash. The private runtime corpus and deck data remain private.
 
-Cases, evaluator source, and gate membership are fixed before the candidate is judged. Changing any of them creates a new experiment to inspect. This makes the repair task concrete: explain the measured disagreement, change the implementation, and run the original checks against the resulting binary. The candidate does not get to redefine success halfway through.
-
-The replay boundary is designed to survive replacing Magic with another target. Rust types define versioned events, content-addressed artifacts, case ancestry, builds, feedback, plans, reviews, and decisions. A generic recorder manages immutable artifacts, atomic snapshots, bounded processes, and measured compute. A generic runtime validates and serves those records.
-
-The domain adapter supplies the meaning: how to derive a case, invoke the target, interpret observations, and apply an acceptance policy. Here it understands Oracle text, Phase syntax trees, and a bounded part of Magic's rules. A compiler factory could use source programs, diagnostic signals, and frozen differential checks. The common layer would still record the same relationships.
-
-That separation puts a limit on what the infrastructure claims. Matching hashes establish content identity. They do not prove that an external evaluator interpreted the rules correctly. The generic runtime's validation is distinct from rerunning the installed domain evaluator and reviewing its policy. Labeling feedback “strong” describes the authority and scope of its claim; it does not make that claim infallible.
-
-The viewer reads the same typed records. Its pipeline uses the stage definitions recorded by the producer. The [generated lifecycle graph](contracts/factory-lifecycle.mmd) comes from those same definitions. As the replay cursor advances, cases enter the queue, executions acquire evidence, and feedback appears. The interface distinguishes weak nominations from stronger evaluations and shows the producer's recorded decision when one exists.
-
-For the current Darkwater Egg case, a reader can open the raw Scryfall record, read the Oracle text, inspect the two parser outputs, and compare the evaluator's expected and observed classification. Source hashes and missing evidence are visible. A passing feedback record does not cause the viewer to announce that a repair has been accepted.
-
-The same records supply attribution when a repair eventually reaches a decision. A proposed change names its motivating feedback. That feedback names executions and cases. Case ancestry leads back to source records and derivation recipes. The frozen plan and review bind the decision to a particular comparison. Reduction, when used, adds a parent-child relationship instead of replacing the original case.
-
-That chain answers a practical question: where did this improvement come from? It can be followed through files, including an inconclusive branch or a rejected attempt. A later article can describe the result without becoming the only place its provenance exists.
-
-We will publish the real Scryfall run as a portable replay alongside the implementation. The bundle contains the recorded events and their UTF-8 artifacts, with hashes that can be checked independently. The full source archive and executables retain separate identities. The viewer can open the bundle offline; importing it does not execute embedded evaluator code. The [software factory documentation](software-factory.md) describes how to run, inspect, and adapt the pipeline.
-
-For now, the replay stops short of an accepted change. It contains eight measured development failures, six passing controls, 27 inconclusive development cases, a frozen candidate gate, and the work leading into repair review. That is already a useful instruction for a coding agent: account for these specific disagreements while preserving the stated checks.
-
-The eventual patch will matter. So will the record showing which source inputs motivated it, which executable changed, what the evaluator measured, and how far the resulting claim extends.
-
+Open the [recorded runs](../replays/README.md) in the factory viewer to follow the accepted ingestion repair or the separate Scryfall investigation. Portable UTF-8 bundles support offline inspection without executing embedded evaluator code. The [factory guide](software-factory.md) describes the runtime, domain checks and adapter commands, so the next improvement can arrive with the same inspectable connection between its source inputs, change and recorded decision.
