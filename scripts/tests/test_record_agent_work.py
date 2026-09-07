@@ -15,8 +15,8 @@ CURRENT_USAGE = {"input_tokens": 3307670, "cached_input_tokens": 3081344,
                  "reasoning_output_tokens": 8104}
 
 
-def session_bytes(usages):
-    events = [{"type": "thread.started", "thread_id": "private-thread-test-identity"}]
+def session_bytes(usages, thread_id="private-thread-test-identity"):
+    events = [{"type": "thread.started", "thread_id": thread_id}]
     for usage in usages:
         events.extend([
             {"type": "turn.started"},
@@ -171,11 +171,33 @@ class AgentWorkRecordingTests(RecorderFixture):
             self.record()
         self.assertEqual(self.replay.path.read_bytes(), before)
 
+    def test_overlapping_thread_snapshot_cannot_count_completed_turns_again(self):
+        turn_a, turn_b = {"input_tokens": 10, "output_tokens": 1}, {"input_tokens": 20, "output_tokens": 2}
+        self.session.write_bytes(session_bytes([turn_a]))
+        first = self.record()
+        before = self.replay.path.read_bytes()
+        self.session.write_bytes(session_bytes([turn_a, turn_b]))
+        self.report.write_bytes(b"Changed report after extending the same thread.")
+        with self.assertRaisesRegex(ValueError, "thread.*already recorded"):
+            self.record()
+        self.assertEqual(self.replay.path.read_bytes(), before)
+        expected_identity = sha256(b"coworld-codex-thread-identity-v1\0private-thread-test-identity")
+        self.assertEqual(self.summary(first)["thread_identity_sha256"], expected_identity)
+        self.assertNotEqual(expected_identity, sha256(b"private-thread-test-identity"))
+        # A genuinely distinct ephemeral thread can record its own work.
+        self.session.write_bytes(session_bytes([turn_b], thread_id="private-new-work-thread"))
+        second = self.record()
+        self.assertNotEqual(self.summary(second)["thread_identity_sha256"], expected_identity)
+        computes = [event["payload"]["usage"] for event in self.replay.value["events"]
+                    if event["payload"]["kind"] == "compute_recorded"]
+        self.assertEqual(sum(usage["input_tokens"] for usage in computes), 30)
+        self.assertEqual(sum(usage["output_tokens"] for usage in computes), 3)
+
     def test_reused_report_or_session_alone_cannot_double_count_compute(self):
         self.record()
         before = self.replay.path.read_bytes()
         original = self.session.read_bytes()
-        self.session.write_bytes(session_bytes([{**CURRENT_USAGE, "output_tokens": 30000}]))
+        self.session.write_bytes(session_bytes([{**CURRENT_USAGE, "output_tokens": 30000}], thread_id="private-other-thread"))
         with self.assertRaisesRegex(ValueError, "already recorded"):
             self.record()
         self.session.write_bytes(original)
@@ -190,7 +212,7 @@ class AgentWorkRecordingTests(RecorderFixture):
         first = self.record()
         self.assertEqual(self.summary(first)["feedback_links"], [{"feedback_id": identity, "relationship": "cross_reference"}])
         self.report.write_bytes(b"Another distinct report.")
-        self.session.write_bytes(session_bytes([{**CURRENT_USAGE, "output_tokens": 30000}]))
+        self.session.write_bytes(session_bytes([{**CURRENT_USAGE, "output_tokens": 30000}], thread_id="private-other-thread"))
         self.args.feedback_supplied_at_start = True
         second = self.record()
         self.assertEqual(self.summary(second)["feedback_links"], [

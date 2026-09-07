@@ -173,9 +173,16 @@ If any turn lacks a count, that whole-session count remains null. No empty
 compute event is emitted when neither input nor output totals are known.
 
 The summary and compute events pass native verification before one atomic
-publication. Repeating the same work is idempotent; reusing its report or session
-with conflicting attribution is rejected. This duplicate protection applies to
-records made by this CLI, not earlier ad hoc summaries without session identities.
+publication. Each work unit must use one ephemeral CLI thread, recorded once as a
+complete thread snapshot. A domain-separated hash identifies that thread without
+publishing its raw ID. Repeating identical metadata is idempotent; any different
+record for the same thread is rejected, including an appended turn with a new
+report and session-file hash. Turn deltas are not inferred. Reusing a report or
+session file with conflicting attribution is also rejected.
+
+Older CLI records without the thread hash and ad hoc summaries cannot detect
+thread overlap. Do not re-import or continue those already-counted threads; use
+new ephemeral threads for new work. Existing records remain immutable.
 Malformed, failed, incomplete or concatenated sessions, unknown feedback links
 and terminal runs are rejected. Publication time is not the agent's work duration.
 

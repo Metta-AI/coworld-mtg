@@ -30,8 +30,8 @@ def unique_object(pairs):
     return result
 
 
-def parse_session(data):
-    """Read one CLI thread, summing per-turn usage without counting subsets twice."""
+def _parse_thread(data):
+    """Read one complete CLI thread and retain only its opaque identity and usage."""
     thread = None
     active = False
     usages = []
@@ -102,7 +102,13 @@ def parse_session(data):
         turns_with_usage=sum(usage is not None for usage in usages),
         per_turn=usages,
         accounting="CLI input and output totals; cached and reasoning counts are subsets, not additional tokens. Billing is unknown.")
-    return totals
+    thread_identity = sha256(b"coworld-codex-thread-identity-v1\0" + thread.encode("utf-8"))
+    return thread_identity, totals
+
+
+def parse_session(data):
+    """Sum completed per-turn usage without exposing the private thread identity."""
+    return _parse_thread(data)[1]
 
 
 def verify(runtime, manifest):
@@ -130,7 +136,7 @@ def record_work(args):
         raise ValueError("a private input file could not be read") from None
     if not prompt.strip() or not report.strip():
         raise ValueError("prompt and completed report must be nonempty")
-    usage = parse_session(session)
+    thread_identity, usage = _parse_thread(session)
     identities = {"prompt_sha256": sha256(prompt), "report_sha256": sha256(report),
                   "session_sha256": sha256(session)}
     requested_links = list(args.feedback_id or [])
@@ -149,6 +155,7 @@ def record_work(args):
         if args.stage not in {stage["id"] for stage in replay.value["stages"]}:
             raise ValueError("compute stage is not in the replay topology")
         content = {"kind": KIND, "session_format": "codex-exec-jsonl", **identities,
+                   "thread_identity_sha256": thread_identity,
                    "model": model, "role": role, "reasoning_effort": reasoning, "summary": summary,
                    "attribution": "Model, role, summary, the association of prompt/report files with this session, and any start-time feedback assertion are supplied by the caller. File hashes and completed-session usage are measured; authorship is not independently proved.",
                    "feedback_links": [{"feedback_id": identity, "relationship": relation}
@@ -164,10 +171,11 @@ def record_work(args):
             previous = json.loads((replay.directory / replay.value["artifacts"][identity]["path"]).read_bytes())
             if not isinstance(previous, dict) or previous.get("kind") != KIND:
                 raise ValueError("existing agent-work record has an incompatible format")
-            if (previous.get("report_sha256") == identities["report_sha256"] or
+            if (previous.get("thread_identity_sha256") == thread_identity or
+                    previous.get("report_sha256") == identities["report_sha256"] or
                     previous.get("session_sha256") == identities["session_sha256"]):
                 if previous != content:
-                    raise ValueError("this report or session is already recorded with different attribution")
+                    raise ValueError("this thread, report or session is already recorded with different attribution")
                 return {"status": "duplicate", "summary_id": identity, "compute_recorded": False}
         original = copy.deepcopy(replay.value)
         temporary = None
