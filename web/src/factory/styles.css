@@ -47,3 +47,19 @@ td{padding:9px 11px;border-bottom:1px solid #edf0e7;color:#526d44}
  .tablet-events{display:block;border:1px solid #d8e2cf;border-radius:4px;font-size:10px;padding:10px;color:#69815a}
  .show-timeline .timeline-panel{display:flex;position:absolute;right:0;top:0;bottom:0;height:auto;width:290px;z-index:3;box-shadow:-5px 0 20px #26492b1a}
 }
+
+.run-status-context{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:13px 30px;background:#f6eee3;border-bottom:1px solid #dfcfb9;flex-shrink:0}
+.run-status-context strong{font-size:11px;text-transform:capitalize;color:#856245}.run-status-context p{font-size:11px;color:#856b51;line-height:1.6;margin-top:5px;max-width:1050px}
+.run-status-context>.text-button{flex-shrink:0}.run-status-context .diagnostic-reason{color:#775c43}
+.successor-run{font-size:10px;color:#876d51;margin-top:7px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.history-intro{font-size:12px;color:#748567;margin-bottom:20px}.run-history-record{padding:17px;border:1px solid #dae3d1;background:#fff;border-radius:4px;margin-bottom:13px}
+.run-history-record>p{font-size:12px;color:#6a7e5b}.run-history-record .diagnostic-reason{margin-top:9px;padding:10px;background:#f4f2e5;color:#827550;border-radius:3px}
+.history-record-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-size:9px;color:#8c9e7e}
+.evaluation-reasons{border:1px solid #dfdac6;background:#f6f3e8;padding:12px 14px;border-radius:4px;margin:13px 0}
+.evaluation-reasons strong{font-size:11px;color:#7c7152;font-weight:550}.evaluation-reasons ul{margin:0;padding-left:16px;font-size:11px;color:#7a7158;line-height:1.8}
+.artifact-recovery{border:1px solid #d7e2cd;border-radius:4px;background:#f2f6eb;padding:17px;margin:18px 0}
+.artifact-recovery h3{font-size:13px;color:#617c50}.artifact-recovery p{font-size:11px;color:#748667;margin-top:9px}
+.artifact-recovery pre{background:#fff;border:1px solid #dfe8d5;border-radius:3px;padding:12px;font-size:10px;color:#5f7a4e}
+.export-blockers{padding-left:18px;max-height:180px;overflow:auto;line-height:2.5}
+.export-blockers .artifact-link{overflow-wrap:anywhere}.export-blockers .badge{margin-left:8px}
+@media(max-width:700px){.run-status-context{padding:13px 16px;flex-direction:column;gap:9px}.run-status-context p{font-size:10px}.history-record-meta{flex-wrap:wrap}}

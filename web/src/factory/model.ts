@@ -232,3 +232,49 @@ export async function verifyArtifact(hash: string, artifact: Artifact, bytes: Ui
   return { status: actual === hash ? "verified" : "mismatch", text, value, detail: actual === hash ? "SHA-256 matches the replay artifact index." : "SHA-256 does not match. This artifact is not trusted evidence." };
 }
 
+
+export interface RunSummary {
+  run_id: string;
+  title: string;
+  status: string;
+  recording?: { kind: string };
+  updated_at?: string;
+}
+export function preferredRun(runs: RunSummary[]): RunSummary | undefined {
+  const statusOrder = (run: RunSummary) => run.status === "running" ? 0 : run.status === "completed" ? 1 : 2;
+  return runs.map((run, index) => ({ run, index })).sort((a, b) =>
+    statusOrder(a.run) - statusOrder(b.run) ||
+    Number(a.run.recording?.kind !== "live") - Number(b.run.recording?.kind !== "live") ||
+    (Date.parse(b.run.updated_at ?? "") || 0) - (Date.parse(a.run.updated_at ?? "") || 0) ||
+    b.index - a.index
+  )[0]?.run;
+}
+export function emptyCaseState(replay: Replay, cursor: number): { title: string; detail: string } {
+  const hasFutureCase = replay.events.some(event => event.sequence > cursor && event.payload.kind === "case_registered");
+  if (hasFutureCase) return { title: "No case recorded at this point", detail: "Step forward in the replay to watch cases enter the queue." };
+  if (replay.status === "running") return { title: "No cases recorded yet", detail: "Follow the run for new records, or inspect its current source and history records." };
+  return { title: "No cases in this " + replay.status + " recording", detail: "This recording ended without registering a case. Inspect the recorded diagnostic in Run history." };
+}
+export function recordedRunContext(events: FactoryEvent[]): { event: FactoryEvent; source: Fields } | undefined {
+  const event = [...events].reverse().find(item => item.payload.kind === "source_imported");
+  return event ? { event, source: object(event.payload.source) } : undefined;
+}
+export function evaluationReasons(receipt: unknown): string[] {
+  const root = object(receipt), reasons = new Set<string>();
+  const add = (value: unknown) => { if (typeof value === "string" && value.trim()) reasons.add(value); };
+  const collect = (value: unknown) => { const entry = object(value); add(entry.reason); array(entry.reasons).forEach(add); };
+  collect(root);
+  for (const raw of array(root.evaluations)) {
+    const evaluation = object(raw); collect(evaluation); collect(evaluation.source_contract);
+    for (const ability of array(evaluation.abilities)) collect(ability);
+    for (const ability of array(object(evaluation.source_contract).abilities)) collect(ability);
+  }
+  return [...reasons];
+}
+export function portableBlockers(replay: Replay, states: ReadonlyMap<string, ArtifactState>): string[] {
+  return Object.keys(replay.artifacts).filter(id => {
+    const artifact = states.get(id);
+    return artifact?.text === undefined || artifact.status === "missing" || artifact.status === "mismatch" || artifact.status === "loading";
+  });
+}
+

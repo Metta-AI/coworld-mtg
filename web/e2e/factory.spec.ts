@@ -46,7 +46,7 @@ test("source provenance, scrubbing, and acceptance remain grounded in visible ev
   await page.getByRole("tab", { name: "Source & lineage" }).click();
   await expect(page.getByText("Synthetic test Oracle text.", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Seek to beginning", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "No case recorded at this point" })).toBeVisible();
+  await expect(page.locator(".case-panel").getByRole("heading", { name: "No case recorded at this point" })).toBeVisible();
   await page.getByRole("button", { name: "Next event", exact: true }).click();
   await expect(page.locator(".case-row")).toHaveCount(0);
   await page.getByRole("button", { name: "Next event", exact: true }).click();
@@ -70,9 +70,12 @@ test("portable local replay works offline and exposes hash mismatches", async ({
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(page.getByText("SHA-256 does not match. This artifact is not trusted evidence.", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Close", exact: true }).click();
-  const download = page.waitForEvent("download");
+  const downloads: string[] = [];
+  page.on("download", item => downloads.push(item.suggestedFilename()));
   await page.getByRole("button", { name: "Save portable", exact: true }).click();
-  expect((await download).suggestedFilename()).toBe(initial.run_id + ".portable.json");
+  await expect(page.getByRole("heading", { name: "Complete the replay before exporting", exact: true })).toBeVisible();
+  expect(downloads).toEqual([]);
+  await expect(page.getByRole("link", { name: "Hydration and portable export instructions" })).toBeVisible();
 });
 test("mobile layout exposes the case and timeline without horizontal page overflow", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -83,5 +86,73 @@ test("mobile layout exposes the case and timeline without horizontal page overfl
   await expect(page.getByRole("heading", { name: "Event stream", exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: "test-results/factory-mobile.png", fullPage: true });
+});
+
+
+test("run selection distinguishes attempts and presents failed and superseded history", async ({ page }) => {
+  const active = { ...structuredClone(initial), run_id: "current-attempt", title: "Repeated run title" };
+  const diagnostic = JSON.stringify({ error: "Recorded input decoding failure." }), diagnosticId = digest(diagnostic);
+  const revision = JSON.stringify({ reason: "Recorded measurement boundary changed; no candidate ran.", successor_run_id: active.run_id }), revisionId = digest(revision);
+  const failed = { ...structuredClone(initial), run_id: "failed-attempt", title: active.title, status: "failed", artifacts: { [diagnosticId]: { path: "diagnostic.json", media_type: "application/json", hash_mode: "bytes" } }, events: [{ sequence: 0, elapsed_ms: 10, stage: "sources", payload: { kind: "source_imported", source: { snapshot_id: diagnosticId, provider: "Preparation diagnostic", description: "The initial preparation failed.", retrieved_at: "fixture", url: "urn:test:diagnostic" } } }] };
+  const cancelled = { ...structuredClone(initial), run_id: "superseded-attempt", title: active.title, status: "cancelled", artifacts: { ...initial.artifacts, [revisionId]: { path: "revision.json", media_type: "application/json", hash_mode: "bytes" } }, events: [...initial.events, { sequence: 3, elapsed_ms: 300, stage: "sources", payload: { kind: "source_imported", source: { snapshot_id: revisionId, provider: "Measurement revision", description: "This attempt was superseded.", retrieved_at: "fixture", url: "urn:test:revision" } } }] };
+  const runs = [ { ...initial, run_id: "authored-history", recording: { kind: "imported" }, status: "completed" }, failed, cancelled, active ];
+  await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs } }));
+  await page.route("**/replay.json", route => route.fulfill({ json: runs.find(run => route.request().url().includes("/" + run.run_id + "/")) }));
+  const texts: Record<string, string> = { [sourceId]: sourceText, [caseId]: caseText, [diagnosticId]: diagnostic, [revisionId]: revision };
+  await page.route("**/artifacts/*", route => route.fulfill({ contentType: "application/json", body: texts[route.request().url().split("/").pop()!] || "{}" }));
+  await page.goto(url);
+  await expect(page.locator("#run-select")).toHaveValue(active.run_id);
+  await expect(page.locator("#run-select option[value=failed-attempt]")).toHaveText("failed · failed-attempt · Repeated run title");
+  await page.locator("#run-select").selectOption(failed.run_id);
+  await expect(page.getByText("Recorded input decoding failure.", { exact: true })).toBeVisible();
+  await expect(page.locator(".case-panel")).toContainText("This recording ended without registering a case.");
+  await expect(page.locator(".case-panel")).not.toContainText("Step forward");
+  await page.locator("#run-select").selectOption(cancelled.run_id);
+  await expect(page.getByText("Recorded measurement boundary changed; no candidate ran.", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "current-attempt", exact: false }).click();
+  await expect(page.locator("#run-select")).toHaveValue(active.run_id);
+  await expect(page).toHaveURL(/run=current-attempt/);
+});
+
+test("inconclusive receipts expose their recorded reason without ability rows", async ({ page }) => {
+  const receiptText = JSON.stringify({ result: "inconclusive", evaluations: [{ abilities: [], reasons: ["Source grammar did not qualify this card."], source_contract: { reasons: ["Additional unaccounted source paragraph."] } }] });
+  const receiptId = digest(receiptText), replay = structuredClone(initial);
+  replay.artifacts[receiptId] = { path: "inconclusive.json", media_type: "application/json", hash_mode: "bytes" };
+  const payload = replay.events[2].payload as unknown as { feedback: { feedback_id: string; declared_strength: string; result: string } };
+  payload.feedback.feedback_id = receiptId; payload.feedback.declared_strength = "strong"; payload.feedback.result = "inconclusive";
+  await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [replay] } }));
+  await page.route("**/replay.json", route => route.fulfill({ json: replay }));
+  await page.route("**/artifacts/*", route => route.fulfill({ contentType: "application/json", body: route.request().url().endsWith(receiptId) ? receiptText : route.request().url().endsWith(sourceId) ? sourceText : caseText }));
+  await page.goto(url);
+  await expect(page.getByText("Source grammar did not qualify this card.", { exact: true })).toBeVisible();
+  await expect(page.getByText("Additional unaccounted source paragraph.", { exact: true })).toBeVisible();
+});
+
+test("missing artifacts block portable export and can be retried after hydration", async ({ page }) => {
+  const missingText = "Restored publisher source bytes.", missingId = digest(missingText);
+  const replay = structuredClone(initial);
+  replay.artifacts[missingId] = { path: "rules.txt", media_type: "text/plain", hash_mode: "bytes" };
+  let hydrated = false;
+  await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [replay] } }));
+  await page.route("**/replay.json", route => route.fulfill({ json: replay }));
+  await page.route("**/artifacts/*", route => {
+    const id = route.request().url().split("/").pop();
+    if (id === missingId) return route.fulfill({ status: hydrated ? 200 : 404, body: hydrated ? missingText : "Missing" });
+    return route.fulfill({ body: id === sourceId ? sourceText : caseText });
+  });
+  const downloads: string[] = [];
+  page.on("download", item => downloads.push(item.suggestedFilename()));
+  await page.goto(url);
+  await page.getByRole("heading", { name: initial.title, exact: true }).waitFor();
+  await page.getByRole("button", { name: "Save portable", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Complete the replay before exporting", exact: true })).toBeVisible();
+  expect(downloads).toEqual([]);
+  await expect(page.locator(".artifact-recovery pre")).toContainText("scripts/share_factory_replay.py hydrate");
+  await expect(page.getByRole("link", { name: "Hydration and portable export instructions" })).toHaveAttribute("href", /docs\/software-factory.md#share-a-run$/);
+  hydrated = true;
+  const download = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Retry portable export", exact: true }).click();
+  expect((await download).suggestedFilename()).toBe(initial.run_id + ".portable.json");
+  await expect(page.getByRole("status")).toContainText("Saved complete portable replay with 3 artifact contents.");
 });
 

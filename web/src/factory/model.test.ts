@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createHash } from "node:crypto";
-import { artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
+import { emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
 
 const hash = (char: string) => char.repeat(64);
 const event = (sequence: number, payload: FactoryEvent["payload"], stage = "cases"): FactoryEvent => ({ sequence, elapsed_ms: sequence * 100, stage, payload });
@@ -125,6 +125,45 @@ describe("artifact integrity", () => {
     const result = await verifyArtifact("2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", { ...artifact, hash_mode: "bytes" }, new TextEncoder().encode(text));
     expect(result.status).toBe("verified");
     expect(result.text).toBe(text);
+  });
+});
+
+
+describe("run selection, history, and portable completeness", () => {
+  it("chooses a current live run from metadata rather than a title or identifier", () => {
+    const archived = { run_id: "zzz", title: "Same title", status: "completed", recording: { kind: "imported" } };
+    const active = { run_id: "aaa", title: "Same title", status: "running", recording: { kind: "live" } };
+    expect(preferredRun([archived, active])?.run_id).toBe("aaa");
+    expect(preferredRun([active, archived])?.run_id).toBe("aaa");
+    expect(preferredRun([{ ...active, updated_at: "2026-01-01" }, { ...active, run_id: "new", updated_at: "2026-02-01" }])?.run_id).toBe("new");
+    expect(preferredRun([])).toBeUndefined();
+  });
+  it("never tells a reader to advance to a case absent from an ended recording", () => {
+    const replay = fixture(); replay.status = "failed";
+    expect(emptyCaseState(replay, -1).title).toContain("failed");
+    expect(emptyCaseState(replay, -1).detail).toContain("ended without");
+    replay.events = [register()];
+    expect(emptyCaseState(replay, -1).detail).toContain("Step forward");
+  });
+  it("uses only history records visible at the current replay cursor", () => {
+    const replay = fixture([
+      event(0, { kind: "source_imported", source: { description: "Original source" } }, "sources"),
+      event(1, { kind: "source_imported", source: { description: "Recorded diagnostic" } }, "sources"),
+    ]);
+    expect(recordedRunContext(visibleEvents(replay, 0))?.source.description).toBe("Original source");
+    expect(recordedRunContext(visibleEvents(replay, 1))?.source.description).toBe("Recorded diagnostic");
+    expect(recordedRunContext([])).toBeUndefined();
+  });
+  it("retains reasons from unsupported evaluations without ability measurements", () => {
+    const evaluation = { reasons: ["Unsupported source grammar"], abilities: [], source_contract: { reasons: ["Additional source paragraph"] } };
+    expect(evaluationReasons({ evaluations: [evaluation, evaluation] })).toEqual(["Unsupported source grammar", "Additional source paragraph"]);
+  });
+  it("blocks missing and mismatched artifacts, including artifacts absent from the loaded cache", () => {
+    const replay = fixture();
+    expect(portableBlockers(replay, new Map())).toEqual([hash("a")]);
+    expect(portableBlockers(replay, new Map([[hash("a"), { status: "mismatch", text: "corrupt" }]]))).toEqual([hash("a")]);
+    expect(portableBlockers(replay, new Map([[hash("a"), { status: "verified", text: "" }]]))).toEqual([]);
+    expect(portableBlockers(replay, new Map([[hash("a"), { status: "unverified", text: "{}" }]]))).toEqual([]);
   });
 });
 

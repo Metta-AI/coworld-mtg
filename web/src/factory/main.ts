@@ -1,18 +1,18 @@
 import "./styles.css";
 import {
-  array, artifactReferences, casesAt, eventTitle, label, object, parseReplay,
+  array, artifactReferences, casesAt, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
+  portableBlockers, preferredRun, recordedRunContext,
   referenceIssues, short, string, updatedCursor, verifyArtifact, visibleEvents,
-  type ArtifactState, type CaseView, type FactoryEvent, type Fields, type Replay,
+  type ArtifactState, type CaseView, type FactoryEvent, type Fields, type Replay, type RunSummary,
 } from "./model";
 
-interface RunSummary { run_id: string; title: string; status: string; recording?: { kind: string } }
 const app = document.querySelector<HTMLDivElement>("#factory-app")!;
 const state = {
   runs: [] as RunSummary[], replay: null as Replay | null, cursor: -1, selectedCase: "",
   tab: "evidence", filter: "", playing: false, following: false, loading: true,
   notice: "", error: "", sourceUrl: "", embedded: {} as Record<string, string>,
   artifacts: new Map<string, ArtifactState>(), inspecting: "", inspectingEvent: -1,
-  issues: [] as string[], timelineOpen: false, exporting: false, timelineFilter: "all", loadGeneration: 0,
+  issues: [] as string[], historyOpen: false, recoveryOpen: false, exportBlockers: [] as string[], timelineOpen: false, exporting: false, timelineFilter: "all", loadGeneration: 0,
 };
 const esc = (value: unknown) => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
@@ -61,7 +61,7 @@ function render(): void {
       <span class="top-divider"></span><span class="top-context">Improvement run explorer</span>
       <div class="top-actions">
         <label class="sr-only" for="run-select">Select a recorded run</label>
-        <select id="run-select" ${state.runs.length ? "" : "disabled"}><option value="">${state.runs.length ? "Select a run" : "No served runs"}</option>${state.runs.map(run => `<option value="${esc(run.run_id)}" ${run.run_id === replay?.run_id ? "selected" : ""}>${esc(run.title)}</option>`).join("")}</select>
+        <select id="run-select" ${state.runs.length ? "" : "disabled"}><option value="">${state.runs.length ? "Select a run" : "No served runs"}</option>${state.runs.map(run => `<option value="${esc(run.run_id)}" ${run.run_id === replay?.run_id ? "selected" : ""}>${esc(label(run.status))} · ${esc(run.run_id)} · ${esc(run.title)}</option>`).join("")}</select>
         <button class="button" data-action="import">Open replay</button><input id="replay-file" type="file" accept=".json,application/json" hidden>
         <button class="button primary" data-action="export" ${!replay || state.exporting ? "disabled" : ""}>${state.exporting ? "Packaging…" : "Save portable"}</button>
       </div>
@@ -70,11 +70,12 @@ function render(): void {
     ${state.notice ? `<div class="notice" role="status">${esc(state.notice)}<button data-action="dismiss">Dismiss</button></div>` : ""}
     ${!replay ? `<main class="welcome"><p class="eyebrow">From evidence to improvement</p><h1>Follow the work.<br>Inspect the proof.</h1><p class="welcome-copy">Replay how source data became a case, how feedback motivated a change, and what the recorded evaluation actually established.</p><div class="welcome-actions"><button class="button primary" data-action="import">Open a replay file</button><button class="button" data-action="refresh">Refresh available runs</button></div><div class="welcome-path"><span>Source</span><span>Case</span><span>Feedback</span><span>Change</span><span>Decision</span></div><p class="subtle">${state.loading ? "Loading recorded runs…" : "Open a portable replay JSON, or serve a factory run to explore its artifacts."}</p></main>` : `
     <section class="run-heading">
-      <div class="run-heading-main"><p class="eyebrow">${esc(replay.target.name)} <span>/</span> ${esc(replay.run_id)}</p><h1>${esc(replay.title)}</h1><div class="run-meta">${badge(replay.status, toneFor(replay.status))}${badge(replay.recording.kind === "imported" ? "Imported evidence" : "Recorded run")}<span>Baseline ${esc(short(replay.target.baseline_revision))}</span><button class="text-button" data-action="raw-export">Replay JSON ↗</button></div></div>
+      <div class="run-heading-main"><p class="eyebrow">${esc(replay.target.name)} <span>/</span> ${esc(replay.run_id)}</p><h1>${esc(replay.title)}</h1><div class="run-meta">${badge(replay.status, toneFor(replay.status))}${badge(replay.recording.kind === "imported" ? "Imported evidence" : "Recorded run")}<span>Baseline ${esc(short(replay.target.baseline_revision))}</span><button class="text-button" data-action="raw-export">Replay metadata ↗</button><button class="text-button" data-action="run-history">Run history ↗</button></div></div>
       <div class="run-stats"><div><strong>${cases.length}</strong><span>cases visible</span></div><div><strong>${feedback.length}</strong><span>feedback records</span></div><div><strong>${decisions.length}</strong><span>recorded decisions</span></div><div><strong>${measured.length ? time(wall) : "—"}</strong><span>measured worker time</span></div></div>
     </section>
     ${replay.recording.kind === "imported" ? `<div class="recording-note">ARCHIVAL RECORD <span>${esc(replay.recording.description || "Imported evidence. Event order reflects recorded dependencies; timing is not reconstructed.")}</span></div>` : ""}
     ${state.issues.length ? `<details class="integrity-warning"><summary>${state.issues.length} reference issue${state.issues.length === 1 ? "" : "s"} in this recording</summary><ul>${state.issues.map(issue => `<li>${esc(issue)}</li>`).join("")}</ul></details>` : ""}
+    ${renderRunContext()}
     <section class="pipeline-section" aria-label="Recorded pipeline"><div class="section-label"><span>PIPELINE</span><span>Defined by this replay · select a stage to seek</span></div><div class="pipeline" style="--stage-count:${replay.stages.length}">${replay.stages.map((stage, index) => {
       const recorded = events.filter(event => event.stage === stage.id);
       const hasAny = replay.events.some(event => event.stage === stage.id);
@@ -82,7 +83,7 @@ function render(): void {
     }).join("")}</div></section>
     <main class="workspace ${state.timelineOpen ? "show-timeline" : ""}">
       <aside class="case-sidebar"><div class="panel-header"><h2>Case queue</h2><span class="count">${cases.length}</span></div><div class="search-wrap"><label class="sr-only" for="case-search">Search cases</label><input id="case-search" type="search" placeholder="Search cases or feedback" value="${esc(state.filter)}"></div><div class="case-list" data-scroll="cases">${renderCaseQueue(cases)}</div><div class="sidebar-footer">Cases appear at their registration event.<br>Every count follows the replay cursor.</div></aside>
-      <section class="case-panel" aria-label="Selected case"><div class="case-heading"><p class="eyebrow">SELECTED CASE</p><h2>${esc(selected?.title || "Waiting for a case")}</h2>${selected ? `<div class="case-meta">${badge(label(object(selected.event.payload.derivation).kind))}${hashButton(selected.id, "Case definition")}</div>` : ""}</div><div class="tabs" role="tablist" aria-label="Case inspection">${[["evidence", "Evidence"], ["lineage", "Source & lineage"], ["changes", "Changes & decision"], ["artifacts", "Artifacts"]].map(([id, title]) => `<button role="tab" id="tab-${id}" aria-controls="case-content" aria-selected="${state.tab === id}" data-tab="${id}" ${state.tab === id ? 'class="active"' : ""}>${title}</button>`).join("")}</div><div id="case-content" class="case-content" role="tabpanel" aria-labelledby="tab-${state.tab}" data-scroll="content">${selected ? renderCaseContent(selected) : empty("No case recorded at this point", "Step forward in the replay to watch cases enter the queue.")}</div></section>
+      <section class="case-panel" aria-label="Selected case"><div class="case-heading"><p class="eyebrow">SELECTED CASE</p><h2>${esc(selected?.title || (replay.status === "running" ? "Waiting for a case" : "No case registered"))}</h2>${selected ? `<div class="case-meta">${badge(label(object(selected.event.payload.derivation).kind))}${hashButton(selected.id, "Case definition")}</div>` : ""}</div><div class="tabs" role="tablist" aria-label="Case inspection">${[["evidence", "Evidence"], ["lineage", "Source & lineage"], ["changes", "Changes & decision"], ["artifacts", "Artifacts"]].map(([id, title]) => `<button role="tab" id="tab-${id}" aria-controls="case-content" aria-selected="${state.tab === id}" data-tab="${id}" ${state.tab === id ? 'class="active"' : ""}>${title}</button>`).join("")}</div><div id="case-content" class="case-content" role="tabpanel" aria-labelledby="tab-${state.tab}" data-scroll="content">${selected ? renderCaseContent(selected) : empty(emptyCaseState(replay, state.cursor).title, emptyCaseState(replay, state.cursor).detail)}</div></section>
       <aside class="timeline-panel"><div class="panel-header"><h2>Event stream</h2><span class="count">${replay.events.length}</span></div><div class="timeline-filter"><button data-timeline="all" class="${state.timelineFilter === "all" ? "active" : ""}">Whole run</button><button data-timeline="case" class="${state.timelineFilter === "case" ? "active" : ""}">Selected case</button></div><ol class="event-list" data-scroll="timeline">${renderTimeline(selected)}</ol><div class="timeline-footer">${current ? `<span>At event ${current.sequence + 1}</span><button class="text-button" data-event-detail="${current.sequence}">Inspect event JSON ↗</button>` : "<span>Before the first event</span>"}</div></aside>
     </main>
     <footer class="transport"><div class="transport-buttons"><button data-action="start" title="Seek to beginning" aria-label="Seek to beginning">|‹</button><button data-action="back" title="Previous event (left arrow)" aria-label="Previous event">‹</button><button class="play-button" data-action="play" aria-label="${state.playing ? "Pause replay" : "Play replay"}">${state.playing ? "Pause" : "Play"}</button><button data-action="next" title="Next event (right arrow)" aria-label="Next event">›</button></div><div class="scrubber"><div class="scrubber-caption"><span>${state.following ? "FOLLOWING LATEST" : state.playing ? "PLAYING RECORDED EVENTS" : "REPLAY POSITION"}</span><span>${state.cursor + 1} / ${replay.events.length} events <b>·</b> ${current ? time(current.elapsed_ms) : "start"}</span></div><label class="sr-only" for="replay-position">Replay event position</label><input id="replay-position" type="range" min="-1" max="${Math.max(-1, replay.events.length - 1)}" value="${state.cursor}" ${replay.events.length ? "" : "disabled"}></div><button class="tablet-events" data-action="timeline" aria-expanded="${state.timelineOpen}">${state.timelineOpen ? "Close events" : "Events"}</button><button class="follow-button ${state.following ? "active" : ""}" data-action="follow" ${state.sourceUrl ? "" : "disabled"}><span class="live-dot"></span>${state.following ? "Following" : "Follow latest"}</button></footer>
@@ -110,7 +111,7 @@ function renderCaseQueue(cases: CaseView[]): string {
   return matches.length ? matches.map(item => {
     const latest = object(item.feedback.at(-1)?.payload.feedback);
     return `<button class="case-row ${state.selectedCase === item.id ? "selected" : ""}" data-case="${esc(item.id)}" aria-pressed="${state.selectedCase === item.id}"><span class="case-row-top"><span class="case-origin">${esc(label(object(item.event.payload.derivation).kind))}</span><span class="case-sequence">${String(item.event.sequence + 1).padStart(2, "0")}</span></span><strong>${esc(item.title)}</strong><span class="case-row-bottom">${badge(latest.result || "awaiting feedback", toneFor(latest.result))}<span>${item.feedback.length} feedback</span></span></button>`;
-  }).join("") : empty(filter ? "No matching cases" : "No cases yet", filter ? "Try a card name, case ID, or feedback result." : "Advance the replay to a case registration.");
+  }).join("") : empty(filter ? "No matching cases" : emptyCaseState(state.replay!, state.cursor).title, filter ? "Try a card name, case ID, or feedback result." : emptyCaseState(state.replay!, state.cursor).detail);
 }
 
 function renderCaseContent(selected: CaseView): string {
@@ -156,9 +157,11 @@ function renderEvaluationDetails(id: string): string {
     expected: ability.expected_is_mana_ability, observed: ability.observed_is_mana_ability,
     verdict: ability.verdict, alignment: ability.ast_alignment,
   })));
-  if (!rows.length) return "";
+  const reasons = evaluationReasons(receipt);
+  const explanation = reasons.length ? `<aside class="evaluation-reasons"><div class="card-top"><strong>Recorded evaluator explanation</strong>${statusMarkup(id)}</div><ul>${reasons.map(reason => `<li>${esc(reason)}</li>`).join("")}</ul></aside>` : "";
+  if (!rows.length) return explanation;
   const booleanText = (value: unknown) => value === true ? "Yes" : value === false ? "No" : "Not recorded";
-  return `<div class="recorded-measurements"><div class="measurement-heading"><span>RECORDED CLASSIFICATION CHECK</span>${statusMarkup(id)}</div><div class="table-scroll"><table><thead><tr><th>Trial / ability</th><th>Expected mana ability</th><th>Observed mana ability</th><th>Evaluator verdict</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.trial} / ${row.paragraph}</td><td>${booleanText(row.expected)}</td><td>${booleanText(row.observed)}</td><td>${badge(row.verdict, row.verdict === "pass" ? "positive" : row.verdict === "fail" ? "negative" : "muted")}</td></tr>`).join("")}</tbody></table></div><p>Exact values from the recorded evaluator receipt. ${receipt.repeatable === true ? "Producer recorded repeatable results." : "Repeatability is not established by this view."}</p></div>`;
+  return explanation + `<div class="recorded-measurements"><div class="measurement-heading"><span>RECORDED CLASSIFICATION CHECK</span>${statusMarkup(id)}</div><div class="table-scroll"><table><thead><tr><th>Trial / ability</th><th>Expected mana ability</th><th>Observed mana ability</th><th>Evaluator verdict</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.trial} / ${row.paragraph}</td><td>${booleanText(row.expected)}</td><td>${booleanText(row.observed)}</td><td>${badge(row.verdict, row.verdict === "pass" ? "positive" : row.verdict === "fail" ? "negative" : "muted")}</td></tr>`).join("")}</tbody></table></div><p>Exact values from the recorded evaluator receipt. ${receipt.repeatable === true ? "Producer recorded repeatable results." : "Repeatability is not established by this view."}</p></div>`;
 }
 function renderParsedAbilities(parsed: Fields): string {
   const abilities = array(parsed.abilities).map(object);
@@ -231,16 +234,43 @@ function renderTimeline(selected: CaseView | undefined): string {
   }).join("") || '<li class="timeline-empty">No events in this view.</li>';
 }
 
+function renderDiagnostic(record: Fields): string {
+  const reasons = [record.error, record.reason].filter(value => typeof value === "string" && value);
+  const successor = string(record.successor_run_id);
+  return `${reasons.map(reason => `<p class="diagnostic-reason">${esc(reason)}</p>`).join("")}${successor ? `<div class="successor-run"><span>Recorded successor:</span> ${state.runs.some(run => run.run_id === successor) ? `<button class="text-button" data-run="${esc(successor)}">${esc(successor)} ↗</button>` : `<code>${esc(successor)}</code>`}</div>` : ""}`;
+}
+function renderRunContext(): string {
+  const replay = state.replay;
+  if (!replay || !["failed", "cancelled"].includes(replay.status)) return "";
+  const context = recordedRunContext(currentEvents());
+  return `<section class="run-status-context"><div><strong>${esc(label(replay.status))} run</strong>${context ? `<p>${esc(context.source.description)}</p>${renderDiagnostic(artifactValue(context.source.snapshot_id))}` : "<p>No diagnostic is visible at this replay position.</p>"}</div><button class="text-button" data-action="run-history">Inspect recorded history ↗</button></section>`;
+}
+function renderRecovery(): string {
+  const path = "replays/" + (state.replay?.run_id ?? "example");
+  const quoted = "'" + path.replaceAll("'", "'\\''") + "'";
+  return `<section class="artifact-recovery"><h3>Restore missing source artifacts</h3><p>For a shared package with <code>external-artifacts.json</code>, run the following from the repository checkout. Replace the directory if your package is stored elsewhere.</p><pre>python3 scripts/share_factory_replay.py hydrate ${esc(quoted)} --runtime target/debug/factory-runtime
+target/debug/factory-runtime export ${esc(quoted)} --output complete.replay.json</pre><p>Hydration verifies downloaded bytes before adding them. For other missing or mismatched evidence, obtain the original hash-matching artifact from the run producer. Then retry export from the served run, or open <code>complete.replay.json</code> for offline inspection.</p><p><a href="https://github.com/Metta-AI/coworld-mtg/blob/main/docs/software-factory.md#share-a-run" target="_blank" rel="noreferrer">Hydration and portable export instructions ↗</a></p></section>`;
+}
 function renderInspector(): string {
+  if (state.historyOpen && state.replay) {
+    const records = currentEvents().filter(event => event.payload.kind === "source_imported");
+    return `<dialog class="artifact-dialog" aria-labelledby="inspector-title"><div class="inspector-header"><div><p class="eyebrow">RECORDED RUN CONTEXT</p><h2 id="inspector-title">Run history & source records</h2></div><button class="button" data-action="close-inspector">Close</button></div><div class="inspector-body"><p class="history-intro">These descriptions and diagnostics come from events visible at the current replay position.</p>${[...records].reverse().map(event => {
+      const source = object(event.payload.source), record = artifactValue(source.snapshot_id);
+      return `<article class="run-history-record"><div class="card-top"><span class="eyebrow">EVENT ${event.sequence + 1} · ${esc(source.provider)}</span>${hashButton(source.snapshot_id, "Record")}</div><p>${esc(source.description)}</p>${renderDiagnostic(record)}<div class="history-record-meta"><span>${esc(source.retrieved_at)}</span><button class="text-button" data-event-detail="${event.sequence}">Event JSON ↗</button></div></article>`;
+    }).join("") || empty("No source or history records yet", "Advance the replay to inspect recorded context.")}</div></dialog>`;
+  }
+  if (state.recoveryOpen && state.replay) {
+    return `<dialog class="artifact-dialog" aria-labelledby="inspector-title"><div class="inspector-header"><div><p class="eyebrow">EXPORT BLOCKED</p><h2 id="inspector-title">Complete the replay before exporting</h2></div><button class="button" data-action="close-inspector">Close</button></div><div class="inspector-body"><p class="history-intro">No portable bundle was downloaded. Every indexed artifact must be present, and a hash mismatch must be resolved before export.</p><ul class="export-blockers">${state.exportBlockers.map(id => `<li>${hashButton(id, state.replay!.artifacts[id].path)} ${statusMarkup(id)}</li>`).join("")}</ul>${renderRecovery()}<button class="button" data-action="retry-export">Retry portable export</button></div></dialog>`;
+  }
   if (state.inspectingEvent >= 0 && state.replay) {
     const event = state.replay.events[state.inspectingEvent];
     return `<dialog class="artifact-dialog" aria-labelledby="inspector-title"><div class="inspector-header"><div><p class="eyebrow">EVENT ${event.sequence + 1}</p><h2 id="inspector-title">${esc(eventTitle(event))}</h2></div><button class="button" data-action="close-inspector">Close</button></div><div class="inspector-body"><pre>${esc(pretty(event))}</pre><h3>Artifact references</h3><div class="reference-chips">${artifactReferences(event).filter(id => state.replay?.artifacts[id]).map(id => hashButton(id, state.replay!.artifacts[id].path)).join("") || "<p>No indexed artifacts referenced.</p>"}</div></div></dialog>`;
   }
   if (!state.inspecting) return "";
   const id = state.inspecting, artifact = state.replay?.artifacts[id], loaded = state.artifacts.get(id);
-  return `<dialog class="artifact-dialog" aria-labelledby="inspector-title"><div class="inspector-header"><div><p class="eyebrow">CONTENT-ADDRESSED ARTIFACT</p><h2 id="inspector-title">${esc(artifact?.path || "Missing artifact")}</h2></div><button class="button" data-action="close-inspector">Close</button></div><div class="inspector-body"><div class="integrity-card ${loaded?.status === "mismatch" ? "failed" : ""}"><div class="card-top">${statusMarkup(id)}<span>${esc(artifact?.hash_mode.replaceAll("_", " ") || "unknown format")}</span></div><code class="full-hash">${esc(id)}</code><p>${esc(loaded?.detail || (artifact ? "Loading artifact and checking its SHA-256…" : "This reference is absent from the replay artifact index."))}</p></div>${loaded?.text !== undefined ? `<div class="artifact-toolbar"><span>${esc(artifact?.media_type)} · ${new TextEncoder().encode(loaded.text).length.toLocaleString()} bytes</span><button class="text-button" data-action="artifact-export">Download original ↗</button></div><pre class="artifact-pre">${esc(loaded.value === undefined ? loaded.text : pretty(loaded.value))}</pre>` : ""}</div></dialog>`;
+  return `<dialog class="artifact-dialog" aria-labelledby="inspector-title"><div class="inspector-header"><div><p class="eyebrow">CONTENT-ADDRESSED ARTIFACT</p><h2 id="inspector-title">${esc(artifact?.path || "Missing artifact")}</h2></div><button class="button" data-action="close-inspector">Close</button></div><div class="inspector-body"><div class="integrity-card ${loaded?.status === "mismatch" ? "failed" : ""}"><div class="card-top">${statusMarkup(id)}<span>${esc(artifact?.hash_mode.replaceAll("_", " ") || "unknown format")}</span></div><code class="full-hash">${esc(id)}</code><p>${esc(loaded?.detail || (artifact ? "Loading artifact and checking its SHA-256…" : "This reference is absent from the replay artifact index."))}</p></div>${loaded?.status === "missing" || loaded?.status === "mismatch" ? renderRecovery() : ""}${loaded?.text !== undefined ? `<div class="artifact-toolbar"><span>${esc(artifact?.media_type)} · ${new TextEncoder().encode(loaded.text).length.toLocaleString()} bytes</span><button class="text-button" data-action="artifact-export">Download original ↗</button></div><pre class="artifact-pre">${esc(loaded.value === undefined ? loaded.text : pretty(loaded.value))}</pre>` : ""}</div></dialog>`;
 }
-function closeInspector(): void { state.inspecting = ""; state.inspectingEvent = -1; render(); }
+function closeInspector(): void { state.inspecting = ""; state.inspectingEvent = -1; state.historyOpen = false; state.recoveryOpen = false; render(); }
 
 let artifactQueue = false;
 function scheduleArtifacts(): void {
@@ -250,6 +280,11 @@ function scheduleArtifacts(): void {
     artifactQueue = false;
     const selected = selectedCase(), ids = new Set<string>();
     if (state.inspecting) ids.add(state.inspecting);
+    if (state.historyOpen) for (const event of currentEvents()) if (event.payload.kind === "source_imported") ids.add(string(object(event.payload.source).snapshot_id));
+    if (state.replay?.status !== "running") {
+      const context = recordedRunContext(currentEvents());
+      if (context) ids.add(string(context.source.snapshot_id));
+    }
     if (selected) {
       ids.add(selected.id);
       for (const event of selected.events) {
@@ -270,9 +305,9 @@ function scheduleArtifacts(): void {
     for (const id of ids) if (!state.artifacts.has(id) && state.replay!.artifacts[id]) void loadArtifact(id);
   });
 }
-async function loadArtifact(id: string): Promise<ArtifactState> {
+async function loadArtifact(id: string, retry = false): Promise<ArtifactState> {
   const cached = state.artifacts.get(id);
-  if (cached && cached.status !== "loading") return cached;
+  if (cached && cached.status !== "loading" && !(retry && ["missing", "mismatch"].includes(cached.status))) return cached;
   const replay = state.replay, generation = state.loadGeneration;
   const artifact = replay?.artifacts[id];
   if (!artifact) return { status: "missing", detail: "Artifact is not indexed by this replay." };
@@ -308,7 +343,7 @@ async function loadRuns(): Promise<void> {
     const url = new URL(replayUrl, location.href);
     if (url.origin !== location.origin) state.error = "Replay URLs must use the same origin as the viewer.";
     else await loadRun(url.href);
-  } else if (requested || state.runs.length) await loadRun("/factory-api/runs/" + encodeURIComponent(requested || state.runs[0].run_id) + "/replay.json");
+  } else if (requested || state.runs.length) await loadRun("/factory-api/runs/" + encodeURIComponent(requested || preferredRun(state.runs)!.run_id) + "/replay.json");
   state.loading = false; render();
 }
 async function loadRun(url: string, poll = false): Promise<void> {
@@ -328,7 +363,7 @@ function installReplay(replay: Replay, embedded: Record<string, string>, sourceU
   state.loadGeneration++; state.replay = replay; state.embedded = embedded; state.sourceUrl = sourceUrl;
   state.cursor = replay.events.length - 1; state.playing = false; state.following = false;
   state.artifacts.clear(); state.selectedCase = ""; state.inspecting = ""; state.inspectingEvent = -1;
-  state.issues = referenceIssues(replay); state.error = ""; state.notice = "";
+  state.issues = referenceIssues(replay); state.error = ""; state.notice = ""; state.historyOpen = false; state.recoveryOpen = false; state.exportBlockers = [];
 }
 function seek(position: number): void {
   state.following = false;
@@ -341,20 +376,28 @@ function download(value: string, filename: string, media = "application/json"): 
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 async function portableExport(): Promise<void> {
-  const replay = state.replay;
-  if (!replay) return;
-  state.exporting = true; state.error = ""; render();
-  const contents: Record<string, string> = { ...state.embedded }, missing: string[] = [];
+  const replay = state.replay, generation = state.loadGeneration;
+  if (!replay || state.exporting) return;
+  state.exporting = true; state.error = ""; state.recoveryOpen = false; render();
+  const contents: Record<string, string> = {}, results = new Map<string, ArtifactState>();
   const ids = Object.keys(replay.artifacts);
   for (let index = 0; index < ids.length; index += 4) {
+    if (state.loadGeneration !== generation) break;
     await Promise.all(ids.slice(index, index + 4).map(async id => {
-      const result = await loadArtifact(id);
-      if (result.text !== undefined) contents[id] = result.text; else missing.push(replay.artifacts[id].path);
+      const result = await loadArtifact(id, true); results.set(id, result);
+      if (result.text !== undefined) contents[id] = result.text;
     }));
   }
-  if (state.replay === replay) {
-    download(pretty({ replay, artifact_contents: contents }), replay.run_id + ".portable.json");
-    state.notice = missing.length ? "Saved replay with available artifacts. " + missing.length + " artifacts were unavailable; their missing evidence states are preserved." : "Saved portable replay with " + Object.keys(contents).length + " artifact contents.";
+  if (state.loadGeneration === generation) {
+    state.exportBlockers = portableBlockers(replay, results);
+    if (state.exportBlockers.length) {
+      state.recoveryOpen = true; state.historyOpen = false; state.inspecting = ""; state.inspectingEvent = -1;
+      state.error = "Portable export blocked: " + state.exportBlockers.length + " artifacts are unavailable or do not match their hashes.";
+    } else {
+      download(pretty({ replay, artifact_contents: contents }), replay.run_id + ".portable.json");
+      const unverified = [...results.values()].filter(result => result.status === "unverified").length;
+      state.notice = "Saved complete portable replay with " + Object.keys(contents).length + " artifact contents." + (unverified ? " " + unverified + " artifacts need native hash verification; see the export instructions." : "");
+    }
   }
   state.exporting = false; render();
 }
@@ -364,8 +407,13 @@ app.addEventListener("click", event => {
   if (!element) return;
   if (element.dataset.case) { state.selectedCase = element.dataset.case; render(); return; }
   if (element.dataset.tab) { state.tab = element.dataset.tab; render(); return; }
-  if (element.dataset.artifact) { state.inspecting = element.dataset.artifact; state.inspectingEvent = -1; render(); return; }
-  if (element.dataset.eventDetail) { state.inspectingEvent = Number(element.dataset.eventDetail); state.inspecting = ""; render(); return; }
+  if (element.dataset.artifact) { state.historyOpen = false; state.recoveryOpen = false; state.inspecting = element.dataset.artifact; state.inspectingEvent = -1; render(); return; }
+  if (element.dataset.eventDetail) { state.historyOpen = false; state.recoveryOpen = false; state.inspectingEvent = Number(element.dataset.eventDetail); state.inspecting = ""; render(); return; }
+  if (element.dataset.run) {
+    state.historyOpen = false; state.recoveryOpen = false;
+    const url = new URL(location.href); url.search = ""; url.searchParams.set("run", element.dataset.run); history.replaceState(null, "", url);
+    void loadRun("/factory-api/runs/" + encodeURIComponent(element.dataset.run) + "/replay.json"); return;
+  }
   if (element.dataset.timeline) { state.timelineFilter = element.dataset.timeline; render(); return; }
   if (element.dataset.seek !== undefined) { state.playing = false; seek(Number(element.dataset.seek)); return; }
   if (element.dataset.stage) {
@@ -376,6 +424,8 @@ app.addEventListener("click", event => {
   switch (element.dataset.action) {
     case "timeline": state.timelineOpen = !state.timelineOpen; render(); break;
     case "import": document.getElementById("replay-file")!.click(); break;
+    case "run-history": state.historyOpen = true; state.recoveryOpen = false; state.inspecting = ""; state.inspectingEvent = -1; render(); break;
+    case "retry-export": void portableExport(); break;
     case "refresh": void loadRuns(); break;
     case "dismiss": state.error = ""; state.notice = ""; render(); break;
     case "export": void portableExport(); break;
