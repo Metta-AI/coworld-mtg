@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createHash } from "node:crypto";
-import { emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
+import { decisionsForChange, emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
 
 const hash = (char: string) => char.repeat(64);
 const event = (sequence: number, payload: FactoryEvent["payload"], stage = "cases"): FactoryEvent => ({ sequence, elapsed_ms: sequence * 100, stage, payload });
@@ -167,3 +167,16 @@ describe("run selection, history, and portable completeness", () => {
   });
 });
 
+
+describe("candidate decision bindings", () => {
+  it("keeps satisfied feedback separate from a recorded rejection and respects replay position", () => {
+    const events = [
+      event(0, { kind: "feedback_recorded", feedback: { case_id: hash("a"), result: "satisfied" } }),
+      event(1, { kind: "decision_recorded", change_id: hash("b"), decision: { kind: "rejected", reasons: ["Another frozen gate failed"] } }),
+      event(2, { kind: "decision_recorded", change_id: hash("c"), decision: { kind: "accepted" } }),
+    ];
+    expect(decisionsForChange(visibleEvents(fixture(events), 0), hash("b"))).toEqual([]);
+    expect(decisionsForChange(events, hash("b")).map(event => event.payload.decision)).toEqual([{ kind: "rejected", reasons: ["Another frozen gate failed"] }]);
+    expect(decisionsForChange(events, hash("d"))).toEqual([]);
+  });
+});

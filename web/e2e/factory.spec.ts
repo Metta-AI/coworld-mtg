@@ -156,3 +156,53 @@ test("missing artifacts block portable export and can be retried after hydration
   await expect(page.getByRole("status")).toContainText("Saved complete portable replay with 3 artifact contents.");
 });
 
+
+test("run planning context is visible before a case has a patch", async ({ page }) => {
+  const planning = { ...structuredClone(initial), events: [...initial.events, { sequence: 3, elapsed_ms: 300, stage: "sources", payload: { kind: "source_imported", source: { snapshot_id: sourceId, provider: "Synthetic planning record", description: "A partial candidate is planned; implementation has not started.", retrieved_at: "test fixture", url: "urn:test:plan" } } }] };
+  await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [planning] } }));
+  await page.route("**/replay.json", route => route.fulfill({ json: planning }));
+  await page.route("**/artifacts/*", route => route.fulfill({ body: route.request().url().endsWith(sourceId) ? sourceText : caseText }));
+  await page.goto(url);
+  await page.getByRole("tab", { name: "Changes & decision" }).click();
+  await expect(page.locator(".change-context")).toContainText("A partial candidate is planned; implementation has not started.");
+  await expect(page.locator(".change-context")).toContainText("This is a run-level record.");
+  await expect(page.getByRole("heading", { name: "No patch proposed for this case", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Inspect planning & run history" }).click();
+  await expect(page.getByRole("dialog")).toContainText("A partial candidate is planned; implementation has not started.");
+  await page.getByRole("button", { name: "Close", exact: true }).click();
+  await page.getByRole("button", { name: "Previous event", exact: true }).click();
+  await expect(page.locator(".change-context")).not.toContainText("A partial candidate is planned");
+});
+
+test("a satisfied candidate case retains its recorded rejection beside the before and after evidence", async ({ page }) => {
+  const patch = "Synthetic test patch only", patchId = digest(patch), decisionId = "d".repeat(64), planId = "e".repeat(64);
+  const observation = (isMana: boolean) => JSON.stringify({ observation: { parsed: { abilities: [{ kind: "Activated", is_mana_ability: isMana, description: "Synthetic classification observation", effect: { type: "Synthetic" } }] } } });
+  const before = observation(true), after = observation(false), beforeId = digest(before), afterId = digest(after);
+  const texts: Record<string, string> = { [sourceId]: sourceText, [caseId]: caseText, [patchId]: patch, [beforeId]: before, [afterId]: after };
+  const artifacts = Object.fromEntries(Object.entries(texts).map(([id]) => [id, { path: id + ".json", media_type: "application/json", hash_mode: "bytes" }]));
+  const events: object[] = [...initial.events];
+  const append = (payload: object) => events.push({ sequence: events.length, elapsed_ms: events.length * 100, stage: "feedback", payload });
+  append({ kind: "acceptance_plan_frozen", plan_id: planId, plan: { case_id: caseId, regression_case_ids: [], holdout_case_ids: [] } });
+  append({ kind: "change_proposed", change_id: patchId, description: "Synthetic partial change", base_revision: "synthetic-revision", motivating_feedback_ids: [feedbackId] });
+  append({ kind: "execution_started", execution_id: "test-baseline", case_id: caseId, request_id: caseId, build_id: caseId, change_id: null });
+  append({ kind: "execution_finished", execution_id: "test-baseline", status: "completed", evidence_id: beforeId, trace_ids: [], detail: null });
+  append({ kind: "execution_started", execution_id: "test-candidate", case_id: caseId, request_id: caseId, build_id: caseId, change_id: patchId });
+  append({ kind: "execution_finished", execution_id: "test-candidate", status: "completed", evidence_id: afterId, trace_ids: [], detail: null });
+  append({ kind: "feedback_recorded", feedback: { feedback_id: "a".repeat(64), case_id: caseId, execution_ids: ["test-candidate"], evaluator: "test evaluator", evaluator_version: "test-only", adapter: "opaque", declared_strength: "strong", method: "Synthetic assertion", bounded_claim: "Only this synthetic check passed.", result: "satisfied", summary: "Synthetic candidate check is satisfied" } });
+  append({ kind: "decision_recorded", change_id: patchId, plan_id: planId, decision_id: decisionId, policy: { kind: "external", scope: "Synthetic frozen checks" }, decision: { kind: "rejected", reasons: ["A different frozen gate still fails."] } });
+  const rejected = { ...structuredClone(initial), artifacts, events };
+  await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [rejected] } }));
+  await page.route("**/replay.json", route => route.fulfill({ json: rejected }));
+  await page.route("**/artifacts/*", route => route.fulfill({ body: texts[route.request().url().split("/").pop()!] || "{}" }));
+  await page.goto(url);
+  await expect(page.getByText("Synthetic candidate check is satisfied", { exact: true })).toBeVisible();
+  const comparison = page.locator(".comparison-grid");
+  await expect(comparison.getByText("mana ability: yes", { exact: true })).toBeVisible();
+  await expect(comparison.getByText("mana ability: no", { exact: true })).toBeVisible();
+  await expect(comparison.getByText("Recorded decision: rejected", { exact: true })).toBeVisible();
+  await expect(comparison).toContainText("A different frozen gate still fails.");
+  await expect(comparison).not.toContainText("accepted");
+  await page.getByRole("button", { name: "Previous event", exact: true }).click();
+  await expect(comparison).toContainText("No decision recorded for this change at this point.");
+  await expect(comparison).not.toContainText("Recorded decision: rejected");
+});

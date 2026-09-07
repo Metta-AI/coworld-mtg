@@ -135,6 +135,10 @@ export function caseEvents(events: FactoryEvent[], caseId: string): FactoryEvent
       (p.kind === "compute_recorded" && executions.has(string(object(p.usage).execution_id)));
   });
 }
+export function decisionsForChange(events: FactoryEvent[], changeId: string): FactoryEvent[] {
+  return events.filter(event => event.payload.kind === "decision_recorded" && event.payload.change_id === changeId);
+}
+
 export function casesAt(events: FactoryEvent[]): CaseView[] {
   return events.filter(event => event.payload.kind === "case_registered").map(event => {
     const id = string(event.payload.case_id), related = caseEvents(events, id);

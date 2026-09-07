@@ -1,6 +1,6 @@
 import "./styles.css";
 import {
-  array, artifactReferences, casesAt, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
+  array, artifactReferences, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
   portableBlockers, preferredRun, recordedRunContext,
   referenceIssues, short, string, updatedCursor, verifyArtifact, visibleEvents,
   type ArtifactState, type CaseView, type FactoryEvent, type Fields, type Replay, type RunSummary,
@@ -139,8 +139,15 @@ function renderExecutions(selected: CaseView, candidate: boolean): string {
     const evidence = artifactValue(finish?.evidence_id);
     const outcome = object(evidence.outcome);
     const observation = evidence.observation ?? outcome.observation;
-    return `<article class="execution-card"><div class="card-top"><code>${esc(p.execution_id)}</code>${badge(finish?.status || "running", toneFor(finish?.status))}</div>${finish?.evidence_id ? `<div class="evidence-integrity">${statusMarkup(string(finish.evidence_id))}<span>Evidence content</span></div>` : ""}<div class="execution-links">${hashButton(p.build_id, "Build")}${hashButton(p.request_id, "Input")}${hashButton(finish?.evidence_id, "Evidence")}${array(finish?.trace_ids).map((id, i) => hashButton(id, "Trace " + (i + 1))).join("")}</div>${finish?.detail ? `<p>${esc(finish.detail)}</p>` : ""}${observation ? renderObservation(object(observation)) : outcome.reason ? `<pre>${esc(pretty(outcome.reason))}</pre>` : `<p class="subtle">${finish?.evidence_id ? evidenceHint(string(finish.evidence_id)) : "No execution evidence recorded yet."}</p>`}</article>`;
+    return `<article class="execution-card"><div class="card-top"><code>${esc(p.execution_id)}</code>${badge("execution " + (finish?.status || "running"), toneFor(finish?.status))}</div>${candidate ? renderExecutionDecision(string(p.change_id), selected.events) : ""}${finish?.evidence_id ? `<div class="evidence-integrity">${statusMarkup(string(finish.evidence_id))}<span>Evidence content</span></div>` : ""}<div class="execution-links">${hashButton(p.build_id, "Build")}${hashButton(p.request_id, "Input")}${hashButton(finish?.evidence_id, "Evidence")}${array(finish?.trace_ids).map((id, i) => hashButton(id, "Trace " + (i + 1))).join("")}</div>${finish?.detail ? `<p>${esc(finish.detail)}</p>` : ""}${observation ? renderObservation(object(observation)) : outcome.reason ? `<pre>${esc(pretty(outcome.reason))}</pre>` : `<p class="subtle">${finish?.evidence_id ? evidenceHint(string(finish.evidence_id)) : "No execution evidence recorded yet."}</p>`}</article>`;
   }).join("") : `<p class="column-empty">No ${candidate ? "candidate" : "baseline"} execution recorded at this point.</p>`}</section>`;
+}
+function renderExecutionDecision(changeId: string, events: FactoryEvent[]): string {
+  const decisions = decisionsForChange(events, changeId);
+  return `<div class="execution-decision"><div class="execution-links">${hashButton(changeId, "Candidate patch")}</div>${decisions.length ? decisions.map(event => {
+    const decision = object(event.payload.decision);
+    return `<div class="candidate-verdict ${esc(string(decision.kind))}"><strong>Recorded decision: ${esc(label(decision.kind))}</strong>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : ""}<p>Applies to the frozen plan bound by this decision.</p>${hashButton(event.payload.decision_id, "Decision record")}</div>`;
+  }).join("") : '<p class="candidate-pending">No decision recorded for this change at this point.</p>'}</div>`;
 }
 function evidenceHint(id: string): string {
   const artifact = state.artifacts.get(id);
@@ -211,11 +218,13 @@ function renderCardRecord(card: Fields): string {
 function renderChanges(selected: CaseView): string {
   const changes = valuesFor(selected.events, "change_proposed"), plans = valuesFor(selected.events, "acceptance_plan_frozen");
   const reviews = valuesFor(selected.events, "review_recorded"), decisions = valuesFor(selected.events, "decision_recorded");
+  const context = recordedRunContext(currentEvents());
   return `<div class="content-intro"><h3>From feedback to a recorded decision</h3><p>Changes cite their motivating feedback. Plans and reviews retain the scope under which a decision was recorded.</p></div>
+    ${context ? `<aside class="change-context"><div class="card-top"><span class="eyebrow">LATEST RUN CONTEXT · ${esc(context.source.provider)}</span>${hashButton(context.source.snapshot_id, "Context record")}</div><p>${esc(context.source.description)}</p><p class="subtle">This is a run-level record. Patch proposals below carry their own case and feedback links.</p><button class="text-button" data-action="run-history">Inspect planning & run history ↗</button></aside>` : ""}
     ${changes.map(event => {
       const p = event.payload, patch = state.artifacts.get(string(p.change_id));
       return `<article class="change-card"><div class="card-top"><span class="eyebrow">PROPOSED CHANGE</span>${hashButton(p.change_id, "Patch artifact")}</div><h4>${esc(p.description)}</h4><p class="subtle">Base revision <code>${esc(p.base_revision)}</code></p><div class="motivations"><span>Motivated by</span>${array(p.motivating_feedback_ids).map(id => hashButton(id)).join("") || "<span>No feedback linked</span>"}</div>${patch?.status === "verified" && patch.text ? `<details class="patch-details"><summary>Inspect recorded diff</summary><pre class="diff">${patch.text.split("\n").slice(0, 1000).map(line => `<span class="${line.startsWith("+") ? "addition" : line.startsWith("-") ? "deletion" : line.startsWith("@@") ? "hunk" : ""}">${esc(line)}</span>`).join("\n")}</pre></details>` : ""}</article>`;
-    }).join("") || empty("No change proposed", "Feedback can identify a gap without producing or accepting a repair.")}
+    }).join("") || empty("No patch proposed for this case", "Planning records can precede a patch. No candidate result or acceptance is implied by a plan.")}
     ${plans.map(event => {
       const plan = object(event.payload.plan);
       return `<article class="plan-card"><div class="card-top"><span class="eyebrow">FROZEN ACCEPTANCE PLAN</span>${hashButton(event.payload.plan_id, "Plan")}</div><div class="plan-counts"><span><strong>${array(plan.regression_case_ids).length}</strong> regression cases</span><span><strong>${array(plan.holdout_case_ids).length}</strong> held-out cases</span></div><details><summary>Inspect the frozen case set</summary><pre>${esc(pretty(plan))}</pre></details></article>`;
