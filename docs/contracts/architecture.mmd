@@ -9,3 +9,5 @@ flowchart LR
     Coordinator -->|AcceptanceDecision| EvidenceStore
     Builder -->|BuildRecord| Coordinator
     Coordinator -->|CaseAttribution| CaseLibrary
+    Coordinator -->|FactoryReplay| ReplayViewer
+    Coordinator -->|FactoryEvent| ReplayStore

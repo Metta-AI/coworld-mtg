@@ -260,6 +260,8 @@ pub fn contract_artifacts() -> BTreeMap<String, String> {
     boundary!(AcceptanceDecision, Coordinator, EvidenceStore);
     boundary!(BuildRecord, Builder, Coordinator);
     boundary!(CaseAttribution, Coordinator, CaseLibrary);
+    boundary!(FactoryReplay, Coordinator, ReplayViewer);
+    boundary!(FactoryEvent, Coordinator, ReplayStore);
     files.insert("architecture.mmd".into(), graph);
     files.insert("message-flow.mmd".into(), sequence);
     files

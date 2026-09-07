@@ -9,3 +9,5 @@ sequenceDiagram
     Coordinator->>EvidenceStore: AcceptanceDecision
     Builder->>Coordinator: BuildRecord
     Coordinator->>CaseLibrary: CaseAttribution
+    Coordinator->>ReplayViewer: FactoryReplay
+    Coordinator->>ReplayStore: FactoryEvent

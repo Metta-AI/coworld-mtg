@@ -1,6 +1,8 @@
 //! The offline improvement protocol. No engine, filesystem, network or agent dependency.
 //! Workers receive setup and operations; only the coordinator receives expectations.
 
+mod factory;
+pub use factory::*;
 mod protocol;
 pub use protocol::*;
 mod attribution;

@@ -1,0 +1,1028 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FactoryReplay",
+  "type": "object",
+  "properties": {
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[0-9a-f]{64}$": {
+          "$ref": "#/$defs/FactoryArtifact"
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FactoryEvent"
+      }
+    },
+    "recording": {
+      "$ref": "#/$defs/ReplayRecording"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FactoryStageSpec"
+      }
+    },
+    "status": {
+      "$ref": "#/$defs/FactoryRunStatus"
+    },
+    "target": {
+      "$ref": "#/$defs/ProgramTarget"
+    },
+    "title": {
+      "type": "string"
+    },
+    "version": {
+      "$ref": "#/$defs/FactoryVersion"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "run_id",
+    "title",
+    "target",
+    "recording",
+    "status",
+    "stages",
+    "artifacts",
+    "events"
+  ],
+  "$defs": {
+    "AcceptanceDecision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "baseline_receipt_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "candidate_receipt_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "gate_receipt_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "const": "accepted"
+            },
+            "plan_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "review_id": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "plan_id",
+            "baseline_receipt_id",
+            "candidate_receipt_id",
+            "gate_receipt_ids",
+            "review_id"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "rejected"
+            },
+            "reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reasons"
+          ]
+        }
+      ]
+    },
+    "AcceptancePlan": {
+      "description": "Freeze this plan before repair. Hold-outs are separately selected cases, not a pass count.",
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "holdout_case_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sha256"
+          }
+        },
+        "regression_case_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sha256"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "regression_case_ids",
+        "holdout_case_ids"
+      ]
+    },
+    "ArtifactHashMode": {
+      "type": "string",
+      "enum": [
+        "canonical_json",
+        "bytes"
+      ]
+    },
+    "CaseDerivation": {
+      "description": "Authentic source records and generated scenarios are deliberately separate claims.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "author": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "authored"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "author",
+            "description"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "source_derived"
+            },
+            "recipe": {
+              "type": "string"
+            },
+            "seed": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint64",
+              "minimum": 0
+            },
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            },
+            "source_records": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SourceRecordSelection"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "source_ids",
+            "source_records",
+            "recipe"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "reduced"
+            },
+            "parent_case_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "recipe": {
+              "type": "string"
+            },
+            "reduction_receipt_id": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "parent_case_id",
+            "reduction_receipt_id",
+            "recipe"
+          ]
+        }
+      ]
+    },
+    "ComputeMeasurement": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "estimated"
+      ]
+    },
+    "ComputeUsage": {
+      "type": "object",
+      "properties": {
+        "cpu_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0
+        },
+        "execution_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "input_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0
+        },
+        "measurement": {
+          "$ref": "#/$defs/ComputeMeasurement"
+        },
+        "output_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0
+        },
+        "peak_memory_bytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0
+        },
+        "wall_ms": {
+          "description": "Missing measurements are unknown, not zero. CPU can exceed wall time.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0
+        },
+        "worker": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "worker",
+        "measurement"
+      ]
+    },
+    "DecisionPolicy": {
+      "description": "External policies are immutable artifacts. Their authority and semantic adequacy\nbelong to the operator; the shared validator verifies their recorded binding only.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "mtg_conformance_v1"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "attestation_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "kind": {
+              "type": "string",
+              "const": "external"
+            },
+            "policy_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "scope": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "policy_id",
+            "scope",
+            "attestation_id"
+          ]
+        }
+      ]
+    },
+    "FactoryArtifact": {
+      "type": "object",
+      "properties": {
+        "hash_mode": {
+          "$ref": "#/$defs/ArtifactHashMode"
+        },
+        "media_type": {
+          "type": "string"
+        },
+        "path": {
+          "description": "A portable path relative to the directory containing replay.json.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "media_type",
+        "hash_mode"
+      ]
+    },
+    "FactoryBuild": {
+      "description": "Domain build attestations (including MTG BuildRecord) remain separate artifacts.",
+      "type": "object",
+      "properties": {
+        "attestation_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "binary_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "command": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "program": {
+          "type": "string"
+        },
+        "source_revision": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "program",
+        "source_revision",
+        "binary_sha256",
+        "command",
+        "environment"
+      ]
+    },
+    "FactoryEvent": {
+      "type": "object",
+      "properties": {
+        "elapsed_ms": {
+          "description": "Null for imported events or when timing was not measured.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/FactoryEventPayload"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "stage": {
+          "$ref": "#/$defs/FactoryStage"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "stage",
+        "payload"
+      ]
+    },
+    "FactoryEventPayload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "source_imported"
+            },
+            "source": {
+              "$ref": "#/$defs/SourceProvenance"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "source"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "case_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "derivation": {
+              "$ref": "#/$defs/CaseDerivation"
+            },
+            "kind": {
+              "type": "string",
+              "const": "case_registered"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "case_id",
+            "title",
+            "derivation"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "build": {
+              "$ref": "#/$defs/FactoryBuild"
+            },
+            "build_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "kind": {
+              "type": "string",
+              "const": "build_recorded"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "build_id",
+            "build"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "build_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "case_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "change_id": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Sha256"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "execution_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "execution_started"
+            },
+            "request_id": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "execution_id",
+            "case_id",
+            "request_id",
+            "build_id"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "detail": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evidence_id": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Sha256"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "execution_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "execution_finished"
+            },
+            "status": {
+              "$ref": "#/$defs/FactoryExecutionStatus"
+            },
+            "trace_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "execution_id",
+            "status",
+            "trace_ids"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "feedback": {
+              "$ref": "#/$defs/FactoryFeedback"
+            },
+            "kind": {
+              "type": "string",
+              "const": "feedback_recorded"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "feedback"
+          ]
+        },
+        {
+          "description": "The change ID is the patch artifact's existing content hash.",
+          "type": "object",
+          "properties": {
+            "base_revision": {
+              "type": "string"
+            },
+            "change_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "description": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "change_proposed"
+            },
+            "motivating_feedback_ids": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Sha256"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "change_id",
+            "description",
+            "base_revision",
+            "motivating_feedback_ids"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "acceptance_plan_frozen"
+            },
+            "plan": {
+              "$ref": "#/$defs/AcceptancePlan"
+            },
+            "plan_id": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "plan_id",
+            "plan"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "review_recorded"
+            },
+            "review": {
+              "$ref": "#/$defs/ReviewRecord"
+            },
+            "review_id": {
+              "$ref": "#/$defs/Sha256"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "review_id",
+            "review"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "change_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "decision": {
+              "$ref": "#/$defs/AcceptanceDecision"
+            },
+            "decision_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "kind": {
+              "type": "string",
+              "const": "decision_recorded"
+            },
+            "plan_id": {
+              "$ref": "#/$defs/Sha256"
+            },
+            "policy": {
+              "$ref": "#/$defs/DecisionPolicy"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "policy",
+            "decision_id",
+            "change_id",
+            "plan_id",
+            "decision"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "compute_recorded"
+            },
+            "usage": {
+              "$ref": "#/$defs/ComputeUsage"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "usage"
+          ]
+        }
+      ]
+    },
+    "FactoryExecutionStatus": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "inconclusive",
+        "error",
+        "cancelled"
+      ]
+    },
+    "FactoryFeedback": {
+      "description": "Strength is an evaluator's declaration about this bounded claim, never a voting weight.\nIt does not grant permission to bypass the existing frozen acceptance gate.",
+      "type": "object",
+      "properties": {
+        "adapter": {
+          "$ref": "#/$defs/FeedbackAdapter"
+        },
+        "bounded_claim": {
+          "type": "string"
+        },
+        "case_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "declared_strength": {
+          "$ref": "#/$defs/FeedbackStrength"
+        },
+        "evaluator": {
+          "type": "string"
+        },
+        "evaluator_version": {
+          "type": "string"
+        },
+        "execution_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "feedback_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "method": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/$defs/FeedbackResult"
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "adapter",
+        "feedback_id",
+        "case_id",
+        "execution_ids",
+        "evaluator",
+        "evaluator_version",
+        "declared_strength",
+        "method",
+        "bounded_claim",
+        "result",
+        "summary"
+      ]
+    },
+    "FactoryRunStatus": {
+      "type": "string",
+      "enum": [
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "FactoryStage": {
+      "type": "string",
+      "enum": [
+        "sources",
+        "cases",
+        "execute",
+        "feedback",
+        "reduce",
+        "changes",
+        "gates",
+        "review",
+        "decisions"
+      ]
+    },
+    "FactoryStageSpec": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/FactoryStage"
+        },
+        "next": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FactoryStage"
+          }
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "next"
+      ]
+    },
+    "FactoryVersion": {
+      "type": "string",
+      "enum": [
+        "software-factory-v1"
+      ]
+    },
+    "FeedbackAdapter": {
+      "type": "string",
+      "enum": [
+        "opaque",
+        "mtg_evaluation_v1"
+      ]
+    },
+    "FeedbackResult": {
+      "type": "string",
+      "enum": [
+        "satisfied",
+        "violated",
+        "inconclusive"
+      ]
+    },
+    "FeedbackStrength": {
+      "type": "string",
+      "enum": [
+        "weak",
+        "strong"
+      ]
+    },
+    "ProgramTarget": {
+      "type": "object",
+      "properties": {
+        "baseline_revision": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "repository",
+        "baseline_revision"
+      ]
+    },
+    "ReplayRecording": {
+      "description": "Imported evidence has logical replay order, not invented historical timestamps.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "live"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "const": "imported"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "description"
+          ]
+        }
+      ]
+    },
+    "ReviewDecision": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "reject"
+      ]
+    },
+    "ReviewRecord": {
+      "description": "A review attestation, not a cryptographic identity claim. The operator owns reviewer trust.",
+      "type": "object",
+      "properties": {
+        "baseline_receipt_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "candidate_receipt_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "decision": {
+          "$ref": "#/$defs/ReviewDecision"
+        },
+        "plan_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "reviewer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "plan_id",
+        "baseline_receipt_id",
+        "candidate_receipt_id",
+        "reviewer",
+        "rationale",
+        "decision"
+      ]
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "SourceProvenance": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "retrieved_at": {
+          "type": "string"
+        },
+        "snapshot_id": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "snapshot_id",
+        "provider",
+        "url",
+        "retrieved_at",
+        "description"
+      ]
+    },
+    "SourceRecordSelection": {
+      "type": "object",
+      "properties": {
+        "record_id": {
+          "type": "string"
+        },
+        "source_id": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "record_id"
+      ]
+    }
+  }
+}
