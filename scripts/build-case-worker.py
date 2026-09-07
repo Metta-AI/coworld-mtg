@@ -87,7 +87,9 @@ def main():
               'cargo_lock_sha256': sha((build / 'Cargo.lock').read_bytes()), 'command': command,
               'builder_sha256': builder,
               'build_environment': {key: environment[key] for key in
-                                    ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'CARGO_BUILD_TARGET') if key in environment},
+                                    ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'CARGO_BUILD_TARGET',
+                                     'CARGO_BUILD_JOBS', 'CARGO_PROFILE_DEV_DEBUG',
+                                     'CARGO_PROFILE_TEST_DEBUG', 'CARGO_INCREMENTAL') if key in environment},
               'compiler': subprocess.check_output(['rustup', 'run', channel, 'rustc', '-Vv'],
                                                   cwd=build, env=environment, text=True).strip()}
     (output / 'build.json').write_text(json.dumps(record, indent=2) + '\n')

@@ -1,24 +1,37 @@
 # EC2 workspace
 
-The fixed-input experiment checkout is on `nishadsingh-box-4` at
-`/home/ubuntu/repos/coworld-mtg`, branch `codex/verifiable-improvement-loop`.
-The engine repair checkout is `/home/ubuntu/repos/phase-verifiable-loop`.
-The checkout used to integrate and publish current main is
-`/home/ubuntu/repos/coworld-mtg-publish`, branch `codex/publish-verifiable-loop`.
-It has its own Cargo target directory. Keep the experiment checkout and its
-preserved checker unchanged as evidence of the accepted comparison.
-The macOS checkout is a migration backup; run builds and experiments on EC2.
+The active software-factory workspace is on `nishadsingh-box-4`:
+
+- Coordinator and viewer: `/home/ubuntu/repos/coworld-factory-20260907-root/repo`.
+- Source snapshots, frozen cohort and preserved builds: sibling `data/` and `bin/` directories.
+- Live and imported runs: sibling `runs/` directory.
+- Isolated Phase repair: `/home/ubuntu/repos/coworld-factory-20260907-phase-fix/repo`.
+
+The read-only factory server listens on remote loopback port 8030. Forward it
+with SSH, then open `http://127.0.0.1:18030/client/factory.html`:
 
 ```sh
-ssh nishadsingh-box-4
-cd /home/ubuntu/repos/coworld-mtg-publish
-export PATH=/home/ubuntu/.cargo/bin:$PATH
-export CARGO_BUILD_JOBS=1
-export CARGO_PROFILE_DEV_DEBUG=0
-export CARGO_PROFILE_TEST_DEBUG=0
-export CARGO_INCREMENTAL=0
-scripts/check.sh
+ssh -N -L 18030:127.0.0.1:8030 nishadsingh-box-4
 ```
+
+Check `~/.local/bin/codex-claim status` before remote work. Use an independently
+reserved clone and output directory for new experiments. The active workspace
+and port remain reserved while the viewer runs; existing experiment records
+must remain immutable.
+
+The macOS checkout is a migration backup. Builds and experiments run on EC2 with
+an isolated Cargo target, one build job, disabled incremental compilation and
+debug information, and explicit memory limits. See
+[software-factory.md](software-factory.md) for commands and replay verification.
+
+## Earlier experiment
+
+The fixed-input experiment remains at `/home/ubuntu/repos/coworld-mtg`, branch
+`codex/verifiable-improvement-loop`, with its engine checkout at
+`/home/ubuntu/repos/phase-verifiable-loop`. The historical publication checkouts
+are `/home/ubuntu/repos/coworld-mtg-publish` and
+`/home/ubuntu/repos/phase-hushbringer-publish`. They preserve the original accepted
+comparison and are read-only inputs to the newer experiment.
 
 The migration verified 3,902 source/evidence files by SHA-256 and preserved
 Git bundles and the original generated client checkout's history. Migration
@@ -32,9 +45,3 @@ executables and source snapshots live in `tmp/verifiable-loop/` on EC2.
 Accepted portable evidence, generated notes and the blog attribution index
 live in `cases/evidence/`; they omit large executable and dependency caches.
 See [verifiable-cases.md](verifiable-cases.md) for reproducing the loop.
-
-The production engine integration checkout is
-`/home/ubuntu/repos/phase-hushbringer-publish`. The accepted experiment remains
-in the original checkouts; the publication checkouts contain the current
-application/engine integration. Re-run application checks in the publication
-checkout to preserve the original comparison workers and build inputs.

@@ -21,7 +21,7 @@ import factory_replay as recorder
 import mana_library_oracle as oracle
 import scryfall_factory as factory
 
-RUNTIME = Path(os.environ.get("FACTORY_RUNTIME", ROOT / "target/debug/factory-runtime"))
+RUNTIME = Path(os.environ.get("FACTORY_RUNTIME", Path(os.environ.get("CARGO_TARGET_DIR", ROOT / "target")) / "debug/factory-runtime"))
 
 
 class RecorderFixture(unittest.TestCase):

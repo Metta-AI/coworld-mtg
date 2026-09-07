@@ -17,8 +17,9 @@ transport/replay adapter and series chrome; the former local renderer is built
 only to keep version-2 Coworld replays readable. See the
 [client migration spec](docs/specs/0001-phase-client-for-coworld.md).
 
-The tracked `web/` application is frozen compatibility code for version-2
-replays. New player, spectator, and replay work belongs in `phase-client/`.
+The game views in `web/` are compatibility code for version-2 replays. New
+player, spectator, and game-replay work belongs in `phase-client/`.
+The independent software-factory viewer lives in `web/src/factory/`.
 
 ## Development checks
 
@@ -50,9 +51,12 @@ The [verifiable case loop](docs/verifiable-cases.md) adds typed rule scenarios,
 separate execution and checking, guarded reduction, and frozen before/after
 acceptance with independent review. Rust types generate its JSON Schemas and
 architecture diagrams. The focused card cases run without the full private
-runtime corpus. Accepted repairs automatically generate [case notes and a blog
-attribution index](cases/evidence/README.md) from their evidence. The active
-workspace and preserved builds are on [EC2](docs/ec2-workspace.md).
+runtime corpus. The newer [software factory](docs/software-factory.md) discovers
+cases from real Scryfall snapshots and records executions, feedback, changes,
+reviews, and decisions as portable replay files. Its viewer follows the same
+typed events that the runner writes. Earlier [case notes](cases/evidence/README.md)
+remain historical artifacts. The active workspace and preserved builds are on
+[EC2](docs/ec2-workspace.md).
 
 ## Private runtime corpus
 
