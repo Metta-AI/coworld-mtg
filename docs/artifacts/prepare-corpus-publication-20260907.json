@@ -1,0 +1,52 @@
+{
+  "schema": "coworld-corpus-publication-v1",
+  "action": "created content-addressed object",
+  "uri": "s3://observatory-private/cogames/coworlds/coworld-mtg/corpora/v1/dfb96d582fc0f03cbc00e8837e4d1dcac42bb3cef6c715677ea446bed1be9099/coworld-mtg-corpus-v1.tar.zst",
+  "sha256": "dfb96d582fc0f03cbc00e8837e4d1dcac42bb3cef6c715677ea446bed1be9099",
+  "bytes": 26234,
+  "read_back_verified": true,
+  "recorded_at": "2026-09-07T23:04:03.035574+00:00",
+  "validation": [
+    "Native card-data-validate accepted the 50-entry Prepare closure.",
+    "Two independent packages produced identical archive bytes.",
+    "All 80 private workspace tests passed.",
+    "Workspace all-target Clippy and formatting passed.",
+    "Actual Phase client built; two-seat browser smoke passed."
+  ],
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "browser_checkout_revision": "2637fadb636950d2b68ade4dd94a607c3ad154f4",
+  "card_payload_sha256": "2ff4dca758e8e642bcae4115a01e1e3c9d1c4f561ef505d855064c57171ee092",
+  "face_entries": 50,
+  "distinct_oracle_ids": 46,
+  "change": "Add the four retained Prepare spell faces; preserve the original 46 face definitions and both 40-card decks exactly.",
+  "scope": "Private corpus closure at the unchanged Phase pin. Native tests exercise real Prepare casting; the browser check loads two Phase seats and submits a stop preference.",
+  "evidence": {
+    "native_prepare_test": {
+      "sha256": "e55f90c4c28126505ff0f09ae433359c24075316762ef5bd03804ccaf99b7643",
+      "bytes": 606,
+      "storage": "Retained in the owned EC2 workspace; not distributed with private episode traces."
+    },
+    "workspace_private_tests": {
+      "sha256": "2263a527e0aa4fd6f988cb963b5c92370fff45d33c8f477e4ec1e3d58083fc5d",
+      "bytes": 11264,
+      "storage": "Retained in the owned EC2 workspace; not distributed with private episode traces."
+    },
+    "clippy": {
+      "sha256": "47ce2575f72fce83a8e62823a03f4f23c5fbe6b4b6ca86cfa955b56091739400",
+      "bytes": 749,
+      "storage": "Retained in the owned EC2 workspace; not distributed with private episode traces."
+    },
+    "browser_smoke": {
+      "sha256": "429599700d0bebf1947a47294f3593847eaf9578b4eab8043073558db8a396fb",
+      "bytes": 175,
+      "storage": "Retained in the owned EC2 workspace; not distributed with private episode traces."
+    },
+    "phase_client_build": {
+      "sha256": "c99791e971634f34ae63782ec0252e3a5b04bf70d57cb187db79ea48611d6401",
+      "bytes": 10258,
+      "storage": "Retained in the owned EC2 workspace; not distributed with private episode traces."
+    }
+  },
+  "native_candidate_revision": "33d332f5ad4055f2204073c091eddded33eac70d",
+  "native_test_context": "The 80-test run exercised the repaired importer before a behavior-equivalent Clippy cleanup. Ten focused importer tests and full Clippy passed after that cleanup; the corpus definitions and Prepare action test were unchanged."
+}

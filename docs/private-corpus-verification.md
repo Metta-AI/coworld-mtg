@@ -25,9 +25,10 @@ a different task must acquire its own workspace before creating files.
 
 The September 7 minimal closure contains 50 card-face entries and 46 distinct
 Oracle IDs. It preserves the exact bytes of both original 40-card decks and adds
-the four required Prepare spell faces. The committed lock may still name the
-old 46-entry archive during review. Use both lock and URI overrides when checking
-the proposed local artifact; changing only the URI still verifies the old hash.
+the four required Prepare spell faces. The committed lock names the published 50-entry archive, verified by a complete
+S3 readback. The examples below can also validate the retained local copy. During
+future artifact reviews, use both lock and URI overrides; changing only the URI
+still verifies the committed hash.
 
 ```sh
 cd /home/ubuntu/repos/coworld-factory-20260907-root/repo
