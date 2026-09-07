@@ -1,0 +1,103 @@
+{
+  "title": "Hushbringer suppresses a death trigger even while dying",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/eld/18/hushbringer",
+        "reference": "Ruling 2019-10-04; CR 603.10",
+        "statement": "A creature dying simultaneously with Hushbringer does not cause death abilities to trigger, including when Hushbringer also dies."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "white",
+        "white",
+        "colorless",
+        "colorless"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "hush",
+        "name": "Hushbringer",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "traveler",
+        "name": "Doomed Traveler",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "wrath",
+        "name": "Wrath of God",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "wrath",
+        "targets": [],
+        "finish": "resolve",
+        "x": null
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "hush-died",
+      "predicate": {
+        "kind": "zone",
+        "object": "hush",
+        "equals": "graveyard"
+      }
+    },
+    {
+      "id": "traveler-died",
+      "predicate": {
+        "kind": "zone",
+        "object": "traveler",
+        "equals": "graveyard"
+      }
+    },
+    {
+      "id": "wrath-finished",
+      "predicate": {
+        "kind": "zone",
+        "object": "wrath",
+        "equals": "graveyard"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "simultaneous-death-suppressed",
+      "predicate": {
+        "kind": "zone_count",
+        "seat": "player",
+        "zone": "battlefield",
+        "name": "Spirit",
+        "equals": 0
+      }
+    }
+  ]
+}

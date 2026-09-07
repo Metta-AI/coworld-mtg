@@ -1,0 +1,77 @@
+{
+  "protocol": "coworld-improvement-v1",
+  "corpus_path": "/home/ubuntu/repos/coworld-mtg/cases/corpus/corpus.json",
+  "corpus_sha256": "8b7151e61d99082ba22c39ee5dc56e798e339e44387af5834f6b3c1982dfbb3c",
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "white",
+        "white",
+        "white",
+        "colorless",
+        "colorless"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "hush",
+        "name": "Hushbringer",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "traveler",
+        "name": "Doomed Traveler",
+        "owner": "player",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "wrath",
+        "name": "Wrath of God",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "swords",
+        "name": "Swords to Plowshares",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "swords",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "hush"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      },
+      {
+        "kind": "cast",
+        "card": "wrath",
+        "targets": [],
+        "finish": "resolve",
+        "x": null
+      }
+    ]
+  }
+}

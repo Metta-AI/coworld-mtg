@@ -1,0 +1,87 @@
+{
+  "title": "Swords to Plowshares remembers counters after exile",
+  "author": "codex-case-author",
+  "justification": {
+    "kind": "rules",
+    "citations": [
+      {
+        "source": "https://scryfall.com/card/msc/143/swords-to-plowshares",
+        "reference": "Ruling 2022-12-08; CR 608.2h",
+        "statement": "Life gain uses the creature power as it last existed on the battlefield, including counters."
+      }
+    ]
+  },
+  "scenario": {
+    "seed": 42,
+    "life": [
+      20,
+      20
+    ],
+    "mana": [
+      [
+        "white"
+      ],
+      []
+    ],
+    "cards": [
+      {
+        "label": "swords",
+        "name": "Swords to Plowshares",
+        "owner": "player",
+        "zone": "hand",
+        "tapped": false,
+        "plus_one_counters": 0
+      },
+      {
+        "label": "bear",
+        "name": "Grizzly Bears",
+        "owner": "opponent",
+        "zone": "battlefield",
+        "tapped": false,
+        "plus_one_counters": 3
+      }
+    ],
+    "operations": [
+      {
+        "kind": "cast",
+        "card": "swords",
+        "targets": [
+          {
+            "kind": "object",
+            "label": "bear"
+          }
+        ],
+        "finish": "resolve",
+        "x": null
+      }
+    ]
+  },
+  "guards": [
+    {
+      "id": "target-actually-exiled",
+      "predicate": {
+        "kind": "zone",
+        "object": "bear",
+        "equals": "exile"
+      }
+    },
+    {
+      "id": "spell-finished",
+      "predicate": {
+        "kind": "zone",
+        "object": "swords",
+        "equals": "graveyard"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "id": "last-known-power-five",
+      "predicate": {
+        "kind": "life",
+        "seat": "opponent",
+        "equals": 25
+      }
+    }
+  ]
+}
