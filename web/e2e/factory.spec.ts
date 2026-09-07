@@ -175,6 +175,9 @@ test("run planning context is visible before a case has a patch", async ({ page 
 });
 
 test("a satisfied candidate case retains its recorded rejection beside the before and after evidence", async ({ page }) => {
+  // Exact reason retained by real Scryfall decision 11bd1d52f3d2dd823d3e72194beb7bf735fcc6d8c1cb455cec33c1ab9e6f00cb.
+  // The surrounding replay stays an explicit UI fixture; this string reproduces its mobile overflow.
+  const recordedReason = "Frozen acceptance requirements were not satisfied: frozen acceptance requirements failed: ['7d91f1fd538d1c634aef57b68fd7c32669b02af543380bb6b82da32417b6919e', '69007946c529eb39476a5dc5ed0944ad39af8ed5debcedc35ea95a4582ad28c8']";
   const patch = "Synthetic test patch only", patchId = digest(patch), decisionId = "d".repeat(64), planId = "e".repeat(64);
   const observation = (isMana: boolean) => JSON.stringify({ observation: { parsed: { abilities: [{ kind: "Activated", is_mana_ability: isMana, description: "Synthetic classification observation", effect: { type: "Synthetic" } }] } } });
   const before = observation(true), after = observation(false), beforeId = digest(before), afterId = digest(after);
@@ -189,7 +192,7 @@ test("a satisfied candidate case retains its recorded rejection beside the befor
   append({ kind: "execution_started", execution_id: "test-candidate", case_id: caseId, request_id: caseId, build_id: caseId, change_id: patchId });
   append({ kind: "execution_finished", execution_id: "test-candidate", status: "completed", evidence_id: afterId, trace_ids: [], detail: null });
   append({ kind: "feedback_recorded", feedback: { feedback_id: "a".repeat(64), case_id: caseId, execution_ids: ["test-candidate"], evaluator: "test evaluator", evaluator_version: "test-only", adapter: "opaque", declared_strength: "strong", method: "Synthetic assertion", bounded_claim: "Only this synthetic check passed.", result: "satisfied", summary: "Synthetic candidate check is satisfied" } });
-  append({ kind: "decision_recorded", change_id: patchId, plan_id: planId, decision_id: decisionId, policy: { kind: "external", scope: "Synthetic frozen checks" }, decision: { kind: "rejected", reasons: ["A different frozen gate still fails."] } });
+  append({ kind: "decision_recorded", change_id: patchId, plan_id: planId, decision_id: decisionId, policy: { kind: "external", scope: "Synthetic frozen checks" }, decision: { kind: "rejected", reasons: [recordedReason] } });
   const rejected = { ...structuredClone(initial), artifacts, events };
   await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [rejected] } }));
   await page.route("**/replay.json", route => route.fulfill({ json: rejected }));
@@ -200,7 +203,13 @@ test("a satisfied candidate case retains its recorded rejection beside the befor
   await expect(comparison.getByText("mana ability: yes", { exact: true })).toBeVisible();
   await expect(comparison.getByText("mana ability: no", { exact: true })).toBeVisible();
   await expect(comparison.getByText("Recorded decision: rejected", { exact: true })).toBeVisible();
-  await expect(comparison).toContainText("A different frozen gate still fails.");
+  await expect(comparison).toContainText(recordedReason);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole("tab", { name: "Changes & decision" }).click();
+  await expect(page.locator(".decision-card")).toContainText(recordedReason);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole("tab", { name: "Evidence", exact: true }).click();
   await expect(comparison).not.toContainText("accepted");
   await page.getByRole("button", { name: "Previous event", exact: true }).click();
   await expect(comparison).toContainText("No decision recorded for this change at this point.");

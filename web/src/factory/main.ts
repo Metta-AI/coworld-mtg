@@ -1,7 +1,7 @@
 import "./styles.css";
 import { isScryfallRecord, renderGenericSourceRecord, renderRecordedResult } from "./record-view";
 import {
-  array, artifactReferences, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
+  array, artifactReferences, candidateGateViolations, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
   portableBlockers, preferredRun, recordedRunContext,
   referenceIssues, short, string, updatedCursor, verifyArtifact, visibleEvents,
   type ArtifactState, type CaseView, type FactoryEvent, type Fields, type Replay, type RunSummary,
@@ -148,7 +148,7 @@ function renderExecutionDecision(changeId: string, events: FactoryEvent[]): stri
   const decisions = decisionsForChange(events, changeId);
   return `<div class="execution-decision"><div class="execution-links">${hashButton(changeId, "Candidate patch")}</div>${decisions.length ? decisions.map(event => {
     const decision = object(event.payload.decision);
-    return `<div class="candidate-verdict ${esc(string(decision.kind))}"><strong>Recorded decision: ${esc(label(decision.kind))}</strong>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : ""}<p>Applies to the frozen plan bound by this decision.</p>${hashButton(event.payload.decision_id, "Decision record")}</div>`;
+    return `<div class="candidate-verdict ${esc(string(decision.kind))}"><strong>Recorded decision: ${esc(label(decision.kind))}</strong>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : ""}${renderGateViolations(event)}<p>Applies to the frozen plan bound by this decision.</p>${hashButton(event.payload.decision_id, "Decision record")}</div>`;
   }).join("") : '<p class="candidate-pending">No decision recorded for this change at this point.</p>'}</div>`;
 }
 function evidenceHint(id: string): string {
@@ -239,8 +239,12 @@ function renderChanges(selected: CaseView): string {
       return `<article class="plan-card"><div class="card-top"><span class="eyebrow">FROZEN ACCEPTANCE PLAN</span>${hashButton(event.payload.plan_id, "Plan")}</div><div class="plan-counts"><span><strong>${array(plan.regression_case_ids).length}</strong> regression cases</span><span><strong>${array(plan.holdout_case_ids).length}</strong> held-out cases</span></div><details><summary>Inspect the frozen case set</summary><pre>${esc(pretty(plan))}</pre></details></article>`;
     }).join("")}
     ${reviews.map(event => { const review = object(event.payload.review); return `<article class="review-card"><div class="card-top"><span class="eyebrow">REVIEW ATTESTATION</span>${badge(review.decision, toneFor(review.decision))}</div><h4>${esc(review.reviewer)}</h4><p>${esc(review.rationale)}</p>${hashButton(event.payload.review_id, "Review record")}</article>`; }).join("")}
-    ${decisions.map(event => { const decision = object(event.payload.decision), policy = object(event.payload.policy); return `<article class="decision-card ${esc(string(decision.kind))}"><div class="card-top"><span class="eyebrow">RECORDED DECISION</span>${badge(decision.kind, toneFor(decision.kind))}</div><h4>${decision.kind === "accepted" ? "Accepted for the recorded plan" : "The proposed change was rejected"}</h4>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : `<p>This decision is bounded to the cases and gates named by the frozen plan. It does not establish correctness outside that scope.</p>`}<dl class="detail-list"><dt>Policy</dt><dd>${esc(label(policy.kind) || "Not declared")}</dd>${policy.scope ? `<dt>Claim scope</dt><dd>${esc(policy.scope)}</dd>` : ""}${policy.attestation_id ? `<dt>Attestation</dt><dd>${hashButton(policy.attestation_id)}</dd>` : ""}</dl>${hashButton(event.payload.decision_id, "Decision record")}<details><summary>Decision bindings</summary><pre>${esc(pretty(decision))}</pre></details></article>`; }).join("") || `<div class="pending-decision"><span class="status-dot"></span><div><strong>No decision recorded at this point</strong><p>The viewer does not turn passing feedback into acceptance.</p></div></div>`}
+    ${decisions.map(event => { const decision = object(event.payload.decision), policy = object(event.payload.policy); return `<article class="decision-card ${esc(string(decision.kind))}"><div class="card-top"><span class="eyebrow">RECORDED DECISION</span>${badge(decision.kind, toneFor(decision.kind))}</div><h4>${decision.kind === "accepted" ? "Accepted for the recorded plan" : "The proposed change was rejected"}</h4>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : `<p>This decision is bounded to the cases and gates named by the frozen plan. It does not establish correctness outside that scope.</p>`}${renderGateViolations(event)}<dl class="detail-list"><dt>Policy</dt><dd>${esc(label(policy.kind) || "Not declared")}</dd>${policy.scope ? `<dt>Claim scope</dt><dd>${esc(policy.scope)}</dd>` : ""}${policy.attestation_id ? `<dt>Attestation</dt><dd>${hashButton(policy.attestation_id)}</dd>` : ""}</dl>${hashButton(event.payload.decision_id, "Decision record")}<details><summary>Decision bindings</summary><pre>${esc(pretty(decision))}</pre></details></article>`; }).join("") || `<div class="pending-decision"><span class="status-dot"></span><div><strong>No decision recorded at this point</strong><p>The viewer does not turn passing feedback into acceptance.</p></div></div>`}
   `;
+}
+function renderGateViolations(decision: FactoryEvent): string {
+  const violations = candidateGateViolations(currentEvents(), decision);
+  return violations.length ? `<section class="candidate-gate-violations"><strong>Recorded candidate gate violations</strong><ul>${violations.map(item => `<li><button class="text-button" data-case="${esc(item.caseId)}">${esc(item.title)}</button> ${item.feedbackIds.map(id => hashButton(id, "Feedback evidence")).join(" ")}</li>`).join("")}</ul></section>` : "";
 }
 function renderTimeline(selected: CaseView | undefined): string {
   const replay = state.replay!;

@@ -135,6 +135,36 @@ export function caseEvents(events: FactoryEvent[], caseId: string): FactoryEvent
       (p.kind === "compute_recorded" && executions.has(string(object(p.usage).execution_id)));
   });
 }
+export interface CandidateGateViolation { caseId: string; title: string; feedbackIds: string[] }
+
+// Explain only typed gate feedback already recorded when this decision was made.
+// An empty result says nothing about acceptance or the producer's rejection reason.
+export function candidateGateViolations(events: FactoryEvent[], decision: FactoryEvent): CandidateGateViolation[] {
+  const payload = decision.payload, changeId = string(payload.change_id), planId = string(payload.plan_id);
+  if (payload.kind !== "decision_recorded" || object(payload.decision).kind !== "rejected" || !changeId || !planId ||
+      !events.some(event => event.sequence === decision.sequence && event.payload.kind === "decision_recorded" && event.payload.decision_id === payload.decision_id)) return [];
+  const prior = events.filter(event => event.sequence <= decision.sequence);
+  const plans = prior.filter(event => event.payload.kind === "acceptance_plan_frozen" && event.payload.plan_id === planId);
+  if (plans.length !== 1) return [];
+  const plan = object(plans[0].payload.plan);
+  const required = [...new Set([plan.case_id, ...array(plan.regression_case_ids), ...array(plan.holdout_case_ids)].map(string).filter(Boolean))];
+  const starts = new Map(prior.filter(event => event.payload.kind === "execution_started").map(event => [string(event.payload.execution_id), event]));
+  return required.flatMap(caseId => {
+    const registration = prior.find(event => event.payload.kind === "case_registered" && event.payload.case_id === caseId);
+    if (!registration) return [];
+    const feedbackIds = prior.filter(event => {
+      if (event.payload.kind !== "feedback_recorded") return false;
+      const feedback = object(event.payload.feedback), ids = array(feedback.execution_ids).map(string);
+      return feedback.case_id === caseId && feedback.declared_strength === "strong" && feedback.result === "violated" &&
+        Boolean(string(feedback.feedback_id)) && ids.length > 0 && ids.every(id => {
+          const start = starts.get(id);
+          return start !== undefined && start.sequence < event.sequence && start.payload.case_id === caseId && start.payload.change_id === changeId;
+        });
+    }).map(event => string(object(event.payload.feedback).feedback_id));
+    return feedbackIds.length ? [{ caseId, title: string(registration.payload.title) || caseId, feedbackIds: [...new Set(feedbackIds)] }] : [];
+  });
+}
+
 export function decisionsForChange(events: FactoryEvent[], changeId: string): FactoryEvent[] {
   return events.filter(event => event.payload.kind === "decision_recorded" && event.payload.change_id === changeId);
 }

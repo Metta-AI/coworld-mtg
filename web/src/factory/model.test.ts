@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createHash } from "node:crypto";
-import { decisionsForChange, emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
+import { object, candidateGateViolations, decisionsForChange, emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Fields, type Replay } from "./model";
 
 const hash = (char: string) => char.repeat(64);
 const event = (sequence: number, payload: FactoryEvent["payload"], stage = "cases"): FactoryEvent => ({ sequence, elapsed_ms: sequence * 100, stage, payload });
@@ -178,5 +178,52 @@ describe("candidate decision bindings", () => {
     expect(decisionsForChange(visibleEvents(fixture(events), 0), hash("b"))).toEqual([]);
     expect(decisionsForChange(events, hash("b")).map(event => event.payload.decision)).toEqual([{ kind: "rejected", reasons: ["Another frozen gate failed"] }]);
     expect(decisionsForChange(events, hash("d"))).toEqual([]);
+  });
+});
+
+
+describe("recorded candidate gate context", () => {
+  const gateFixture = () => {
+    const events: FactoryEvent[] = [];
+    const add = (payload: FactoryEvent["payload"]) => events.push(event(events.length, payload));
+    add({ kind: "case_registered", case_id: hash("a"), title: "Deranged Assistant" });
+    add({ kind: "case_registered", case_id: hash("b"), title: "Millikin" });
+    add({ kind: "case_registered", case_id: hash("c"), title: "Unrelated case" });
+    add({ kind: "acceptance_plan_frozen", plan_id: hash("d"), plan: { case_id: hash("a"), regression_case_ids: [hash("b")], holdout_case_ids: [] } });
+    add({ kind: "acceptance_plan_frozen", plan_id: hash("e"), plan: { case_id: hash("c"), regression_case_ids: [], holdout_case_ids: [] } });
+    for (const [caseId, id, change] of [[hash("a"), "assistant", hash("f")], [hash("b"), "millikin", hash("f")], [hash("c"), "unrelated", hash("f")], [hash("a"), "other-candidate", hash("e")]]) {
+      add({ kind: "execution_started", execution_id: id, case_id: caseId, change_id: change });
+      add({ kind: "feedback_recorded", feedback: { case_id: caseId, feedback_id: id, declared_strength: "strong", result: "violated", execution_ids: [id] } });
+    }
+    add({ kind: "decision_recorded", decision_id: "rejection", plan_id: hash("d"), change_id: hash("f"), decision: { kind: "rejected", reasons: ["An opaque producer reason"] } });
+    return { events, decision: events[events.length - 1], add };
+  };
+  it("joins required case names and feedback through the exact plan and candidate", () => {
+    const { events, decision } = gateFixture();
+    expect(candidateGateViolations(events, decision)).toEqual([
+      { caseId: hash("a"), title: "Deranged Assistant", feedbackIds: ["assistant"] },
+      { caseId: hash("b"), title: "Millikin", feedbackIds: ["millikin"] },
+    ]);
+  });
+  it("keeps later candidate or same-change feedback from rewriting an earlier rejection", () => {
+    const { events, decision, add } = gateFixture(), original = candidateGateViolations(events, decision);
+    add({ kind: "execution_started", execution_id: "later", case_id: hash("a"), change_id: hash("f") });
+    add({ kind: "feedback_recorded", feedback: { case_id: hash("a"), feedback_id: "later-failure", declared_strength: "strong", result: "violated", execution_ids: ["later"] } });
+    add({ kind: "feedback_recorded", feedback: { case_id: hash("b"), feedback_id: "later-success", declared_strength: "strong", result: "satisfied", execution_ids: ["millikin"] } });
+    add({ kind: "decision_recorded", decision_id: "later-acceptance", plan_id: hash("d"), change_id: hash("e"), decision: { kind: "accepted" } });
+    expect(candidateGateViolations(events, decision)).toEqual(original);
+    expect(candidateGateViolations(events.slice(0, decision.sequence), decision)).toEqual([]);
+  });
+  it("excludes weak, missing, mixed-candidate or mismatched-case execution bindings", () => {
+    const { events, decision } = gateFixture();
+    const invalidBindings: Fields[] = [
+      { declared_strength: "weak" }, { execution_ids: [] }, { execution_ids: ["missing"] },
+      { execution_ids: ["assistant", "other-candidate"] }, { execution_ids: ["millikin"] },
+    ];
+    for (const bad of invalidBindings) {
+      const changed = events.map(item => item.payload.kind === "feedback_recorded" && object(item.payload.feedback).feedback_id === "assistant" ? { ...item, payload: { ...item.payload, feedback: { ...object(item.payload.feedback), ...bad } } } : item);
+      expect(candidateGateViolations(changed, decision).map(item => item.title)).toEqual(["Millikin"]);
+    }
+    expect(candidateGateViolations(events.filter(item => item.payload.kind !== "acceptance_plan_frozen"), decision)).toEqual([]);
   });
 });
