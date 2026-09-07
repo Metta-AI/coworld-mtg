@@ -150,7 +150,7 @@ def record_work(args):
             raise ValueError("compute stage is not in the replay topology")
         content = {"kind": KIND, "session_format": "codex-exec-jsonl", **identities,
                    "model": model, "role": role, "reasoning_effort": reasoning, "summary": summary,
-                   "attribution": "Model, role, summary and start-time feedback assertions are supplied by the caller.",
+                   "attribution": "Model, role, summary, the association of prompt/report files with this session, and any start-time feedback assertion are supplied by the caller. File hashes and completed-session usage are measured; authorship is not independently proved.",
                    "feedback_links": [{"feedback_id": identity, "relationship": relation}
                                       for identity in sorted(requested_links)],
                    "usage": usage, "wall_ms": None, "started_at": None, "completed_at": None,

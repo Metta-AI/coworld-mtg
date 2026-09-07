@@ -179,6 +179,10 @@ records made by this CLI, not earlier ad hoc summaries without session identitie
 Malformed, failed, incomplete or concatenated sessions, unknown feedback links
 and terminal runs are rejected. Publication time is not the agent's work duration.
 
+The caller also associates the supplied prompt and report with the session.
+Their hashes preserve those supplied files; they do not independently prove
+that the session consumed the prompt or authored the report.
+
 ## Adapting another factory
 
 Keep the replay, artifact store, viewer and process recorder. Replace the source
