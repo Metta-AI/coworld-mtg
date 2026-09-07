@@ -90,6 +90,10 @@ function render(): void {
     ${renderInspector()}
   `;
   for (const element of app.querySelectorAll<HTMLElement>("[data-scroll]")) element.scrollTop = scrolls.get(element.dataset.scroll) ?? 0;
+  if (state.following) {
+    const stream = app.querySelector<HTMLElement>(".event-list");
+    if (stream) stream.scrollTop = stream.scrollHeight;
+  }
   if (focusId) {
     const element = document.getElementById(focusId) as HTMLInputElement | null;
     element?.focus({ preventScroll: true });
