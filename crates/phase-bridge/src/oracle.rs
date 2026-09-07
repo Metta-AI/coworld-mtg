@@ -99,6 +99,28 @@ pub fn inspect_oracle_card(record: Value) -> OracleInspection {
             &types,
             &subtypes,
         );
+        // Phase's UI serialization omits false flags. This measurement boundary
+        // records the authoritative classifier result explicitly for every root
+        // ability, so absence cannot be confused with an unavailable observation.
+        let classifications: Vec<bool> = parsed
+            .abilities
+            .iter()
+            .map(phase_engine::game::mana_abilities::is_mana_ability)
+            .collect();
+        let mut observed = serde_json::to_value(parsed).map_err(|error| error.to_string())?;
+        let abilities = observed
+            .get_mut("abilities")
+            .and_then(Value::as_array_mut)
+            .ok_or("Phase serialization did not contain an ability array")?;
+        if abilities.len() != classifications.len() {
+            return Err("Phase serialization changed the measured ability count".into());
+        }
+        for (ability, classification) in abilities.iter_mut().zip(classifications) {
+            ability
+                .as_object_mut()
+                .ok_or("Phase serialized a non-object ability")?
+                .insert("is_mana_ability".into(), Value::Bool(classification));
+        }
         Ok(OracleInspection::Parsed {
             card_id: card.id,
             oracle_id: card.oracle_id,
@@ -106,7 +128,7 @@ pub fn inspect_oracle_card(record: Value) -> OracleInspection {
             phase_revision: PHASE_REVISION.into(),
             types,
             subtypes,
-            parsed: serde_json::to_value(parsed).map_err(|error| error.to_string())?,
+            parsed: observed,
         })
     };
     match run() {
@@ -138,5 +160,23 @@ mod tests {
     fn unknown_type_context_is_explicitly_inconclusive() {
         assert!(type_context("Unrecognized Artifact").is_err());
         assert!(type_context("Creature — NotARealSubtype").is_err());
+    }
+    #[test]
+    fn explicit_false_is_an_observation_not_a_missing_field() {
+        let result = inspect_oracle_card(serde_json::json!({
+            "id": "probe-of-actual-source-text",
+            "oracle_id": "daily-bugle-newspaper",
+            "name": "Daily Bugle Newspaper",
+            "layout": "normal",
+            "type_line": "Artifact",
+            "keywords": [],
+            "oracle_text": "{2}, {T}: Draw a card, then discard a card. Create a Treasure token."
+        }));
+        let OracleInspection::Parsed { parsed, .. } = result else {
+            panic!("the authentic activated paragraph must parse");
+        };
+        let abilities = parsed["abilities"].as_array().unwrap();
+        assert!(!abilities.is_empty());
+        assert_eq!(abilities[0]["is_mana_ability"], serde_json::json!(false));
     }
 }
