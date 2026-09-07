@@ -230,13 +230,13 @@ Several weak signals do not satisfy a missing strong acceptance gate.
 Start the adapter with `Replay.create`, retain inputs through `artifact`, register
 cases through `event`, then use `build`, `run_jsonl` and `feedback`. Keep expected
 results in the evaluator, outside the worker request. The Python runner currently
-uses Unix process limits and expects one finite JSONL observation of at most
-16 MiB. Other protocols need a wrapper or their own executor that emits the same
-execution records. Put flags and other behavior-changing inputs in the retained
-case/request, and have a fixed worker wrapper consume them. The current JSONL
-request records the input and executable hashes, not its arbitrary argument
-callback's full command line. A new adapter must preserve and audit any additional
-invocation configuration. For interpreted programs, the interpreter's binary hash alone
+uses Unix process limits and defaults to one finite JSONL observation of at most
+16 MiB. An adapter can supply `decode_output` and `output_media_type` for another
+native format; raw output remains a separate byte artifact. Decoder exceptions
+produce error evidence with no partial observation. Requests retain the actual
+command vector as well as input and executable hashes. A domain verifier must
+check those arguments and recompute the decoded observation with its frozen
+decoder; imported replay code is never executed. For interpreted programs, the interpreter's binary hash alone
 does not identify the target: retain the program's source and invocation in the
 build attestation and verify that binding. Original domain data, including
 floating-point values, can remain byte artifacts instead of canonical contracts.
@@ -264,3 +264,87 @@ budget as its target requirement. Pure utility ranking without such a requiremen
 is outside this acceptance shape; do not invent a baseline violation to fit it.
 The non-MTG parser fixtures establish that the envelope can represent another
 domain. They do not establish a second production improvement result.
+
+
+### Real 17Lands importer coverage adapter
+
+`scripts/seventeenlands_factory.py` applies the same runtime to Coworld's native
+`mine17lands` importer. The target is the Coworld harness repository and commit;
+the Phase revision in its minimal manifest is a loader compatibility pin. It is
+not the source revision being repaired. The observed discovery failure read 92
+real public game rows but produced an empty card-frequency list. Independent
+source parsing found 1,426 listed cast occurrences, 230 Arena IDs and 229 official
+names (two IDs map to Lightning Strike). These counts concern source ingestion.
+They do not establish a successful repair or gameplay correctness.
+
+The frozen experiment uses exact public CSV bytes and the official `cards.csv`
+mapping. Primary rows 1–46 and regression rows 47–92 are disjoint. The holdout is
+the first 16 newly completed rows after those 92, selected from a longer prefix
+of the same archive before candidate results and withheld from the miner
+implementation agent. Acquisition checks the new prefix's first 65,536 bytes
+against the retained prefix, and records ETag, Last-Modified, byte ranges and
+hashes. The whole-92 case is an additional reproduction measurement that overlaps
+the two known partitions; its counts must not be added to theirs. Holdout success
+would cover unseen rows of this archive, not unseen formats or rules semantics.
+
+`seventeenlands_coverage.py` independently enumerates exact per-turn cast columns,
+pipe positions, Arena IDs and official names. It excludes totals, zone snapshots
+and ability lists. Repeated casts retain separate entries; name frequencies may
+combine different Arena IDs. Unknown schemas, missing input rows, invalid tokens,
+unmapped IDs, failed workers and nonrepeatable output remain inconclusive. A provided
+unknown or malformed normalization schema is inconclusive even when its frequency
+list differs; the known baseline can still prove frequency loss without a
+normalization field. Repeatability compares the coverage projection after omitting
+the invocation-local mapping path. It does not require equality of unrelated weak
+numeric summaries or entire raw output files; both raw files remain retained. Strong
+feedback checks this source-coverage claim; the fact that the workload came from
+human games is separately recorded as weak feedback. Both the native observation
+and coverage receipt use the tagged `software-factory-result-v1` display envelope,
+with the recorded feedback result separate from measured data.
+
+The baseline uses its supported legacy flags. The candidate additionally receives
+`--input-schema public-replay-wide-v1`, the official mapping path and its hash.
+Both consume the same frozen public source identities through a minimal public-only
+manifest; its zero corpus-validation fields make no assertion about a Phase
+corpus. Historical discovery output that used private bootstrap material must be
+described separately and must not be relabeled as public-input-only execution.
+
+A build receipt has schema `17lands-miner-build-v1`: exact Coworld source/base
+commits, patch and executable hashes, Cargo lock hash, source-file hashes before
+and after compilation, compiler identity, command and environment. The before and
+after maps must equal the retained source map; a baseline has the empty patch
+hash, and a candidate binds its distinct clean commit to the proposed patch.
+Retain the source archive and actual builder logs separately. These are explicit
+caller attestations, not independent proof of reproducible compilation.
+
+```sh
+python3 scripts/seventeenlands_factory.py prepare --source-dir SOURCE_FREEZE_DIR \
+  --output-dir RUN_DIR --runtime FACTORY_RUNTIME --run-id RUN_ID \
+  --baseline-revision FULL_COWORLD_BASELINE_COMMIT
+python3 scripts/seventeenlands_factory.py execute --run-dir RUN_DIR \
+  --runtime FACTORY_RUNTIME --phase baseline --worker BASELINE_WORKER \
+  --build-attestation BASELINE_BUILD_JSON
+python3 scripts/seventeenlands_factory.py propose --run-dir RUN_DIR \
+  --runtime FACTORY_RUNTIME --patch EXACT_TARGET_PATCH --description DESCRIPTION
+python3 scripts/seventeenlands_factory.py execute --run-dir RUN_DIR \
+  --runtime FACTORY_RUNTIME --phase candidate --worker CANDIDATE_WORKER \
+  --build-attestation CANDIDATE_BUILD_JSON --change-id PATCH_SHA256
+```
+
+Then use `review`, `decide` and `verify` with the same run/runtime. A passing result
+still needs a retained independent review bound to the exact plan and before/after
+feedback. `verify` checks retained output bytes, source slices, mapping, invocation,
+build binding, exact installed evaluator and adapter hashes, and recomputed
+acceptance inputs. Only `decide`
+records acceptance; default terminal-run immutability applies.
+
+Public packaging is an explicit allowlist: derived source CSV partitions, official
+mapping, sanitized acquisition/slicing receipt, frozen evaluator and expectations,
+raw native outputs, bounded execution/feedback, patch/build/review/decision records.
+Compressed prefix bytes remain in the source-freeze directory outside the UTF-8
+portable bundle, with their hashes and derivation in the public receipt. A prefix
+hash is never a full archive hash. Do not copy the audit directory wholesale or
+publish its original completion/importer receipts, private bootstrap manifest or
+materialized corpus. Attribute [17Lands public datasets](https://www.17lands.com/public_datasets)
+under CC BY 4.0, record slicing as a modification, and retain the non-endorsement
+notice. Wide game rows omit global action order, targets, priority and hidden state.

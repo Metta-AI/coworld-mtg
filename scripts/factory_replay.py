@@ -216,8 +216,14 @@ class Replay:
 
     def run_jsonl(self, *, execution_id, case_id, build_id, binary, record,
                   arguments, protocol, classify_status, change_id=None,
-                  deadline_seconds=30, memory_bytes=2 * 1024**3):
-        """Run a domain JSONL worker in isolation; adapters supply its protocol."""
+                  deadline_seconds=30, memory_bytes=2 * 1024**3,
+                  decode_output=decode_jsonl, output_media_type="application/x-ndjson"):
+        """Run a bounded worker; its adapter decodes retained raw output bytes.
+
+        The default remains one JSONL observation. A decoder may wrap another
+        native format for presentation, but verification must recompute that
+        observation from the retained output with the same frozen decoder.
+        """
         self.require_running()
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,159}", execution_id):
             raise ValueError("execution ID must be a safe single path component")
@@ -233,7 +239,7 @@ class Replay:
         input_id = self.artifact(input_path.read_bytes(), raw=True, media_type="application/x-ndjson")
         output_path = work / "output.jsonl"
         command = [str(Path(binary).resolve()), *arguments(input_path, output_path)]
-        request = {"protocol": protocol, "case_id": case_id,
+        request = {"protocol": protocol, "command": command, "case_id": case_id,
                    "build_id": build_id, "input_sha256": input_id, "worker_sha256": binary_hash,
                    "deadline_seconds": deadline_seconds, "memory_bytes": memory_bytes}
         request_id = self.artifact(request)
@@ -280,7 +286,7 @@ class Replay:
         output_error = None
         try:
             raw_output = read_worker_output(output_path)
-            output_id = self.artifact(raw_output, raw=True, media_type="application/x-ndjson")
+            output_id = self.artifact(raw_output, raw=True, media_type=output_media_type)
             traces.append(output_id)
         except (OSError, ValueError) as error:
             output_error = str(error)
@@ -295,11 +301,13 @@ class Replay:
             try:
                 if output_error is not None:
                     raise ValueError(output_error)
-                output = decode_jsonl(raw_output)
+                output = decode_output(raw_output)
+                encode_json(output)
                 status, detail = classify_status(output)
                 if status not in ("completed", "inconclusive"):
                     raise ValueError("unknown observation status")
-            except (OSError, ValueError, TypeError, KeyError, AttributeError) as error:
+            except Exception as error:
+                output = None
                 status, detail = "error", f"invalid worker output: {error}"
         receipt = {"request_id": request_id, "worker_pid": process.pid if process else None,
                    "worker_sha256": binary_hash,
