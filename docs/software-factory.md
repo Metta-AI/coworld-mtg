@@ -38,7 +38,9 @@ frozen gate cannot be dropped to obtain acceptance.
 
 Each measurement runs the expectation-free Phase worker twice in separate
 processes. Exact inputs, outputs, exit results, binary/build identities and
-measured wall time become artifacts/events. The checker receives observations
+measured wall time become artifacts/events. Verification binds each parsed
+observation back to its retained JSONL bytes; new receipts name that output
+artifact explicitly. The checker receives observations
 after execution; the worker does not receive expected classifications.
 
 For the September 7, 2026 snapshot:

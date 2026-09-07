@@ -2,7 +2,7 @@
 
 Darkwater Egg is an unassuming Magic card. Its activated ability adds blue and black mana, then draws a card. That last clause is enough to make it useful for testing a rules engine.
 
-In the [rules snapshot](https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt) used by our September 7, 2026 experiment, an activated mana ability cannot have a cost or effect that moves a card to or from a library. Drawing a card crosses that boundary. Our baseline parser classified Darkwater Egg's ability as a mana ability anyway.
+In the [rules snapshot](https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt) used by our September 7, 2026 experiment, an activated mana ability cannot have a cost or effect that moves a card to or from a library. Drawing a card crosses that boundary. Our baseline engine classified Darkwater Egg's ability as a mana ability anyway.
 
 We did not start by writing a Darkwater Egg test. We downloaded [Scryfall's Oracle Cards snapshot](https://api.scryfall.com/bulk-data/oracle_cards), audited every row, and searched for a family of card definitions that could expose this disagreement. The resulting work item carries the original card record, the rule version, the selection recipe, the executable's identity, two recorded observations, and the evaluator's expected and observed values.
 
@@ -22,7 +22,7 @@ The broad scan is deliberately permissive. A paragraph can mention drawing cards
 
 The stronger check has a separate job. Before testing a repair, we froze a small source grammar for complete cost and effect sentences. It derives an expected classification from the source text and the pinned rule, then aligns that interpretation with the actual syntax tree produced by Phase. Unsupported sentences and failed alignments remain inconclusive.
 
-For Darkwater Egg, the recorded source and syntax tree align. The evaluator expects `is_mana_ability = false`; the baseline parser reports `true`. The two isolated worker executions reproduce that disagreement. The same frozen check finds violations in the other four Eggs, Chromatic Sphere, Deranged Assistant, and Millikin. The last two matter because they put library movement in the activation cost rather than the effect.
+For Darkwater Egg, the recorded source and syntax tree align. The evaluator expects `is_mana_ability = false`; the baseline engine reports `true`. The two isolated worker executions reproduce that disagreement. The same frozen check finds violations in the other four Eggs, Chromatic Sphere, Deranged Assistant, and Millikin. The last two matter because they put library movement in the activation cost rather than the effect.
 
 The measured development baseline is small enough to state directly:
 
@@ -39,6 +39,8 @@ There is an important limitation in that split. No source-qualified library-movi
 This is also classification assurance, with a narrow grammar and a particular rules snapshot. It does not certify runtime behavior during payment, priority, replacement effects, or resolution. A parser result can be correct while the engine later executes the ability incorrectly. Those claims need their own production-path cases and observations.
 
 We keep the execution boundary simple. The worker receives a card definition and reports what Phase produced. It does not receive the expected classification. The evaluator runs after the worker and compares recorded output with the frozen expectation. Each measurement uses two separate processes, with their inputs, outputs, exit results, and measured wall time retained.
+
+The measuring software needed corrections too. The first preparation attempt rejected numeric fields in real Scryfall records; source data now stays in byte-preserving artifacts. A later inspection showed that the display serializer omitted false classification flags. We retained that baseline attempt and repeated it with an inspector that explicitly records the engine's boolean. The evaluator and case cohort stayed fixed. An evidence audit then caught a second route to a misleading result: an edited observation could disagree with its retained raw output. Verification now decodes the output bytes before checking the observation. Those attempts and their explanations belong in the replay history, because improvements to the measuring system also need an origin.
 
 The build identity needs similar care. An executable can report the revision pinned by its enclosing workspace even when it was built against an overridden checkout. We record that declared identity separately from the attested source revision, source snapshot, patch, and binary hash. A comparison between baseline and candidate should identify the programs that actually ran.
 
