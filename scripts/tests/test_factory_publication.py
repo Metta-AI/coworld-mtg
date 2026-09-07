@@ -122,11 +122,14 @@ class PublicationTests(RecorderFixture):
             request_id = self.replay.artifact(request)
             self.replay.event("execute", "execution_started", execution_id=execution_id,
                               case_id=case_id, request_id=request_id, build_id=build_id, change_id=change_id)
+            output_id = self.replay.artifact(json.dumps(observation).encode() + b"\n", raw=True,
+                                             media_type="application/x-ndjson")
             evidence_id = self.replay.artifact({"request_id": request_id, "worker_sha256": build["binary_sha256"],
-                                               "observation": observation, "exit_code": 0, "timed_out": False,
+                                               "observation": observation, "output_artifact_id": output_id,
+                                               "exit_code": 0, "timed_out": False,
                                                "detail": None, "fixture_repeat": repeat})
             self.replay.event("execute", "execution_finished", execution_id=execution_id,
-                              status="completed", evidence_id=evidence_id, trace_ids=[], detail=None)
+                              status="completed", evidence_id=evidence_id, trace_ids=[output_id], detail=None)
             runs.append({"execution_id": execution_id, "evidence_id": evidence_id,
                          "status": "completed", "observation": observation})
         receipt = factory.evaluate_runs(case_id, card, runs, build["source_revision"], self.cfg,

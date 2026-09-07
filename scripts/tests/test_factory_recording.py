@@ -186,7 +186,7 @@ def process_running(pid):
     return True
 
 
-class DomainFeedbackTests(RecorderFixture):
+class DomainFeedbackFixture(RecorderFixture):
     def build(self):
         attestation = {
             "binary_sha256": recorder.sha256(Path(sys.executable).read_bytes()),
@@ -232,11 +232,14 @@ class DomainFeedbackTests(RecorderFixture):
                                                "input_sha256": input_id})
             self.replay.event("execute", "execution_started", execution_id=execution_id,
                               case_id=self.case_id, request_id=request_id, build_id=self.build_id, change_id=None)
+            output_id = self.replay.artifact(json.dumps(observation).encode() + b"\n", raw=True,
+                                             media_type="application/x-ndjson")
             evidence_id = self.replay.artifact({"request_id": request_id, "worker_sha256": worker_hash,
-                                                "observation": observation, "fixture_repeat": repeat,
+                                                "observation": observation, "output_artifact_id": output_id,
+                                                "fixture_repeat": repeat,
                                                 "exit_code": 0, "timed_out": False, "detail": None})
             self.replay.event("execute", "execution_finished", execution_id=execution_id,
-                              status="completed", evidence_id=evidence_id, trace_ids=[], detail=None)
+                              status="completed", evidence_id=evidence_id, trace_ids=[output_id], detail=None)
             runs.append({"execution_id": execution_id, "evidence_id": evidence_id,
                          "status": "completed", "observation": observation})
         self.runs = runs
@@ -249,6 +252,8 @@ class DomainFeedbackTests(RecorderFixture):
                              result="satisfied", summary="Constructed fixture passes its bounded check")
         self.feedback = self.replay.value["events"][-1]["payload"]["feedback"]
 
+
+class DomainFeedbackTests(DomainFeedbackFixture):
     def test_unchanged_evidence_recomputes_to_recorded_feedback(self):
         factory.verify_domain(self.replay, self.cfg)
 
