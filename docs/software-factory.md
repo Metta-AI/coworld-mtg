@@ -144,6 +144,41 @@ remain immutable. After hydration the ordinary viewer, domain verification and
 portable export commands work unchanged. Portable export is the fully contained
 format for local offline viewing.
 
+## Record finished agent work
+
+Record a completed Codex CLI JSONL session without copying its private inputs
+into the replay:
+
+```sh
+python3 scripts/record_agent_work.py \
+  --run-dir tmp/runs/example --runtime target/debug/factory-runtime \
+  --session private/session.jsonl --prompt private/prompt.txt --report private/report.md \
+  --model gpt-6-astra --role repair_plan --reasoning-effort ultra \
+  --summary "Reviewed the implementation plan against the recorded failures."
+```
+
+Only content hashes and caller-selected public metadata are retained. Prompt,
+report and session contents and local paths stay private. The model and role are
+caller declarations. `--feedback-id SHA` may be repeated; links default to
+cross-references. `--feedback-supplied-at-start` explicitly records the caller's
+assertion that those exact receipts were supplied initially, without claiming
+independent proof of prompt contents. `--stage review` assigns review compute to
+that stage; planning defaults to `changes`.
+
+The recorder accepts one completed CLI thread, including startup items and
+multiple completed turns, and sums measured `turn.completed` usage once. Input
+and output totals feed the compute event; cached input and reasoning output are
+reported separately as subsets. Billing, wall time and absent usage stay unknown.
+If any turn lacks a count, that whole-session count remains null. No empty
+compute event is emitted when neither input nor output totals are known.
+
+The summary and compute events pass native verification before one atomic
+publication. Repeating the same work is idempotent; reusing its report or session
+with conflicting attribution is rejected. This duplicate protection applies to
+records made by this CLI, not earlier ad hoc summaries without session identities.
+Malformed, failed, incomplete or concatenated sessions, unknown feedback links
+and terminal runs are rejected. Publication time is not the agent's work duration.
+
 ## Adapting another factory
 
 Keep the replay, artifact store, viewer and process recorder. Replace the source
