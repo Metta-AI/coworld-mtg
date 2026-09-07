@@ -151,6 +151,20 @@ class NativeTransportTests(RecorderFixture):
         evidence = factory.artifact_json(self.replay, result["evidence_id"])
         self.assertIsNotNone(evidence["output_artifact_id"])
 
+    def test_default_jsonl_classifier_failure_retains_successfully_decoded_value(self):
+        raw = b'{"status":"unsupported","score":1.25}\n'
+        def reject_status(_):
+            raise ValueError("unsupported fixture observation status")
+        result = self.replay.run_jsonl(execution_id="classifier-error", case_id=self.case({"fixture": True}), build_id=self.build(),
+            binary=sys.executable, record={"fixture": True}, protocol="fixture-jsonl-v1",
+            arguments=lambda src,dst: ["-c", "import pathlib,sys;pathlib.Path(sys.argv[1]).write_bytes(" + repr(raw) + ")", str(dst)],
+            classify_status=reject_status)
+        self.assertEqual(result["status"],"error")
+        self.assertEqual(result["observation"],json.loads(raw))
+        evidence = factory.artifact_json(self.replay,result["evidence_id"])
+        self.assertEqual(kernel.decode_jsonl(factory.artifact_bytes(self.replay,evidence["output_artifact_id"])), evidence["observation"])
+        self.assertIn("unsupported fixture observation status",evidence["detail"])
+
     def test_process_failure_is_not_replaced_by_successful_native_output(self):
         result = self.run_native(kernel.encode_json(native_report(coverage.source_expectation(SOURCE, MAPPING))), returncode=2)
         self.assertEqual(result["status"], "error")

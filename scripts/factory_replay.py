@@ -303,12 +303,19 @@ class Replay:
                     raise ValueError(output_error)
                 output = decode_output(raw_output)
                 encode_json(output)
-                status, detail = classify_status(output)
-                if status not in ("completed", "inconclusive"):
-                    raise ValueError("unknown observation status")
             except Exception as error:
                 output = None
                 status, detail = "error", f"invalid worker output: {error}"
+            else:
+                try:
+                    status, detail = classify_status(output)
+                    if status not in ("completed", "inconclusive"):
+                        raise ValueError("unknown observation status")
+                except Exception as error:
+                    # Decoding succeeded: keep its exact value even if the domain
+                    # classifier rejects it. Existing JSONL verifiers reconcile
+                    # that error observation with the retained raw bytes.
+                    status, detail = "error", f"invalid worker output: {error}"
         receipt = {"request_id": request_id, "worker_pid": process.pid if process else None,
                    "worker_sha256": binary_hash,
                    "exit_code": returncode, "timed_out": timed_out,
