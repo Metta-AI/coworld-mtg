@@ -470,7 +470,8 @@ def decide(args):
                      policy={"kind": "external", "policy_id": cfg["policy_id"], "scope": CLAIM,
                              "attestation_id": attestation_id},
                      decision_id=decision_id, change_id=args.change_id, plan_id=cfg["plan_id"], decision=decision)
-        replay.finish()
+        if decision["kind"] != "rejected" or not getattr(args, "continue_on_rejection", False):
+            replay.finish()
         print(json.dumps({"decision_id": decision_id, "result": decision["kind"], "scope": CLAIM}))
 
 
@@ -561,6 +562,8 @@ def main():
     review.add_argument("--decision", choices=["approve", "reject"], required=True)
     decision = commands.add_parser("decide")
     decision.add_argument("--review-id")
+    decision.add_argument("--continue-on-rejection", action="store_true",
+                          help="Keep a rejected run open for a distinct patch under the same frozen plan")
     verify = commands.add_parser("verify")
     for command in [change, review, decision, verify]:
         command.add_argument("--run-dir", type=Path, required=True)

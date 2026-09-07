@@ -107,6 +107,14 @@ records the independent review and exact before/after receipts. `decide`
 recomputes the frozen requirements and validates a decision before publication.
 Each command's `--help` lists its arguments.
 
+By default, `decide` closes the run after either outcome. Use
+`decide --continue-on-rejection` to retain an immutable rejected decision while
+leaving that replay running for a distinct next patch against the same baseline.
+The source identities, evaluator and frozen target/regression/holdout plan stay
+unchanged; the next patch receives its own executions, feedback and decision.
+The same exact change cannot be decided again. Accepted decisions always close
+the run, including with this flag, and terminal runs cannot be reopened.
+
 ```sh
 python3 scripts/scryfall_factory.py verify \
   --run-dir tmp/runs/example --runtime target/debug/factory-runtime

@@ -149,10 +149,11 @@ class PublicationTests(RecorderFixture):
         self.replay.event("review", "review_recorded", review_id=identity, review=review)
         return identity
 
-    def decide(self, review_id=None):
+    def decide(self, review_id=None, *, continue_on_rejection=False):
         self.replay.lock.close()
         args = SimpleNamespace(run_dir=self.directory, runtime=RUNTIME,
-                               change_id=self.change_id, review_id=review_id)
+                               change_id=self.change_id, review_id=review_id,
+                               continue_on_rejection=continue_on_rejection)
         with contextlib.redirect_stdout(io.StringIO()):
             factory.decide(args)
 
@@ -220,9 +221,78 @@ class PublicationTests(RecorderFixture):
                               and e["payload"]["feedback"]["feedback_id"] == target_feedback["feedback_id"])
         self.assertEqual(saved_feedback["result"], "inconclusive")
         self.assertEqual(saved["status"], "completed")
+        terminal_bytes = self.replay.path.read_bytes()
+        with self.assertRaisesRegex(ValueError, "terminal"):
+            self.decide(continue_on_rejection=True)
+        self.assertEqual(self.replay.path.read_bytes(), terminal_bytes)
         subprocess.run([str(RUNTIME), "verify", str(self.directory)], check=True, capture_output=True)
         with contextlib.redirect_stdout(io.StringIO()):
             factory.verify_run(SimpleNamespace(runtime=RUNTIME, run_dir=self.directory))
+
+    def test_rejected_patch_can_precede_a_distinct_patch_under_the_same_frozen_plan(self):
+        self.prepare_gate_run(candidate_classification=True)
+        original_change = self.change_id
+        frozen_ids = [self.cfg["plan_id"], self.cfg["policy_id"], self.cfg["evaluator_sha256"],
+                      self.cfg["rules_sha256"], self.baseline_feedback, *self.case_ids]
+        frozen_bytes = {identity: (self.directory / self.replay.value["artifacts"][identity]["path"]).read_bytes()
+                        for identity in frozen_ids}
+        self.replay.lock.close()
+        # Exercise the public CLI flag, including prospective native validation.
+        completed = subprocess.run([
+            sys.executable, str(Path(factory.__file__)), "decide", "--run-dir", str(self.directory),
+            "--runtime", str(RUNTIME), "--change-id", self.change_id, "--continue-on-rejection"],
+            check=True, capture_output=True)
+        self.assertEqual(json.loads(completed.stdout)["result"], "rejected")
+        first = json.loads(self.replay.path.read_bytes())
+        self.assertEqual(first["status"], "running")
+        rejection = first["events"][-1]["payload"]
+        self.assertEqual(rejection["decision"]["kind"], "rejected")
+        self.assertEqual(rejection["plan_id"], self.cfg["plan_id"])
+        # Continuing must not make the existing change eligible for another decision.
+        before = self.replay.path.read_bytes()
+        with self.assertRaisesRegex(ValueError, "already has an immutable decision"):
+            self.decide(continue_on_rejection=True)
+        self.assertEqual(self.replay.path.read_bytes(), before)
+
+        patch = self.root / "distinct-combined-repair.patch"
+        patch.write_bytes(b"diff --git a/fixture b/fixture\n+distinct combined repair fixture\n")
+        with contextlib.redirect_stdout(io.StringIO()):
+            factory.propose(SimpleNamespace(run_dir=self.directory, runtime=RUNTIME, patch=patch,
+                                            description="Distinct next repair against the same baseline"))
+        self.change_id = recorder.sha256(patch.read_bytes())
+        self.assertNotEqual(self.change_id, original_change)
+        self.replay = recorder.Replay(self.directory)
+        self.addCleanup(self.replay.lock.close)
+        next_build = self.attested_build("fixture-combined-candidate", self.change_id)
+        next_feedback = [self.record_pair(index, next_build, f"next-candidate-{index}", False,
+                                          self.change_id) for index in range(3)]
+        review_id = self.add_review(next_feedback[0])
+        self.decide(review_id, continue_on_rejection=True)
+        final = json.loads(self.replay.path.read_bytes())
+        self.assertEqual(final["status"], "completed")
+        self.assertEqual(final["events"][:len(first["events"])], first["events"])
+        self.assertEqual(final["target"], first["target"])
+        decisions = [event["payload"] for event in final["events"]
+                     if event["payload"]["kind"] == "decision_recorded"]
+        self.assertEqual([item["change_id"] for item in decisions], [original_change, self.change_id])
+        self.assertEqual([item["decision"]["kind"] for item in decisions], ["rejected", "accepted"])
+        self.assertEqual({item["plan_id"] for item in decisions}, {self.cfg["plan_id"]})
+        self.assertEqual(sum(event["payload"]["kind"] == "acceptance_plan_frozen"
+                             for event in final["events"]), 1)
+        for identity, original in frozen_bytes.items():
+            self.assertEqual((self.directory / final["artifacts"][identity]["path"]).read_bytes(), original)
+        with contextlib.redirect_stdout(io.StringIO()):
+            factory.verify_run(SimpleNamespace(runtime=RUNTIME, run_dir=self.directory))
+
+    def test_continue_flag_cannot_keep_an_accepted_run_open_or_reopen_it(self):
+        self.prepare_gate_run()
+        review_id = self.add_review(self.candidate_feedbacks[0])
+        self.decide(review_id, continue_on_rejection=True)
+        saved = self.replay.path.read_bytes()
+        self.assertEqual(json.loads(saved)["status"], "completed")
+        with self.assertRaisesRegex(ValueError, "terminal"):
+            self.decide(review_id, continue_on_rejection=True)
+        self.assertEqual(self.replay.path.read_bytes(), saved)
 
     def test_valid_review_can_publish_the_exact_accepted_decision(self):
         self.prepare_gate_run()
