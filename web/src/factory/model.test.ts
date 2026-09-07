@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { createHash } from "node:crypto";
 import { artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
 
 const hash = (char: string) => char.repeat(64);
@@ -108,6 +109,16 @@ describe("artifact integrity", () => {
     for (const text of ['{"number":9007199254740993}', '{"number":1.0}', '{"number":1e3}']) {
       expect((await verifyArtifact(expected, artifact, new TextEncoder().encode(text))).status).toBe("unverified");
     }
+  });
+  it("preserves a UTF-8 BOM for byte-exact portable export", async () => {
+    const original = '\uFEFF{"source":"rules"}';
+    const bytes = new TextEncoder().encode(original);
+    const hash = createHash("sha256").update(bytes).digest("hex");
+    const result = await verifyArtifact(hash, { ...artifact, hash_mode: "bytes" }, bytes);
+    expect(result.status).toBe("verified");
+    expect(result.text).toBe(original);
+    expect(result.value).toEqual({ source: "rules" });
+    expect(new TextEncoder().encode(result.text)).toEqual(bytes);
   });
   it("hashes byte artifacts without canonicalizing JSON", async () => {
     const text = "hello";

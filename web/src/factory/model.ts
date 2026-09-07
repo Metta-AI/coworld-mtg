@@ -212,10 +212,10 @@ export function canonicalJson(value: Json): string {
 }
 export async function verifyArtifact(hash: string, artifact: Artifact, bytes: Uint8Array): Promise<ArtifactState> {
   let text: string;
-  try { text = new TextDecoder("utf-8", { fatal: true }).decode(bytes); }
+  try { text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes); }
   catch { return { status: "unverified", detail: "Binary artifact. Download the original to inspect it." }; }
   let value: Json | undefined;
-  try { value = JSON.parse(text) as Json; } catch { /* Text artifacts remain readable. */ }
+  try { value = JSON.parse(text.replace(/^\uFEFF/, "")) as Json; } catch { /* Text artifacts remain readable. */ }
   let digestBytes = bytes;
   if (artifact.hash_mode === "canonical_json") {
     if (value === undefined) return { status: "mismatch", text, detail: "Expected JSON, but the artifact cannot be parsed." };

@@ -12,7 +12,7 @@ const state = {
   tab: "evidence", filter: "", playing: false, following: false, loading: true,
   notice: "", error: "", sourceUrl: "", embedded: {} as Record<string, string>,
   artifacts: new Map<string, ArtifactState>(), inspecting: "", inspectingEvent: -1,
-  issues: [] as string[], exporting: false, timelineFilter: "all", loadGeneration: 0,
+  issues: [] as string[], timelineOpen: false, exporting: false, timelineFilter: "all", loadGeneration: 0,
 };
 const esc = (value: unknown) => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
 const pretty = (value: unknown) => JSON.stringify(value, null, 2);
@@ -80,12 +80,12 @@ function render(): void {
       const hasAny = replay.events.some(event => event.stage === stage.id);
       return `<button class="stage ${current?.stage === stage.id ? "current" : recorded.length ? "visited" : ""}" data-stage="${esc(stage.id)}" ${hasAny ? "" : "disabled"} title="Next: ${esc(stage.next.map(id => replay.stages.find(s => s.id === id)?.title ?? id).join(", ") || "terminal stage")}"><span class="stage-top"><span class="stage-number">${String(index + 1).padStart(2, "0")}</span><span class="stage-dot" aria-hidden="true"></span></span><strong>${esc(stage.title)}</strong><span class="stage-count">${recorded.length ? recorded.length + " recorded event" + (recorded.length === 1 ? "" : "s") : "No events yet"}</span><span class="stage-next">${stage.next.length ? "→ " + esc(stage.next.map(id => replay.stages.find(s => s.id === id)?.title ?? id).join(" / ")) : "End of pipeline"}</span></button>`;
     }).join("")}</div></section>
-    <main class="workspace">
+    <main class="workspace ${state.timelineOpen ? "show-timeline" : ""}">
       <aside class="case-sidebar"><div class="panel-header"><h2>Case queue</h2><span class="count">${cases.length}</span></div><div class="search-wrap"><label class="sr-only" for="case-search">Search cases</label><input id="case-search" type="search" placeholder="Search cases or feedback" value="${esc(state.filter)}"></div><div class="case-list" data-scroll="cases">${renderCaseQueue(cases)}</div><div class="sidebar-footer">Cases appear at their registration event.<br>Every count follows the replay cursor.</div></aside>
       <section class="case-panel" aria-label="Selected case"><div class="case-heading"><p class="eyebrow">SELECTED CASE</p><h2>${esc(selected?.title || "Waiting for a case")}</h2>${selected ? `<div class="case-meta">${badge(label(object(selected.event.payload.derivation).kind))}${hashButton(selected.id, "Case definition")}</div>` : ""}</div><div class="tabs" role="tablist" aria-label="Case inspection">${[["evidence", "Evidence"], ["lineage", "Source & lineage"], ["changes", "Changes & decision"], ["artifacts", "Artifacts"]].map(([id, title]) => `<button role="tab" id="tab-${id}" aria-controls="case-content" aria-selected="${state.tab === id}" data-tab="${id}" ${state.tab === id ? 'class="active"' : ""}>${title}</button>`).join("")}</div><div id="case-content" class="case-content" role="tabpanel" aria-labelledby="tab-${state.tab}" data-scroll="content">${selected ? renderCaseContent(selected) : empty("No case recorded at this point", "Step forward in the replay to watch cases enter the queue.")}</div></section>
       <aside class="timeline-panel"><div class="panel-header"><h2>Event stream</h2><span class="count">${replay.events.length}</span></div><div class="timeline-filter"><button data-timeline="all" class="${state.timelineFilter === "all" ? "active" : ""}">Whole run</button><button data-timeline="case" class="${state.timelineFilter === "case" ? "active" : ""}">Selected case</button></div><ol class="event-list" data-scroll="timeline">${renderTimeline(selected)}</ol><div class="timeline-footer">${current ? `<span>At event ${current.sequence + 1}</span><button class="text-button" data-event-detail="${current.sequence}">Inspect event JSON ↗</button>` : "<span>Before the first event</span>"}</div></aside>
     </main>
-    <footer class="transport"><div class="transport-buttons"><button data-action="start" title="Seek to beginning" aria-label="Seek to beginning">|‹</button><button data-action="back" title="Previous event (left arrow)" aria-label="Previous event">‹</button><button class="play-button" data-action="play" aria-label="${state.playing ? "Pause replay" : "Play replay"}">${state.playing ? "Pause" : "Play"}</button><button data-action="next" title="Next event (right arrow)" aria-label="Next event">›</button></div><div class="scrubber"><div class="scrubber-caption"><span>${state.following ? "FOLLOWING LATEST" : state.playing ? "PLAYING RECORDED EVENTS" : "REPLAY POSITION"}</span><span>${state.cursor + 1} / ${replay.events.length} events <b>·</b> ${current ? time(current.elapsed_ms) : "start"}</span></div><label class="sr-only" for="replay-position">Replay event position</label><input id="replay-position" type="range" min="-1" max="${Math.max(-1, replay.events.length - 1)}" value="${state.cursor}" ${replay.events.length ? "" : "disabled"}></div><button class="follow-button ${state.following ? "active" : ""}" data-action="follow" ${state.sourceUrl ? "" : "disabled"}><span class="live-dot"></span>${state.following ? "Following" : "Follow latest"}</button></footer>
+    <footer class="transport"><div class="transport-buttons"><button data-action="start" title="Seek to beginning" aria-label="Seek to beginning">|‹</button><button data-action="back" title="Previous event (left arrow)" aria-label="Previous event">‹</button><button class="play-button" data-action="play" aria-label="${state.playing ? "Pause replay" : "Play replay"}">${state.playing ? "Pause" : "Play"}</button><button data-action="next" title="Next event (right arrow)" aria-label="Next event">›</button></div><div class="scrubber"><div class="scrubber-caption"><span>${state.following ? "FOLLOWING LATEST" : state.playing ? "PLAYING RECORDED EVENTS" : "REPLAY POSITION"}</span><span>${state.cursor + 1} / ${replay.events.length} events <b>·</b> ${current ? time(current.elapsed_ms) : "start"}</span></div><label class="sr-only" for="replay-position">Replay event position</label><input id="replay-position" type="range" min="-1" max="${Math.max(-1, replay.events.length - 1)}" value="${state.cursor}" ${replay.events.length ? "" : "disabled"}></div><button class="tablet-events" data-action="timeline" aria-expanded="${state.timelineOpen}">${state.timelineOpen ? "Close events" : "Events"}</button><button class="follow-button ${state.following ? "active" : ""}" data-action="follow" ${state.sourceUrl ? "" : "disabled"}><span class="live-dot"></span>${state.following ? "Following" : "Follow latest"}</button></footer>
     `}
     ${renderInspector()}
   `;
@@ -116,11 +116,11 @@ function renderCaseContent(selected: CaseView): string {
     const refs = artifactReferences(selected.events).filter(id => state.replay?.artifacts[id]);
     return `<div class="content-intro"><h3>Evidence inventory</h3><p>Artifacts referenced by the visible lineage of this case. Verification checks content against its recorded SHA-256.</p></div>${refs.length ? `<div class="artifact-list">${refs.map(id => `<button class="artifact-row" data-artifact="${esc(id)}"><span><strong>${esc(state.replay!.artifacts[id].path)}</strong><code>${esc(short(id))}</code></span>${statusMarkup(id)}</button>`).join("")}</div>` : empty("No indexed artifacts", "This recording contains no indexed artifacts for the selected case.")}`;
   }
-  const feedback = selected.feedback.map(event => object(event.payload.feedback));
+  const feedback = [...selected.feedback].reverse().map(event => object(event.payload.feedback));
   const caseRecord = artifactValue(selected.id);
   return `
-    <div class="content-intro"><h3>What did the evidence establish?</h3><p>Results below are recorded evaluator claims. Their scope and strength travel with the evidence.</p></div>
-    ${feedback.length ? feedback.map(f => `<article class="feedback-card ${esc(string(f.declared_strength))}"><div class="card-top"><span class="eyebrow">${esc(label(f.declared_strength))} FEEDBACK</span>${badge(f.result, toneFor(f.result))}</div><h4>${esc(f.summary)}</h4><p class="bounded-claim">${esc(f.bounded_claim)}</p><details><summary>Evaluation method & provenance</summary><dl class="detail-list"><dt>Adapter</dt><dd>${esc(label(f.adapter) || "Not declared")}</dd><dt>Evaluator</dt><dd>${esc(f.evaluator)} <code>${esc(f.evaluator_version)}</code></dd><dt>Method</dt><dd>${esc(f.method)}</dd><dt>Evidence</dt><dd>${array(f.execution_ids).map(id => `<code>${esc(id)}</code>`).join(" ")}</dd></dl>${hashButton(f.feedback_id, "Feedback record")}</details></article>`).join("") : empty("No feedback recorded", "Executions and evaluator feedback will appear here as the replay advances.")}
+    ${caseRecord.oracle_text ? `<div class="case-oracle"><span class="eyebrow">SOURCE ORACLE TEXT</span><p>${esc(caseRecord.oracle_text)}</p></div>` : ""}<div class="content-intro"><h3>What did the evidence establish?</h3><p>Results below are recorded evaluator claims. Their scope and strength travel with the evidence.</p></div>
+    ${feedback.length ? feedback.map(f => `<article class="feedback-card ${esc(string(f.declared_strength))}"><div class="card-top"><span class="eyebrow">${esc(label(f.declared_strength))} FEEDBACK</span>${badge(f.result, toneFor(f.result))}</div><h4>${esc(f.summary)}</h4><p class="bounded-claim">${esc(f.bounded_claim)}</p>${renderEvaluationDetails(string(f.feedback_id))}<details><summary>Evaluation method & provenance</summary><dl class="detail-list"><dt>Adapter</dt><dd>${esc(label(f.adapter) || "Not declared")}</dd><dt>Evaluator</dt><dd>${esc(f.evaluator)} <code>${esc(f.evaluator_version)}</code></dd><dt>Method</dt><dd>${esc(f.method)}</dd><dt>Evidence</dt><dd>${array(f.execution_ids).map(id => `<code>${esc(id)}</code>`).join(" ")}</dd></dl>${hashButton(f.feedback_id, "Feedback record")}</details></article>`).join("") : empty("No feedback recorded", "Executions and evaluator feedback will appear here as the replay advances.")}
     <div class="subsection-heading"><h3>Baseline → candidate</h3><span>Recorded executions</span></div><div class="comparison-grid">${renderExecutions(selected, false)}${renderExecutions(selected, true)}</div>
     ${caseRecord.justification ? `<details class="document-details"><summary>Expectation & scope</summary><pre>${esc(pretty(caseRecord.justification))}</pre></details>` : ""}
     ${caseRecord.scenario ? `<details class="document-details"><summary>Case inputs & operations</summary><pre>${esc(pretty(caseRecord.scenario))}</pre></details>` : ""}
@@ -133,7 +133,8 @@ function renderExecutions(selected: CaseView, candidate: boolean): string {
     const finish = selected.events.find(other => other.payload.kind === "execution_finished" && other.payload.execution_id === p.execution_id)?.payload;
     const evidence = artifactValue(finish?.evidence_id);
     const outcome = object(evidence.outcome);
-    return `<article class="execution-card"><div class="card-top"><code>${esc(p.execution_id)}</code>${badge(finish?.status || "running", toneFor(finish?.status))}</div>${finish?.evidence_id ? `<div class="evidence-integrity">${statusMarkup(string(finish.evidence_id))}<span>Evidence content</span></div>` : ""}<div class="execution-links">${hashButton(p.build_id, "Build")}${hashButton(p.request_id, "Input")}${hashButton(finish?.evidence_id, "Evidence")}${array(finish?.trace_ids).map((id, i) => hashButton(id, "Trace " + (i + 1))).join("")}</div>${finish?.detail ? `<p>${esc(finish.detail)}</p>` : ""}${outcome.observation ? renderObservation(object(outcome.observation)) : outcome.reason ? `<pre>${esc(pretty(outcome.reason))}</pre>` : `<p class="subtle">${finish?.evidence_id ? evidenceHint(string(finish.evidence_id)) : "No execution evidence recorded yet."}</p>`}</article>`;
+    const observation = evidence.observation ?? outcome.observation;
+    return `<article class="execution-card"><div class="card-top"><code>${esc(p.execution_id)}</code>${badge(finish?.status || "running", toneFor(finish?.status))}</div>${finish?.evidence_id ? `<div class="evidence-integrity">${statusMarkup(string(finish.evidence_id))}<span>Evidence content</span></div>` : ""}<div class="execution-links">${hashButton(p.build_id, "Build")}${hashButton(p.request_id, "Input")}${hashButton(finish?.evidence_id, "Evidence")}${array(finish?.trace_ids).map((id, i) => hashButton(id, "Trace " + (i + 1))).join("")}</div>${finish?.detail ? `<p>${esc(finish.detail)}</p>` : ""}${observation ? renderObservation(object(observation)) : outcome.reason ? `<pre>${esc(pretty(outcome.reason))}</pre>` : `<p class="subtle">${finish?.evidence_id ? evidenceHint(string(finish.evidence_id)) : "No execution evidence recorded yet."}</p>`}</article>`;
   }).join("") : `<p class="column-empty">No ${candidate ? "candidate" : "baseline"} execution recorded at this point.</p>`}</section>`;
 }
 function evidenceHint(id: string): string {
@@ -142,8 +143,26 @@ function evidenceHint(id: string): string {
   if (artifact?.status === "missing") return "Evidence unavailable. Open a portable replay containing its artifacts.";
   return artifact?.status === "loading" ? "Loading recorded evidence…" : "Open the evidence artifact to inspect its result.";
 }
+// Adapter views display recorded values. Evaluation and acceptance remain producer decisions.
+function renderEvaluationDetails(id: string): string {
+  const receipt = artifactValue(id);
+  const evaluations = array(receipt.evaluations).map(object);
+  const rows = evaluations.flatMap((evaluation, trial) => array(evaluation.abilities).map(object).map(ability => ({
+    trial: trial + 1, paragraph: Number(ability.source_paragraph_index ?? 0) + 1,
+    expected: ability.expected_is_mana_ability, observed: ability.observed_is_mana_ability,
+    verdict: ability.verdict, alignment: ability.ast_alignment,
+  })));
+  if (!rows.length) return "";
+  const booleanText = (value: unknown) => value === true ? "Yes" : value === false ? "No" : "Not recorded";
+  return `<div class="recorded-measurements"><div class="measurement-heading"><span>RECORDED CLASSIFICATION CHECK</span>${statusMarkup(id)}</div><div class="table-scroll"><table><thead><tr><th>Trial / ability</th><th>Expected mana ability</th><th>Observed mana ability</th><th>Evaluator verdict</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.trial} / ${row.paragraph}</td><td>${booleanText(row.expected)}</td><td>${booleanText(row.observed)}</td><td>${badge(row.verdict, row.verdict === "pass" ? "positive" : row.verdict === "fail" ? "negative" : "muted")}</td></tr>`).join("")}</tbody></table></div><p>Exact values from the recorded evaluator receipt. ${receipt.repeatable === true ? "Producer recorded repeatable results." : "Repeatability is not established by this view."}</p></div>`;
+}
+function renderParsedAbilities(parsed: Fields): string {
+  const abilities = array(parsed.abilities).map(object);
+  if (!abilities.length) return "";
+  return `<div class="parsed-abilities"><span class="eyebrow">PARSED ABILITIES</span>${abilities.map((ability, index) => `<div class="parsed-ability"><div><strong>Ability ${index + 1} · ${esc(ability.kind)}</strong>${typeof ability.is_mana_ability === "boolean" ? badge("mana ability: " + (ability.is_mana_ability ? "yes" : "no")) : ""}</div><p>${esc(ability.description || "No description recorded")}</p><span>Effect: ${esc(object(ability.effect).type || "not recorded")}${object(ability.sub_ability).effect ? " → " + esc(object(object(ability.sub_ability).effect).type) : ""}</span></div>`).join("")}</div>`;
+}
 function renderObservation(observation: Fields): string {
-  return `<div class="observation">${Array.isArray(observation.life) ? `<div class="life-readings">${observation.life.map((life, index) => `<span>Player ${index + 1}<strong>${esc(life)} <small>life</small></strong></span>`).join("")}</div>` : ""}${Array.isArray(observation.objects) ? `<div class="observed-objects">${observation.objects.slice(0, 12).map(raw => { const card = object(raw); return `<div><strong>${esc(card.name || card.object_id)}</strong><span>${esc(label(card.zone))}${card.tapped === true ? " · tapped" : ""}${Number(card.plus_one_counters) > 0 ? " · " + esc(card.plus_one_counters) + " counters" : ""}</span></div>`; }).join("")}</div>` : ""}<details><summary>Raw observation</summary><pre>${esc(pretty(observation))}</pre></details></div>`;
+  return `<div class="observation">${renderParsedAbilities(object(observation.parsed))}${Array.isArray(observation.life) ? `<div class="life-readings">${observation.life.map((life, index) => `<span>Player ${index + 1}<strong>${esc(life)} <small>life</small></strong></span>`).join("")}</div>` : ""}${Array.isArray(observation.objects) ? `<div class="observed-objects">${observation.objects.slice(0, 12).map(raw => { const card = object(raw); return `<div><strong>${esc(card.name || card.object_id)}</strong><span>${esc(label(card.zone))}${card.tapped === true ? " · tapped" : ""}${Number(card.plus_one_counters) > 0 ? " · " + esc(card.plus_one_counters) + " counters" : ""}</span></div>`; }).join("")}</div>` : ""}<details><summary>Raw observation</summary><pre>${esc(pretty(observation))}</pre></details></div>`;
 }
 
 function renderLineage(selected: CaseView): string {
@@ -233,6 +252,7 @@ function scheduleArtifacts(): void {
         const p = event.payload;
         if (p.kind === "execution_finished" && p.evidence_id) ids.add(string(p.evidence_id));
         if (p.kind === "change_proposed") ids.add(string(p.change_id));
+        if (p.kind === "feedback_recorded") ids.add(string(object(p.feedback).feedback_id));
         if (p.kind === "source_imported") ids.add(string(object(p.source).snapshot_id));
         if (p.kind === "case_registered") {
           for (const ref of array(object(p.derivation).source_records)) {
@@ -350,6 +370,7 @@ app.addEventListener("click", event => {
     return;
   }
   switch (element.dataset.action) {
+    case "timeline": state.timelineOpen = !state.timelineOpen; render(); break;
     case "import": document.getElementById("replay-file")!.click(); break;
     case "refresh": void loadRuns(); break;
     case "dismiss": state.error = ""; state.notice = ""; render(); break;
