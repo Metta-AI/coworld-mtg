@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 import subprocess
 
-from factory_replay import Replay, canonical, sha256
+from factory_replay import Replay, canonical, sha256, encode_json, decode_jsonl
 import mana_library_oracle as oracle
 import scryfall_source
 
@@ -311,10 +311,35 @@ def verify_domain(replay, cfg):
                     expected_status = "error"
             if finished["status"] != expected_status:
                 raise ValueError("execution status contradicts its worker exit or observation")
+            if request["protocol"] != "oracle-probe-jsonl-v1":
+                raise ValueError("worker request uses an unsupported observation protocol")
+            output_id = evidence.get("output_artifact_id")
+            if "output_artifact_id" not in evidence:
+                # Older recorded executions bind output by their unique NDJSON trace.
+                outputs = [identity for identity in finished["trace_ids"]
+                           if replay.value["artifacts"][identity]["media_type"] == "application/x-ndjson"]
+                if len(outputs) > 1:
+                    raise ValueError("legacy execution has ambiguous raw output traces")
+                output_id = outputs[0] if outputs else None
+            expected_observation = None
+            if output_id is not None:
+                if output_id not in finished["trace_ids"]:
+                    raise ValueError("worker output artifact is not a retained execution trace")
+                output_meta = replay.value["artifacts"][output_id]
+                output_bytes = (replay.directory / output_meta["path"]).read_bytes()
+                if output_meta["hash_mode"] != "bytes" or sha256(output_bytes) != output_id:
+                    raise ValueError("worker output artifact must preserve exact raw bytes")
+                if (not evidence["timed_out"] and evidence["exit_code"] == 0
+                        and evidence.get("detail") != "worker interrupted"):
+                    try:
+                        expected_observation = decode_jsonl(output_bytes)
+                    except (ValueError, TypeError):
+                        pass
+            if encode_json(expected_observation) != encode_json(evidence["observation"]):
+                raise ValueError("worker observation differs from retained raw output")
             input_data = artifact_json(replay, request["input_sha256"])
             # Python equality conflates booleans and numbers; source fields keep their JSON types.
-            if (json.dumps(input_data, sort_keys=True, allow_nan=False) !=
-                    json.dumps(card, sort_keys=True, allow_nan=False)):
+            if encode_json(input_data) != encode_json(card):
                 raise ValueError("exact worker input differs from its case")
             if (request["build_id"] != started["build_id"] or request["case_id"] != case_id or
                     request["worker_sha256"] != build["binary_sha256"] or

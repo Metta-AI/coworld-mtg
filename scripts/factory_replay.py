@@ -14,9 +14,39 @@ from pathlib import Path
 import resource
 import re
 import signal
+import stat
 import subprocess
 import time
 import tempfile
+
+
+def encode_json(value):
+    """Deterministic JSON bytes, preserving finite floats and JSON value types."""
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def decode_jsonl(data):
+    """The worker protocol contains exactly one finite JSON observation."""
+    lines = data.splitlines()
+    if len(lines) != 1:
+        raise ValueError("expected exactly one observation")
+    value = json.loads(lines[0])
+    encode_json(value)  # Reject nonstandard NaN and overflowed infinities.
+    return value
+
+
+def read_worker_output(path):
+    """Never follow a worker's symlink or block on a FIFO/device."""
+    limit = 16 * 1024**2
+    flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK
+    with os.fdopen(os.open(path, flags), "rb") as stream:
+        metadata = os.fstat(stream.fileno())
+        if not stat.S_ISREG(metadata.st_mode) or metadata.st_size > limit:
+            raise ValueError("worker output must be a regular file of at most 16 MiB")
+        data = stream.read(limit + 1)
+        if len(data) > limit:
+            raise ValueError("worker output exceeds 16 MiB")
+        return data
 
 
 def canonical(value):
@@ -30,7 +60,7 @@ def canonical(value):
             for child in item:
                 integers_only(child)
     integers_only(value)
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    return encode_json(value)
 
 
 def sha256(data):
@@ -199,7 +229,7 @@ class Replay:
         work = self.directory / "work" / execution_id
         work.mkdir(exist_ok=False)
         input_path = work / "input.jsonl"
-        input_path.write_bytes(json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8") + b"\n")
+        input_path.write_bytes(encode_json(record) + b"\n")
         input_id = self.artifact(input_path.read_bytes(), raw=True, media_type="application/x-ndjson")
         output_path = work / "output.jsonl"
         command = [str(Path(binary).resolve()), *arguments(input_path, output_path)]
@@ -245,8 +275,15 @@ class Replay:
         duration = int((time.monotonic() - started) * 1000)
         traces = [self.artifact((work / name).read_bytes(), raw=True, media_type="text/plain")
                   for name in ("stdout.txt", "stderr.txt")]
-        if output_path.exists() and not output_path.is_symlink():
-            traces.append(self.artifact(output_path.read_bytes(), raw=True, media_type="application/x-ndjson"))
+        output_id = None
+        raw_output = None
+        output_error = None
+        try:
+            raw_output = read_worker_output(output_path)
+            output_id = self.artifact(raw_output, raw=True, media_type="application/x-ndjson")
+            traces.append(output_id)
+        except (OSError, ValueError) as error:
+            output_error = str(error)
         output = None
         detail = None
         status = "completed"
@@ -256,10 +293,9 @@ class Replay:
                       else process_error or f"worker exited with status {returncode}")
         else:
             try:
-                lines = output_path.read_bytes().splitlines()
-                if len(lines) != 1:
-                    raise ValueError("expected exactly one observation")
-                output = json.loads(lines[0])
+                if output_error is not None:
+                    raise ValueError(output_error)
+                output = decode_jsonl(raw_output)
                 status, detail = classify_status(output)
                 if status not in ("completed", "inconclusive"):
                     raise ValueError("unknown observation status")
@@ -268,8 +304,8 @@ class Replay:
         receipt = {"request_id": request_id, "worker_pid": process.pid if process else None,
                    "worker_sha256": binary_hash,
                    "exit_code": returncode, "timed_out": timed_out,
-                   "observation": output, "detail": detail}
-        evidence_id = self.artifact(receipt)
+                   "observation": output, "detail": detail, "output_artifact_id": output_id}
+        evidence_id = self.artifact(encode_json(receipt), raw=True)
         self.event("execute", "execution_finished", execution_id=execution_id,
                    status=status, evidence_id=evidence_id, trace_ids=list(dict.fromkeys(traces)), detail=detail)
         self.event("execute", "compute_recorded", usage={
