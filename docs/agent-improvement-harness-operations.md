@@ -91,17 +91,51 @@ same ID.
 
 ## Mine observational workloads
 
-This command ranks card and event frequency and summarizes turn, damage, mana,
-and game-length columns from a 17Lands CSV or CSV gzip snapshot:
+For the official public replay CSV, supply the separately preserved `cards.csv`
+mapping and its SHA-256. The replay input remains the content-addressed `17lands`
+artifact in the corpus manifest. The MSH public format stores one game per row,
+with user/opponent turn columns; it is not a complete ordered action log.
 
 ```sh
 scripts/cargo.sh run --locked -p coworld-mtg-harness -- mine17lands \
   --manifest-uri artifacts/corpus/manifest.json \
+  --input-schema public-replay-wide-v1 \
+  --cards-csv <preserved-17lands-cards.csv> \
+  --cards-csv-sha256 <sha256> \
   --output artifacts/soft-signals.json
 ```
 
-The report labels itself observational. It cannot fail a hard gate. Its card
-ranking is input for deck/scenario selection and investigation only.
+The `normalization` object retains the mapping source, exact byte hash and size,
+plus each cast occurrence: one-based data row, original column, zero-based pipe
+position, Arena ID, turn index, player roles, kind and mapping result. Repeated
+IDs are repeated recorded casts. Totals, abilities and end-of-turn zone lists
+are excluded from cast counts. Unknown IDs and malformed ID tokens remain
+explicitly unmapped or invalid; they cannot silently disappear from the
+coverage denominator. Conflicting mapping identities, malformed rows and
+unsupported cast columns are errors. `card_frequency` aggregates mapped cast
+occurrences by the official card name; distinct Arena IDs remain in normalization.
+Wide-replay numeric summaries include only turn count and mana-spent fields,
+so numeric card IDs cannot become measurements.
+
+The default `--input-schema auto` accepts canonical public turn columns with a
+mapping, or known named-value columns such as `card_name`, `cards`, `deck`, and
+`drawn_cards`. Unknown schemas, mixed named/public schemas and case-changed public
+columns are rejected explicitly. Existing named-card CSV inputs keep their
+frequency semantics; use `--input-schema legacy-named-v1` for other known legacy
+headers handled by the earlier broad named-value heuristic. Public replay input
+cannot be forced through that legacy path. The optional
+`--row-limit` counts complete game rows, not turns or cast occurrences.
+
+Data from [17Lands public datasets](https://www.17lands.com/public_datasets) is
+CC BY 4.0 unless otherwise noted. Preserve source links, attribution, download
+identity and any subset/normalization description. 17Lands does not endorse
+this harness. The retained first-game fixture is previously inspected regression
+evidence, not an unseen holdout.
+
+Mapping/count preservation can be checked as an ingestion contract. These
+observations do not provide a gameplay correctness gate or recover missing
+targets, action ordering, priority, or hidden state. Card rankings nominate
+workloads and later rules-backed scenarios.
 
 ## Run or resume a shard
 

@@ -1,0 +1,59 @@
+{
+  "kind": "17lands-known-source-ingestion-fixture-v1",
+  "license": "CC BY 4.0 unless otherwise noted by 17Lands",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Public gameplay data from 17Lands. 17Lands does not endorse this work.",
+  "source_page": "https://www.17lands.com/public_datasets",
+  "source_archive_url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.MSH.PremierDraft.csv.gz",
+  "retrieved_at": "2026-09-07T22:20:40.842121+00:00",
+  "archive_prefix_range": "bytes=0-65535",
+  "archive_prefix_sha256": "646156abb39c38ef0d148f182ecf27ba0f3c675fc5de06d5275f16b55c56270c",
+  "full_archive_hash_known": false,
+  "source_complete92_rows_sha256": "2b14adfaebf0294250a48c2c996c49a504ae959516132372dba1dda4dece5855",
+  "selection": "The first complete game row and exact original CSV header. Known inspected regression evidence; not held out. Card mapping retains original header and exact source rows for IDs appearing in this game cast fields.",
+  "card_mapping_url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv",
+  "card_mapping_full_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+  "mapping_source_data_row_indexes": [
+    25034,
+    25066,
+    25111,
+    25129,
+    25164,
+    25233,
+    25245,
+    25250,
+    25254,
+    25261,
+    25263,
+    25273,
+    25300,
+    25313,
+    25327
+  ],
+  "semantics": "Each nonempty pipe element in documented per-turn cast columns is one recorded cast occurrence; preserve duplicates. Exclude total counts, abilities and end-of-turn zones. Card name resolution uses the separately hashed official Arena ID mapping. These are turn-level observations, not a fully ordered game log or rules outcome.",
+  "files": {
+    "expected-casts.json": {
+      "sha256": "c57c1a3e37619a0a7b3621075a954c4b8123c86ae867813a1015ab179b803217",
+      "bytes": 3839
+    },
+    "cards-subset.csv": {
+      "sha256": "908f70ddca98d0819fe1f9e0cf00fcb04c2753920716b7b6444cca23e07871c8",
+      "bytes": 1287
+    },
+    "observed-first-game.csv": {
+      "sha256": "9a9fa10c2f786f67da390965851f53182925a484ebb607d5ef3a6421157cd5cb",
+      "bytes": 92870
+    }
+  },
+  "expected_known_full92": {
+    "rows": 92,
+    "cast_occurrences": 1426,
+    "distinct_cast_arena_ids": 230,
+    "mapped_cast_occurrences": 1426,
+    "unmapped_cast_occurrences": 0,
+    "invalid_cast_occurrences": 0
+  },
+  "observed_bytes_and_expectations_frozen_before_native_source_edits": true,
+  "metadata_revision_note": "Attribution and selection prose spacing corrected during review; observed CSV bytes, mapping subset bytes and expected values are unchanged.",
+  "initial_frozen_manifest_sha256": "d06e3570c6ffdea491fb44837c25985e9fc8f599db50964bf9fdfd3623cb2b17"
+}

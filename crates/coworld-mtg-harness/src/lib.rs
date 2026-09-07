@@ -18,4 +18,6 @@ pub use aggregate::{aggregate_results, AggregateOptions};
 pub use corpus::{load_manifest, materialize_corpus, MaterializeOptions};
 pub use model::*;
 pub use runner::{minimize_trace, replay_trace_file, run_shard, RunOptions};
-pub use soft_signals::mine_17lands;
+pub use soft_signals::{
+    mine_17lands, mine_17lands_with_options, CardsCsvInput, Lands17InputSchema, Mine17landsOptions,
+};

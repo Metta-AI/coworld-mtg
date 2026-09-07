@@ -1,8 +1,9 @@
 use anyhow::{bail, Result};
 use clap::{Args, Parser, Subcommand};
 use coworld_mtg_harness::{
-    aggregate_results, load_manifest, materialize_corpus, mine_17lands, minimize_trace,
-    replay_trace_file, run_shard, AggregateOptions, MaterializeOptions, RunOptions,
+    aggregate_results, load_manifest, materialize_corpus, mine_17lands_with_options,
+    minimize_trace, replay_trace_file, run_shard, AggregateOptions, CardsCsvInput,
+    Lands17InputSchema, MaterializeOptions, Mine17landsOptions, RunOptions,
 };
 use phase_bridge::PHASE_REVISION;
 use std::path::PathBuf;
@@ -132,6 +133,13 @@ struct Mine17landsArgs {
     output: PathBuf,
     #[arg(long)]
     row_limit: Option<u64>,
+    /// Resolve observed Arena cast IDs in the public wide replay schema.
+    #[arg(long, value_enum, default_value = "auto")]
+    input_schema: Lands17InputSchema,
+    #[arg(long, requires = "cards_csv_sha256")]
+    cards_csv: Option<String>,
+    #[arg(long, requires = "cards_csv")]
+    cards_csv_sha256: Option<String>,
 }
 
 #[derive(Args)]
@@ -219,7 +227,19 @@ async fn main() -> Result<()> {
             println!("{}", serde_json::to_string_pretty(&scoreboard)?);
         }
         Command::Mine17lands(args) => {
-            let report = mine_17lands(&args.manifest_uri, &args.output, args.row_limit).await?;
+            let report = mine_17lands_with_options(
+                &args.manifest_uri,
+                &args.output,
+                args.row_limit,
+                &Mine17landsOptions {
+                    input_schema: args.input_schema,
+                    cards_csv: args
+                        .cards_csv
+                        .zip(args.cards_csv_sha256)
+                        .map(|(source, sha256)| CardsCsvInput { source, sha256 }),
+                },
+            )
+            .await?;
             println!("{}", serde_json::to_string_pretty(&report)?);
         }
         Command::Improve(args) => {

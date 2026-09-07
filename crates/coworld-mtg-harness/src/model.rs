@@ -180,6 +180,8 @@ pub struct SoftSignalReport {
     pub card_frequency: Vec<NamedCount>,
     pub event_frequency: Vec<NamedCount>,
     pub numeric_summaries: BTreeMap<String, NumericSummary>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub normalization: Option<ReplayNormalization>,
     pub interpretation: String,
 }
 
@@ -189,4 +191,65 @@ pub struct NumericSummary {
     pub mean: f64,
     pub min: f64,
     pub max: f64,
+}
+
+/// Public replay normalization describes recorded observations, not engine events.
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+pub struct CardsMappingProvenance {
+    pub source: String,
+    pub sha256: String,
+    pub bytes: u64,
+}
+
+#[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum ReplayPlayer {
+    User,
+    Oppo,
+}
+
+#[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum RecordedCastKind {
+    Creature,
+    NonCreature,
+    InstantSorcery,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(tag = "status", rename_all = "snake_case")]
+pub enum CastResolution {
+    Mapped { name: String },
+    Unmapped { reason: String },
+    Invalid { reason: String },
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+pub struct RecordedCast {
+    /// One-based data row, excluding the CSV header.
+    pub row: u64,
+    pub column: String,
+    /// Zero-based position in the original pipe-delimited cell.
+    pub value_index: usize,
+    pub raw_id: String,
+    pub arena_id: Option<u32>,
+    /// Source turn index; not a reconstructed global game-action index.
+    pub turn_number: u32,
+    pub active_player: ReplayPlayer,
+    pub casting_player: ReplayPlayer,
+    pub cast_kind: RecordedCastKind,
+    pub resolution: CastResolution,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ReplayNormalization {
+    pub schema: String,
+    pub cards_mapping: CardsMappingProvenance,
+    pub cast_occurrences: u64,
+    pub mapped_cast_occurrences: u64,
+    pub unmapped_cast_occurrences: u64,
+    pub invalid_cast_occurrences: u64,
+    pub distinct_cast_arena_ids: u64,
+    pub distinct_mapped_cast_arena_ids: u64,
+    pub casts: Vec<RecordedCast>,
 }
