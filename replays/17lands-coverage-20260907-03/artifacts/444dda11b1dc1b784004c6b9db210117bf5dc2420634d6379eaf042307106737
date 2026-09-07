@@ -1,0 +1,5506 @@
+{
+  "schema": "coworld-mtg-17lands-soft-signals-v1",
+  "manifest_id": "759ee3283883e711aa0d54544966e667701d79cbb63bfa0a0a23bda4b00ed11d",
+  "dataset_sha256": "8f1525a31c61f45cf88d23e25c5efdd186b5a4e1466d252b83ad276cc65a963e",
+  "rows": 46,
+  "card_frequency": [],
+  "event_frequency": [
+    {
+      "name": "PremierDraft",
+      "count": 46
+    }
+  ],
+  "numeric_summaries": {
+    "deck_call damage control": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "deck_return to the ranks": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "num_turns": {
+      "observations": 46,
+      "mean": 8.91304347826087,
+      "min": 6.0,
+      "max": 15.0
+    },
+    "oppo_total_mana_spent": {
+      "observations": 46,
+      "mean": 26.41304347826087,
+      "min": 11.0,
+      "max": 60.0
+    },
+    "oppo_turn_10_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.41304347826086957,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_10_creatures_attacked": {
+      "observations": 3,
+      "mean": 104932.66666666667,
+      "min": 104899.0,
+      "max": 104997.0
+    },
+    "oppo_turn_10_creatures_blocked": {
+      "observations": 2,
+      "mean": 105092.0,
+      "min": 104997.0,
+      "max": 105187.0
+    },
+    "oppo_turn_10_creatures_blocking": {
+      "observations": 1,
+      "mean": 104980.0,
+      "min": 104980.0,
+      "max": 104980.0
+    },
+    "oppo_turn_10_creatures_cast": {
+      "observations": 5,
+      "mean": 104986.4,
+      "min": 104899.0,
+      "max": 105110.0
+    },
+    "oppo_turn_10_creatures_unblocked": {
+      "observations": 2,
+      "mean": 104900.5,
+      "min": 104899.0,
+      "max": 104902.0
+    },
+    "oppo_turn_10_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.5217391304347826,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_10_eot_oppo_creatures_in_play": {
+      "observations": 1,
+      "mean": 104899.0,
+      "min": 104899.0,
+      "max": 104899.0
+    },
+    "oppo_turn_10_eot_oppo_life": {
+      "observations": 46,
+      "mean": 4.021739130434782,
+      "min": 0.0,
+      "max": 31.0
+    },
+    "oppo_turn_10_eot_oppo_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 104941.0,
+      "min": 104934.0,
+      "max": 104948.0
+    },
+    "oppo_turn_10_eot_user_cards_in_hand": {
+      "observations": 4,
+      "mean": 105112.25,
+      "min": 104996.0,
+      "max": 105178.0
+    },
+    "oppo_turn_10_eot_user_creatures_in_play": {
+      "observations": 1,
+      "mean": 105191.0,
+      "min": 105191.0,
+      "max": 105191.0
+    },
+    "oppo_turn_10_eot_user_life": {
+      "observations": 46,
+      "mean": 3.130434782608696,
+      "min": -3.0,
+      "max": 23.0
+    },
+    "oppo_turn_10_eot_user_non_creatures_in_play": {
+      "observations": 3,
+      "mean": 104989.66666666667,
+      "min": 104948.0,
+      "max": 105012.0
+    },
+    "oppo_turn_10_lands_played": {
+      "observations": 6,
+      "mean": 95659.33333333333,
+      "min": 70503.0,
+      "max": 107495.0
+    },
+    "oppo_turn_10_non_creatures_cast": {
+      "observations": 3,
+      "mean": 104937.66666666667,
+      "min": 104930.0,
+      "max": 104949.0
+    },
+    "oppo_turn_10_oppo_abilities": {
+      "observations": 6,
+      "mean": 132939.33333333334,
+      "min": 1268.0,
+      "max": 206494.0
+    },
+    "oppo_turn_10_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.30434782608695654,
+      "min": -6.0,
+      "max": 0.0
+    },
+    "oppo_turn_10_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104997.0,
+      "min": 104997.0,
+      "max": 104997.0
+    },
+    "oppo_turn_10_oppo_instants_sorceries_cast": {
+      "observations": 2,
+      "mean": 105035.0,
+      "min": 104994.0,
+      "max": 105076.0
+    },
+    "oppo_turn_10_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 1.1521739130434783,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "oppo_turn_10_user_abilities": {
+      "observations": 1,
+      "mean": 206149.0,
+      "min": 206149.0,
+      "max": 206149.0
+    },
+    "oppo_turn_10_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.43478260869565216,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "oppo_turn_10_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 105006.0,
+      "min": 104980.0,
+      "max": 105032.0
+    },
+    "oppo_turn_10_user_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105014.0,
+      "min": 105014.0,
+      "max": 105014.0
+    },
+    "oppo_turn_10_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 104922.0,
+      "min": 104922.0,
+      "max": 104922.0
+    },
+    "oppo_turn_10_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.08695652173913043,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_11_cards_discarded": {
+      "observations": 1,
+      "mean": 70503.0,
+      "min": 70503.0,
+      "max": 70503.0
+    },
+    "oppo_turn_11_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.17391304347826086,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_11_creatures_attacked": {
+      "observations": 1,
+      "mean": 104914.0,
+      "min": 104914.0,
+      "max": 104914.0
+    },
+    "oppo_turn_11_creatures_blocked": {
+      "observations": 1,
+      "mean": 104914.0,
+      "min": 104914.0,
+      "max": 104914.0
+    },
+    "oppo_turn_11_creatures_blocking": {
+      "observations": 1,
+      "mean": 105105.0,
+      "min": 105105.0,
+      "max": 105105.0
+    },
+    "oppo_turn_11_creatures_cast": {
+      "observations": 4,
+      "mean": 105004.5,
+      "min": 104967.0,
+      "max": 105044.0
+    },
+    "oppo_turn_11_creatures_unblocked": {
+      "observations": 1,
+      "mean": 105191.0,
+      "min": 105191.0,
+      "max": 105191.0
+    },
+    "oppo_turn_11_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.1956521739130435,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_11_eot_oppo_life": {
+      "observations": 46,
+      "mean": 1.8478260869565217,
+      "min": 0.0,
+      "max": 27.0
+    },
+    "oppo_turn_11_eot_oppo_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 104941.0,
+      "min": 104934.0,
+      "max": 104948.0
+    },
+    "oppo_turn_11_eot_user_cards_in_hand": {
+      "observations": 4,
+      "mean": 89951.5,
+      "min": 70502.0,
+      "max": 105112.0
+    },
+    "oppo_turn_11_eot_user_creatures_in_play": {
+      "observations": 1,
+      "mean": 105104.0,
+      "min": 105104.0,
+      "max": 105104.0
+    },
+    "oppo_turn_11_eot_user_life": {
+      "observations": 46,
+      "mean": 1.8478260869565217,
+      "min": 0.0,
+      "max": 23.0
+    },
+    "oppo_turn_11_lands_played": {
+      "observations": 4,
+      "mean": 105179.5,
+      "min": 105176.0,
+      "max": 105182.0
+    },
+    "oppo_turn_11_non_creatures_cast": {
+      "observations": 1,
+      "mean": 105067.0,
+      "min": 105067.0,
+      "max": 105067.0
+    },
+    "oppo_turn_11_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_11_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104986.0,
+      "min": 104986.0,
+      "max": 104986.0
+    },
+    "oppo_turn_11_oppo_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 104983.0,
+      "min": 104967.0,
+      "max": 104999.0
+    },
+    "oppo_turn_11_oppo_instants_sorceries_cast": {
+      "observations": 2,
+      "mean": 104997.0,
+      "min": 104977.0,
+      "max": 105017.0
+    },
+    "oppo_turn_11_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.6739130434782609,
+      "min": 0.0,
+      "max": 8.0
+    },
+    "oppo_turn_11_user_abilities": {
+      "observations": 1,
+      "mean": 206236.0,
+      "min": 206236.0,
+      "max": 206236.0
+    },
+    "oppo_turn_11_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_11_user_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104999.0,
+      "min": 104999.0,
+      "max": 104999.0
+    },
+    "oppo_turn_11_user_instants_sorceries_cast": {
+      "observations": 2,
+      "mean": 105017.0,
+      "min": 105017.0,
+      "max": 105017.0
+    },
+    "oppo_turn_11_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.13043478260869565,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_12_cards_discarded": {
+      "observations": 2,
+      "mean": 105019.0,
+      "min": 104949.0,
+      "max": 105089.0
+    },
+    "oppo_turn_12_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.21739130434782608,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_12_creatures_attacked": {
+      "observations": 2,
+      "mean": 104955.5,
+      "min": 104914.0,
+      "max": 104997.0
+    },
+    "oppo_turn_12_creatures_cast": {
+      "observations": 2,
+      "mean": 105110.5,
+      "min": 105101.0,
+      "max": 105120.0
+    },
+    "oppo_turn_12_creatures_unblocked": {
+      "observations": 2,
+      "mean": 104955.5,
+      "min": 104914.0,
+      "max": 104997.0
+    },
+    "oppo_turn_12_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.1956521739130435,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_12_eot_oppo_life": {
+      "observations": 46,
+      "mean": 1.7173913043478262,
+      "min": 0.0,
+      "max": 29.0
+    },
+    "oppo_turn_12_eot_oppo_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 105098.0,
+      "min": 104948.0,
+      "max": 105248.0
+    },
+    "oppo_turn_12_eot_user_cards_in_hand": {
+      "observations": 4,
+      "mean": 96401.25,
+      "min": 70502.0,
+      "max": 105112.0
+    },
+    "oppo_turn_12_eot_user_life": {
+      "observations": 46,
+      "mean": 0.8478260869565217,
+      "min": -1.0,
+      "max": 23.0
+    },
+    "oppo_turn_12_eot_user_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 104985.0,
+      "min": 104985.0,
+      "max": 104985.0
+    },
+    "oppo_turn_12_lands_played": {
+      "observations": 2,
+      "mean": 105169.0,
+      "min": 105158.0,
+      "max": 105180.0
+    },
+    "oppo_turn_12_non_creatures_cast": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "oppo_turn_12_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.06521739130434782,
+      "min": -3.0,
+      "max": 0.0
+    },
+    "oppo_turn_12_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104999.0,
+      "min": 104999.0,
+      "max": 104999.0
+    },
+    "oppo_turn_12_oppo_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 105076.0,
+      "min": 105076.0,
+      "max": 105076.0
+    },
+    "oppo_turn_12_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.5652173913043478,
+      "min": 0.0,
+      "max": 8.0
+    },
+    "oppo_turn_12_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.5,
+      "min": 0.0,
+      "max": 10.0
+    },
+    "oppo_turn_12_user_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104997.0,
+      "min": 104997.0,
+      "max": 104997.0
+    },
+    "oppo_turn_12_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_13_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.10869565217391304,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_13_creatures_attacked": {
+      "observations": 1,
+      "mean": 105101.0,
+      "min": 105101.0,
+      "max": 105101.0
+    },
+    "oppo_turn_13_creatures_cast": {
+      "observations": 1,
+      "mean": 104941.0,
+      "min": 104941.0,
+      "max": 104941.0
+    },
+    "oppo_turn_13_creatures_unblocked": {
+      "observations": 2,
+      "mean": 105077.5,
+      "min": 105054.0,
+      "max": 105101.0
+    },
+    "oppo_turn_13_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.08695652173913043,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_13_eot_oppo_life": {
+      "observations": 46,
+      "mean": 1.0434782608695652,
+      "min": 0.0,
+      "max": 29.0
+    },
+    "oppo_turn_13_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "oppo_turn_13_eot_user_life": {
+      "observations": 46,
+      "mean": 0.41304347826086957,
+      "min": 0.0,
+      "max": 18.0
+    },
+    "oppo_turn_13_eot_user_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 104985.0,
+      "min": 104985.0,
+      "max": 104985.0
+    },
+    "oppo_turn_13_lands_played": {
+      "observations": 2,
+      "mean": 105179.0,
+      "min": 105176.0,
+      "max": 105182.0
+    },
+    "oppo_turn_13_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_13_oppo_instants_sorceries_cast": {
+      "observations": 2,
+      "mean": 105049.5,
+      "min": 105042.0,
+      "max": 105057.0
+    },
+    "oppo_turn_13_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.34782608695652173,
+      "min": 0.0,
+      "max": 8.0
+    },
+    "oppo_turn_13_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.2391304347826087,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_13_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_14_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.06521739130434782,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_14_creatures_cast": {
+      "observations": 2,
+      "mean": 105056.5,
+      "min": 105036.0,
+      "max": 105077.0
+    },
+    "oppo_turn_14_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.06521739130434782,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_14_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.8913043478260869,
+      "min": 0.0,
+      "max": 29.0
+    },
+    "oppo_turn_14_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "oppo_turn_14_eot_user_cards_in_hand": {
+      "observations": 1,
+      "mean": 105080.0,
+      "min": 105080.0,
+      "max": 105080.0
+    },
+    "oppo_turn_14_eot_user_life": {
+      "observations": 46,
+      "mean": -0.13043478260869565,
+      "min": -7.0,
+      "max": 1.0
+    },
+    "oppo_turn_14_lands_played": {
+      "observations": 1,
+      "mean": 105182.0,
+      "min": 105182.0,
+      "max": 105182.0
+    },
+    "oppo_turn_14_oppo_abilities": {
+      "observations": 1,
+      "mean": 145367.0,
+      "min": 145367.0,
+      "max": 145367.0
+    },
+    "oppo_turn_14_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_14_oppo_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 104952.0,
+      "min": 104952.0,
+      "max": 104952.0
+    },
+    "oppo_turn_14_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.1956521739130435,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "oppo_turn_14_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.5217391304347826,
+      "min": 0.0,
+      "max": 24.0
+    },
+    "oppo_turn_14_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_15_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_15_creatures_cast": {
+      "observations": 1,
+      "mean": 105088.0,
+      "min": 105088.0,
+      "max": 105088.0
+    },
+    "oppo_turn_15_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_15_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_15_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "oppo_turn_15_eot_user_life": {
+      "observations": 46,
+      "mean": 0.021739130434782608,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "oppo_turn_15_lands_played": {
+      "observations": 1,
+      "mean": 105180.0,
+      "min": 105180.0,
+      "max": 105180.0
+    },
+    "oppo_turn_15_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_15_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.17391304347826086,
+      "min": 0.0,
+      "max": 8.0
+    },
+    "oppo_turn_15_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_15_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_16_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_17_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_18_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_19_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_1_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.4782608695652174,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "oppo_turn_1_creatures_cast": {
+      "observations": 5,
+      "mean": 104947.8,
+      "min": 104893.0,
+      "max": 105081.0
+    },
+    "oppo_turn_1_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 6.173913043478261,
+      "min": 4.0,
+      "max": 7.0
+    },
+    "oppo_turn_1_eot_oppo_creatures_in_play": {
+      "observations": 5,
+      "mean": 104947.8,
+      "min": 104893.0,
+      "max": 105081.0
+    },
+    "oppo_turn_1_eot_oppo_lands_in_play": {
+      "observations": 46,
+      "mean": 92092.95652173914,
+      "min": 7065.0,
+      "max": 107495.0
+    },
+    "oppo_turn_1_eot_oppo_life": {
+      "observations": 46,
+      "mean": 20.26086956521739,
+      "min": 20.0,
+      "max": 22.0
+    },
+    "oppo_turn_1_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105027.0,
+      "min": 105027.0,
+      "max": 105027.0
+    },
+    "oppo_turn_1_eot_user_lands_in_play": {
+      "observations": 22,
+      "mean": 75301.31818181818,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "oppo_turn_1_eot_user_life": {
+      "observations": 46,
+      "mean": 20.043478260869566,
+      "min": 20.0,
+      "max": 21.0
+    },
+    "oppo_turn_1_lands_played": {
+      "observations": 46,
+      "mean": 92092.95652173914,
+      "min": 7065.0,
+      "max": 107495.0
+    },
+    "oppo_turn_1_non_creatures_cast": {
+      "observations": 1,
+      "mean": 105027.0,
+      "min": 105027.0,
+      "max": 105027.0
+    },
+    "oppo_turn_1_oppo_abilities": {
+      "observations": 13,
+      "mean": 97295.0,
+      "min": 90050.0,
+      "max": 121445.0
+    },
+    "oppo_turn_1_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_1_oppo_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 105076.0,
+      "min": 105076.0,
+      "max": 105076.0
+    },
+    "oppo_turn_1_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.15217391304347827,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "oppo_turn_1_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_1_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_20_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_21_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_22_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_23_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_24_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_25_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_26_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_27_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_28_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_29_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_2_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "oppo_turn_2_creatures_attacked": {
+      "observations": 7,
+      "mean": 104978.71428571429,
+      "min": 104893.0,
+      "max": 105081.0
+    },
+    "oppo_turn_2_creatures_cast": {
+      "observations": 26,
+      "mean": 105015.03846153847,
+      "min": 104894.0,
+      "max": 105138.0
+    },
+    "oppo_turn_2_creatures_unblocked": {
+      "observations": 7,
+      "mean": 104978.71428571429,
+      "min": 104893.0,
+      "max": 105081.0
+    },
+    "oppo_turn_2_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 5.565217391304348,
+      "min": 4.0,
+      "max": 7.0
+    },
+    "oppo_turn_2_eot_oppo_creatures_in_play": {
+      "observations": 29,
+      "mean": 104998.62068965517,
+      "min": 104893.0,
+      "max": 105138.0
+    },
+    "oppo_turn_2_eot_oppo_life": {
+      "observations": 46,
+      "mean": 20.23913043478261,
+      "min": 20.0,
+      "max": 22.0
+    },
+    "oppo_turn_2_eot_oppo_non_creatures_in_play": {
+      "observations": 3,
+      "mean": 105026.66666666667,
+      "min": 104913.0,
+      "max": 105140.0
+    },
+    "oppo_turn_2_eot_user_creatures_in_play": {
+      "observations": 16,
+      "mean": 105020.25,
+      "min": 105005.0,
+      "max": 105047.0
+    },
+    "oppo_turn_2_eot_user_lands_in_play": {
+      "observations": 24,
+      "mean": 85188.625,
+      "min": 11809.0,
+      "max": 107492.0
+    },
+    "oppo_turn_2_eot_user_life": {
+      "observations": 46,
+      "mean": 19.847826086956523,
+      "min": 18.0,
+      "max": 21.0
+    },
+    "oppo_turn_2_lands_played": {
+      "observations": 46,
+      "mean": 87284.41304347826,
+      "min": 6993.0,
+      "max": 107496.0
+    },
+    "oppo_turn_2_non_creatures_cast": {
+      "observations": 2,
+      "mean": 105026.5,
+      "min": 104913.0,
+      "max": 105140.0
+    },
+    "oppo_turn_2_oppo_abilities": {
+      "observations": 3,
+      "mean": 110921.33333333333,
+      "min": 90050.0,
+      "max": 121357.0
+    },
+    "oppo_turn_2_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_2_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 1.1521739130434783,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_2_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.2391304347826087,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_2_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_30_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "oppo_turn_3_cards_discarded": {
+      "observations": 4,
+      "mean": 105012.75,
+      "min": 104906.0,
+      "max": 105149.0
+    },
+    "oppo_turn_3_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 1.0869565217391304,
+      "min": 1.0,
+      "max": 2.0
+    },
+    "oppo_turn_3_creatures_attacked": {
+      "observations": 17,
+      "mean": 105005.29411764706,
+      "min": 104893.0,
+      "max": 105091.0
+    },
+    "oppo_turn_3_creatures_blocked": {
+      "observations": 1,
+      "mean": 105081.0,
+      "min": 105081.0,
+      "max": 105081.0
+    },
+    "oppo_turn_3_creatures_blocking": {
+      "observations": 1,
+      "mean": 105047.0,
+      "min": 105047.0,
+      "max": 105047.0
+    },
+    "oppo_turn_3_creatures_cast": {
+      "observations": 25,
+      "mean": 105041.92,
+      "min": 104894.0,
+      "max": 105148.0
+    },
+    "oppo_turn_3_creatures_unblocked": {
+      "observations": 16,
+      "mean": 105000.5625,
+      "min": 104893.0,
+      "max": 105091.0
+    },
+    "oppo_turn_3_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 4.826086956521739,
+      "min": 3.0,
+      "max": 7.0
+    },
+    "oppo_turn_3_eot_oppo_creatures_in_play": {
+      "observations": 24,
+      "mean": 105027.58333333333,
+      "min": 104893.0,
+      "max": 105148.0
+    },
+    "oppo_turn_3_eot_oppo_life": {
+      "observations": 46,
+      "mean": 19.934782608695652,
+      "min": 18.0,
+      "max": 23.0
+    },
+    "oppo_turn_3_eot_oppo_non_creatures_in_play": {
+      "observations": 7,
+      "mean": 105010.85714285714,
+      "min": 104913.0,
+      "max": 105142.0
+    },
+    "oppo_turn_3_eot_user_creatures_in_play": {
+      "observations": 18,
+      "mean": 104993.27777777778,
+      "min": 104894.0,
+      "max": 105146.0
+    },
+    "oppo_turn_3_eot_user_life": {
+      "observations": 46,
+      "mean": 19.23913043478261,
+      "min": 16.0,
+      "max": 22.0
+    },
+    "oppo_turn_3_eot_user_non_creatures_in_play": {
+      "observations": 3,
+      "mean": 105070.66666666667,
+      "min": 104991.0,
+      "max": 105199.0
+    },
+    "oppo_turn_3_lands_played": {
+      "observations": 43,
+      "mean": 90395.51162790698,
+      "min": 7193.0,
+      "max": 107494.0
+    },
+    "oppo_turn_3_non_creatures_cast": {
+      "observations": 3,
+      "mean": 105008.0,
+      "min": 104934.0,
+      "max": 105142.0
+    },
+    "oppo_turn_3_oppo_abilities": {
+      "observations": 9,
+      "mean": 159736.66666666666,
+      "min": 152.0,
+      "max": 206312.0
+    },
+    "oppo_turn_3_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.10869565217391304,
+      "min": -3.0,
+      "max": 0.0
+    },
+    "oppo_turn_3_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 105068.0,
+      "min": 105068.0,
+      "max": 105068.0
+    },
+    "oppo_turn_3_oppo_instants_sorceries_cast": {
+      "observations": 5,
+      "mean": 104996.2,
+      "min": 104922.0,
+      "max": 105078.0
+    },
+    "oppo_turn_3_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 2.152173913043478,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_3_user_abilities": {
+      "observations": 2,
+      "mean": 188405.5,
+      "min": 170331.0,
+      "max": 206480.0
+    },
+    "oppo_turn_3_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.6086956521739131,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_3_user_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 105047.0,
+      "min": 105047.0,
+      "max": 105047.0
+    },
+    "oppo_turn_3_user_creatures_killed_non_combat": {
+      "observations": 4,
+      "mean": 104984.5,
+      "min": 104899.0,
+      "max": 105038.0
+    },
+    "oppo_turn_3_user_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 104993.33333333333,
+      "min": 104977.0,
+      "max": 105015.0
+    },
+    "oppo_turn_3_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.2391304347826087,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_4_cards_discarded": {
+      "observations": 6,
+      "mean": 73178.16666666667,
+      "min": 7065.0,
+      "max": 105113.0
+    },
+    "oppo_turn_4_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 1.173913043478261,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "oppo_turn_4_creatures_attacked": {
+      "observations": 20,
+      "mean": 105011.9,
+      "min": 104893.0,
+      "max": 105192.0
+    },
+    "oppo_turn_4_creatures_blocked": {
+      "observations": 4,
+      "mean": 104972.0,
+      "min": 104899.0,
+      "max": 105054.0
+    },
+    "oppo_turn_4_creatures_blocking": {
+      "observations": 3,
+      "mean": 104994.33333333333,
+      "min": 104894.0,
+      "max": 105109.0
+    },
+    "oppo_turn_4_creatures_cast": {
+      "observations": 26,
+      "mean": 105028.38461538461,
+      "min": 104907.0,
+      "max": 105149.0
+    },
+    "oppo_turn_4_creatures_unblocked": {
+      "observations": 18,
+      "mean": 105025.05555555556,
+      "min": 104893.0,
+      "max": 105192.0
+    },
+    "oppo_turn_4_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 3.9347826086956523,
+      "min": 2.0,
+      "max": 6.0
+    },
+    "oppo_turn_4_eot_oppo_creatures_in_play": {
+      "observations": 18,
+      "mean": 105017.27777777778,
+      "min": 104893.0,
+      "max": 105138.0
+    },
+    "oppo_turn_4_eot_oppo_life": {
+      "observations": 46,
+      "mean": 19.17391304347826,
+      "min": 16.0,
+      "max": 24.0
+    },
+    "oppo_turn_4_eot_oppo_non_creatures_in_play": {
+      "observations": 7,
+      "mean": 105010.14285714286,
+      "min": 104913.0,
+      "max": 105142.0
+    },
+    "oppo_turn_4_eot_user_creatures_in_play": {
+      "observations": 16,
+      "mean": 104970.0,
+      "min": 104894.0,
+      "max": 105132.0
+    },
+    "oppo_turn_4_eot_user_life": {
+      "observations": 46,
+      "mean": 18.347826086956523,
+      "min": 14.0,
+      "max": 23.0
+    },
+    "oppo_turn_4_eot_user_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 105073.77777777778,
+      "min": 104929.0,
+      "max": 105203.0
+    },
+    "oppo_turn_4_lands_played": {
+      "observations": 39,
+      "mean": 86614.53846153847,
+      "min": 7065.0,
+      "max": 107495.0
+    },
+    "oppo_turn_4_non_creatures_cast": {
+      "observations": 3,
+      "mean": 104941.0,
+      "min": 104929.0,
+      "max": 104965.0
+    },
+    "oppo_turn_4_oppo_abilities": {
+      "observations": 22,
+      "mean": 155887.5909090909,
+      "min": 137.0,
+      "max": 206497.0
+    },
+    "oppo_turn_4_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.13043478260869565,
+      "min": -3.0,
+      "max": 1.0
+    },
+    "oppo_turn_4_oppo_creatures_killed_combat": {
+      "observations": 3,
+      "mean": 104994.66666666667,
+      "min": 104899.0,
+      "max": 105054.0
+    },
+    "oppo_turn_4_oppo_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 105045.5,
+      "min": 105021.0,
+      "max": 105070.0
+    },
+    "oppo_turn_4_oppo_instants_sorceries_cast": {
+      "observations": 9,
+      "mean": 105010.22222222222,
+      "min": 104976.0,
+      "max": 105076.0
+    },
+    "oppo_turn_4_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 3.108695652173913,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "oppo_turn_4_user_abilities": {
+      "observations": 2,
+      "mean": 85234.0,
+      "min": 137.0,
+      "max": 170331.0
+    },
+    "oppo_turn_4_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.065217391304348,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "oppo_turn_4_user_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 105049.5,
+      "min": 104963.0,
+      "max": 105146.0
+    },
+    "oppo_turn_4_user_creatures_killed_non_combat": {
+      "observations": 5,
+      "mean": 105017.6,
+      "min": 104907.0,
+      "max": 105105.0
+    },
+    "oppo_turn_4_user_instants_sorceries_cast": {
+      "observations": 5,
+      "mean": 104981.6,
+      "min": 104922.0,
+      "max": 105017.0
+    },
+    "oppo_turn_4_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.3695652173913043,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_5_cards_discarded": {
+      "observations": 4,
+      "mean": 105008.5,
+      "min": 104899.0,
+      "max": 105176.0
+    },
+    "oppo_turn_5_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 1.173913043478261,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "oppo_turn_5_creatures_attacked": {
+      "observations": 13,
+      "mean": 105045.15384615384,
+      "min": 104907.0,
+      "max": 105192.0
+    },
+    "oppo_turn_5_creatures_blocked": {
+      "observations": 6,
+      "mean": 105076.33333333333,
+      "min": 104926.0,
+      "max": 105192.0
+    },
+    "oppo_turn_5_creatures_blocking": {
+      "observations": 5,
+      "mean": 104958.6,
+      "min": 104894.0,
+      "max": 105005.0
+    },
+    "oppo_turn_5_creatures_cast": {
+      "observations": 25,
+      "mean": 105021.0,
+      "min": 104901.0,
+      "max": 105143.0
+    },
+    "oppo_turn_5_creatures_unblocked": {
+      "observations": 14,
+      "mean": 105003.28571428571,
+      "min": 104894.0,
+      "max": 105143.0
+    },
+    "oppo_turn_5_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 3.239130434782609,
+      "min": 1.0,
+      "max": 7.0
+    },
+    "oppo_turn_5_eot_oppo_creatures_in_play": {
+      "observations": 11,
+      "mean": 105034.54545454546,
+      "min": 104893.0,
+      "max": 105138.0
+    },
+    "oppo_turn_5_eot_oppo_life": {
+      "observations": 46,
+      "mean": 17.67391304347826,
+      "min": 9.0,
+      "max": 26.0
+    },
+    "oppo_turn_5_eot_oppo_non_creatures_in_play": {
+      "observations": 7,
+      "mean": 105061.42857142857,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "oppo_turn_5_eot_user_cards_in_hand": {
+      "observations": 4,
+      "mean": 104991.5,
+      "min": 104934.0,
+      "max": 105037.0
+    },
+    "oppo_turn_5_eot_user_creatures_in_play": {
+      "observations": 13,
+      "mean": 105020.15384615384,
+      "min": 104899.0,
+      "max": 105152.0
+    },
+    "oppo_turn_5_eot_user_life": {
+      "observations": 46,
+      "mean": 16.82608695652174,
+      "min": 9.0,
+      "max": 26.0
+    },
+    "oppo_turn_5_eot_user_non_creatures_in_play": {
+      "observations": 10,
+      "mean": 105017.8,
+      "min": 104934.0,
+      "max": 105203.0
+    },
+    "oppo_turn_5_lands_played": {
+      "observations": 28,
+      "mean": 79120.21428571429,
+      "min": 7065.0,
+      "max": 107494.0
+    },
+    "oppo_turn_5_non_creatures_cast": {
+      "observations": 7,
+      "mean": 105048.85714285714,
+      "min": 104934.0,
+      "max": 105150.0
+    },
+    "oppo_turn_5_oppo_abilities": {
+      "observations": 13,
+      "mean": 132715.76923076922,
+      "min": 137.0,
+      "max": 206357.0
+    },
+    "oppo_turn_5_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.06521739130434782,
+      "min": -2.0,
+      "max": 2.0
+    },
+    "oppo_turn_5_oppo_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 105126.5,
+      "min": 105105.0,
+      "max": 105148.0
+    },
+    "oppo_turn_5_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 104938.0,
+      "min": 104938.0,
+      "max": 104938.0
+    },
+    "oppo_turn_5_oppo_instants_sorceries_cast": {
+      "observations": 12,
+      "mean": 102504.5,
+      "min": 74995.0,
+      "max": 105063.0
+    },
+    "oppo_turn_5_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 3.5652173913043477,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_5_user_abilities": {
+      "observations": 3,
+      "mean": 137475.66666666666,
+      "min": 152.0,
+      "max": 206193.0
+    },
+    "oppo_turn_5_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.565217391304348,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_5_user_creatures_killed_combat": {
+      "observations": 6,
+      "mean": 104975.0,
+      "min": 104894.0,
+      "max": 105005.0
+    },
+    "oppo_turn_5_user_creatures_killed_non_combat": {
+      "observations": 5,
+      "mean": 105003.6,
+      "min": 104894.0,
+      "max": 105125.0
+    },
+    "oppo_turn_5_user_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 104952.66666666667,
+      "min": 104906.0,
+      "max": 105030.0
+    },
+    "oppo_turn_5_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.2391304347826087,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_6_cards_discarded": {
+      "observations": 5,
+      "mean": 98746.0,
+      "min": 73497.0,
+      "max": 105176.0
+    },
+    "oppo_turn_6_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 1.2173913043478262,
+      "min": 1.0,
+      "max": 2.0
+    },
+    "oppo_turn_6_creatures_attacked": {
+      "observations": 10,
+      "mean": 105009.8,
+      "min": 104894.0,
+      "max": 105192.0
+    },
+    "oppo_turn_6_creatures_blocked": {
+      "observations": 3,
+      "mean": 105018.0,
+      "min": 104894.0,
+      "max": 105113.0
+    },
+    "oppo_turn_6_creatures_blocking": {
+      "observations": 2,
+      "mean": 104961.0,
+      "min": 104926.0,
+      "max": 104996.0
+    },
+    "oppo_turn_6_creatures_cast": {
+      "observations": 25,
+      "mean": 105010.28,
+      "min": 104896.0,
+      "max": 105152.0
+    },
+    "oppo_turn_6_creatures_unblocked": {
+      "observations": 10,
+      "mean": 105010.8,
+      "min": 104904.0,
+      "max": 105192.0
+    },
+    "oppo_turn_6_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 2.6739130434782608,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_6_eot_oppo_creatures_in_play": {
+      "observations": 9,
+      "mean": 105013.66666666667,
+      "min": 104907.0,
+      "max": 105152.0
+    },
+    "oppo_turn_6_eot_oppo_life": {
+      "observations": 46,
+      "mean": 15.347826086956522,
+      "min": 4.0,
+      "max": 28.0
+    },
+    "oppo_turn_6_eot_oppo_non_creatures_in_play": {
+      "observations": 13,
+      "mean": 105034.30769230769,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "oppo_turn_6_eot_user_cards_in_hand": {
+      "observations": 8,
+      "mean": 101764.5,
+      "min": 79095.0,
+      "max": 105112.0
+    },
+    "oppo_turn_6_eot_user_creatures_in_play": {
+      "observations": 9,
+      "mean": 105066.11111111111,
+      "min": 104912.0,
+      "max": 105191.0
+    },
+    "oppo_turn_6_eot_user_life": {
+      "observations": 46,
+      "mean": 14.76086956521739,
+      "min": 4.0,
+      "max": 28.0
+    },
+    "oppo_turn_6_eot_user_non_creatures_in_play": {
+      "observations": 11,
+      "mean": 105008.09090909091,
+      "min": 104934.0,
+      "max": 105203.0
+    },
+    "oppo_turn_6_lands_played": {
+      "observations": 26,
+      "mean": 86678.73076923077,
+      "min": 7065.0,
+      "max": 107496.0
+    },
+    "oppo_turn_6_non_creatures_cast": {
+      "observations": 9,
+      "mean": 104984.33333333333,
+      "min": 104921.0,
+      "max": 105107.0
+    },
+    "oppo_turn_6_oppo_abilities": {
+      "observations": 12,
+      "mean": 174445.08333333334,
+      "min": 1268.0,
+      "max": 206480.0
+    },
+    "oppo_turn_6_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.10869565217391304,
+      "min": -3.0,
+      "max": 0.0
+    },
+    "oppo_turn_6_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104894.0,
+      "min": 104894.0,
+      "max": 104894.0
+    },
+    "oppo_turn_6_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105089.0,
+      "min": 105089.0,
+      "max": 105089.0
+    },
+    "oppo_turn_6_oppo_instants_sorceries_cast": {
+      "observations": 5,
+      "mean": 105018.4,
+      "min": 104932.0,
+      "max": 105078.0
+    },
+    "oppo_turn_6_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 3.5,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_6_user_abilities": {
+      "observations": 4,
+      "mean": 122287.25,
+      "min": 152.0,
+      "max": 206236.0
+    },
+    "oppo_turn_6_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 2.108695652173913,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "oppo_turn_6_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 104961.0,
+      "min": 104926.0,
+      "max": 104996.0
+    },
+    "oppo_turn_6_user_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105026.0,
+      "min": 105026.0,
+      "max": 105026.0
+    },
+    "oppo_turn_6_user_instants_sorceries_cast": {
+      "observations": 4,
+      "mean": 104999.75,
+      "min": 104977.0,
+      "max": 105030.0
+    },
+    "oppo_turn_6_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.41304347826086957,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_7_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 1.065217391304348,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "oppo_turn_7_creatures_attacked": {
+      "observations": 14,
+      "mean": 105059.5,
+      "min": 104933.0,
+      "max": 105192.0
+    },
+    "oppo_turn_7_creatures_blocked": {
+      "observations": 4,
+      "mean": 105007.25,
+      "min": 104925.0,
+      "max": 105131.0
+    },
+    "oppo_turn_7_creatures_blocking": {
+      "observations": 4,
+      "mean": 105017.25,
+      "min": 104979.0,
+      "max": 105103.0
+    },
+    "oppo_turn_7_creatures_cast": {
+      "observations": 22,
+      "mean": 105024.90909090909,
+      "min": 104899.0,
+      "max": 105151.0
+    },
+    "oppo_turn_7_creatures_unblocked": {
+      "observations": 14,
+      "mean": 105062.14285714286,
+      "min": 104928.0,
+      "max": 105192.0
+    },
+    "oppo_turn_7_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 1.9565217391304348,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_7_eot_oppo_creatures_in_play": {
+      "observations": 3,
+      "mean": 105050.33333333333,
+      "min": 104978.0,
+      "max": 105152.0
+    },
+    "oppo_turn_7_eot_oppo_life": {
+      "observations": 46,
+      "mean": 12.152173913043478,
+      "min": 0.0,
+      "max": 28.0
+    },
+    "oppo_turn_7_eot_oppo_non_creatures_in_play": {
+      "observations": 12,
+      "mean": 104996.66666666667,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "oppo_turn_7_eot_user_cards_in_hand": {
+      "observations": 8,
+      "mean": 100382.5,
+      "min": 70502.0,
+      "max": 105015.0
+    },
+    "oppo_turn_7_eot_user_creatures_in_play": {
+      "observations": 8,
+      "mean": 105058.125,
+      "min": 104912.0,
+      "max": 105191.0
+    },
+    "oppo_turn_7_eot_user_life": {
+      "observations": 46,
+      "mean": 12.152173913043478,
+      "min": 0.0,
+      "max": 31.0
+    },
+    "oppo_turn_7_eot_user_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 105005.88888888889,
+      "min": 104934.0,
+      "max": 105203.0
+    },
+    "oppo_turn_7_lands_played": {
+      "observations": 22,
+      "mean": 88946.68181818182,
+      "min": 11863.0,
+      "max": 107492.0
+    },
+    "oppo_turn_7_non_creatures_cast": {
+      "observations": 8,
+      "mean": 104982.25,
+      "min": 104921.0,
+      "max": 105127.0
+    },
+    "oppo_turn_7_oppo_abilities": {
+      "observations": 14,
+      "mean": 170920.7857142857,
+      "min": 152.0,
+      "max": 206505.0
+    },
+    "oppo_turn_7_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.10869565217391304,
+      "min": -3.0,
+      "max": 0.0
+    },
+    "oppo_turn_7_oppo_creatures_killed_combat": {
+      "observations": 3,
+      "mean": 105024.66666666667,
+      "min": 104925.0,
+      "max": 105131.0
+    },
+    "oppo_turn_7_oppo_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 105030.5,
+      "min": 104997.0,
+      "max": 105064.0
+    },
+    "oppo_turn_7_oppo_instants_sorceries_cast": {
+      "observations": 5,
+      "mean": 104989.0,
+      "min": 104932.0,
+      "max": 105023.0
+    },
+    "oppo_turn_7_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 3.347826086956522,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "oppo_turn_7_user_abilities": {
+      "observations": 1,
+      "mean": 206193.0,
+      "min": 206193.0,
+      "max": 206193.0
+    },
+    "oppo_turn_7_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.3043478260869565,
+      "min": -2.0,
+      "max": 7.0
+    },
+    "oppo_turn_7_user_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 105017.25,
+      "min": 104979.0,
+      "max": 105103.0
+    },
+    "oppo_turn_7_user_creatures_killed_non_combat": {
+      "observations": 3,
+      "mean": 105059.33333333333,
+      "min": 104914.0,
+      "max": 105152.0
+    },
+    "oppo_turn_7_user_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 104995.33333333333,
+      "min": 104977.0,
+      "max": 105015.0
+    },
+    "oppo_turn_7_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.2826086956521739,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "oppo_turn_8_cards_discarded": {
+      "observations": 2,
+      "mean": 92671.0,
+      "min": 80416.0,
+      "max": 104926.0
+    },
+    "oppo_turn_8_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.9565217391304348,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_8_creatures_attacked": {
+      "observations": 4,
+      "mean": 104970.25,
+      "min": 104899.0,
+      "max": 105034.0
+    },
+    "oppo_turn_8_creatures_blocked": {
+      "observations": 1,
+      "mean": 105113.0,
+      "min": 105113.0,
+      "max": 105113.0
+    },
+    "oppo_turn_8_creatures_blocking": {
+      "observations": 1,
+      "mean": 105005.0,
+      "min": 105005.0,
+      "max": 105005.0
+    },
+    "oppo_turn_8_creatures_cast": {
+      "observations": 19,
+      "mean": 104974.05263157895,
+      "min": 104892.0,
+      "max": 105113.0
+    },
+    "oppo_turn_8_creatures_unblocked": {
+      "observations": 5,
+      "mean": 104978.2,
+      "min": 104899.0,
+      "max": 105034.0
+    },
+    "oppo_turn_8_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 1.5,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "oppo_turn_8_eot_oppo_creatures_in_play": {
+      "observations": 6,
+      "mean": 105004.33333333333,
+      "min": 104907.0,
+      "max": 105136.0
+    },
+    "oppo_turn_8_eot_oppo_life": {
+      "observations": 46,
+      "mean": 8.891304347826088,
+      "min": 0.0,
+      "max": 25.0
+    },
+    "oppo_turn_8_eot_oppo_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 104994.88888888889,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "oppo_turn_8_eot_user_cards_in_hand": {
+      "observations": 6,
+      "mean": 100659.16666666667,
+      "min": 79095.0,
+      "max": 105037.0
+    },
+    "oppo_turn_8_eot_user_creatures_in_play": {
+      "observations": 2,
+      "mean": 104963.5,
+      "min": 104895.0,
+      "max": 105032.0
+    },
+    "oppo_turn_8_eot_user_life": {
+      "observations": 46,
+      "mean": 8.065217391304348,
+      "min": -2.0,
+      "max": 29.0
+    },
+    "oppo_turn_8_eot_user_non_creatures_in_play": {
+      "observations": 10,
+      "mean": 105002.2,
+      "min": 104934.0,
+      "max": 105199.0
+    },
+    "oppo_turn_8_lands_played": {
+      "observations": 12,
+      "mean": 98319.41666666667,
+      "min": 70765.0,
+      "max": 107494.0
+    },
+    "oppo_turn_8_non_creatures_cast": {
+      "observations": 4,
+      "mean": 105020.25,
+      "min": 104934.0,
+      "max": 105234.0
+    },
+    "oppo_turn_8_oppo_abilities": {
+      "observations": 11,
+      "mean": 150160.81818181818,
+      "min": 137.0,
+      "max": 206476.0
+    },
+    "oppo_turn_8_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.17391304347826086,
+      "min": -6.0,
+      "max": 0.0
+    },
+    "oppo_turn_8_oppo_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 105070.5,
+      "min": 105021.0,
+      "max": 105120.0
+    },
+    "oppo_turn_8_oppo_instants_sorceries_cast": {
+      "observations": 7,
+      "mean": 105020.57142857143,
+      "min": 104932.0,
+      "max": 105076.0
+    },
+    "oppo_turn_8_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 2.6739130434782608,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "oppo_turn_8_user_abilities": {
+      "observations": 4,
+      "mean": 206231.25,
+      "min": 206053.0,
+      "max": 206480.0
+    },
+    "oppo_turn_8_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.3043478260869565,
+      "min": 0.0,
+      "max": 14.0
+    },
+    "oppo_turn_8_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 104969.0,
+      "min": 104933.0,
+      "max": 105005.0
+    },
+    "oppo_turn_8_user_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 105060.0,
+      "min": 105002.0,
+      "max": 105118.0
+    },
+    "oppo_turn_8_user_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 104971.0,
+      "min": 104906.0,
+      "max": 105030.0
+    },
+    "oppo_turn_8_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.15217391304347827,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_9_cards_discarded": {
+      "observations": 4,
+      "mean": 82472.5,
+      "min": 12053.0,
+      "max": 107494.0
+    },
+    "oppo_turn_9_cards_drawn_or_tutored": {
+      "observations": 46,
+      "mean": 0.5652173913043478,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "oppo_turn_9_creatures_attacked": {
+      "observations": 4,
+      "mean": 104958.75,
+      "min": 104899.0,
+      "max": 105073.0
+    },
+    "oppo_turn_9_creatures_blocked": {
+      "observations": 5,
+      "mean": 105059.8,
+      "min": 104899.0,
+      "max": 105198.0
+    },
+    "oppo_turn_9_creatures_blocking": {
+      "observations": 4,
+      "mean": 105096.25,
+      "min": 104980.0,
+      "max": 105187.0
+    },
+    "oppo_turn_9_creatures_cast": {
+      "observations": 9,
+      "mean": 105011.33333333333,
+      "min": 104911.0,
+      "max": 105149.0
+    },
+    "oppo_turn_9_creatures_unblocked": {
+      "observations": 5,
+      "mean": 104980.0,
+      "min": 104908.0,
+      "max": 105047.0
+    },
+    "oppo_turn_9_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.7608695652173914,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "oppo_turn_9_eot_oppo_creatures_in_play": {
+      "observations": 2,
+      "mean": 104932.0,
+      "min": 104908.0,
+      "max": 104956.0
+    },
+    "oppo_turn_9_eot_oppo_life": {
+      "observations": 46,
+      "mean": 5.695652173913044,
+      "min": 0.0,
+      "max": 25.0
+    },
+    "oppo_turn_9_eot_oppo_non_creatures_in_play": {
+      "observations": 3,
+      "mean": 104953.66666666667,
+      "min": 104948.0,
+      "max": 104965.0
+    },
+    "oppo_turn_9_eot_user_cards_in_hand": {
+      "observations": 6,
+      "mean": 105020.16666666667,
+      "min": 104896.0,
+      "max": 105178.0
+    },
+    "oppo_turn_9_eot_user_creatures_in_play": {
+      "observations": 1,
+      "mean": 105191.0,
+      "min": 105191.0,
+      "max": 105191.0
+    },
+    "oppo_turn_9_eot_user_life": {
+      "observations": 46,
+      "mean": 5.239130434782608,
+      "min": -1.0,
+      "max": 31.0
+    },
+    "oppo_turn_9_eot_user_non_creatures_in_play": {
+      "observations": 6,
+      "mean": 104973.66666666667,
+      "min": 104934.0,
+      "max": 105012.0
+    },
+    "oppo_turn_9_lands_played": {
+      "observations": 11,
+      "mean": 98105.18181818182,
+      "min": 74121.0,
+      "max": 107494.0
+    },
+    "oppo_turn_9_non_creatures_cast": {
+      "observations": 2,
+      "mean": 104941.5,
+      "min": 104934.0,
+      "max": 104949.0
+    },
+    "oppo_turn_9_oppo_abilities": {
+      "observations": 8,
+      "mean": 195043.0,
+      "min": 149374.0,
+      "max": 206365.0
+    },
+    "oppo_turn_9_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.2608695652173913,
+      "min": -6.0,
+      "max": 0.0
+    },
+    "oppo_turn_9_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 105073.0,
+      "min": 105073.0,
+      "max": 105073.0
+    },
+    "oppo_turn_9_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105064.0,
+      "min": 105064.0,
+      "max": 105064.0
+    },
+    "oppo_turn_9_oppo_instants_sorceries_cast": {
+      "observations": 4,
+      "mean": 104974.0,
+      "min": 104939.0,
+      "max": 104994.0
+    },
+    "oppo_turn_9_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 1.891304347826087,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "oppo_turn_9_user_abilities": {
+      "observations": 1,
+      "mean": 118824.0,
+      "min": 118824.0,
+      "max": 118824.0
+    },
+    "oppo_turn_9_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.8043478260869565,
+      "min": 0.0,
+      "max": 8.0
+    },
+    "oppo_turn_9_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 105007.5,
+      "min": 104980.0,
+      "max": 105035.0
+    },
+    "oppo_turn_9_user_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 104969.0,
+      "min": 104969.0,
+      "max": 104969.0
+    },
+    "oppo_turn_9_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 104922.0,
+      "min": 104922.0,
+      "max": 104922.0
+    },
+    "oppo_turn_9_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.1956521739130435,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "sideboard_call damage control": {
+      "observations": 46,
+      "mean": 0.13043478260869565,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "sideboard_return to the ranks": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_total_mana_spent": {
+      "observations": 46,
+      "mean": 26.782608695652176,
+      "min": 5.0,
+      "max": 59.0
+    },
+    "user_turn_10_cards_discarded": {
+      "observations": 2,
+      "mean": 105178.0,
+      "min": 105178.0,
+      "max": 105178.0
+    },
+    "user_turn_10_cards_drawn": {
+      "observations": 9,
+      "mean": 91533.77777777778,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "user_turn_10_cards_tutored": {
+      "observations": 1,
+      "mean": 105114.0,
+      "min": 105114.0,
+      "max": 105114.0
+    },
+    "user_turn_10_creatures_attacked": {
+      "observations": 1,
+      "mean": 105097.0,
+      "min": 105097.0,
+      "max": 105097.0
+    },
+    "user_turn_10_creatures_blocked": {
+      "observations": 3,
+      "mean": 105103.66666666667,
+      "min": 105026.0,
+      "max": 105188.0
+    },
+    "user_turn_10_creatures_blocking": {
+      "observations": 3,
+      "mean": 104994.66666666667,
+      "min": 104899.0,
+      "max": 105080.0
+    },
+    "user_turn_10_creatures_cast": {
+      "observations": 4,
+      "mean": 105030.5,
+      "min": 105002.0,
+      "max": 105101.0
+    },
+    "user_turn_10_creatures_unblocked": {
+      "observations": 2,
+      "mean": 104949.5,
+      "min": 104919.0,
+      "max": 104980.0
+    },
+    "user_turn_10_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.45652173913043476,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "user_turn_10_eot_oppo_creatures_in_play": {
+      "observations": 2,
+      "mean": 105028.5,
+      "min": 104908.0,
+      "max": 105149.0
+    },
+    "user_turn_10_eot_oppo_life": {
+      "observations": 46,
+      "mean": 2.9565217391304346,
+      "min": 0.0,
+      "max": 25.0
+    },
+    "user_turn_10_eot_oppo_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 104941.0,
+      "min": 104934.0,
+      "max": 104948.0
+    },
+    "user_turn_10_eot_user_cards_in_hand": {
+      "observations": 4,
+      "mean": 98591.5,
+      "min": 79095.0,
+      "max": 105178.0
+    },
+    "user_turn_10_eot_user_life": {
+      "observations": 46,
+      "mean": 3.0652173913043477,
+      "min": 0.0,
+      "max": 23.0
+    },
+    "user_turn_10_eot_user_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 104998.5,
+      "min": 104985.0,
+      "max": 105012.0
+    },
+    "user_turn_10_lands_played": {
+      "observations": 5,
+      "mean": 62125.8,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "user_turn_10_non_creatures_cast": {
+      "observations": 2,
+      "mean": 104966.5,
+      "min": 104948.0,
+      "max": 104985.0
+    },
+    "user_turn_10_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.43478260869565216,
+      "min": -1.0,
+      "max": 8.0
+    },
+    "user_turn_10_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 104899.0,
+      "min": 104899.0,
+      "max": 104899.0
+    },
+    "user_turn_10_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105080.0,
+      "min": 105080.0,
+      "max": 105080.0
+    },
+    "user_turn_10_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_10_user_abilities": {
+      "observations": 4,
+      "mean": 170228.75,
+      "min": 96573.0,
+      "max": 206371.0
+    },
+    "user_turn_10_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.08695652173913043,
+      "min": -2.0,
+      "max": 0.0
+    },
+    "user_turn_10_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 105044.5,
+      "min": 104992.0,
+      "max": 105097.0
+    },
+    "user_turn_10_user_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 104976.0,
+      "min": 104939.0,
+      "max": 105037.0
+    },
+    "user_turn_10_user_mana_spent": {
+      "observations": 46,
+      "mean": 1.065217391304348,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "user_turn_11_cards_discarded": {
+      "observations": 2,
+      "mean": 105091.0,
+      "min": 105006.0,
+      "max": 105176.0
+    },
+    "user_turn_11_cards_drawn": {
+      "observations": 4,
+      "mean": 96373.25,
+      "min": 70502.0,
+      "max": 105026.0
+    },
+    "user_turn_11_creatures_attacked": {
+      "observations": 2,
+      "mean": 104982.5,
+      "min": 104963.0,
+      "max": 105002.0
+    },
+    "user_turn_11_creatures_cast": {
+      "observations": 4,
+      "mean": 105029.25,
+      "min": 104996.0,
+      "max": 105096.0
+    },
+    "user_turn_11_creatures_unblocked": {
+      "observations": 2,
+      "mean": 104982.5,
+      "min": 104963.0,
+      "max": 105002.0
+    },
+    "user_turn_11_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.21739130434782608,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "user_turn_11_eot_oppo_life": {
+      "observations": 46,
+      "mean": 1.3695652173913044,
+      "min": -14.0,
+      "max": 27.0
+    },
+    "user_turn_11_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 104948.0,
+      "min": 104948.0,
+      "max": 104948.0
+    },
+    "user_turn_11_eot_user_cards_in_hand": {
+      "observations": 3,
+      "mean": 93570.33333333333,
+      "min": 70502.0,
+      "max": 105112.0
+    },
+    "user_turn_11_eot_user_life": {
+      "observations": 46,
+      "mean": 1.7608695652173914,
+      "min": 0.0,
+      "max": 23.0
+    },
+    "user_turn_11_eot_user_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 104998.5,
+      "min": 104985.0,
+      "max": 105012.0
+    },
+    "user_turn_11_lands_played": {
+      "observations": 1,
+      "mean": 11809.0,
+      "min": 11809.0,
+      "max": 11809.0
+    },
+    "user_turn_11_non_creatures_cast": {
+      "observations": 2,
+      "mean": 104966.5,
+      "min": 104948.0,
+      "max": 104985.0
+    },
+    "user_turn_11_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.5652173913043478,
+      "min": 0.0,
+      "max": 16.0
+    },
+    "user_turn_11_oppo_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 105025.0,
+      "min": 105025.0,
+      "max": 105025.0
+    },
+    "user_turn_11_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_11_user_abilities": {
+      "observations": 2,
+      "mean": 206241.5,
+      "min": 206172.0,
+      "max": 206311.0
+    },
+    "user_turn_11_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.043478260869565216,
+      "min": -2.0,
+      "max": 0.0
+    },
+    "user_turn_11_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 105017.0,
+      "min": 105017.0,
+      "max": 105017.0
+    },
+    "user_turn_11_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.5652173913043478,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_12_cards_discarded": {
+      "observations": 2,
+      "mean": 92103.5,
+      "min": 79095.0,
+      "max": 105112.0
+    },
+    "user_turn_12_cards_drawn": {
+      "observations": 3,
+      "mean": 93522.66666666667,
+      "min": 70502.0,
+      "max": 105080.0
+    },
+    "user_turn_12_creatures_blocked": {
+      "observations": 1,
+      "mean": 105005.0,
+      "min": 105005.0,
+      "max": 105005.0
+    },
+    "user_turn_12_creatures_blocking": {
+      "observations": 1,
+      "mean": 104997.0,
+      "min": 104997.0,
+      "max": 104997.0
+    },
+    "user_turn_12_creatures_unblocked": {
+      "observations": 1,
+      "mean": 105002.0,
+      "min": 105002.0,
+      "max": 105002.0
+    },
+    "user_turn_12_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.15217391304347827,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "user_turn_12_eot_oppo_life": {
+      "observations": 46,
+      "mean": 1.6304347826086956,
+      "min": 0.0,
+      "max": 29.0
+    },
+    "user_turn_12_eot_oppo_non_creatures_in_play": {
+      "observations": 2,
+      "mean": 105098.0,
+      "min": 104948.0,
+      "max": 105248.0
+    },
+    "user_turn_12_eot_user_cards_in_hand": {
+      "observations": 3,
+      "mean": 93497.66666666667,
+      "min": 70502.0,
+      "max": 105005.0
+    },
+    "user_turn_12_eot_user_life": {
+      "observations": 46,
+      "mean": 1.1956521739130435,
+      "min": 0.0,
+      "max": 23.0
+    },
+    "user_turn_12_eot_user_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 104985.0,
+      "min": 104985.0,
+      "max": 104985.0
+    },
+    "user_turn_12_lands_played": {
+      "observations": 2,
+      "mean": 74798.5,
+      "min": 70502.0,
+      "max": 79095.0
+    },
+    "user_turn_12_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_12_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_12_user_abilities": {
+      "observations": 2,
+      "mean": 206260.0,
+      "min": 206155.0,
+      "max": 206365.0
+    },
+    "user_turn_12_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_12_user_creatures_killed_combat": {
+      "observations": 1,
+      "mean": 105005.0,
+      "min": 105005.0,
+      "max": 105005.0
+    },
+    "user_turn_12_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 105042.0,
+      "min": 105042.0,
+      "max": 105042.0
+    },
+    "user_turn_12_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.5217391304347826,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "user_turn_13_cards_discarded": {
+      "observations": 2,
+      "mean": 92049.5,
+      "min": 79094.0,
+      "max": 105005.0
+    },
+    "user_turn_13_cards_drawn": {
+      "observations": 1,
+      "mean": 105052.0,
+      "min": 105052.0,
+      "max": 105052.0
+    },
+    "user_turn_13_creatures_cast": {
+      "observations": 2,
+      "mean": 105064.0,
+      "min": 105005.0,
+      "max": 105123.0
+    },
+    "user_turn_13_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.10869565217391304,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "user_turn_13_eot_oppo_creatures_in_play": {
+      "observations": 1,
+      "mean": 105044.0,
+      "min": 105044.0,
+      "max": 105044.0
+    },
+    "user_turn_13_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.8913043478260869,
+      "min": 0.0,
+      "max": 29.0
+    },
+    "user_turn_13_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "user_turn_13_eot_user_cards_in_hand": {
+      "observations": 1,
+      "mean": 105080.0,
+      "min": 105080.0,
+      "max": 105080.0
+    },
+    "user_turn_13_eot_user_life": {
+      "observations": 46,
+      "mean": 0.6086956521739131,
+      "min": 0.0,
+      "max": 17.0
+    },
+    "user_turn_13_non_creatures_cast": {
+      "observations": 1,
+      "mean": 105006.0,
+      "min": 105006.0,
+      "max": 105006.0
+    },
+    "user_turn_13_oppo_abilities": {
+      "observations": 1,
+      "mean": 145367.0,
+      "min": 145367.0,
+      "max": 145367.0
+    },
+    "user_turn_13_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.15217391304347827,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "user_turn_13_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_13_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_13_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 105052.0,
+      "min": 105052.0,
+      "max": 105052.0
+    },
+    "user_turn_13_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.3695652173913043,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "user_turn_14_cards_discarded": {
+      "observations": 1,
+      "mean": 105080.0,
+      "min": 105080.0,
+      "max": 105080.0
+    },
+    "user_turn_14_cards_drawn": {
+      "observations": 1,
+      "mean": 104948.0,
+      "min": 104948.0,
+      "max": 104948.0
+    },
+    "user_turn_14_cards_tutored": {
+      "observations": 1,
+      "mean": 102740.0,
+      "min": 102740.0,
+      "max": 102740.0
+    },
+    "user_turn_14_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_14_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_14_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "user_turn_14_eot_user_life": {
+      "observations": 46,
+      "mean": 0.021739130434782608,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "user_turn_14_lands_played": {
+      "observations": 1,
+      "mean": 102740.0,
+      "min": 102740.0,
+      "max": 102740.0
+    },
+    "user_turn_14_non_creatures_cast": {
+      "observations": 1,
+      "mean": 104948.0,
+      "min": 104948.0,
+      "max": 104948.0
+    },
+    "user_turn_14_oppo_abilities": {
+      "observations": 1,
+      "mean": 145367.0,
+      "min": 145367.0,
+      "max": 145367.0
+    },
+    "user_turn_14_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.21739130434782608,
+      "min": 0.0,
+      "max": 10.0
+    },
+    "user_turn_14_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_14_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_14_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.10869565217391304,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "user_turn_15_cards_drawn": {
+      "observations": 1,
+      "mean": 105030.0,
+      "min": 105030.0,
+      "max": 105030.0
+    },
+    "user_turn_15_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_15_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_15_eot_oppo_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 105248.0,
+      "min": 105248.0,
+      "max": 105248.0
+    },
+    "user_turn_15_eot_user_life": {
+      "observations": 46,
+      "mean": 0.021739130434782608,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "user_turn_15_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_15_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105088.0,
+      "min": 105088.0,
+      "max": 105088.0
+    },
+    "user_turn_15_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_15_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_15_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 105030.0,
+      "min": 105030.0,
+      "max": 105030.0
+    },
+    "user_turn_15_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_16_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_16_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_16_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_16_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_16_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_16_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_16_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_17_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_18_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_19_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_1_cards_drawn": {
+      "observations": 24,
+      "mean": 94385.54166666667,
+      "min": 70502.0,
+      "max": 105176.0
+    },
+    "user_turn_1_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 6.239130434782608,
+      "min": 4.0,
+      "max": 7.0
+    },
+    "user_turn_1_eot_oppo_creatures_in_play": {
+      "observations": 3,
+      "mean": 104955.66666666667,
+      "min": 104893.0,
+      "max": 105081.0
+    },
+    "user_turn_1_eot_oppo_lands_in_play": {
+      "observations": 24,
+      "mean": 94957.54166666667,
+      "min": 11809.0,
+      "max": 107494.0
+    },
+    "user_turn_1_eot_oppo_life": {
+      "observations": 46,
+      "mean": 20.108695652173914,
+      "min": 20.0,
+      "max": 21.0
+    },
+    "user_turn_1_eot_user_lands_in_play": {
+      "observations": 46,
+      "mean": 80459.91304347826,
+      "min": 11809.0,
+      "max": 107492.0
+    },
+    "user_turn_1_eot_user_life": {
+      "observations": 46,
+      "mean": 20.08695652173913,
+      "min": 20.0,
+      "max": 21.0
+    },
+    "user_turn_1_lands_played": {
+      "observations": 46,
+      "mean": 80459.91304347826,
+      "min": 11809.0,
+      "max": 107492.0
+    },
+    "user_turn_1_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_1_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_1_user_abilities": {
+      "observations": 5,
+      "mean": 96329.0,
+      "min": 90050.0,
+      "max": 121445.0
+    },
+    "user_turn_1_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_1_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_20_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_21_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_22_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_23_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_24_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_25_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_26_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_27_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_28_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_29_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_2_cards_discarded": {
+      "observations": 13,
+      "mean": 96450.69230769231,
+      "min": 70502.0,
+      "max": 105176.0
+    },
+    "user_turn_2_cards_drawn": {
+      "observations": 33,
+      "mean": 96360.78787878787,
+      "min": 11809.0,
+      "max": 107493.0
+    },
+    "user_turn_2_creatures_attacked": {
+      "observations": 1,
+      "mean": 105047.0,
+      "min": 105047.0,
+      "max": 105047.0
+    },
+    "user_turn_2_creatures_cast": {
+      "observations": 30,
+      "mean": 105008.0,
+      "min": 104894.0,
+      "max": 105146.0
+    },
+    "user_turn_2_creatures_unblocked": {
+      "observations": 1,
+      "mean": 105047.0,
+      "min": 105047.0,
+      "max": 105047.0
+    },
+    "user_turn_2_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 5.804347826086956,
+      "min": 4.0,
+      "max": 7.0
+    },
+    "user_turn_2_eot_oppo_creatures_in_play": {
+      "observations": 17,
+      "mean": 104995.88235294117,
+      "min": 104893.0,
+      "max": 105091.0
+    },
+    "user_turn_2_eot_oppo_lands_in_play": {
+      "observations": 22,
+      "mean": 88967.95454545454,
+      "min": 7065.0,
+      "max": 107495.0
+    },
+    "user_turn_2_eot_oppo_life": {
+      "observations": 46,
+      "mean": 20.217391304347824,
+      "min": 19.0,
+      "max": 22.0
+    },
+    "user_turn_2_eot_oppo_non_creatures_in_play": {
+      "observations": 3,
+      "mean": 105026.66666666667,
+      "min": 104913.0,
+      "max": 105140.0
+    },
+    "user_turn_2_eot_user_creatures_in_play": {
+      "observations": 30,
+      "mean": 105008.0,
+      "min": 104894.0,
+      "max": 105146.0
+    },
+    "user_turn_2_eot_user_life": {
+      "observations": 46,
+      "mean": 19.891304347826086,
+      "min": 18.0,
+      "max": 21.0
+    },
+    "user_turn_2_eot_user_non_creatures_in_play": {
+      "observations": 1,
+      "mean": 104991.0,
+      "min": 104991.0,
+      "max": 104991.0
+    },
+    "user_turn_2_lands_played": {
+      "observations": 46,
+      "mean": 83748.39130434782,
+      "min": 11809.0,
+      "max": 107493.0
+    },
+    "user_turn_2_non_creatures_cast": {
+      "observations": 1,
+      "mean": 104991.0,
+      "min": 104991.0,
+      "max": 104991.0
+    },
+    "user_turn_2_oppo_abilities": {
+      "observations": 1,
+      "mean": 170331.0,
+      "min": 170331.0,
+      "max": 170331.0
+    },
+    "user_turn_2_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_2_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 104959.0,
+      "min": 104959.0,
+      "max": 104959.0
+    },
+    "user_turn_2_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.043478260869565216,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_2_user_abilities": {
+      "observations": 13,
+      "mean": 166865.07692307694,
+      "min": 149374.0,
+      "max": 206220.0
+    },
+    "user_turn_2_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_2_user_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 104988.0,
+      "min": 104988.0,
+      "max": 104988.0
+    },
+    "user_turn_2_user_mana_spent": {
+      "observations": 46,
+      "mean": 1.391304347826087,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_30_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_30_eot_oppo_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_30_eot_user_life": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_30_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_30_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_30_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_30_user_mana_spent": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_3_cards_discarded": {
+      "observations": 5,
+      "mean": 98149.0,
+      "min": 70502.0,
+      "max": 105178.0
+    },
+    "user_turn_3_cards_drawn": {
+      "observations": 37,
+      "mean": 97483.7027027027,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "user_turn_3_creatures_attacked": {
+      "observations": 20,
+      "mean": 105001.05,
+      "min": 104894.0,
+      "max": 105047.0
+    },
+    "user_turn_3_creatures_blocked": {
+      "observations": 3,
+      "mean": 105015.0,
+      "min": 104980.0,
+      "max": 105040.0
+    },
+    "user_turn_3_creatures_blocking": {
+      "observations": 3,
+      "mean": 105018.0,
+      "min": 104936.0,
+      "max": 105138.0
+    },
+    "user_turn_3_creatures_cast": {
+      "observations": 31,
+      "mean": 104990.80645161291,
+      "min": 104892.0,
+      "max": 105149.0
+    },
+    "user_turn_3_creatures_unblocked": {
+      "observations": 17,
+      "mean": 104998.58823529411,
+      "min": 104894.0,
+      "max": 105047.0
+    },
+    "user_turn_3_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 5.239130434782608,
+      "min": 3.0,
+      "max": 7.0
+    },
+    "user_turn_3_eot_oppo_creatures_in_play": {
+      "observations": 27,
+      "mean": 105007.92592592593,
+      "min": 104893.0,
+      "max": 105191.0
+    },
+    "user_turn_3_eot_oppo_life": {
+      "observations": 46,
+      "mean": 19.456521739130434,
+      "min": 18.0,
+      "max": 21.0
+    },
+    "user_turn_3_eot_oppo_non_creatures_in_play": {
+      "observations": 4,
+      "mean": 105013.0,
+      "min": 104913.0,
+      "max": 105140.0
+    },
+    "user_turn_3_eot_user_creatures_in_play": {
+      "observations": 20,
+      "mean": 104992.0,
+      "min": 104894.0,
+      "max": 105191.0
+    },
+    "user_turn_3_eot_user_life": {
+      "observations": 46,
+      "mean": 19.695652173913043,
+      "min": 16.0,
+      "max": 22.0
+    },
+    "user_turn_3_eot_user_non_creatures_in_play": {
+      "observations": 6,
+      "mean": 105054.16666666667,
+      "min": 104929.0,
+      "max": 105199.0
+    },
+    "user_turn_3_lands_played": {
+      "observations": 41,
+      "mean": 76414.78048780488,
+      "min": 11809.0,
+      "max": 107493.0
+    },
+    "user_turn_3_non_creatures_cast": {
+      "observations": 3,
+      "mean": 104978.66666666667,
+      "min": 104929.0,
+      "max": 105022.0
+    },
+    "user_turn_3_oppo_abilities": {
+      "observations": 4,
+      "mean": 178458.75,
+      "min": 167024.0,
+      "max": 206149.0
+    },
+    "user_turn_3_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.6521739130434783,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_3_oppo_creatures_killed_combat": {
+      "observations": 3,
+      "mean": 105018.0,
+      "min": 104936.0,
+      "max": 105138.0
+    },
+    "user_turn_3_oppo_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 105075.5,
+      "min": 105047.0,
+      "max": 105104.0
+    },
+    "user_turn_3_oppo_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 104988.0,
+      "min": 104988.0,
+      "max": 104988.0
+    },
+    "user_turn_3_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.2608695652173913,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "user_turn_3_user_abilities": {
+      "observations": 15,
+      "mean": 198582.13333333333,
+      "min": 149374.0,
+      "max": 206312.0
+    },
+    "user_turn_3_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.043478260869565216,
+      "min": -2.0,
+      "max": 0.0
+    },
+    "user_turn_3_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 105010.0,
+      "min": 104980.0,
+      "max": 105040.0
+    },
+    "user_turn_3_user_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 105106.0,
+      "min": 105106.0,
+      "max": 105106.0
+    },
+    "user_turn_3_user_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 104979.66666666667,
+      "min": 104922.0,
+      "max": 105029.0
+    },
+    "user_turn_3_user_mana_spent": {
+      "observations": 46,
+      "mean": 2.217391304347826,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "user_turn_4_cards_discarded": {
+      "observations": 14,
+      "mean": 95180.28571428571,
+      "min": 79094.0,
+      "max": 105176.0
+    },
+    "user_turn_4_cards_drawn": {
+      "observations": 29,
+      "mean": 95916.58620689655,
+      "min": 11809.0,
+      "max": 105174.0
+    },
+    "user_turn_4_creatures_attacked": {
+      "observations": 9,
+      "mean": 104982.0,
+      "min": 104894.0,
+      "max": 105105.0
+    },
+    "user_turn_4_creatures_blocked": {
+      "observations": 6,
+      "mean": 105017.33333333333,
+      "min": 104907.0,
+      "max": 105191.0
+    },
+    "user_turn_4_creatures_blocking": {
+      "observations": 5,
+      "mean": 105026.6,
+      "min": 104941.0,
+      "max": 105104.0
+    },
+    "user_turn_4_creatures_cast": {
+      "observations": 29,
+      "mean": 105014.8275862069,
+      "min": 104894.0,
+      "max": 105132.0
+    },
+    "user_turn_4_creatures_unblocked": {
+      "observations": 13,
+      "mean": 104991.76923076923,
+      "min": 104894.0,
+      "max": 105105.0
+    },
+    "user_turn_4_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 4.391304347826087,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "user_turn_4_eot_oppo_creatures_in_play": {
+      "observations": 20,
+      "mean": 105008.7,
+      "min": 104893.0,
+      "max": 105192.0
+    },
+    "user_turn_4_eot_oppo_life": {
+      "observations": 46,
+      "mean": 18.52173913043478,
+      "min": 15.0,
+      "max": 22.0
+    },
+    "user_turn_4_eot_oppo_non_creatures_in_play": {
+      "observations": 7,
+      "mean": 105010.85714285714,
+      "min": 104913.0,
+      "max": 105142.0
+    },
+    "user_turn_4_eot_user_creatures_in_play": {
+      "observations": 16,
+      "mean": 105009.75,
+      "min": 104894.0,
+      "max": 105132.0
+    },
+    "user_turn_4_eot_user_life": {
+      "observations": 46,
+      "mean": 18.869565217391305,
+      "min": 14.0,
+      "max": 24.0
+    },
+    "user_turn_4_eot_user_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 105025.44444444444,
+      "min": 104934.0,
+      "max": 105203.0
+    },
+    "user_turn_4_lands_played": {
+      "observations": 38,
+      "mean": 85692.86842105263,
+      "min": 11809.0,
+      "max": 107493.0
+    },
+    "user_turn_4_non_creatures_cast": {
+      "observations": 7,
+      "mean": 104998.28571428571,
+      "min": 104934.0,
+      "max": 105142.0
+    },
+    "user_turn_4_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.0,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "user_turn_4_oppo_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 105038.0,
+      "min": 104967.0,
+      "max": 105081.0
+    },
+    "user_turn_4_oppo_creatures_killed_non_combat": {
+      "observations": 4,
+      "mean": 105088.0,
+      "min": 105072.0,
+      "max": 105104.0
+    },
+    "user_turn_4_oppo_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 105062.0,
+      "min": 105062.0,
+      "max": 105062.0
+    },
+    "user_turn_4_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.06521739130434782,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "user_turn_4_user_abilities": {
+      "observations": 28,
+      "mean": 167003.2857142857,
+      "min": 152.0,
+      "max": 206476.0
+    },
+    "user_turn_4_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.13043478260869565,
+      "min": -2.0,
+      "max": 0.0
+    },
+    "user_turn_4_user_creatures_killed_combat": {
+      "observations": 5,
+      "mean": 104964.6,
+      "min": 104907.0,
+      "max": 105007.0
+    },
+    "user_turn_4_user_instants_sorceries_cast": {
+      "observations": 5,
+      "mean": 105021.8,
+      "min": 105015.0,
+      "max": 105030.0
+    },
+    "user_turn_4_user_mana_spent": {
+      "observations": 46,
+      "mean": 2.9347826086956523,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "user_turn_5_cards_discarded": {
+      "observations": 10,
+      "mean": 99003.7,
+      "min": 70502.0,
+      "max": 105176.0
+    },
+    "user_turn_5_cards_drawn": {
+      "observations": 34,
+      "mean": 93831.41176470589,
+      "min": 70502.0,
+      "max": 105175.0
+    },
+    "user_turn_5_cards_tutored": {
+      "observations": 1,
+      "mean": 74144.0,
+      "min": 74144.0,
+      "max": 74144.0
+    },
+    "user_turn_5_creatures_attacked": {
+      "observations": 15,
+      "mean": 105035.06666666667,
+      "min": 104899.0,
+      "max": 105192.0
+    },
+    "user_turn_5_creatures_blocked": {
+      "observations": 6,
+      "mean": 105068.33333333333,
+      "min": 104894.0,
+      "max": 105194.0
+    },
+    "user_turn_5_creatures_blocking": {
+      "observations": 4,
+      "mean": 104986.0,
+      "min": 104957.0,
+      "max": 105021.0
+    },
+    "user_turn_5_creatures_cast": {
+      "observations": 28,
+      "mean": 105015.71428571429,
+      "min": 104899.0,
+      "max": 105152.0
+    },
+    "user_turn_5_creatures_unblocked": {
+      "observations": 15,
+      "mean": 105011.73333333334,
+      "min": 104894.0,
+      "max": 105192.0
+    },
+    "user_turn_5_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 3.5652173913043477,
+      "min": 1.0,
+      "max": 6.0
+    },
+    "user_turn_5_eot_oppo_creatures_in_play": {
+      "observations": 13,
+      "mean": 105019.69230769231,
+      "min": 104907.0,
+      "max": 105138.0
+    },
+    "user_turn_5_eot_oppo_life": {
+      "observations": 46,
+      "mean": 16.630434782608695,
+      "min": 8.0,
+      "max": 24.0
+    },
+    "user_turn_5_eot_oppo_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 105034.22222222222,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "user_turn_5_eot_user_cards_in_hand": {
+      "observations": 4,
+      "mean": 105003.75,
+      "min": 104965.0,
+      "max": 105037.0
+    },
+    "user_turn_5_eot_user_creatures_in_play": {
+      "observations": 6,
+      "mean": 105064.0,
+      "min": 104925.0,
+      "max": 105152.0
+    },
+    "user_turn_5_eot_user_life": {
+      "observations": 46,
+      "mean": 17.717391304347824,
+      "min": 9.0,
+      "max": 28.0
+    },
+    "user_turn_5_eot_user_non_creatures_in_play": {
+      "observations": 12,
+      "mean": 104993.08333333333,
+      "min": 104934.0,
+      "max": 105199.0
+    },
+    "user_turn_5_lands_played": {
+      "observations": 38,
+      "mean": 82349.47368421052,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "user_turn_5_non_creatures_cast": {
+      "observations": 5,
+      "mean": 104964.4,
+      "min": 104931.0,
+      "max": 105009.0
+    },
+    "user_turn_5_oppo_abilities": {
+      "observations": 3,
+      "mean": 185369.66666666666,
+      "min": 143868.0,
+      "max": 206149.0
+    },
+    "user_turn_5_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.934782608695652,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "user_turn_5_oppo_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 104989.25,
+      "min": 104957.0,
+      "max": 105021.0
+    },
+    "user_turn_5_oppo_creatures_killed_non_combat": {
+      "observations": 5,
+      "mean": 105053.4,
+      "min": 104893.0,
+      "max": 105138.0
+    },
+    "user_turn_5_oppo_instants_sorceries_cast": {
+      "observations": 2,
+      "mean": 105003.5,
+      "min": 104977.0,
+      "max": 105030.0
+    },
+    "user_turn_5_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.15217391304347827,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "user_turn_5_user_abilities": {
+      "observations": 16,
+      "mean": 164052.6875,
+      "min": 137.0,
+      "max": 206483.0
+    },
+    "user_turn_5_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.043478260869565216,
+      "min": -2.0,
+      "max": 0.0
+    },
+    "user_turn_5_user_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 104964.5,
+      "min": 104894.0,
+      "max": 105035.0
+    },
+    "user_turn_5_user_creatures_killed_non_combat": {
+      "observations": 2,
+      "mean": 105004.0,
+      "min": 105003.0,
+      "max": 105005.0
+    },
+    "user_turn_5_user_instants_sorceries_cast": {
+      "observations": 6,
+      "mean": 105001.83333333333,
+      "min": 104898.0,
+      "max": 105045.0
+    },
+    "user_turn_5_user_mana_spent": {
+      "observations": 46,
+      "mean": 3.630434782608696,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_6_cards_discarded": {
+      "observations": 10,
+      "mean": 93104.8,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "user_turn_6_cards_drawn": {
+      "observations": 31,
+      "mean": 97210.45161290323,
+      "min": 11809.0,
+      "max": 105176.0
+    },
+    "user_turn_6_cards_tutored": {
+      "observations": 1,
+      "mean": 74132.0,
+      "min": 74132.0,
+      "max": 74132.0
+    },
+    "user_turn_6_creatures_attacked": {
+      "observations": 9,
+      "mean": 105116.55555555556,
+      "min": 104984.0,
+      "max": 105193.0
+    },
+    "user_turn_6_creatures_blocked": {
+      "observations": 12,
+      "mean": 105052.91666666667,
+      "min": 104899.0,
+      "max": 105193.0
+    },
+    "user_turn_6_creatures_blocking": {
+      "observations": 7,
+      "mean": 105057.57142857143,
+      "min": 104901.0,
+      "max": 105185.0
+    },
+    "user_turn_6_creatures_cast": {
+      "observations": 21,
+      "mean": 105041.42857142857,
+      "min": 104911.0,
+      "max": 105143.0
+    },
+    "user_turn_6_creatures_unblocked": {
+      "observations": 8,
+      "mean": 105126.625,
+      "min": 104928.0,
+      "max": 105191.0
+    },
+    "user_turn_6_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 2.847826086956522,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_6_eot_oppo_creatures_in_play": {
+      "observations": 11,
+      "mean": 105022.81818181818,
+      "min": 104907.0,
+      "max": 105136.0
+    },
+    "user_turn_6_eot_oppo_life": {
+      "observations": 46,
+      "mean": 13.847826086956522,
+      "min": 4.0,
+      "max": 26.0
+    },
+    "user_turn_6_eot_oppo_non_creatures_in_play": {
+      "observations": 11,
+      "mean": 105035.54545454546,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "user_turn_6_eot_user_cards_in_hand": {
+      "observations": 9,
+      "mean": 98277.0,
+      "min": 70502.0,
+      "max": 105032.0
+    },
+    "user_turn_6_eot_user_creatures_in_play": {
+      "observations": 8,
+      "mean": 105070.75,
+      "min": 104912.0,
+      "max": 105191.0
+    },
+    "user_turn_6_eot_user_life": {
+      "observations": 46,
+      "mean": 16.152173913043477,
+      "min": 4.0,
+      "max": 31.0
+    },
+    "user_turn_6_eot_user_non_creatures_in_play": {
+      "observations": 8,
+      "mean": 105036.375,
+      "min": 104934.0,
+      "max": 105203.0
+    },
+    "user_turn_6_lands_played": {
+      "observations": 27,
+      "mean": 85638.85185185185,
+      "min": 11809.0,
+      "max": 107492.0
+    },
+    "user_turn_6_non_creatures_cast": {
+      "observations": 7,
+      "mean": 104993.57142857143,
+      "min": 104929.0,
+      "max": 105095.0
+    },
+    "user_turn_6_oppo_abilities": {
+      "observations": 5,
+      "mean": 167896.4,
+      "min": 76556.0,
+      "max": 206499.0
+    },
+    "user_turn_6_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 2.4347826086956523,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "user_turn_6_oppo_creatures_killed_combat": {
+      "observations": 6,
+      "mean": 105003.5,
+      "min": 104901.0,
+      "max": 105149.0
+    },
+    "user_turn_6_oppo_creatures_killed_non_combat": {
+      "observations": 6,
+      "mean": 105029.83333333333,
+      "min": 104938.0,
+      "max": 105093.0
+    },
+    "user_turn_6_oppo_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 105012.33333333333,
+      "min": 104932.0,
+      "max": 105075.0
+    },
+    "user_turn_6_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.391304347826087,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_6_user_abilities": {
+      "observations": 10,
+      "mean": 176376.5,
+      "min": 100685.0,
+      "max": 206512.0
+    },
+    "user_turn_6_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.30434782608695654,
+      "min": -5.0,
+      "max": 0.0
+    },
+    "user_turn_6_user_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 104998.5,
+      "min": 104979.0,
+      "max": 105035.0
+    },
+    "user_turn_6_user_instants_sorceries_cast": {
+      "observations": 14,
+      "mean": 104997.21428571429,
+      "min": 104917.0,
+      "max": 105045.0
+    },
+    "user_turn_6_user_mana_spent": {
+      "observations": 46,
+      "mean": 3.760869565217391,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_7_cards_discarded": {
+      "observations": 7,
+      "mean": 74702.57142857143,
+      "min": 11809.0,
+      "max": 105176.0
+    },
+    "user_turn_7_cards_drawn": {
+      "observations": 28,
+      "mean": 95057.42857142857,
+      "min": 70502.0,
+      "max": 105176.0
+    },
+    "user_turn_7_creatures_attacked": {
+      "observations": 9,
+      "mean": 105053.77777777778,
+      "min": 104990.0,
+      "max": 105118.0
+    },
+    "user_turn_7_creatures_blocked": {
+      "observations": 9,
+      "mean": 105012.22222222222,
+      "min": 104928.0,
+      "max": 105112.0
+    },
+    "user_turn_7_creatures_blocking": {
+      "observations": 6,
+      "mean": 104977.0,
+      "min": 104907.0,
+      "max": 105108.0
+    },
+    "user_turn_7_creatures_cast": {
+      "observations": 19,
+      "mean": 105026.78947368421,
+      "min": 104920.0,
+      "max": 105152.0
+    },
+    "user_turn_7_creatures_unblocked": {
+      "observations": 13,
+      "mean": 105022.69230769231,
+      "min": 104914.0,
+      "max": 105118.0
+    },
+    "user_turn_7_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 2.282608695652174,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_7_eot_oppo_creatures_in_play": {
+      "observations": 7,
+      "mean": 105054.57142857143,
+      "min": 104953.0,
+      "max": 105191.0
+    },
+    "user_turn_7_eot_oppo_life": {
+      "observations": 46,
+      "mean": 10.608695652173912,
+      "min": -4.0,
+      "max": 25.0
+    },
+    "user_turn_7_eot_oppo_non_creatures_in_play": {
+      "observations": 15,
+      "mean": 105012.8,
+      "min": 104913.0,
+      "max": 105150.0
+    },
+    "user_turn_7_eot_user_cards_in_hand": {
+      "observations": 9,
+      "mean": 104726.33333333333,
+      "min": 102740.0,
+      "max": 105030.0
+    },
+    "user_turn_7_eot_user_creatures_in_play": {
+      "observations": 2,
+      "mean": 105038.0,
+      "min": 105038.0,
+      "max": 105038.0
+    },
+    "user_turn_7_eot_user_life": {
+      "observations": 46,
+      "mean": 13.978260869565217,
+      "min": 0.0,
+      "max": 31.0
+    },
+    "user_turn_7_eot_user_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 105031.0,
+      "min": 104934.0,
+      "max": 105203.0
+    },
+    "user_turn_7_lands_played": {
+      "observations": 18,
+      "mean": 81024.77777777778,
+      "min": 11809.0,
+      "max": 105176.0
+    },
+    "user_turn_7_non_creatures_cast": {
+      "observations": 5,
+      "mean": 104971.4,
+      "min": 104929.0,
+      "max": 105022.0
+    },
+    "user_turn_7_oppo_abilities": {
+      "observations": 3,
+      "mean": 182889.66666666666,
+      "min": 136240.0,
+      "max": 206338.0
+    },
+    "user_turn_7_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 2.4130434782608696,
+      "min": 0.0,
+      "max": 12.0
+    },
+    "user_turn_7_oppo_creatures_killed_combat": {
+      "observations": 6,
+      "mean": 104996.0,
+      "min": 104907.0,
+      "max": 105111.0
+    },
+    "user_turn_7_oppo_creatures_killed_non_combat": {
+      "observations": 5,
+      "mean": 105053.6,
+      "min": 104978.0,
+      "max": 105129.0
+    },
+    "user_turn_7_oppo_instants_sorceries_cast": {
+      "observations": 2,
+      "mean": 105007.0,
+      "min": 104952.0,
+      "max": 105062.0
+    },
+    "user_turn_7_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.41304347826086957,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "user_turn_7_user_abilities": {
+      "observations": 14,
+      "mean": 160174.14285714287,
+      "min": 137.0,
+      "max": 206482.0
+    },
+    "user_turn_7_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.30434782608695654,
+      "min": -6.0,
+      "max": 0.0
+    },
+    "user_turn_7_user_creatures_killed_combat": {
+      "observations": 7,
+      "mean": 105025.28571428571,
+      "min": 104980.0,
+      "max": 105112.0
+    },
+    "user_turn_7_user_instants_sorceries_cast": {
+      "observations": 11,
+      "mean": 105000.90909090909,
+      "min": 104898.0,
+      "max": 105045.0
+    },
+    "user_turn_7_user_mana_spent": {
+      "observations": 46,
+      "mean": 3.608695652173913,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "user_turn_8_cards_discarded": {
+      "observations": 4,
+      "mean": 105005.25,
+      "min": 104894.0,
+      "max": 105178.0
+    },
+    "user_turn_8_cards_drawn": {
+      "observations": 19,
+      "mean": 100810.26315789473,
+      "min": 73644.0,
+      "max": 107492.0
+    },
+    "user_turn_8_creatures_attacked": {
+      "observations": 10,
+      "mean": 105108.9,
+      "min": 105005.0,
+      "max": 105191.0
+    },
+    "user_turn_8_creatures_blocked": {
+      "observations": 7,
+      "mean": 105087.71428571429,
+      "min": 104999.0,
+      "max": 105191.0
+    },
+    "user_turn_8_creatures_blocking": {
+      "observations": 4,
+      "mean": 105055.75,
+      "min": 104907.0,
+      "max": 105191.0
+    },
+    "user_turn_8_creatures_cast": {
+      "observations": 15,
+      "mean": 105047.26666666666,
+      "min": 104907.0,
+      "max": 105143.0
+    },
+    "user_turn_8_creatures_unblocked": {
+      "observations": 8,
+      "mean": 105118.5,
+      "min": 105005.0,
+      "max": 105191.0
+    },
+    "user_turn_8_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 1.3695652173913044,
+      "min": 0.0,
+      "max": 6.0
+    },
+    "user_turn_8_eot_oppo_creatures_in_play": {
+      "observations": 6,
+      "mean": 105039.33333333333,
+      "min": 104907.0,
+      "max": 105191.0
+    },
+    "user_turn_8_eot_oppo_life": {
+      "observations": 46,
+      "mean": 6.260869565217392,
+      "min": -12.0,
+      "max": 25.0
+    },
+    "user_turn_8_eot_oppo_non_creatures_in_play": {
+      "observations": 8,
+      "mean": 104973.375,
+      "min": 104913.0,
+      "max": 105087.0
+    },
+    "user_turn_8_eot_user_cards_in_hand": {
+      "observations": 5,
+      "mean": 105010.0,
+      "min": 104922.0,
+      "max": 105097.0
+    },
+    "user_turn_8_eot_user_creatures_in_play": {
+      "observations": 1,
+      "mean": 104895.0,
+      "min": 104895.0,
+      "max": 104895.0
+    },
+    "user_turn_8_eot_user_life": {
+      "observations": 46,
+      "mean": 8.173913043478262,
+      "min": 0.0,
+      "max": 31.0
+    },
+    "user_turn_8_eot_user_non_creatures_in_play": {
+      "observations": 7,
+      "mean": 104984.85714285714,
+      "min": 104934.0,
+      "max": 105012.0
+    },
+    "user_turn_8_lands_played": {
+      "observations": 9,
+      "mean": 77198.11111111111,
+      "min": 11809.0,
+      "max": 107492.0
+    },
+    "user_turn_8_non_creatures_cast": {
+      "observations": 6,
+      "mean": 104956.33333333333,
+      "min": 104929.0,
+      "max": 105006.0
+    },
+    "user_turn_8_oppo_abilities": {
+      "observations": 2,
+      "mean": 174015.0,
+      "min": 141939.0,
+      "max": 206091.0
+    },
+    "user_turn_8_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 1.3043478260869565,
+      "min": 0.0,
+      "max": 14.0
+    },
+    "user_turn_8_oppo_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 105037.75,
+      "min": 104967.0,
+      "max": 105101.0
+    },
+    "user_turn_8_oppo_creatures_killed_non_combat": {
+      "observations": 3,
+      "mean": 105089.33333333333,
+      "min": 105069.0,
+      "max": 105108.0
+    },
+    "user_turn_8_oppo_instants_sorceries_cast": {
+      "observations": 1,
+      "mean": 104906.0,
+      "min": 104906.0,
+      "max": 104906.0
+    },
+    "user_turn_8_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.15217391304347827,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "user_turn_8_user_abilities": {
+      "observations": 8,
+      "mean": 188004.375,
+      "min": 90050.0,
+      "max": 206357.0
+    },
+    "user_turn_8_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": -0.17391304347826086,
+      "min": -6.0,
+      "max": 1.0
+    },
+    "user_turn_8_user_creatures_killed_combat": {
+      "observations": 4,
+      "mean": 105051.5,
+      "min": 104999.0,
+      "max": 105105.0
+    },
+    "user_turn_8_user_instants_sorceries_cast": {
+      "observations": 9,
+      "mean": 104994.22222222222,
+      "min": 104906.0,
+      "max": 105030.0
+    },
+    "user_turn_8_user_mana_spent": {
+      "observations": 46,
+      "mean": 2.4782608695652173,
+      "min": 0.0,
+      "max": 7.0
+    },
+    "user_turn_9_cards_discarded": {
+      "observations": 5,
+      "mean": 105105.6,
+      "min": 104905.0,
+      "max": 105178.0
+    },
+    "user_turn_9_cards_drawn": {
+      "observations": 15,
+      "mean": 80201.93333333333,
+      "min": 11809.0,
+      "max": 105178.0
+    },
+    "user_turn_9_creatures_attacked": {
+      "observations": 5,
+      "mean": 105135.4,
+      "min": 105097.0,
+      "max": 105191.0
+    },
+    "user_turn_9_creatures_blocked": {
+      "observations": 5,
+      "mean": 105141.6,
+      "min": 105097.0,
+      "max": 105191.0
+    },
+    "user_turn_9_creatures_blocking": {
+      "observations": 2,
+      "mean": 105150.5,
+      "min": 105113.0,
+      "max": 105188.0
+    },
+    "user_turn_9_creatures_cast": {
+      "observations": 13,
+      "mean": 105024.46153846153,
+      "min": 104896.0,
+      "max": 105105.0
+    },
+    "user_turn_9_creatures_unblocked": {
+      "observations": 4,
+      "mean": 105064.5,
+      "min": 104980.0,
+      "max": 105143.0
+    },
+    "user_turn_9_eot_oppo_cards_in_hand": {
+      "observations": 46,
+      "mean": 0.8260869565217391,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "user_turn_9_eot_oppo_creatures_in_play": {
+      "observations": 3,
+      "mean": 104933.66666666667,
+      "min": 104908.0,
+      "max": 104956.0
+    },
+    "user_turn_9_eot_oppo_life": {
+      "observations": 46,
+      "mean": 5.239130434782608,
+      "min": 0.0,
+      "max": 22.0
+    },
+    "user_turn_9_eot_oppo_non_creatures_in_play": {
+      "observations": 4,
+      "mean": 104972.0,
+      "min": 104948.0,
+      "max": 105027.0
+    },
+    "user_turn_9_eot_user_cards_in_hand": {
+      "observations": 6,
+      "mean": 105037.0,
+      "min": 104939.0,
+      "max": 105178.0
+    },
+    "user_turn_9_eot_user_creatures_in_play": {
+      "observations": 1,
+      "mean": 105191.0,
+      "min": 105191.0,
+      "max": 105191.0
+    },
+    "user_turn_9_eot_user_life": {
+      "observations": 46,
+      "mean": 5.956521739130435,
+      "min": 0.0,
+      "max": 31.0
+    },
+    "user_turn_9_eot_user_non_creatures_in_play": {
+      "observations": 9,
+      "mean": 104983.44444444444,
+      "min": 104934.0,
+      "max": 105012.0
+    },
+    "user_turn_9_lands_played": {
+      "observations": 10,
+      "mean": 78406.7,
+      "min": 11809.0,
+      "max": 105174.0
+    },
+    "user_turn_9_non_creatures_cast": {
+      "observations": 1,
+      "mean": 104948.0,
+      "min": 104948.0,
+      "max": 104948.0
+    },
+    "user_turn_9_oppo_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.5,
+      "min": -4.0,
+      "max": 8.0
+    },
+    "user_turn_9_oppo_creatures_killed_combat": {
+      "observations": 2,
+      "mean": 105055.0,
+      "min": 104997.0,
+      "max": 105113.0
+    },
+    "user_turn_9_oppo_creatures_killed_non_combat": {
+      "observations": 1,
+      "mean": 104923.0,
+      "min": 104923.0,
+      "max": 104923.0
+    },
+    "user_turn_9_oppo_instants_sorceries_cast": {
+      "observations": 3,
+      "mean": 105018.0,
+      "min": 105017.0,
+      "max": 105020.0
+    },
+    "user_turn_9_oppo_mana_spent": {
+      "observations": 46,
+      "mean": 0.2826086956521739,
+      "min": 0.0,
+      "max": 5.0
+    },
+    "user_turn_9_user_abilities": {
+      "observations": 5,
+      "mean": 189285.6,
+      "min": 121394.0,
+      "max": 206371.0
+    },
+    "user_turn_9_user_combat_damage_taken": {
+      "observations": 46,
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "user_turn_9_user_creatures_killed_combat": {
+      "observations": 3,
+      "mean": 105067.0,
+      "min": 105003.0,
+      "max": 105101.0
+    },
+    "user_turn_9_user_instants_sorceries_cast": {
+      "observations": 5,
+      "mean": 104974.0,
+      "min": 104906.0,
+      "max": 105017.0
+    },
+    "user_turn_9_user_mana_spent": {
+      "observations": 46,
+      "mean": 1.9782608695652173,
+      "min": 0.0,
+      "max": 7.0
+    }
+  },
+  "interpretation": "Observational workload evidence only; no value in this report is a rules oracle or hard conformance gate."
+}

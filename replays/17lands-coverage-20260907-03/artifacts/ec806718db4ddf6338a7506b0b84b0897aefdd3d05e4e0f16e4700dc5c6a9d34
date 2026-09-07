@@ -1,0 +1,1203 @@
+diff --git a/crates/coworld-mtg-harness/src/lib.rs b/crates/coworld-mtg-harness/src/lib.rs
+index 6094a25755c2a44352ff2e2169d319d9032e484d..b531792a8cef2dddd0534f0460303acf4bf047d3 100644
+--- a/crates/coworld-mtg-harness/src/lib.rs
++++ b/crates/coworld-mtg-harness/src/lib.rs
+@@ -18,4 +18,6 @@ pub use aggregate::{aggregate_results, AggregateOptions};
+ pub use corpus::{load_manifest, materialize_corpus, MaterializeOptions};
+ pub use model::*;
+ pub use runner::{minimize_trace, replay_trace_file, run_shard, RunOptions};
+-pub use soft_signals::mine_17lands;
++pub use soft_signals::{
++    mine_17lands, mine_17lands_with_options, CardsCsvInput, Lands17InputSchema, Mine17landsOptions,
++};
+diff --git a/crates/coworld-mtg-harness/src/main.rs b/crates/coworld-mtg-harness/src/main.rs
+index 5c7cc4afc840c523bbe8c29f0c920d0890589d1b..d1e24e32cad5bd9c7379e72b31c1c6cf2cd64560 100644
+--- a/crates/coworld-mtg-harness/src/main.rs
++++ b/crates/coworld-mtg-harness/src/main.rs
+@@ -1,8 +1,9 @@
+ use anyhow::{bail, Result};
+ use clap::{Args, Parser, Subcommand};
+ use coworld_mtg_harness::{
+-    aggregate_results, load_manifest, materialize_corpus, mine_17lands, minimize_trace,
+-    replay_trace_file, run_shard, AggregateOptions, MaterializeOptions, RunOptions,
++    aggregate_results, load_manifest, materialize_corpus, mine_17lands_with_options,
++    minimize_trace, replay_trace_file, run_shard, AggregateOptions, CardsCsvInput,
++    Lands17InputSchema, MaterializeOptions, Mine17landsOptions, RunOptions,
+ };
+ use phase_bridge::PHASE_REVISION;
+ use std::path::PathBuf;
+@@ -132,6 +133,13 @@ struct Mine17landsArgs {
+     output: PathBuf,
+     #[arg(long)]
+     row_limit: Option<u64>,
++    /// Resolve observed Arena cast IDs in the public wide replay schema.
++    #[arg(long, value_enum, default_value = "auto")]
++    input_schema: Lands17InputSchema,
++    #[arg(long, requires = "cards_csv_sha256")]
++    cards_csv: Option<String>,
++    #[arg(long, requires = "cards_csv")]
++    cards_csv_sha256: Option<String>,
+ }
+ 
+ #[derive(Args)]
+@@ -219,7 +227,19 @@ async fn main() -> Result<()> {
+             println!("{}", serde_json::to_string_pretty(&scoreboard)?);
+         }
+         Command::Mine17lands(args) => {
+-            let report = mine_17lands(&args.manifest_uri, &args.output, args.row_limit).await?;
++            let report = mine_17lands_with_options(
++                &args.manifest_uri,
++                &args.output,
++                args.row_limit,
++                &Mine17landsOptions {
++                    input_schema: args.input_schema,
++                    cards_csv: args
++                        .cards_csv
++                        .zip(args.cards_csv_sha256)
++                        .map(|(source, sha256)| CardsCsvInput { source, sha256 }),
++                },
++            )
++            .await?;
+             println!("{}", serde_json::to_string_pretty(&report)?);
+         }
+         Command::Improve(args) => {
+diff --git a/crates/coworld-mtg-harness/src/model.rs b/crates/coworld-mtg-harness/src/model.rs
+index da333eef5d139077540b32bcc04b4e5ca0e4632d..a1ad09d05a2acb2808f3d845c00dc9dc6a42f734 100644
+--- a/crates/coworld-mtg-harness/src/model.rs
++++ b/crates/coworld-mtg-harness/src/model.rs
+@@ -180,6 +180,8 @@ pub struct SoftSignalReport {
+     pub card_frequency: Vec<NamedCount>,
+     pub event_frequency: Vec<NamedCount>,
+     pub numeric_summaries: BTreeMap<String, NumericSummary>,
++    #[serde(default, skip_serializing_if = "Option::is_none")]
++    pub normalization: Option<ReplayNormalization>,
+     pub interpretation: String,
+ }
+ 
+@@ -190,3 +192,64 @@ pub struct NumericSummary {
+     pub min: f64,
+     pub max: f64,
+ }
++
++/// Public replay normalization describes recorded observations, not engine events.
++#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
++pub struct CardsMappingProvenance {
++    pub source: String,
++    pub sha256: String,
++    pub bytes: u64,
++}
++
++#[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
++#[serde(rename_all = "snake_case")]
++pub enum ReplayPlayer {
++    User,
++    Oppo,
++}
++
++#[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
++#[serde(rename_all = "snake_case")]
++pub enum RecordedCastKind {
++    Creature,
++    NonCreature,
++    InstantSorcery,
++}
++
++#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
++#[serde(tag = "status", rename_all = "snake_case")]
++pub enum CastResolution {
++    Mapped { name: String },
++    Unmapped { reason: String },
++    Invalid { reason: String },
++}
++
++#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
++pub struct RecordedCast {
++    /// One-based data row, excluding the CSV header.
++    pub row: u64,
++    pub column: String,
++    /// Zero-based position in the original pipe-delimited cell.
++    pub value_index: usize,
++    pub raw_id: String,
++    pub arena_id: Option<u32>,
++    /// Source turn index; not a reconstructed global game-action index.
++    pub turn_number: u32,
++    pub active_player: ReplayPlayer,
++    pub casting_player: ReplayPlayer,
++    pub cast_kind: RecordedCastKind,
++    pub resolution: CastResolution,
++}
++
++#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
++pub struct ReplayNormalization {
++    pub schema: String,
++    pub cards_mapping: CardsMappingProvenance,
++    pub cast_occurrences: u64,
++    pub mapped_cast_occurrences: u64,
++    pub unmapped_cast_occurrences: u64,
++    pub invalid_cast_occurrences: u64,
++    pub distinct_cast_arena_ids: u64,
++    pub distinct_mapped_cast_arena_ids: u64,
++    pub casts: Vec<RecordedCast>,
++}
+diff --git a/crates/coworld-mtg-harness/src/soft_signals.rs b/crates/coworld-mtg-harness/src/soft_signals.rs
+index 56a5b3951f177cf698c7dac830fd65ae7f2fc2cb..87f79510626e32ec4890e6fe0b42c5dfd0e45f0f 100644
+--- a/crates/coworld-mtg-harness/src/soft_signals.rs
++++ b/crates/coworld-mtg-harness/src/soft_signals.rs
+@@ -1,15 +1,60 @@
+ use crate::corpus::{load_manifest, load_manifest_artifact};
+-use crate::io::{decoded_json_bytes, write_json_atomic};
+-use crate::model::{NamedCount, NumericSummary, SoftSignalReport, SOFT_SIGNAL_SCHEMA};
+-use anyhow::{Context, Result};
++use crate::io::{
++    decoded_json_bytes, read_resource, sanitized_resource_uri, verify_hash, write_json_atomic,
++};
++use crate::model::{
++    CardsMappingProvenance, CastResolution, NamedCount, NumericSummary, RecordedCast,
++    RecordedCastKind, ReplayNormalization, ReplayPlayer, SoftSignalReport, SOFT_SIGNAL_SCHEMA,
++};
++use anyhow::{bail, Context, Result};
++use clap::ValueEnum;
++use serde::Deserialize;
+ use serde_json::Value;
+-use std::collections::BTreeMap;
++use std::collections::{BTreeMap, BTreeSet};
+ use std::path::Path;
+ 
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, ValueEnum)]
++pub enum Lands17InputSchema {
++    #[default]
++    Auto,
++    #[value(name = "legacy-named-v1")]
++    LegacyNamedV1,
++    #[value(name = "public-replay-wide-v1")]
++    PublicReplayWideV1,
++}
++
++#[derive(Clone, Debug)]
++pub struct CardsCsvInput {
++    pub source: String,
++    pub sha256: String,
++}
++
++#[derive(Clone, Debug, Default)]
++pub struct Mine17landsOptions {
++    pub input_schema: Lands17InputSchema,
++    pub cards_csv: Option<CardsCsvInput>,
++}
++
++/// Retain the named-card input API; real public replay rows require a mapping.
+ pub async fn mine_17lands(
+     manifest_uri: &str,
+     output: &Path,
+     row_limit: Option<u64>,
++) -> Result<SoftSignalReport> {
++    mine_17lands_with_options(
++        manifest_uri,
++        output,
++        row_limit,
++        &Mine17landsOptions::default(),
++    )
++    .await
++}
++
++pub async fn mine_17lands_with_options(
++    manifest_uri: &str,
++    output: &Path,
++    row_limit: Option<u64>,
++    options: &Mine17landsOptions,
+ ) -> Result<SoftSignalReport> {
+     let manifest = load_manifest(manifest_uri).await?;
+     let artifact = manifest
+@@ -18,18 +63,55 @@ pub async fn mine_17lands(
+         .context("manifest has no 17lands artifact")?;
+     let raw = load_manifest_artifact(manifest_uri, &manifest, "17lands").await?;
+     let decoded = decoded_json_bytes(&raw)?;
+-
+     let mut reader = csv::ReaderBuilder::new()
+         .flexible(true)
+         .from_reader(decoded.as_slice());
+-    let headers = reader
+-        .headers()?
++    let original_headers = reader.headers()?.clone();
++    let looks_wide = original_headers.iter().any(looks_like_replay_column);
++    let wide = match options.input_schema {
++        Lands17InputSchema::Auto => auto_schema(&original_headers)?,
++        Lands17InputSchema::PublicReplayWideV1 => true,
++        Lands17InputSchema::LegacyNamedV1 if looks_wide => {
++            bail!(
++                "public replay turn columns require public-replay-wide-v1 and a cards CSV mapping"
++            )
++        }
++        Lands17InputSchema::LegacyNamedV1 => false,
++    };
++    let headers = original_headers
+         .iter()
+         .map(|header| header.to_ascii_lowercase())
+         .collect::<Vec<_>>();
++    let cast_columns = if wide {
++        Some(parse_replay_headers(&original_headers)?)
++    } else {
++        if options.cards_csv.is_some() {
++            bail!("cards CSV mapping is only used with public-replay-wide-v1");
++        }
++        None
++    };
++    let mapping = if wide {
++        let input = options
++            .cards_csv
++            .as_ref()
++            .context("public-replay-wide-v1 requires --cards-csv and --cards-csv-sha256")?;
++        let raw = read_resource(&input.source).await?;
++        let hash = verify_hash("17Lands cards CSV", &raw, Some(&input.sha256))?;
++        Some((
++            parse_cards_mapping(&decoded_json_bytes(&raw)?)?,
++            CardsMappingProvenance {
++                source: sanitized_resource_uri(&input.source),
++                sha256: hash,
++                bytes: raw.len() as u64,
++            },
++        ))
++    } else {
++        None
++    };
+     let mut cards = BTreeMap::<String, u64>::new();
+     let mut events = BTreeMap::<String, u64>::new();
+     let mut numeric = BTreeMap::<String, NumericAccumulator>::new();
++    let mut casts = Vec::new();
+     let mut rows = 0u64;
+ 
+     for record in reader.records() {
+@@ -38,24 +120,77 @@ pub async fn mine_17lands(
+         }
+         let record = record?;
+         rows += 1;
++        if let (Some(columns), Some((mapping, _))) = (&cast_columns, &mapping) {
++            if record.len() != original_headers.len() {
++                bail!("public replay data row {rows} has a different column count from its header");
++            }
++            for (index, column) in columns {
++                let value = &record[*index];
++                if value.is_empty() {
++                    continue;
++                }
++                for (value_index, raw_id) in value.split('|').enumerate() {
++                    let arena_id = arena_id(raw_id);
++                    let resolution = match arena_id {
++                        Some(id) => match mapping.get(&id) {
++                            Some(name) => {
++                                *cards.entry(name.clone()).or_default() += 1;
++                                CastResolution::Mapped { name: name.clone() }
++                            }
++                            None => CastResolution::Unmapped {
++                                reason: "unknown_arena_id".into(),
++                            },
++                        },
++                        None => CastResolution::Invalid {
++                            reason: "expected_positive_decimal_arena_id".into(),
++                        },
++                    };
++                    casts.push(RecordedCast {
++                        row: rows,
++                        column: original_headers[*index].to_owned(),
++                        value_index,
++                        raw_id: raw_id.to_owned(),
++                        arena_id,
++                        turn_number: column.turn_number,
++                        active_player: column.active_player,
++                        casting_player: column.casting_player,
++                        cast_kind: column.cast_kind,
++                        resolution,
++                    });
++                }
++            }
++        }
+         for (index, value) in record.iter().enumerate() {
+             let Some(header) = headers.get(index) else {
+                 continue;
+             };
+-            if card_column(header) {
++            if !wide && card_column(header) {
+                 collect_card_values(value, &mut cards);
+             }
+             if event_column(header) && !value.trim().is_empty() {
+                 *events.entry(value.trim().to_owned()).or_insert(0) += 1;
+             }
+-            if numeric_column(header) {
++            let is_numeric = if wide {
++                // Never reinterpret single card IDs or card-ID lists as measurements.
++                header == "num_turns" || header.ends_with("_mana_spent")
++            } else {
++                numeric_column(header)
++            };
++            if is_numeric {
+                 if let Ok(value) = value.parse::<f64>() {
+-                    numeric.entry(header.clone()).or_default().add(value);
++                    if value.is_finite() {
++                        numeric.entry(header.clone()).or_default().add(value);
++                    }
+                 }
+             }
+         }
+     }
+-
++    let normalization = mapping.map(|(_, provenance)| normalization(casts, provenance));
++    let interpretation = if wide {
++        "Recorded cast occurrences normalized with the supplied Arena card mapping. Source column order is not game-action order. Mapping coverage is observable; these data are not a rules oracle or a gameplay conformance gate."
++    } else {
++        "Observational workload evidence only; no value in this report is a rules oracle or hard conformance gate."
++    };
+     let report = SoftSignalReport {
+         schema: SOFT_SIGNAL_SCHEMA.to_owned(),
+         manifest_id: manifest.manifest_id,
+@@ -67,12 +202,186 @@ pub async fn mine_17lands(
+             .into_iter()
+             .map(|(name, values)| (name, values.finish()))
+             .collect(),
+-        interpretation: "Observational workload evidence only; no value in this report is a rules oracle or hard conformance gate.".to_owned(),
++        normalization,
++        interpretation: interpretation.to_owned(),
+     };
+     write_json_atomic(output, &report)?;
+     Ok(report)
+ }
+ 
++fn auto_schema(headers: &csv::StringRecord) -> Result<bool> {
++    let wide = headers.iter().any(looks_like_replay_column);
++    // These named-value columns belong to the supported legacy input family.
++    // Public replay's opening_hand field contains Arena IDs, so it is not a
++    // stand-alone named-schema marker.
++    let named = headers.iter().any(|header| {
++        matches!(
++            header,
++            "card_name"
++                | "card_names"
++                | "cards"
++                | "deck"
++                | "decklist"
++                | "drawn_cards"
++                | "sideboard"
++                | "sideboard_cards"
++        )
++    });
++    match (wide, named) {
++        (true, true) => bail!(
++            "ambiguous 17Lands input: both public turn columns and named-card columns; select an explicit --input-schema"
++        ),
++        (true, false) => Ok(true),
++        (false, true) => Ok(false),
++        (false, false) => bail!(
++            "unknown 17Lands input schema: expected public replay turn columns or supported named-card columns; use --input-schema legacy-named-v1 only for known legacy named values"
++        ),
++    }
++}
++
++fn looks_like_replay_column(header: &str) -> bool {
++    let lowercase = header.to_ascii_lowercase();
++    lowercase.starts_with("user_turn_") || lowercase.starts_with("oppo_turn_")
++}
++
++fn arena_id(raw: &str) -> Option<u32> {
++    if raw.is_empty() || !raw.bytes().all(|byte| byte.is_ascii_digit()) {
++        return None;
++    }
++    raw.parse::<u32>().ok().filter(|value| *value > 0)
++}
++
++#[derive(Debug, Deserialize)]
++struct CardMappingRow {
++    id: String,
++    name: String,
++}
++
++fn parse_cards_mapping(bytes: &[u8]) -> Result<BTreeMap<u32, String>> {
++    let mut reader = csv::Reader::from_reader(bytes);
++    let headers = reader.headers()?;
++    let unique = headers.iter().collect::<BTreeSet<_>>();
++    if unique.len() != headers.len() || !unique.contains("id") || !unique.contains("name") {
++        bail!("cards CSV requires unique headers including id and name");
++    }
++    let mut result = BTreeMap::new();
++    for (index, row) in reader.deserialize::<CardMappingRow>().enumerate() {
++        let row = row.with_context(|| format!("invalid cards CSV data row {}", index + 1))?;
++        let id = arena_id(&row.id)
++            .with_context(|| format!("invalid Arena ID at cards CSV data row {}", index + 1))?;
++        if row.name.trim().is_empty() {
++            bail!("empty card name at cards CSV data row {}", index + 1);
++        }
++        if let Some(previous) = result.insert(id, row.name.clone()) {
++            if previous != row.name {
++                bail!("cards CSV gives conflicting names for Arena ID {id}");
++            }
++        }
++    }
++    if result.is_empty() {
++        bail!("cards CSV contains no card mappings");
++    }
++    Ok(result)
++}
++
++#[derive(Clone, Copy, Debug)]
++struct CastColumn {
++    turn_number: u32,
++    active_player: ReplayPlayer,
++    casting_player: ReplayPlayer,
++    cast_kind: RecordedCastKind,
++}
++
++fn parse_cast_column(header: &str) -> Option<CastColumn> {
++    let (active_player, rest) = if let Some(rest) = header.strip_prefix("user_turn_") {
++        (ReplayPlayer::User, rest)
++    } else {
++        let rest = header.strip_prefix("oppo_turn_")?;
++        (ReplayPlayer::Oppo, rest)
++    };
++    let (turn, suffix) = rest.split_once('_')?;
++    let turn_number = arena_id(turn)?;
++    let (casting_player, cast_kind) = match suffix {
++        "creatures_cast" => (active_player, RecordedCastKind::Creature),
++        "non_creatures_cast" => (active_player, RecordedCastKind::NonCreature),
++        "user_instants_sorceries_cast" => (ReplayPlayer::User, RecordedCastKind::InstantSorcery),
++        "oppo_instants_sorceries_cast" => (ReplayPlayer::Oppo, RecordedCastKind::InstantSorcery),
++        _ => return None,
++    };
++    Some(CastColumn {
++        turn_number,
++        active_player,
++        casting_player,
++        cast_kind,
++    })
++}
++
++fn parse_replay_headers(headers: &csv::StringRecord) -> Result<Vec<(usize, CastColumn)>> {
++    let unique = headers.iter().collect::<BTreeSet<_>>();
++    if unique.len() != headers.len() {
++        bail!("public replay CSV has duplicate column names");
++    }
++    for required in ["draft_id", "build_index", "match_number", "game_number"] {
++        if !unique.contains(required) {
++            bail!("public-replay-wide-v1 requires the {required} column");
++        }
++    }
++    let mut columns = Vec::new();
++    for (index, header) in headers.iter().enumerate() {
++        if looks_like_replay_column(header) && header != header.to_ascii_lowercase() {
++            bail!("public replay schema requires lowercase column names; found {header}");
++        }
++        if let Some(column) = parse_cast_column(header) {
++            columns.push((index, column));
++        } else if (header.starts_with("user_turn_") || header.starts_with("oppo_turn_"))
++            && header.ends_with("_cast")
++        {
++            bail!("unsupported public replay cast column {header}");
++        }
++    }
++    if columns.is_empty() {
++        bail!("public-replay-wide-v1 has no supported per-turn cast columns");
++    }
++    Ok(columns)
++}
++
++fn normalization(
++    casts: Vec<RecordedCast>,
++    cards_mapping: CardsMappingProvenance,
++) -> ReplayNormalization {
++    let mut all_ids = BTreeSet::new();
++    let mut mapped_ids = BTreeSet::new();
++    let mut mapped = 0;
++    let mut unmapped = 0;
++    let mut invalid = 0;
++    for cast in &casts {
++        if let Some(id) = cast.arena_id {
++            all_ids.insert(id);
++        }
++        match &cast.resolution {
++            CastResolution::Mapped { .. } => {
++                mapped += 1;
++                if let Some(id) = cast.arena_id {
++                    mapped_ids.insert(id);
++                }
++            }
++            CastResolution::Unmapped { .. } => unmapped += 1,
++            CastResolution::Invalid { .. } => invalid += 1,
++        }
++    }
++    ReplayNormalization {
++        schema: "17lands-public-replay-wide-v1".to_owned(),
++        cards_mapping,
++        cast_occurrences: casts.len() as u64,
++        mapped_cast_occurrences: mapped,
++        unmapped_cast_occurrences: unmapped,
++        invalid_cast_occurrences: invalid,
++        distinct_cast_arena_ids: all_ids.len() as u64,
++        distinct_mapped_cast_arena_ids: mapped_ids.len() as u64,
++        casts,
++    }
++}
++
+ fn card_column(header: &str) -> bool {
+     !header.ends_with("_id")
+         && !header.ends_with("_hash")
+@@ -202,3 +511,334 @@ impl NumericAccumulator {
+         }
+     }
+ }
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    use crate::io::{canonical_hash, sha256};
++    use crate::model::{Artifact, CorpusManifest, CorpusValidation, MANIFEST_SCHEMA};
++    use std::fs;
++    use tempfile::TempDir;
++
++    const OBSERVED_GAME: &[u8] =
++        include_bytes!("../tests/fixtures/17lands-msh-replay-v1/observed-first-game.csv");
++    const OFFICIAL_MAPPING_SUBSET: &[u8] =
++        include_bytes!("../tests/fixtures/17lands-msh-replay-v1/cards-subset.csv");
++    const EXPECTED_CASTS: &[u8] =
++        include_bytes!("../tests/fixtures/17lands-msh-replay-v1/expected-casts.json");
++
++    fn source_manifest(temp: &TempDir, bytes: &[u8]) -> String {
++        fs::write(temp.path().join("observations.csv"), bytes).unwrap();
++        let artifact = Artifact {
++            source: "test-input:explicit-source-fixture".into(),
++            sha256: sha256(bytes),
++            bytes: bytes.len() as u64,
++            stored_path: "observations.csv".into(),
++        };
++        // This manifest binds a miner input only; it asserts no Phase card corpus.
++        let mut manifest = CorpusManifest {
++            schema: MANIFEST_SCHEMA.into(),
++            manifest_id: String::new(),
++            set: "source-ingestion-test".into(),
++            phase_revision: phase_bridge::PHASE_REVISION.into(),
++            generator_schema: "miner-input-fixture".into(),
++            input_labels: BTreeMap::from([("17lands_dataset".into(), "test-fixture".into())]),
++            artifacts: BTreeMap::from([("17lands".into(), artifact)]),
++            output_hashes: BTreeMap::new(),
++            validation: CorpusValidation::default(),
++        };
++        manifest.manifest_id = canonical_hash(&manifest).unwrap();
++        let path = temp.path().join("manifest.json");
++        fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
++        path.to_string_lossy().into_owned()
++    }
++
++    fn mapping_options(temp: &TempDir, bytes: &[u8]) -> Mine17landsOptions {
++        let path = temp.path().join("cards.csv");
++        fs::write(&path, bytes).unwrap();
++        Mine17landsOptions {
++            input_schema: Lands17InputSchema::PublicReplayWideV1,
++            cards_csv: Some(CardsCsvInput {
++                source: path.to_string_lossy().into_owned(),
++                sha256: sha256(bytes),
++            }),
++        }
++    }
++
++    #[tokio::test]
++    async fn authentic_observed_game_preserves_cast_counts_identity_and_provenance() {
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, OBSERVED_GAME);
++        let options = mapping_options(&temp, OFFICIAL_MAPPING_SUBSET);
++        let report =
++            mine_17lands_with_options(&manifest, &temp.path().join("report.json"), None, &options)
++                .await
++                .unwrap();
++        let expected: Value = serde_json::from_slice(EXPECTED_CASTS).unwrap();
++        let normalized = report.normalization.as_ref().unwrap();
++        assert_eq!(report.rows, 1);
++        assert_eq!(report.dataset_sha256, sha256(OBSERVED_GAME));
++        assert_eq!(normalized.cast_occurrences, 19);
++        assert_eq!(normalized.mapped_cast_occurrences, 19);
++        assert_eq!(normalized.distinct_cast_arena_ids, 15);
++        assert_eq!(normalized.distinct_mapped_cast_arena_ids, 15);
++        assert_eq!(normalized.unmapped_cast_occurrences, 0);
++        assert_eq!(normalized.invalid_cast_occurrences, 0);
++        assert_eq!(
++            normalized.cards_mapping.sha256,
++            sha256(OFFICIAL_MAPPING_SUBSET)
++        );
++        assert_eq!(
++            normalized.cards_mapping.bytes,
++            OFFICIAL_MAPPING_SUBSET.len() as u64
++        );
++        let actual_names = report
++            .card_frequency
++            .iter()
++            .map(|entry| (entry.name.clone(), entry.count))
++            .collect::<BTreeMap<_, _>>();
++        let expected_names: BTreeMap<String, u64> =
++            serde_json::from_value(expected["name_counts"].clone()).unwrap();
++        assert_eq!(actual_names, expected_names);
++        let projected = normalized
++            .casts
++            .iter()
++            .map(|cast| {
++                let CastResolution::Mapped { name } = &cast.resolution else {
++                    panic!("known fixture must map")
++                };
++                serde_json::json!({
++                    "row": cast.row, "column": cast.column, "value_index": cast.value_index,
++                    "arena_id": cast.arena_id.unwrap(), "name": name,
++                })
++            })
++            .collect::<Vec<_>>();
++        assert_eq!(serde_json::json!(projected), expected["casts"]);
++        assert!(!report
++            .numeric_summaries
++            .contains_key("user_turn_2_creatures_cast"));
++        assert!(report.interpretation.contains("not game-action order"));
++    }
++
++    #[tokio::test]
++    async fn unknown_invalid_and_repeated_ids_remain_visible_without_count_inflation() {
++        // Structural protocol fixture; no claim these rows are observed gameplay.
++        let input = b"draft_id,build_index,match_number,game_number,user_turn_1_creatures_cast,user_total_creatures_cast,user_turn_1_eot_user_creatures_in_play\nfixture,0,1,1,10|10|999||x,999,10|10|10\n";
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, input);
++        let options = mapping_options(&temp, b"id,name\n10,Test Card\n");
++        let report =
++            mine_17lands_with_options(&manifest, &temp.path().join("report.json"), None, &options)
++                .await
++                .unwrap();
++        assert_eq!(
++            report.card_frequency,
++            vec![NamedCount {
++                name: "Test Card".into(),
++                count: 2
++            }]
++        );
++        let normalized = report.normalization.unwrap();
++        assert_eq!(normalized.cast_occurrences, 5);
++        assert_eq!(normalized.mapped_cast_occurrences, 2);
++        assert_eq!(normalized.unmapped_cast_occurrences, 1);
++        assert_eq!(normalized.invalid_cast_occurrences, 2);
++        assert_eq!(normalized.distinct_cast_arena_ids, 2);
++        assert_eq!(normalized.distinct_mapped_cast_arena_ids, 1);
++        assert_eq!(normalized.casts[3].raw_id, "");
++        assert_eq!(normalized.casts[3].value_index, 3);
++        assert!(matches!(
++            normalized.casts[2].resolution,
++            CastResolution::Unmapped { .. }
++        ));
++        assert!(matches!(
++            normalized.casts[4].resolution,
++            CastResolution::Invalid { .. }
++        ));
++    }
++
++    #[tokio::test]
++    async fn missing_or_corrupt_mapping_refuses_output_and_preserves_existing_report() {
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, OBSERVED_GAME);
++        let output = temp.path().join("report.json");
++        fs::write(&output, b"retained-existing-report").unwrap();
++        let error = mine_17lands(&manifest, &output, None).await.unwrap_err();
++        assert!(error.to_string().contains("--cards-csv"));
++        let mut options = mapping_options(&temp, OFFICIAL_MAPPING_SUBSET);
++        options.cards_csv.as_mut().unwrap().sha256 = "0".repeat(64);
++        let error = mine_17lands_with_options(&manifest, &output, None, &options)
++            .await
++            .unwrap_err();
++        assert!(error.to_string().contains("sha256 mismatch"));
++        assert_eq!(fs::read(output).unwrap(), b"retained-existing-report");
++    }
++
++    #[test]
++    fn mapping_collisions_and_bad_identity_are_explicit_errors() {
++        assert!(parse_cards_mapping(b"id,name\n10,A\n10,B\n").is_err());
++        assert_eq!(
++            parse_cards_mapping(b"id,name\n10,A\n10,A\n").unwrap().len(),
++            1
++        );
++        assert!(parse_cards_mapping(b"id,name\n0,A\n").is_err());
++        assert!(parse_cards_mapping(b"id,name\nx,A\n").is_err());
++        assert!(parse_cards_mapping(b"id,name,name\n10,A,A\n").is_err());
++        assert!(parse_cards_mapping(b"id,name\n10,\n").is_err());
++        assert!(parse_cards_mapping(b"id,name\n").is_err());
++        for value in ["-1", "1.0", " 10", "4294967296", ""] {
++            assert_eq!(arena_id(value), None, "{value}");
++        }
++    }
++
++    #[test]
++    fn schema_rejects_ambiguous_headers_and_preserves_turn_player_roles() {
++        let base = ["draft_id", "build_index", "match_number", "game_number"];
++        for bad in ["user_turn_0_creatures_cast", "user_turn_2_mystery_cast"] {
++            let mut headers = csv::StringRecord::from(base.to_vec());
++            headers.push_field(bad);
++            assert!(parse_replay_headers(&headers).is_err());
++        }
++        let headers = csv::StringRecord::from(vec![
++            "draft_id",
++            "build_index",
++            "match_number",
++            "game_number",
++            "user_turn_1_creatures_cast",
++            "user_turn_1_creatures_cast",
++        ]);
++        assert!(parse_replay_headers(&headers).is_err());
++        let column = parse_cast_column("oppo_turn_7_user_instants_sorceries_cast").unwrap();
++        assert_eq!(column.active_player, ReplayPlayer::Oppo);
++        assert_eq!(column.casting_player, ReplayPlayer::User);
++        assert_eq!(column.turn_number, 7);
++        assert_eq!(column.cast_kind, RecordedCastKind::InstantSorcery);
++        let column = parse_cast_column("user_turn_3_non_creatures_cast").unwrap();
++        assert_eq!(column.cast_kind, RecordedCastKind::NonCreature);
++        assert!(parse_cast_column("user_total_creatures_cast").is_none());
++    }
++
++    #[tokio::test]
++    async fn row_limits_and_same_name_arena_aliases_keep_exact_occurrence_counts() {
++        let input = b"draft_id,build_index,match_number,game_number,oppo_turn_1_creatures_cast\nfixture,0,1,1,10|11\nfixture,0,1,2,10\n";
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, input);
++        let options = mapping_options(&temp, b"id,name\n10,Same Name\n11,Same Name\n");
++        let report = mine_17lands_with_options(
++            &manifest,
++            &temp.path().join("report.json"),
++            Some(1),
++            &options,
++        )
++        .await
++        .unwrap();
++        assert_eq!(report.rows, 1);
++        assert_eq!(report.card_frequency[0].count, 2);
++        assert_eq!(
++            report
++                .normalization
++                .as_ref()
++                .unwrap()
++                .distinct_mapped_cast_arena_ids,
++            2
++        );
++        let empty = mine_17lands_with_options(
++            &manifest,
++            &temp.path().join("empty.json"),
++            Some(0),
++            &options,
++        )
++        .await
++        .unwrap();
++        assert_eq!(empty.rows, 0);
++        assert_eq!(empty.normalization.unwrap().cast_occurrences, 0);
++    }
++
++    #[tokio::test]
++    async fn malformed_public_row_is_rejected_instead_of_silently_skipping_columns() {
++        let input = b"draft_id,build_index,match_number,game_number,user_turn_1_creatures_cast\nfixture,0,1,1\n";
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, input);
++        let options = mapping_options(&temp, b"id,name\n10,Test Card\n");
++        let output = temp.path().join("report.json");
++        let error = mine_17lands_with_options(&manifest, &output, None, &options)
++            .await
++            .unwrap_err();
++        assert!(error.to_string().contains("column count"));
++        assert!(!output.exists());
++    }
++
++    #[tokio::test]
++    async fn named_card_inputs_keep_existing_frequency_semantics() {
++        let input = b"event_type,card_name,drawn_cards,turn,damage\ncast,Mountain,\"[\"\"Goblin Piker\"\"]\",2,0\nattack,Raging Goblin,[],3,1\n";
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, input);
++        let report = mine_17lands(&manifest, &temp.path().join("report.json"), None)
++            .await
++            .unwrap();
++        assert_eq!(report.rows, 2);
++        assert!(report.normalization.is_none());
++        assert_eq!(report.card_frequency.len(), 3);
++        assert!(report
++            .card_frequency
++            .iter()
++            .any(|card| card.name == "Goblin Piker"));
++        assert_eq!(report.numeric_summaries["turn"].mean, 2.5);
++    }
++    #[tokio::test]
++    async fn auto_rejects_unknown_case_changed_and_ambiguous_inputs_without_overwriting() {
++        let inputs: [&[u8]; 3] = [
++            b"unknown,value\nrecord,10\n",
++            b"draft_id,build_index,match_number,game_number,User_Turn_1_creatures_cast\nfixture,0,1,1,10\n",
++            b"draft_id,build_index,match_number,game_number,card_name,user_turn_1_creatures_cast\nfixture,0,1,1,Test Card,10\n",
++        ];
++        for input in inputs {
++            let temp = TempDir::new().unwrap();
++            let manifest = source_manifest(&temp, input);
++            let output = temp.path().join("report.json");
++            fs::write(&output, b"existing-report").unwrap();
++            let error = mine_17lands(&manifest, &output, None).await.unwrap_err();
++            assert!(
++                error.to_string().contains("schema"),
++                "expected an actionable schema error, got {error}"
++            );
++            assert_eq!(fs::read(output).unwrap(), b"existing-report");
++        }
++    }
++
++    #[tokio::test]
++    async fn auto_reaches_named_families_and_explicit_legacy_retains_broad_headers() {
++        for header in ["cards", "deck", "sideboard_cards"] {
++            let temp = TempDir::new().unwrap();
++            let input = format!("{header}\nTest Card\n");
++            let manifest = source_manifest(&temp, input.as_bytes());
++            let report = mine_17lands(&manifest, &temp.path().join("report.json"), None)
++                .await
++                .unwrap();
++            assert_eq!(
++                report.card_frequency,
++                vec![NamedCount {
++                    name: "Test Card".into(),
++                    count: 1
++                }]
++            );
++            assert!(report.normalization.is_none());
++        }
++        let temp = TempDir::new().unwrap();
++        let manifest = source_manifest(&temp, b"custom_deck_values\nTest Card\n");
++        assert!(
++            mine_17lands(&manifest, &temp.path().join("auto.json"), None)
++                .await
++                .is_err()
++        );
++        let options = Mine17landsOptions {
++            input_schema: Lands17InputSchema::LegacyNamedV1,
++            cards_csv: None,
++        };
++        let report =
++            mine_17lands_with_options(&manifest, &temp.path().join("legacy.json"), None, &options)
++                .await
++                .unwrap();
++        assert_eq!(report.card_frequency[0].name, "Test Card");
++    }
++}
+diff --git a/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/.gitattributes b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/.gitattributes
+new file mode 100644
+index 0000000000000000000000000000000000000000..b77ed855bb5064e487d57aeec306ef964ff1a274
+--- /dev/null
++++ b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/.gitattributes
+@@ -0,0 +1,2 @@
++# Preserve exact official CSV bytes, including the mapping source CRLF endings.
++*.csv -text whitespace=cr-at-eol
+diff --git a/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/cards-subset.csv b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/cards-subset.csv
+new file mode 100644
+index 0000000000000000000000000000000000000000..3895b60e46e34f8875a986c7500ddabd86c95b26
+--- /dev/null
++++ b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/cards-subset.csv
+@@ -0,0 +1,16 @@
++id,expansion,name,rarity,color_identity,mana_value,types,is_booster
++104903,MSH,"Captain Mar-Vell, Space-Born",uncommon,W,5,Legendary Creature - Kree Soldier Hero,True
++104986,MSH,"Crossbones, Malicious Mercenary",uncommon,B,4,Legendary Creature - Human Mercenary Villain,True
++104923,MSH,"Patriot, Shield Wielder",uncommon,W,2,Legendary Creature - Human Hero,True
++104935,MSH,"White Widow, Free Agent",uncommon,W,4,Legendary Creature - Human Hero Villain,True
++105148,MSH,"Ultron, Artificial Malevolence",mythic,,3,Legendary Artifact Creature - Robot Villain,True
++105138,MSH,A.I.M. Synthoids,common,,2,Artifact Creature - Robot Villain,True
++104906,MSH,Helicarrier Strike,common,W,1,Instant,True
++105017,MSH,Widow's Bite,common,B,2,Instant,True
++104955,MSH,"Justice, Vance Astrovik",uncommon,U,3,Legendary Creature - Mutant Hero,True
++105011,MSH,"Swordsman, Sharp Scoundrel",uncommon,B,2,Legendary Creature - Human Hero Villain,True
++104896,MSH,Agents of S.H.I.E.L.D.,common,W,3,Creature - Human Spy Hero,True
++104926,MSH,Raft Security Officer,common,W,2,Creature - Human Soldier,True
++104936,MSH,Aerial Doombot,common,U,1,Artifact Creature - Robot Villain,True
++104907,MSH,Hero in Training,common,W,3,Creature - Human Hero,True
++104932,MSH,Take Up the Shield,common,W,2,Instant,True
+diff --git a/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/expected-casts.json b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/expected-casts.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..82794ab319f17b1002f2430068110eee1ba15c77
+--- /dev/null
++++ b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/expected-casts.json
+@@ -0,0 +1,160 @@
++{
++  "rows": 1,
++  "cast_occurrences": 19,
++  "distinct_cast_arena_ids": 15,
++  "mapped_cast_occurrences": 19,
++  "unmapped_cast_occurrences": 0,
++  "invalid_cast_occurrences": 0,
++  "name_counts": {
++    "A.I.M. Synthoids": 2,
++    "Aerial Doombot": 2,
++    "Agents of S.H.I.E.L.D.": 1,
++    "Captain Mar-Vell, Space-Born": 1,
++    "Crossbones, Malicious Mercenary": 1,
++    "Helicarrier Strike": 1,
++    "Hero in Training": 1,
++    "Justice, Vance Astrovik": 1,
++    "Patriot, Shield Wielder": 1,
++    "Raft Security Officer": 2,
++    "Swordsman, Sharp Scoundrel": 1,
++    "Take Up the Shield": 1,
++    "Ultron, Artificial Malevolence": 1,
++    "White Widow, Free Agent": 1,
++    "Widow's Bite": 2
++  },
++  "casts": [
++    {
++      "row": 1,
++      "column": "user_turn_2_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104926,
++      "name": "Raft Security Officer"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_2_creatures_cast",
++      "value_index": 0,
++      "arena_id": 105138,
++      "name": "A.I.M. Synthoids"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_3_creatures_cast",
++      "value_index": 0,
++      "arena_id": 105148,
++      "name": "Ultron, Artificial Malevolence"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_3_creatures_cast",
++      "value_index": 0,
++      "arena_id": 105011,
++      "name": "Swordsman, Sharp Scoundrel"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_4_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104936,
++      "name": "Aerial Doombot"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_4_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104955,
++      "name": "Justice, Vance Astrovik"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_5_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104936,
++      "name": "Aerial Doombot"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_5_creatures_cast",
++      "value_index": 0,
++      "arena_id": 105138,
++      "name": "A.I.M. Synthoids"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_6_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104907,
++      "name": "Hero in Training"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_6_oppo_instants_sorceries_cast",
++      "value_index": 0,
++      "arena_id": 105017,
++      "name": "Widow's Bite"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_6_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104926,
++      "name": "Raft Security Officer"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_7_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104903,
++      "name": "Captain Mar-Vell, Space-Born"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_7_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104986,
++      "name": "Crossbones, Malicious Mercenary"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_8_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104896,
++      "name": "Agents of S.H.I.E.L.D."
++    },
++    {
++      "row": 1,
++      "column": "user_turn_9_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104923,
++      "name": "Patriot, Shield Wielder"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_9_user_instants_sorceries_cast",
++      "value_index": 0,
++      "arena_id": 104906,
++      "name": "Helicarrier Strike"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_9_oppo_instants_sorceries_cast",
++      "value_index": 0,
++      "arena_id": 105017,
++      "name": "Widow's Bite"
++    },
++    {
++      "row": 1,
++      "column": "user_turn_9_oppo_instants_sorceries_cast",
++      "value_index": 1,
++      "arena_id": 104932,
++      "name": "Take Up the Shield"
++    },
++    {
++      "row": 1,
++      "column": "oppo_turn_9_creatures_cast",
++      "value_index": 0,
++      "arena_id": 104935,
++      "name": "White Widow, Free Agent"
++    }
++  ]
++}
+diff --git a/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/observed-first-game.csv b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/observed-first-game.csv
+new file mode 100644
+index 0000000000000000000000000000000000000000..c48074f568c469e86dc8a98c7683a1b732e28906
+--- /dev/null
++++ b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/observed-first-game.csv
+@@ -0,0 +1,2 @@
++expansion,event_type,draft_id,draft_time,build_index,match_number,game_number,game_time,rank,opp_rank,main_colors,splash_colors,on_play,num_mulligans,opp_num_mulligans,opp_colors,num_turns,won,candidate_hand_1,candidate_hand_2,candidate_hand_3,candidate_hand_4,candidate_hand_5,candidate_hand_6,candidate_hand_7,opening_hand,user_turn_1_cards_drawn,user_turn_1_cards_tutored,user_turn_1_cards_discarded,user_turn_1_lands_played,user_turn_1_creatures_cast,user_turn_1_non_creatures_cast,user_turn_1_user_instants_sorceries_cast,user_turn_1_oppo_instants_sorceries_cast,user_turn_1_user_abilities,user_turn_1_oppo_abilities,user_turn_1_creatures_attacked,user_turn_1_creatures_blocked,user_turn_1_creatures_unblocked,user_turn_1_creatures_blocking,user_turn_1_oppo_combat_damage_taken,user_turn_1_user_combat_damage_taken,user_turn_1_user_creatures_killed_combat,user_turn_1_oppo_creatures_killed_combat,user_turn_1_user_creatures_killed_non_combat,user_turn_1_oppo_creatures_killed_non_combat,user_turn_1_user_mana_spent,user_turn_1_oppo_mana_spent,user_turn_1_eot_user_cards_in_hand,user_turn_1_eot_oppo_cards_in_hand,user_turn_1_eot_user_lands_in_play,user_turn_1_eot_oppo_lands_in_play,user_turn_1_eot_user_creatures_in_play,user_turn_1_eot_oppo_creatures_in_play,user_turn_1_eot_user_non_creatures_in_play,user_turn_1_eot_oppo_non_creatures_in_play,user_turn_1_eot_user_life,user_turn_1_eot_oppo_life,oppo_turn_1_cards_discarded,oppo_turn_1_lands_played,oppo_turn_1_creatures_cast,oppo_turn_1_non_creatures_cast,oppo_turn_1_user_instants_sorceries_cast,oppo_turn_1_oppo_instants_sorceries_cast,oppo_turn_1_user_abilities,oppo_turn_1_oppo_abilities,oppo_turn_1_creatures_attacked,oppo_turn_1_creatures_blocked,oppo_turn_1_creatures_unblocked,oppo_turn_1_creatures_blocking,oppo_turn_1_oppo_combat_damage_taken,oppo_turn_1_user_combat_damage_taken,oppo_turn_1_user_creatures_killed_combat,oppo_turn_1_oppo_creatures_killed_combat,oppo_turn_1_user_creatures_killed_non_combat,oppo_turn_1_oppo_creatures_killed_non_combat,oppo_turn_1_user_mana_spent,oppo_turn_1_oppo_mana_spent,oppo_turn_1_eot_user_cards_in_hand,oppo_turn_1_eot_oppo_cards_in_hand,oppo_turn_1_eot_user_lands_in_play,oppo_turn_1_eot_oppo_lands_in_play,oppo_turn_1_eot_user_creatures_in_play,oppo_turn_1_eot_oppo_creatures_in_play,oppo_turn_1_eot_user_non_creatures_in_play,oppo_turn_1_eot_oppo_non_creatures_in_play,oppo_turn_1_eot_user_life,oppo_turn_1_eot_oppo_life,user_turn_2_cards_drawn,user_turn_2_cards_tutored,user_turn_2_cards_discarded,user_turn_2_lands_played,user_turn_2_creatures_cast,user_turn_2_non_creatures_cast,user_turn_2_user_instants_sorceries_cast,user_turn_2_oppo_instants_sorceries_cast,user_turn_2_user_abilities,user_turn_2_oppo_abilities,user_turn_2_creatures_attacked,user_turn_2_creatures_blocked,user_turn_2_creatures_unblocked,user_turn_2_creatures_blocking,user_turn_2_oppo_combat_damage_taken,user_turn_2_user_combat_damage_taken,user_turn_2_user_creatures_killed_combat,user_turn_2_oppo_creatures_killed_combat,user_turn_2_user_creatures_killed_non_combat,user_turn_2_oppo_creatures_killed_non_combat,user_turn_2_user_mana_spent,user_turn_2_oppo_mana_spent,user_turn_2_eot_user_cards_in_hand,user_turn_2_eot_oppo_cards_in_hand,user_turn_2_eot_user_lands_in_play,user_turn_2_eot_oppo_lands_in_play,user_turn_2_eot_user_creatures_in_play,user_turn_2_eot_oppo_creatures_in_play,user_turn_2_eot_user_non_creatures_in_play,user_turn_2_eot_oppo_non_creatures_in_play,user_turn_2_eot_user_life,user_turn_2_eot_oppo_life,oppo_turn_2_cards_discarded,oppo_turn_2_lands_played,oppo_turn_2_creatures_cast,oppo_turn_2_non_creatures_cast,oppo_turn_2_user_instants_sorceries_cast,oppo_turn_2_oppo_instants_sorceries_cast,oppo_turn_2_user_abilities,oppo_turn_2_oppo_abilities,oppo_turn_2_creatures_attacked,oppo_turn_2_creatures_blocked,oppo_turn_2_creatures_unblocked,oppo_turn_2_creatures_blocking,oppo_turn_2_oppo_combat_damage_taken,oppo_turn_2_user_combat_damage_taken,oppo_turn_2_user_creatures_killed_combat,oppo_turn_2_oppo_creatures_killed_combat,oppo_turn_2_user_creatures_killed_non_combat,oppo_turn_2_oppo_creatures_killed_non_combat,oppo_turn_2_user_mana_spent,oppo_turn_2_oppo_mana_spent,oppo_turn_2_eot_user_cards_in_hand,oppo_turn_2_eot_oppo_cards_in_hand,oppo_turn_2_eot_user_lands_in_play,oppo_turn_2_eot_oppo_lands_in_play,oppo_turn_2_eot_user_creatures_in_play,oppo_turn_2_eot_oppo_creatures_in_play,oppo_turn_2_eot_user_non_creatures_in_play,oppo_turn_2_eot_oppo_non_creatures_in_play,oppo_turn_2_eot_user_life,oppo_turn_2_eot_oppo_life,user_turn_3_cards_drawn,user_turn_3_cards_tutored,user_turn_3_cards_discarded,user_turn_3_lands_played,user_turn_3_creatures_cast,user_turn_3_non_creatures_cast,user_turn_3_user_instants_sorceries_cast,user_turn_3_oppo_instants_sorceries_cast,user_turn_3_user_abilities,user_turn_3_oppo_abilities,user_turn_3_creatures_attacked,user_turn_3_creatures_blocked,user_turn_3_creatures_unblocked,user_turn_3_creatures_blocking,user_turn_3_oppo_combat_damage_taken,user_turn_3_user_combat_damage_taken,user_turn_3_user_creatures_killed_combat,user_turn_3_oppo_creatures_killed_combat,user_turn_3_user_creatures_killed_non_combat,user_turn_3_oppo_creatures_killed_non_combat,user_turn_3_user_mana_spent,user_turn_3_oppo_mana_spent,user_turn_3_eot_user_cards_in_hand,user_turn_3_eot_oppo_cards_in_hand,user_turn_3_eot_user_lands_in_play,user_turn_3_eot_oppo_lands_in_play,user_turn_3_eot_user_creatures_in_play,user_turn_3_eot_oppo_creatures_in_play,user_turn_3_eot_user_non_creatures_in_play,user_turn_3_eot_oppo_non_creatures_in_play,user_turn_3_eot_user_life,user_turn_3_eot_oppo_life,oppo_turn_3_cards_discarded,oppo_turn_3_lands_played,oppo_turn_3_creatures_cast,oppo_turn_3_non_creatures_cast,oppo_turn_3_user_instants_sorceries_cast,oppo_turn_3_oppo_instants_sorceries_cast,oppo_turn_3_user_abilities,oppo_turn_3_oppo_abilities,oppo_turn_3_creatures_attacked,oppo_turn_3_creatures_blocked,oppo_turn_3_creatures_unblocked,oppo_turn_3_creatures_blocking,oppo_turn_3_oppo_combat_damage_taken,oppo_turn_3_user_combat_damage_taken,oppo_turn_3_user_creatures_killed_combat,oppo_turn_3_oppo_creatures_killed_combat,oppo_turn_3_user_creatures_killed_non_combat,oppo_turn_3_oppo_creatures_killed_non_combat,oppo_turn_3_user_mana_spent,oppo_turn_3_oppo_mana_spent,oppo_turn_3_eot_user_cards_in_hand,oppo_turn_3_eot_oppo_cards_in_hand,oppo_turn_3_eot_user_lands_in_play,oppo_turn_3_eot_oppo_lands_in_play,oppo_turn_3_eot_user_creatures_in_play,oppo_turn_3_eot_oppo_creatures_in_play,oppo_turn_3_eot_user_non_creatures_in_play,oppo_turn_3_eot_oppo_non_creatures_in_play,oppo_turn_3_eot_user_life,oppo_turn_3_eot_oppo_life,user_turn_4_cards_drawn,user_turn_4_cards_tutored,user_turn_4_cards_discarded,user_turn_4_lands_played,user_turn_4_creatures_cast,user_turn_4_non_creatures_cast,user_turn_4_user_instants_sorceries_cast,user_turn_4_oppo_instants_sorceries_cast,user_turn_4_user_abilities,user_turn_4_oppo_abilities,user_turn_4_creatures_attacked,user_turn_4_creatures_blocked,user_turn_4_creatures_unblocked,user_turn_4_creatures_blocking,user_turn_4_oppo_combat_damage_taken,user_turn_4_user_combat_damage_taken,user_turn_4_user_creatures_killed_combat,user_turn_4_oppo_creatures_killed_combat,user_turn_4_user_creatures_killed_non_combat,user_turn_4_oppo_creatures_killed_non_combat,user_turn_4_user_mana_spent,user_turn_4_oppo_mana_spent,user_turn_4_eot_user_cards_in_hand,user_turn_4_eot_oppo_cards_in_hand,user_turn_4_eot_user_lands_in_play,user_turn_4_eot_oppo_lands_in_play,user_turn_4_eot_user_creatures_in_play,user_turn_4_eot_oppo_creatures_in_play,user_turn_4_eot_user_non_creatures_in_play,user_turn_4_eot_oppo_non_creatures_in_play,user_turn_4_eot_user_life,user_turn_4_eot_oppo_life,oppo_turn_4_cards_discarded,oppo_turn_4_lands_played,oppo_turn_4_creatures_cast,oppo_turn_4_non_creatures_cast,oppo_turn_4_user_instants_sorceries_cast,oppo_turn_4_oppo_instants_sorceries_cast,oppo_turn_4_user_abilities,oppo_turn_4_oppo_abilities,oppo_turn_4_creatures_attacked,oppo_turn_4_creatures_blocked,oppo_turn_4_creatures_unblocked,oppo_turn_4_creatures_blocking,oppo_turn_4_oppo_combat_damage_taken,oppo_turn_4_user_combat_damage_taken,oppo_turn_4_user_creatures_killed_combat,oppo_turn_4_oppo_creatures_killed_combat,oppo_turn_4_user_creatures_killed_non_combat,oppo_turn_4_oppo_creatures_killed_non_combat,oppo_turn_4_user_mana_spent,oppo_turn_4_oppo_mana_spent,oppo_turn_4_eot_user_cards_in_hand,oppo_turn_4_eot_oppo_cards_in_hand,oppo_turn_4_eot_user_lands_in_play,oppo_turn_4_eot_oppo_lands_in_play,oppo_turn_4_eot_user_creatures_in_play,oppo_turn_4_eot_oppo_creatures_in_play,oppo_turn_4_eot_user_non_creatures_in_play,oppo_turn_4_eot_oppo_non_creatures_in_play,oppo_turn_4_eot_user_life,oppo_turn_4_eot_oppo_life,user_turn_5_cards_drawn,user_turn_5_cards_tutored,user_turn_5_cards_discarded,user_turn_5_lands_played,user_turn_5_creatures_cast,user_turn_5_non_creatures_cast,user_turn_5_user_instants_sorceries_cast,user_turn_5_oppo_instants_sorceries_cast,user_turn_5_user_abilities,user_turn_5_oppo_abilities,user_turn_5_creatures_attacked,user_turn_5_creatures_blocked,user_turn_5_creatures_unblocked,user_turn_5_creatures_blocking,user_turn_5_oppo_combat_damage_taken,user_turn_5_user_combat_damage_taken,user_turn_5_user_creatures_killed_combat,user_turn_5_oppo_creatures_killed_combat,user_turn_5_user_creatures_killed_non_combat,user_turn_5_oppo_creatures_killed_non_combat,user_turn_5_user_mana_spent,user_turn_5_oppo_mana_spent,user_turn_5_eot_user_cards_in_hand,user_turn_5_eot_oppo_cards_in_hand,user_turn_5_eot_user_lands_in_play,user_turn_5_eot_oppo_lands_in_play,user_turn_5_eot_user_creatures_in_play,user_turn_5_eot_oppo_creatures_in_play,user_turn_5_eot_user_non_creatures_in_play,user_turn_5_eot_oppo_non_creatures_in_play,user_turn_5_eot_user_life,user_turn_5_eot_oppo_life,oppo_turn_5_cards_discarded,oppo_turn_5_lands_played,oppo_turn_5_creatures_cast,oppo_turn_5_non_creatures_cast,oppo_turn_5_user_instants_sorceries_cast,oppo_turn_5_oppo_instants_sorceries_cast,oppo_turn_5_user_abilities,oppo_turn_5_oppo_abilities,oppo_turn_5_creatures_attacked,oppo_turn_5_creatures_blocked,oppo_turn_5_creatures_unblocked,oppo_turn_5_creatures_blocking,oppo_turn_5_oppo_combat_damage_taken,oppo_turn_5_user_combat_damage_taken,oppo_turn_5_user_creatures_killed_combat,oppo_turn_5_oppo_creatures_killed_combat,oppo_turn_5_user_creatures_killed_non_combat,oppo_turn_5_oppo_creatures_killed_non_combat,oppo_turn_5_user_mana_spent,oppo_turn_5_oppo_mana_spent,oppo_turn_5_eot_user_cards_in_hand,oppo_turn_5_eot_oppo_cards_in_hand,oppo_turn_5_eot_user_lands_in_play,oppo_turn_5_eot_oppo_lands_in_play,oppo_turn_5_eot_user_creatures_in_play,oppo_turn_5_eot_oppo_creatures_in_play,oppo_turn_5_eot_user_non_creatures_in_play,oppo_turn_5_eot_oppo_non_creatures_in_play,oppo_turn_5_eot_user_life,oppo_turn_5_eot_oppo_life,user_turn_6_cards_drawn,user_turn_6_cards_tutored,user_turn_6_cards_discarded,user_turn_6_lands_played,user_turn_6_creatures_cast,user_turn_6_non_creatures_cast,user_turn_6_user_instants_sorceries_cast,user_turn_6_oppo_instants_sorceries_cast,user_turn_6_user_abilities,user_turn_6_oppo_abilities,user_turn_6_creatures_attacked,user_turn_6_creatures_blocked,user_turn_6_creatures_unblocked,user_turn_6_creatures_blocking,user_turn_6_oppo_combat_damage_taken,user_turn_6_user_combat_damage_taken,user_turn_6_user_creatures_killed_combat,user_turn_6_oppo_creatures_killed_combat,user_turn_6_user_creatures_killed_non_combat,user_turn_6_oppo_creatures_killed_non_combat,user_turn_6_user_mana_spent,user_turn_6_oppo_mana_spent,user_turn_6_eot_user_cards_in_hand,user_turn_6_eot_oppo_cards_in_hand,user_turn_6_eot_user_lands_in_play,user_turn_6_eot_oppo_lands_in_play,user_turn_6_eot_user_creatures_in_play,user_turn_6_eot_oppo_creatures_in_play,user_turn_6_eot_user_non_creatures_in_play,user_turn_6_eot_oppo_non_creatures_in_play,user_turn_6_eot_user_life,user_turn_6_eot_oppo_life,oppo_turn_6_cards_discarded,oppo_turn_6_lands_played,oppo_turn_6_creatures_cast,oppo_turn_6_non_creatures_cast,oppo_turn_6_user_instants_sorceries_cast,oppo_turn_6_oppo_instants_sorceries_cast,oppo_turn_6_user_abilities,oppo_turn_6_oppo_abilities,oppo_turn_6_creatures_attacked,oppo_turn_6_creatures_blocked,oppo_turn_6_creatures_unblocked,oppo_turn_6_creatures_blocking,oppo_turn_6_oppo_combat_damage_taken,oppo_turn_6_user_combat_damage_taken,oppo_turn_6_user_creatures_killed_combat,oppo_turn_6_oppo_creatures_killed_combat,oppo_turn_6_user_creatures_killed_non_combat,oppo_turn_6_oppo_creatures_killed_non_combat,oppo_turn_6_user_mana_spent,oppo_turn_6_oppo_mana_spent,oppo_turn_6_eot_user_cards_in_hand,oppo_turn_6_eot_oppo_cards_in_hand,oppo_turn_6_eot_user_lands_in_play,oppo_turn_6_eot_oppo_lands_in_play,oppo_turn_6_eot_user_creatures_in_play,oppo_turn_6_eot_oppo_creatures_in_play,oppo_turn_6_eot_user_non_creatures_in_play,oppo_turn_6_eot_oppo_non_creatures_in_play,oppo_turn_6_eot_user_life,oppo_turn_6_eot_oppo_life,user_turn_7_cards_drawn,user_turn_7_cards_tutored,user_turn_7_cards_discarded,user_turn_7_lands_played,user_turn_7_creatures_cast,user_turn_7_non_creatures_cast,user_turn_7_user_instants_sorceries_cast,user_turn_7_oppo_instants_sorceries_cast,user_turn_7_user_abilities,user_turn_7_oppo_abilities,user_turn_7_creatures_attacked,user_turn_7_creatures_blocked,user_turn_7_creatures_unblocked,user_turn_7_creatures_blocking,user_turn_7_oppo_combat_damage_taken,user_turn_7_user_combat_damage_taken,user_turn_7_user_creatures_killed_combat,user_turn_7_oppo_creatures_killed_combat,user_turn_7_user_creatures_killed_non_combat,user_turn_7_oppo_creatures_killed_non_combat,user_turn_7_user_mana_spent,user_turn_7_oppo_mana_spent,user_turn_7_eot_user_cards_in_hand,user_turn_7_eot_oppo_cards_in_hand,user_turn_7_eot_user_lands_in_play,user_turn_7_eot_oppo_lands_in_play,user_turn_7_eot_user_creatures_in_play,user_turn_7_eot_oppo_creatures_in_play,user_turn_7_eot_user_non_creatures_in_play,user_turn_7_eot_oppo_non_creatures_in_play,user_turn_7_eot_user_life,user_turn_7_eot_oppo_life,oppo_turn_7_cards_discarded,oppo_turn_7_lands_played,oppo_turn_7_creatures_cast,oppo_turn_7_non_creatures_cast,oppo_turn_7_user_instants_sorceries_cast,oppo_turn_7_oppo_instants_sorceries_cast,oppo_turn_7_user_abilities,oppo_turn_7_oppo_abilities,oppo_turn_7_creatures_attacked,oppo_turn_7_creatures_blocked,oppo_turn_7_creatures_unblocked,oppo_turn_7_creatures_blocking,oppo_turn_7_oppo_combat_damage_taken,oppo_turn_7_user_combat_damage_taken,oppo_turn_7_user_creatures_killed_combat,oppo_turn_7_oppo_creatures_killed_combat,oppo_turn_7_user_creatures_killed_non_combat,oppo_turn_7_oppo_creatures_killed_non_combat,oppo_turn_7_user_mana_spent,oppo_turn_7_oppo_mana_spent,oppo_turn_7_eot_user_cards_in_hand,oppo_turn_7_eot_oppo_cards_in_hand,oppo_turn_7_eot_user_lands_in_play,oppo_turn_7_eot_oppo_lands_in_play,oppo_turn_7_eot_user_creatures_in_play,oppo_turn_7_eot_oppo_creatures_in_play,oppo_turn_7_eot_user_non_creatures_in_play,oppo_turn_7_eot_oppo_non_creatures_in_play,oppo_turn_7_eot_user_life,oppo_turn_7_eot_oppo_life,user_turn_8_cards_drawn,user_turn_8_cards_tutored,user_turn_8_cards_discarded,user_turn_8_lands_played,user_turn_8_creatures_cast,user_turn_8_non_creatures_cast,user_turn_8_user_instants_sorceries_cast,user_turn_8_oppo_instants_sorceries_cast,user_turn_8_user_abilities,user_turn_8_oppo_abilities,user_turn_8_creatures_attacked,user_turn_8_creatures_blocked,user_turn_8_creatures_unblocked,user_turn_8_creatures_blocking,user_turn_8_oppo_combat_damage_taken,user_turn_8_user_combat_damage_taken,user_turn_8_user_creatures_killed_combat,user_turn_8_oppo_creatures_killed_combat,user_turn_8_user_creatures_killed_non_combat,user_turn_8_oppo_creatures_killed_non_combat,user_turn_8_user_mana_spent,user_turn_8_oppo_mana_spent,user_turn_8_eot_user_cards_in_hand,user_turn_8_eot_oppo_cards_in_hand,user_turn_8_eot_user_lands_in_play,user_turn_8_eot_oppo_lands_in_play,user_turn_8_eot_user_creatures_in_play,user_turn_8_eot_oppo_creatures_in_play,user_turn_8_eot_user_non_creatures_in_play,user_turn_8_eot_oppo_non_creatures_in_play,user_turn_8_eot_user_life,user_turn_8_eot_oppo_life,oppo_turn_8_cards_discarded,oppo_turn_8_lands_played,oppo_turn_8_creatures_cast,oppo_turn_8_non_creatures_cast,oppo_turn_8_user_instants_sorceries_cast,oppo_turn_8_oppo_instants_sorceries_cast,oppo_turn_8_user_abilities,oppo_turn_8_oppo_abilities,oppo_turn_8_creatures_attacked,oppo_turn_8_creatures_blocked,oppo_turn_8_creatures_unblocked,oppo_turn_8_creatures_blocking,oppo_turn_8_oppo_combat_damage_taken,oppo_turn_8_user_combat_damage_taken,oppo_turn_8_user_creatures_killed_combat,oppo_turn_8_oppo_creatures_killed_combat,oppo_turn_8_user_creatures_killed_non_combat,oppo_turn_8_oppo_creatures_killed_non_combat,oppo_turn_8_user_mana_spent,oppo_turn_8_oppo_mana_spent,oppo_turn_8_eot_user_cards_in_hand,oppo_turn_8_eot_oppo_cards_in_hand,oppo_turn_8_eot_user_lands_in_play,oppo_turn_8_eot_oppo_lands_in_play,oppo_turn_8_eot_user_creatures_in_play,oppo_turn_8_eot_oppo_creatures_in_play,oppo_turn_8_eot_user_non_creatures_in_play,oppo_turn_8_eot_oppo_non_creatures_in_play,oppo_turn_8_eot_user_life,oppo_turn_8_eot_oppo_life,user_turn_9_cards_drawn,user_turn_9_cards_tutored,user_turn_9_cards_discarded,user_turn_9_lands_played,user_turn_9_creatures_cast,user_turn_9_non_creatures_cast,user_turn_9_user_instants_sorceries_cast,user_turn_9_oppo_instants_sorceries_cast,user_turn_9_user_abilities,user_turn_9_oppo_abilities,user_turn_9_creatures_attacked,user_turn_9_creatures_blocked,user_turn_9_creatures_unblocked,user_turn_9_creatures_blocking,user_turn_9_oppo_combat_damage_taken,user_turn_9_user_combat_damage_taken,user_turn_9_user_creatures_killed_combat,user_turn_9_oppo_creatures_killed_combat,user_turn_9_user_creatures_killed_non_combat,user_turn_9_oppo_creatures_killed_non_combat,user_turn_9_user_mana_spent,user_turn_9_oppo_mana_spent,user_turn_9_eot_user_cards_in_hand,user_turn_9_eot_oppo_cards_in_hand,user_turn_9_eot_user_lands_in_play,user_turn_9_eot_oppo_lands_in_play,user_turn_9_eot_user_creatures_in_play,user_turn_9_eot_oppo_creatures_in_play,user_turn_9_eot_user_non_creatures_in_play,user_turn_9_eot_oppo_non_creatures_in_play,user_turn_9_eot_user_life,user_turn_9_eot_oppo_life,oppo_turn_9_cards_discarded,oppo_turn_9_lands_played,oppo_turn_9_creatures_cast,oppo_turn_9_non_creatures_cast,oppo_turn_9_user_instants_sorceries_cast,oppo_turn_9_oppo_instants_sorceries_cast,oppo_turn_9_user_abilities,oppo_turn_9_oppo_abilities,oppo_turn_9_creatures_attacked,oppo_turn_9_creatures_blocked,oppo_turn_9_creatures_unblocked,oppo_turn_9_creatures_blocking,oppo_turn_9_oppo_combat_damage_taken,oppo_turn_9_user_combat_damage_taken,oppo_turn_9_user_creatures_killed_combat,oppo_turn_9_oppo_creatures_killed_combat,oppo_turn_9_user_creatures_killed_non_combat,oppo_turn_9_oppo_creatures_killed_non_combat,oppo_turn_9_user_mana_spent,oppo_turn_9_oppo_mana_spent,oppo_turn_9_eot_user_cards_in_hand,oppo_turn_9_eot_oppo_cards_in_hand,oppo_turn_9_eot_user_lands_in_play,oppo_turn_9_eot_oppo_lands_in_play,oppo_turn_9_eot_user_creatures_in_play,oppo_turn_9_eot_oppo_creatures_in_play,oppo_turn_9_eot_user_non_creatures_in_play,oppo_turn_9_eot_oppo_non_creatures_in_play,oppo_turn_9_eot_user_life,oppo_turn_9_eot_oppo_life,user_turn_10_cards_drawn,user_turn_10_cards_tutored,user_turn_10_cards_discarded,user_turn_10_lands_played,user_turn_10_creatures_cast,user_turn_10_non_creatures_cast,user_turn_10_user_instants_sorceries_cast,user_turn_10_oppo_instants_sorceries_cast,user_turn_10_user_abilities,user_turn_10_oppo_abilities,user_turn_10_creatures_attacked,user_turn_10_creatures_blocked,user_turn_10_creatures_unblocked,user_turn_10_creatures_blocking,user_turn_10_oppo_combat_damage_taken,user_turn_10_user_combat_damage_taken,user_turn_10_user_creatures_killed_combat,user_turn_10_oppo_creatures_killed_combat,user_turn_10_user_creatures_killed_non_combat,user_turn_10_oppo_creatures_killed_non_combat,user_turn_10_user_mana_spent,user_turn_10_oppo_mana_spent,user_turn_10_eot_user_cards_in_hand,user_turn_10_eot_oppo_cards_in_hand,user_turn_10_eot_user_lands_in_play,user_turn_10_eot_oppo_lands_in_play,user_turn_10_eot_user_creatures_in_play,user_turn_10_eot_oppo_creatures_in_play,user_turn_10_eot_user_non_creatures_in_play,user_turn_10_eot_oppo_non_creatures_in_play,user_turn_10_eot_user_life,user_turn_10_eot_oppo_life,oppo_turn_10_cards_discarded,oppo_turn_10_lands_played,oppo_turn_10_creatures_cast,oppo_turn_10_non_creatures_cast,oppo_turn_10_user_instants_sorceries_cast,oppo_turn_10_oppo_instants_sorceries_cast,oppo_turn_10_user_abilities,oppo_turn_10_oppo_abilities,oppo_turn_10_creatures_attacked,oppo_turn_10_creatures_blocked,oppo_turn_10_creatures_unblocked,oppo_turn_10_creatures_blocking,oppo_turn_10_oppo_combat_damage_taken,oppo_turn_10_user_combat_damage_taken,oppo_turn_10_user_creatures_killed_combat,oppo_turn_10_oppo_creatures_killed_combat,oppo_turn_10_user_creatures_killed_non_combat,oppo_turn_10_oppo_creatures_killed_non_combat,oppo_turn_10_user_mana_spent,oppo_turn_10_oppo_mana_spent,oppo_turn_10_eot_user_cards_in_hand,oppo_turn_10_eot_oppo_cards_in_hand,oppo_turn_10_eot_user_lands_in_play,oppo_turn_10_eot_oppo_lands_in_play,oppo_turn_10_eot_user_creatures_in_play,oppo_turn_10_eot_oppo_creatures_in_play,oppo_turn_10_eot_user_non_creatures_in_play,oppo_turn_10_eot_oppo_non_creatures_in_play,oppo_turn_10_eot_user_life,oppo_turn_10_eot_oppo_life,user_turn_11_cards_drawn,user_turn_11_cards_tutored,user_turn_11_cards_discarded,user_turn_11_lands_played,user_turn_11_creatures_cast,user_turn_11_non_creatures_cast,user_turn_11_user_instants_sorceries_cast,user_turn_11_oppo_instants_sorceries_cast,user_turn_11_user_abilities,user_turn_11_oppo_abilities,user_turn_11_creatures_attacked,user_turn_11_creatures_blocked,user_turn_11_creatures_unblocked,user_turn_11_creatures_blocking,user_turn_11_oppo_combat_damage_taken,user_turn_11_user_combat_damage_taken,user_turn_11_user_creatures_killed_combat,user_turn_11_oppo_creatures_killed_combat,user_turn_11_user_creatures_killed_non_combat,user_turn_11_oppo_creatures_killed_non_combat,user_turn_11_user_mana_spent,user_turn_11_oppo_mana_spent,user_turn_11_eot_user_cards_in_hand,user_turn_11_eot_oppo_cards_in_hand,user_turn_11_eot_user_lands_in_play,user_turn_11_eot_oppo_lands_in_play,user_turn_11_eot_user_creatures_in_play,user_turn_11_eot_oppo_creatures_in_play,user_turn_11_eot_user_non_creatures_in_play,user_turn_11_eot_oppo_non_creatures_in_play,user_turn_11_eot_user_life,user_turn_11_eot_oppo_life,oppo_turn_11_cards_discarded,oppo_turn_11_lands_played,oppo_turn_11_creatures_cast,oppo_turn_11_non_creatures_cast,oppo_turn_11_user_instants_sorceries_cast,oppo_turn_11_oppo_instants_sorceries_cast,oppo_turn_11_user_abilities,oppo_turn_11_oppo_abilities,oppo_turn_11_creatures_attacked,oppo_turn_11_creatures_blocked,oppo_turn_11_creatures_unblocked,oppo_turn_11_creatures_blocking,oppo_turn_11_oppo_combat_damage_taken,oppo_turn_11_user_combat_damage_taken,oppo_turn_11_user_creatures_killed_combat,oppo_turn_11_oppo_creatures_killed_combat,oppo_turn_11_user_creatures_killed_non_combat,oppo_turn_11_oppo_creatures_killed_non_combat,oppo_turn_11_user_mana_spent,oppo_turn_11_oppo_mana_spent,oppo_turn_11_eot_user_cards_in_hand,oppo_turn_11_eot_oppo_cards_in_hand,oppo_turn_11_eot_user_lands_in_play,oppo_turn_11_eot_oppo_lands_in_play,oppo_turn_11_eot_user_creatures_in_play,oppo_turn_11_eot_oppo_creatures_in_play,oppo_turn_11_eot_user_non_creatures_in_play,oppo_turn_11_eot_oppo_non_creatures_in_play,oppo_turn_11_eot_user_life,oppo_turn_11_eot_oppo_life,user_turn_12_cards_drawn,user_turn_12_cards_tutored,user_turn_12_cards_discarded,user_turn_12_lands_played,user_turn_12_creatures_cast,user_turn_12_non_creatures_cast,user_turn_12_user_instants_sorceries_cast,user_turn_12_oppo_instants_sorceries_cast,user_turn_12_user_abilities,user_turn_12_oppo_abilities,user_turn_12_creatures_attacked,user_turn_12_creatures_blocked,user_turn_12_creatures_unblocked,user_turn_12_creatures_blocking,user_turn_12_oppo_combat_damage_taken,user_turn_12_user_combat_damage_taken,user_turn_12_user_creatures_killed_combat,user_turn_12_oppo_creatures_killed_combat,user_turn_12_user_creatures_killed_non_combat,user_turn_12_oppo_creatures_killed_non_combat,user_turn_12_user_mana_spent,user_turn_12_oppo_mana_spent,user_turn_12_eot_user_cards_in_hand,user_turn_12_eot_oppo_cards_in_hand,user_turn_12_eot_user_lands_in_play,user_turn_12_eot_oppo_lands_in_play,user_turn_12_eot_user_creatures_in_play,user_turn_12_eot_oppo_creatures_in_play,user_turn_12_eot_user_non_creatures_in_play,user_turn_12_eot_oppo_non_creatures_in_play,user_turn_12_eot_user_life,user_turn_12_eot_oppo_life,oppo_turn_12_cards_discarded,oppo_turn_12_lands_played,oppo_turn_12_creatures_cast,oppo_turn_12_non_creatures_cast,oppo_turn_12_user_instants_sorceries_cast,oppo_turn_12_oppo_instants_sorceries_cast,oppo_turn_12_user_abilities,oppo_turn_12_oppo_abilities,oppo_turn_12_creatures_attacked,oppo_turn_12_creatures_blocked,oppo_turn_12_creatures_unblocked,oppo_turn_12_creatures_blocking,oppo_turn_12_oppo_combat_damage_taken,oppo_turn_12_user_combat_damage_taken,oppo_turn_12_user_creatures_killed_combat,oppo_turn_12_oppo_creatures_killed_combat,oppo_turn_12_user_creatures_killed_non_combat,oppo_turn_12_oppo_creatures_killed_non_combat,oppo_turn_12_user_mana_spent,oppo_turn_12_oppo_mana_spent,oppo_turn_12_eot_user_cards_in_hand,oppo_turn_12_eot_oppo_cards_in_hand,oppo_turn_12_eot_user_lands_in_play,oppo_turn_12_eot_oppo_lands_in_play,oppo_turn_12_eot_user_creatures_in_play,oppo_turn_12_eot_oppo_creatures_in_play,oppo_turn_12_eot_user_non_creatures_in_play,oppo_turn_12_eot_oppo_non_creatures_in_play,oppo_turn_12_eot_user_life,oppo_turn_12_eot_oppo_life,user_turn_13_cards_drawn,user_turn_13_cards_tutored,user_turn_13_cards_discarded,user_turn_13_lands_played,user_turn_13_creatures_cast,user_turn_13_non_creatures_cast,user_turn_13_user_instants_sorceries_cast,user_turn_13_oppo_instants_sorceries_cast,user_turn_13_user_abilities,user_turn_13_oppo_abilities,user_turn_13_creatures_attacked,user_turn_13_creatures_blocked,user_turn_13_creatures_unblocked,user_turn_13_creatures_blocking,user_turn_13_oppo_combat_damage_taken,user_turn_13_user_combat_damage_taken,user_turn_13_user_creatures_killed_combat,user_turn_13_oppo_creatures_killed_combat,user_turn_13_user_creatures_killed_non_combat,user_turn_13_oppo_creatures_killed_non_combat,user_turn_13_user_mana_spent,user_turn_13_oppo_mana_spent,user_turn_13_eot_user_cards_in_hand,user_turn_13_eot_oppo_cards_in_hand,user_turn_13_eot_user_lands_in_play,user_turn_13_eot_oppo_lands_in_play,user_turn_13_eot_user_creatures_in_play,user_turn_13_eot_oppo_creatures_in_play,user_turn_13_eot_user_non_creatures_in_play,user_turn_13_eot_oppo_non_creatures_in_play,user_turn_13_eot_user_life,user_turn_13_eot_oppo_life,oppo_turn_13_cards_discarded,oppo_turn_13_lands_played,oppo_turn_13_creatures_cast,oppo_turn_13_non_creatures_cast,oppo_turn_13_user_instants_sorceries_cast,oppo_turn_13_oppo_instants_sorceries_cast,oppo_turn_13_user_abilities,oppo_turn_13_oppo_abilities,oppo_turn_13_creatures_attacked,oppo_turn_13_creatures_blocked,oppo_turn_13_creatures_unblocked,oppo_turn_13_creatures_blocking,oppo_turn_13_oppo_combat_damage_taken,oppo_turn_13_user_combat_damage_taken,oppo_turn_13_user_creatures_killed_combat,oppo_turn_13_oppo_creatures_killed_combat,oppo_turn_13_user_creatures_killed_non_combat,oppo_turn_13_oppo_creatures_killed_non_combat,oppo_turn_13_user_mana_spent,oppo_turn_13_oppo_mana_spent,oppo_turn_13_eot_user_cards_in_hand,oppo_turn_13_eot_oppo_cards_in_hand,oppo_turn_13_eot_user_lands_in_play,oppo_turn_13_eot_oppo_lands_in_play,oppo_turn_13_eot_user_creatures_in_play,oppo_turn_13_eot_oppo_creatures_in_play,oppo_turn_13_eot_user_non_creatures_in_play,oppo_turn_13_eot_oppo_non_creatures_in_play,oppo_turn_13_eot_user_life,oppo_turn_13_eot_oppo_life,user_turn_14_cards_drawn,user_turn_14_cards_tutored,user_turn_14_cards_discarded,user_turn_14_lands_played,user_turn_14_creatures_cast,user_turn_14_non_creatures_cast,user_turn_14_user_instants_sorceries_cast,user_turn_14_oppo_instants_sorceries_cast,user_turn_14_user_abilities,user_turn_14_oppo_abilities,user_turn_14_creatures_attacked,user_turn_14_creatures_blocked,user_turn_14_creatures_unblocked,user_turn_14_creatures_blocking,user_turn_14_oppo_combat_damage_taken,user_turn_14_user_combat_damage_taken,user_turn_14_user_creatures_killed_combat,user_turn_14_oppo_creatures_killed_combat,user_turn_14_user_creatures_killed_non_combat,user_turn_14_oppo_creatures_killed_non_combat,user_turn_14_user_mana_spent,user_turn_14_oppo_mana_spent,user_turn_14_eot_user_cards_in_hand,user_turn_14_eot_oppo_cards_in_hand,user_turn_14_eot_user_lands_in_play,user_turn_14_eot_oppo_lands_in_play,user_turn_14_eot_user_creatures_in_play,user_turn_14_eot_oppo_creatures_in_play,user_turn_14_eot_user_non_creatures_in_play,user_turn_14_eot_oppo_non_creatures_in_play,user_turn_14_eot_user_life,user_turn_14_eot_oppo_life,oppo_turn_14_cards_discarded,oppo_turn_14_lands_played,oppo_turn_14_creatures_cast,oppo_turn_14_non_creatures_cast,oppo_turn_14_user_instants_sorceries_cast,oppo_turn_14_oppo_instants_sorceries_cast,oppo_turn_14_user_abilities,oppo_turn_14_oppo_abilities,oppo_turn_14_creatures_attacked,oppo_turn_14_creatures_blocked,oppo_turn_14_creatures_unblocked,oppo_turn_14_creatures_blocking,oppo_turn_14_oppo_combat_damage_taken,oppo_turn_14_user_combat_damage_taken,oppo_turn_14_user_creatures_killed_combat,oppo_turn_14_oppo_creatures_killed_combat,oppo_turn_14_user_creatures_killed_non_combat,oppo_turn_14_oppo_creatures_killed_non_combat,oppo_turn_14_user_mana_spent,oppo_turn_14_oppo_mana_spent,oppo_turn_14_eot_user_cards_in_hand,oppo_turn_14_eot_oppo_cards_in_hand,oppo_turn_14_eot_user_lands_in_play,oppo_turn_14_eot_oppo_lands_in_play,oppo_turn_14_eot_user_creatures_in_play,oppo_turn_14_eot_oppo_creatures_in_play,oppo_turn_14_eot_user_non_creatures_in_play,oppo_turn_14_eot_oppo_non_creatures_in_play,oppo_turn_14_eot_user_life,oppo_turn_14_eot_oppo_life,user_turn_15_cards_drawn,user_turn_15_cards_tutored,user_turn_15_cards_discarded,user_turn_15_lands_played,user_turn_15_creatures_cast,user_turn_15_non_creatures_cast,user_turn_15_user_instants_sorceries_cast,user_turn_15_oppo_instants_sorceries_cast,user_turn_15_user_abilities,user_turn_15_oppo_abilities,user_turn_15_creatures_attacked,user_turn_15_creatures_blocked,user_turn_15_creatures_unblocked,user_turn_15_creatures_blocking,user_turn_15_oppo_combat_damage_taken,user_turn_15_user_combat_damage_taken,user_turn_15_user_creatures_killed_combat,user_turn_15_oppo_creatures_killed_combat,user_turn_15_user_creatures_killed_non_combat,user_turn_15_oppo_creatures_killed_non_combat,user_turn_15_user_mana_spent,user_turn_15_oppo_mana_spent,user_turn_15_eot_user_cards_in_hand,user_turn_15_eot_oppo_cards_in_hand,user_turn_15_eot_user_lands_in_play,user_turn_15_eot_oppo_lands_in_play,user_turn_15_eot_user_creatures_in_play,user_turn_15_eot_oppo_creatures_in_play,user_turn_15_eot_user_non_creatures_in_play,user_turn_15_eot_oppo_non_creatures_in_play,user_turn_15_eot_user_life,user_turn_15_eot_oppo_life,oppo_turn_15_cards_discarded,oppo_turn_15_lands_played,oppo_turn_15_creatures_cast,oppo_turn_15_non_creatures_cast,oppo_turn_15_user_instants_sorceries_cast,oppo_turn_15_oppo_instants_sorceries_cast,oppo_turn_15_user_abilities,oppo_turn_15_oppo_abilities,oppo_turn_15_creatures_attacked,oppo_turn_15_creatures_blocked,oppo_turn_15_creatures_unblocked,oppo_turn_15_creatures_blocking,oppo_turn_15_oppo_combat_damage_taken,oppo_turn_15_user_combat_damage_taken,oppo_turn_15_user_creatures_killed_combat,oppo_turn_15_oppo_creatures_killed_combat,oppo_turn_15_user_creatures_killed_non_combat,oppo_turn_15_oppo_creatures_killed_non_combat,oppo_turn_15_user_mana_spent,oppo_turn_15_oppo_mana_spent,oppo_turn_15_eot_user_cards_in_hand,oppo_turn_15_eot_oppo_cards_in_hand,oppo_turn_15_eot_user_lands_in_play,oppo_turn_15_eot_oppo_lands_in_play,oppo_turn_15_eot_user_creatures_in_play,oppo_turn_15_eot_oppo_creatures_in_play,oppo_turn_15_eot_user_non_creatures_in_play,oppo_turn_15_eot_oppo_non_creatures_in_play,oppo_turn_15_eot_user_life,oppo_turn_15_eot_oppo_life,user_turn_16_cards_drawn,user_turn_16_cards_tutored,user_turn_16_cards_discarded,user_turn_16_lands_played,user_turn_16_creatures_cast,user_turn_16_non_creatures_cast,user_turn_16_user_instants_sorceries_cast,user_turn_16_oppo_instants_sorceries_cast,user_turn_16_user_abilities,user_turn_16_oppo_abilities,user_turn_16_creatures_attacked,user_turn_16_creatures_blocked,user_turn_16_creatures_unblocked,user_turn_16_creatures_blocking,user_turn_16_oppo_combat_damage_taken,user_turn_16_user_combat_damage_taken,user_turn_16_user_creatures_killed_combat,user_turn_16_oppo_creatures_killed_combat,user_turn_16_user_creatures_killed_non_combat,user_turn_16_oppo_creatures_killed_non_combat,user_turn_16_user_mana_spent,user_turn_16_oppo_mana_spent,user_turn_16_eot_user_cards_in_hand,user_turn_16_eot_oppo_cards_in_hand,user_turn_16_eot_user_lands_in_play,user_turn_16_eot_oppo_lands_in_play,user_turn_16_eot_user_creatures_in_play,user_turn_16_eot_oppo_creatures_in_play,user_turn_16_eot_user_non_creatures_in_play,user_turn_16_eot_oppo_non_creatures_in_play,user_turn_16_eot_user_life,user_turn_16_eot_oppo_life,oppo_turn_16_cards_discarded,oppo_turn_16_lands_played,oppo_turn_16_creatures_cast,oppo_turn_16_non_creatures_cast,oppo_turn_16_user_instants_sorceries_cast,oppo_turn_16_oppo_instants_sorceries_cast,oppo_turn_16_user_abilities,oppo_turn_16_oppo_abilities,oppo_turn_16_creatures_attacked,oppo_turn_16_creatures_blocked,oppo_turn_16_creatures_unblocked,oppo_turn_16_creatures_blocking,oppo_turn_16_oppo_combat_damage_taken,oppo_turn_16_user_combat_damage_taken,oppo_turn_16_user_creatures_killed_combat,oppo_turn_16_oppo_creatures_killed_combat,oppo_turn_16_user_creatures_killed_non_combat,oppo_turn_16_oppo_creatures_killed_non_combat,oppo_turn_16_user_mana_spent,oppo_turn_16_oppo_mana_spent,oppo_turn_16_eot_user_cards_in_hand,oppo_turn_16_eot_oppo_cards_in_hand,oppo_turn_16_eot_user_lands_in_play,oppo_turn_16_eot_oppo_lands_in_play,oppo_turn_16_eot_user_creatures_in_play,oppo_turn_16_eot_oppo_creatures_in_play,oppo_turn_16_eot_user_non_creatures_in_play,oppo_turn_16_eot_oppo_non_creatures_in_play,oppo_turn_16_eot_user_life,oppo_turn_16_eot_oppo_life,user_turn_17_cards_drawn,user_turn_17_cards_tutored,user_turn_17_cards_discarded,user_turn_17_lands_played,user_turn_17_creatures_cast,user_turn_17_non_creatures_cast,user_turn_17_user_instants_sorceries_cast,user_turn_17_oppo_instants_sorceries_cast,user_turn_17_user_abilities,user_turn_17_oppo_abilities,user_turn_17_creatures_attacked,user_turn_17_creatures_blocked,user_turn_17_creatures_unblocked,user_turn_17_creatures_blocking,user_turn_17_oppo_combat_damage_taken,user_turn_17_user_combat_damage_taken,user_turn_17_user_creatures_killed_combat,user_turn_17_oppo_creatures_killed_combat,user_turn_17_user_creatures_killed_non_combat,user_turn_17_oppo_creatures_killed_non_combat,user_turn_17_user_mana_spent,user_turn_17_oppo_mana_spent,user_turn_17_eot_user_cards_in_hand,user_turn_17_eot_oppo_cards_in_hand,user_turn_17_eot_user_lands_in_play,user_turn_17_eot_oppo_lands_in_play,user_turn_17_eot_user_creatures_in_play,user_turn_17_eot_oppo_creatures_in_play,user_turn_17_eot_user_non_creatures_in_play,user_turn_17_eot_oppo_non_creatures_in_play,user_turn_17_eot_user_life,user_turn_17_eot_oppo_life,oppo_turn_17_cards_discarded,oppo_turn_17_lands_played,oppo_turn_17_creatures_cast,oppo_turn_17_non_creatures_cast,oppo_turn_17_user_instants_sorceries_cast,oppo_turn_17_oppo_instants_sorceries_cast,oppo_turn_17_user_abilities,oppo_turn_17_oppo_abilities,oppo_turn_17_creatures_attacked,oppo_turn_17_creatures_blocked,oppo_turn_17_creatures_unblocked,oppo_turn_17_creatures_blocking,oppo_turn_17_oppo_combat_damage_taken,oppo_turn_17_user_combat_damage_taken,oppo_turn_17_user_creatures_killed_combat,oppo_turn_17_oppo_creatures_killed_combat,oppo_turn_17_user_creatures_killed_non_combat,oppo_turn_17_oppo_creatures_killed_non_combat,oppo_turn_17_user_mana_spent,oppo_turn_17_oppo_mana_spent,oppo_turn_17_eot_user_cards_in_hand,oppo_turn_17_eot_oppo_cards_in_hand,oppo_turn_17_eot_user_lands_in_play,oppo_turn_17_eot_oppo_lands_in_play,oppo_turn_17_eot_user_creatures_in_play,oppo_turn_17_eot_oppo_creatures_in_play,oppo_turn_17_eot_user_non_creatures_in_play,oppo_turn_17_eot_oppo_non_creatures_in_play,oppo_turn_17_eot_user_life,oppo_turn_17_eot_oppo_life,user_turn_18_cards_drawn,user_turn_18_cards_tutored,user_turn_18_cards_discarded,user_turn_18_lands_played,user_turn_18_creatures_cast,user_turn_18_non_creatures_cast,user_turn_18_user_instants_sorceries_cast,user_turn_18_oppo_instants_sorceries_cast,user_turn_18_user_abilities,user_turn_18_oppo_abilities,user_turn_18_creatures_attacked,user_turn_18_creatures_blocked,user_turn_18_creatures_unblocked,user_turn_18_creatures_blocking,user_turn_18_oppo_combat_damage_taken,user_turn_18_user_combat_damage_taken,user_turn_18_user_creatures_killed_combat,user_turn_18_oppo_creatures_killed_combat,user_turn_18_user_creatures_killed_non_combat,user_turn_18_oppo_creatures_killed_non_combat,user_turn_18_user_mana_spent,user_turn_18_oppo_mana_spent,user_turn_18_eot_user_cards_in_hand,user_turn_18_eot_oppo_cards_in_hand,user_turn_18_eot_user_lands_in_play,user_turn_18_eot_oppo_lands_in_play,user_turn_18_eot_user_creatures_in_play,user_turn_18_eot_oppo_creatures_in_play,user_turn_18_eot_user_non_creatures_in_play,user_turn_18_eot_oppo_non_creatures_in_play,user_turn_18_eot_user_life,user_turn_18_eot_oppo_life,oppo_turn_18_cards_discarded,oppo_turn_18_lands_played,oppo_turn_18_creatures_cast,oppo_turn_18_non_creatures_cast,oppo_turn_18_user_instants_sorceries_cast,oppo_turn_18_oppo_instants_sorceries_cast,oppo_turn_18_user_abilities,oppo_turn_18_oppo_abilities,oppo_turn_18_creatures_attacked,oppo_turn_18_creatures_blocked,oppo_turn_18_creatures_unblocked,oppo_turn_18_creatures_blocking,oppo_turn_18_oppo_combat_damage_taken,oppo_turn_18_user_combat_damage_taken,oppo_turn_18_user_creatures_killed_combat,oppo_turn_18_oppo_creatures_killed_combat,oppo_turn_18_user_creatures_killed_non_combat,oppo_turn_18_oppo_creatures_killed_non_combat,oppo_turn_18_user_mana_spent,oppo_turn_18_oppo_mana_spent,oppo_turn_18_eot_user_cards_in_hand,oppo_turn_18_eot_oppo_cards_in_hand,oppo_turn_18_eot_user_lands_in_play,oppo_turn_18_eot_oppo_lands_in_play,oppo_turn_18_eot_user_creatures_in_play,oppo_turn_18_eot_oppo_creatures_in_play,oppo_turn_18_eot_user_non_creatures_in_play,oppo_turn_18_eot_oppo_non_creatures_in_play,oppo_turn_18_eot_user_life,oppo_turn_18_eot_oppo_life,user_turn_19_cards_drawn,user_turn_19_cards_tutored,user_turn_19_cards_discarded,user_turn_19_lands_played,user_turn_19_creatures_cast,user_turn_19_non_creatures_cast,user_turn_19_user_instants_sorceries_cast,user_turn_19_oppo_instants_sorceries_cast,user_turn_19_user_abilities,user_turn_19_oppo_abilities,user_turn_19_creatures_attacked,user_turn_19_creatures_blocked,user_turn_19_creatures_unblocked,user_turn_19_creatures_blocking,user_turn_19_oppo_combat_damage_taken,user_turn_19_user_combat_damage_taken,user_turn_19_user_creatures_killed_combat,user_turn_19_oppo_creatures_killed_combat,user_turn_19_user_creatures_killed_non_combat,user_turn_19_oppo_creatures_killed_non_combat,user_turn_19_user_mana_spent,user_turn_19_oppo_mana_spent,user_turn_19_eot_user_cards_in_hand,user_turn_19_eot_oppo_cards_in_hand,user_turn_19_eot_user_lands_in_play,user_turn_19_eot_oppo_lands_in_play,user_turn_19_eot_user_creatures_in_play,user_turn_19_eot_oppo_creatures_in_play,user_turn_19_eot_user_non_creatures_in_play,user_turn_19_eot_oppo_non_creatures_in_play,user_turn_19_eot_user_life,user_turn_19_eot_oppo_life,oppo_turn_19_cards_discarded,oppo_turn_19_lands_played,oppo_turn_19_creatures_cast,oppo_turn_19_non_creatures_cast,oppo_turn_19_user_instants_sorceries_cast,oppo_turn_19_oppo_instants_sorceries_cast,oppo_turn_19_user_abilities,oppo_turn_19_oppo_abilities,oppo_turn_19_creatures_attacked,oppo_turn_19_creatures_blocked,oppo_turn_19_creatures_unblocked,oppo_turn_19_creatures_blocking,oppo_turn_19_oppo_combat_damage_taken,oppo_turn_19_user_combat_damage_taken,oppo_turn_19_user_creatures_killed_combat,oppo_turn_19_oppo_creatures_killed_combat,oppo_turn_19_user_creatures_killed_non_combat,oppo_turn_19_oppo_creatures_killed_non_combat,oppo_turn_19_user_mana_spent,oppo_turn_19_oppo_mana_spent,oppo_turn_19_eot_user_cards_in_hand,oppo_turn_19_eot_oppo_cards_in_hand,oppo_turn_19_eot_user_lands_in_play,oppo_turn_19_eot_oppo_lands_in_play,oppo_turn_19_eot_user_creatures_in_play,oppo_turn_19_eot_oppo_creatures_in_play,oppo_turn_19_eot_user_non_creatures_in_play,oppo_turn_19_eot_oppo_non_creatures_in_play,oppo_turn_19_eot_user_life,oppo_turn_19_eot_oppo_life,user_turn_20_cards_drawn,user_turn_20_cards_tutored,user_turn_20_cards_discarded,user_turn_20_lands_played,user_turn_20_creatures_cast,user_turn_20_non_creatures_cast,user_turn_20_user_instants_sorceries_cast,user_turn_20_oppo_instants_sorceries_cast,user_turn_20_user_abilities,user_turn_20_oppo_abilities,user_turn_20_creatures_attacked,user_turn_20_creatures_blocked,user_turn_20_creatures_unblocked,user_turn_20_creatures_blocking,user_turn_20_oppo_combat_damage_taken,user_turn_20_user_combat_damage_taken,user_turn_20_user_creatures_killed_combat,user_turn_20_oppo_creatures_killed_combat,user_turn_20_user_creatures_killed_non_combat,user_turn_20_oppo_creatures_killed_non_combat,user_turn_20_user_mana_spent,user_turn_20_oppo_mana_spent,user_turn_20_eot_user_cards_in_hand,user_turn_20_eot_oppo_cards_in_hand,user_turn_20_eot_user_lands_in_play,user_turn_20_eot_oppo_lands_in_play,user_turn_20_eot_user_creatures_in_play,user_turn_20_eot_oppo_creatures_in_play,user_turn_20_eot_user_non_creatures_in_play,user_turn_20_eot_oppo_non_creatures_in_play,user_turn_20_eot_user_life,user_turn_20_eot_oppo_life,oppo_turn_20_cards_discarded,oppo_turn_20_lands_played,oppo_turn_20_creatures_cast,oppo_turn_20_non_creatures_cast,oppo_turn_20_user_instants_sorceries_cast,oppo_turn_20_oppo_instants_sorceries_cast,oppo_turn_20_user_abilities,oppo_turn_20_oppo_abilities,oppo_turn_20_creatures_attacked,oppo_turn_20_creatures_blocked,oppo_turn_20_creatures_unblocked,oppo_turn_20_creatures_blocking,oppo_turn_20_oppo_combat_damage_taken,oppo_turn_20_user_combat_damage_taken,oppo_turn_20_user_creatures_killed_combat,oppo_turn_20_oppo_creatures_killed_combat,oppo_turn_20_user_creatures_killed_non_combat,oppo_turn_20_oppo_creatures_killed_non_combat,oppo_turn_20_user_mana_spent,oppo_turn_20_oppo_mana_spent,oppo_turn_20_eot_user_cards_in_hand,oppo_turn_20_eot_oppo_cards_in_hand,oppo_turn_20_eot_user_lands_in_play,oppo_turn_20_eot_oppo_lands_in_play,oppo_turn_20_eot_user_creatures_in_play,oppo_turn_20_eot_oppo_creatures_in_play,oppo_turn_20_eot_user_non_creatures_in_play,oppo_turn_20_eot_oppo_non_creatures_in_play,oppo_turn_20_eot_user_life,oppo_turn_20_eot_oppo_life,user_turn_21_cards_drawn,user_turn_21_cards_tutored,user_turn_21_cards_discarded,user_turn_21_lands_played,user_turn_21_creatures_cast,user_turn_21_non_creatures_cast,user_turn_21_user_instants_sorceries_cast,user_turn_21_oppo_instants_sorceries_cast,user_turn_21_user_abilities,user_turn_21_oppo_abilities,user_turn_21_creatures_attacked,user_turn_21_creatures_blocked,user_turn_21_creatures_unblocked,user_turn_21_creatures_blocking,user_turn_21_oppo_combat_damage_taken,user_turn_21_user_combat_damage_taken,user_turn_21_user_creatures_killed_combat,user_turn_21_oppo_creatures_killed_combat,user_turn_21_user_creatures_killed_non_combat,user_turn_21_oppo_creatures_killed_non_combat,user_turn_21_user_mana_spent,user_turn_21_oppo_mana_spent,user_turn_21_eot_user_cards_in_hand,user_turn_21_eot_oppo_cards_in_hand,user_turn_21_eot_user_lands_in_play,user_turn_21_eot_oppo_lands_in_play,user_turn_21_eot_user_creatures_in_play,user_turn_21_eot_oppo_creatures_in_play,user_turn_21_eot_user_non_creatures_in_play,user_turn_21_eot_oppo_non_creatures_in_play,user_turn_21_eot_user_life,user_turn_21_eot_oppo_life,oppo_turn_21_cards_discarded,oppo_turn_21_lands_played,oppo_turn_21_creatures_cast,oppo_turn_21_non_creatures_cast,oppo_turn_21_user_instants_sorceries_cast,oppo_turn_21_oppo_instants_sorceries_cast,oppo_turn_21_user_abilities,oppo_turn_21_oppo_abilities,oppo_turn_21_creatures_attacked,oppo_turn_21_creatures_blocked,oppo_turn_21_creatures_unblocked,oppo_turn_21_creatures_blocking,oppo_turn_21_oppo_combat_damage_taken,oppo_turn_21_user_combat_damage_taken,oppo_turn_21_user_creatures_killed_combat,oppo_turn_21_oppo_creatures_killed_combat,oppo_turn_21_user_creatures_killed_non_combat,oppo_turn_21_oppo_creatures_killed_non_combat,oppo_turn_21_user_mana_spent,oppo_turn_21_oppo_mana_spent,oppo_turn_21_eot_user_cards_in_hand,oppo_turn_21_eot_oppo_cards_in_hand,oppo_turn_21_eot_user_lands_in_play,oppo_turn_21_eot_oppo_lands_in_play,oppo_turn_21_eot_user_creatures_in_play,oppo_turn_21_eot_oppo_creatures_in_play,oppo_turn_21_eot_user_non_creatures_in_play,oppo_turn_21_eot_oppo_non_creatures_in_play,oppo_turn_21_eot_user_life,oppo_turn_21_eot_oppo_life,user_turn_22_cards_drawn,user_turn_22_cards_tutored,user_turn_22_cards_discarded,user_turn_22_lands_played,user_turn_22_creatures_cast,user_turn_22_non_creatures_cast,user_turn_22_user_instants_sorceries_cast,user_turn_22_oppo_instants_sorceries_cast,user_turn_22_user_abilities,user_turn_22_oppo_abilities,user_turn_22_creatures_attacked,user_turn_22_creatures_blocked,user_turn_22_creatures_unblocked,user_turn_22_creatures_blocking,user_turn_22_oppo_combat_damage_taken,user_turn_22_user_combat_damage_taken,user_turn_22_user_creatures_killed_combat,user_turn_22_oppo_creatures_killed_combat,user_turn_22_user_creatures_killed_non_combat,user_turn_22_oppo_creatures_killed_non_combat,user_turn_22_user_mana_spent,user_turn_22_oppo_mana_spent,user_turn_22_eot_user_cards_in_hand,user_turn_22_eot_oppo_cards_in_hand,user_turn_22_eot_user_lands_in_play,user_turn_22_eot_oppo_lands_in_play,user_turn_22_eot_user_creatures_in_play,user_turn_22_eot_oppo_creatures_in_play,user_turn_22_eot_user_non_creatures_in_play,user_turn_22_eot_oppo_non_creatures_in_play,user_turn_22_eot_user_life,user_turn_22_eot_oppo_life,oppo_turn_22_cards_discarded,oppo_turn_22_lands_played,oppo_turn_22_creatures_cast,oppo_turn_22_non_creatures_cast,oppo_turn_22_user_instants_sorceries_cast,oppo_turn_22_oppo_instants_sorceries_cast,oppo_turn_22_user_abilities,oppo_turn_22_oppo_abilities,oppo_turn_22_creatures_attacked,oppo_turn_22_creatures_blocked,oppo_turn_22_creatures_unblocked,oppo_turn_22_creatures_blocking,oppo_turn_22_oppo_combat_damage_taken,oppo_turn_22_user_combat_damage_taken,oppo_turn_22_user_creatures_killed_combat,oppo_turn_22_oppo_creatures_killed_combat,oppo_turn_22_user_creatures_killed_non_combat,oppo_turn_22_oppo_creatures_killed_non_combat,oppo_turn_22_user_mana_spent,oppo_turn_22_oppo_mana_spent,oppo_turn_22_eot_user_cards_in_hand,oppo_turn_22_eot_oppo_cards_in_hand,oppo_turn_22_eot_user_lands_in_play,oppo_turn_22_eot_oppo_lands_in_play,oppo_turn_22_eot_user_creatures_in_play,oppo_turn_22_eot_oppo_creatures_in_play,oppo_turn_22_eot_user_non_creatures_in_play,oppo_turn_22_eot_oppo_non_creatures_in_play,oppo_turn_22_eot_user_life,oppo_turn_22_eot_oppo_life,user_turn_23_cards_drawn,user_turn_23_cards_tutored,user_turn_23_cards_discarded,user_turn_23_lands_played,user_turn_23_creatures_cast,user_turn_23_non_creatures_cast,user_turn_23_user_instants_sorceries_cast,user_turn_23_oppo_instants_sorceries_cast,user_turn_23_user_abilities,user_turn_23_oppo_abilities,user_turn_23_creatures_attacked,user_turn_23_creatures_blocked,user_turn_23_creatures_unblocked,user_turn_23_creatures_blocking,user_turn_23_oppo_combat_damage_taken,user_turn_23_user_combat_damage_taken,user_turn_23_user_creatures_killed_combat,user_turn_23_oppo_creatures_killed_combat,user_turn_23_user_creatures_killed_non_combat,user_turn_23_oppo_creatures_killed_non_combat,user_turn_23_user_mana_spent,user_turn_23_oppo_mana_spent,user_turn_23_eot_user_cards_in_hand,user_turn_23_eot_oppo_cards_in_hand,user_turn_23_eot_user_lands_in_play,user_turn_23_eot_oppo_lands_in_play,user_turn_23_eot_user_creatures_in_play,user_turn_23_eot_oppo_creatures_in_play,user_turn_23_eot_user_non_creatures_in_play,user_turn_23_eot_oppo_non_creatures_in_play,user_turn_23_eot_user_life,user_turn_23_eot_oppo_life,oppo_turn_23_cards_discarded,oppo_turn_23_lands_played,oppo_turn_23_creatures_cast,oppo_turn_23_non_creatures_cast,oppo_turn_23_user_instants_sorceries_cast,oppo_turn_23_oppo_instants_sorceries_cast,oppo_turn_23_user_abilities,oppo_turn_23_oppo_abilities,oppo_turn_23_creatures_attacked,oppo_turn_23_creatures_blocked,oppo_turn_23_creatures_unblocked,oppo_turn_23_creatures_blocking,oppo_turn_23_oppo_combat_damage_taken,oppo_turn_23_user_combat_damage_taken,oppo_turn_23_user_creatures_killed_combat,oppo_turn_23_oppo_creatures_killed_combat,oppo_turn_23_user_creatures_killed_non_combat,oppo_turn_23_oppo_creatures_killed_non_combat,oppo_turn_23_user_mana_spent,oppo_turn_23_oppo_mana_spent,oppo_turn_23_eot_user_cards_in_hand,oppo_turn_23_eot_oppo_cards_in_hand,oppo_turn_23_eot_user_lands_in_play,oppo_turn_23_eot_oppo_lands_in_play,oppo_turn_23_eot_user_creatures_in_play,oppo_turn_23_eot_oppo_creatures_in_play,oppo_turn_23_eot_user_non_creatures_in_play,oppo_turn_23_eot_oppo_non_creatures_in_play,oppo_turn_23_eot_user_life,oppo_turn_23_eot_oppo_life,user_turn_24_cards_drawn,user_turn_24_cards_tutored,user_turn_24_cards_discarded,user_turn_24_lands_played,user_turn_24_creatures_cast,user_turn_24_non_creatures_cast,user_turn_24_user_instants_sorceries_cast,user_turn_24_oppo_instants_sorceries_cast,user_turn_24_user_abilities,user_turn_24_oppo_abilities,user_turn_24_creatures_attacked,user_turn_24_creatures_blocked,user_turn_24_creatures_unblocked,user_turn_24_creatures_blocking,user_turn_24_oppo_combat_damage_taken,user_turn_24_user_combat_damage_taken,user_turn_24_user_creatures_killed_combat,user_turn_24_oppo_creatures_killed_combat,user_turn_24_user_creatures_killed_non_combat,user_turn_24_oppo_creatures_killed_non_combat,user_turn_24_user_mana_spent,user_turn_24_oppo_mana_spent,user_turn_24_eot_user_cards_in_hand,user_turn_24_eot_oppo_cards_in_hand,user_turn_24_eot_user_lands_in_play,user_turn_24_eot_oppo_lands_in_play,user_turn_24_eot_user_creatures_in_play,user_turn_24_eot_oppo_creatures_in_play,user_turn_24_eot_user_non_creatures_in_play,user_turn_24_eot_oppo_non_creatures_in_play,user_turn_24_eot_user_life,user_turn_24_eot_oppo_life,oppo_turn_24_cards_discarded,oppo_turn_24_lands_played,oppo_turn_24_creatures_cast,oppo_turn_24_non_creatures_cast,oppo_turn_24_user_instants_sorceries_cast,oppo_turn_24_oppo_instants_sorceries_cast,oppo_turn_24_user_abilities,oppo_turn_24_oppo_abilities,oppo_turn_24_creatures_attacked,oppo_turn_24_creatures_blocked,oppo_turn_24_creatures_unblocked,oppo_turn_24_creatures_blocking,oppo_turn_24_oppo_combat_damage_taken,oppo_turn_24_user_combat_damage_taken,oppo_turn_24_user_creatures_killed_combat,oppo_turn_24_oppo_creatures_killed_combat,oppo_turn_24_user_creatures_killed_non_combat,oppo_turn_24_oppo_creatures_killed_non_combat,oppo_turn_24_user_mana_spent,oppo_turn_24_oppo_mana_spent,oppo_turn_24_eot_user_cards_in_hand,oppo_turn_24_eot_oppo_cards_in_hand,oppo_turn_24_eot_user_lands_in_play,oppo_turn_24_eot_oppo_lands_in_play,oppo_turn_24_eot_user_creatures_in_play,oppo_turn_24_eot_oppo_creatures_in_play,oppo_turn_24_eot_user_non_creatures_in_play,oppo_turn_24_eot_oppo_non_creatures_in_play,oppo_turn_24_eot_user_life,oppo_turn_24_eot_oppo_life,user_turn_25_cards_drawn,user_turn_25_cards_tutored,user_turn_25_cards_discarded,user_turn_25_lands_played,user_turn_25_creatures_cast,user_turn_25_non_creatures_cast,user_turn_25_user_instants_sorceries_cast,user_turn_25_oppo_instants_sorceries_cast,user_turn_25_user_abilities,user_turn_25_oppo_abilities,user_turn_25_creatures_attacked,user_turn_25_creatures_blocked,user_turn_25_creatures_unblocked,user_turn_25_creatures_blocking,user_turn_25_oppo_combat_damage_taken,user_turn_25_user_combat_damage_taken,user_turn_25_user_creatures_killed_combat,user_turn_25_oppo_creatures_killed_combat,user_turn_25_user_creatures_killed_non_combat,user_turn_25_oppo_creatures_killed_non_combat,user_turn_25_user_mana_spent,user_turn_25_oppo_mana_spent,user_turn_25_eot_user_cards_in_hand,user_turn_25_eot_oppo_cards_in_hand,user_turn_25_eot_user_lands_in_play,user_turn_25_eot_oppo_lands_in_play,user_turn_25_eot_user_creatures_in_play,user_turn_25_eot_oppo_creatures_in_play,user_turn_25_eot_user_non_creatures_in_play,user_turn_25_eot_oppo_non_creatures_in_play,user_turn_25_eot_user_life,user_turn_25_eot_oppo_life,oppo_turn_25_cards_discarded,oppo_turn_25_lands_played,oppo_turn_25_creatures_cast,oppo_turn_25_non_creatures_cast,oppo_turn_25_user_instants_sorceries_cast,oppo_turn_25_oppo_instants_sorceries_cast,oppo_turn_25_user_abilities,oppo_turn_25_oppo_abilities,oppo_turn_25_creatures_attacked,oppo_turn_25_creatures_blocked,oppo_turn_25_creatures_unblocked,oppo_turn_25_creatures_blocking,oppo_turn_25_oppo_combat_damage_taken,oppo_turn_25_user_combat_damage_taken,oppo_turn_25_user_creatures_killed_combat,oppo_turn_25_oppo_creatures_killed_combat,oppo_turn_25_user_creatures_killed_non_combat,oppo_turn_25_oppo_creatures_killed_non_combat,oppo_turn_25_user_mana_spent,oppo_turn_25_oppo_mana_spent,oppo_turn_25_eot_user_cards_in_hand,oppo_turn_25_eot_oppo_cards_in_hand,oppo_turn_25_eot_user_lands_in_play,oppo_turn_25_eot_oppo_lands_in_play,oppo_turn_25_eot_user_creatures_in_play,oppo_turn_25_eot_oppo_creatures_in_play,oppo_turn_25_eot_user_non_creatures_in_play,oppo_turn_25_eot_oppo_non_creatures_in_play,oppo_turn_25_eot_user_life,oppo_turn_25_eot_oppo_life,user_turn_26_cards_drawn,user_turn_26_cards_tutored,user_turn_26_cards_discarded,user_turn_26_lands_played,user_turn_26_creatures_cast,user_turn_26_non_creatures_cast,user_turn_26_user_instants_sorceries_cast,user_turn_26_oppo_instants_sorceries_cast,user_turn_26_user_abilities,user_turn_26_oppo_abilities,user_turn_26_creatures_attacked,user_turn_26_creatures_blocked,user_turn_26_creatures_unblocked,user_turn_26_creatures_blocking,user_turn_26_oppo_combat_damage_taken,user_turn_26_user_combat_damage_taken,user_turn_26_user_creatures_killed_combat,user_turn_26_oppo_creatures_killed_combat,user_turn_26_user_creatures_killed_non_combat,user_turn_26_oppo_creatures_killed_non_combat,user_turn_26_user_mana_spent,user_turn_26_oppo_mana_spent,user_turn_26_eot_user_cards_in_hand,user_turn_26_eot_oppo_cards_in_hand,user_turn_26_eot_user_lands_in_play,user_turn_26_eot_oppo_lands_in_play,user_turn_26_eot_user_creatures_in_play,user_turn_26_eot_oppo_creatures_in_play,user_turn_26_eot_user_non_creatures_in_play,user_turn_26_eot_oppo_non_creatures_in_play,user_turn_26_eot_user_life,user_turn_26_eot_oppo_life,oppo_turn_26_cards_discarded,oppo_turn_26_lands_played,oppo_turn_26_creatures_cast,oppo_turn_26_non_creatures_cast,oppo_turn_26_user_instants_sorceries_cast,oppo_turn_26_oppo_instants_sorceries_cast,oppo_turn_26_user_abilities,oppo_turn_26_oppo_abilities,oppo_turn_26_creatures_attacked,oppo_turn_26_creatures_blocked,oppo_turn_26_creatures_unblocked,oppo_turn_26_creatures_blocking,oppo_turn_26_oppo_combat_damage_taken,oppo_turn_26_user_combat_damage_taken,oppo_turn_26_user_creatures_killed_combat,oppo_turn_26_oppo_creatures_killed_combat,oppo_turn_26_user_creatures_killed_non_combat,oppo_turn_26_oppo_creatures_killed_non_combat,oppo_turn_26_user_mana_spent,oppo_turn_26_oppo_mana_spent,oppo_turn_26_eot_user_cards_in_hand,oppo_turn_26_eot_oppo_cards_in_hand,oppo_turn_26_eot_user_lands_in_play,oppo_turn_26_eot_oppo_lands_in_play,oppo_turn_26_eot_user_creatures_in_play,oppo_turn_26_eot_oppo_creatures_in_play,oppo_turn_26_eot_user_non_creatures_in_play,oppo_turn_26_eot_oppo_non_creatures_in_play,oppo_turn_26_eot_user_life,oppo_turn_26_eot_oppo_life,user_turn_27_cards_drawn,user_turn_27_cards_tutored,user_turn_27_cards_discarded,user_turn_27_lands_played,user_turn_27_creatures_cast,user_turn_27_non_creatures_cast,user_turn_27_user_instants_sorceries_cast,user_turn_27_oppo_instants_sorceries_cast,user_turn_27_user_abilities,user_turn_27_oppo_abilities,user_turn_27_creatures_attacked,user_turn_27_creatures_blocked,user_turn_27_creatures_unblocked,user_turn_27_creatures_blocking,user_turn_27_oppo_combat_damage_taken,user_turn_27_user_combat_damage_taken,user_turn_27_user_creatures_killed_combat,user_turn_27_oppo_creatures_killed_combat,user_turn_27_user_creatures_killed_non_combat,user_turn_27_oppo_creatures_killed_non_combat,user_turn_27_user_mana_spent,user_turn_27_oppo_mana_spent,user_turn_27_eot_user_cards_in_hand,user_turn_27_eot_oppo_cards_in_hand,user_turn_27_eot_user_lands_in_play,user_turn_27_eot_oppo_lands_in_play,user_turn_27_eot_user_creatures_in_play,user_turn_27_eot_oppo_creatures_in_play,user_turn_27_eot_user_non_creatures_in_play,user_turn_27_eot_oppo_non_creatures_in_play,user_turn_27_eot_user_life,user_turn_27_eot_oppo_life,oppo_turn_27_cards_discarded,oppo_turn_27_lands_played,oppo_turn_27_creatures_cast,oppo_turn_27_non_creatures_cast,oppo_turn_27_user_instants_sorceries_cast,oppo_turn_27_oppo_instants_sorceries_cast,oppo_turn_27_user_abilities,oppo_turn_27_oppo_abilities,oppo_turn_27_creatures_attacked,oppo_turn_27_creatures_blocked,oppo_turn_27_creatures_unblocked,oppo_turn_27_creatures_blocking,oppo_turn_27_oppo_combat_damage_taken,oppo_turn_27_user_combat_damage_taken,oppo_turn_27_user_creatures_killed_combat,oppo_turn_27_oppo_creatures_killed_combat,oppo_turn_27_user_creatures_killed_non_combat,oppo_turn_27_oppo_creatures_killed_non_combat,oppo_turn_27_user_mana_spent,oppo_turn_27_oppo_mana_spent,oppo_turn_27_eot_user_cards_in_hand,oppo_turn_27_eot_oppo_cards_in_hand,oppo_turn_27_eot_user_lands_in_play,oppo_turn_27_eot_oppo_lands_in_play,oppo_turn_27_eot_user_creatures_in_play,oppo_turn_27_eot_oppo_creatures_in_play,oppo_turn_27_eot_user_non_creatures_in_play,oppo_turn_27_eot_oppo_non_creatures_in_play,oppo_turn_27_eot_user_life,oppo_turn_27_eot_oppo_life,user_turn_28_cards_drawn,user_turn_28_cards_tutored,user_turn_28_cards_discarded,user_turn_28_lands_played,user_turn_28_creatures_cast,user_turn_28_non_creatures_cast,user_turn_28_user_instants_sorceries_cast,user_turn_28_oppo_instants_sorceries_cast,user_turn_28_user_abilities,user_turn_28_oppo_abilities,user_turn_28_creatures_attacked,user_turn_28_creatures_blocked,user_turn_28_creatures_unblocked,user_turn_28_creatures_blocking,user_turn_28_oppo_combat_damage_taken,user_turn_28_user_combat_damage_taken,user_turn_28_user_creatures_killed_combat,user_turn_28_oppo_creatures_killed_combat,user_turn_28_user_creatures_killed_non_combat,user_turn_28_oppo_creatures_killed_non_combat,user_turn_28_user_mana_spent,user_turn_28_oppo_mana_spent,user_turn_28_eot_user_cards_in_hand,user_turn_28_eot_oppo_cards_in_hand,user_turn_28_eot_user_lands_in_play,user_turn_28_eot_oppo_lands_in_play,user_turn_28_eot_user_creatures_in_play,user_turn_28_eot_oppo_creatures_in_play,user_turn_28_eot_user_non_creatures_in_play,user_turn_28_eot_oppo_non_creatures_in_play,user_turn_28_eot_user_life,user_turn_28_eot_oppo_life,oppo_turn_28_cards_discarded,oppo_turn_28_lands_played,oppo_turn_28_creatures_cast,oppo_turn_28_non_creatures_cast,oppo_turn_28_user_instants_sorceries_cast,oppo_turn_28_oppo_instants_sorceries_cast,oppo_turn_28_user_abilities,oppo_turn_28_oppo_abilities,oppo_turn_28_creatures_attacked,oppo_turn_28_creatures_blocked,oppo_turn_28_creatures_unblocked,oppo_turn_28_creatures_blocking,oppo_turn_28_oppo_combat_damage_taken,oppo_turn_28_user_combat_damage_taken,oppo_turn_28_user_creatures_killed_combat,oppo_turn_28_oppo_creatures_killed_combat,oppo_turn_28_user_creatures_killed_non_combat,oppo_turn_28_oppo_creatures_killed_non_combat,oppo_turn_28_user_mana_spent,oppo_turn_28_oppo_mana_spent,oppo_turn_28_eot_user_cards_in_hand,oppo_turn_28_eot_oppo_cards_in_hand,oppo_turn_28_eot_user_lands_in_play,oppo_turn_28_eot_oppo_lands_in_play,oppo_turn_28_eot_user_creatures_in_play,oppo_turn_28_eot_oppo_creatures_in_play,oppo_turn_28_eot_user_non_creatures_in_play,oppo_turn_28_eot_oppo_non_creatures_in_play,oppo_turn_28_eot_user_life,oppo_turn_28_eot_oppo_life,user_turn_29_cards_drawn,user_turn_29_cards_tutored,user_turn_29_cards_discarded,user_turn_29_lands_played,user_turn_29_creatures_cast,user_turn_29_non_creatures_cast,user_turn_29_user_instants_sorceries_cast,user_turn_29_oppo_instants_sorceries_cast,user_turn_29_user_abilities,user_turn_29_oppo_abilities,user_turn_29_creatures_attacked,user_turn_29_creatures_blocked,user_turn_29_creatures_unblocked,user_turn_29_creatures_blocking,user_turn_29_oppo_combat_damage_taken,user_turn_29_user_combat_damage_taken,user_turn_29_user_creatures_killed_combat,user_turn_29_oppo_creatures_killed_combat,user_turn_29_user_creatures_killed_non_combat,user_turn_29_oppo_creatures_killed_non_combat,user_turn_29_user_mana_spent,user_turn_29_oppo_mana_spent,user_turn_29_eot_user_cards_in_hand,user_turn_29_eot_oppo_cards_in_hand,user_turn_29_eot_user_lands_in_play,user_turn_29_eot_oppo_lands_in_play,user_turn_29_eot_user_creatures_in_play,user_turn_29_eot_oppo_creatures_in_play,user_turn_29_eot_user_non_creatures_in_play,user_turn_29_eot_oppo_non_creatures_in_play,user_turn_29_eot_user_life,user_turn_29_eot_oppo_life,oppo_turn_29_cards_discarded,oppo_turn_29_lands_played,oppo_turn_29_creatures_cast,oppo_turn_29_non_creatures_cast,oppo_turn_29_user_instants_sorceries_cast,oppo_turn_29_oppo_instants_sorceries_cast,oppo_turn_29_user_abilities,oppo_turn_29_oppo_abilities,oppo_turn_29_creatures_attacked,oppo_turn_29_creatures_blocked,oppo_turn_29_creatures_unblocked,oppo_turn_29_creatures_blocking,oppo_turn_29_oppo_combat_damage_taken,oppo_turn_29_user_combat_damage_taken,oppo_turn_29_user_creatures_killed_combat,oppo_turn_29_oppo_creatures_killed_combat,oppo_turn_29_user_creatures_killed_non_combat,oppo_turn_29_oppo_creatures_killed_non_combat,oppo_turn_29_user_mana_spent,oppo_turn_29_oppo_mana_spent,oppo_turn_29_eot_user_cards_in_hand,oppo_turn_29_eot_oppo_cards_in_hand,oppo_turn_29_eot_user_lands_in_play,oppo_turn_29_eot_oppo_lands_in_play,oppo_turn_29_eot_user_creatures_in_play,oppo_turn_29_eot_oppo_creatures_in_play,oppo_turn_29_eot_user_non_creatures_in_play,oppo_turn_29_eot_oppo_non_creatures_in_play,oppo_turn_29_eot_user_life,oppo_turn_29_eot_oppo_life,user_turn_30_cards_drawn,user_turn_30_cards_tutored,user_turn_30_cards_discarded,user_turn_30_lands_played,user_turn_30_creatures_cast,user_turn_30_non_creatures_cast,user_turn_30_user_instants_sorceries_cast,user_turn_30_oppo_instants_sorceries_cast,user_turn_30_user_abilities,user_turn_30_oppo_abilities,user_turn_30_creatures_attacked,user_turn_30_creatures_blocked,user_turn_30_creatures_unblocked,user_turn_30_creatures_blocking,user_turn_30_oppo_combat_damage_taken,user_turn_30_user_combat_damage_taken,user_turn_30_user_creatures_killed_combat,user_turn_30_oppo_creatures_killed_combat,user_turn_30_user_creatures_killed_non_combat,user_turn_30_oppo_creatures_killed_non_combat,user_turn_30_user_mana_spent,user_turn_30_oppo_mana_spent,user_turn_30_eot_user_cards_in_hand,user_turn_30_eot_oppo_cards_in_hand,user_turn_30_eot_user_lands_in_play,user_turn_30_eot_oppo_lands_in_play,user_turn_30_eot_user_creatures_in_play,user_turn_30_eot_oppo_creatures_in_play,user_turn_30_eot_user_non_creatures_in_play,user_turn_30_eot_oppo_non_creatures_in_play,user_turn_30_eot_user_life,user_turn_30_eot_oppo_life,oppo_turn_30_cards_discarded,oppo_turn_30_lands_played,oppo_turn_30_creatures_cast,oppo_turn_30_non_creatures_cast,oppo_turn_30_user_instants_sorceries_cast,oppo_turn_30_oppo_instants_sorceries_cast,oppo_turn_30_user_abilities,oppo_turn_30_oppo_abilities,oppo_turn_30_creatures_attacked,oppo_turn_30_creatures_blocked,oppo_turn_30_creatures_unblocked,oppo_turn_30_creatures_blocking,oppo_turn_30_oppo_combat_damage_taken,oppo_turn_30_user_combat_damage_taken,oppo_turn_30_user_creatures_killed_combat,oppo_turn_30_oppo_creatures_killed_combat,oppo_turn_30_user_creatures_killed_non_combat,oppo_turn_30_oppo_creatures_killed_non_combat,oppo_turn_30_user_mana_spent,oppo_turn_30_oppo_mana_spent,oppo_turn_30_eot_user_cards_in_hand,oppo_turn_30_eot_oppo_cards_in_hand,oppo_turn_30_eot_user_lands_in_play,oppo_turn_30_eot_oppo_lands_in_play,oppo_turn_30_eot_user_creatures_in_play,oppo_turn_30_eot_oppo_creatures_in_play,oppo_turn_30_eot_user_non_creatures_in_play,oppo_turn_30_eot_oppo_non_creatures_in_play,oppo_turn_30_eot_user_life,oppo_turn_30_eot_oppo_life,user_total_cards_drawn,user_total_cards_tutored,user_total_cards_discarded,user_total_lands_played,user_total_cards_foretold,user_total_creatures_cast,user_total_non_creatures_cast,user_total_instants_sorceries_cast,user_total_cards_learned,user_total_mana_spent,oppo_total_cards_discarded,oppo_total_lands_played,oppo_total_cards_foretold,oppo_total_creatures_cast,oppo_total_non_creatures_cast,oppo_total_instants_sorceries_cast,oppo_total_cards_learned,oppo_total_mana_spent,deck_A.I.M. Labs,deck_A.I.M. Scientists,deck_A.I.M. Synthoids,"deck_Abomination, Terrifying Titan",deck_Absorbing Man,deck_Aerial Doombot,"deck_Agent 13, Sharon Carter",deck_Agent Maria Hill,deck_Agent Phil Coulson,deck_Agent of Atlas,deck_Agents of HYDRA,deck_Agents of S.H.I.E.L.D.,deck_Alien Invasion,deck_Ant-Man's Army,"deck_Ant-Man, Colony Commander",deck_Anthem of Champions,deck_Arc Reactor,deck_Archangel of Thune,"deck_Ares, God of War",deck_Armor Wars,"deck_Arnim Zola, Bio-Fanatic",deck_Asgardian Citadel,deck_Atlantean Cavalry,deck_Atlantis Attacks,"deck_Attuma, Atlantean Warlord","deck_Aurelia, the Warleader",deck_Avengers Assemble!,deck_Avengers Disassembled,deck_Avengers Hangar,deck_Avengers Tower,deck_Avengers: Under Siege,deck_Baron Helmut Zemo,"deck_Baron Strucker, HYDRA Overlord",deck_Baxter Building,deck_Beast Within,"deck_Beast, Erudite Aerialist",deck_Bedlam,deck_Birnin Zana Plaza,"deck_Black Panther, Vanguard","deck_Black Panther, Wakandan King","deck_Black Widow, Double Agent","deck_Black Widow, Super Spy",deck_Blazing Crescendo,deck_Bold Biochemist,deck_Borough Backup,deck_Brave Brawler,deck_Bruce Banner,"deck_Bullseye, Death Dealer",deck_Call Damage Control,deck_Captain America's Shield,"deck_Captain America, First Avenger","deck_Captain America, Living Legend","deck_Captain America, Super-Soldier","deck_Captain America, Wings of Freedom","deck_Captain Mar-Vell, Space-Born","deck_Captain Marvel, Earth's Protector",deck_Castle Doom,deck_Chaos Warp,deck_Claim the Kingdom,"deck_Cloak and Dagger, Entwined","deck_Colleen Wing, Street Samurai",deck_Concerted Effort,deck_Construct a Cosmic Cube,deck_Cosmic Cube,deck_Counterspell,deck_Crimson Operative,"deck_Crossbones, Malicious Mercenary",deck_Crowd of True Believers,deck_Cruel Alliance,deck_Cyberdrive Awakener,"deck_Daredevil, Man Without Fear",deck_Dark Deed,deck_Dark Fortress,deck_Dauthi Voidwalker,deck_Deadly Dispute,deck_Death to Our Enemies,deck_Decoy Ploy,deck_Defense of the Heart,deck_Dependable Quinjet,deck_Depower,deck_Dig Through Time,"deck_Doc Samson, Super Psychiatrist",deck_Doctor Doom,deck_Don't Move,deck_Doom Reigns Supreme,deck_Earth's Mightiest Heroes,"deck_Echo, Perceptive Prodigy","deck_Elektra, Daughter of the Hand",deck_Ephemerate,deck_Epic Fight,deck_Escape to the Wilds,deck_Evil's Thrall,deck_Extinction Event,deck_Falcon's Wing Harness,"deck_Falcon, Winged Wonder",deck_Fiery Emancipation,deck_Fight to the Death,deck_Fin Fang Foom,deck_Final Act,deck_Final Showdown,deck_Fisk Tower,deck_Force of Vigor,deck_Forest,deck_Frozen in Ice,deck_Fury of the Horde,deck_Futurist Forge,deck_Gathering Place,"deck_Ghost, Spectral Saboteur",deck_Giant Growth,deck_Giant-Sized Flying Ant,deck_Gleaming Bastion,deck_Go Nuts!,"deck_Grim Reaper, Lethal Legionnaire",deck_Guerrilla Gorilla,deck_H.E.R.B.I.E. Scout Unit,deck_HULK SMASH!,deck_HYDRA Assault Robot,deck_HYDRA Infiltration,deck_HYDRA Troopers,deck_Harbinger of the Seas,deck_Hawkeye's Bow,"deck_Hawkeye, Master Marksman","deck_Hawkeye, Young Avenger",deck_Helicarrier Strike,deck_Hell's Kitchen,"deck_Hellcat, Undying Vigilante","deck_Hercules, Prince of Power",deck_Hero in Training,deck_Heroic Feast,deck_Heroic Intervention,deck_Hex Magic,deck_Hidden Lair,deck_Hire a Crew,deck_Horn of Greed,deck_Hour of Defeat,"deck_Hulk, Gamma Goliath","deck_Hulkling, Burgeoning Bruiser","deck_Human Torch, Johnny Storm",deck_Hydraulic Helper,deck_I Am Iron Man,"deck_Invisible Woman, Sue Storm","deck_Iron Fist, Living Weapon","deck_Iron Lad, Diverging Destiny",deck_Iron Man Armor,"deck_Iron Man, Master of Machines","deck_Iron Man, Titan of Innovation","deck_Ironheart, Clever Champion",deck_Island,deck_Jennifer Walters,"deck_Jessica Jones, Private Eye","deck_Justice, Vance Astrovik",deck_K'un-Lun Warrior,deck_Ka-Zar of the Savage Land,deck_Kang the Conqueror,"deck_Kang, Temporal Tyrant",deck_Kid Loki,"deck_Killmonger, Scourge of Wakanda",deck_King T'Challa,deck_Kingpin's Enforcers,"deck_Klaw, Sonic Subjugator",deck_Knight of Wundagore,deck_Kree Commandos,deck_Kree Sentinel,"deck_Leader, Super-Genius",deck_Light of Promise,deck_Lightning Strike,deck_Loki Laufeyson,"deck_Loki, God of Mischief",deck_Lord of Atlantis,deck_Los Diablos Missile Base,"deck_Luke Cage, Power Man",deck_M.O.D.O.K.,deck_Machinesmith Automaton,deck_Madame Hydra,deck_Madame Masque,deck_Massacre Girl,deck_Mechanized Production,"deck_Mister Fantastic, Reed Richards","deck_Mister Hyde, Monster Within","deck_Misty Knight, Hero for Hire","deck_Mjölnir, Hammer of Thor","deck_Mockingbird, Ace Agent","deck_Mole Man, Moloid Master",deck_Monica Rambeau,deck_Monstrous Rage,deck_Moon Girl and Devil Dinosaur,"deck_Moonstone, Harsh Mistress",deck_Mountain,"deck_Ms. Marvel, Kamala Khan",deck_Multiversal Incursion,deck_Murdock's Crusade,deck_Namor the Sub-Mariner,deck_Narset's Reversal,"deck_Nick Fury, Agent of S.H.I.E.L.D.","deck_Night Nurse, Healer of Heroes",deck_Ninja of the Hand,deck_No Mercy,"deck_Okoye, Dora Milaje Leader",deck_Origin of the Avengers,deck_Panther Pounce,deck_Path to Exile,"deck_Patriot, Shield Wielder",deck_Pet Avengers,deck_Photon Blast Barrage,deck_Plains,deck_Political Triumph,deck_Powerful Broker,deck_Primal Vigor,deck_Privileged Position,deck_Project Deathlok Soldier,deck_Punishing Punch,deck_Pym Particles,deck_Pym Technologies,"deck_Quake, Agent of S.H.I.E.L.D.","deck_Quicksilver, Brash Blur",deck_Raft Security Officer,deck_Rancor,deck_Rapid Rescue,deck_Ravenous Tyrannosaurus,deck_Reconnaissance Mission,"deck_Red Guardian, Super-Soldier",deck_Red Hulk,deck_Red Room Recruit,"deck_Reptil, Dinomorpher",deck_Repulsor Blast,deck_Restorative Technique,deck_Return to the Ranks,deck_Rewrite History,"deck_Rick Jones, Destined Sidekick",deck_Righteous Fury,deck_Roaming Throne,deck_Robot Domination,"deck_Ronin, Shadow Stalker",deck_Roxxon Brutes,deck_S.H.I.E.L.D. Deployment Drone,deck_S.H.I.E.L.D. Flying Car,deck_S.H.I.E.L.D. Helicarrier,deck_S.H.I.E.L.D. Spy Kit,deck_Savage Land Dinosaur,deck_Scientist Supreme of A.I.M.,deck_Secret Invasion,deck_Seize the Day,deck_Serpent Specialist,"deck_Shang-Chi, Master of Kung Fu","deck_She-Hulk, Jade Defender",deck_Show and Tell,"deck_Shuri, Wakandan Inventor",deck_Simulacrum Synthesizer,"deck_Speed, Young Avenger","deck_Speedball, New Warrior","deck_Spider-Man, To the Rescue","deck_Spider-Woman, Secret Agent",deck_Stark Industries,deck_Stark Industries Executive,"deck_Stature, Size Shifter",deck_Steelshaper's Gift,deck_Steely Resolve,deck_Stolen Stark Tech,"deck_Storm, Force of Nature","deck_Storm, Windrider",deck_Subterranean Cavern,deck_Sundering Growth,deck_Super Intelligence,deck_Super Speed,deck_Super Strength,deck_Super Suit,deck_Super Villain Lockup,deck_Super-Adaptoid,deck_Super-Skrull,deck_Super-Soldier Serum,deck_Surveillance Room,deck_Swamp,deck_Sword of Fire and Ice,"deck_Swordsman, Sharp Scoundrel",deck_Take Up the Shield,"deck_Taskmaster, Mercenary Mimic",deck_Team Tactics,deck_Teferi's Protection,"deck_Thanos, the Mad Titan",deck_The Astonishing Ant-Man,deck_The Coming of Galactus,deck_The Kingpin of Crime,deck_The Masters of Evil,"deck_The Mighty Thor, Jane Foster",deck_The Mind Stone,deck_The Ruinous Wrecking Crew,deck_The Scarlet Witch,"deck_The Sentry, Golden Guardian",deck_The Serpent Society,deck_The Super Hero Civil War,deck_The Ten Rings,"deck_The Thing, Ben Grimm",deck_The Unbeatable Squirrel Girl,deck_The Vision,deck_The Wondrous Wasp,deck_Thirst for Knowledge,deck_Thor Odinson,"deck_Thor, God of Thunder",deck_Three Steps Ahead,deck_Thunderbolts Conspiracy,"deck_Tigra, Feline Fury","deck_Titania, Rugged Rumbler",deck_Tony Stark,deck_Too Evil to Stay Dead,deck_Training Compound,deck_Training Regimen,deck_Trickster's Stratagem,deck_Truck Toss,"deck_U.S.Agent, John Walker",deck_Ultron Drone,"deck_Ultron, Artificial Malevolence",deck_Undercover Skrull,deck_Unliving Legionnaire,deck_Unnatural Growth,deck_Vibranium Energy Daggers,deck_Villainous Hideout,deck_Vision Quest,deck_Vision of Love,deck_Visions of Villainy,"deck_Viv Vision, Teen Synthezoid",deck_Volcanic Villain,deck_Wakandan Drone Flock,deck_Wakandan Royal Guard,"deck_War Machine, Legacy of Iron",deck_Warleader's Call,deck_We Say Thee Nay!,deck_Web Up,"deck_Whiplash, Vengeful Engineer","deck_White Tiger, Ava Ayala","deck_White Widow, Free Agent","deck_Wiccan, Rising Magician",deck_Widow's Bite,"deck_Winter Soldier, Icy Assassin","deck_Wolverine, Best There Is","deck_Wolverine, Fierce Fighter","deck_Wonder Man, Hollywood Hero",deck_World War Hulk,deck_Worlds Within Worlds,"deck_Yellowjacket, Heartless Marauder",sideboard_A.I.M. Labs,sideboard_A.I.M. Scientists,sideboard_A.I.M. Synthoids,"sideboard_Abomination, Terrifying Titan",sideboard_Absorbing Man,sideboard_Aerial Doombot,"sideboard_Agent 13, Sharon Carter",sideboard_Agent Maria Hill,sideboard_Agent Phil Coulson,sideboard_Agent of Atlas,sideboard_Agents of HYDRA,sideboard_Agents of S.H.I.E.L.D.,sideboard_Alien Invasion,sideboard_Ant-Man's Army,"sideboard_Ant-Man, Colony Commander",sideboard_Anthem of Champions,sideboard_Arc Reactor,sideboard_Archangel of Thune,"sideboard_Ares, God of War",sideboard_Armor Wars,"sideboard_Arnim Zola, Bio-Fanatic",sideboard_Asgardian Citadel,sideboard_Atlantean Cavalry,sideboard_Atlantis Attacks,"sideboard_Attuma, Atlantean Warlord","sideboard_Aurelia, the Warleader",sideboard_Avengers Assemble!,sideboard_Avengers Disassembled,sideboard_Avengers Hangar,sideboard_Avengers Tower,sideboard_Avengers: Under Siege,sideboard_Baron Helmut Zemo,"sideboard_Baron Strucker, HYDRA Overlord",sideboard_Baxter Building,sideboard_Beast Within,"sideboard_Beast, Erudite Aerialist",sideboard_Bedlam,sideboard_Birnin Zana Plaza,"sideboard_Black Panther, Vanguard","sideboard_Black Panther, Wakandan King","sideboard_Black Widow, Double Agent","sideboard_Black Widow, Super Spy",sideboard_Blazing Crescendo,sideboard_Bold Biochemist,sideboard_Borough Backup,sideboard_Brave Brawler,sideboard_Bruce Banner,"sideboard_Bullseye, Death Dealer",sideboard_Call Damage Control,sideboard_Captain America's Shield,"sideboard_Captain America, First Avenger","sideboard_Captain America, Living Legend","sideboard_Captain America, Super-Soldier","sideboard_Captain America, Wings of Freedom","sideboard_Captain Mar-Vell, Space-Born","sideboard_Captain Marvel, Earth's Protector",sideboard_Castle Doom,sideboard_Chaos Warp,sideboard_Claim the Kingdom,"sideboard_Cloak and Dagger, Entwined","sideboard_Colleen Wing, Street Samurai",sideboard_Concerted Effort,sideboard_Construct a Cosmic Cube,sideboard_Cosmic Cube,sideboard_Counterspell,sideboard_Crimson Operative,"sideboard_Crossbones, Malicious Mercenary",sideboard_Crowd of True Believers,sideboard_Cruel Alliance,sideboard_Cyberdrive Awakener,"sideboard_Daredevil, Man Without Fear",sideboard_Dark Deed,sideboard_Dark Fortress,sideboard_Dauthi Voidwalker,sideboard_Deadly Dispute,sideboard_Death to Our Enemies,sideboard_Decoy Ploy,sideboard_Defense of the Heart,sideboard_Dependable Quinjet,sideboard_Depower,sideboard_Dig Through Time,"sideboard_Doc Samson, Super Psychiatrist",sideboard_Doctor Doom,sideboard_Don't Move,sideboard_Doom Reigns Supreme,sideboard_Earth's Mightiest Heroes,"sideboard_Echo, Perceptive Prodigy","sideboard_Elektra, Daughter of the Hand",sideboard_Ephemerate,sideboard_Epic Fight,sideboard_Escape to the Wilds,sideboard_Evil's Thrall,sideboard_Extinction Event,sideboard_Falcon's Wing Harness,"sideboard_Falcon, Winged Wonder",sideboard_Fiery Emancipation,sideboard_Fight to the Death,sideboard_Fin Fang Foom,sideboard_Final Act,sideboard_Final Showdown,sideboard_Fisk Tower,sideboard_Force of Vigor,sideboard_Forest,sideboard_Frozen in Ice,sideboard_Fury of the Horde,sideboard_Futurist Forge,sideboard_Gathering Place,"sideboard_Ghost, Spectral Saboteur",sideboard_Giant Growth,sideboard_Giant-Sized Flying Ant,sideboard_Gleaming Bastion,sideboard_Go Nuts!,"sideboard_Grim Reaper, Lethal Legionnaire",sideboard_Guerrilla Gorilla,sideboard_H.E.R.B.I.E. Scout Unit,sideboard_HULK SMASH!,sideboard_HYDRA Assault Robot,sideboard_HYDRA Infiltration,sideboard_HYDRA Troopers,sideboard_Harbinger of the Seas,sideboard_Hawkeye's Bow,"sideboard_Hawkeye, Master Marksman","sideboard_Hawkeye, Young Avenger",sideboard_Helicarrier Strike,sideboard_Hell's Kitchen,"sideboard_Hellcat, Undying Vigilante","sideboard_Hercules, Prince of Power",sideboard_Hero in Training,sideboard_Heroic Feast,sideboard_Heroic Intervention,sideboard_Hex Magic,sideboard_Hidden Lair,sideboard_Hire a Crew,sideboard_Horn of Greed,sideboard_Hour of Defeat,"sideboard_Hulk, Gamma Goliath","sideboard_Hulkling, Burgeoning Bruiser","sideboard_Human Torch, Johnny Storm",sideboard_Hydraulic Helper,sideboard_I Am Iron Man,"sideboard_Invisible Woman, Sue Storm","sideboard_Iron Fist, Living Weapon","sideboard_Iron Lad, Diverging Destiny",sideboard_Iron Man Armor,"sideboard_Iron Man, Master of Machines","sideboard_Iron Man, Titan of Innovation","sideboard_Ironheart, Clever Champion",sideboard_Island,sideboard_Jennifer Walters,"sideboard_Jessica Jones, Private Eye","sideboard_Justice, Vance Astrovik",sideboard_K'un-Lun Warrior,sideboard_Ka-Zar of the Savage Land,sideboard_Kang the Conqueror,"sideboard_Kang, Temporal Tyrant",sideboard_Kid Loki,"sideboard_Killmonger, Scourge of Wakanda",sideboard_King T'Challa,sideboard_Kingpin's Enforcers,"sideboard_Klaw, Sonic Subjugator",sideboard_Knight of Wundagore,sideboard_Kree Commandos,sideboard_Kree Sentinel,"sideboard_Leader, Super-Genius",sideboard_Light of Promise,sideboard_Lightning Strike,sideboard_Loki Laufeyson,"sideboard_Loki, God of Mischief",sideboard_Lord of Atlantis,sideboard_Los Diablos Missile Base,"sideboard_Luke Cage, Power Man",sideboard_M.O.D.O.K.,sideboard_Machinesmith Automaton,sideboard_Madame Hydra,sideboard_Madame Masque,sideboard_Massacre Girl,sideboard_Mechanized Production,"sideboard_Mister Fantastic, Reed Richards","sideboard_Mister Hyde, Monster Within","sideboard_Misty Knight, Hero for Hire","sideboard_Mjölnir, Hammer of Thor","sideboard_Mockingbird, Ace Agent","sideboard_Mole Man, Moloid Master",sideboard_Monica Rambeau,sideboard_Monstrous Rage,sideboard_Moon Girl and Devil Dinosaur,"sideboard_Moonstone, Harsh Mistress",sideboard_Mountain,"sideboard_Ms. Marvel, Kamala Khan",sideboard_Multiversal Incursion,sideboard_Murdock's Crusade,sideboard_Namor the Sub-Mariner,sideboard_Narset's Reversal,"sideboard_Nick Fury, Agent of S.H.I.E.L.D.","sideboard_Night Nurse, Healer of Heroes",sideboard_Ninja of the Hand,sideboard_No Mercy,"sideboard_Okoye, Dora Milaje Leader",sideboard_Origin of the Avengers,sideboard_Panther Pounce,sideboard_Path to Exile,"sideboard_Patriot, Shield Wielder",sideboard_Pet Avengers,sideboard_Photon Blast Barrage,sideboard_Plains,sideboard_Political Triumph,sideboard_Powerful Broker,sideboard_Primal Vigor,sideboard_Privileged Position,sideboard_Project Deathlok Soldier,sideboard_Punishing Punch,sideboard_Pym Particles,sideboard_Pym Technologies,"sideboard_Quake, Agent of S.H.I.E.L.D.","sideboard_Quicksilver, Brash Blur",sideboard_Raft Security Officer,sideboard_Rancor,sideboard_Rapid Rescue,sideboard_Ravenous Tyrannosaurus,sideboard_Reconnaissance Mission,"sideboard_Red Guardian, Super-Soldier",sideboard_Red Hulk,sideboard_Red Room Recruit,"sideboard_Reptil, Dinomorpher",sideboard_Repulsor Blast,sideboard_Restorative Technique,sideboard_Return to the Ranks,sideboard_Rewrite History,"sideboard_Rick Jones, Destined Sidekick",sideboard_Righteous Fury,sideboard_Roaming Throne,sideboard_Robot Domination,"sideboard_Ronin, Shadow Stalker",sideboard_Roxxon Brutes,sideboard_S.H.I.E.L.D. Deployment Drone,sideboard_S.H.I.E.L.D. Flying Car,sideboard_S.H.I.E.L.D. Helicarrier,sideboard_S.H.I.E.L.D. Spy Kit,sideboard_Savage Land Dinosaur,sideboard_Scientist Supreme of A.I.M.,sideboard_Secret Invasion,sideboard_Seize the Day,sideboard_Serpent Specialist,"sideboard_Shang-Chi, Master of Kung Fu","sideboard_She-Hulk, Jade Defender",sideboard_Show and Tell,"sideboard_Shuri, Wakandan Inventor",sideboard_Simulacrum Synthesizer,"sideboard_Speed, Young Avenger","sideboard_Speedball, New Warrior","sideboard_Spider-Man, To the Rescue","sideboard_Spider-Woman, Secret Agent",sideboard_Stark Industries,sideboard_Stark Industries Executive,"sideboard_Stature, Size Shifter",sideboard_Steelshaper's Gift,sideboard_Steely Resolve,sideboard_Stolen Stark Tech,"sideboard_Storm, Force of Nature","sideboard_Storm, Windrider",sideboard_Subterranean Cavern,sideboard_Sundering Growth,sideboard_Super Intelligence,sideboard_Super Speed,sideboard_Super Strength,sideboard_Super Suit,sideboard_Super Villain Lockup,sideboard_Super-Adaptoid,sideboard_Super-Skrull,sideboard_Super-Soldier Serum,sideboard_Surveillance Room,sideboard_Swamp,sideboard_Sword of Fire and Ice,"sideboard_Swordsman, Sharp Scoundrel",sideboard_Take Up the Shield,"sideboard_Taskmaster, Mercenary Mimic",sideboard_Team Tactics,sideboard_Teferi's Protection,"sideboard_Thanos, the Mad Titan",sideboard_The Astonishing Ant-Man,sideboard_The Coming of Galactus,sideboard_The Kingpin of Crime,sideboard_The Masters of Evil,"sideboard_The Mighty Thor, Jane Foster",sideboard_The Mind Stone,sideboard_The Ruinous Wrecking Crew,sideboard_The Scarlet Witch,"sideboard_The Sentry, Golden Guardian",sideboard_The Serpent Society,sideboard_The Super Hero Civil War,sideboard_The Ten Rings,"sideboard_The Thing, Ben Grimm",sideboard_The Unbeatable Squirrel Girl,sideboard_The Vision,sideboard_The Wondrous Wasp,sideboard_Thirst for Knowledge,sideboard_Thor Odinson,"sideboard_Thor, God of Thunder",sideboard_Three Steps Ahead,sideboard_Thunderbolts Conspiracy,"sideboard_Tigra, Feline Fury","sideboard_Titania, Rugged Rumbler",sideboard_Tony Stark,sideboard_Too Evil to Stay Dead,sideboard_Training Compound,sideboard_Training Regimen,sideboard_Trickster's Stratagem,sideboard_Truck Toss,"sideboard_U.S.Agent, John Walker",sideboard_Ultron Drone,"sideboard_Ultron, Artificial Malevolence",sideboard_Undercover Skrull,sideboard_Unliving Legionnaire,sideboard_Unnatural Growth,sideboard_Vibranium Energy Daggers,sideboard_Villainous Hideout,sideboard_Vision Quest,sideboard_Vision of Love,sideboard_Visions of Villainy,"sideboard_Viv Vision, Teen Synthezoid",sideboard_Volcanic Villain,sideboard_Wakandan Drone Flock,sideboard_Wakandan Royal Guard,"sideboard_War Machine, Legacy of Iron",sideboard_Warleader's Call,sideboard_We Say Thee Nay!,sideboard_Web Up,"sideboard_Whiplash, Vengeful Engineer","sideboard_White Tiger, Ava Ayala","sideboard_White Widow, Free Agent","sideboard_Wiccan, Rising Magician",sideboard_Widow's Bite,"sideboard_Winter Soldier, Icy Assassin","sideboard_Wolverine, Best There Is","sideboard_Wolverine, Fierce Fighter","sideboard_Wonder Man, Hollywood Hero",sideboard_World War Hulk,sideboard_Worlds Within Worlds,"sideboard_Yellowjacket, Heartless Marauder",user_n_games_bucket,user_game_win_rate_bucket,oppo_turn_1_cards_drawn_or_tutored,oppo_turn_2_cards_drawn_or_tutored,oppo_turn_3_cards_drawn_or_tutored,oppo_turn_4_cards_drawn_or_tutored,oppo_turn_5_cards_drawn_or_tutored,oppo_turn_6_cards_drawn_or_tutored,oppo_turn_7_cards_drawn_or_tutored,oppo_turn_8_cards_drawn_or_tutored,oppo_turn_9_cards_drawn_or_tutored,oppo_turn_10_cards_drawn_or_tutored,oppo_turn_11_cards_drawn_or_tutored,oppo_turn_12_cards_drawn_or_tutored,oppo_turn_13_cards_drawn_or_tutored,oppo_turn_14_cards_drawn_or_tutored,oppo_turn_15_cards_drawn_or_tutored,oppo_turn_16_cards_drawn_or_tutored,oppo_turn_17_cards_drawn_or_tutored,oppo_turn_18_cards_drawn_or_tutored,oppo_turn_19_cards_drawn_or_tutored,oppo_turn_20_cards_drawn_or_tutored,oppo_turn_21_cards_drawn_or_tutored,oppo_turn_22_cards_drawn_or_tutored,oppo_turn_23_cards_drawn_or_tutored,oppo_turn_24_cards_drawn_or_tutored,oppo_turn_25_cards_drawn_or_tutored,oppo_turn_26_cards_drawn_or_tutored,oppo_turn_27_cards_drawn_or_tutored,oppo_turn_28_cards_drawn_or_tutored,oppo_turn_29_cards_drawn_or_tutored,oppo_turn_30_cards_drawn_or_tutored,oppo_total_cards_drawn_or_tutored
++MSH,PremierDraft,4a1aad2df30442d384bf0a15ad3e8d4d,2026-06-23 23:40:21,0,1,1,2026-06-23 23:40:45,gold,None,WU,R,True,0,0,WUB,10,True,104936|104917|105170|105174|104926|105180|104936,,,,,,,104936|104917|105170|105174|104926|105180|104936,,,,105170,,,,,121445,,,,,,0,0,,,,,0.0,0.0,104936|105180|104926|105174|104917|104936,7.0,105170,,,,,,20.0,20.0,,75023,,,,,,,,,,,0,0,,,,,0.0,0.0,104936|105180|104926|105174|104917|104936,7.0,105170,75023,,,,,20.0,20.0,105148,,,105174,104926,,,,,,,,,,0,0,,,,,2.0,0.0,105148|104936|105180|104917|104936,7.0,105174|105170,75023,104926,,,,20.0,20.0,,75022,105138,,,,,121357,,,,,0,0,,,,,0.0,2.0,105148|104936|105180|104917|104936,6.0,105174|105170,75022|75023,104926,105138,,,20.0,20.0,105036,,,105180,105148,,,,,,,,,,0,0,,,,,3.0,0.0,105036|104936|104917|104936,6.0,105180|105174|105170,75022|75023,105148|104926,105138,,,20.0,20.0,,105153,105011,,,,,90050,,,,,0,0,,,,,0.0,2.0,105036|104936|104917|104936,5.0,105180|105174|105170,105153|75022|75023,105148|104926,105011|105138,,,20.0,21.0,104903,105176,105036,105176,104936,,,,170331|206364,,,,,,0,0,,,,,3.0,0.0,104903|104936|104917,5.0,105176|105180|105174|105170,105153|75022|75023,104936|105148|104926,105011|105138,,,20.0,21.0,,,104955,,,,206091,206120|206121,,,,,0,0,,,,,1.0,3.0,104903|104936|104917,6.0,105176|105180|105174|105170,105153|75022|75023,104936|105148|104926,104955|105011,,,20.0,21.0,104939,,,,104936,,,,206364,,105148|104936,,105148|104936,,3,0,,,,,3.0,0.0,104939|104903|104917,6.0,105176|105180|105174|105170,105153|75022|75023,104936|104936|105148|104926|104936,104955|105011,,,20.0,18.0,,75022,105138,,,,206091,121357|206191,,,,,0,0,,,,,1.0,2.0,104939|104903|104917,5.0,105176|105180|105174|105170,75022|105153|75022|75023,104936|104936|105148|104926|104936,105138|104955|105011,,,20.0,18.0,104907|105174,,,105174,104907,,,105017,206068,,104936|104936|104936,,104936|104936|104936,,3,0,,,104907,,3.0,2.0,104939|104903|104917,4.0,105174|105176|105180|105174|105170,75022|105153|75022|75023,104936|104936|105148|104926|104936,105138|104955|105011,,,20.0,15.0,,75021,104926,,,,206091,,,,,,0,0,,,,,1.0,2.0,104939|104903|104917,3.0,105174|105176|105180|105174|105170,75021|75022|105153|75022|75023,104936|104936|105148|104926|104936,104926|105138|104955|105011,,,20.0,15.0,104896,,,,104903,,,,,,104936|104936|104936,,104936|104936|104936,,3,0,,,,,5.0,0.0,104896|104939|104917,3.0,105174|105176|105180|105174|105170,75021|75022|105153|75022|75023,104903|104936|104936|105148|104926|104936,104926|105138|104955|105011,,,20.0,12.0,,,104986,,,,,206191,,,,,0,0,,,,,0.0,4.0,104896|104939|104917,3.0,105174|105176|105180|105174|105170,75021|75022|105153|75022|75023,104903|104936|104936|105148|104926|104936,104986|104926|105138|104955|105011,,,20.0,12.0,104923,,,,104896,,,,206054,,104903,,104903,,5,0,,,,,3.0,0.0,104923|104939|104917,3.0,105174|105176|105180|105174|105170,75021|75022|105153|75022|75023,104896|104903|104936|104936|105148|104926|104936,104986|104926|105138|104955|105011,,,20.0,7.0,,75023,,,,,206091,,,,,,0,0,,,,,1.0,0.0,104923|104939|104917,3.0,105174|105176|105180|105174|105170,75023|75021|75022|105153|75022|75023,104896|104903|104936|104936|105148|104926|104936,104986|104926|105138|104955|105011,,,20.0,7.0,104906,,,,104923,,104906,105017|104932,206091,1002|1002|206091,105148|104936|104936|104936|104896,105148|104896,104936|104936|104936,105011|105138,1,0,105148|104896,,,,4.0,6.0,104939|104917,1.0,105174|105176|105180|105174|105170,75023|75021|75022|105153|75022|75023,104923|104903|104936|104936|104926|104936,104986|104926|105138|104955|105011,,,20.0,6.0,,,104935,,,,,206157|206098|206191,105011|104955|105138|104926|104986,,105011|104955|105138|104926|104986,,0,13,,,,,0.0,4.0,104939|104917,1.0,105174|105176|105180|105174|105170,75023|75021|75022|105153|75022|75023,104923|104903|104936|104936|104926|104936,104935|104986|104926|105138|104955|105011,,,5.0,6.0,105174,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,105174|104939|104917,1.0,105174|105176|105180|105174|105170,75023|75021|75022|105153|75022|75023,104923|104903|104936|104936|104926|104936,104935|104986|104926|105138|104955|105011,,,5.0,6.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,,,,,,,,,,,,,0,0,,,,,0.0,0.0,,0.0,,,,,,,0.0,0.0,10,1,1,5,0,8,0,1,0,30,0,6,0,7,0,3,0,27,0,0,1,0,0,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,7,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,100,0.56,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9
+diff --git a/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/source-manifest.json b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/source-manifest.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..94f8ee9f88c56e532c2483c11bb5347932f845a4
+--- /dev/null
++++ b/crates/coworld-mtg-harness/tests/fixtures/17lands-msh-replay-v1/source-manifest.json
+@@ -0,0 +1,59 @@
++{
++  "kind": "17lands-known-source-ingestion-fixture-v1",
++  "license": "CC BY 4.0 unless otherwise noted by 17Lands",
++  "license_url": "https://creativecommons.org/licenses/by/4.0/",
++  "attribution": "Public gameplay data from 17Lands. 17Lands does not endorse this work.",
++  "source_page": "https://www.17lands.com/public_datasets",
++  "source_archive_url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.MSH.PremierDraft.csv.gz",
++  "retrieved_at": "2026-09-07T22:20:40.842121+00:00",
++  "archive_prefix_range": "bytes=0-65535",
++  "archive_prefix_sha256": "646156abb39c38ef0d148f182ecf27ba0f3c675fc5de06d5275f16b55c56270c",
++  "full_archive_hash_known": false,
++  "source_complete92_rows_sha256": "2b14adfaebf0294250a48c2c996c49a504ae959516132372dba1dda4dece5855",
++  "selection": "The first complete game row and exact original CSV header. Known inspected regression evidence; not held out. Card mapping retains original header and exact source rows for IDs appearing in this game cast fields.",
++  "card_mapping_url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv",
++  "card_mapping_full_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
++  "mapping_source_data_row_indexes": [
++    25034,
++    25066,
++    25111,
++    25129,
++    25164,
++    25233,
++    25245,
++    25250,
++    25254,
++    25261,
++    25263,
++    25273,
++    25300,
++    25313,
++    25327
++  ],
++  "semantics": "Each nonempty pipe element in documented per-turn cast columns is one recorded cast occurrence; preserve duplicates. Exclude total counts, abilities and end-of-turn zones. Card name resolution uses the separately hashed official Arena ID mapping. These are turn-level observations, not a fully ordered game log or rules outcome.",
++  "files": {
++    "expected-casts.json": {
++      "sha256": "c57c1a3e37619a0a7b3621075a954c4b8123c86ae867813a1015ab179b803217",
++      "bytes": 3839
++    },
++    "cards-subset.csv": {
++      "sha256": "908f70ddca98d0819fe1f9e0cf00fcb04c2753920716b7b6444cca23e07871c8",
++      "bytes": 1287
++    },
++    "observed-first-game.csv": {
++      "sha256": "9a9fa10c2f786f67da390965851f53182925a484ebb607d5ef3a6421157cd5cb",
++      "bytes": 92870
++    }
++  },
++  "expected_known_full92": {
++    "rows": 92,
++    "cast_occurrences": 1426,
++    "distinct_cast_arena_ids": 230,
++    "mapped_cast_occurrences": 1426,
++    "unmapped_cast_occurrences": 0,
++    "invalid_cast_occurrences": 0
++  },
++  "observed_bytes_and_expectations_frozen_before_native_source_edits": true,
++  "metadata_revision_note": "Attribution and selection prose spacing corrected during review; observed CSV bytes, mapping subset bytes and expected values are unchanged.",
++  "initial_frozen_manifest_sha256": "d06e3570c6ffdea491fb44837c25985e9fc8f599db50964bf9fdfd3623cb2b17"
++}
+diff --git a/docs/agent-improvement-harness-operations.md b/docs/agent-improvement-harness-operations.md
+index ef5da28fa50e194b27421f7ba526314da23034ff..45147c84b5a2858aa04fd2056957ad6aeae6e799 100644
+--- a/docs/agent-improvement-harness-operations.md
++++ b/docs/agent-improvement-harness-operations.md
+@@ -91,17 +91,51 @@ same ID.
+ 
+ ## Mine observational workloads
+ 
+-This command ranks card and event frequency and summarizes turn, damage, mana,
+-and game-length columns from a 17Lands CSV or CSV gzip snapshot:
++For the official public replay CSV, supply the separately preserved `cards.csv`
++mapping and its SHA-256. The replay input remains the content-addressed `17lands`
++artifact in the corpus manifest. The MSH public format stores one game per row,
++with user/opponent turn columns; it is not a complete ordered action log.
+ 
+ ```sh
+ scripts/cargo.sh run --locked -p coworld-mtg-harness -- mine17lands \
+   --manifest-uri artifacts/corpus/manifest.json \
++  --input-schema public-replay-wide-v1 \
++  --cards-csv <preserved-17lands-cards.csv> \
++  --cards-csv-sha256 <sha256> \
+   --output artifacts/soft-signals.json
+ ```
+ 
+-The report labels itself observational. It cannot fail a hard gate. Its card
+-ranking is input for deck/scenario selection and investigation only.
++The `normalization` object retains the mapping source, exact byte hash and size,
++plus each cast occurrence: one-based data row, original column, zero-based pipe
++position, Arena ID, turn index, player roles, kind and mapping result. Repeated
++IDs are repeated recorded casts. Totals, abilities and end-of-turn zone lists
++are excluded from cast counts. Unknown IDs and malformed ID tokens remain
++explicitly unmapped or invalid; they cannot silently disappear from the
++coverage denominator. Conflicting mapping identities, malformed rows and
++unsupported cast columns are errors. `card_frequency` aggregates mapped cast
++occurrences by the official card name; distinct Arena IDs remain in normalization.
++Wide-replay numeric summaries include only turn count and mana-spent fields,
++so numeric card IDs cannot become measurements.
++
++The default `--input-schema auto` accepts canonical public turn columns with a
++mapping, or known named-value columns such as `card_name`, `cards`, `deck`, and
++`drawn_cards`. Unknown schemas, mixed named/public schemas and case-changed public
++columns are rejected explicitly. Existing named-card CSV inputs keep their
++frequency semantics; use `--input-schema legacy-named-v1` for other known legacy
++headers handled by the earlier broad named-value heuristic. Public replay input
++cannot be forced through that legacy path. The optional
++`--row-limit` counts complete game rows, not turns or cast occurrences.
++
++Data from [17Lands public datasets](https://www.17lands.com/public_datasets) is
++CC BY 4.0 unless otherwise noted. Preserve source links, attribution, download
++identity and any subset/normalization description. 17Lands does not endorse
++this harness. The retained first-game fixture is previously inspected regression
++evidence, not an unseen holdout.
++
++Mapping/count preservation can be checked as an ingestion contract. These
++observations do not provide a gameplay correctness gate or recover missing
++targets, action ordering, priority, or hidden state. Card rankings nominate
++workloads and later rules-backed scenarios.
+ 
+ ## Run or resume a shard
+ 

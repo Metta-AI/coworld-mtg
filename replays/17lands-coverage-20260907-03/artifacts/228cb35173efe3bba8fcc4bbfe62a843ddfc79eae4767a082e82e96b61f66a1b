@@ -1,0 +1,36 @@
+# Independent review of the recorded 17Lands ingestion repair
+
+Recommendation: approve the bounded source-ingestion change under the frozen coverage policy. No material findings. This is an independent review of recorded native results and their inputs, not an inference from viewer tests. No acceptance decision was present in the reviewed 70-event snapshot of `17lands-coverage-20260907-03`.
+
+The controlled baseline completed two executions for each of primary, regression and aggregate, read the expected rows, and returned an empty `card_frequency` each time. The candidate completed two executions for each of primary, regression, holdout and aggregate. Its raw output preserves every independently counted source cast, raw/parsed Arena ID, mapped name, row, original column, pipe position, turn and active/casting player. The recorded strong feedback is therefore supported: baseline violated, candidate satisfied.
+
+| Source cohort | Rows | Recorded casts | Distinct Arena IDs | Candidate repetitions |
+| --- | ---: | ---: | ---: | ---: |
+| Primary, original rows 1–46 | 46 | 679 | 184 | 2 |
+| Regression, original rows 47–92 | 46 | 747 | 204 | 2 |
+| Holdout, original rows 93–108 | 16 | 276 | 113 | 2 |
+| Aggregate, original rows 1–92 | 92 | 1,426 | 230 | 2 |
+
+The 92-row aggregate overlaps both known 46-row cohorts. It is informational and is not a fourth independent gate or another 92 unique games. The frozen plan requires primary, regression and holdout. No baseline execution is recorded for holdout, and none is claimed here.
+
+Independent checks verified all 90 artifact identities, the unchanged initial 18-event source/gate prefix, each execution's raw output versus its tagged observation, request/build/source bindings, and feedback-to-evidence references. Both repetitions agree after removing only the temporary local mapping path; raw candidate output hashes need not match because that path is retained in each output. Counts, identities and all other report fields agree. The same candidate build ran every required gate. The proposed patch is motivated by the recorded baseline violations.
+
+The preserved extended compressed prefix begins with the exact earlier 65,536-byte prefix and decompresses to the retained complete records. The known 92 CSV rows remain byte-identical, and the holdout is the exact original header plus uncompressed bytes [723989, 841126), yielding rows 93–108. Its game identity tuples do not overlap the known 92. All source-file hashes and sizes, CSV partitions and independently reconstructed expected casts/names match. These 16 rows were acquired and frozen separately before candidate observations according to the retained acquisition/freeze receipt; they are from the same archive, not a new format or population. Prefix hashes are not full-archive hashes.
+
+The retained workers match their measured SHA-256 values. Source archives and before/after source-file hashes match the stated Git revisions; the exact full-index Git diff matches the proposed patch. The compiler identity and build command are recorded. This corroborates the controlled build records but does not independently prove that a particular compiler invocation produced those executable bytes. Acquisition time, source authority, non-exposure of holdout contents and compilation linkage remain caller attestations. They must not be presented as cryptographically proven or independently reproduced facts.
+
+The evidence establishes preservation and mapping of observations in the frozen public CSV. It does not establish gameplay action ordering, targets, priority, hidden state, card-rule correctness, or a complete replay of the games. Official Arena mapping and the declared source-column semantics provide the reference boundary; weak workload nomination and strong extraction coverage have distinct claims.
+
+Reviewed identities:
+
+- Baseline revision: `0d045477305fde4617cba844289e88a909869ed9`; worker: `c1eae37550ff66a4bd03e93b482352d40401b38e9802af28f91d986338417dfa`.
+- Candidate revision: `33d332f5ad4055f2204073c091eddded33eac70d`; worker: `0a97ca37c68f9cf89386a344f4318d114e5a2aaa6a1ccc489a2efd7a82100414`.
+- Proposed patch: `ec806718db4ddf6338a7506b0b84b0897aefdd3d05e4e0f16e4700dc5c6a9d34`.
+- Frozen evaluator: `ac970d4b28648ed5ade840ba6f010626e57a46f85732d29f9f40cde1a2fd9d82`.
+- Frozen plan: `ea6601436ead9614f9461aaf9f5072235524a95ea9622765b28c31a06ab03ee4`.
+- Baseline primary receipt: `d067d5f82a6b0703940c40b9a2d20d75caa27b6610204a6dabd6a61493186501`.
+- Candidate primary receipt: `af1e0212e94cd306b72738346098ded4735cb5d0b6411a0ecf7d8dbbafe06348`.
+- Candidate regression receipt: `36fe715cef6d80ef5f129ff24fb6742a823ce58ac58397788513ea09dfdee687`.
+- Candidate holdout receipt: `606a25aba182164ccb1833ebc0f965658b8103020e6b6ab64368a6a61fc5fe57`.
+
+Review method: read-only code, artifact, CSV, Git-object and executable-hash inspection; no native rebuild or re-execution. Real browser presentation checks are separate and were pending when this native result review was completed.

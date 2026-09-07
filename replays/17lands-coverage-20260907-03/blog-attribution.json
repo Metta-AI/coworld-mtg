@@ -1,0 +1,156 @@
+{
+  "builds": {
+    "baseline": {
+      "binary_sha256": "c1eae37550ff66a4bd03e93b482352d40401b38e9802af28f91d986338417dfa",
+      "build_id": "888c9f6400c08d5d516a60fdadccbf74ea9a8be3bd0cd0a076c67a314c7ed056",
+      "source_revision": "0d045477305fde4617cba844289e88a909869ed9"
+    },
+    "candidate": {
+      "binary_sha256": "0a97ca37c68f9cf89386a344f4318d114e5a2aaa6a1ccc489a2efd7a82100414",
+      "build_id": "355219a80a30bfeceac33d462d621a4a5b71b1d20f9fe13422c48202c11f8c75",
+      "source_revision": "33d332f5ad4055f2204073c091eddded33eac70d"
+    }
+  },
+  "change": "The candidate explicitly recognizes the public wide CSV schema, preserves each cast token with row/column/role identity, maps positive Arena IDs through a SHA-256-bound official cards.csv, and surfaces unknown or invalid IDs.",
+  "component": "coworld-mtg-harness/mine17lands",
+  "decision_id": "15f6bba8dafa697ec5245ebf2d9a36b7ef92a67515bc46355a04794370d9b31e",
+  "execution_counts": {
+    "baseline": 6,
+    "candidate": 8,
+    "repetitions_per_variant_partition": 2
+  },
+  "freeze": {
+    "adapter_sha256": "e2eff72a947a25db55e8862432c44fe9bfbde60375bcdc057510392e44aae12e",
+    "evaluator_sha256": "ac970d4b28648ed5ade840ba6f010626e57a46f85732d29f9f40cde1a2fd9d82",
+    "frozen_at": "2026-09-07T22:55:36.358107+00:00",
+    "plan_id": "ea6601436ead9614f9461aaf9f5072235524a95ea9622765b28c31a06ab03ee4",
+    "policy_id": "884c46debbc22599941e6a2772f800151d812bee35f3cb1e17caf29c19626403"
+  },
+  "limits": [
+    "The accepted claim is CSV ingestion coverage and identity preservation. No 17Lands gameplay or Phase rules bug is established.",
+    "Wide game/turn summaries omit sufficient global action order, targets, priority and hidden state for faithful gameplay replay.",
+    "The primary and regression rows were previously inspected. According to retained provenance, the 16 source-row holdouts were frozen before candidate results and withheld from implementation; they use the same archive and schema. No baseline holdout was run.",
+    "All selected cast IDs mapped; these rows do not demonstrate every malformed-input behavior or generalization to new formats.",
+    "Repeated coverage projections agree; invocation-local paths mean raw output bytes need not match.",
+    "Source authority, timing, holdout non-exposure and binary/source linkage remain caller attestations. Hashes establish retained identities, not cryptographic proof of those associations.",
+    "Archive-prefix hashes identify bounded ranges, not the complete archive. Public-only loader manifests do not claim private Phase corpus validation."
+  ],
+  "observed_failure": "The baseline native miner successfully read real public wide 17Lands rows but emitted an empty card_frequency list because it did not normalize numeric Arena-ID cast columns.",
+  "overlap": "The aggregate is exactly primary plus regression: 92 rows and 1,426 listed casts, with 230 Arena IDs mapping to 229 names. It is informational, not additional independent coverage or a fourth gate.",
+  "partitions": [
+    {
+      "arena_ids": 184,
+      "listed_casts": 679,
+      "mapped_names": 184,
+      "results": [
+        {
+          "feedback_id": "d067d5f82a6b0703940c40b9a2d20d75caa27b6610204a6dabd6a61493186501",
+          "result": "violated",
+          "variant": "baseline"
+        },
+        {
+          "feedback_id": "af1e0212e94cd306b72738346098ded4735cb5d0b6411a0ecf7d8dbbafe06348",
+          "result": "satisfied",
+          "variant": "candidate"
+        }
+      ],
+      "role": "primary",
+      "rows": 46,
+      "source_rows": [
+        1,
+        46
+      ],
+      "source_sha256": "39bf0e1e99d7b547bf91f20f8b667f1e758edee1afdb1cf7658edb97bbb13a0c"
+    },
+    {
+      "arena_ids": 204,
+      "listed_casts": 747,
+      "mapped_names": 203,
+      "results": [
+        {
+          "feedback_id": "4682ba39e1c09acac27692e8f087f565f9151ba4b12f305e4dd9d3422df19306",
+          "result": "violated",
+          "variant": "baseline"
+        },
+        {
+          "feedback_id": "36fe715cef6d80ef5f129ff24fb6742a823ce58ac58397788513ea09dfdee687",
+          "result": "satisfied",
+          "variant": "candidate"
+        }
+      ],
+      "role": "regression",
+      "rows": 46,
+      "source_rows": [
+        47,
+        92
+      ],
+      "source_sha256": "8f1525a31c61f45cf88d23e25c5efdd186b5a4e1466d252b83ad276cc65a963e"
+    },
+    {
+      "arena_ids": 113,
+      "listed_casts": 276,
+      "mapped_names": 113,
+      "results": [
+        {
+          "feedback_id": "606a25aba182164ccb1833ebc0f965658b8103020e6b6ab64368a6a61fc5fe57",
+          "result": "satisfied",
+          "variant": "candidate"
+        }
+      ],
+      "role": "holdout",
+      "rows": 16,
+      "source_rows": [
+        93,
+        108
+      ],
+      "source_sha256": "27fb706724c87938ff064c9ca210ce30715b6d9fd8d935a3486278faa4804b52"
+    },
+    {
+      "arena_ids": 230,
+      "listed_casts": 1426,
+      "mapped_names": 229,
+      "results": [
+        {
+          "feedback_id": "7558a7ccb3f5b50493afacd0abdf7bbb17202aadd072ed19ca2013978ae793c7",
+          "result": "violated",
+          "variant": "baseline"
+        },
+        {
+          "feedback_id": "1a326bf80f6ff36fe11de1fca1b1dfa447fe9d9edd36641fe097b1528a944986",
+          "result": "satisfied",
+          "variant": "candidate"
+        }
+      ],
+      "role": "aggregate",
+      "rows": 92,
+      "source_rows": [
+        1,
+        92
+      ],
+      "source_sha256": "2b14adfaebf0294250a48c2c996c49a504ae959516132372dba1dda4dece5855"
+    }
+  ],
+  "patch_id": "ec806718db4ddf6338a7506b0b84b0897aefdd3d05e4e0f16e4700dc5c6a9d34",
+  "policy_attestation_id": "3ae9484a87e4504dbab4a519ceadb47c16558d65fce8c83d5c4652bc768dafb0",
+  "replay_sha256": "b548b36717889df6dff0114aca8f46b7332342909365cdd03e65835dca21b0da",
+  "repository": "https://github.com/Metta-AI/coworld-mtg.git",
+  "review_ids": [
+    "f03b8501f6a374f552b419a09340f2171872fe143b218446e5ecd538e263b2f2",
+    "228cb35173efe3bba8fcc4bbfe62a843ddfc79eae4767a082e82e96b61f66a1b"
+  ],
+  "run_id": "17lands-coverage-20260907-03",
+  "schema": "coworld-factory-blog-attribution-v1",
+  "source": {
+    "attribution": "Source data: 17Lands public datasets. Derived excerpts and normalization by the Coworld MTG project. 17Lands does not endorse this work.",
+    "dataset_url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.MSH.PremierDraft.csv.gz",
+    "documentation": "https://www.17lands.com/public_datasets",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "mapping_url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv",
+    "modifications": "Bounded public archive prefixes were decompressed to complete rows and sliced without changing selected field values. Counts and normalization are derived artifacts.",
+    "provider": "17Lands",
+    "receipt_id": "483f59d09bb158d229e4023c333d72e92cb4cf313372c20ca683153066f92e23"
+  },
+  "status": "accepted_source_ingestion_repair"
+}
