@@ -4,6 +4,7 @@
 //! reproduce Magic rules; it translates deck/configuration input and exposes
 //! Phase's exact legal actions and viewer-filtered state to the host.
 
+mod fitting;
 mod oracle;
 pub use oracle::{inspect_oracle_card, OracleInspection};
 
@@ -73,6 +74,8 @@ pub enum BridgeError {
     Action(String),
     #[error("invalid Phase checkpoint: {0}")]
     Checkpoint(String),
+    #[error("invalid fitting setup: {0}")]
+    FittingSetup(String),
 }
 
 /// Immutable card corpus plus helpers for creating independent games.
