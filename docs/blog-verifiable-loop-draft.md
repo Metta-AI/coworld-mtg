@@ -1,5 +1,7 @@
 # A software factory that keeps its evidence
 
+A standalone narrative draft is available in [A machine that can tell whether it got better](blog-verifiable-ai-software.md).
+
 Our importer read 92 real game rows, exited successfully, and returned an empty card-frequency list. The input contained 1,426 listed casts. A successful process had silently lost the information we wanted from it.
 
 The rows came from a public [17Lands dataset](https://www.17lands.com/public_datasets). Coworld's native miner could count these wide CSV rows, but it did not extract their numbered per-turn cast columns and resolve the Arena card IDs through the official mapping. We repaired that ingestion path and recorded an [accepted decision](../replays/17lands-coverage-20260907-03/artifacts/15f6bba8dafa697ec5245ebf2d9a36b7ef92a67515bc46355a04794370d9b31e) after checking the original failures, frozen regression and holdout inputs, and an independent review.
