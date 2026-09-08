@@ -1,0 +1,190 @@
+diff --git a/web/e2e/factory.spec.ts b/web/e2e/factory.spec.ts
+index 7d5b347..23640b0 100644
+--- a/web/e2e/factory.spec.ts
++++ b/web/e2e/factory.spec.ts
+@@ -175,6 +175,9 @@ test("run planning context is visible before a case has a patch", async ({ page
+ });
+ 
+ test("a satisfied candidate case retains its recorded rejection beside the before and after evidence", async ({ page }) => {
++  // Exact reason retained by real Scryfall decision 11bd1d52f3d2dd823d3e72194beb7bf735fcc6d8c1cb455cec33c1ab9e6f00cb.
++  // The surrounding replay stays an explicit UI fixture; this string reproduces its mobile overflow.
++  const recordedReason = "Frozen acceptance requirements were not satisfied: frozen acceptance requirements failed: ['7d91f1fd538d1c634aef57b68fd7c32669b02af543380bb6b82da32417b6919e', '69007946c529eb39476a5dc5ed0944ad39af8ed5debcedc35ea95a4582ad28c8']";
+   const patch = "Synthetic test patch only", patchId = digest(patch), decisionId = "d".repeat(64), planId = "e".repeat(64);
+   const observation = (isMana: boolean) => JSON.stringify({ observation: { parsed: { abilities: [{ kind: "Activated", is_mana_ability: isMana, description: "Synthetic classification observation", effect: { type: "Synthetic" } }] } } });
+   const before = observation(true), after = observation(false), beforeId = digest(before), afterId = digest(after);
+@@ -189,7 +192,7 @@ test("a satisfied candidate case retains its recorded rejection beside the befor
+   append({ kind: "execution_started", execution_id: "test-candidate", case_id: caseId, request_id: caseId, build_id: caseId, change_id: patchId });
+   append({ kind: "execution_finished", execution_id: "test-candidate", status: "completed", evidence_id: afterId, trace_ids: [], detail: null });
+   append({ kind: "feedback_recorded", feedback: { feedback_id: "a".repeat(64), case_id: caseId, execution_ids: ["test-candidate"], evaluator: "test evaluator", evaluator_version: "test-only", adapter: "opaque", declared_strength: "strong", method: "Synthetic assertion", bounded_claim: "Only this synthetic check passed.", result: "satisfied", summary: "Synthetic candidate check is satisfied" } });
+-  append({ kind: "decision_recorded", change_id: patchId, plan_id: planId, decision_id: decisionId, policy: { kind: "external", scope: "Synthetic frozen checks" }, decision: { kind: "rejected", reasons: ["A different frozen gate still fails."] } });
++  append({ kind: "decision_recorded", change_id: patchId, plan_id: planId, decision_id: decisionId, policy: { kind: "external", scope: "Synthetic frozen checks" }, decision: { kind: "rejected", reasons: [recordedReason] } });
+   const rejected = { ...structuredClone(initial), artifacts, events };
+   await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [rejected] } }));
+   await page.route("**/replay.json", route => route.fulfill({ json: rejected }));
+@@ -200,7 +203,13 @@ test("a satisfied candidate case retains its recorded rejection beside the befor
+   await expect(comparison.getByText("mana ability: yes", { exact: true })).toBeVisible();
+   await expect(comparison.getByText("mana ability: no", { exact: true })).toBeVisible();
+   await expect(comparison.getByText("Recorded decision: rejected", { exact: true })).toBeVisible();
+-  await expect(comparison).toContainText("A different frozen gate still fails.");
++  await expect(comparison).toContainText(recordedReason);
++  await page.setViewportSize({ width: 390, height: 844 });
++  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++  await page.getByRole("tab", { name: "Changes & decision" }).click();
++  await expect(page.locator(".decision-card")).toContainText(recordedReason);
++  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++  await page.getByRole("tab", { name: "Evidence", exact: true }).click();
+   await expect(comparison).not.toContainText("accepted");
+   await page.getByRole("button", { name: "Previous event", exact: true }).click();
+   await expect(comparison).toContainText("No decision recorded for this change at this point.");
+diff --git a/web/src/factory/main.ts b/web/src/factory/main.ts
+index c68c36b..5c3dc06 100644
+--- a/web/src/factory/main.ts
++++ b/web/src/factory/main.ts
+@@ -1,7 +1,7 @@
+ import "./styles.css";
+ import { isScryfallRecord, renderGenericSourceRecord, renderRecordedResult } from "./record-view";
+ import {
+-  array, artifactReferences, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
++  array, artifactReferences, candidateGateViolations, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
+   portableBlockers, preferredRun, recordedRunContext,
+   referenceIssues, short, string, updatedCursor, verifyArtifact, visibleEvents,
+   type ArtifactState, type CaseView, type FactoryEvent, type Fields, type Replay, type RunSummary,
+@@ -148,7 +148,7 @@ function renderExecutionDecision(changeId: string, events: FactoryEvent[]): stri
+   const decisions = decisionsForChange(events, changeId);
+   return `<div class="execution-decision"><div class="execution-links">${hashButton(changeId, "Candidate patch")}</div>${decisions.length ? decisions.map(event => {
+     const decision = object(event.payload.decision);
+-    return `<div class="candidate-verdict ${esc(string(decision.kind))}"><strong>Recorded decision: ${esc(label(decision.kind))}</strong>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : ""}<p>Applies to the frozen plan bound by this decision.</p>${hashButton(event.payload.decision_id, "Decision record")}</div>`;
++    return `<div class="candidate-verdict ${esc(string(decision.kind))}"><strong>Recorded decision: ${esc(label(decision.kind))}</strong>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : ""}${renderGateViolations(event)}<p>Applies to the frozen plan bound by this decision.</p>${hashButton(event.payload.decision_id, "Decision record")}</div>`;
+   }).join("") : '<p class="candidate-pending">No decision recorded for this change at this point.</p>'}</div>`;
+ }
+ function evidenceHint(id: string): string {
+@@ -239,9 +239,13 @@ function renderChanges(selected: CaseView): string {
+       return `<article class="plan-card"><div class="card-top"><span class="eyebrow">FROZEN ACCEPTANCE PLAN</span>${hashButton(event.payload.plan_id, "Plan")}</div><div class="plan-counts"><span><strong>${array(plan.regression_case_ids).length}</strong> regression cases</span><span><strong>${array(plan.holdout_case_ids).length}</strong> held-out cases</span></div><details><summary>Inspect the frozen case set</summary><pre>${esc(pretty(plan))}</pre></details></article>`;
+     }).join("")}
+     ${reviews.map(event => { const review = object(event.payload.review); return `<article class="review-card"><div class="card-top"><span class="eyebrow">REVIEW ATTESTATION</span>${badge(review.decision, toneFor(review.decision))}</div><h4>${esc(review.reviewer)}</h4><p>${esc(review.rationale)}</p>${hashButton(event.payload.review_id, "Review record")}</article>`; }).join("")}
+-    ${decisions.map(event => { const decision = object(event.payload.decision), policy = object(event.payload.policy); return `<article class="decision-card ${esc(string(decision.kind))}"><div class="card-top"><span class="eyebrow">RECORDED DECISION</span>${badge(decision.kind, toneFor(decision.kind))}</div><h4>${decision.kind === "accepted" ? "Accepted for the recorded plan" : "The proposed change was rejected"}</h4>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : `<p>This decision is bounded to the cases and gates named by the frozen plan. It does not establish correctness outside that scope.</p>`}<dl class="detail-list"><dt>Policy</dt><dd>${esc(label(policy.kind) || "Not declared")}</dd>${policy.scope ? `<dt>Claim scope</dt><dd>${esc(policy.scope)}</dd>` : ""}${policy.attestation_id ? `<dt>Attestation</dt><dd>${hashButton(policy.attestation_id)}</dd>` : ""}</dl>${hashButton(event.payload.decision_id, "Decision record")}<details><summary>Decision bindings</summary><pre>${esc(pretty(decision))}</pre></details></article>`; }).join("") || `<div class="pending-decision"><span class="status-dot"></span><div><strong>No decision recorded at this point</strong><p>The viewer does not turn passing feedback into acceptance.</p></div></div>`}
++    ${decisions.map(event => { const decision = object(event.payload.decision), policy = object(event.payload.policy); return `<article class="decision-card ${esc(string(decision.kind))}"><div class="card-top"><span class="eyebrow">RECORDED DECISION</span>${badge(decision.kind, toneFor(decision.kind))}</div><h4>${decision.kind === "accepted" ? "Accepted for the recorded plan" : "The proposed change was rejected"}</h4>${array(decision.reasons).length ? `<ul>${array(decision.reasons).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>` : `<p>This decision is bounded to the cases and gates named by the frozen plan. It does not establish correctness outside that scope.</p>`}${renderGateViolations(event)}<dl class="detail-list"><dt>Policy</dt><dd>${esc(label(policy.kind) || "Not declared")}</dd>${policy.scope ? `<dt>Claim scope</dt><dd>${esc(policy.scope)}</dd>` : ""}${policy.attestation_id ? `<dt>Attestation</dt><dd>${hashButton(policy.attestation_id)}</dd>` : ""}</dl>${hashButton(event.payload.decision_id, "Decision record")}<details><summary>Decision bindings</summary><pre>${esc(pretty(decision))}</pre></details></article>`; }).join("") || `<div class="pending-decision"><span class="status-dot"></span><div><strong>No decision recorded at this point</strong><p>The viewer does not turn passing feedback into acceptance.</p></div></div>`}
+   `;
+ }
++function renderGateViolations(decision: FactoryEvent): string {
++  const violations = candidateGateViolations(currentEvents(), decision);
++  return violations.length ? `<section class="candidate-gate-violations"><strong>Recorded candidate gate violations</strong><ul>${violations.map(item => `<li><button class="text-button" data-case="${esc(item.caseId)}">${esc(item.title)}</button> ${item.feedbackIds.map(id => hashButton(id, "Feedback evidence")).join(" ")}</li>`).join("")}</ul></section>` : "";
++}
+ function renderTimeline(selected: CaseView | undefined): string {
+   const replay = state.replay!;
+   const caseSequences = new Set(selected?.events.map(event => event.sequence));
+diff --git a/web/src/factory/model.test.ts b/web/src/factory/model.test.ts
+index 2178c44..58ec32c 100644
+--- a/web/src/factory/model.test.ts
++++ b/web/src/factory/model.test.ts
+@@ -1,6 +1,6 @@
+ import { describe, expect, it } from "vitest";
+ import { createHash } from "node:crypto";
+-import { decisionsForChange, emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Replay } from "./model";
++import { object, candidateGateViolations, decisionsForChange, emptyCaseState, evaluationReasons, portableBlockers, preferredRun, recordedRunContext, artifactReferences, canonicalJson, caseEvents, casesAt, parseReplay, referenceIssues, updatedCursor, verifyArtifact, visibleEvents, type FactoryEvent, type Fields, type Replay } from "./model";
+ 
+ const hash = (char: string) => char.repeat(64);
+ const event = (sequence: number, payload: FactoryEvent["payload"], stage = "cases"): FactoryEvent => ({ sequence, elapsed_ms: sequence * 100, stage, payload });
+@@ -180,3 +180,50 @@ describe("candidate decision bindings", () => {
+     expect(decisionsForChange(events, hash("d"))).toEqual([]);
+   });
+ });
++
++
++describe("recorded candidate gate context", () => {
++  const gateFixture = () => {
++    const events: FactoryEvent[] = [];
++    const add = (payload: FactoryEvent["payload"]) => events.push(event(events.length, payload));
++    add({ kind: "case_registered", case_id: hash("a"), title: "Deranged Assistant" });
++    add({ kind: "case_registered", case_id: hash("b"), title: "Millikin" });
++    add({ kind: "case_registered", case_id: hash("c"), title: "Unrelated case" });
++    add({ kind: "acceptance_plan_frozen", plan_id: hash("d"), plan: { case_id: hash("a"), regression_case_ids: [hash("b")], holdout_case_ids: [] } });
++    add({ kind: "acceptance_plan_frozen", plan_id: hash("e"), plan: { case_id: hash("c"), regression_case_ids: [], holdout_case_ids: [] } });
++    for (const [caseId, id, change] of [[hash("a"), "assistant", hash("f")], [hash("b"), "millikin", hash("f")], [hash("c"), "unrelated", hash("f")], [hash("a"), "other-candidate", hash("e")]]) {
++      add({ kind: "execution_started", execution_id: id, case_id: caseId, change_id: change });
++      add({ kind: "feedback_recorded", feedback: { case_id: caseId, feedback_id: id, declared_strength: "strong", result: "violated", execution_ids: [id] } });
++    }
++    add({ kind: "decision_recorded", decision_id: "rejection", plan_id: hash("d"), change_id: hash("f"), decision: { kind: "rejected", reasons: ["An opaque producer reason"] } });
++    return { events, decision: events[events.length - 1], add };
++  };
++  it("joins required case names and feedback through the exact plan and candidate", () => {
++    const { events, decision } = gateFixture();
++    expect(candidateGateViolations(events, decision)).toEqual([
++      { caseId: hash("a"), title: "Deranged Assistant", feedbackIds: ["assistant"] },
++      { caseId: hash("b"), title: "Millikin", feedbackIds: ["millikin"] },
++    ]);
++  });
++  it("keeps later candidate or same-change feedback from rewriting an earlier rejection", () => {
++    const { events, decision, add } = gateFixture(), original = candidateGateViolations(events, decision);
++    add({ kind: "execution_started", execution_id: "later", case_id: hash("a"), change_id: hash("f") });
++    add({ kind: "feedback_recorded", feedback: { case_id: hash("a"), feedback_id: "later-failure", declared_strength: "strong", result: "violated", execution_ids: ["later"] } });
++    add({ kind: "feedback_recorded", feedback: { case_id: hash("b"), feedback_id: "later-success", declared_strength: "strong", result: "satisfied", execution_ids: ["millikin"] } });
++    add({ kind: "decision_recorded", decision_id: "later-acceptance", plan_id: hash("d"), change_id: hash("e"), decision: { kind: "accepted" } });
++    expect(candidateGateViolations(events, decision)).toEqual(original);
++    expect(candidateGateViolations(events.slice(0, decision.sequence), decision)).toEqual([]);
++  });
++  it("excludes weak, missing, mixed-candidate or mismatched-case execution bindings", () => {
++    const { events, decision } = gateFixture();
++    const invalidBindings: Fields[] = [
++      { declared_strength: "weak" }, { execution_ids: [] }, { execution_ids: ["missing"] },
++      { execution_ids: ["assistant", "other-candidate"] }, { execution_ids: ["millikin"] },
++    ];
++    for (const bad of invalidBindings) {
++      const changed = events.map(item => item.payload.kind === "feedback_recorded" && object(item.payload.feedback).feedback_id === "assistant" ? { ...item, payload: { ...item.payload, feedback: { ...object(item.payload.feedback), ...bad } } } : item);
++      expect(candidateGateViolations(changed, decision).map(item => item.title)).toEqual(["Millikin"]);
++    }
++    expect(candidateGateViolations(events.filter(item => item.payload.kind !== "acceptance_plan_frozen"), decision)).toEqual([]);
++  });
++});
+diff --git a/web/src/factory/model.ts b/web/src/factory/model.ts
+index 23f5595..912c6c9 100644
+--- a/web/src/factory/model.ts
++++ b/web/src/factory/model.ts
+@@ -135,6 +135,36 @@ export function caseEvents(events: FactoryEvent[], caseId: string): FactoryEvent
+       (p.kind === "compute_recorded" && executions.has(string(object(p.usage).execution_id)));
+   });
+ }
++export interface CandidateGateViolation { caseId: string; title: string; feedbackIds: string[] }
++
++// Explain only typed gate feedback already recorded when this decision was made.
++// An empty result says nothing about acceptance or the producer's rejection reason.
++export function candidateGateViolations(events: FactoryEvent[], decision: FactoryEvent): CandidateGateViolation[] {
++  const payload = decision.payload, changeId = string(payload.change_id), planId = string(payload.plan_id);
++  if (payload.kind !== "decision_recorded" || object(payload.decision).kind !== "rejected" || !changeId || !planId ||
++      !events.some(event => event.sequence === decision.sequence && event.payload.kind === "decision_recorded" && event.payload.decision_id === payload.decision_id)) return [];
++  const prior = events.filter(event => event.sequence <= decision.sequence);
++  const plans = prior.filter(event => event.payload.kind === "acceptance_plan_frozen" && event.payload.plan_id === planId);
++  if (plans.length !== 1) return [];
++  const plan = object(plans[0].payload.plan);
++  const required = [...new Set([plan.case_id, ...array(plan.regression_case_ids), ...array(plan.holdout_case_ids)].map(string).filter(Boolean))];
++  const starts = new Map(prior.filter(event => event.payload.kind === "execution_started").map(event => [string(event.payload.execution_id), event]));
++  return required.flatMap(caseId => {
++    const registration = prior.find(event => event.payload.kind === "case_registered" && event.payload.case_id === caseId);
++    if (!registration) return [];
++    const feedbackIds = prior.filter(event => {
++      if (event.payload.kind !== "feedback_recorded") return false;
++      const feedback = object(event.payload.feedback), ids = array(feedback.execution_ids).map(string);
++      return feedback.case_id === caseId && feedback.declared_strength === "strong" && feedback.result === "violated" &&
++        Boolean(string(feedback.feedback_id)) && ids.length > 0 && ids.every(id => {
++          const start = starts.get(id);
++          return start !== undefined && start.sequence < event.sequence && start.payload.case_id === caseId && start.payload.change_id === changeId;
++        });
++    }).map(event => string(object(event.payload.feedback).feedback_id));
++    return feedbackIds.length ? [{ caseId, title: string(registration.payload.title) || caseId, feedbackIds: [...new Set(feedbackIds)] }] : [];
++  });
++}
++
+ export function decisionsForChange(events: FactoryEvent[], changeId: string): FactoryEvent[] {
+   return events.filter(event => event.payload.kind === "decision_recorded" && event.payload.change_id === changeId);
+ }
+diff --git a/web/src/factory/styles.css b/web/src/factory/styles.css
+index 39d138b..61ca652 100644
+--- a/web/src/factory/styles.css
++++ b/web/src/factory/styles.css
+@@ -67,3 +67,6 @@ td{padding:9px 11px;border-bottom:1px solid #edf0e7;color:#526d44}
+ .change-context{margin-bottom:18px;padding:16px 18px;border:1px solid #d9e1cf;border-radius:5px;background:#f4f7ef}.change-context p{font-size:12px;color:#546c48;margin:10px 0;line-height:1.7}.change-context .subtle{font-size:10px;color:#718565}.change-context .text-button{font-size:11px}.execution-decision{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #e0e5d9}.candidate-verdict{padding:10px;border:1px solid #cbd8bc;border-radius:4px;background:#f4f7ed;margin-top:8px}.candidate-verdict.rejected{background:#fcf4e9;border-color:#e3c7a5}.candidate-verdict strong{font-size:11px;color:#556d47}.candidate-verdict.rejected strong{color:#965e36}.candidate-verdict ul{font-size:10px;color:#886448;padding-left:15px;margin:8px 0;line-height:1.6}.candidate-verdict p,.candidate-pending{font-size:10px!important;line-height:1.6}.candidate-verdict .artifact-link{font-size:9px}
+ 
+ .recorded-result,.generic-source-record{margin:14px 0;padding:13px;border:1px solid #dce4d3;border-radius:4px;background:#f8faf4;min-width:0}.recorded-result.malformed{border-color:#ddbfa4;background:#fcf4e9}.result-summary{font-size:11px;line-height:1.7;margin:9px 0 12px;color:#506849}.recorded-fields{display:grid;grid-template-columns:minmax(90px,1fr) minmax(70px,1fr);gap:7px 12px;font-size:10px;margin:10px 0}.recorded-fields dt{color:#718466;overflow-wrap:anywhere}.recorded-fields dd{margin:0;color:#405d39;overflow-wrap:anywhere;white-space:pre-wrap}.recorded-section{border-top:1px solid #e0e5d9;padding-top:9px;margin-top:10px}.recorded-section summary{font-size:10px;color:#506e44;overflow-wrap:anywhere}.recorded-section summary span{font-weight:400;color:#718466;margin-left:6px}.generic-table{margin-top:10px;max-height:330px;overflow:auto}.generic-table table{width:100%;font-size:10px;border-collapse:collapse}.generic-table th,.generic-table td{padding:7px 9px;border-bottom:1px solid #dfe6d6;text-align:left;vertical-align:top;max-width:260px;overflow-wrap:anywhere;white-space:pre-wrap}.generic-table th{font-weight:600;background:#eef3e8;color:#526e47}.generic-table td{color:#49643e}.record-truncation,.recorded-result-note,.record-empty{font-size:9px!important;color:#718466!important;line-height:1.7;margin-top:9px}.recorded-result-note{border-top:1px solid #e0e5d9;padding-top:9px}
++
++.decision-card li,.candidate-verdict li{overflow-wrap:anywhere}
++.candidate-gate-violations{margin:12px 0}.candidate-gate-violations>strong{font-size:11px}.candidate-gate-violations ul{padding-left:16px;line-height:1.8}.candidate-gate-violations .text-button{font-size:11px;text-align:left;overflow-wrap:anywhere}.candidate-gate-violations .artifact-link{font-size:9px}

@@ -1,0 +1,140 @@
+{
+  "artifacts": {
+    "candidates.jsonl": {
+      "bytes": 72157,
+      "sha256": "0eedb1658402f8df71238232029069d0f4edc36bb7e49e0fea68f6f50ff9e859"
+    },
+    "discovery.jsonl": {
+      "bytes": 27269164,
+      "sha256": "096af9ab4b74ca8d8a41c35232947e7a1163ac0e49324f66357607625bcf0590"
+    },
+    "selected-records.jsonl": {
+      "bytes": 254215,
+      "sha256": "8f6bd071ae663d7785883e6f2857e7ec0cd84aaedac402ca97a9206e3be68e11"
+    }
+  },
+  "candidate_split_counts": {
+    "development": 35,
+    "holdout": 12
+  },
+  "completed_at": "2026-09-07T19:44:12.842852+00:00",
+  "counts": {
+    "all_weak_signal_records": 55,
+    "decoded_records": 38633,
+    "distinct_oracle_ids": 38633,
+    "eligible_records": 29530,
+    "eligible_weak_candidate_records": 47,
+    "excluded_records": 9103,
+    "source_decode_errors": 0,
+    "source_rows": 38633
+  },
+  "exclusion_counts": {
+    "layout_not_normal": 5300,
+    "representative_printing_not_paper": 2132,
+    "vintage_not_legal_or_restricted": 6891
+  },
+  "families": [
+    {
+      "distinct_eligible_oracle_ids": 25,
+      "family": "mana_library_effect",
+      "rank": 1
+    },
+    {
+      "distinct_eligible_oracle_ids": 19,
+      "family": "mana_library_cost",
+      "rank": 2
+    },
+    {
+      "distinct_eligible_oracle_ids": 3,
+      "family": "mana_library_both",
+      "rank": 3
+    }
+  ],
+  "interpretation": "Whole-snapshot source audit and weak nomination. No Phase import, gameplay failure, patch, or improvement is claimed.",
+  "layout_counts": {
+    "adventure": 170,
+    "art_series": 2243,
+    "augment": 14,
+    "case": 15,
+    "class": 38,
+    "double_faced_token": 80,
+    "emblem": 87,
+    "flip": 26,
+    "front_card": 291,
+    "host": 20,
+    "leveler": 26,
+    "meld": 21,
+    "modal_dfc": 100,
+    "mutate": 34,
+    "normal": 33333,
+    "planar": 207,
+    "prepare": 55,
+    "prototype": 21,
+    "saga": 194,
+    "scheme": 102,
+    "split": 137,
+    "token": 911,
+    "transform": 401,
+    "vanguard": 107
+  },
+  "producer": {
+    "git_dirty": false,
+    "git_revision": "b549d53a8f49d5eaa3dc39c7b31f1efb898e3d91",
+    "recipe_sha256": "89f38877e7818ce1e815c4231347b84cb91caa3bc983196e3c46fd14deb21b1b",
+    "script_sha256": "5a5c0d1be1f4851433759d8025968157eab6eb9c0324936f466a4644706d93f4"
+  },
+  "recipe": {
+    "cohort": {
+      "games_contains": "paper",
+      "layout": "normal",
+      "legalities.vintage": [
+        "legal",
+        "restricted"
+      ],
+      "object": "card",
+      "oracle_id": "present",
+      "printing_id": "present"
+    },
+    "limits": {
+      "archive_bytes": 134217728,
+      "record_bytes": 8388608,
+      "uncompressed_bytes": 536870912
+    },
+    "ranking": [
+      "family eligible distinct oracle count descending",
+      "family name",
+      "oracle text length ascending",
+      "sha256(seed NUL oracle_id)",
+      "printing_id",
+      "source_index"
+    ],
+    "scope": "All source rows audited; only the declared cohort is ranked. No card-name allowlist.",
+    "seed": "coworld-scryfall-discovery-20260907-v1",
+    "signal": "activated paragraph with mana production and potential library movement in cost or effect",
+    "signal_strength": "weak; text heuristics nominate candidates and do not establish semantic failure",
+    "split": "int(sha256(seed NUL oracle_id)[:8], 16) % 100 < 20 => holdout; otherwise development",
+    "version": 1
+  },
+  "representative_ranks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "schema_version": 1,
+  "selected_records_note": "All ranked weak candidates, reserialized as JSONL for import. Exact source bytes are retained at each candidate's raw_record_path.",
+  "source_archive_sha256": "2a739abff0876a20cd43ef0e6d98aab59100d899e990ad2f0251481098df9101",
+  "source_manifest_sha256": "3503d467a7334b42a0f5dabcfc54f723106536b1869aedaca106dac7a9607b82",
+  "split_counts": {
+    "development": 30876,
+    "holdout": 7757
+  },
+  "started_at": "2026-09-07T19:44:09.572450+00:00",
+  "status": "complete"
+}

@@ -1,0 +1,39 @@
+{
+  "run_id": "scryfall-mana-20260907-03",
+  "decision_id": "11bd1d52f3d2dd823d3e72194beb7bf735fcc6d8c1cb455cec33c1ab9e6f00cb",
+  "decision_sequence": 863,
+  "measurements": {
+    "before": {
+      "selector": ".decision-card.rejected > ul > li",
+      "text": "Frozen acceptance requirements were not satisfied: frozen acceptance requirements failed: ['7d91f1fd538d1c634aef57b68fd7c32669b02af543380bb6b82da32417b6919e', '69007946c529eb39476a5dc5ed0944ad39af8ed5debcedc35ea95a4582ad28c8']",
+      "elementClientWidth": 304,
+      "elementScrollWidth": 447,
+      "overflowWrap": "normal",
+      "viewportWidth": 390,
+      "documentScrollWidth": 498
+    },
+    "after": {
+      "selector": ".decision-card.rejected > ul > li",
+      "text": "Frozen acceptance requirements were not satisfied: frozen acceptance requirements failed: ['7d91f1fd538d1c634aef57b68fd7c32669b02af543380bb6b82da32417b6919e', '69007946c529eb39476a5dc5ed0944ad39af8ed5debcedc35ea95a4582ad28c8']",
+      "elementClientWidth": 304,
+      "elementScrollWidth": 304,
+      "overflowWrap": "anywhere",
+      "viewportWidth": 390,
+      "documentScrollWidth": 390
+    }
+  },
+  "typed_links": [
+    {
+      "title": "Deranged Assistant",
+      "case_id": "7d91f1fd538d1c634aef57b68fd7c32669b02af543380bb6b82da32417b6919e",
+      "feedback_id": "1f35b27bc692c8069a242bfd8844f86cea654219dd6d1245107524487171d4f1"
+    },
+    {
+      "title": "Millikin",
+      "case_id": "69007946c529eb39476a5dc5ed0944ad39af8ed5debcedc35ea95a4582ad28c8",
+      "feedback_id": "5cf0b027af0ceda0f5a36ed9ecdcc0914703df05f9bd991e05ea2a608ba5d88a"
+    }
+  ],
+  "case_link_opens_selected_case": true,
+  "feedback_link_opens_record": true
+}

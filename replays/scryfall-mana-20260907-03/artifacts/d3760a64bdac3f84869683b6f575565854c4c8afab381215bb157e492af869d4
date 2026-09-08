@@ -1,0 +1,11 @@
+The retained Draw measurement build is consistent with the frozen baseline harness and the reviewed candidate source identity. No material provenance mismatch was found.
+
+The candidate worker and Cargo-selected executable both hash to 4399707190e033da17176267ab5ac0762666914d03da825d0418606134efd806. The retained baseline worker matches its receipt. All 31 baseline-recorded harness paths match the candidate; all 48 candidate harness paths match frozen commit 09007eb7bd726af47953e054b1abdd64d5829c04. The 2,054 retained Phase source paths match the current checkout, with exactly six changes from baseline 54227f4527a0b45b01eb3f819d262ee49b665810.
+
+The canonical patch hashes to 0e87162bb9e09f10a87722015e9d7d6fbbc2fcea269392bec47486f729ba5017. The executor patch differs only in six index lines that abbreviate the same Git blob hashes; every other byte agrees. The resolved harness lock differs only by removal of engine's pinned Git source for the explicit local path override. Recorded compiler identity and common build settings match baseline.
+
+Cargo's retained messages report success, compile the expected local engine, and select the exact retained executable. The attestation embeds the original build record and binds its exact bytes. The builder hashes sources before/after compilation and matches its recorded hash. Its only difference from frozen commit09007eb adds four environment keys to the receipt; the cargo wrapper and compiled harness sources match the frozen commit.
+
+These checks establish retained identities and measurement comparability, not independently reproduced compilation, gameplay correctness, or acceptance. The builder writes its receipt before its final case build-check invocation; this directory supplies no separate completion receipt for that invocation, so none is claimed here. No worker or build was run during this audit.
+
+Details and verified source maps are in report.json, verified-source-maps.json and patch-comparison.json.

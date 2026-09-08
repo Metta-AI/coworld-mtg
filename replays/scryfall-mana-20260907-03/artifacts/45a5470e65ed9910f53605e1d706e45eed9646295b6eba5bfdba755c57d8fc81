@@ -1,0 +1,33 @@
+{
+  "clock_ticks_per_second": 100,
+  "log_bytes": 1038,
+  "log_sha256": "41756f0bfbcf17188b2ac5b2b0b774c70f0b2d842a3a4f1332c828f47f2989d8",
+  "observed_utc": "2026-09-07T23:27:01.521963+00:00",
+  "output_exists": false,
+  "page_bytes": 4096,
+  "pid": 3963227,
+  "threads": [
+    {
+      "affinity": [
+        0
+      ],
+      "rss_pages": 225693,
+      "state": "S",
+      "system_cpu_ticks": 54,
+      "tid": 3963227,
+      "user_cpu_ticks": 1283,
+      "wait_channel": "futex_wait_queue"
+    },
+    {
+      "affinity": [
+        0
+      ],
+      "rss_pages": 225693,
+      "state": "R",
+      "system_cpu_ticks": 77,
+      "tid": 3966024,
+      "user_cpu_ticks": 86283,
+      "wait_channel": "0"
+    }
+  ]
+}

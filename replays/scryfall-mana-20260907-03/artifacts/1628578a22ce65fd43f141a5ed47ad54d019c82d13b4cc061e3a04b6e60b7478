@@ -1,0 +1,26 @@
+# Real Scryfall partial-candidate browser audit and repair
+
+The requested real-run assertions pass against the repaired viewer. One material presentation defect was found and fixed: the original rejection reason's complete case hashes expanded a 390px mobile page to 498px. The decision panel also required readers to resolve those hashes manually to identify the failing cases.
+
+The trigger is recorded decision `11bd1d52f3d2dd823d3e72194beb7bf735fcc6d8c1cb455cec33c1ab9e6f00cb`, sequence 863, in `scryfall-mana-20260907-03`, for candidate patch `0e87162bb9e09f10a87722015e9d7d6fbbc2fcea269392bec47486f729ba5017`. The offending element is `.decision-card.rejected > ul > li`: its content width was 447px within a 304px element. With wrapping, content and element both fit 304px and the page fits 390px. The complete reason text is unchanged; before/after measurements and exact text are retained in `ui-repair-evidence.json`.
+
+The scoped viewer change adds wrapping in both rejection surfaces and “Recorded candidate gate violations” with links to Deranged Assistant, Millikin and their feedback evidence. Names and evidence are joined through this decision's exact frozen plan, candidate execution records and strong violated feedback, using globally visible events only through the decision sequence. The implementation does not parse the original reason or infer acceptance from an empty violation set. Case selection and feedback-inspector links were exercised on the actual run.
+
+| Actual case | Baseline feedback | Candidate feedback |
+| --- | --- | --- |
+| Darkwater Egg | Violated | Satisfied |
+| Chromatic Sphere | Violated | Satisfied |
+| Deranged Assistant | Violated | Violated |
+| Millikin | Violated | Violated |
+| Vault of Whispers | No baseline recorded | Satisfied |
+| Manakin | No baseline recorded | Satisfied |
+| Seat of the Synod | No baseline recorded | Satisfied |
+| Ancient Den | No baseline recorded | Satisfied |
+
+The queue preserves all 57 candidate results: 16 satisfied, 2 violated and 39 inconclusive. An actual inconclusive case was inspected and remained inconclusive. The candidate stays visibly rejected beside satisfied case evidence, and the overall run remains running. Seeking to sequence 862 hides the decision; sequence 863 restores the rejection. No accepted Scryfall decision is shown. Source Oracle text and the independent implementation-review summary remain accessible, including the review's explicit statement that source review is separate from experiment acceptance and the Mill cases remain unfixed.
+
+Validation: TypeScript checking, 29 focused unit tests, all 9 existing factory browser tests (including a regression with the exact real rejection reason), and the bounded real-run browser audit. Unit coverage excludes unrelated plan/candidate feedback, weak or malformed execution bindings, and later feedback that would rewrite this decision. Desktop and mobile evidence/decision views have no horizontal page overflow after the fix. No JavaScript or HTTP errors occurred in the completed real-run audit.
+
+The original view was checked on the existing server at port 8030. The repaired production build was served only in the reviewer's reserved workspace on port 4198; browser API requests read the unchanged real run from 8030. No replay data, native source, decision or shared server files were altered. Root deployment of the repaired viewer remains a separate step.
+
+Implementation commit: `19b35478ba347a3098bc3b6390010debdbc73d3a`.

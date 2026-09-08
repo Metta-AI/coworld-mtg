@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""Owned discovery notes only. Freeze actual source nominations before bounded baseline observations."""
+import collections,csv,datetime,hashlib,io,json,os,re,resource,shutil,signal,subprocess,sys,time
+from pathlib import Path
+BASE=Path(__file__).resolve().parent
+OUT=BASE/"data"
+ROOT=Path("/home/ubuntu/repos/coworld-factory-20260907-root")
+OLD=ROOT/"data/17lands-audit-01"
+PRIOR=OLD/"exploratory-25"
+WORKER=ROOT/"bin/oracle-probe-baseline-v2"
+SNAPSHOT=ROOT/"data/snapshot-01/oracle-cards.jsonl.gz"
+COL_RE=r"(user|oppo)_turn_\d+_(creatures_cast|non_creatures_cast|(user|oppo)_instants_sorceries_cast)"
+WORKER_HASH="96d005c1a91652a2734fcac30c1f0835a1b59f8dba1b75e84ee8049a5cec0e8c"
+PHASE="54227f4527a0b45b01eb3f819d262ee49b665810"
+def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+def digest(path):
+ h=hashlib.sha256()
+ with Path(path).open("rb") as f:
+  for block in iter(lambda:f.read(1024*1024),b""):h.update(block)
+ return h.hexdigest()
+def write(path,obj):
+ path=Path(path)
+ with path.open("x") as f:json.dump(obj,f,indent=2,ensure_ascii=False,sort_keys=True);f.write("\n")
+ return {"path":str(path.relative_to(OUT)),"sha256":digest(path),"bytes":path.stat().st_size}
+def copy_exact(source,dest):
+ shutil.copyfile(source,dest)
+ assert digest(source)==digest(dest)
+ return {"path":str(dest.relative_to(OUT)),"sha256":digest(dest),"bytes":dest.stat().st_size}
+def freeze():
+ (OUT/"source").mkdir();(OUT/"prior-first25").mkdir();(OUT/"raw-scryfall").mkdir()
+ source={}
+ for src,name in [(OLD/"replay_data.complete-rows.csv","known-92.csv"),(OLD/"cards.csv","cards.csv"),(SNAPSHOT,"oracle-cards.jsonl.gz"),(OLD/"replay_data.csv.gz.prefix","replay-prefix.csv.gz"),(ROOT/"data/baseline-build-v2.json","baseline-build-attestation.json"),(OLD/"cards.metadata.json","cards-acquisition.json"),(OLD/"replay_data.metadata.json","replay-acquisition.json"),(ROOT/"data/snapshot-01/descriptor.json","scryfall-descriptor.json"),(ROOT/"data/snapshot-01/source-manifest.json","scryfall-source-manifest.json")]:
+  source[name]=copy_exact(src,OUT/"source"/name)
+ assert source["known-92.csv"]["sha256"]=="2b14adfaebf0294250a48c2c996c49a504ae959516132372dba1dda4dece5855"
+ assert source["cards.csv"]["sha256"]=="cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153"
+ assert source["oracle-cards.jsonl.gz"]["sha256"]=="2a739abff0876a20cd43ef0e6d98aab59100d899e990ad2f0251481098df9101"
+ prior_plan=json.loads((PRIOR/"native-nomination-plan.json").read_bytes())
+ prior_receipt=json.loads((PRIOR/"native-execution-receipt.json").read_bytes())
+ prior_artifacts={}
+ for name in ("native-nomination-plan.json","native-execution-receipt.json"):
+  prior_artifacts[name]=copy_exact(PRIOR/name,OUT/"prior-first25"/name)
+ for e in prior_receipt["executions"]:
+  for name in (e["output_path"],e["output_path"].replace(".jsonl",".stdout"),e["output_path"].replace(".jsonl",".stderr")):
+   prior_artifacts[name]=copy_exact(PRIOR/name,OUT/"prior-first25"/name)
+ with (OUT/"source/known-92.csv").open(newline="") as f:reader=csv.DictReader(f);rows=list(reader);headers=reader.fieldnames
+ with (OUT/"source/cards.csv").open(newline="") as f:cards=list(csv.DictReader(f))
+ assert len(rows)==92 and len(headers)==2615
+ cmap=collections.defaultdict(list)
+ for row in cards:cmap[row["id"]].append(row)
+ nominees=[];by_id={};occurrences=[]
+ for row_number,row in enumerate(rows,1):
+  for column,value in row.items():
+   if not re.fullmatch(COL_RE,column) or not value:continue
+   for position,arena_id in enumerate(value.split("|")):
+    assert re.fullmatch(r"[0-9]+",arena_id) and int(arena_id)>0
+    occurrence={"source_row":row_number,"source_column":column,"value_position":position,"arena_id":arena_id,"source_value":value}
+    occurrences.append(occurrence)
+    if arena_id not in by_id:
+     n={"nominee":len(nominees)+1,"arena_id":arena_id,"first_observed":occurrence,"recorded_cast_occurrences":0,"official_mapping_matches":cmap[arena_id]}
+     nominees.append(n);by_id[arena_id]=n
+    by_id[arena_id]["recorded_cast_occurrences"]+=1
+ assert len(nominees)==230 and len(occurrences)==1426
+ names={n["official_mapping_matches"][0]["name"] for n in nominees if len(n["official_mapping_matches"])==1}
+ sys.dont_write_bytecode=True
+ sys.path.insert(0,str(ROOT/"repo/scripts"))
+ import scryfall_source
+ found={name:[] for name in names};scanned=0
+ for record in scryfall_source.iter_records(OUT/"source/oracle-cards.jsonl.gz"):
+  scanned+=1
+  if record.error:raise ValueError(record.error)
+  if record.card["name"] in found:found[record.card["name"]].append(record)
+ for n in nominees:
+  n["scryfall_matches"]=[]
+  if len(n["official_mapping_matches"])!=1:
+   n.update(mapping_status="inconclusive",mapping_detail="official Arena mapping is absent or nonunique");continue
+  name=n["official_mapping_matches"][0]["name"];n["name"]=name
+  matches=found[name]
+  for rec in matches:
+   path=OUT/"raw-scryfall"/f"{rec.index:05d}-{rec.card['id']}.jsonl"
+   if not path.exists():path.write_bytes(rec.raw)
+   n["scryfall_matches"].append({"oracle_id":rec.card["oracle_id"],"printing_id":rec.card["id"],"arena_id":rec.card.get("arena_id"),"name":rec.card["name"],"layout":rec.card["layout"],"set":rec.card["set"],"snapshot_index":rec.index,"snapshot_offset":rec.offset,"raw_record_path":str(path.relative_to(OUT)),"raw_record_sha256":digest(path)})
+  if len(matches)!=1:
+   n.update(mapping_status="inconclusive",mapping_detail="nonunique or absent exact name");continue
+  if str(matches[0].card.get("arena_id"))!=n["arena_id"]:
+   n.update(mapping_status="inconclusive",mapping_detail="Scryfall representative arena_id differs or absent; exact Arena identity not established");continue
+  n.update(mapping_status="exact_unique_name_to_current_oracle_record",selected_record=n["scryfall_matches"][0])
+ old_status=[]
+ for old,n in zip(prior_plan["nominees"],nominees[:25]):
+  assert old["arena_id"]==n["arena_id"] and old["mapping_status"]==n["mapping_status"]
+  if "raw_record_sha256" in old:assert old["raw_record_sha256"]==n["selected_record"]["raw_record_sha256"]
+  results=[e for e in prior_receipt["executions"] if e["nominee"]==n["nominee"]]
+  old_status.append({"nominee":n["nominee"],"arena_id":n["arena_id"],"name":n["name"],"original_mapping_status":old["mapping_status"],"original_mapping_detail":old.get("mapping_detail"),"original_execution_count":len(results),"original_observed_statuses":[e.get("observation",{}).get("status") for e in results],"original_output_sha256":[e.get("output_sha256") for e in results]})
+ assert digest(WORKER)==WORKER_HASH
+ attestation=json.loads((OUT/"source/baseline-build-attestation.json").read_bytes())
+ assert attestation["binary_sha256"]==WORKER_HASH and attestation["phase_revision"]==PHASE
+ source_occurrences=write(OUT/"source-occurrences.json",{"cast_column_regex":COL_RE,"occurrences":occurrences})
+ old_record=write(OUT/"original-first25-status.json",{"selection":"Previously inspected first 25; preserved as original observations, not holdouts or new outcomes.","artifacts":prior_artifacts,"nominees":old_status})
+ plan={"schema":"17lands-all230-discovery-plan-v1","frozen_at":now(),"scope":"Source-derived card parser observations only. No reconstruction of full games, engine rules correctness result, frozen-experiment change, repair or acceptance.","selection":"All distinct Arena IDs in the same 92 complete public MSH PremierDraft rows, ordered by first occurrence in source row order, original header order, then pipe-token position. Column order is an audit traversal, not global gameplay order. No name, outcome, parser-result or card-type filtering.","selection_bias":"A bounded prefix of one event/set archive; first 92 rows are already inspected and not representative of all 17Lands games. The earlier first 25 are a known subset, not unseen holdouts.","source_rows":len(rows),"columns":len(headers),"listed_cast_occurrences":len(occurrences),"nominees_total":len(nominees),"mapping_rule":"Preserve the original first 25 conservative rule: exactly one official cards.csv row for the observed Arena ID, exactly one entire Scryfall record with that exact mapped name, and that record's arena_id equals the observed ID. No name-only fallback, face splitting, ambiguity resolution or current representative substitution.","mapping_boundary":"This is exact identity matching against the retained current snapshot, not proof that its printing or Oracle text equals the historical Arena game version.","source_records":source,"source_occurrences":source_occurrences,"scryfall_records_scanned":scanned,"source_helper_sha256":digest(ROOT/"repo/scripts/scryfall_source.py"),"baseline_worker":{"path":str(WORKER),"sha256":WORKER_HASH,"phase_revision_caller_attested":PHASE,"attestation":source["baseline-build-attestation.json"],"boundary":"Executable identity is hashed; its Phase source association comes from the existing build attestation."},"protocol":{"command":[str(WORKER),"oracle-probe","--input","<raw-scryfall-record>","--output","<native-output>"],"private_corpus_or_bootstrap_required":False},"limits":{"repetitions":2,"worker_processes":1,"cpu_affinity":"one available CPU selected before launch","address_space_bytes":8*1024**3,"cpu_seconds_per_execution":10,"wall_seconds_per_execution":20,"file_size_bytes":4*1024**2,"total_worker_wall_seconds":900},"result_categories":["native_crash_or_nonzero_exit","wall_timeout","missing_or_invalid_json_output","native_nonparsed_status","parsed_with_explicit_Unimplemented_tag","parsed_without_explicit_Unimplemented_tag"],"interpretation":"Explicit native Unimplemented tags are missing-support observations. A parsed result is not proof of full semantic coverage. Empty ability sections are reported separately and never called defects by this audit.","unimplemented_matcher":"Recursively inspect the parsed AST only: dictionaries with type exactly Unimplemented, dictionary variant keys exactly Unimplemented, or scalar enum strings exactly Unimplemented. Do not search Oracle text, descriptions or substrings.","representative_recipe":"At most the first five nominees in source order per result category; if a category contains fewer, retain all. All 230 per-ID results remain available.","original_first25":old_record,"runner_sha256":digest(Path(__file__)),"nominees":nominees,"attribution":{"provider":"17Lands","documentation_url":"https://www.17lands.com/public_datasets","dataset_url":"https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.MSH.PremierDraft.csv.gz","mapping_url":"https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv","license":"CC BY 4.0","license_url":"https://creativecommons.org/licenses/by/4.0/","credit":"Source data: 17Lands public datasets. Derived slicing, normalization and discovery by Coworld MTG. 17Lands does not endorse this work.","modifications":"Copied a previously acquired bounded compressed prefix and its 92 complete CSV rows; source field values are unchanged. Arena-to-Scryfall associations and native outputs are derived separately.","scryfall_documentation":"https://scryfall.com/docs/api/bulk-data","scryfall_snapshot_url":"https://data.scryfall.io/oracle-cards/oracle-cards-20260907090154.jsonl.gz"}}
+ plan_record=write(OUT/"input-manifest.json",plan)
+ write(OUT/"freeze-receipt.json",{"schema":"17lands-discovery-freeze-v1","plan":plan_record,"runner_sha256":plan["runner_sha256"],"created_before_worker_results":True,"worker_executions_started":0})
+ print(json.dumps({"freeze":plan_record,"mapping_status_counts":dict(collections.Counter(n["mapping_status"] for n in nominees)),"nominees":len(nominees),"raw_source_records":len(list((OUT/"raw-scryfall").iterdir()))}),flush=True)
+
+def run():
+ plan=json.loads((OUT/"input-manifest.json").read_bytes());freeze=json.loads((OUT/"freeze-receipt.json").read_bytes())
+ assert digest(OUT/"input-manifest.json")==freeze["plan"]["sha256"]
+ assert digest(Path(__file__))==plan["runner_sha256"] and digest(WORKER)==WORKER_HASH
+ output_dir=OUT/"executions";output_dir.mkdir()
+ cpus=sorted(os.sched_getaffinity(0));cpu=cpus[0]
+ def limits():
+  resource.setrlimit(resource.RLIMIT_AS,(8*1024**3,8*1024**3))
+  resource.setrlimit(resource.RLIMIT_CPU,(10,10))
+  resource.setrlimit(resource.RLIMIT_FSIZE,(4*1024**2,4*1024**2))
+  resource.setrlimit(resource.RLIMIT_CORE,(0,0))
+  os.sched_setaffinity(0,{cpu})
+ env={**os.environ,"RAYON_NUM_THREADS":"1","TOKIO_WORKER_THREADS":"1","TMPDIR":str(BASE/"tmp")}
+ workload_start=time.monotonic();started_at=now();deadline=workload_start+900
+ executions=[];not_run=[]
+ receipt_path=OUT/"execution-receipts.jsonl"
+ with receipt_path.open("x") as receipts:
+  for n in plan["nominees"]:
+   if n["mapping_status"]=="inconclusive":continue
+   for repeat in (1,2):
+    remaining=deadline-time.monotonic()
+    if remaining<=0:
+     not_run.append({"nominee":n["nominee"],"repeat":repeat,"reason":"total_15_minute_worker_budget_exhausted"});continue
+    stem=f"{n['nominee']:03d}-{repeat}"
+    output=output_dir/(stem+".jsonl");stdout=output_dir/(stem+".stdout");stderr=output_dir/(stem+".stderr")
+    args=[str(WORKER),"oracle-probe","--input",n["selected_record"]["raw_record_path"],"--output",str(output.relative_to(OUT))]
+    assert digest(OUT/n["selected_record"]["raw_record_path"])==n["selected_record"]["raw_record_sha256"]
+    started=now();t=time.monotonic();usage_before=resource.getrusage(resource.RUSAGE_CHILDREN)
+    with stdout.open("xb") as so,stderr.open("xb") as se:
+     proc=subprocess.Popen(args,cwd=OUT,stdout=so,stderr=se,env=env,preexec_fn=limits,start_new_session=True)
+     failure=None
+     try:code=proc.wait(timeout=min(20,remaining))
+     except subprocess.TimeoutExpired:
+      os.killpg(proc.pid,signal.SIGKILL);code=proc.wait();failure="wall_timeout"
+    usage_after=resource.getrusage(resource.RUSAGE_CHILDREN)
+    rec={"nominee":n["nominee"],"arena_id":n["arena_id"],"name":n["name"],"repeat":repeat,"command":args,"cwd":str(OUT),"pid":proc.pid,"cpu_affinity":[cpu],"started_at":started,"elapsed_ms":round((time.monotonic()-t)*1000),"cpu_user_ms":round((usage_after.ru_utime-usage_before.ru_utime)*1000),"cpu_system_ms":round((usage_after.ru_stime-usage_before.ru_stime)*1000),"returncode":code,"failure":failure,"input_sha256":n["selected_record"]["raw_record_sha256"],"stdout":{"path":str(stdout.relative_to(OUT)),"sha256":digest(stdout),"bytes":stdout.stat().st_size},"stderr":{"path":str(stderr.relative_to(OUT)),"sha256":digest(stderr),"bytes":stderr.stat().st_size},"output":{"path":str(output.relative_to(OUT)),"sha256":digest(output),"bytes":output.stat().st_size} if output.exists() else None}
+    receipts.write(json.dumps(rec,sort_keys=True)+"\n");receipts.flush();executions.append(rec)
+    if len(executions)%40==0:print(json.dumps({"completed_executions":len(executions),"last_nominee":n["nominee"],"elapsed_seconds":round(time.monotonic()-workload_start)}),flush=True)
+ assert digest(WORKER)==WORKER_HASH and digest(OUT/"input-manifest.json")==freeze["plan"]["sha256"]
+ write(OUT/"execution-completion.json",{"schema":"17lands-all230-baseline-execution-v1","plan_sha256":freeze["plan"]["sha256"],"runner_sha256":digest(Path(__file__)),"started_at":started_at,"finished_at":now(),"elapsed_ms":round((time.monotonic()-workload_start)*1000),"executions":len(executions),"not_run":not_run,"worker_sha256_before_and_after":WORKER_HASH,"receipt_sha256":digest(receipt_path),"private_bootstrap_used":False,"no_live_experiment_changes":True})
+ print(json.dumps({"completed":len(executions),"not_run":len(not_run),"elapsed_seconds":round(time.monotonic()-workload_start)}),flush=True)
+
+def explicit_nodes(value,path="parsed"):
+ result=[]
+ if isinstance(value,dict):
+  if value.get("type")=="Unimplemented":result.append({"path":path,"node":value})
+  for k,v in value.items():
+   if k=="Unimplemented":result.append({"path":path+"."+k,"node":v})
+   if k!="type":result.extend(explicit_nodes(v,path+"."+k))
+ elif isinstance(value,list):
+  for i,v in enumerate(value):result.extend(explicit_nodes(v,f"{path}[{i}]"))
+ elif value=="Unimplemented":result.append({"path":path,"node":value})
+ return result
+def summarize():
+ plan=json.loads((OUT/"input-manifest.json").read_bytes())
+ complete=json.loads((OUT/"execution-completion.json").read_bytes())
+ assert digest(OUT/"input-manifest.json")==complete["plan_sha256"]
+ receipts=[json.loads(x) for x in (OUT/"execution-receipts.jsonl").read_text().splitlines()]
+ assert digest(OUT/"execution-receipts.jsonl")==complete["receipt_sha256"]
+ grouped=collections.defaultdict(list)
+ for r in receipts:grouped[r["nominee"]].append(r)
+ results=[]
+ for n in plan["nominees"]:
+  item={"nominee":n["nominee"],"arena_id":n["arena_id"],"name":n.get("name"),"recorded_cast_occurrences":n["recorded_cast_occurrences"],"first_observed":n["first_observed"],"mapping_status":n["mapping_status"],"mapping_detail":n.get("mapping_detail"),"scryfall_matches":n["scryfall_matches"],"executions":[]}
+  if n["mapping_status"]=="inconclusive":
+   item["category"]="source_mapping_inconclusive";results.append(item);continue
+  observations=[]
+  for r in grouped[n["nominee"]]:
+   obs=None;problem=None
+   if r["output"]:
+    try:
+     data=(OUT/r["output"]["path"]).read_bytes()
+     assert digest(OUT/r["output"]["path"])==r["output"]["sha256"]
+     assert len(data.splitlines())==1
+     obs=json.loads(data)
+     if not isinstance(obs,dict):raise ValueError('expected object observation')
+    except (ValueError,AssertionError) as e:problem=type(e).__name__
+   else:problem="missing_output"
+   if r["failure"]=="wall_timeout":category="wall_timeout"
+   elif r["returncode"]!=0:category="native_crash_or_nonzero_exit"
+   elif problem:category="missing_or_invalid_json_output"
+   elif obs.get("status")!="parsed":category="native_nonparsed_status"
+   elif explicit_nodes(obs.get("parsed")):category="parsed_with_explicit_Unimplemented_tag"
+   else:category="parsed_without_explicit_Unimplemented_tag"
+   parsed=obs.get("parsed",{}) if obs else {}
+   er={"repeat":r["repeat"],"category":category,"returncode":r["returncode"],"failure":r["failure"],"elapsed_ms":r["elapsed_ms"],"output":r["output"],"stdout":r["stdout"],"stderr":r["stderr"],"native_status":obs.get("status") if obs else None,"native_detail":obs.get("detail") if obs else None,"explicit_unimplemented_nodes":explicit_nodes(parsed),"ability_section_lengths":{k:len(v) for k,v in parsed.items() if isinstance(v,list)},"output_problem":problem}
+   item["executions"].append(er)
+   observations.append(obs)
+  categories={r["category"] for r in item["executions"]}
+  item["category"]=next(iter(categories)) if len(categories)==1 and len(item["executions"])==2 else ("not_executed" if not categories else "incomplete_or_nonrepeatable")
+  item["repeats"]=len(item["executions"])
+  item["observations_equal"]=len(observations)==2 and observations[0]==observations[1]
+  item["raw_output_hashes_equal"]=len(item["executions"])==2 and item["executions"][0]["output"] and item["executions"][1]["output"] and item["executions"][0]["output"]["sha256"]==item["executions"][1]["output"]["sha256"]
+  item["all_parsed_sections_empty"]=bool(observations and observations[0] and observations[0].get("status")=="parsed" and observations[0].get("parsed") and all(not v for v in observations[0]["parsed"].values()))
+  if item["all_parsed_sections_empty"]:
+   raw=json.loads((OUT/n["selected_record"]["raw_record_path"]).read_bytes());item["nonempty_oracle_text_but_empty_sections"]=bool(raw.get("oracle_text"));item["empty_sections_interpretation"]="Observation only; not a rule defect. May reflect static stats, unsupported grammar, unsupported keywords, vanilla cards or adapter limitations."
+  results.append(item)
+ result_record=write(OUT/"result-manifest.json",{"schema":"17lands-all230-discovery-results-v1","plan_sha256":complete["plan_sha256"],"execution_completion_sha256":digest(OUT/"execution-completion.json"),"results":results})
+ prior=json.loads((OUT/"original-first25-status.json").read_bytes())
+ prior_checks=[]
+ for old,current in zip(prior["nominees"],results[:25]):
+  assert old["nominee"]==current["nominee"] and old["arena_id"]==current["arena_id"]
+  statuses=[e["native_status"] for e in current["executions"]]
+  hashes=[e["output"]["sha256"] if e["output"] else None for e in current["executions"]]
+  prior_checks.append({"nominee":current["nominee"],"arena_id":current["arena_id"],"original_mapping_status_preserved":old["original_mapping_status"]==current["mapping_status"],"original_native_statuses":old["original_observed_statuses"],"new_native_statuses":statuses,"status_sequences_equal":old["original_observed_statuses"]==statuses,"raw_output_hashes_equal_to_original":old["original_output_sha256"]==hashes})
+ counts=dict(collections.Counter(r["category"] for r in results))
+ representatives={category:[{"nominee":r["nominee"],"arena_id":r["arena_id"],"name":r["name"],"recorded_cast_occurrences":r["recorded_cast_occurrences"],"first_observed":r["first_observed"],"oracle_id":r["scryfall_matches"][0]["oracle_id"] if len(r["scryfall_matches"])==1 else None,"detail":r.get("mapping_detail") or (r["executions"][0].get("native_detail") if r["executions"] else None),"explicit_unimplemented_nodes":r["executions"][0]["explicit_unimplemented_nodes"] if r["executions"] else []} for r in results if r["category"]==category][:5] for category in counts}
+ report={"schema":"17lands-all230-discovery-report-v1","created_at":now(),"plan_sha256":complete["plan_sha256"],"scope":plan["scope"],"source_attribution":plan["attribution"],"selection":plan["selection"],"selection_bias":plan["selection_bias"],"mapping_rule":plan["mapping_rule"],"denominators":{"source_rows":92,"listed_cast_occurrences":1426,"distinct_arena_ids":230,"distinct_official_names":len({n["name"] for n in plan["nominees"]}),"mapping_resolved":sum(n["mapping_status"]!="inconclusive" for n in plan["nominees"]),"mapping_inconclusive":sum(n["mapping_status"]=="inconclusive" for n in plan["nominees"]),"executions":complete["executions"],"expected_executions_for_resolved":2*sum(n["mapping_status"]!="inconclusive" for n in plan["nominees"]),"not_run_repeats":len(complete["not_run"])},"per_nominee_category_counts":counts,"elapsed_worker_workload_ms":complete["elapsed_ms"],"baseline_worker":plan["baseline_worker"],"representatives_first_five_per_category":representatives,"all_empty_parsed_sections":[{"nominee":r["nominee"],"arena_id":r["arena_id"],"name":r["name"],"nonempty_oracle_text":r.get("nonempty_oracle_text_but_empty_sections",False)} for r in results if r.get("all_parsed_sections_empty")],"original_first25_comparison":prior_checks,"result_manifest":result_record,"limitations":["No gameplay sequence was reconstructed; no gameplay or rules discrepancy, repair or acceptance is claimed.","Explicit Unimplemented tags identify native missing-support output, not necessarily a defect in a supported rules path.","Successful parse and absence of Unimplemented are not evidence of complete semantic support; empty sections are reported as observations only.","Current Scryfall Oracle text and representative printings may differ from historical Arena data. The strict identity mapping deliberately leaves some real observed IDs unresolved.","This first 92-row sample and the previously inspected first 25 are not unseen holdouts or a representative population.","Retained executable hash proves identity; its Phase source association remains a build attestation.","No private corpus/bootstrap inputs, network downloads, builds, source edits or frozen-experiment changes were used."],"publication_boundary":"Do not publish this directory wholesale. Source archive/prefix and exact legacy receipts are retained for audit; review selected raw records, sanitized provenance, result manifests and output bytes before publishing."}
+ report_record=write(OUT/"report.json",report)
+ lines=["This is discovery from the same 92 public 17Lands rows, not a gameplay replay or acceptance result.",f"All 230 observed Arena IDs were nominated before native results; {report['denominators']['mapping_resolved']} met the unchanged exact-name-plus-Arena-ID mapping rule. The baseline Phase 542 worker completed {complete['executions']} executions.",f"Per-ID outcomes: {json.dumps(counts,sort_keys=True)}.","Representatives were chosen mechanically as the first five source-ordered IDs per category:"]
+ for cat,items in representatives.items():lines.append(cat+": "+", ".join(x["name"] or x["arena_id"] for x in items))
+ lines+=["The original first 25 statuses and output hashes are retained and compared in report.json. Missing source mapping and empty ability sections are separate from native parse failures and explicit Unimplemented output.","Source: 17Lands public datasets, CC BY 4.0; https://www.17lands.com/public_datasets . 17Lands does not endorse this work. Current Scryfall records were joined to recorded cast IDs; they are not claims about historical Oracle text or reconstructed action order."]
+ (OUT/"report.md").write_text("\n\n".join(lines)+"\n")
+ inventory=[]
+ for p in sorted(OUT.rglob("*")):
+  if p.is_file():inventory.append({"path":str(p.relative_to(OUT)),"bytes":p.stat().st_size,"sha256":digest(p)})
+ write(OUT/"artifact-inventory.json",{"schema":"17lands-discovery-inventory-v1","runner_sha256":digest(Path(__file__)),"artifacts":inventory})
+ print(json.dumps({"report":report_record,"denominators":report["denominators"],"categories":counts,"representatives":{k:[x["name"] for x in v] for k,v in representatives.items()},"first25_statuses_equal":all(x["status_sequences_equal"] for x in prior_checks),"first25_bytes_equal":all(x["raw_output_hashes_equal_to_original"] for x in prior_checks)},indent=2),flush=True)
+if __name__=="__main__":{"freeze":freeze,"run":run,"summarize":summarize}[sys.argv[1]]()
+

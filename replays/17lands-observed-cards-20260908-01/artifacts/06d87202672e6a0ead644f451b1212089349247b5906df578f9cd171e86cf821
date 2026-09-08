@@ -1,0 +1,149 @@
+{
+  "actual_adapter_limits": [
+    {
+      "arena_id": "105127",
+      "detail": "the current parser adapter handles normal layouts; found saga",
+      "layout": "saga",
+      "name": "The Super Hero Civil War",
+      "native_status": "inconclusive",
+      "new_beyond_original_first25": false,
+      "nominee": 21,
+      "oracle_id": "11d74dc2-8c11-4d4b-b727-8216d2eb6b4e",
+      "raw_source": "raw-scryfall/02716-fbd1f333-5640-41f8-b9dd-1c322ac7724a.jsonl",
+      "raw_source_sha256": "206c1d482ba8a178af85d41f95ebc4fd283f551e2e00a956faf857f45e979a6f",
+      "recorded_cast_occurrences": 5,
+      "repeated_output_sha256": "f257f4ec1ca2d865fb11f9b6909127a7590a97cbb1523193918d3cb787650a84",
+      "scryfall_url": "https://scryfall.com/card/msh/231/the-super-hero-civil-war?utm_source=api"
+    },
+    {
+      "arena_id": "104921",
+      "detail": "the current parser adapter handles normal layouts; found saga",
+      "layout": "saga",
+      "name": "Origin of the Avengers",
+      "native_status": "inconclusive",
+      "new_beyond_original_first25": true,
+      "nominee": 64,
+      "oracle_id": "d7f3178d-7b7c-4346-af50-a7b0206bee22",
+      "raw_source": "raw-scryfall/32524-9b0701e8-e365-425a-b897-92f4df9edcb8.jsonl",
+      "raw_source_sha256": "15ac2b3a6dbf8862f2265959430cffc8e54fba9b972a816e9e5d8c32c2f96d8b",
+      "recorded_cast_occurrences": 4,
+      "repeated_output_sha256": "0799bccd2924269ac82f66c51b2e440a66cd6960f5b0c51ab2df9f377a5ad79b",
+      "scryfall_url": "https://scryfall.com/card/msh/28/origin-of-the-avengers?utm_source=api"
+    },
+    {
+      "arena_id": "105092",
+      "detail": "the current parser adapter handles normal layouts; found saga",
+      "layout": "saga",
+      "name": "World War Hulk",
+      "native_status": "inconclusive",
+      "new_beyond_original_first25": true,
+      "nominee": 148,
+      "oracle_id": "8c4da760-8913-46ca-b00c-bba6d877d482",
+      "raw_source": "raw-scryfall/21097-9032f05b-5c21-4996-90c1-268dc6dffbaa.jsonl",
+      "raw_source_sha256": "1fc5ab1ea4848761b1a8d218d7c541ad4975df742b367733f674761de64b27e8",
+      "recorded_cast_occurrences": 2,
+      "repeated_output_sha256": "cd2939cb9fe4c12b2e4154a306f273d76684de95b66ded55683034ec801d9c17",
+      "scryfall_url": "https://scryfall.com/card/msh/197/world-war-hulk?utm_source=api"
+    },
+    {
+      "arena_id": "105107",
+      "detail": "the current parser adapter handles normal layouts; found saga",
+      "layout": "saga",
+      "name": "The Coming of Galactus",
+      "native_status": "inconclusive",
+      "new_beyond_original_first25": true,
+      "nominee": 222,
+      "oracle_id": "e05f23ba-f2b2-4c40-83fa-8defce3cb978",
+      "raw_source": "raw-scryfall/33777-04a38b92-619e-4fe8-b0cb-6fa31f0824ff.jsonl",
+      "raw_source_sha256": "41ca91dc8ac1d71e304e55dae28f63850006df656a4c7dc7fc6bde897f71a4e5",
+      "recorded_cast_occurrences": 1,
+      "repeated_output_sha256": "c046c02ddee01b427b4c1a2ba2aafb1781a1aff59361eb5ce0bf2be90ef45d78",
+      "scryfall_url": "https://scryfall.com/card/msh/212/the-coming-of-galactus?utm_source=api"
+    }
+  ],
+  "attribution": {
+    "credit": "Source data: 17Lands public datasets. Derived slicing, normalization and discovery by Coworld MTG. 17Lands does not endorse this work.",
+    "dataset_url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.MSH.PremierDraft.csv.gz",
+    "documentation_url": "https://www.17lands.com/public_datasets",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "mapping_url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv",
+    "modifications": "Selected complete rows from a bounded source prefix and joined source cast IDs to retained Scryfall records; original source field values remain unchanged.",
+    "provider": "17Lands"
+  },
+  "coverage": {
+    "all_exit_codes_zero": true,
+    "all_mapped_cards_byte_repeatable": true,
+    "cards_with_adapter_layout_inconclusive": 4,
+    "cards_with_empty_parsed_sections": 0,
+    "cards_with_explicit_unimplemented_nodes": 0,
+    "crashes_or_nonzero_exits": 0,
+    "executions_completed": 436,
+    "executions_planned": 436,
+    "invalid_or_missing_json_outputs": 0,
+    "listed_cast_occurrences_by_category": {
+      "native_nonparsed_status": 12,
+      "parsed_without_explicit_Unimplemented_tag": 1361,
+      "source_mapping_inconclusive": 53
+    },
+    "mapped_cards_parsed": 214,
+    "native_status_counts_by_execution": {
+      "inconclusive": 8,
+      "parsed": 428
+    },
+    "not_run": 0,
+    "resolved_source_ids": 218,
+    "serial_workers": 1,
+    "timeouts": 0,
+    "unresolved_source_ids": 12,
+    "worker_cpu_system_ms": 3628,
+    "worker_cpu_user_ms": 19768,
+    "worker_workload_elapsed_ms": 30840
+  },
+  "freeze": {
+    "first_execution_at": "2026-09-08T00:07:27.469361+00:00",
+    "frozen_at": "2026-09-08T00:07:06.379293+00:00",
+    "plan_sha256": "638d106fc297c90fc177656ce4d8a323274b67c2e55b6834343285ea34375864",
+    "runner_sha256": "ad1beead7d7ecd61f3a511dd554a725cf2044943f90d8973a2f5962eb7900d18"
+  },
+  "interpretation": "The additional measured support limits are three more observed Saga cards beyond the original first 25, all rejected conservatively by the existing normal-layout adapter. This pass found no native crash, parse-error status or explicit Unimplemented AST node. Parsed output does not prove complete semantics or gameplay correctness.",
+  "limits": [
+    "No gameplay sequence was reconstructed; no gameplay or rules discrepancy, repair or acceptance is claimed.",
+    "Explicit Unimplemented tags identify native missing-support output, not necessarily a defect in a supported rules path.",
+    "Successful parse and absence of Unimplemented are not evidence of complete semantic support; empty sections are reported as observations only.",
+    "Current Scryfall Oracle text and representative printings may differ from historical Arena data. The strict identity mapping deliberately leaves some real observed IDs unresolved.",
+    "This first 92-row sample and the previously inspected first 25 are not unseen holdouts or a representative population.",
+    "Retained executable hash proves identity; its Phase source association remains a build attestation.",
+    "No private corpus/bootstrap inputs, network downloads, builds, source edits or frozen-experiment changes were used."
+  ],
+  "original_first25": {
+    "mapping_statuses_preserved": true,
+    "native_output_bytes_preserved": true,
+    "native_statuses_preserved": true,
+    "observation": "The original 23 resolved IDs and 46 executions are exactly reproduced; the original 2 mapping gaps remain unresolved. The original first 25 were known before this pass and are not holdouts."
+  },
+  "publication": "Keep retained archive/prefix and legacy acquisition/history receipts private unless separately reviewed. Publish only selected source records, sanitized provenance and bounded results after an explicit inventory audit.",
+  "reports": {
+    "execution_completion_sha256": "69c88794413a4a2ec1ebaa1955be1ef7411a438393f2df11456a460bb6c4e9b4",
+    "execution_receipts_sha256": "daa280bac1db1f767c2637a57385d434937cf2fb7b17f036c6df9b91f0b6c7b3",
+    "report_json_sha256": "f5696383baef0391b9bd6d6d0a368af5b50c7f1936a3c7a0d00ce09f7d34db01",
+    "result_manifest_sha256": "c7e374f8afc739dbc55e1053ec5f0b549617c7972fc260592e426c49f110e5f0"
+  },
+  "schema": "17lands-all230-discovery-completion-v1",
+  "source": {
+    "csv_sha256": "2b14adfaebf0294250a48c2c996c49a504ae959516132372dba1dda4dece5855",
+    "listed_cast_occurrences": 1426,
+    "mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "rows": 92,
+    "scryfall_archive_sha256": "2a739abff0876a20cd43ef0e6d98aab59100d899e990ad2f0251481098df9101",
+    "selection_bias": "A bounded prefix of one event/set archive; first 92 rows are already inspected and not representative of all 17Lands games. The earlier first 25 are a known subset, not unseen holdouts.",
+    "unique_arena_ids": 230,
+    "unique_official_names": 229
+  },
+  "status": "completed_discovery_no_gameplay_claim",
+  "worker": {
+    "bootstrap_or_corpus_used": false,
+    "phase_revision_caller_attested": "54227f4527a0b45b01eb3f819d262ee49b665810",
+    "sha256": "96d005c1a91652a2734fcac30c1f0835a1b59f8dba1b75e84ee8049a5cec0e8c"
+  }
+}

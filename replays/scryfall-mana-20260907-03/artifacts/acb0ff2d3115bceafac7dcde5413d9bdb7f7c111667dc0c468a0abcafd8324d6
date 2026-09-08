@@ -1,0 +1,176 @@
+{
+  "conclusion": "The observed silence and one busy worker are consistent with unoptimized whole-corpus parsing. No evidence of a pathological outer loop was found; no completion estimate or proof of continued card-by-card progress is possible from the existing logging.",
+  "findings": [
+    {
+      "finding": "The current command has no --filter and parses the entire sorted AtomicCards key list.",
+      "interpretation": "This is substantially broader than the 46-ID private corpus export alone.",
+      "lines": [
+        392,
+        397,
+        1122,
+        1145,
+        1152
+      ],
+      "source": "crates/engine/src/bin/oracle_gen.rs"
+    },
+    {
+      "finding": "Workers map build_card_work over fixed finite chunks, collect Vec<CardWork>, then the main thread joins. The results merge after every worker finishes.",
+      "interpretation": "No per-card counter, timed heartbeat, partial output or chunk-completion message is emitted here.",
+      "lines": [
+        1141,
+        1145,
+        1149,
+        1159,
+        1166
+      ],
+      "source": "crates/engine/src/bin/oracle_gen.rs"
+    },
+    {
+      "finding": "JSON is serialized and written after the full parse/merge; --stats prints only after writing.",
+      "interpretation": "An unchanged log and missing output file are expected during this stage. --stats is not a progress flag.",
+      "lines": [
+        1230,
+        1232,
+        1265
+      ],
+      "source": "crates/engine/src/bin/oracle_gen.rs"
+    },
+    {
+      "finding": "Both main and worker are pinned to CPU 0. Main sleeps in futex_wait_queue, worker is runnable and continues accumulating user CPU.",
+      "interpretation": "Consistent with the one-worker thread join in source; no evidence of memory pressure or an I/O wait bottleneck from this bounded observation.",
+      "source": "/home/ubuntu/repos/coworld-factory-20260907-oracle-progress-audit/data/process-sample.json"
+    },
+    {
+      "finding": "During two earlier observations in this audit, worker user CPU increased from 74,602 to 77,480 ticks while shared RSS increased from 210,877 to 214,237 pages.",
+      "interpretation": "About 28.78 CPU seconds and 13.1 MiB RSS growth. This is activity, not proof of how many cards completed or proof against a parser hotspot.",
+      "source": "Retained tool observations in this audit conversation"
+    },
+    {
+      "finding": "dev explicitly uses opt-level=0. The existing tool profile inherits dev and uses opt-level=1 with LLVM; its comment names oracle-gen and coverage-report.",
+      "interpretation": "The current unoptimized build can be slower than normal optimized tool use.",
+      "lines": [
+        31,
+        32,
+        65,
+        66,
+        68,
+        69
+      ],
+      "source": "Cargo.toml"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/home/ubuntu/repos/coworld-factory-20260907-phase-fix/repo",
+        "diff",
+        "--name-only",
+        "54227f4527a0b45b01eb3f819d262ee49b665810",
+        "--",
+        "crates/engine/src/bin/oracle_gen.rs",
+        "crates/engine/src/parser",
+        "crates/engine/src/database/synthesis.rs"
+      ],
+      "exit_code": 0,
+      "finding": "No source differences from baseline542 were found in the exporter, parser directory or database synthesis source, including the current working tree.",
+      "interpretation": "The reviewed Draw runtime work did not replace this parse loop. This is source comparison, not a claim that a binary hash proves compilation linkage.",
+      "stdout": "crates/engine/src/parser/oracle_ir/snapshots/engine__parser__oracle_ir__snapshot_tests__manamorphose_ir.snap\ncrates/engine/src/parser/oracle_ir/snapshots/engine__parser__oracle_ir__snapshot_tests__manamorphose_lowered.snap\n"
+    },
+    {
+      "finding": "The source comment estimates roughly 5 ms/card over 35,000 cards but gives no profile, machine or measured-run provenance.",
+      "interpretation": "Do not use that comment as a runtime bound for this single-CPU unoptimized export.",
+      "lines": [
+        1134,
+        1135
+      ],
+      "source": "crates/engine/src/bin/oracle_gen.rs"
+    }
+  ],
+  "limitations": [
+    "No debugger, profiler or current-card instrumentation was used; a slow or pathological individual parser invocation cannot be excluded.",
+    "CPU/RSS activity cannot give percentage completion or reliable ETA.",
+    "No comparable controlled full-export timing was retained in the targeted records inspected.",
+    "No build, test, benchmark, worker execution or global host mutation was performed."
+  ],
+  "observed_utc": "2026-09-07T23:27:01.521963+00:00",
+  "prior_timing_check": {
+    "finding": "No comparable retained full-export elapsed-time receipt was located in the bounded targeted check. The earlier integration audit recommends --profile tool but did not execute a new exporter; its source data include a previously retained completed full export. The baseline validation receipt reports 21 ms and 28 ms for validation of the 46/50-card subsets, which are not export timings and cannot predict this duration.",
+    "prior_atomic_snapshot": {
+      "bytes": 159550994,
+      "date": "2026-09-04",
+      "matching_faces": 55,
+      "matching_groups": 51,
+      "missing_private_oracle_ids": [],
+      "sha256": "174409bbbc05112c261046df6b1f4e3245517c66e941738ad50cc4091d88f098",
+      "version": "5.3.0+20260904"
+    },
+    "prior_report_sha256": "b67bb85855fc4b85c3a964685cf8b94f9984d162fb15143d47d8d9d196ed6ffe",
+    "targeted_paths": [
+      "/home/ubuntu/repos/coworld-factory-20260907-root/data/integration-audit-01/report.json",
+      "/home/ubuntu/repos/coworld-factory-20260907-root/data/corpus-baseline-validation-01/receipt.json",
+      "/home/ubuntu/repos/phase-hushbringer-publish",
+      "/home/ubuntu/repos/coworld-factory-20260907-phase-fix/.task-private"
+    ]
+  },
+  "recommended_next_step": {
+    "cohort_option": "If the later task only requires private-corpus regeneration, the earlier audited recipe uses --filter as a workload reduction, followed by exact Oracle-ID closure selection and native validation. That is a different export scope, not a substitute for completing or relabeling the current full export.",
+    "current_process": "Leave the authoritative executor's current export running and preserve its evidence unchanged. This inspection provides no basis to stop it, relaunch it, change affinity, or label it hung.",
+    "future_command_shape": [
+      "cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "tool",
+      "-p",
+      "engine",
+      "--features",
+      "cli",
+      "--bin",
+      "oracle-gen"
+    ],
+    "future_exports": "When a new export is independently needed and authorized, use the repository's existing --profile tool rather than dev, with the same source/input identities, existing owned target, explicit worker/memory/CPU limits and heavy-compute reservation. Record that distinct build/profile as a new execution."
+  },
+  "running_export": {
+    "atomic_input_identity_boundary": "Retained executor input attestation; this audit did not reread/hash the 159.6 MB AtomicCards payload.",
+    "atomic_input_identity_from_executor_receipt": {
+      "bytes": 159550994,
+      "mtime_ns": 1788649791256365124,
+      "sha256": "174409bbbc05112c261046df6b1f4e3245517c66e941738ad50cc4091d88f098"
+    },
+    "command_receipt_path": "/home/ubuntu/repos/coworld-factory-20260907-phase-fix/.task-private/draw-executor-02/export.json",
+    "command_receipt_sha256": "e8a260c20cf0a3e069003791199e1a2c772d5f15d4845006ed27d390ebef196f",
+    "compile_duration_from_log": "2m 03s",
+    "compile_profile_from_log": "dev [unoptimized]",
+    "completed_rarity_scan": {
+      "card_names_with_rarity": 28295,
+      "set_files": 334
+    },
+    "pid": 3963227,
+    "rarity_scan_finished_utc_from_log": "2026-09-07T23:12:32.401277Z",
+    "sample": {
+      "bytes": 710,
+      "path": "/home/ubuntu/repos/coworld-factory-20260907-oracle-progress-audit/data/process-sample.json",
+      "sha256": "45a5470e65ed9910f53605e1d706e45eed9646295b6eba5bfdba755c57d8fc81"
+    },
+    "started_utc_from_receipt": "2026-09-07T23:10:19.713878+00:00"
+  },
+  "schema": "coworld-oracle-export-progress-audit-v1",
+  "scope": "Bounded read-only source, log and /proc inspection. No process signal, debugger, stack attachment, affinity change, build, export, benchmark or source/output mutation.",
+  "source_identities": [
+    {
+      "bytes": 2371,
+      "path": "/home/ubuntu/repos/coworld-factory-20260907-phase-fix/repo/Cargo.toml",
+      "sha256": "b8c83fee6fe4481488f01dd83a3adf2830090d5f80bbc714e96536cecba740e1"
+    },
+    {
+      "bytes": 89249,
+      "path": "/home/ubuntu/repos/coworld-factory-20260907-phase-fix/repo/crates/engine/src/bin/oracle_gen.rs",
+      "sha256": "b6a10c2935917baaf0cf75937939863f5c3bd22e1fe478c9991fb09f0af5f355"
+    },
+    {
+      "bytes": 1022575,
+      "path": "/home/ubuntu/repos/coworld-factory-20260907-phase-fix/repo/crates/engine/src/database/synthesis.rs",
+      "sha256": "bfae3e452e7bd82944bdd66503871a33237b539535761815dcf1c652c839f0d2"
+    }
+  ]
+}

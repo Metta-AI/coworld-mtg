@@ -1,0 +1,255 @@
+#!/usr/bin/env python3
+"""Import retained all230 observations into the generic factory contract; never run probes."""
+from __future__ import annotations
+import argparse,collections,csv,hashlib,io,json,subprocess,sys
+from pathlib import Path
+sys.dont_write_bytecode=True
+
+RUN_ID="17lands-observed-cards-20260908-01"
+EXPECTED_PLAN="638d106fc297c90fc177656ce4d8a323274b67c2e55b6834343285ea34375864"
+EXPECTED_WORKER="96d005c1a91652a2734fcac30c1f0835a1b59f8dba1b75e84ee8049a5cec0e8c"
+EXPECTED_PHASE="54227f4527a0b45b01eb3f819d262ee49b665810"
+def sha(raw):return hashlib.sha256(raw).hexdigest()
+def file_sha(path):return sha(Path(path).read_bytes())
+def read(path):return json.loads(Path(path).read_bytes())
+def encode(obj):return json.dumps(obj,sort_keys=True,ensure_ascii=False,separators=(",",":"),allow_nan=False).encode()
+def write(path,obj):Path(path).write_bytes(json.dumps(obj,sort_keys=True,ensure_ascii=False,indent=2,allow_nan=False).encode()+b"\n")
+def explicit_nodes(v,path="parsed"):
+ out=[]
+ if isinstance(v,dict):
+  if v.get("type")=="Unimplemented":out.append({"path":path,"node":v})
+  for k,x in v.items():
+   if k=="Unimplemented":out.append({"path":path+"."+k,"node":x})
+   if k!="type":out.extend(explicit_nodes(x,path+"."+k))
+ elif isinstance(v,list):
+  for i,x in enumerate(v):out.extend(explicit_nodes(x,f"{path}[{i}]"))
+ elif v=="Unimplemented":out.append({"path":path,"node":v})
+ return out
+
+def main():
+ ap=argparse.ArgumentParser(description=__doc__)
+ ap.add_argument("--source",type=Path,required=True,help="Immutable completed all230 discovery data directory")
+ ap.add_argument("--kernel-scripts",type=Path,required=True,help="Read-only current factory script directory")
+ ap.add_argument("--runtime",type=Path,required=True,help="Existing native factory-runtime; no build occurs")
+ ap.add_argument("--output-root",type=Path,required=True,help="New owned output directory")
+ args=ap.parse_args()
+ source=args.source.resolve();output=args.output_root.resolve()
+ if output.exists():raise ValueError("Refusing to overwrite an existing import")
+ if source==output or source in output.parents or output in source.parents:raise ValueError("Separate immutable source and output required")
+ sys.path.insert(0,str(args.kernel_scripts.resolve()))
+ from import_case_replay import ArtifactStore
+ from factory_replay import canonical
+ assert file_sha(source/"input-manifest.json")==EXPECTED_PLAN
+ plan=read(source/"input-manifest.json");freeze=read(source/"freeze-receipt.json")
+ results=read(source/"result-manifest.json")
+ completion=read(source/"execution-completion.json");summary=read(source/"completion-summary.json")
+ occurrences=read(source/"source-occurrences.json")["occurrences"]
+ receipt_lines=(source/"execution-receipts.jsonl").read_bytes().splitlines(keepends=True)
+ receipts=[json.loads(line) for line in receipt_lines]
+ assert freeze["plan"]["sha256"]==results["plan_sha256"]==completion["plan_sha256"]==EXPECTED_PLAN
+ assert len(plan["nominees"])==len(results["results"])==230
+ assert len(receipts)==completion["executions"]==436 and completion["not_run"]==[]
+ assert completion["worker_sha256_before_and_after"]==EXPECTED_WORKER
+ assert completion["receipt_sha256"]==file_sha(source/"execution-receipts.jsonl")
+ assert plan["baseline_worker"]["phase_revision_caller_attested"]==EXPECTED_PHASE
+ assert file_sha(source.parent/"discover.py")==plan["runner_sha256"]
+ assert len(occurrences)==1426 and len({o["arena_id"] for o in occurrences})==230
+ source_files={}
+ # Explicit allowlist. Archive/prefix, private bootstrap/corpus, prior raw sessions and binaries are excluded.
+ public_source_names=[
+  "input-manifest.json","freeze-receipt.json","source-occurrences.json",
+  "result-manifest.json","execution-receipts.jsonl","execution-completion.json",
+  "original-first25-status.json","completion-summary.json",
+  "source/known-92.csv","source/cards.csv","source/baseline-build-attestation.json",
+  "source/scryfall-descriptor.json",
+ ]
+ output.mkdir(parents=True)
+ run=output/RUN_ID;run.mkdir()
+ initial=output/"initial-replay.json"
+ native_commands=[]
+ def native(*argv):
+  cmd=[str(args.runtime.resolve()),*map(str,argv)]
+  p=subprocess.run(cmd,capture_output=True,timeout=90)
+  native_commands.append({"command":cmd,"exit_code":p.returncode,"stdout":p.stdout.decode(),"stderr":p.stderr.decode()})
+  if p.returncode:raise RuntimeError(native_commands[-1])
+  return p
+ native("init","--run-id",RUN_ID,"--title","17Lands observed cards: all 230 IDs (imported discovery)",
+        "--program","Phase Oracle parser via frozen Coworld oracle-probe",
+        "--repository","https://github.com/nishu-builder/phase.git",
+        "--baseline-revision",EXPECTED_PHASE,"--output",initial)
+ replay=read(initial);replay["status"]="completed"
+ replay["recording"]={"kind":"imported","description":"Reconstructed logical order from retained source nominations and 436 completed baseline parser invocations. The importer ran no probes. Event elapsed times are unknown and null; original measured per-execution wall and CPU usage is retained separately. Discovery only; no gameplay or rules verdict."}
+ store=ArtifactStore(run,replay)
+ def raw(data,media="application/json",origin=None):
+  data.decode("utf-8")
+  return store.add(data,"bytes",media,"",origin)
+ def obj(value):return store.add(canonical(value),"canonical_json","application/json","")
+ def file(rel,media=None):
+  p=source/rel
+  if p.is_symlink():raise ValueError("Source symlink")
+  content=p.read_bytes()
+  kind=media or ("text/csv" if p.suffix==".csv" else "application/x-ndjson" if p.suffix==".jsonl" else "application/json")
+  identity=raw(content,kind,rel);source_files[rel]=identity;return identity
+ def event(stage,kind,**fields):
+  replay["events"].append({"sequence":len(replay["events"]),"elapsed_ms":None,"stage":stage,"payload":{"kind":kind,**fields}})
+ imported_sources=set()
+ def src(identity,provider,url,when,description):
+  if identity in imported_sources:return
+  event("sources","source_imported",source={"snapshot_id":identity,"provider":provider,"url":url,"retrieved_at":when,"description":description})
+  imported_sources.add(identity)
+ for rel in public_source_names:file(rel)
+ original_runner_id=raw((source.parent/"discover.py").read_bytes(),"text/x-python","../discover.py")
+ importer_id=raw(Path(__file__).read_bytes(),"text/x-python","importer_recipe")
+ csv_id=source_files["source/known-92.csv"];map_id=source_files["source/cards.csv"]
+ for key,relative in [("known-92.csv","source/known-92.csv"),("cards.csv","source/cards.csv")]:
+  assert plan["source_records"][key]["sha256"]==source_files[relative]
+ csv_reader=csv.DictReader(io.StringIO((source/"source/known-92.csv").read_text(),newline=""))
+ csv_rows=list(csv_reader);assert len(csv_rows)==92
+ cards=list(csv.DictReader(io.StringIO((source/"source/cards.csv").read_text(),newline="")))
+ cmap=collections.defaultdict(list)
+ for row in cards:cmap[row["id"]].append(row)
+ by_arena=collections.defaultdict(list)
+ for o in occurrences:
+  row=csv_rows[o["source_row"]-1]
+  assert row[o["source_column"]]==o["source_value"]
+  assert row[o["source_column"]].split("|")[o["value_position"]]==o["arena_id"]
+  by_arena[o["arena_id"]].append(o)
+ acq=read(source/"source/replay-acquisition.json")
+ map_acq=read(source/"source/cards-acquisition.json")
+ scryfall_manifest=read(source/"source/scryfall-source-manifest.json")
+ archive_meta=scryfall_manifest["artifacts"]["archive"]
+ scryfall_when=archive_meta["attempts"][-1]["completed_at"]
+ scryfall_url=archive_meta["attempts"][-1]["request_url"]
+ provenance={
+  "schema":"17lands-observed-source-provenance-v1",
+  "input_manifest_id":EXPECTED_PLAN,
+  "scope":"Previously retained public inputs; the importer made no acquisition or worker execution.",
+  "replay_csv":{"artifact_id":csv_id,"url":acq["source_url"],"original_retrieved_at":acq["retrieved_at"],"rows":92,"columns":2615,"prefix_bytes":65536,"prefix_sha256":acq["sha256"],"archive_total_bytes":acq["source_total_bytes"],"range":acq["request_headers"]["Range"],"etag":acq["headers"]["ETag"],"original_acquisition_metadata_sha256":file_sha(source/"source/replay-acquisition.json")},
+  "official_cards_mapping":{"artifact_id":map_id,"url":map_acq["source_url"],"original_retrieved_at":map_acq["retrieved_at"],"original_acquisition_metadata_sha256":file_sha(source/"source/cards-acquisition.json")},
+  "scryfall_snapshot":{"url":scryfall_url,"original_retrieved_at":scryfall_when,"archive_sha256":archive_meta["sha256"],"archive_bytes":archive_meta["bytes"],"descriptor_artifact_id":source_files["source/scryfall-descriptor.json"],"original_acquisition_metadata_sha256":file_sha(source/"source/scryfall-source-manifest.json"),"archive_in_bundle":False},
+  "selection_boundary":"The full archive and compressed prefix are omitted. Original selection/freeze manifests attest to acquisition, complete-prefix slicing, whole-snapshot name cardinality and source timing. Included CSV, mapping, selected raw records and native outputs retain exact bytes; their hashes alone do not independently prove upstream authority or historical timing.",
+  "attribution":summary["attribution"],
+  "timing_boundary":"Imported events use null elapsed_ms. Original per-execution rounded wall_ms and child CPU usage are copied from receipts; memory caps are not reported as measured memory.",
+ }
+ provenance_id=obj(provenance)
+ src(provenance_id,"Retained public-source acquisition and selection receipt",acq["source_url"],acq["retrieved_at"],"Sanitized provenance for the same 92 public rows, official Arena mapping and retained Scryfall snapshot. Archive identities are retained; full archives are not bundled.")
+ src(csv_id,"17Lands public MSH PremierDraft rows",acq["source_url"],acq["retrieved_at"],"Exact 92 complete source rows from a bounded prefix; 1,426 listed casts and 230 Arena IDs. Turn/card-list columns do not supply a faithful complete gameplay replay. CC BY 4.0; 17Lands does not endorse this work.")
+ src(map_id,"17Lands official Arena card mapping",map_acq["source_url"],map_acq["retrieved_at"],"Exact official cards.csv bytes used to map observed Arena IDs to names; CC BY 4.0.")
+ src(EXPECTED_PLAN,"Frozen all-230 discovery input manifest","urn:coworld:17lands-all230-source-plan",plan["frozen_at"],"All 230 source-derived nominations and the conservative mapping rule were frozen before these 436 retained probe outputs. The original first 25 were already known; no unseen-holdout claim.")
+ src(original_runner_id,"Frozen discovery recorder and structural summarizer","urn:coworld:17lands-all230-discovery-recorder",plan["frozen_at"],"Exact pre-execution recorder recipe. Structural discovery only; no rules-conformance evaluator.")
+ scryfall_records={}
+ for n in plan["nominees"]:
+  assert len(by_arena[n["arena_id"]])==n["recorded_cast_occurrences"]
+  assert n["official_mapping_matches"]==cmap[n["arena_id"]]
+  for match in n["scryfall_matches"]:
+   identity=file(match["raw_record_path"])
+   assert identity==match["raw_record_sha256"]
+   card=read(source/match["raw_record_path"])
+   assert card["name"]==match["name"]==n["name"] and card["id"]==match["printing_id"] and card["oracle_id"]==match["oracle_id"]
+   assert card.get("arena_id")==match["arena_id"]
+   scryfall_records[identity]=card
+ for identity,card in scryfall_records.items():
+  src(identity,"Scryfall raw Oracle record",scryfall_url,scryfall_when,f"Exact retained record for {card['name']} (Oracle {card['oracle_id']}); derived from the identified snapshot, not fetched during this import. Current Oracle text is not asserted identical to the historical Arena game.")
+ lineage=[]
+ for n in plan["nominees"]:
+  lineage.append({"record_id":"arena:"+n["arena_id"],"arena_id":n["arena_id"],"name":n["name"],"recorded_cast_occurrences":n["recorded_cast_occurrences"],"first_observed":n["first_observed"],"all_observed_occurrences":by_arena[n["arena_id"]],"source_csv_id":csv_id,"official_mapping_id":map_id,"official_mapping_rows":n["official_mapping_matches"],"mapping_status":n["mapping_status"],"mapping_detail":n.get("mapping_detail"),"raw_scryfall_artifact_ids":[m["raw_record_sha256"] for m in n["scryfall_matches"]]})
+ lineage_id=obj({"schema":"17lands-observed-card-lineage-v1","records":lineage,"derivation":"Deterministic readable index of the exact source CSV occurrences and official mapping, joined to the already-frozen Scryfall match records. Original bytes remain separate artifacts."})
+ src(lineage_id,"Derived observed-card source index","urn:coworld:17lands-observed-card-lineage",plan["frozen_at"],"Readable per-Arena-ID lineage backed by the exact public CSV, mapping and retained raw Scryfall records. This derived index is not an additional game dataset.")
+ attestation=read(source/"source/baseline-build-attestation.json")
+ assert attestation["binary_sha256"]==EXPECTED_WORKER and attestation["phase_revision"]==EXPECTED_PHASE
+ build={"program":"coworld-mtg-harness/oracle-probe using Phase","source_revision":EXPECTED_PHASE,"binary_sha256":EXPECTED_WORKER,"command":attestation["command"],"environment":attestation["environment"],"attestation_id":source_files["source/baseline-build-attestation.json"]}
+ build_id=obj(build)
+ cases={}
+ for n in plan["nominees"]:
+  cid=obj({"schema":"17lands-observed-card-case-v1","source_plan_id":EXPECTED_PLAN,"nomination":n,"scope":"Source-derived parser discovery only; no authored gameplay scenario or acceptance claim."})
+  cases[n["nominee"]]=cid
+  sources=[csv_id,map_id,EXPECTED_PLAN,lineage_id,provenance_id,*[m["raw_record_sha256"] for m in n["scryfall_matches"]]]
+  selectors=[{"source_id":lineage_id,"record_id":"arena:"+n["arena_id"]}]
+  selectors += [{"source_id":m["raw_record_sha256"],"record_id":m["oracle_id"]} for m in n["scryfall_matches"]]
+  event("cases","case_registered",case_id=cid,title=f"{n['nominee']:03d} · {n['name']} (Arena {n['arena_id']})",derivation={"kind":"source_derived","source_ids":list(dict.fromkeys(sources)),"source_records":selectors,"seed":None,"recipe":f"Frozen source-order nomination {n['nominee']} of 230: {n['recorded_cast_occurrences']} actual listed casts in the same 92 rows. {plan['mapping_rule']} This is a card parser probe nomination, not a reconstructed game."})
+ event("execute","build_recorded",build_id=build_id,build=build)
+ by_nominee=collections.defaultdict(list)
+ for receipt,line in zip(receipts,receipt_lines):by_nominee[receipt["nominee"]].append((receipt,line))
+ execution_links=[];feedback_links=[];cpu_total=wall_total=0
+ for n,result in zip(plan["nominees"],results["results"]):
+  assert n["nominee"]==result["nominee"] and n["arena_id"]==result["arena_id"]
+  cid=cases[n["nominee"]];exec_ids=[];evidence_ids=[];native_outputs=[]
+  result_entry_id=obj(result)
+  for receipt,line in by_nominee[n["nominee"]]:
+   repeat=receipt["repeat"];execution_id=f"observed-{n['nominee']:03d}-repeat-{repeat}"
+   assert receipt["input_sha256"]==n["selected_record"]["raw_record_sha256"]
+   assert receipt["returncode"]==0 and receipt["failure"] is None
+   rid=raw(line,"application/x-ndjson",f"execution-receipts.jsonl#nominee={n['nominee']},repeat={repeat}")
+   native_output_id=file(receipt["output"]["path"])
+   stdout_id=file(receipt["stdout"]["path"],"text/plain");stderr_id=file(receipt["stderr"]["path"],"text/plain")
+   for descriptor,identity in [(receipt["output"],native_output_id),(receipt["stdout"],stdout_id),(receipt["stderr"],stderr_id)]:
+    assert identity==descriptor["sha256"]
+   observation=read(source/receipt["output"]["path"])
+   if "phase_revision" in observation:assert observation["phase_revision"]==EXPECTED_PHASE
+   if "oracle_id" in observation:assert observation["oracle_id"]==n["selected_record"]["oracle_id"]
+   expected_exec=next(e for e in result["executions"] if e["repeat"]==repeat)
+   assert observation["status"]==expected_exec["native_status"]
+   assert explicit_nodes(observation.get("parsed",{}))==expected_exec["explicit_unimplemented_nodes"]
+   native_status="completed" if observation["status"]=="parsed" else "inconclusive"
+   assert observation["status"] in ("parsed","inconclusive")
+   request={"schema":"17lands-imported-parser-request-v1","protocol":"oracle-probe raw Scryfall JSONL","case_id":cid,"build_id":build_id,"original_receipt_artifact_id":rid,"input_sha256":receipt["input_sha256"],"worker_sha256":EXPECTED_WORKER,"original_command":receipt["command"],"original_cwd":receipt["cwd"],"original_started_at":receipt["started_at"],"limits":plan["limits"],"importer_executed_worker":False}
+   request_id=obj(request)
+   evidence={"schema":"software-factory-result-v1","summary":f"Imported baseline observation for {n['name']}: {observation['status']}. Exact original native output retained; no probe was run by the importer and no gameplay verdict is implied.","data":{"schema":"17lands-imported-parser-observation-v1","original_receipt_artifact_id":rid,"request_id":request_id,"raw_output_artifact_id":native_output_id,"worker_sha256":EXPECTED_WORKER,"recorded_exit_code":receipt["returncode"],"native_status":observation["status"],"native_detail":observation.get("detail"),"explicit_unimplemented_nodes":expected_exec["explicit_unimplemented_nodes"],"native_observation":observation}}
+   evidence_id=raw(encode(evidence))
+   event("execute","execution_started",execution_id=execution_id,case_id=cid,request_id=request_id,build_id=build_id,change_id=None)
+   event("execute","execution_finished",execution_id=execution_id,status=native_status,evidence_id=evidence_id,trace_ids=list(dict.fromkeys([native_output_id,rid,stdout_id,stderr_id])),detail=observation.get("detail") or "Imported parsed structural observation. Successful parse does not establish complete semantics or gameplay correctness.")
+   cpu=receipt["cpu_user_ms"]+receipt["cpu_system_ms"];wall=receipt["elapsed_ms"];cpu_total+=cpu;wall_total+=wall
+   event("execute","compute_recorded",usage={"execution_id":execution_id,"worker":"retained baseline oracle-probe (original measurements)","measurement":"measured","wall_ms":wall,"cpu_ms":cpu,"peak_memory_bytes":None,"input_tokens":None,"output_tokens":None})
+   exec_ids.append(execution_id);evidence_ids.append(evidence_id);native_outputs.append(native_output_id)
+   execution_links.append({"nominee":n["nominee"],"repeat":repeat,"execution_id":execution_id,"case_id":cid,"request_id":request_id,"evidence_id":evidence_id,"original_receipt_id":rid,"original_output_sha256":receipt["output"]["sha256"],"retained_output_artifact_id":native_output_id})
+  if n["mapping_status"]=="inconclusive":
+   assert not exec_ids and result["category"]=="source_mapping_inconclusive"
+   feedback_result="inconclusive";description=f"Source mapping inconclusive: {n['mapping_detail']}. No worker invocation is recorded for this Arena ID."
+  elif result["category"]=="native_nonparsed_status":
+   assert len(exec_ids)==2 and len(set(native_outputs))==1
+   feedback_result="inconclusive";description=f"Two repeated baseline adapter limits: {result['executions'][0]['native_detail']}. This is an adapter capability limit, not a measured gameplay discrepancy."
+  else:
+   assert len(exec_ids)==2 and len(set(native_outputs))==1 and result["category"]=="parsed_without_explicit_Unimplemented_tag"
+   feedback_result="satisfied";description="Both retained baseline invocations returned the same parsed structure with no explicit Unimplemented tag. This bounded structural observation does not establish complete card semantics or gameplay correctness."
+  feedback_artifact={"schema":"software-factory-result-v1","summary":description,"data":{"schema":"17lands-imported-discovery-feedback-v1","case_id":cid,"arena_id":n["arena_id"],"card_name":n["name"],"recorded_cast_occurrences":n["recorded_cast_occurrences"],"mapping_status":n["mapping_status"],"structural_discovery_category":result["category"],"observed_native_statuses":[e["native_status"] for e in result["executions"]],"repeatability":result.get("observations_equal"),"raw_output_hashes_equal":result.get("raw_output_hashes_equal"),"executions":len(exec_ids),"source_result_entry_id":result_entry_id,"source_result_manifest_id":source_files["result-manifest.json"],"original_evidence_ids":evidence_ids,"result":feedback_result,"claim_strength":"weak structural discovery","rules_or_gameplay_verdict":None}}
+  fid=raw(encode(feedback_artifact))
+  event("feedback","feedback_recorded",feedback={"adapter":"opaque","feedback_id":fid,"case_id":cid,"execution_ids":exec_ids,"evaluator":"Frozen all-230 structural discovery summary (imported)","evaluator_version":plan["runner_sha256"],"declared_strength":"weak","method":"Retained source mapping and two original native parser outputs, exact-byte repeatability and explicit Unimplemented-tag inspection. Importer reconciles source/output bytes; no worker or rules evaluator is executed.","bounded_claim":"Only recorded source identity resolution, native parser/adapter status, byte repeatability and explicit AST tags. No complete gameplay replay, semantic coverage or rules correctness claim.","result":feedback_result,"summary":description})
+  feedback_links.append({"nominee":n["nominee"],"case_id":cid,"feedback_id":fid,"result":feedback_result,"execution_ids":exec_ids})
+ assert len(cases)==230 and len(execution_links)==436
+ assert all(e["elapsed_ms"] is None for e in replay["events"])
+ assert not any(e["payload"]["kind"] in ("change_proposed","acceptance_plan_frozen","review_recorded","decision_recorded") for e in replay["events"])
+ forbidden=[plan["source_records"]["oracle-cards.jsonl.gz"]["sha256"],plan["source_records"]["replay-prefix.csv.gz"]["sha256"],EXPECTED_WORKER]
+ assert not any(h in replay["artifacts"] for h in forbidden)
+ for h,meta in replay["artifacts"].items():
+  b=(run/meta["path"]).read_bytes();b.decode("utf-8")
+  assert (sha(canonical(json.loads(b))) if meta["hash_mode"]=="canonical_json" else sha(b))==h
+ write(run/"replay.json",replay)
+ native("verify",run)
+ bundle=output/(RUN_ID+".bundle.json")
+ native("export",run,"--output",bundle)
+ native("verify",bundle)
+ portable=read(bundle)
+ assert portable["replay"]==replay
+ assert set(portable["artifact_contents"])==set(replay["artifacts"])
+ assert all(portable["artifact_contents"][h].encode()==(run/m["path"]).read_bytes() for h,m in replay["artifacts"].items())
+ reconciliation={"schema":"17lands-imported-discovery-reconciliation-v1","run_id":RUN_ID,"source_plan_sha256":EXPECTED_PLAN,"source_result_manifest_sha256":source_files["result-manifest.json"],"source_execution_receipts_sha256":source_files["execution-receipts.jsonl"],"replay_sha256":file_sha(run/"replay.json"),"case_ids":cases,"executions":execution_links,"feedback":feedback_links,"all436_original_output_hashes_retained":True,"all230_nomination_fields_preserved":True,"source_occurrences_reconciled_against_exact_csv":1426,"official_mapping_matches_reconciled":230,"raw_scryfall_records_retained":len(scryfall_records),"measured_wall_ms_sum":wall_total,"measured_cpu_ms_sum":cpu_total,"opaque_boundary":"Native verification checks manifest topology, artifact hashes and embedded build identity. This importer separately reconciles every source/receipt/output link and the frozen structural result; it performs no rules-conformance evaluation."}
+ write(output/"reconciliation.json",reconciliation)
+ inventory=[{"artifact_id":h,**m,"bytes":(run/m["path"]).stat().st_size,"raw_byte_sha256":file_sha(run/m["path"])} for h,m in sorted(replay["artifacts"].items())]
+ write(output/"artifact-inventory.json",{"schema":"17lands-imported-discovery-inventory-v1","artifacts":inventory,"exact_original_files":store.inventory,"allowlist_paths":["replay.json",*[m["path"] for m in replay["artifacts"].values()]],"omitted_archive_or_binary_hashes":forbidden})
+ report={"schema":"17lands-observed-cards-import-report-v1","run_id":RUN_ID,"run_directory":str(run),"portable_bundle":str(bundle),"replay_sha256":file_sha(run/"replay.json"),"portable_bundle_sha256":file_sha(bundle),"portable_bundle_bytes":bundle.stat().st_size,"events":len(replay["events"]),"artifacts":len(replay["artifacts"]),"artifact_bytes":sum(x["bytes"] for x in inventory),"event_kind_counts":dict(collections.Counter(e["payload"]["kind"] for e in replay["events"])),"case_count":230,"execution_count":436,"parsed_cards":214,"mapping_gaps":12,"explicit_saga_adapter_limits":4,"native_crashes_or_parse_errors":0,"explicit_unimplemented_cards":0,"feedback_strength":"all weak","decisions":0,"acceptance_plans":0,"source_plan_sha256":EXPECTED_PLAN,"source_result_manifest_sha256":source_files["result-manifest.json"],"importer_sha256":file_sha(Path(__file__)),"importer_artifact_id":importer_id,"original_recorder_sha256":plan["runner_sha256"],"native_runtime_sha256":file_sha(args.runtime),"kernel_import_script_sha256":file_sha(args.kernel_scripts/"import_case_replay.py"),"native_commands":native_commands,"portable_artifact_bytes_exact":True,"original_output_hashes_preserved":True,"full_archive_prefix_and_worker_binary_excluded":True,"private_bootstrap_corpus_or_sessions_included":False,"unknown_event_elapsed_times_all_null":True,"measured_wall_ms_sum":wall_total,"measured_cpu_ms_sum":cpu_total,"unknown_peak_memory_and_tokens_null":True,"reconciliation_sha256":file_sha(output/"reconciliation.json"),"inventory_sha256":file_sha(output/"artifact-inventory.json"),"limits":[provenance["selection_boundary"],reconciliation["opaque_boundary"],"Imported logical event order must not be described as a newly executed run. The only execution durations are original per-execution receipt measurements.","This previously inspected source prefix is not representative or an unseen holdout. Four Saga records expose the normal-layout adapter limit; parsed structures do not establish complete card semantics."],"source_attribution":summary["attribution"]}
+ write(output/"import-report.json",report)
+ (output/"README.md").write_text(f"""Imported discovery replay: {RUN_ID}
+
+The separate replay contains all 230 retained source-derived cases and 436 original baseline probe executions: 214 cards parsed, 12 source mapping gaps, and four explicit Saga adapter limits. There is no change proposal, acceptance plan, review, decision or gameplay verdict. Every feedback record is weak and states its structural scope.
+
+The importer ran only factory-runtime init, verify and export. It ran no probes or builds. All event elapsed_ms values are null because the timeline is reconstructed; original measured wall/CPU usage remains attributed to each original execution. Peak memory and token counts are unknown, not zero.
+
+Exact relevant Scryfall records, the bounded 92-row public CSV, official mapping, frozen input/results, original receipt lines and native outputs are bundled. The full Scryfall archive, compressed prefix, worker binary and any private corpus/bootstrap/session material are excluded. Acquisition, global selection and binary/source associations retain their stated attestation boundaries.
+
+Native directory and portable-bundle verification passed. reconciliation.json checks every original output hash and case/receipt linkage; native opaque feedback validation itself is not a domain rules evaluator. artifact-inventory.json is the exact package allowlist. The portable bundle preserves every included artifact byte.
+
+Source data: 17Lands public datasets, CC BY 4.0; https://www.17lands.com/public_datasets . Derived slicing/normalization by Coworld MTG. 17Lands does not endorse this work.
+""")
+ print(json.dumps({"run":str(run),"replay_sha256":report["replay_sha256"],"bundle":str(bundle),"bundle_sha256":report["portable_bundle_sha256"],"events":report["events"],"artifacts":report["artifacts"],"report":str(output/"import-report.json"),"report_sha256":file_sha(output/"import-report.json")},indent=2))
+if __name__=="__main__":main()
+
