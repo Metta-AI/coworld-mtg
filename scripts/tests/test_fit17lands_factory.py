@@ -184,6 +184,16 @@ class DiscoveryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "failed execution cannot"):
             factory.verify_domain(replay)
 
+    def test_unknown_recording_adapter_is_not_accepted_as_compatible(self):
+        with kernel.Replay(self.run) as replay:
+            cfg_id = factory.sources(replay,factory.CONFIG)[0]
+            cfg = factory.artifact_json(replay,cfg_id)
+            cfg["adapter_id"] = replay.artifact(b"unknown recording implementation",raw=True)
+            replacement = replay.artifact(cfg)
+            next(e for e in replay.value["events"] if e["payload"].get("source",{}).get("snapshot_id")==cfg_id)["payload"]["source"]["snapshot_id"]=replacement
+            with self.assertRaisesRegex(ValueError,"unknown recording adapter"):
+                factory.verify_domain(replay)
+
     def test_feedback_strength_cannot_be_promoted_by_rehashing_report(self):
         replay = self.replay()
         factory.payloads(replay,"feedback_recorded")[0]["feedback"]["declared_strength"] = "strong"
@@ -198,7 +208,7 @@ class DiscoveryTests(unittest.TestCase):
                          base_revision=BASE, motivating_feedback_ids=[c["feedback_id"] for c in before["cases"]])
             attribution = {"schema":"coworld/17lands-repair-attribution@1","change_id":patch_id,
                 "baseline_report_id":before_id,"origin_issue_ids":[i["issue_id"] for i in before["issues"]],
-                "origin_case_ids":[c["case_id"] for c in before["cases"]],
+                "origin_case_ids":sorted(c["case_id"] for c in before["cases"]),
                 "diagnosis_id":replay.artifact(b"Constructed comparison test only",raw=True,media_type="text/markdown"),
                 "component":"observation_adapter","candidate_revision":"c"*40,
                 "authority":"Constructed unit-test attribution; no real compilation or repair claimed."}
@@ -225,6 +235,18 @@ class DiscoveryTests(unittest.TestCase):
             self.assertTrue(row["remaining_issue_ids"])
         self.assertFalse(factory.payloads(replay,"decision_recorded"))
         factory.verify_domain(replay)
+        attribution_id = factory.sources(replay,factory.PROPOSAL)[0]
+        for field, value in [("origin_issue_ids",["e"*64]),("origin_case_ids",[]),
+                             ("candidate_revision","d"*40),("diagnosis_id","f"*64)]:
+            altered = self.replay()
+            changed = factory.artifact_json(altered,attribution_id)
+            changed[field] = value
+            with kernel.Replay(self.run) as writer:
+                changed_id = writer.artifact(changed)
+                altered.value["artifacts"].update(writer.value["artifacts"])
+            next(e for e in altered.value["events"] if e["payload"].get("source",{}).get("snapshot_id")==attribution_id)["payload"]["source"]["snapshot_id"]=changed_id
+            with self.subTest(attribution_field=field), self.assertRaises((ValueError,KeyError)):
+                factory.verify_domain(altered)
         with kernel.Replay(self.run) as writer:
             comparison["scope_changes"] = []
             bad_id = writer.artifact(comparison)

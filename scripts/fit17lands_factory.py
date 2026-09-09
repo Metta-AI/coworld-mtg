@@ -24,6 +24,12 @@ CONFIG = "17Lands trajectory discovery configuration"
 REPORT = "17Lands trajectory discovery report"
 COMPARISON = "17Lands trajectory discovery comparison"
 PROPOSAL = "17Lands trajectory repair attribution"
+VERIFIER_UPDATE = "17Lands compatible verification update"
+# This published predecessor has identical decoding, report and issue-identity
+# semantics. The reader upgrade adds rejection of invalid provenance only.
+COMPATIBLE_RECORDING_ADAPTERS = {
+    "42ac3393c467f165896de7d2bac46de08662cdc8c4ecd1ecbb641e259995ca2f",
+}
 SCHEMA = "coworld/17lands-discovery-report@1"
 COMPARISON_SCHEMA = "coworld/17lands-discovery-comparison@1"
 CLAIM = ("Report whether a legal trajectory was found for the enforced observations under the recorded "
@@ -74,14 +80,32 @@ def configuration(replay):
     ids = sources(replay, CONFIG)
     require(len(ids) == 1, "exactly one discovery configuration is required")
     cfg = artifact_json(replay, ids[0])
-    require(cfg["adapter_id"] == sha256(Path(__file__).read_bytes()),
-            "installed discovery adapter differs from frozen recorder/decoder")
-    require(artifact_bytes(replay, cfg["adapter_id"]) == Path(__file__).read_bytes(),
-            "frozen adapter bytes differ")
+    installed_id = sha256(Path(__file__).read_bytes())
+    require(cfg["adapter_id"] == installed_id or cfg["adapter_id"] in COMPATIBLE_RECORDING_ADAPTERS,
+            "unknown recording adapter; no compatible reader is declared")
+    retained_adapter = artifact_bytes(replay, cfg["adapter_id"])
+    require(sha256(retained_adapter) == cfg["adapter_id"], "frozen adapter bytes differ")
     require(replay.value["target"]["name"] == PROGRAM, "wrong target program")
     require(cfg["recorder_id"] == sha256(Path(__file__).with_name("factory_replay.py").read_bytes()),
             "installed recorder differs from frozen source")
     return cfg
+
+
+def record_verifier_update(replay, cfg):
+    current = Path(__file__).read_bytes()
+    current_id = sha256(current)
+    if cfg["adapter_id"] == current_id:
+        return
+    for identity in sources(replay, VERIFIER_UPDATE):
+        if artifact_json(replay, identity).get("verification_source_id") == current_id:
+            return
+    source_id = replay.artifact(current, raw=True, media_type="text/x-python")
+    update = {"schema": "coworld/17lands-verifier-update@1",
+              "recording_adapter_id": cfg["adapter_id"], "verification_source_id": source_id,
+              "compatibility": "Identical decoding, report derivation and diagnostic identities; stricter offline provenance checks. Original baseline receipts remain unchanged.",
+              "active_execution_adapter_id": source_id}
+    source(replay, replay.artifact(update), VERIFIER_UPDATE,
+           "Explicit recording-reader upgrade before further actions; the active adapter source and original derivation source are both retained.")
 
 
 def safe_member(directory, name):
@@ -322,6 +346,7 @@ def execute(args):
     with Replay(args.run_dir) as replay:
         cfg = configuration(replay)
         verify_domain(replay)
+        record_verifier_update(replay, cfg)
         require(sha256(args.input_manifest.read_bytes()) == cfg["runtime_manifest_sha256"],
                 "runtime manifest differs from prepared run")
         attestation = read_json(args.build_attestation)
@@ -397,6 +422,7 @@ def propose(args):
     with Replay(args.run_dir) as replay:
         cfg = configuration(replay)
         verify_domain(replay)
+        record_verifier_update(replay, cfg)
         report = complete_report(replay, args.report_id)
         require(report["label"] == "baseline", "repair attribution must start from baseline discovery")
         known = {i["issue_id"]: i for i in report["issues"]}
@@ -422,6 +448,7 @@ def propose(args):
                        "component": args.component, "candidate_revision": args.candidate_revision,
                        "authority": "Operator-supplied diagnosis and patch; discovery alone does not prove this diagnosis."}
         source(replay, replay.artifact(attribution), PROPOSAL, "Issue-to-patch attribution with a separate diagnosis.")
+        verify_domain(replay)
         native_verify(args, replay.directory)
         print(json.dumps({"change_id": identity}))
 
@@ -476,15 +503,64 @@ def compare(args):
         print(json.dumps({"comparison_id": identity, "assessment": value["assessment"]}))
 
 
+def validate_attributions(replay):
+    changes = {p["change_id"]: p for p in payloads(replay, "change_proposed")}
+    attributes = {}
+    for identity in sources(replay, PROPOSAL):
+        a = artifact_json(replay, identity)
+        require(a.get("schema") == "coworld/17lands-repair-attribution@1", "unsupported repair attribution schema")
+        change_id = a["change_id"]
+        require(change_id in changes and change_id not in attributes, "attribution needs one unique proposed change")
+        before = complete_report(replay, a["baseline_report_id"])
+        require(before["label"] == "baseline" and before["change_id"] is None, "origins must come from baseline discovery")
+        known = {i["issue_id"]: i for i in before["issues"]}
+        ids = a["origin_issue_ids"]
+        require(isinstance(ids, list) and ids and ids == sorted(set(ids)) and all(i in known for i in ids),
+                "repair attribution names unknown or duplicate origin issues")
+        origins = sorted({o["case_id"] for i in ids for o in known[i]["origins"]})
+        require(a["origin_case_ids"] == origins, "repair attribution origin cases differ from actual issues")
+        feedbacks = [c["feedback_id"] for c in before["cases"] if c["case_id"] in origins]
+        change = changes[change_id]
+        require(change["motivating_feedback_ids"] == feedbacks,
+                "proposed change motivation differs from its discovered origins")
+        require(change["base_revision"] == replay.value["target"]["baseline_revision"],
+                "proposed change baseline revision differs")
+        require(re.fullmatch("[0-9a-f]{40}", a["candidate_revision"]), "attribution candidate revision must be a full commit")
+        require(a["component"] in COMPONENTS.values(), "unsupported attributed component")
+        require(bool(artifact_bytes(replay, a["diagnosis_id"])), "attribution diagnosis must exist and be nonempty")
+        require(b"diff --git " in artifact_bytes(replay, change_id), "attributed patch is not a Git diff")
+        attributes[change_id] = a
+    require(set(changes) == set(attributes), "every proposed change requires its source issue attribution")
+    return attributes
+
+
 def verify_domain(replay):
     cfg = configuration(replay)
     cases = {c["case_id"]: c for c in cfg["cases"]}
     feedbacks = {f["feedback"]["feedback_id"]: f["feedback"] for f in payloads(replay, "feedback_recorded")}
     starts = {p["execution_id"]: p for p in payloads(replay, "execution_started")}
     finishes = {p["execution_id"]: p for p in payloads(replay, "execution_finished")}
+    attributes = validate_attributions(replay)
+    builds = {p["build_id"]: p["build"] for p in payloads(replay, "build_recorded")}
+    for identity in sources(replay, VERIFIER_UPDATE):
+        update = artifact_json(replay, identity)
+        require(update.get("schema") == "coworld/17lands-verifier-update@1"
+                and update["recording_adapter_id"] == cfg["adapter_id"],
+                "verification update differs from original recording adapter")
+        require(sha256(artifact_bytes(replay, update["verification_source_id"])) == update["verification_source_id"]
+                and update["active_execution_adapter_id"] == update["verification_source_id"],
+                "verification source binding differs")
     # Recompute every displayed report from retained raw output and immutable cases.
     for _identity, report in all_reports(replay):
         rows = []
+        build = builds[report["build_id"]]
+        if report["label"] == "baseline":
+            require(report["change_id"] is None and build["source_revision"] == replay.value["target"]["baseline_revision"],
+                    "baseline report uses a different revision or proposed change")
+        else:
+            require(report["change_id"] in attributes and
+                    build["source_revision"] == attributes[report["change_id"]]["candidate_revision"],
+                    "candidate report revision differs from its attributed change")
         require(report["scope"] == cfg["scope"], "report scope differs")
         require([c["case_id"] for c in report["cases"]] == [c["case_id"] for c in cfg["cases"][:len(report["cases"])]],
                 "report omits or reorders cohort cases")
