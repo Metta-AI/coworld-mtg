@@ -1,4 +1,7 @@
 import "./styles.css";
+import "./fitting/styles.css";
+import { caseRecord as fittingCase, fittingArtifactIds, fittingContext, fittingStatus, initialFittingSelection, isFittingRecord, selectedReport } from "./fitting/model";
+import { renderFitting, renderFittingComparison } from "./fitting/view";
 import { isScryfallRecord, renderGenericSourceRecord, renderRecordedResult } from "./record-view";
 import {
   array, artifactReferences, candidateGateViolations, casesAt, decisionsForChange, emptyCaseState, evaluationReasons, eventTitle, label, object, parseReplay,
@@ -9,7 +12,8 @@ import {
 
 const app = document.querySelector<HTMLDivElement>("#factory-app")!;
 const state = {
-  runs: [] as RunSummary[], replay: null as Replay | null, cursor: -1, selectedCase: "",
+  fitting: initialFittingSelection(), fittingStructureOpen: false,
+  runs: [] as RunSummary[], replay: null as Replay | null, cursor: -1, selectedCase: "", requestedCase: "",
   tab: "evidence", filter: "", playing: false, following: false, loading: true,
   notice: "", error: "", sourceUrl: "", embedded: {} as Record<string, string>,
   artifacts: new Map<string, ArtifactState>(), inspecting: "", inspectingEvent: -1,
@@ -38,6 +42,9 @@ const artifactValue = (id: unknown): Fields => {
   return artifact?.status === "verified" || artifact?.status === "unverified" ? object(artifact.value) : {};
 };
 
+const currentFitting = () => fittingContext(currentEvents(), artifactValue);
+const fittingHelpers = () => ({ read: artifactValue, artifact: hashButton, integrity: statusMarkup, caseTitle: (id: string) => currentCases().find(c => c.id === id)?.title || id });
+
 function statusMarkup(id: string): string {
   const entry = state.artifacts.get(id);
   if (!state.replay?.artifacts[id]) return badge("not indexed", "negative");
@@ -49,6 +56,7 @@ function render(): void {
   const selection = active?.type === "search" ? active.selectionStart : null;
   const scrolls = new Map([...app.querySelectorAll<HTMLElement>("[data-scroll]")].map(el => [el.dataset.scroll, el.scrollTop]));
   const replay = state.replay, events = currentEvents(), cases = currentCases();
+  if (cases.some(item => item.id === state.requestedCase)) state.selectedCase = state.requestedCase;
   if (cases.length && !cases.some(item => item.id === state.selectedCase)) state.selectedCase = cases[0].id;
   const selected = selectedCase();
   const feedback = valuesFor(events, "feedback_recorded");
@@ -56,6 +64,9 @@ function render(): void {
   const current = events.at(-1);
   const measured = valuesFor(events, "compute_recorded").filter(event => object(event.payload.usage).measurement === "measured");
   const wall = measured.reduce((total, event) => total + Number(object(event.payload.usage).wall_ms ?? 0), 0);
+  const hasFitting = currentFitting().reports.length > 0;
+  app.classList.toggle("fitting-run", hasFitting);
+  app.classList.toggle("show-fit-structure", state.fittingStructureOpen);
   app.innerHTML = `
     <header class="topbar">
       <a class="brand" href="./factory.html" aria-label="Coworld factory home"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span>COWORLD <b>FACTORY</b></span></a>
@@ -71,7 +82,7 @@ function render(): void {
     ${state.notice ? `<div class="notice" role="status">${esc(state.notice)}<button data-action="dismiss">Dismiss</button></div>` : ""}
     ${!replay ? `<main class="welcome"><p class="eyebrow">From evidence to improvement</p><h1>Follow the work.<br>Inspect the proof.</h1><p class="welcome-copy">Replay how source data became a case, how feedback motivated a change, and what the recorded evaluation actually established.</p><div class="welcome-actions"><button class="button primary" data-action="import">Open a replay file</button><button class="button" data-action="refresh">Refresh available runs</button></div><div class="welcome-path"><span>Source</span><span>Case</span><span>Feedback</span><span>Change</span><span>Decision</span></div><p class="subtle">${state.loading ? "Loading recorded runs…" : "Open a portable replay JSON, or serve a factory run to explore its artifacts."}</p></main>` : `
     <section class="run-heading">
-      <div class="run-heading-main"><p class="eyebrow">${esc(replay.target.name)} <span>/</span> ${esc(replay.run_id)}</p><h1>${esc(replay.title)}</h1><div class="run-meta">${badge(replay.status, toneFor(replay.status))}${badge(replay.recording.kind === "imported" ? "Imported evidence" : "Recorded run")}<span>Baseline ${esc(short(replay.target.baseline_revision))}</span><button class="text-button" data-action="raw-export">Replay metadata ↗</button><button class="text-button" data-action="run-history">Run history ↗</button></div></div>
+      <div class="run-heading-main"><p class="eyebrow">${esc(replay.target.name)} <span>/</span> ${esc(replay.run_id)}</p><h1>${esc(replay.title)}</h1><div class="run-meta">${badge(replay.status, toneFor(replay.status))}${badge(replay.recording.kind === "imported" ? "Imported evidence" : "Recorded run")}<span>Baseline ${esc(short(replay.target.baseline_revision))}</span><button class="text-button" data-action="raw-export">Replay metadata ↗</button><button class="text-button" data-action="run-history">Run history ↗</button>${hasFitting ? `<button class="text-button" data-action="fitting-structure" aria-expanded="${state.fittingStructureOpen}">${state.fittingStructureOpen ? "Hide run structure" : "Show run structure"}</button>` : ""}</div></div>
       <div class="run-stats"><div><strong>${cases.length}</strong><span>cases visible</span></div><div><strong>${feedback.length}</strong><span>feedback records</span></div><div><strong>${decisions.length}</strong><span>recorded decisions</span></div><div><strong>${measured.length ? time(wall) : "—"}</strong><span>measured worker time</span></div></div>
     </section>
     ${replay.recording.kind === "imported" ? `<div class="recording-note">ARCHIVAL RECORD <span>${esc(replay.recording.description || "Imported evidence. Event order reflects recorded dependencies; timing is not reconstructed.")}</span></div>` : ""}
@@ -111,17 +122,21 @@ function renderCaseQueue(cases: CaseView[]): string {
   const matches = cases.filter(item => (item.title + " " + item.id + " " + pretty(item.feedback.map(event => event.payload.feedback))).toLowerCase().includes(filter));
   return matches.length ? matches.map(item => {
     const latest = object(item.feedback.at(-1)?.payload.feedback);
-    return `<button class="case-row ${state.selectedCase === item.id ? "selected" : ""}" data-case="${esc(item.id)}" aria-pressed="${state.selectedCase === item.id}"><span class="case-row-top"><span class="case-origin">${esc(label(object(item.event.payload.derivation).kind))}</span><span class="case-sequence">${String(item.event.sequence + 1).padStart(2, "0")}</span></span><strong>${esc(item.title)}</strong><span class="case-row-bottom">${badge(latest.result || "awaiting feedback", toneFor(latest.result))}<span>${item.feedback.length} feedback</span></span></button>`;
+    const report = selectedReport(currentFitting(), item.id, "");
+    const fitStatus = report ? fittingStatus(fittingCase(report, item.id).status) : "";
+    return `<button class="case-row ${state.selectedCase === item.id ? "selected" : ""}" data-case="${esc(item.id)}" aria-pressed="${state.selectedCase === item.id}"><span class="case-row-top"><span class="case-origin">${esc(label(object(item.event.payload.derivation).kind))}</span><span class="case-sequence">${String(item.event.sequence + 1).padStart(2, "0")}</span></span><strong>${esc(item.title)}</strong><span class="case-row-bottom">${badge(fitStatus || latest.result || "awaiting feedback", fitStatus ? "muted" : toneFor(latest.result))}<span>${item.feedback.length} feedback</span></span></button>`;
   }).join("") : empty(filter ? "No matching cases" : emptyCaseState(state.replay!, state.cursor).title, filter ? "Try a card name, case ID, or feedback result." : emptyCaseState(state.replay!, state.cursor).detail);
 }
 
 function renderCaseContent(selected: CaseView): string {
   if (state.tab === "lineage") return renderLineage(selected);
-  if (state.tab === "changes") return renderChanges(selected);
+  if (state.tab === "changes") return renderFittingComparison(currentFitting(), selected.id, fittingHelpers()) + renderChanges(selected);
   if (state.tab === "artifacts") {
     const refs = artifactReferences(selected.events).filter(id => state.replay?.artifacts[id]);
     return `<div class="content-intro"><h3>Evidence inventory</h3><p>Artifacts referenced by the visible lineage of this case. Verification checks content against its recorded SHA-256.</p></div>${refs.length ? `<div class="artifact-list">${refs.map(id => `<button class="artifact-row" data-artifact="${esc(id)}"><span><strong>${esc(state.replay!.artifacts[id].path)}</strong><code>${esc(short(id))}</code></span>${statusMarkup(id)}</button>`).join("")}</div>` : empty("No indexed artifacts", "This recording contains no indexed artifacts for the selected case.")}`;
   }
+  const fitting = renderFitting(currentFitting(), selected.id, state.fitting, fittingHelpers());
+  if (fitting !== null) return fitting;
   const feedback = [...selected.feedback].reverse().map(event => object(event.payload.feedback));
   const caseRecord = artifactValue(selected.id);
   return `
@@ -301,6 +316,7 @@ function scheduleArtifacts(): void {
   queueMicrotask(() => {
     artifactQueue = false;
     const selected = selectedCase(), ids = new Set<string>();
+    for (const id of fittingArtifactIds(currentEvents(), currentFitting(), selected?.id || "")) ids.add(id);
     if (state.inspecting) ids.add(state.inspecting);
     if (state.historyOpen) for (const event of currentEvents()) if (event.payload.kind === "source_imported") ids.add(string(object(event.payload.source).snapshot_id));
     if (state.replay?.status !== "running") {
@@ -322,7 +338,7 @@ function scheduleArtifacts(): void {
           }
         }
       }
-      for (const id of [...ids]) for (const linked of artifactReferences(artifactValue(id))) if (state.replay!.artifacts[linked]) ids.add(linked);
+      for (const id of [...ids]) if (!isFittingRecord(artifactValue(id))) for (const linked of artifactReferences(artifactValue(id))) if (state.replay!.artifacts[linked]) ids.add(linked);
     }
     for (const id of ids) if (!state.artifacts.has(id) && state.replay!.artifacts[id]) void loadArtifact(id);
   });
@@ -384,8 +400,19 @@ async function loadRun(url: string, poll = false): Promise<void> {
 function installReplay(replay: Replay, embedded: Record<string, string>, sourceUrl: string): void {
   state.loadGeneration++; state.replay = replay; state.embedded = embedded; state.sourceUrl = sourceUrl;
   state.cursor = replay.events.length - 1; state.playing = false; state.following = false;
-  state.artifacts.clear(); state.selectedCase = ""; state.inspecting = ""; state.inspectingEvent = -1;
+  state.artifacts.clear(); state.fittingStructureOpen = false; state.fitting = initialFittingSelection(); state.selectedCase = ""; state.inspecting = ""; state.inspectingEvent = -1;
+  const params = new URLSearchParams(location.search);
+  state.requestedCase = sourceUrl ? params.get("case") || "" : "";
+  state.fitting.reportId = sourceUrl ? params.get("report") || "" : "";
   state.issues = referenceIssues(replay); state.error = ""; state.notice = ""; state.historyOpen = false; state.recoveryOpen = false; state.exportBlockers = [];
+}
+function updateSelectionUrl(): void {
+  if (!state.sourceUrl || !state.replay) return;
+  const url = new URL(location.href);
+  if (!url.searchParams.has("replay")) url.searchParams.set("run", state.replay.run_id);
+  if (state.requestedCase) url.searchParams.set("case", state.requestedCase); else url.searchParams.delete("case");
+  if (state.fitting.reportId) url.searchParams.set("report", state.fitting.reportId); else url.searchParams.delete("report");
+  history.replaceState(null, "", url);
 }
 function seek(position: number): void {
   state.following = false;
@@ -427,7 +454,9 @@ async function portableExport(): Promise<void> {
 app.addEventListener("click", event => {
   const element = (event.target as HTMLElement).closest<HTMLElement>("button, [data-seek]");
   if (!element) return;
-  if (element.dataset.case) { state.selectedCase = element.dataset.case; render(); return; }
+  if (element.dataset.case) { state.selectedCase = element.dataset.case; state.requestedCase = element.dataset.case; state.fitting = initialFittingSelection(); updateSelectionUrl(); const content = app.querySelector("#case-content"); if (content) content.scrollTop = 0; render(); return; }
+  if (element.dataset.fitStep !== undefined) { state.fitting.transition = Number(element.dataset.fitStep); render(); return; }
+  if (element.dataset.fitFields) { state.fitting.allFields = element.dataset.fitFields === "all"; render(); return; }
   if (element.dataset.tab) { state.tab = element.dataset.tab; render(); return; }
   if (element.dataset.artifact) { state.historyOpen = false; state.recoveryOpen = false; state.inspecting = element.dataset.artifact; state.inspectingEvent = -1; render(); return; }
   if (element.dataset.eventDetail) { state.historyOpen = false; state.recoveryOpen = false; state.inspectingEvent = Number(element.dataset.eventDetail); state.inspecting = ""; render(); return; }
@@ -457,6 +486,7 @@ app.addEventListener("click", event => {
       if (loaded?.text !== undefined) download(loaded.text, artifact?.path.split("/").pop() || id, artifact?.media_type);
       break;
     }
+    case "fitting-structure": state.fittingStructureOpen = !state.fittingStructureOpen; render(); break;
     case "close-inspector": closeInspector(); break;
     case "start": state.playing = false; seek(-1); break;
     case "back": state.playing = false; seek(state.cursor - 1); break;
@@ -472,6 +502,9 @@ app.addEventListener("input", event => {
 });
 app.addEventListener("change", async event => {
   const target = event.target as HTMLInputElement;
+  if (target.id === "fit-report-select") { state.fitting = { ...initialFittingSelection(), reportId: target.value }; updateSelectionUrl(); render(); return; }
+  if (target.id === "fit-moment-select") { state.fitting.moment = Number(target.value); render(); return; }
+  if (target.id === "fit-transition-select") { state.fitting.transition = Number(target.value); render(); return; }
   if (target.id === "run-select" && target.value) {
     const url = new URL(location.href); url.search = ""; url.searchParams.set("run", target.value); history.replaceState(null, "", url);
     await loadRun("/factory-api/runs/" + encodeURIComponent(target.value) + "/replay.json");
