@@ -1,0 +1,45 @@
+# Diagnosis: make discovered fitting obstacles inspectable
+
+The original twenty-game baseline report is
+5ea2ba333bf885c7fea32ec5b8cb27223639ec5a7641dae81b4e33c37a242551.
+Source row 8 reaches two of eight selected player-specific milestones in
+2,540 nodes and then reports an unsupported boundary. Its receipt retains a
+prefix and a generic explanation, but does not show which original transition
+prevented the observation check. The eight matching games likewise lack
+recorded field-by-field engine values for the viewer.
+
+This is a diagnosis of the measurement and explanation machinery. It does
+not establish an MTG rules error. The candidate adds typed traces of the
+original submitted actions, events and projected states, plus source-field
+comparisons and a separately identified failing branch.
+
+The unsupported projection messages also need more precise explanations.
+The independent source diagnosis artifact
+6efc5660277c276eb704087d2b8e64aaa0566b0e15f350b1e8ec7b25751fa014
+preserves twelve negative combat-damage observations from the exact full
+source rows. Neither the inspected official schema helper nor client source
+established that this column equals native combat damage events. The native
+mana expenditure events also do not cover every payment path. Ability IDs
+require their own binding. Consequently all these observations remain
+unsupported; a diagnostic native combat total is explicitly unchecked.
+
+The change preserves legal action search, boundary guards, reconstruction,
+enforced observations, Phase revision and existing issue identities. It
+improves source reasons and stores a diagnostic code/reason in issue
+evidence while retaining the earlier grouping detail for compatibility.
+
+The independent static trace review pins the six native source files.
+Tests replay successful and failed paths through the production engine and
+check original event/state equality, branch separation and lack of invented
+actual values for unsupported, unknown or unreached fields. The locked
+workspace tests and required Rust checks passed.
+
+The exact patch is against the baseline worker's source commit. That commit
+preceded the already-published measurement documentation; the full commit
+diff therefore also retains those documentation changes. The substantive
+native trace changes are the six reviewed bridge/fitter files.
+
+The same twenty cases will run with the same manifest, node/action bounds
+and sixty-second external deadline. The intended improvement is inspectable
+evidence. This proposal does not promise fewer unsupported cases, treat
+changed wording as an issue resolution, or authorize an acceptance decision.

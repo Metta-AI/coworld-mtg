@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "assessment": "Enforced fields compare the original parent state before the successful transition. The existing guard requires End phase, exactly one TurnStarted and only PriorityPassed/PhaseChanged before it. Receipts explicitly reference BeforeTransition, whose before state comes from that same original parent. No state is reconstructed by replay for receipt generation.",
+      "locators": [
+        "fitting/search.rs:144",
+        "fitting/search.rs:631",
+        "fitting/search.rs:705"
+      ],
+      "topic": "Expected versus actual boundary"
+    },
+    {
+      "assessment": "Only Enforced fields receive comparison actuals. Blank informational fields remain Unknown; unsupported fields remain Unsupported with actual null. Unreached enforced milestones remain NotReached. Unsupported boundaries do not claim actual field values. Nonnegative source combat cells are not promoted; native damage totals occupy a separate explicitly limited diagnostic.",
+      "locators": [
+        "fitting/search.rs:150",
+        "fitting/search.rs:195",
+        "fitting/source.rs:253",
+        "fitting/source.rs:282"
+      ],
+      "topic": "Unknown and unsupported"
+    },
+    {
+      "assessment": "Source edits refine reasons only. The retained UnsupportedProjection detail stays stable for existing factory grouping and specific diagnosis moves to evidence. Unsupported fields still prevent fully_covered_milestones. A clearer diagnostic is not a resolved support issue.",
+      "locators": [
+        "fitting/search.rs:433",
+        "fitting/search.rs:747",
+        "fitting/source.rs:282"
+      ],
+      "topic": "Coverage and grouping"
+    },
+    {
+      "assessment": "The main trace materializes the exact retained best-prefix Arc path. A failed attempt carries its own predecessor actions, attempted action, before/after state and branch-local transition index. Final boundary outcomes choose a separately retained real boundary context; other incomplete outcomes retain a prioritized representative failure at the furthest prefix. It is explicitly not an explanation of all explored or unexplored alternatives.",
+      "locators": [
+        "fitting/search.rs:238",
+        "fitting/search.rs:488",
+        "fitting/search.rs:713",
+        "fitting/search.rs:780",
+        "fitting/trace.rs:123"
+      ],
+      "topic": "Failure branch separation"
+    },
+    {
+      "assessment": "Path depth is capped at max_actions <= 512; current cohort uses 128. Persistent Arc links retain the current DFS ancestry and best prefix rather than every explored node. At most two representative failure contexts are retained internally and one serialized; existing issue evidence is capped at 16 native action/invariant failures. Native event/state payload bytes have no separate internal constant cap, so existing supervisor address-space and file-size limits remain necessary.",
+      "locators": [
+        "fitting/search.rs:371",
+        "fitting/search.rs:488",
+        "fitting/search.rs:584",
+        "fitting/trace.rs:191"
+      ],
+      "topic": "Retention bounds"
+    },
+    {
+      "assessment": "The helper accepts only actual DamageDealt events targeting a player with is_combat true. Aggregates and LifeChanged are not added. Each accepted turn transition resets the diagnostic accumulator before observing the next turn. The code does not equate this sum with 17Lands combat_damage_taken.",
+      "locators": [
+        "phase-bridge/src/fitting.rs:11",
+        "fitting/search.rs:34",
+        "fitting/search.rs:687"
+      ],
+      "topic": "Native event diagnostic"
+    },
+    {
+      "assessment": "Read source regressions for original-transition reproduction, cross-milestone backtracking, separate mismatch branches, budget/input null actuals and uncertain aggregate support. Author reported the first run as 9 passed/2 failed due to failure-context prioritization, then 11 passed after the reviewed selection fix. Reviewer did not execute these tests. git diff --check passed in this review.",
+      "locators": [
+        "fitting/search.rs:983",
+        "fitting/search.rs:1089",
+        "fitting/source.rs:518"
+      ],
+      "topic": "Test evidence boundary"
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    "This trace is a projection of one reconstructed hidden setup, including hypothetical opponent cards; its names are not evidence of the recorded opponent hand.",
+    "The unchanged EOT projection assumption remains narrower than a complete game-state reconstruction. Native events after TurnStarted belong to the next interval.",
+    "One selected failure context can be a mismatch even when overall search stops by budget; it must not be presented as an exhaustive unreachability proof.",
+    "Matching supported fields is not full source coverage. The verified baseline has eight matches and zero fully covered milestones in every returned native result.",
+    "External timeouts or output/memory limits can prevent result publication; this review does not claim performance parity after trace recording.",
+    "Compilation, Clippy, complete test outcomes, frozen candidate execution and factory verification remain the implementing and parent tasks responsibilities."
+  ],
+  "reviewed_at": "2026-09-09T07:47:19.647668+00:00",
+  "reviewer_mutations": "Only this owned review directory. No Phase, fitter, root checkout, baseline run or frozen cohort changes.",
+  "schema": "coworld/fitting-trace-source-review@1",
+  "scope": "Independent read-only source review of trace receipts, observation boundaries, unsupported fields, retained failure branches and memory retention. No build or native execution by reviewer, no candidate result or acceptance review.",
+  "source": {
+    "boundary": "The harness trace edits were uncommitted at review time; trace.rs was a new untracked file and is bound separately by its exact hash. This review applies to these bytes, not subsequent edits.",
+    "files_sha256": {
+      "crates/coworld-mtg-harness/src/fitting/mod.rs": "ce42d0631d23680b84759a156c5d64885deebf79798b7f18076185d16e6a3d37",
+      "crates/coworld-mtg-harness/src/fitting/search.rs": "ab720fcae89fef13aa8680cbb70371d187367b48931c6b63a20a9dd170dd6c73",
+      "crates/coworld-mtg-harness/src/fitting/source.rs": "ecc7c331088e1d2d84ae453eb2d86f5b97f5be5c16aa68b80b09215794cf9e51",
+      "crates/coworld-mtg-harness/src/fitting/trace.rs": "78beaf067e1ccdb2e058aac383ec14b2ca8bb4ded067802d5eda18f4acc8dffb",
+      "crates/phase-bridge/src/fitting.rs": "9a59b8773530c419e48170709a0416aab3df04a235d8b5fac97c5f602d86aa28",
+      "crates/phase-bridge/src/lib.rs": "73b058c255b55ce9ffb1b6777e2aa9da00408141744e28a7eab02d56c6b40916"
+    },
+    "head": "dac88ecfc54a7276ee355b399fe107a97b1a2975",
+    "tracked_worktree_full_index_diff_sha256": "eece5a691fcd8fdae04e1ebe066c5c4202c87445c8121b47f8be11cf1607df9b"
+  },
+  "source_diagnosis_sha256": "6efc5660277c276eb704087d2b8e64aaa0566b0e15f350b1e8ec7b25751fa014",
+  "status": "no_material_blockers_in_reviewed_source"
+}

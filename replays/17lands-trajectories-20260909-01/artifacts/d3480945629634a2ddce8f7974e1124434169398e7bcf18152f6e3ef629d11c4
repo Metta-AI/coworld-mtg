@@ -1,0 +1,1591 @@
+{
+  "seed": 7,
+  "schema": "coworld-17lands-guided-fit-v1",
+  "status": "input_issue",
+  "nodes": 0,
+  "matched_prefix_backtracks": 0,
+  "elapsed_millis": 0,
+  "milestones_fitted": 0,
+  "milestones_total": 8,
+  "fully_covered_milestones": 0,
+  "witness": [],
+  "trace": {
+    "schema": "coworld-17lands-fit-trace-v1",
+    "path_kind": "no_execution",
+    "initial_state": null,
+    "transitions": [],
+    "milestones": [
+      {
+        "key": {
+          "turn_owner": 0,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "user_turn_1_cards_discarded",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_cards_drawn",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_cards_tutored",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_creatures_attacked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_creatures_blocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_creatures_blocking",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_creatures_unblocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_cards_in_hand",
+            "raw": "102732|102695|102732|102482|102488|102487",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Plains",
+              "Suspend Aggression",
+              "Plains",
+              "Joined Researchers",
+              "Rehearsed Debater",
+              "Rapier Wit"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_lands_in_play",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_lands_played",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_non_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_user_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_user_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_user_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_user_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_user_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_user_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 0,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "user_turn_1_eot_oppo_cards_in_hand",
+            "raw": "6.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 6,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_oppo_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_oppo_lands_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_oppo_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_oppo_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_oppo_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_oppo_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_oppo_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_oppo_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_oppo_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "oppo_turn_1_eot_user_cards_in_hand",
+            "raw": "102732|102695|102732|102482|102488|102487",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Plains",
+              "Suspend Aggression",
+              "Plains",
+              "Joined Researchers",
+              "Rehearsed Debater",
+              "Rapier Wit"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_lands_in_play",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "oppo_turn_1_cards_discarded",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_cards_drawn_or_tutored",
+            "raw": "1",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "drawn_or_tutored_count",
+            "expected": 1,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_attacked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_blocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_blocking",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_unblocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_cards_in_hand",
+            "raw": "6.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 6,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_lands_in_play",
+            "raw": "102714",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Fields of Strife"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_lands_played",
+            "raw": "102714",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Fields of Strife"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_non_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 0,
+          "turn_index": 2,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "user_turn_2_cards_discarded",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_cards_drawn",
+            "raw": "102468",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "drawn",
+            "expected": [
+              "Daydream"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_cards_tutored",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_creatures_attacked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_creatures_blocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_creatures_blocking",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_creatures_cast",
+            "raw": "102482",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "creature_cast",
+            "expected": [
+              "Joined Researchers"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_creatures_unblocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_user_cards_in_hand",
+            "raw": "102468|102732|102695|102488|102487",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Daydream",
+              "Plains",
+              "Suspend Aggression",
+              "Rehearsed Debater",
+              "Rapier Wit"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_user_creatures_in_play",
+            "raw": "102482",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "creatures",
+            "expected": [
+              "Joined Researchers"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_user_lands_in_play",
+            "raw": "102732|102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Plains",
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_user_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_lands_played",
+            "raw": "102732",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Plains"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_non_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_user_abilities",
+            "raw": "204312",
+            "disposition": "unsupported",
+            "reason": "recorded ability IDs require a separate runtime ability binding; they are not card IDs",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_user_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_user_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_user_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_user_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_user_mana_spent",
+            "raw": "2.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 0,
+          "turn_index": 2,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "user_turn_2_eot_oppo_cards_in_hand",
+            "raw": "6.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 6,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_oppo_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_oppo_lands_in_play",
+            "raw": "102714",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Fields of Strife"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_eot_oppo_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_oppo_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_oppo_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_oppo_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_oppo_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_oppo_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_2_oppo_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 2,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "oppo_turn_2_eot_user_cards_in_hand",
+            "raw": "102468|102732|102695|102488|102487",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Daydream",
+              "Plains",
+              "Suspend Aggression",
+              "Rehearsed Debater",
+              "Rapier Wit"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_user_creatures_in_play",
+            "raw": "102482",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "creatures",
+            "expected": [
+              "Joined Researchers"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_user_lands_in_play",
+            "raw": "102732|102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Plains",
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_user_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_user_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_user_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_user_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_user_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_user_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_user_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 2,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "oppo_turn_2_cards_discarded",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_cards_drawn_or_tutored",
+            "raw": "1",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "drawn_or_tutored_count",
+            "expected": 1,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_creatures_attacked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_creatures_blocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_creatures_blocking",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_creatures_cast",
+            "raw": "102490",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "creature_cast",
+            "expected": [
+              "Shattered Acolyte"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_creatures_unblocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_oppo_cards_in_hand",
+            "raw": "5.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 5,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_oppo_creatures_in_play",
+            "raw": "102490",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "creatures",
+            "expected": [
+              "Shattered Acolyte"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_oppo_lands_in_play",
+            "raw": "70501|102714",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Plains",
+              "Fields of Strife"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_eot_oppo_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_lands_played",
+            "raw": "70501",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Plains"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_non_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_oppo_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_oppo_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_oppo_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_oppo_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_oppo_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_2_oppo_mana_spent",
+            "raw": "2.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      }
+    ],
+    "failure": null
+  },
+  "issues": [
+    {
+      "kind": "unsupported_input",
+      "detail": "first supported slice requires both recorded mulligan counts to be explicitly zero",
+      "source_columns": [
+        "num_mulligans/opp_num_mulligans"
+      ]
+    }
+  ],
+  "limits": {
+    "nodes": 10000,
+    "max_actions": 128
+  },
+  "assumptions": [
+    "Official Arena IDs resolve to names in a pinned mapping; runtime matching is a name projection, not proof of unique token/face characteristics. One reconstructed hidden state: recorded user deck/opening multiset, chosen opening order and listed draw-prefix order, deterministic remaining library; no search over all shuffles.",
+    "Hypothetical opponent: maximum observed name multiplicities plus Plains to forty cards, in deterministic order; neither opponent deck nor opening hand is source-confirmed.",
+    "EOT fields project the last stable end-step state before a projection-neutral cleanup/turn transition; transitions with other pre-TurnStarted events are unsupported.",
+    "Runtime preflight checks names and setup only; it does not inventory every unsupported or unimplemented card effect. Blank cells are unknown. Nonblank card lists are multiset constraints; no global action order, targets, priority decisions, or hidden information is reconstructed as fact."
+  ],
+  "search": "Depth-first exact offered actions with cross-milestone backtracking; node and path-length limits count forced actions too; no completeness claim over hidden setups.",
+  "manifest_id": "3ac8a66b6bd4de88bf9e8e0b0777d868c742fe3672c766a3b4ba84bede321a96",
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "source_sha256": "746224a63538b15e949b91ddd939423a7e884bb01d2c49dce72757ff0a109012",
+  "cards_mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+  "input_sha256": "43c8e420001ce1df287fcbf05fc56327ace56d1d3937f07f75b00989bdd33a73"
+}

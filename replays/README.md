@@ -2,11 +2,14 @@
 
 These directories preserve replay manifests and content-addressed evidence.
 Open them with the factory viewer; the manifest is the record, and the viewer
-explains its events and relationships. Start with the [checkpoint handoff](../docs/handoff-2026-09-07.md)
-for a plain-language explanation of the current page and the three separate results.
+explains its events and relationships. Start with the
+[recorded-game fitting run](17lands-trajectories-20260909-01/README.md) for the
+current discovery pipeline. The [earlier checkpoint handoff](../docs/handoff-2026-09-07.md)
+explains the preceding ingestion and card-parsing experiments.
 
 | Run | Recorded outcome |
 | --- | --- |
+| [17lands-trajectories-20260909-01](17lands-trajectories-20260909-01/replay.json) | 20 real SOS games, baseline and candidate: eight partial matches, nine unsupported mulligan inputs, one boundary limit, two deadlines per worker. Typed traces and source-to-change attribution added; unchanged coverage/outcomes, comparison only. |
 | [17lands-coverage-20260907-03](17lands-coverage-20260907-03/replay.json) | Accepted native CSV source-coverage repair after independent review: 73 events, 95 artifacts, 14 executions. Primary, regression and new-row holdout gates satisfied. |
 | [scryfall-mana-20260907-03](scryfall-mana-20260907-03/replay.json) | Rejected Draw candidate; recording complete. 57 candidate cases: 16 satisfied, two Mill violations, 39 inconclusive. Reviewed Draw partial published separately; Coworld runtime pin unchanged. |
 | [17lands-observed-cards-20260908-01](17lands-observed-cards-20260908-01/replay.json) | Imported discovery from 230 observed Arena IDs and 436 retained executions: 214 parsed cards, four Saga adapter limits, 12 mapping gaps. Weak feedback only; no acceptance decision. |

@@ -24,6 +24,21 @@ an isolated Cargo target, one build job, disabled incremental compilation and
 debug information, and explicit memory limits. See
 [software-factory.md](software-factory.md) for commands and replay verification.
 
+## Current fitting run
+
+The completed recording is
+`/home/ubuntu/repos/coworld-factory-20260907-root/runs/17lands-trajectories-20260909-01`.
+The viewer uses the root workspace's `viewer-dist-20260909` directory. Its native
+candidate worker and build receipt remain in
+`data/fitting-trace-build-b5d1e6/`; the matching runtime manifest remains at
+`/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/inputs/manifest.json`.
+These are retained inputs, not authorization to edit another task's workspace.
+
+The [public replay](../replays/17lands-trajectories-20260909-01/README.md) can be
+verified and inspected without the private corpus. Re-executing the engine needs
+the exact manifest's full pinned export and a matching retained or rebuilt worker.
+No fitting workers are left running.
+
 ## Earlier experiment
 
 The fixed-input experiment remains at `/home/ubuntu/repos/coworld-mtg`, branch

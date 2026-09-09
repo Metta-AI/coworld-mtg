@@ -1,0 +1,288 @@
+{
+  "baseline_outcomes": {
+    "execution_scope": {
+      "deadline_seconds": 60,
+      "max_actions": 128,
+      "memory_bytes": 8589934592,
+      "nodes": 10000,
+      "opponent_filler": "Plains",
+      "turn_pairs": 2,
+      "workers": 1
+    },
+    "external_deadline": {
+      "count": 2,
+      "limit": "External supervisor deadline, not a native proof of unreachability or measured node exhaustion.",
+      "native_result": null,
+      "seconds_per_case": 60,
+      "source_rows": [
+        6,
+        11
+      ]
+    },
+    "input_issue": {
+      "count": 9,
+      "reason": "At least one recorded mulligan count is nonzero; current first slice requires both explicitly zero. Zero search nodes, not an engine gameplay failure.",
+      "source_rows": [
+        0,
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ]
+    },
+    "matched_supported_projection": {
+      "count": 8,
+      "fully_covered_milestones_each": 0,
+      "limit": "Witnesses satisfy implemented projections under the stated single reconstructed hidden setup. Unsupported source fields remain unchecked.",
+      "milestones_each": 8,
+      "source_rows": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        12,
+        13,
+        18
+      ]
+    },
+    "unsupported_boundary": {
+      "count": 1,
+      "milestones_fitted": 2,
+      "milestones_total": 8,
+      "nodes": 2540,
+      "source_rows": [
+        8
+      ]
+    }
+  },
+  "combat_diagnosis": {
+    "all_retained_turns": {
+      "cells": 2400,
+      "negative_cells": 12,
+      "negative_values": {
+        "-2": 5,
+        "-3": 5,
+        "-4": 1,
+        "-9": 1
+      }
+    },
+    "candidate_boundary": "Preserve grouped issue identity. A specific diagnostic reason or trace can improve explanation; it does not resolve this unsupported observation contract or justify a coverage increase.",
+    "exact_negative_observations": [
+      {
+        "combat_column": "oppo_turn_9_oppo_combat_damage_taken",
+        "combat_raw": "-9",
+        "current_eot_column": "oppo_turn_9_eot_oppo_life",
+        "current_eot_life_raw": "11.0",
+        "previous_eot_column": "user_turn_8_eot_oppo_life",
+        "previous_eot_life_raw": "2.0",
+        "source_row_index": 1
+      },
+      {
+        "combat_column": "oppo_turn_3_oppo_combat_damage_taken",
+        "combat_raw": "-2",
+        "current_eot_column": "oppo_turn_3_eot_oppo_life",
+        "current_eot_life_raw": "20.0",
+        "previous_eot_column": "user_turn_3_eot_oppo_life",
+        "previous_eot_life_raw": "18.0",
+        "source_row_index": 7
+      },
+      {
+        "combat_column": "oppo_turn_7_oppo_combat_damage_taken",
+        "combat_raw": "-3",
+        "current_eot_column": "oppo_turn_7_eot_oppo_life",
+        "current_eot_life_raw": "14.0",
+        "previous_eot_column": "user_turn_7_eot_oppo_life",
+        "previous_eot_life_raw": "11.0",
+        "source_row_index": 7
+      },
+      {
+        "combat_column": "user_turn_5_user_combat_damage_taken",
+        "combat_raw": "-3",
+        "current_eot_column": "user_turn_5_eot_user_life",
+        "current_eot_life_raw": "23.0",
+        "previous_eot_column": "oppo_turn_4_eot_user_life",
+        "previous_eot_life_raw": "20.0",
+        "source_row_index": 8
+      },
+      {
+        "combat_column": "user_turn_6_user_combat_damage_taken",
+        "combat_raw": "-3",
+        "current_eot_column": "user_turn_6_eot_user_life",
+        "current_eot_life_raw": "29.0",
+        "previous_eot_column": "oppo_turn_5_eot_user_life",
+        "previous_eot_life_raw": "23.0",
+        "source_row_index": 8
+      },
+      {
+        "combat_column": "oppo_turn_5_user_combat_damage_taken",
+        "combat_raw": "-3",
+        "current_eot_column": "oppo_turn_5_eot_user_life",
+        "current_eot_life_raw": "18.0",
+        "previous_eot_column": "user_turn_4_eot_user_life",
+        "previous_eot_life_raw": "15.0",
+        "source_row_index": 10
+      },
+      {
+        "combat_column": "user_turn_3_user_combat_damage_taken",
+        "combat_raw": "-2",
+        "current_eot_column": "user_turn_3_eot_user_life",
+        "current_eot_life_raw": "22.0",
+        "previous_eot_column": "oppo_turn_2_eot_user_life",
+        "previous_eot_life_raw": "20.0",
+        "source_row_index": 16
+      },
+      {
+        "combat_column": "user_turn_4_user_combat_damage_taken",
+        "combat_raw": "-3",
+        "current_eot_column": "user_turn_4_eot_user_life",
+        "current_eot_life_raw": "27.0",
+        "previous_eot_column": "oppo_turn_3_eot_user_life",
+        "previous_eot_life_raw": "22.0",
+        "source_row_index": 16
+      },
+      {
+        "combat_column": "user_turn_7_user_combat_damage_taken",
+        "combat_raw": "-4",
+        "current_eot_column": "user_turn_7_eot_user_life",
+        "current_eot_life_raw": "31.0",
+        "previous_eot_column": "oppo_turn_6_eot_user_life",
+        "previous_eot_life_raw": "27.0",
+        "source_row_index": 16
+      },
+      {
+        "combat_column": "user_turn_3_user_combat_damage_taken",
+        "combat_raw": "-2",
+        "current_eot_column": "user_turn_3_eot_user_life",
+        "current_eot_life_raw": "17.0",
+        "previous_eot_column": "oppo_turn_3_eot_user_life",
+        "previous_eot_life_raw": "15.0",
+        "source_row_index": 18
+      },
+      {
+        "combat_column": "user_turn_4_user_combat_damage_taken",
+        "combat_raw": "-2",
+        "current_eot_column": "user_turn_4_eot_user_life",
+        "current_eot_life_raw": "19.0",
+        "previous_eot_column": "oppo_turn_4_eot_user_life",
+        "previous_eot_life_raw": "17.0",
+        "source_row_index": 18
+      },
+      {
+        "combat_column": "user_turn_5_user_combat_damage_taken",
+        "combat_raw": "-2",
+        "current_eot_column": "user_turn_5_eot_user_life",
+        "current_eot_life_raw": "21.0",
+        "previous_eot_column": "oppo_turn_5_eot_user_life",
+        "previous_eot_life_raw": "19.0",
+        "source_row_index": 18
+      }
+    ],
+    "first_two_turn_pairs": {
+      "cells": 160,
+      "values": {
+        "0": 156,
+        "1": 4
+      }
+    },
+    "inference": "Negative aggregates and associated life gains suggest a combat-associated net-life convention, potentially including lifelink. The public inspected sources do not establish its exact time window, included causes or aggregation rule.",
+    "primary_sources": [
+      {
+        "finding": "Declares str; does not specify aggregation meaning.",
+        "locator": "COLUMN_TYPES regex for OWNER_turn_N_ACTOR_combat_damage_taken",
+        "sha256": "10873b986ace94016c3ca336e74ae9295b41dd8a94fb27fdcd569f3b29e151a7",
+        "url": "https://17lands-public.s3.amazonaws.com/analysis_data/helper_files/replay_dtypes.py"
+      },
+      {
+        "finding": "Public collector retains GRE messages and attaches full game-history events for submission; no combat_damage_taken construction found in this file.",
+        "locator": "lines 715\u2013734 _add_to_game_history and __handle_gre_to_client_message; lines 1141\u20131149 history attachment",
+        "sha256": "71117bdd8b1ef75cc019bbddfaeab9a69a02c5ef9efd741ec05a2e660918f77d",
+        "url": "https://github.com/rconroy293/mtga-log-client/blob/b87160b65cfe5be1ff9f526cecacf6405147b198/src/python/seventeenlands/mtga_follower.py#L715"
+      },
+      {
+        "finding": "Same raw-history collection role; no public CSV combat aggregate construction found in this inspected file.",
+        "locator": "AddToGameHistory/AddGameHistoryEvents lines 1681\u20131723; history attachment lines 859\u2013869",
+        "sha256": "862ac32ae17ceb696e4630c48a931a8088c7d9721cf99451d940b5bd83c05bec",
+        "url": "https://github.com/rconroy293/mtga-log-client/blob/b87160b65cfe5be1ff9f526cecacf6405147b198/src/cs/mtga-log-client/LogParser.cs#L1681"
+      }
+    ],
+    "qualification": "Keep the observation semantically unsupported until its construction is established. Preserve signed source values and label the missing projection contract; do not equate nonnegative cells with native DamageDealt totals or coerce negative values to invalid data. Excluding negative rows would not prove the meaning of remaining nonnegative cells.",
+    "status": "source_aggregation_contract_unresolved"
+  },
+  "identities": {
+    "baseline_source_reconciliation_sha256": "db25d2a479dde5a037c8ba760cce22fe70701caf04d8692922b07155b36b5bc0",
+    "cohort_manifest_sha256": "b5bb3640e6f64311f860faf69f6616fad2f7571a88980b056b3cc20bfa72d1ba",
+    "combat_semantic_review_sha256": "0ba1fe600decb015af2fd4570e275010b1a43b0a482c46229537b8acdc01fc15",
+    "games_csv_sha256": "746224a63538b15e949b91ddd939423a7e884bb01d2c49dce72757ff0a109012",
+    "native_reported_phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+    "negative_observations_sha256": "6669b887b6ec49cbaff81b890f7b962b2b80c1237c5f2f4f09df2f39af87fd1d",
+    "official_cards_csv_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "preparer_commit": "ff2a2cace954d3a4b9702a30e14aa47ec3c6847b",
+    "runtime_manifest_id": "3ac8a66b6bd4de88bf9e8e0b0777d868c742fe3672c766a3b4ba84bede321a96",
+    "worker_sha256": "7ba97b22bfdc1355f8e6de169afaa49771173f6056c9b0335d6120bd8c60d518"
+  },
+  "publication": {
+    "attribution": {
+      "credit": "Source data: 17Lands public datasets. Cohort selection and provenance by Coworld MTG. 17Lands does not endorse this work.",
+      "documentation_url": "https://www.17lands.com/public_datasets",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "modifications": "Exact complete CSV rows selected with their original header, quoting and line endings; no field values changed. Manifest and case labels derived.",
+      "provider": "17Lands"
+    },
+    "safe": "This derived receipt contains source observations, public identifiers, hashes and bounded audit conclusions. No private corpus bytes, session logs, credentials, full archive or downloaded client code."
+  },
+  "reviewed_at": "2026-09-09T07:43:13.001432+00:00",
+  "run": {
+    "artifacts": 187,
+    "completed_executions": 20,
+    "events": 126,
+    "replay_snapshot_sha256": "32b8c622128e0dc8f800a5184c9f831849ca05b9d67682bc7c6444def0879712",
+    "run_id": "17lands-trajectories-20260909-01"
+  },
+  "schema": "coworld/17lands-cohort-baseline-source-diagnosis@1",
+  "scope": "Completed baseline source and artifact reconciliation plus a bounded source-semantics diagnosis. No candidate results, acceptance, full-game reconstruction, search completeness or gameplay-correctness verdict.",
+  "selection": {
+    "algorithm": "Contiguous source rows in original CSV order; no outcome, identity, mulligan or support filters.",
+    "count": 20,
+    "development_source_rows": [
+      2,
+      3,
+      11
+    ],
+    "history_boundary": "Inspection history is caller-declared. Evaluation is a role, not a claim that source rows were unseen.",
+    "no_filters": true,
+    "previously_inspected_prefix": 25,
+    "start_row": 0,
+    "unseen_holdout": false
+  },
+  "source": {
+    "acquisition_binding": "Retained local archive rehashed before and after selection. Historical source URL association is caller-attested; original HTTP receipt and retrieval time are unavailable. This command does not download data.",
+    "archive_sha256": "db2e760e872e931b3d58238fa4cebff6647e48d178341dc5d21e642546ed4d3e",
+    "attribution": {
+      "credit": "Source data: 17Lands public datasets. Cohort selection and provenance by Coworld MTG. 17Lands does not endorse this work.",
+      "documentation_url": "https://www.17lands.com/public_datasets",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "modifications": "Exact complete CSV rows selected with their original header, quoting and line endings; no field values changed. Manifest and case labels derived.",
+      "provider": "17Lands"
+    },
+    "bytes": 331979824,
+    "retrieved_at": null,
+    "url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.SOS.PremierDraft.csv.gz"
+  },
+  "source_bindings_verified": {
+    "boundary": "Read-only comparison with retained source bytes and receipts; no reexecution. Original archive URL association and retrieval history remain as attested in the frozen source manifest. Binary/source association relies on retained build evidence, not a binary hash alone.",
+    "case_selections_equal_frozen_manifest": 20,
+    "constraints_raw_bytes_hashed": 20,
+    "constraints_raw_fields_equal_source": 52580,
+    "native_results_raw_bytes_hashed": 18,
+    "native_source_mapping_manifest_phase_and_limits_match": 18,
+    "timed_out_without_native_result": 2,
+    "unique_cases_and_indices": 20
+  }
+}

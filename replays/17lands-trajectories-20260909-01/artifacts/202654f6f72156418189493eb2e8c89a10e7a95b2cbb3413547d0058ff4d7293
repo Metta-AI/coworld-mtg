@@ -1,0 +1,23 @@
+{
+  "acceptance_claim": null,
+  "baseline_snapshot_sha256": "a05fefd5ffc658e97cd83b484534c275801aa267802174a72426516b9d21f013",
+  "domain_verify_accepted_invalid_origins": true,
+  "invalid_origin_case_id": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "invalid_origin_issue_id": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "material_gap": "The checked propose() command generates valid origin bindings, but portable verification does not revalidate attribution artifacts against their baseline issue origins or motivating feedback. This permits rehashed fabricated attribution to pass, independently of the actual baseline measurements.",
+  "native_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "native_stdout_sha256": "4d39d7ec891d2b0624ea0cf700115f1f0411ffba8aa7e1fc28af66b025b7489f",
+  "native_verify_exit_code": 0,
+  "private_audit_only": [
+    "audit-only-copied-run"
+  ],
+  "publication_allowlist": [
+    "report.json"
+  ],
+  "recommendation": "Validate each PROPOSAL in verify_domain: schema and uniqueness by change; complete baseline report; nonempty origin issue IDs from it; exact union of origin case IDs; exact corresponding motivating feedback; valid diagnosis artifact and declared component/revision. Verify baseline/candidate report build revisions against target/proposal. Freeze amended adapter only under an explicit version transition; do not silently mutate frozen records.",
+  "reproducer": "Copy the completed baseline run, retain real baseline feedback for change_proposed, and append a generic PROPOSAL source artifact with an absent origin issue and absent origin case. verify_domain() and the generic native verifier accept it.",
+  "reviewed_at": "2026-09-09T07:50:13.724726+00:00",
+  "schema": "coworld/discovery-adapter-attribution-audit@1",
+  "scope": "Audit-only copied baseline run. No worker rerun, engine execution, source edit, acceptance decision or live replay mutation.",
+  "source_adapter_sha256": "42ac3393c467f165896de7d2bac46de08662cdc8c4ecd1ecbb641e259995ca2f"
+}

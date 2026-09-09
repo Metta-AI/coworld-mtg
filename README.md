@@ -103,10 +103,13 @@ retaining alternative paths across observations.
 The [first fitting measurements](docs/artifacts/17lands-guided-fit-20260908/README.md)
 retain three repeated opening-turn examples. The larger
 [frozen cohort](fixtures/17lands/sos-cohort-20/README.md) includes all first 20
-records without filtering on fitting results. Its baseline found eight supported
-projection matches, nine unsupported mulligan reconstructions, two worker
-deadlines and one unsupported boundary. Even the matches have zero fully covered
-milestones. These records were previously inspected and are not unseen holdouts.
+records without filtering on fitting results. The [recorded before/after run](replays/17lands-trajectories-20260909-01/README.md)
+ran all 20 games against each worker. Both found eight supported projection
+matches, nine unsupported mulligan reconstructions, two worker deadlines and one
+unsupported boundary. The candidate adds inspectable state/action traces; it
+does not change these outcomes or increase observation coverage. Even the matches
+have zero fully covered milestones. These records were previously inspected and
+are not unseen holdouts.
 
 Combat-damage, mana-spent and ability observations remain unchecked where their
 source semantics or engine bindings are unestablished. In particular, the raw

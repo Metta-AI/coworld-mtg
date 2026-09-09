@@ -1,0 +1,485 @@
+{
+  "seed": 10,
+  "schema": "coworld-17lands-guided-fit-v1",
+  "status": "matched_supported_projection",
+  "nodes": 50,
+  "matched_prefix_backtracks": 0,
+  "elapsed_millis": 1097,
+  "milestones_fitted": 8,
+  "milestones_total": 8,
+  "fully_covered_milestones": 0,
+  "witness": [
+    {
+      "seat": 0,
+      "action": {
+        "type": "MulliganDecision",
+        "data": {
+          "choice": {
+            "type": "Keep"
+          }
+        }
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "MulliganDecision",
+        "data": {
+          "choice": {
+            "type": "Keep"
+          }
+        }
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PlayLand",
+        "data": {
+          "object_id": 45,
+          "card_id": 45
+        }
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PlayLand",
+        "data": {
+          "object_id": 39,
+          "card_id": 39
+        }
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PlayLand",
+        "data": {
+          "object_id": 81,
+          "card_id": 81
+        }
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "CastSpell",
+        "data": {
+          "object_id": 42,
+          "card_id": 42,
+          "targets": [],
+          "payment_mode": {
+            "type": "Auto"
+          }
+        }
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PlayLand",
+        "data": {
+          "object_id": 23,
+          "card_id": 23
+        }
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "CastSpell",
+        "data": {
+          "object_id": 38,
+          "card_id": 38,
+          "targets": [],
+          "payment_mode": {
+            "type": "Auto"
+          }
+        }
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 0,
+      "action": {
+        "type": "PassPriority"
+      }
+    },
+    {
+      "seat": 1,
+      "action": {
+        "type": "PassPriority"
+      }
+    }
+  ],
+  "issues": [
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_1_oppo_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_1_oppo_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_1_user_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_1_user_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_2_oppo_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_2_oppo_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_2_user_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "oppo_turn_2_user_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_1_oppo_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_1_oppo_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_1_user_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_1_user_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_2_oppo_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_2_oppo_mana_spent"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_2_user_combat_damage_taken"
+      ]
+    },
+    {
+      "kind": "unsupported_projection",
+      "detail": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "source_columns": [
+        "user_turn_2_user_mana_spent"
+      ]
+    }
+  ],
+  "limits": {
+    "nodes": 10000,
+    "max_actions": 128
+  },
+  "assumptions": [
+    "Official Arena IDs resolve to names in a pinned mapping; runtime matching is a name projection, not proof of unique token/face characteristics. One reconstructed hidden state: recorded user deck/opening multiset, chosen opening order and listed draw-prefix order, deterministic remaining library; no search over all shuffles.",
+    "Hypothetical opponent: maximum observed name multiplicities plus Plains to forty cards, in deterministic order; neither opponent deck nor opening hand is source-confirmed.",
+    "EOT fields project the last stable end-step state before a projection-neutral cleanup/turn transition; transitions with other pre-TurnStarted events are unsupported.",
+    "Runtime preflight checks names and setup only; it does not inventory every unsupported or unimplemented card effect. Blank cells are unknown. Nonblank card lists are multiset constraints; no global action order, targets, priority decisions, or hidden information is reconstructed as fact."
+  ],
+  "search": "Depth-first exact offered actions with cross-milestone backtracking; node and path-length limits count forced actions too; no completeness claim over hidden setups.",
+  "manifest_id": "3ac8a66b6bd4de88bf9e8e0b0777d868c742fe3672c766a3b4ba84bede321a96",
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "source_sha256": "746224a63538b15e949b91ddd939423a7e884bb01d2c49dce72757ff0a109012",
+  "cards_mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+  "input_sha256": "be555bdda510582e973edb2a827ce2133d3b237eb0b163e3102217b9a2e467cf"
+}

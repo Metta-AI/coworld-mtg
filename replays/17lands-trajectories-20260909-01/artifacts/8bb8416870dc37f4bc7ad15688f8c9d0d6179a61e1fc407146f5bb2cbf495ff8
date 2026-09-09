@@ -1,0 +1,20 @@
+
+Running 14 tests using 1 worker
+
+  ✓   1 web/e2e/factory.spec.ts:32:1 › source provenance, scrubbing, and acceptance remain grounded in visible events (545ms)
+  ✓   2 web/e2e/factory.spec.ts:64:1 › portable local replay works offline and exposes hash mismatches (278ms)
+  ✓   3 web/e2e/factory.spec.ts:80:1 › mobile layout exposes the case and timeline without horizontal page overflow (178ms)
+  ✓   4 web/e2e/factory.spec.ts:92:1 › run selection distinguishes attempts and presents failed and superseded history (282ms)
+  ✓   5 web/e2e/factory.spec.ts:117:1 › inconclusive receipts expose their recorded reason without ability rows (150ms)
+  ✓   6 web/e2e/factory.spec.ts:131:1 › missing artifacts block portable export and can be retried after hydration (259ms)
+  ✓   7 web/e2e/factory.spec.ts:160:1 › run planning context is visible before a case has a patch (336ms)
+  ✓   8 web/e2e/factory.spec.ts:177:1 › a satisfied candidate case retains its recorded rejection beside the before and after evidence (378ms)
+  ✓   9 web/e2e/factory.spec.ts:219:1 › tagged source-ingestion results stay distinct from evaluator claims and Scryfall cards (405ms)
+  ✓  10 web/e2e/fitting.spec.ts:41:1 › older real receipts show source chronology without invented engine measurements (449ms)
+  ✓  11 web/e2e/fitting.spec.ts:61:1 › typed trace separates comparisons, unchecked diagnostics, and failed branch actions (441ms)
+  ✓  12 web/e2e/fitting.spec.ts:82:1 › corrupt report bytes never introduce a discovery view (226ms)
+  -  13 web/e2e/fitting.spec.ts:90:1 › actual live discovery reports and old receipts render without claim inflation
+  ✓  14 web/e2e/fitting.spec.ts:141:1 › actual comparison field shape wraps on mobile without claiming changed scope or a repair (200ms)
+
+  1 skipped
+  13 passed (5.4s)

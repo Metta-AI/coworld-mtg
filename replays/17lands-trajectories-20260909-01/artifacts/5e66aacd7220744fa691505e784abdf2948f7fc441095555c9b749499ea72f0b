@@ -1,0 +1,22 @@
+
+> build:legacy
+> vite build --config web/vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 17 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/factory.html                                0.57 kB │ gzip:  0.34 kB
+dist/player.html                                 0.60 kB │ gzip:  0.32 kB
+dist/global.html                                 0.60 kB │ gzip:  0.32 kB
+dist/replay.html                                 0.60 kB │ gzip:  0.32 kB
+dist/assets/app-CVzu3Mzc.css                    25.00 kB │ gzip:  7.07 kB
+dist/assets/factory-MipaF_qx.css                45.87 kB │ gzip: 10.56 kB
+dist/assets/replay-BwtMV0qu.js                   0.09 kB │ gzip:  0.10 kB
+dist/assets/global-1X4q65tr.js                   0.10 kB │ gzip:  0.11 kB
+dist/assets/player-DsV_GmxN.js                   0.10 kB │ gzip:  0.11 kB
+dist/assets/modulepreload-polyfill-B5Qt9EMX.js   0.71 kB │ gzip:  0.40 kB
+dist/assets/app-DySdATJT.js                     36.78 kB │ gzip: 11.53 kB
+dist/assets/factory-D9GMyO4M.js                 78.67 kB │ gzip: 24.90 kB
+✓ built in 414ms

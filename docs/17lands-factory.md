@@ -14,6 +14,25 @@ A matched result means the search found a trajectory for the enforced projection
 
 The frozen SOS cohort includes the first 20 source rows and uses two turns from each player. All were previously inspected; the evaluation role is not a claim of unseen holdout data. Nine contain mulligans that the first reconstruction does not handle. The runtime uses a full pinned card export, but a resolved card name is not a complete implementation-support certificate.
 
+## Inspect the recorded run
+
+The [20-game before/after replay](../replays/17lands-trajectories-20260909-01/README.md)
+contains 40 actual worker executions with the same corpus, scope and limits.
+Both workers return eight supported projection matches, nine input issues, one
+unsupported boundary and two external deadlines. The candidate adds typed
+explanations without changing those outcomes, witness actions or field coverage.
+
+Open source row 8 to inspect the boundary obstacle. A separate retained search
+branch discards a Forest during cleanup before the turn changes. The current
+boundary projection cannot safely interpret that transition, and therefore does
+not invent an observed state. This is a branch of the reconstructed setup, not a
+claim that the recorded player took that action.
+
+The replay connects the baseline issue groups to the candidate patch, retains
+the separate diagnosis, and compares the candidate on every original game. Its
+independent audit verifies that the changed constraint records contain reason
+annotation changes only. Combat observations remain unchecked.
+
 ## Run the pipeline
 
 Build the Coworld harness and factory runtime, retaining the harness build receipt. The worker must have access to the matching runtime corpus. Public replay artifacts do not contain that corpus.
@@ -93,7 +112,7 @@ Verify and close a finished recording:
       --run-dir /path/to/runs/my-17lands-discovery \
       --runtime /path/to/factory-runtime
 
-Verification recomputes report contents and attribution from retained worker receipts and checks the generic replay structure. It does not rerun the engine. Use the recorder/adapter version retained by the run when checking historical recordings.
+Verification recomputes report contents and attribution from retained worker receipts and checks the generic replay structure. It does not rerun the engine. The original recording adapter and any explicitly compatible verification update are retained in the run. The current stricter verifier recognizes the first recording version; unknown versions are rejected.
 
 Serve the run directory with factory-runtime and open client/factory.html?run=my-17lands-discovery. The fitting view shows recorded observations beside engine projections, the selected path, unchecked fields, assumptions and issue origins. Older receipts without a trace remain readable and are explicitly labeled as missing that explanation.
 

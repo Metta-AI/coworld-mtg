@@ -1,0 +1,24 @@
+{
+  "actual_live_baseline_read_only_verification": "passed; replay.json bytes unchanged",
+  "attempt_note": "Initial AST inspection attempted to iterate the Module instead of its body and stopped before report output or live baseline verification; corrected the audit code, without source or replay changes.",
+  "fixed_adapter_sha256": "25da0223a19d9c29d5335487ecca7d43b541cc01c424d7b224e55040875e94f7",
+  "initial_audit_sha256": "202654f6f72156418189493eb2e8c89a10e7a95b2cbb3413547d0058ff4d7293",
+  "initial_owned_invalid_proposal_now_rejected": true,
+  "live_snapshot_sha256": "a05fefd5ffc658e97cd83b484534c275801aa267802174a72426516b9d21f013",
+  "original_adapter_sha256": "42ac3393c467f165896de7d2bac46de08662cdc8c4ecd1ecbb641e259995ca2f",
+  "rejection": "repair attribution names unknown or duplicate origin issues",
+  "review": "All proposed origin/feedback/base-revision/diagnosis and baseline/candidate source-revision checks are now in portable verification. The exact old adapter remains retained and explicitly allowlisted; new execution/verification code is recorded separately before subsequent actions. No new interpretation or normalization functions changed.",
+  "reviewed_at": "2026-09-09T07:53:51.650610+00:00",
+  "schema": "coworld/discovery-adapter-attribution-audit-followup@1",
+  "scope": "Read-only verifier calls against existing copied audit run and actual baseline; no native worker rerun, no source or live replay mutation, no candidate results.",
+  "unchanged_function_asts": {
+    "classify": true,
+    "comparison_value": true,
+    "coverage": true,
+    "decode_result": true,
+    "issue_identity": true,
+    "issues_for": true,
+    "outcome": true,
+    "report_value": true
+  }
+}

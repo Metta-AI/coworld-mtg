@@ -1,0 +1,213 @@
+{
+  "assessment": "Discovery trace and diagnostic explanation improved; no source-coverage increase or gameplay correctness verdict.",
+  "audit_artifacts": {
+    "baseline_source_diagnosis_sha256": "6efc5660277c276eb704087d2b8e64aaa0566b0e15f350b1e8ec7b25751fa014",
+    "candidate_source_trace_reconciliation_sha256": "444086a316cf89a0177b11e31117db6172a878686a0f10a136d28004ec2dcacd",
+    "provenance_gap_fixed_followup_sha256": "fe891db4ad461bc3c9490373165561df8d818cf0de415804608f598cfaec6ec6",
+    "trace_review_addendum_sha256": "bb864ca2260f1f21f67e0b6158c7fe1f0de71ad4fd77c9f872d69ece43f35bdd",
+    "trace_source_review_sha256": "b089c8108f27f64928e0a0cb794774a28457982af8626893f05285a89d7b728b"
+  },
+  "baseline_report_id": "5ea2ba333bf885c7fea32ec5b8cb27223639ec5a7641dae81b4e33c37a242551",
+  "builds": {
+    "baseline": {
+      "build_id": "779550cd25777aeaf20ab70c4ee0e9ac35e0dc4cd9b882975985612668048c61",
+      "source_revision": "201aa8a139db9819911ca9b4e1d9bb02465fb5f1",
+      "worker_sha256": "7ba97b22bfdc1355f8e6de169afaa49771173f6056c9b0335d6120bd8c60d518"
+    },
+    "candidate": {
+      "build_id": "b131fd0a1d06a2908d89fed98a1f25317c59971d7b1e8bcebff429bb7514f648",
+      "source_revision": "b5d1e69897c092a48810295016f46ec0ec47c5c3",
+      "worker_sha256": "efae177fb6091030a2999d3843e1a55d8156336171635ab08a84ebc5556a3a6b"
+    }
+  },
+  "candidate_report_id": "413faa9eff65009754ef307562bdceb8016ea47f36dde065c1ef4931c53b630b",
+  "change_id": "7c3366bd0c119ccf983394bf9cb4a5f1a5eaab9b294417b817661ed9523978aa",
+  "limits": [
+    "No engine rerun by this reviewer; original retained states, transitions and outputs were reconciled.",
+    "Matched observations use one reconstructed hidden setup with a hypothetical opponent; absent cells remain unknown.",
+    "Combat aggregate construction remains unverified despite signed source observations and separate native diagnostic totals.",
+    "A clearer unsupported-field reason does not repair that support limitation.",
+    "External 60-second deadlines are not proof of unreachable gameplay.",
+    "No acceptance plan, rules verdict or acceptance decision is claimed by this summary."
+  ],
+  "new_inspectable_evidence": {
+    "main_transitions": 429,
+    "native_combat_diagnostics_explicitly_uncompared": 66,
+    "native_trace_objects": 18,
+    "no_execution_trace_objects": 9,
+    "search_trace_objects": 9,
+    "separate_unsupported_boundary_contexts": 1,
+    "state_projection_actuals_recomputed": 132,
+    "trace_fields_checked": 2299
+  },
+  "node_and_witness_comparison": [
+    {
+      "nodes": 0,
+      "source_row_index": 0,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 52,
+      "source_row_index": 1,
+      "witness_actions": 52
+    },
+    {
+      "nodes": 50,
+      "source_row_index": 2,
+      "witness_actions": 50
+    },
+    {
+      "nodes": 47,
+      "source_row_index": 3,
+      "witness_actions": 47
+    },
+    {
+      "nodes": 55,
+      "source_row_index": 4,
+      "witness_actions": 55
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 5,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 7,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 2540,
+      "source_row_index": 8,
+      "witness_actions": 11
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 9,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 50,
+      "source_row_index": 10,
+      "witness_actions": 50
+    },
+    {
+      "nodes": 64,
+      "source_row_index": 12,
+      "witness_actions": 64
+    },
+    {
+      "nodes": 47,
+      "source_row_index": 13,
+      "witness_actions": 47
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 14,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 15,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 16,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 17,
+      "witness_actions": 0
+    },
+    {
+      "nodes": 60,
+      "source_row_index": 18,
+      "witness_actions": 53
+    },
+    {
+      "nodes": 0,
+      "source_row_index": 19,
+      "witness_actions": 0
+    }
+  ],
+  "outcomes": {
+    "baseline": {
+      "input_issue": 9,
+      "matched_supported_projection": 8,
+      "unsupported_boundary": 1,
+      "worker_execution": 2
+    },
+    "candidate": {
+      "input_issue": 9,
+      "matched_supported_projection": 8,
+      "unsupported_boundary": 1,
+      "worker_execution": 2
+    },
+    "external_timeout_rows": [
+      6,
+      11
+    ],
+    "fully_covered_milestones_in_all_18_returned_native_results": 0,
+    "input_rows": [
+      0,
+      5,
+      7,
+      9,
+      14,
+      15,
+      16,
+      17,
+      19
+    ],
+    "matched_rows": [
+      1,
+      2,
+      3,
+      4,
+      10,
+      12,
+      13,
+      18
+    ],
+    "unsupported_boundary_row": 8
+  },
+  "prepared_at": "2026-09-09T08:03:15.353473+00:00",
+  "publication": "Derived public-source/measurement summary only. Do not include the full source archive, private runtime corpus, copied invalid audit replay or private session material.",
+  "run_id": "17lands-trajectories-20260909-01",
+  "same_scope": {
+    "deadline_seconds": 60,
+    "max_actions": 128,
+    "memory_bytes": 8589934592,
+    "nodes": 10000,
+    "opponent_filler": "Plains",
+    "turn_pairs": 2
+  },
+  "schema": "coworld/17lands-trajectory-before-after@1",
+  "source": {
+    "archive_sha256": "db2e760e872e931b3d58238fa4cebff6647e48d178341dc5d21e642546ed4d3e",
+    "attribution": {
+      "credit": "Source data: 17Lands public datasets. Cohort selection and provenance by Coworld MTG. 17Lands does not endorse this work.",
+      "documentation_url": "https://www.17lands.com/public_datasets",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "modifications": "Exact complete CSV rows selected with their original header, quoting and line endings; no field values changed. Manifest and case labels derived.",
+      "provider": "17Lands"
+    },
+    "cohort_manifest_sha256": "b5bb3640e6f64311f860faf69f6616fad2f7571a88980b056b3cc20bfa72d1ba",
+    "games_csv_sha256": "746224a63538b15e949b91ddd939423a7e884bb01d2c49dce72757ff0a109012",
+    "official_cards_csv_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "selection": "First 20 complete SOS source rows, indices 0 through 19, no filtering. All were previously inspected; no unseen holdout claim.",
+    "url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.SOS.PremierDraft.csv.gz"
+  },
+  "verified_unchanged": {
+    "case_selections": 20,
+    "coverage_by_source_column_equal_cases": 20,
+    "expected_values_dispositions_projections_decks_libraries_assumptions_milestones": "unchanged",
+    "native_issue_signatures_equal_in_both_native_results": 18,
+    "node_counts_and_witnesses_equal_in_both_native_results": 18,
+    "reason_annotation_changes": 336,
+    "source_raw_fields": 52580
+  }
+}

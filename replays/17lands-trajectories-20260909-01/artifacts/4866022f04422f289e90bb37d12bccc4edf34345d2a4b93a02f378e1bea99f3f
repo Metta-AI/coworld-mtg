@@ -1,0 +1,94 @@
+[
+  {
+    "argv": [
+      "python3",
+      "scripts/check-phase-pin.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.022433648817241192,
+    "log": "/home/ubuntu/repos/coworld-fitter-20260909-trace-runtime/repo/../check-00.log",
+    "log_sha256": "5ac536c0cd6e802bf45c98563ce252ce5577b7ac3c380f4d0c7c258b63dd99b7"
+  },
+  {
+    "argv": [
+      "/home/ubuntu/.cargo/bin/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.21960941702127457,
+    "log": "/home/ubuntu/repos/coworld-fitter-20260909-trace-runtime/repo/../check-01.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/home/ubuntu/.cargo/bin/cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 21.805101552046835,
+    "log": "/home/ubuntu/repos/coworld-fitter-20260909-trace-runtime/repo/../check-02.log",
+    "log_sha256": "107cb777b0acb6a8a65099bc5b49d44dc2d5501ae2a3ab4ed166f0aafa624e38"
+  },
+  {
+    "argv": [
+      "/home/ubuntu/.cargo/bin/cargo",
+      "test",
+      "--workspace",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 104.75301434472203,
+    "log": "/home/ubuntu/repos/coworld-fitter-20260909-trace-runtime/repo/../check-03.log",
+    "log_sha256": "87ed6192b62737f28a0663a1e2a80dc7e71afddf8b551940e14ce0491e3f66ac"
+  },
+  {
+    "argv": [
+      "/home/ubuntu/.cargo/bin/cargo",
+      "run",
+      "--locked",
+      "-q",
+      "-p",
+      "coworld-mtg-harness",
+      "--",
+      "case",
+      "contracts",
+      "--output-dir",
+      "docs/contracts",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 10.20224826876074,
+    "log": "/home/ubuntu/repos/coworld-fitter-20260909-trace-runtime/repo/../check-04.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/home/ubuntu/.cargo/bin/cargo",
+      "run",
+      "--locked",
+      "-q",
+      "-p",
+      "coworld-mtg-harness",
+      "--",
+      "case",
+      "catalog",
+      "--evidence-dir",
+      "cases/evidence",
+      "--output",
+      "cases/evidence/README.md",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.2124699717387557,
+    "log": "/home/ubuntu/repos/coworld-fitter-20260909-trace-runtime/repo/../check-05.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

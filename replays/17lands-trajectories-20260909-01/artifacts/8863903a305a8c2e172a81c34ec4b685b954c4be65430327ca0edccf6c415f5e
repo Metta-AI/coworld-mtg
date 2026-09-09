@@ -1,0 +1,157 @@
+{
+  "schema": "coworld/viewer-browser-review@1",
+  "run_id": "17lands-trajectories-20260909-01",
+  "replay_sha256": "06e49b86fee0cb070c92d92c358df05572489c056b2cf841284b1bbebf58d202",
+  "replay_event_count": 240,
+  "viewer_origin": "http://127.0.0.1:4199",
+  "artifact_origin": "http://127.0.0.1:8030",
+  "report_id": "413faa9eff65009754ef307562bdceb8016ea47f36dde065c1ef4931c53b630b",
+  "comparison_id": "188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee",
+  "viewer_html_sha256": "0af5df9deaf03ffb436d850df564f1e807fb2ea04a2b674c6922d6a5f5f966f2",
+  "native_claim_scope": "Named supported projections under reconstructed assumptions. This browser audit does not certify gameplay correctness or acceptance.",
+  "native_status_counts": {
+    "input_issue": 9,
+    "matched_supported_projection": 8,
+    "unsupported_boundary": 1,
+    "worker_execution": 2
+  },
+  "results": [
+    {
+      "check": "row0 input issue",
+      "result_id": "233b75fff9f1f3fd295ea463ff3fdfb81add0c577a375054454506dafabb20a5",
+      "status": "passed",
+      "claims": "No engine path invented for no_execution."
+    },
+    {
+      "check": "row1 actual expected/actual trace",
+      "result_id": "b2e8b525bf698fd9c96037ccd2eb5620ddda8a046a130c431047596392e1ac7d",
+      "status": "passed",
+      "assertions": [
+        "5 source hand cards / 5 native count / recorded matched",
+        "known zero remains zero, blank remains unknown",
+        "native combat diagnostic remains separate and unsupported",
+        "boundary links to recorded transition 13 before state",
+        "0 fully covered milestones",
+        "mobile has no page overflow"
+      ]
+    },
+    {
+      "check": "row8 unsupported boundary",
+      "result_id": "a6f670f523a10b2e367e70da07e52cce41b30526483ef617c25922f7967afd56",
+      "status": "passed",
+      "assertions": [
+        "2/8 and unsupported boundary unchanged",
+        "failure index21 independent of 11-transition retained prefix",
+        "Cleanup + ZoneChanged/Discarded reason displayed",
+        "separate failure actual fields remain null/not reached",
+        "raw recorded attempt selects object42 Forest and emits discard then turn start"
+      ]
+    },
+    {
+      "check": "actual comparison and attribution",
+      "comparison_id": "188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee",
+      "status": "passed",
+      "sequence": 232,
+      "assertions": [
+        "same baseline/candidate outcome totals",
+        "row8 unsupported before and after",
+        "typed origin issue/patch attribution visible",
+        "comparison only remains separate from acceptance",
+        "comparison absent one event before import and present at exact import event",
+        "mobile no page overflow"
+      ]
+    }
+  ],
+  "verified_artifacts": [
+    {
+      "id": "413faa9eff65009754ef307562bdceb8016ea47f36dde065c1ef4931c53b630b",
+      "byte_sha256": "413faa9eff65009754ef307562bdceb8016ea47f36dde065c1ef4931c53b630b",
+      "bytes": 202483,
+      "hash_mode": "canonical_json"
+    },
+    {
+      "id": "188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee",
+      "byte_sha256": "188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee",
+      "bytes": 472483,
+      "hash_mode": "canonical_json"
+    },
+    {
+      "id": "5ea2ba333bf885c7fea32ec5b8cb27223639ec5a7641dae81b4e33c37a242551",
+      "byte_sha256": "5ea2ba333bf885c7fea32ec5b8cb27223639ec5a7641dae81b4e33c37a242551",
+      "bytes": 170694,
+      "hash_mode": "canonical_json"
+    },
+    {
+      "id": "233b75fff9f1f3fd295ea463ff3fdfb81add0c577a375054454506dafabb20a5",
+      "byte_sha256": "233b75fff9f1f3fd295ea463ff3fdfb81add0c577a375054454506dafabb20a5",
+      "bytes": 59782,
+      "hash_mode": "bytes"
+    },
+    {
+      "id": "dd232341292d82448e5e50324cfe11eb4eb562bd0c9de487dce76fce7dced359",
+      "byte_sha256": "dd232341292d82448e5e50324cfe11eb4eb562bd0c9de487dce76fce7dced359",
+      "bytes": 680066,
+      "hash_mode": "bytes"
+    },
+    {
+      "id": "b2e8b525bf698fd9c96037ccd2eb5620ddda8a046a130c431047596392e1ac7d",
+      "byte_sha256": "b2e8b525bf698fd9c96037ccd2eb5620ddda8a046a130c431047596392e1ac7d",
+      "bytes": 365074,
+      "hash_mode": "bytes"
+    },
+    {
+      "id": "ccb64987a8f5e35e81a75818c9ea2eee5faa9df5fc3e06afa239b5f7e36ed458",
+      "byte_sha256": "ccb64987a8f5e35e81a75818c9ea2eee5faa9df5fc3e06afa239b5f7e36ed458",
+      "bytes": 681082,
+      "hash_mode": "bytes"
+    },
+    {
+      "id": "a6f670f523a10b2e367e70da07e52cce41b30526483ef617c25922f7967afd56",
+      "byte_sha256": "a6f670f523a10b2e367e70da07e52cce41b30526483ef617c25922f7967afd56",
+      "bytes": 153299,
+      "hash_mode": "bytes"
+    },
+    {
+      "id": "5d888c8aac7b719ad6ef73edbd9c8f423512170a92252ef6bcd0df08767760fe",
+      "byte_sha256": "5d888c8aac7b719ad6ef73edbd9c8f423512170a92252ef6bcd0df08767760fe",
+      "bytes": 679625,
+      "hash_mode": "bytes"
+    }
+  ],
+  "javascript_errors": [],
+  "failed_http_responses": [],
+  "findings": [],
+  "validation": {
+    "factory_unit_tests": 42,
+    "typecheck": "passed",
+    "legacy_vite_build": "passed",
+    "browser_regressions": {
+      "passed": 13,
+      "skipped": 1,
+      "skip_reason": "Older-v1 live baseline test omitted; actual current candidate audited independently."
+    },
+    "actual_live_candidate_checks": "4 groups passed against exact source artifacts, rows 0/1/8 and whole-report comparison"
+  },
+  "remediated_findings": [
+    {
+      "kind": "mobile_overflow",
+      "comparison_id": "188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee",
+      "selector": ".fit-repair .fit-scope p",
+      "before": {
+        "viewport": 390,
+        "document_width": 831,
+        "paragraph_client_width": 287,
+        "paragraph_scroll_width_range": [
+          720,
+          758
+        ]
+      },
+      "after": "Both Evidence and Changes views pass document-width <= viewport at 390px; full constraint record text retained.",
+      "fix": "Inherited overflow-wrap:anywhere within fitting comparison sections."
+    },
+    {
+      "kind": "wording",
+      "fix": "Changed constraint records and Diagnostic signatures no longer reported distinguish annotation differences and absent signatures from scope changes or reviewed repairs."
+    }
+  ]
+}
