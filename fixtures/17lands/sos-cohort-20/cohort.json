@@ -1,0 +1,516 @@
+{
+  "cases": [
+    {
+      "case_id": "sos-source-row-000000",
+      "decompressed_byte_offset": 83616,
+      "game_index": 0,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102713|102734|102599|102505|102740|102521|102511",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 5983,
+      "source_row_index": 0,
+      "source_row_sha256": "bc45993e012c3341c8a578564cc6ab686d354f72fdf6dc12547adb85ba17b13c",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000001",
+      "decompressed_byte_offset": 89599,
+      "game_index": 1,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "102618|102674|102740|102717|102713|102497|102740",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 7130,
+      "source_row_index": 1,
+      "source_row_sha256": "239dcee8ba0d0be574627582041719d5305aea52eeb2bddb214fc0751998c983",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000002",
+      "decompressed_byte_offset": 96729,
+      "game_index": 2,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102515|102617|102734|102734|102599|102523|102734",
+        "opp_num_mulligans": "0"
+      },
+      "role": "development",
+      "source_row_bytes": 7304,
+      "source_row_index": 2,
+      "source_row_sha256": "477996899609c17325e255fdf9d890482239a12fa846d9e80b7d73f626ab0094",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000003",
+      "decompressed_byte_offset": 104033,
+      "game_index": 3,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "102497|102740|102650|102505|102734|102734|102521",
+        "opp_num_mulligans": "0"
+      },
+      "role": "development",
+      "source_row_bytes": 7646,
+      "source_row_index": 3,
+      "source_row_sha256": "18fce51d01327e1cab04084f9b6a316ab5609645d9405f2a4b1f7e9d7a6a7f4d",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000004",
+      "decompressed_byte_offset": 111679,
+      "game_index": 4,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "102734|102740|102505|102599|102770|102511|102523",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 10315,
+      "source_row_index": 4,
+      "source_row_sha256": "dbe4efe26cdde4003b217f55a5137421013c568a481494cac1e3b086a292d90c",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000005",
+      "decompressed_byte_offset": 121994,
+      "game_index": 5,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "102740|102521|102768|102740|102524|102717|102734",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6256,
+      "source_row_index": 5,
+      "source_row_sha256": "bc874d8ea6926f073b23b395290c1bb428a48f7380b1dbf8bd31e1b796611250",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000006",
+      "decompressed_byte_offset": 128250,
+      "game_index": 6,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102734|102674|102734|102734|102622|102617|102740",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6308,
+      "source_row_index": 6,
+      "source_row_sha256": "652c0b5c003468d4ac13696885edf1608e4e12bfd925aa8f518364167cfd4ff7",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000007",
+      "decompressed_byte_offset": 134558,
+      "game_index": 7,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102487|102723|102488|102482|102732|102695|102732",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 7539,
+      "source_row_index": 7,
+      "source_row_sha256": "26b538323ae632d3dececc2442ee0c1caba72d5ea4c7c0679d9c8a6eb3187222",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000008",
+      "decompressed_byte_offset": 142097,
+      "game_index": 8,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102483|102815|102732|102565|102723|102640|102738",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 5912,
+      "source_row_index": 8,
+      "source_row_sha256": "dccb3c1e34a2008487dbd1b428def4ea082f778dd8accb4522cd2276edf9eeb3",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000009",
+      "decompressed_byte_offset": 148009,
+      "game_index": 9,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "1",
+        "on_play": "True",
+        "opening_hand": "102565|102478|102738|102488|102732|102757|102738",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 7213,
+      "source_row_index": 9,
+      "source_row_sha256": "c21898d82be8ec48b29797e2527beeee3fce7a4aa02629083a5be6df28b27ac4",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000010",
+      "decompressed_byte_offset": 155222,
+      "game_index": 10,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "102473|102723|102487|102732|102468|102732|102757",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6210,
+      "source_row_index": 10,
+      "source_row_sha256": "9825c02d77477f9714d32abfa82bc139a694eae58fe926741c98e07a0d933d7e",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000011",
+      "decompressed_byte_offset": 161432,
+      "game_index": 11,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "73489|102648|102808|73496|102597|102614|102724",
+        "opp_num_mulligans": "0"
+      },
+      "role": "development",
+      "source_row_bytes": 5804,
+      "source_row_index": 11,
+      "source_row_sha256": "506ea21d08681dd44d3d83334b28235571633d65594cea83c5c924a93c9e7858",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000012",
+      "decompressed_byte_offset": 167236,
+      "game_index": 12,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "73496|73489|102508|73489|102513|102501|102528",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6480,
+      "source_row_index": 12,
+      "source_row_sha256": "7d4ae25e9c1e8337b7673e5967bb3484e94477bb0bfef60c5e74d04f8340fad3",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000013",
+      "decompressed_byte_offset": 173716,
+      "game_index": 13,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102513|73489|73489|102501|102806|73489|102832",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 7595,
+      "source_row_index": 13,
+      "source_row_sha256": "fed6ee0fb757e584854d0dc60619b10d0eb5392e4c1a8cef15491602118a7576",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000014",
+      "decompressed_byte_offset": 181311,
+      "game_index": 14,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102808|102513|73496|102625|102631|102605|73489",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6679,
+      "source_row_index": 14,
+      "source_row_sha256": "cf3f8156a1cae4573b83d06fdaeb114471fa7b3d48bb6cff59df348a45fdb559",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000015",
+      "decompressed_byte_offset": 187990,
+      "game_index": 15,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "73489|102806|102648|102667|73496|73496|102645",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 5583,
+      "source_row_index": 15,
+      "source_row_sha256": "0f91f2a005177a76595dd0012e92a9d94c917efb67d6e4c03931408088a911fb",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000016",
+      "decompressed_byte_offset": 193573,
+      "game_index": 16,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102693|73485|102714|102490|102495|102555|100651",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6133,
+      "source_row_index": 16,
+      "source_row_sha256": "f70ffa846a7ea6cb47df93a087f294342a344115642fd021937de40405e124d4",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000017",
+      "decompressed_byte_offset": 199706,
+      "game_index": 17,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "True",
+        "opening_hand": "102543|102495|73491|102760|102483|102714|102541",
+        "opp_num_mulligans": "1"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6585,
+      "source_row_index": 17,
+      "source_row_sha256": "a34e59ab9b195f69d10a05760f698dd0fe859a9895d758e24ca78061a48c0030",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000018",
+      "decompressed_byte_offset": 206291,
+      "game_index": 18,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "0",
+        "on_play": "False",
+        "opening_hand": "102578|73491|73485|102760|73485|102490|102545",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 6629,
+      "source_row_index": 18,
+      "source_row_sha256": "2dd74f295eaaa0a0eb5926b9330100922a2029b85f8c69e7e3c29af5ffd697f2",
+      "unseen_holdout": false
+    },
+    {
+      "case_id": "sos-source-row-000019",
+      "decompressed_byte_offset": 212920,
+      "game_index": 19,
+      "metadata_presence": {
+        "num_mulligans": "present",
+        "on_play": "present",
+        "opening_hand": "present",
+        "opp_num_mulligans": "present"
+      },
+      "previously_inspected": true,
+      "raw_metadata": {
+        "num_mulligans": "1",
+        "on_play": "True",
+        "opening_hand": "102476|102683|102471|102483|73491|102714|102693",
+        "opp_num_mulligans": "0"
+      },
+      "role": "evaluation",
+      "source_row_bytes": 7710,
+      "source_row_index": 19,
+      "source_row_sha256": "cdc7a143ef639a14bb8b43626cd0a476ad3b19e5d41eb9f05886fc6be8cd3308",
+      "unseen_holdout": false
+    }
+  ],
+  "fit": {
+    "max_actions": 128,
+    "nodes": 10000,
+    "opponent_filler": "Plains",
+    "turn_pairs": 2
+  },
+  "mapping": {
+    "binding": "Exact supplied official mapping bytes; URL association is caller-attested.",
+    "bytes": 1704693,
+    "path": "cards.csv",
+    "sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv"
+  },
+  "preparer_sha256": "b06246398519a2f014b7923b5baeb13d638c965df482344a75e7b97bd1324eb3",
+  "replay": {
+    "bytes": 220630,
+    "columns": 2629,
+    "path": "games.csv",
+    "rows": 20,
+    "sha256": "746224a63538b15e949b91ddd939423a7e884bb01d2c49dce72757ff0a109012"
+  },
+  "schema": "coworld/17lands-cohort@1",
+  "scope": "Frozen source workload only. No engine execution, compatibility result, rules correctness verdict or acceptance decision is encoded.",
+  "selection": {
+    "algorithm": "Contiguous source rows in original CSV order; no outcome, identity, mulligan or support filters.",
+    "count": 20,
+    "development_source_rows": [
+      2,
+      3,
+      11
+    ],
+    "history_boundary": "Inspection history is caller-declared. Evaluation is a role, not a claim that source rows were unseen.",
+    "no_filters": true,
+    "previously_inspected_prefix": 25,
+    "start_row": 0,
+    "unseen_holdout": false
+  },
+  "source": {
+    "acquisition_binding": "Retained local archive rehashed before and after selection. Historical source URL association is caller-attested; original HTTP receipt and retrieval time are unavailable. This command does not download data.",
+    "archive_sha256": "db2e760e872e931b3d58238fa4cebff6647e48d178341dc5d21e642546ed4d3e",
+    "attribution": {
+      "credit": "Source data: 17Lands public datasets. Cohort selection and provenance by Coworld MTG. 17Lands does not endorse this work.",
+      "documentation_url": "https://www.17lands.com/public_datasets",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "modifications": "Exact complete CSV rows selected with their original header, quoting and line endings; no field values changed. Manifest and case labels derived.",
+      "provider": "17Lands"
+    },
+    "bytes": 331979824,
+    "retrieved_at": null,
+    "url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.SOS.PremierDraft.csv.gz"
+  }
+}
