@@ -1,2 +1,5 @@
 # Content identities require exact artifact bytes on every checkout.
 replays/**/artifacts/* -text
+
+# Source fixtures and their inventories also retain original bytes.
+fixtures/17lands/sos-first-turns/source/* -text

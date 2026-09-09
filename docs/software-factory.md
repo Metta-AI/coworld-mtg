@@ -1,5 +1,7 @@
 # Software factory replays
 
+The current development goal is [issue discovery from recorded 17Lands games](17lands-discovery-plan.md): resolve identities and support gaps, search for compatible engine trajectories, then investigate and fix candidates separately. The ingestion and card experiments below establish narrower results.
+
 A factory run records where a case came from, which program ran it, what each
 evaluator established, what changed, and why a decision followed. The viewer
 reads those records directly. A prose case study is an interpretation of a

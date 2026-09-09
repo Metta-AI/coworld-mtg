@@ -1,0 +1,63 @@
+{
+  "diagnosis": "The extracted anchor combines hand counts from different turn-owner end-of-turn moments. Requiring 7 and 6 simultaneously is an invalid requirement. The retained run actually blocked this game on unresolved IDs at zero nodes; it did not execute and measure that contradiction.",
+  "expected_source_projection": [
+    {
+      "boundary_index": 0,
+      "observed_seat": 1,
+      "opponent_hand_count": 7,
+      "owner_local_turn": 1,
+      "turn_owner": "user"
+    },
+    {
+      "boundary_index": 1,
+      "observed_seat": 1,
+      "opponent_hand_count": 6,
+      "owner_local_turn": 1,
+      "turn_owner": "oppo"
+    }
+  ],
+  "gameplay_defect_demonstrated": false,
+  "historical_anchor_projection": {
+    "hand_count_constraints": [
+      {
+        "kind": "hand_count",
+        "source_column": "user_turn_1_eot_oppo_cards_in_hand",
+        "value": 7.0
+      },
+      {
+        "kind": "hand_count",
+        "source_column": "oppo_turn_1_eot_oppo_cards_in_hand",
+        "value": 6.0
+      }
+    ],
+    "observed_seat": 1,
+    "turn": 1
+  },
+  "historical_constraints_sha256": "ab8108221161d2ca6f34ce6e4f48531902608948da6d304e410b9e6e69bdcdae",
+  "historical_execution_status": {
+    "anchors_fitted": 0,
+    "game_index": 11,
+    "nodes": 10000,
+    "status": "fit_budget_exhausted"
+  },
+  "historical_result_sha256": "81e45e84501f7b127ada29164775ab031cd2134f72b5361575ee31bed08ab0a5",
+  "new_engine_execution": false,
+  "recording_kind": "derived_from_retained_artifacts",
+  "schema": "17lands-source-extraction-anomaly-v1",
+  "source_archive_sha256": "db2e760e872e931b3d58238fa4cebff6647e48d178341dc5d21e642546ed4d3e",
+  "source_fields": {
+    "num_mulligans": "0",
+    "on_play": "True",
+    "opp_num_mulligans": "0",
+    "oppo_turn_1_eot_oppo_cards_in_hand": "6.0",
+    "user_turn_1_eot_oppo_cards_in_hand": "7.0"
+  },
+  "source_row": {
+    "decompressed_byte_offset": 161432,
+    "fixture_row_index": 2,
+    "row_bytes": 5804,
+    "row_sha256": "506ea21d08681dd44d3d83334b28235571633d65594cea83c5c924a93c9e7858",
+    "source_row_index": 11
+  },
+  "unit_expectation_scope": "Only source-to-observation normalization. These expected milestones are not measured engine states or compatibility outcomes."
+}

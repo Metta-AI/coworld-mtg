@@ -1,5 +1,7 @@
 # From debugging campaigns to accumulating executable knowledge
 
+Current direction: see [the recorded-game discovery plan](17lands-discovery-plan.md) for the observation-driven loop, corrections to the older fitter, and next implementation milestones. This document preserves the earlier design history.
+
 Implementation update: the rules-case, reduction and acceptance path now lives
 in [the verifiable case guide](verifiable-cases.md), with generated schemas and
 diagrams. The account of `main` below describes the inspected starting commit
