@@ -5,6 +5,7 @@
 //! Phase's exact legal actions and viewer-filtered state to the host.
 
 mod fitting;
+pub use fitting::combat_damage_to_player;
 mod oracle;
 pub use oracle::{inspect_oracle_card, OracleInspection};
 

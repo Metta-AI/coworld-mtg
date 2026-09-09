@@ -5,7 +5,30 @@
 
 use super::*;
 use phase_engine::game::engine::start_game_with_starting_player;
+use phase_engine::types::ability::TargetRef;
 use std::collections::BTreeMap;
+
+/// Read one actual combat-damage hit from a production action's event stream.
+///
+/// This native engine diagnostic does not establish equivalence to any external
+/// dataset field, including 17Lands `combat_damage_taken`.
+///
+/// Phase emits `DamageDealt` after damage replacement/prevention and uses the
+/// actual recipient, including redirection. Its amount is damage dealt, which
+/// can differ from life lost. Aggregate combat events and life changes must not
+/// be added to this value. Sum each returned hit once within its turn; repeated
+/// sources across double-strike steps or extra combats are separate hits.
+pub fn combat_damage_to_player(event: &GameEvent) -> Option<(u8, u32)> {
+    match event {
+        GameEvent::DamageDealt {
+            target: TargetRef::Player(player),
+            amount,
+            is_combat: true,
+            ..
+        } => Some((player.0, *amount)),
+        _ => None,
+    }
+}
 
 impl PhaseRuntime {
     /// Resolve a known name to the exact face name used by the Phase corpus.
@@ -186,6 +209,81 @@ fn name_counts(names: &[String]) -> BTreeMap<&str, usize> {
 mod tests {
     use super::*;
     use phase_engine::types::actions::MulliganChoice;
+
+    #[test]
+    fn combat_damage_projection_accepts_only_actual_combat_hits_on_players() {
+        let damage = |target, amount, is_combat| GameEvent::DamageDealt {
+            source_id: ObjectId(7),
+            target,
+            amount,
+            is_combat,
+            excess: 0,
+        };
+        assert_eq!(
+            combat_damage_to_player(&damage(TargetRef::Player(PlayerId(1)), 3, true)),
+            Some((1, 3))
+        );
+        assert_eq!(
+            combat_damage_to_player(&damage(TargetRef::Player(PlayerId(0)), 0, true)),
+            Some((0, 0))
+        );
+        for event in [
+            damage(TargetRef::Player(PlayerId(1)), 3, false),
+            damage(TargetRef::Object(ObjectId(8)), 3, true),
+            GameEvent::DamagePrevented {
+                source_id: ObjectId(7),
+                target: TargetRef::Player(PlayerId(1)),
+                amount: 3,
+            },
+            GameEvent::LifeChanged {
+                player_id: PlayerId(1),
+                amount: -3,
+            },
+            GameEvent::CombatDamageDealtToPlayer {
+                player_id: PlayerId(1),
+                source_amounts: vec![(ObjectId(7), 3)],
+                total_damage: 3,
+            },
+        ] {
+            assert_eq!(combat_damage_to_player(&event), None, "{event:?}");
+        }
+    }
+
+    #[test]
+    fn combat_damage_projection_counts_each_hit_without_counting_its_aggregate() {
+        let events = [
+            GameEvent::DamageDealt {
+                source_id: ObjectId(7),
+                target: TargetRef::Player(PlayerId(1)),
+                amount: 3,
+                is_combat: true,
+                excess: 0,
+            },
+            GameEvent::CombatDamageDealtToPlayer {
+                player_id: PlayerId(1),
+                source_amounts: vec![(ObjectId(7), 3)],
+                total_damage: 3,
+            },
+            GameEvent::DamageDealt {
+                source_id: ObjectId(7),
+                target: TargetRef::Player(PlayerId(1)),
+                amount: 3,
+                is_combat: true,
+                excess: 0,
+            },
+            GameEvent::CombatDamageDealtToPlayer {
+                player_id: PlayerId(1),
+                source_amounts: vec![(ObjectId(7), 3)],
+                total_damage: 3,
+            },
+        ];
+        let hits = events
+            .iter()
+            .filter_map(combat_damage_to_player)
+            .collect::<Vec<_>>();
+        assert_eq!(hits, vec![(1, 3), (1, 3)]);
+        assert_eq!(hits.iter().map(|(_, amount)| amount).sum::<u32>(), 6);
+    }
 
     fn runtime() -> PhaseRuntime {
         let land = |name, oracle_id| {
