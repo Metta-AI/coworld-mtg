@@ -217,7 +217,8 @@ class Replay:
     def run_jsonl(self, *, execution_id, case_id, build_id, binary, record,
                   arguments, protocol, classify_status, change_id=None,
                   deadline_seconds=30, memory_bytes=2 * 1024**3,
-                  decode_output=decode_jsonl, output_media_type="application/x-ndjson"):
+                  decode_output=decode_jsonl, output_media_type="application/x-ndjson",
+                  output_name="output.jsonl", companion_names=()):
         """Run a bounded worker; its adapter decodes retained raw output bytes.
 
         The default remains one JSONL observation. A decoder may wrap another
@@ -225,6 +226,13 @@ class Replay:
         observation from the retained output with the same frozen decoder.
         """
         self.require_running()
+        # File-producing programs use the same supervised execution protocol.
+        # Names are single components; workers cannot nominate arbitrary host files.
+        names = [output_name, *companion_names]
+        if (len(set(names)) != len(names) or any(
+                not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,159}", name)
+                or name in ("input.jsonl", "stdout.txt", "stderr.txt") for name in names)):
+            raise ValueError("worker output names must be unique safe file components")
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,159}", execution_id):
             raise ValueError("execution ID must be a safe single path component")
         builds = [e["payload"]["build"] for e in self.value["events"]
@@ -237,11 +245,14 @@ class Replay:
         input_path = work / "input.jsonl"
         input_path.write_bytes(encode_json(record) + b"\n")
         input_id = self.artifact(input_path.read_bytes(), raw=True, media_type="application/x-ndjson")
-        output_path = work / "output.jsonl"
+        output_path = work / output_name
         command = [str(Path(binary).resolve()), *arguments(input_path, output_path)]
         request = {"protocol": protocol, "command": command, "case_id": case_id,
                    "build_id": build_id, "input_sha256": input_id, "worker_sha256": binary_hash,
                    "deadline_seconds": deadline_seconds, "memory_bytes": memory_bytes}
+        if output_name != "output.jsonl" or companion_names:
+            request["output_name"] = output_name
+            request["companion_names"] = list(companion_names)
         request_id = self.artifact(request)
         self.event("execute", "execution_started", execution_id=execution_id,
                    case_id=case_id, request_id=request_id, build_id=build_id, change_id=change_id)
@@ -290,6 +301,15 @@ class Replay:
             traces.append(output_id)
         except (OSError, ValueError) as error:
             output_error = str(error)
+        companion_ids = {}
+        companion_errors = {}
+        for name in companion_names:
+            try:
+                data = read_worker_output(work / name)
+                companion_ids[name] = self.artifact(data, raw=True, media_type="application/json")
+                traces.append(companion_ids[name])
+            except (OSError, ValueError) as error:
+                companion_errors[name] = str(error)
         output = None
         detail = None
         status = "completed"
@@ -301,6 +321,8 @@ class Replay:
             try:
                 if output_error is not None:
                     raise ValueError(output_error)
+                if companion_errors:
+                    raise ValueError("missing or unsafe companion output: " + str(companion_errors))
                 output = decode_output(raw_output)
                 encode_json(output)
             except Exception as error:
@@ -320,6 +342,9 @@ class Replay:
                    "worker_sha256": binary_hash,
                    "exit_code": returncode, "timed_out": timed_out,
                    "observation": output, "detail": detail, "output_artifact_id": output_id}
+        if companion_names:
+            receipt["companion_artifact_ids"] = companion_ids
+            receipt["companion_errors"] = companion_errors
         evidence_id = self.artifact(encode_json(receipt), raw=True)
         self.event("execute", "execution_finished", execution_id=execution_id,
                    status=status, evidence_id=evidence_id, trace_ids=list(dict.fromkeys(traces)), detail=detail)
