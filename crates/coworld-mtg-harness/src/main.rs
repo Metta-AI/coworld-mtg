@@ -41,6 +41,35 @@ enum Command {
     Mine17lands(Mine17landsArgs),
     /// Validate campaign identity and run one improvement shard.
     Improve(ImproveArgs),
+    /// Fit a bounded supported projection of real 17Lands observations.
+    Fit17lands(Fit17landsArgs),
+}
+
+#[derive(Args)]
+struct Fit17landsArgs {
+    #[arg(long)]
+    manifest_uri: String,
+    #[arg(long)]
+    replay_data: String,
+    #[arg(long)]
+    replay_sha256: String,
+    #[arg(long)]
+    cards_csv: String,
+    #[arg(long)]
+    cards_csv_sha256: String,
+    #[arg(long, default_value_t = 0)]
+    game_index: u64,
+    #[arg(long, default_value_t = 1)]
+    turn_pairs: u32,
+    #[arg(long, default_value_t = 10_000)]
+    nodes: u64,
+    #[arg(long, default_value_t = 128)]
+    max_actions: usize,
+    /// Explicit hypothetical filler for an unobserved opponent deck.
+    #[arg(long)]
+    opponent_filler: String,
+    #[arg(long)]
+    output_dir: PathBuf,
 }
 
 #[derive(Args)]
@@ -178,6 +207,26 @@ async fn main() -> Result<()> {
     match cli.command {
         Command::OracleProbe { input, output } => {
             coworld_mtg_harness::oracle_probe::inspect_file(&input, &output)?
+        }
+        Command::Fit17lands(args) => {
+            use coworld_mtg_harness::fitting::{fit_17lands, FitLimits, FitOptions};
+            let result = fit_17lands(FitOptions {
+                manifest_uri: args.manifest_uri,
+                replay_data: args.replay_data,
+                replay_sha256: args.replay_sha256,
+                cards_csv: args.cards_csv,
+                cards_csv_sha256: args.cards_csv_sha256,
+                game_index: args.game_index,
+                turn_pairs: args.turn_pairs,
+                opponent_filler: args.opponent_filler,
+                output_dir: args.output_dir,
+                limits: FitLimits {
+                    nodes: args.nodes,
+                    max_actions: args.max_actions,
+                },
+            })
+            .await?;
+            println!("{}", serde_json::to_string_pretty(&result)?);
         }
         Command::Case(args) => coworld_mtg_harness::cases::dispatch(args)?,
         Command::Materialize(args) => {

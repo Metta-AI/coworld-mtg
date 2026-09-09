@@ -25,7 +25,7 @@ use phase_engine::game::{
 use phase_engine::types::card_type::CoreType;
 use phase_engine::types::format::FormatConfig;
 use phase_engine::types::game_state::{AutoPassMode, WaitingFor};
-use phase_engine::types::identifiers::ObjectId;
+pub use phase_engine::types::identifiers::ObjectId;
 use phase_engine::types::mana::ManaCost;
 use phase_engine::types::phase::PhaseStop;
 use phase_engine::types::player::PlayerId;
@@ -34,7 +34,7 @@ use serde_json::Value;
 use std::sync::Arc;
 use thiserror::Error;
 
-pub use phase_engine::types::actions::GameAction;
+pub use phase_engine::types::actions::{GameAction, MulliganChoice};
 pub use phase_engine::types::events::GameEvent;
 pub use phase_engine::types::game_state::{ActionResult, GameState, StackEntryKind};
 pub use phase_engine::types::zones::Zone;

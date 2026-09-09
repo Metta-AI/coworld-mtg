@@ -7,6 +7,7 @@
 mod aggregate;
 pub mod cases;
 mod corpus;
+pub mod fitting;
 mod invariants;
 mod io;
 mod model;
