@@ -2,6 +2,8 @@
 //! failure under one reconstructed hidden state is an issue candidate, not a rules proof.
 mod search;
 mod source;
+mod trace;
+pub use trace::*;
 
 use crate::{
     corpus::{load_manifest, load_phase_runtime},
@@ -133,6 +135,8 @@ pub struct FitResult {
     pub milestones_total: usize,
     pub fully_covered_milestones: usize,
     pub witness: Vec<FitAction>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub trace: Option<FitTrace>,
     pub issues: Vec<IssueCandidate>,
     pub limits: FitLimits,
     pub assumptions: Vec<String>,

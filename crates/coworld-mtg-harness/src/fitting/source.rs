@@ -281,7 +281,15 @@ pub fn extract_game(
                 }
             } else {
                 field.disposition = FieldDisposition::Unsupported;
-                field.reason = "no implemented projection for this recorded field; ability IDs are not card IDs".into();
+                field.reason = if suffix.ends_with("combat_damage_taken") {
+                    "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent"
+                } else if suffix.ends_with("mana_spent") {
+                    "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero"
+                } else if suffix.ends_with("abilities") {
+                    "recorded ability IDs require a separate runtime ability binding; they are not card IDs"
+                } else {
+                    "no implemented projection for this recorded source field"
+                }.into();
             }
         } else if *column == "opening_hand" {
             field.disposition = if opening.len() == 7 {
@@ -506,6 +514,43 @@ mod tests {
                 .any(|i| i.detail.contains("explicitly zero")));
         }
     }
+    #[test]
+    fn uncertain_source_aggregates_never_gain_support_from_scalar_shape() {
+        for (column, raw, reason) in [
+            (
+                "user_turn_1_user_combat_damage_taken",
+                "-9",
+                "can be negative",
+            ),
+            (
+                "oppo_turn_1_oppo_combat_damage_taken",
+                "0",
+                "can be negative",
+            ),
+            ("user_turn_1_user_mana_spent", "0", "every payment path"),
+            (
+                "oppo_turn_1_user_abilities",
+                "88024",
+                "separate runtime ability binding",
+            ),
+        ] {
+            let input = extract_game(
+                &sample(column, raw, "True", "0"),
+                mapping_bytes(),
+                0,
+                1,
+                "Plains",
+            )
+            .unwrap();
+            let field = input.fields.iter().find(|f| f.column == column).unwrap();
+            assert_eq!(field.raw, raw);
+            assert_eq!(field.disposition, FieldDisposition::Unsupported);
+            assert!(field.projection.is_none());
+            assert!(field.expected.is_none());
+            assert!(field.reason.contains(reason), "{}", field.reason);
+        }
+    }
+
     #[test]
     fn ambiguous_mapping_and_blanks_remain_visible() {
         let bytes = sample("user_turn_1_cards_drawn", "999", "True", "0");
