@@ -116,3 +116,13 @@ it("does not relabel a nonblank informational zero as an unknown observation", (
   const input = { fields: [{ column: "known", raw: "0", milestone: key, disposition: "informational" }, { column: "blank", raw: "", milestone: key, disposition: "informational" }] };
   expect(observationRows(input, {}, key).map(row => row.comparison)).toEqual(["informational", "unknown"]);
 });
+
+it("does not describe changed annotations or absent signatures as proved scope changes or fixes", () => {
+  const f = fixture();
+  f.values.comparison = { schema: COMPARISON_SCHEMA, baseline_report_id: "report", candidate_report_id: "report", assessment: "comparison_only", rows: [{ case_id: "game-11", before_status: "unsupported_boundary", after_status: "unsupported_boundary", resolved_issue_ids: [] }], scope_changes: [{ case_id: "game-11", kind: "observation_changed", column: "combat", before: { reason: "unbound" }, after: { reason: "source aggregation unverified" } }] };
+  const html = renderFittingComparison(fittingContext([source("report"), source("comparison", 1)], f.read), "game-11", f.h);
+  expect(html).toContain("Changed constraint records");
+  expect(html).toContain("Diagnostic signatures no longer reported");
+  expect(html).not.toContain("Scope changed");
+  expect(html).not.toContain("Recorded resolved issues");
+});

@@ -30,7 +30,7 @@ function fixture(withTrace = false) {
     { sequence: 0, elapsed_ms: null, stage: "cases", payload: { kind: "case_registered", case_id: caseId, title: "UI wrapper · retained SOS game 11", derivation: { kind: "authored", author: "UI test", description: "Testing wrapper only" } } },
     { sequence: 1, elapsed_ms: null, stage: "sources", payload: { kind: "source_imported", source: { snapshot_id: reportId, provider: "17Lands trajectory discovery report", url: "urn:ui-fixture", description: "UI wrapper, not an actual run", retrieved_at: "fixture" } } },
   ] };
-  return { replay, contents, reportId, resultId, field };
+  return { replay, contents, reportId, resultId, field, put, caseId };
 }
 async function mount(page: Page, data: ReturnType<typeof fixture>, corrupt = "") {
   await page.route("**/factory-api/runs", route => route.fulfill({ json: { runs: [data.replay] } }));
@@ -135,4 +135,25 @@ test("actual live discovery reports and old receipts render without claim inflat
   expect((await page.locator("#case-content").boundingBox())!.height).toBeGreaterThan(330);
   await page.screenshot({ path: "test-results/fitting-real-row8-desktop.png", fullPage: true });
   writeFileSync(testInfo.outputPath("actual-live-browser-evidence.json"), JSON.stringify({ run_id: run, replay_sha256: digest(replayBytes.toString()), events: replay.events.length, artifacts: Object.keys(replay.artifacts).length, report_ids: replay.events.filter((e: any) => e.payload.kind === "source_imported" && e.payload.source.provider === "17Lands trajectory discovery report").map((e: any) => e.payload.source.snapshot_id), selected_case: await page.locator(".case-heading h2").innerText(), checked: ["actual input issue and recorded stop reason", "actual supported match with zero fully covered milestones", "old receipt engine values not reconstructed", "desktop and mobile render", "no mobile page overflow", "no JavaScript errors", "real row 8 unsupported boundary deep link", "case and report selection retained through live fetch and scrub"], artifact_reads: [...artifactReads], js_errors: errors }, null, 2));
+});
+
+
+test("actual comparison field shape wraps on mobile without claiming changed scope or a repair", async ({ page }) => {
+  const data = fixture();
+  // Exact source-field shape from comparison 188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee.
+  // The wrapper remains UI fixture data, not an additional factory measurement.
+  const before = { column: "oppo_turn_1_oppo_combat_damage_taken", disposition: "unsupported", expected: null, milestone: { boundary: "end_of_turn", observed_player: 1, turn_index: 1, turn_owner: 1 }, projection: null, raw: "0", reason: "no implemented projection for this recorded field; ability IDs are not card IDs" };
+  const after = { ...before, reason: "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent" };
+  const id = data.put({ schema: "coworld/17lands-discovery-comparison@1", baseline_report_id: data.reportId, candidate_report_id: data.reportId, assessment: "comparison_only", origin_issue_ids: [], rows: [{ case_id: data.caseId, before_status: "matched_supported_projection", after_status: "matched_supported_projection", resolved_issue_ids: [], remaining_issue_ids: ["ui-issue"], new_issue_ids: [] }], scope_changes: [{ case_id: data.caseId, kind: "observation_changed", column: before.column, before, after }], limitations: [] });
+  data.replay.events.push({ sequence: 2, elapsed_ms: null, stage: "sources", payload: { kind: "source_imported", source: { snapshot_id: id, provider: "17Lands trajectory discovery comparison", url: "urn:ui-fixture", description: "UI comparison fixture", retrieved_at: "fixture" } } });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mount(page, data);
+  await expect(page.getByRole("heading", { name: "Recorded before / after comparison" })).toBeVisible();
+  await expect(page.locator(".fit-repair")).toContainText("Changed constraint records");
+  await expect(page.locator(".fit-repair")).toContainText("Diagnostic signatures no longer reported");
+  await expect(page.locator(".fit-repair .fit-scope p").first()).toHaveText("Before: " + JSON.stringify(before));
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole("tab", { name: "Changes & decision" }).click();
+  await expect(page.locator(".fit-repair")).toContainText(after.reason);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
