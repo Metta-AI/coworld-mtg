@@ -1,0 +1,109 @@
+{
+  "source_revision": "201aa8a139db9819911ca9b4e1d9bb02465fb5f1",
+  "source_tree": "5da48163549b29b6954b0c6a1ff7bf33509df0a2",
+  "files": {
+    "checks.json": {
+      "sha256": "d5c71f5023cea09b1cb28d45ad9a28aa6b978f0e2ab85240d68d68781ed16118",
+      "bytes": 2504
+    },
+    "repeat-comparison.json": {
+      "sha256": "c01bf235157718164f5a7d6642c79b775ce68272d32fdc48333bd39ec6e8a23c",
+      "bytes": 2373
+    },
+    "inputs/manifest.json": {
+      "sha256": "ebea5a7dbfc86ead7c6fb525fcfd389ea84730bb29f1bc2712c95126de63bcdb",
+      "bytes": 1087
+    },
+    "build-final/build.json": {
+      "sha256": "b1901049105fbd79b6698b2015a2399499e1761784e418d82eb875f3e16588bf",
+      "bytes": 19340
+    },
+    "build-final/compiler.txt": {
+      "sha256": "42c4ba275329001967931cba5e8c4313944c295c0d6a94a853fca1cbde45e7b4",
+      "bytes": 212
+    },
+    "build-final/toolchain.txt": {
+      "sha256": "d5264698593441c450d77116811daeb0a7ed490dd7d13e3b3ae57892b7a274c3",
+      "bytes": 150
+    },
+    "real-probes-01/game-2/constraints.json": {
+      "sha256": "1de1d8e1de570d17673d02e9a43a76256bec4a37b00b875fb444cc4c6874f284",
+      "bytes": 113339
+    },
+    "real-probes-01/game-2/result.json": {
+      "sha256": "0f2a2f021fc4cd7e0140ece526e6f93b00961b4fdf35e09434804560b8e869f6",
+      "bytes": 6043
+    },
+    "real-probes-01/game-2/process-receipt.json": {
+      "sha256": "a38e2b9942feb1fe2f6832bb2174abd6a22840a629d3b2dcabc3c57df1e266a6",
+      "bytes": 2164
+    },
+    "real-probes-01/game-3/constraints.json": {
+      "sha256": "2e28d9ee9c3b2eb30f4f61c85baba560fbd0a43b4a93dee513eeedc670eaeba9",
+      "bytes": 113526
+    },
+    "real-probes-01/game-3/result.json": {
+      "sha256": "6a97adfd88bd11853c047da13618d280fa4a7e31025c3875cd2c49648405e687",
+      "bytes": 6043
+    },
+    "real-probes-01/game-3/process-receipt.json": {
+      "sha256": "61ccde39c408790f5312cd0b65400f263c74018b12507c5c7b148c9973690591",
+      "bytes": 2164
+    },
+    "real-probes-01/game-11/constraints.json": {
+      "sha256": "e28eba25ad27421d83d9bca275610cfb9ed0addc35fd7dedba2243a277a5ff1d",
+      "bytes": 113536
+    },
+    "real-probes-01/game-11/result.json": {
+      "sha256": "98e115700b88302eb9dc7b1cb0246911a136dda1ece4d59eb044e1757ccf6957",
+      "bytes": 7297
+    },
+    "real-probes-01/game-11/process-receipt.json": {
+      "sha256": "5a8805a5fa8e902a9d7e06281f4698a63c25d37237e1c5d55678a29b08a6ab90",
+      "bytes": 2166
+    },
+    "real-probes-02/game-2/constraints.json": {
+      "sha256": "1de1d8e1de570d17673d02e9a43a76256bec4a37b00b875fb444cc4c6874f284",
+      "bytes": 113339
+    },
+    "real-probes-02/game-2/result.json": {
+      "sha256": "6acdd69a5bf336dbcccd1b5a7f92a2988327323231c1fb4c2d0b9c349490e84e",
+      "bytes": 6043
+    },
+    "real-probes-02/game-2/process-receipt.json": {
+      "sha256": "1205ca6e04af2d7262ee71aa6dab0670da6774a25cf704e6f80e00f41b2ecb58",
+      "bytes": 2163
+    },
+    "real-probes-02/game-3/constraints.json": {
+      "sha256": "2e28d9ee9c3b2eb30f4f61c85baba560fbd0a43b4a93dee513eeedc670eaeba9",
+      "bytes": 113526
+    },
+    "real-probes-02/game-3/result.json": {
+      "sha256": "bd77da7b395e2b01031916e7422bafd5e3ac44f67df69c88579c6091c56efc1e",
+      "bytes": 6043
+    },
+    "real-probes-02/game-3/process-receipt.json": {
+      "sha256": "ace6cf5664729d540057e8d77f687d0e6cb233b090265e50c994bd1493bd6161",
+      "bytes": 2164
+    },
+    "real-probes-02/game-11/constraints.json": {
+      "sha256": "e28eba25ad27421d83d9bca275610cfb9ed0addc35fd7dedba2243a277a5ff1d",
+      "bytes": 113536
+    },
+    "real-probes-02/game-11/result.json": {
+      "sha256": "bb1d63311410ec455e6241ed25021c0d626a6046da6225a2a6a97d2ba3b9a92b",
+      "bytes": 7296
+    },
+    "real-probes-02/game-11/process-receipt.json": {
+      "sha256": "7689e1b3a02f0cceff39e718c3b3c923970687cad11ff33fc515aa9c9b053848",
+      "bytes": 2166
+    }
+  },
+  "excluded": [
+    "private full Phase card definitions",
+    "retained worker binary",
+    "source archive and build scratch",
+    "private claim tokens"
+  ],
+  "status": "all three source rows matched the supported projection in both repeats; no full-game or rules-discrepancy claim"
+}

@@ -1,0 +1,4391 @@
+{
+  "seed": 0,
+  "schema": "coworld-17lands-guided-fit-v1",
+  "game_index": 0,
+  "on_play": true,
+  "mulligans": [
+    0,
+    0
+  ],
+  "source_sha256": "dc93a2677e59b4b2b19900ff1ddafefb72533dce1be678b3493263709dec1215",
+  "cards_mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+  "fields": [
+    {
+      "column": "candidate_hand_1",
+      "raw": "102515|102617|102734|102734|102599|102523|102734",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "candidate_hand_2",
+      "raw": "",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "candidate_hand_3",
+      "raw": "",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "candidate_hand_4",
+      "raw": "",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "candidate_hand_5",
+      "raw": "",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "candidate_hand_6",
+      "raw": "",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "candidate_hand_7",
+      "raw": "",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Aberrant Manawurm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Abigale, Poet Laureate",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Abrade",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Abstract Paintmage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ad Nauseam",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Additive Evolution",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Adrix and Nev, Twincasters",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Adventurous Eater",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ajani's Response",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Akroma's Will",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ambitious Augmenter",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ancestral Anger",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Angel's Grace",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Antiquities on the Loose",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Applied Geometry",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Arcane Omens",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Archaeomancer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Archaic's Agony",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Archmage Emeritus",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ark of Hunger",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Armageddon",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Arnyn, Deathbloom Botanist",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Artistic Process",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ascendant Dustspeaker",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Awaken the Woods",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Aziza, Mage Tower Captain",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Banishing Betrayal",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Berserk",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Berta, Wise Extrapolator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Biblioplex Tomekeeper",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Big Score",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Bitter Triumph",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Blazing Firesinger",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Blech, Loafing Pest",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Bogwater Lumaret",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Borrowed Knowledge",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Brain Freeze",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Bring to Light",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Brotherhood's End",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Brush Off",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Bulk Up",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Burrog Banemaker",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Burrog Barrage",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Burst Lightning",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Campus Composer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Cauldron of Essence",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Charging Strifeknight",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Chase Inspiration",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Cheerful Osteomancer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Chelonian Tackle",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Choreographed Sparks",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Codie, Vociferous Codex",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Colorstorm Stallion",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Colossus of the Blood Age",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Comforting Counsel",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Conciliator's Duelist",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Cost of Brilliance",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Crackle with Power",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Crop Rotation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Cuboid Colony",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Culling Ritual",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Culling the Weak",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Cyclonic Rift",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Daydream",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Daze",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Deathcap Glade",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Decorum Dissertation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Deduce",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Deflecting Palm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Deluge Virtuoso",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Diary of Dreams",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Dig Site Inventory",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Dina's Guidance",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Disdainful Stroke",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Dismember",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Dissection Practice",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Divergent Equation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Dreamroot Cascade",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Dualcaster Mage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Duel Tactics",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Duty Beyond Death",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Eager Glyphmage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Echocasting Symposium",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Efflorescence",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Elemental Mascot",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Elite Interceptor",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Embrace the Paradox",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Emeritus of Abundance",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Emeritus of Conflict",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Emeritus of Ideation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Emeritus of Truce",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Emeritus of Woe",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Emil, Vastlands Roamer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Empty the Warrens",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Encouraging Aviator",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_End of the Hunt",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ennis, Debate Moderator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Environmental Scientist",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Erode",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Essence Scatter",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Essenceknit Scholar",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Eternal Student",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Exhibition Tidecaller",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Expressive Firedancer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Expressive Iteration",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Feed the Swarm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fields of Strife",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fix What's Broken",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Flashback",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Flow State",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Flusterstorm",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Follow the Lumarets",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Foolish Fate",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Force of Will",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Forest",
+      "raw": "7",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Forum Necroscribe",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Forum of Amity",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fractal Anomaly",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fractal Mascot",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fractal Tender",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fractalize",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Fracture",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Garrison Excavator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Geometer's Arthropod",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Germination Practicum",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Giant Growth",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Glimpse of Nature",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Glorious Decay",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Goblin Glasswright",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Graduation Day",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Grapple with Death",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Grave Researcher",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Great Hall of the Biblioplex",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Grim Haruspex",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Group Project",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Growth Curve",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Hardened Academic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Harmonized Trio",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Harsh Annotation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Heated Argument",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Helping Hand",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Homesickness",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Honorbound Page",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Hop to It",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Hungry Graffalon",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Hydro-Channeler",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Imperious Inkmage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Impractical Joke",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Improvisation Capstone",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Infirmary Healer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Informed Inkwright",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Inkling Mascot",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Inkshape Demonstrator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Interjection",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Island",
+      "raw": "8",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Jadzi, Steward of Fate",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Jeska's Will",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Joined Researchers",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Killian's Confidence",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Kirol, History Buff",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Knockout Maneuver",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Landscape Painter",
+      "raw": "2",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Last Gasp",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Lecturing Scornmage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Leech Collector",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Library of Alexandria",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Living End",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Living History",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Lluwen, Exchange Student",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Locust Spray",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Lorehold Charm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Lorehold, the Historian",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Lumaret's Favor",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Maelstrom Artisan",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mage Tower Referee",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Magmablood Archaic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Magus of the Library",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mana Sculpt",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Masterful Flourish",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mathemagics",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Matterbending Mage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Melancholic Poet",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mica, Reader of Ruins",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mind Roots",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mind into Matter",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mindful Biomancer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Molten Note",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Molten-Core Maestro",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Moment of Reckoning",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Monstrous Rage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Moseo, Vein's New Dean",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Mountain",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Murmuring Mystic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Muse Seeker",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Muse's Encouragement",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Nita, Forum Conciliator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Noxious Newt",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Old-Growth Educator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Oracle's Restoration",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Orysa, Tide Choreographer",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Owlin Historian",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Page, Loose Leaf",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Paradox Gardens",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Paradox Surveyor",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pensive Professor",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pest Mascot",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pestbrood Sloth",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Petrified Hamlet",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pick Your Poison",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pigment Wrangler",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Plains",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Planar Engineering",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Poisoner's Apprentice",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pongify",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Postmortem Professor",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Potioner's Trove",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pox Plague",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Practiced Offense",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Practiced Scrollsmith",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Preordain",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Primary Research",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Prismari Charm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Prismari, the Inspiration",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Prismatic Ending",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Procrastinate",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Proctor's Gaze",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Professor Dellian Fel",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pterafractyl",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pull from the Grave",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pursue the Past",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Pyretic Ritual",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Quandrix Charm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Quandrix, the Proof",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Quick Study",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Quill-Blade Laureate",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rabid Attack",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ral Zarek, Guest Lecturer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rancorous Archaic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rapier Wit",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rapturous Moment",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rearing Embermare",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rehearsed Debater",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Render Speechless",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Repel Calamity",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Reprieve",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Requisition Raid",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Resonating Lute",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Restoration Seminar",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Return the Favor",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Return to the Ranks",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Root Manipulation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Royal Treatment",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Rubble Rouser",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Run Behind",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sanar, Unfinished Genius",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Scathing Shadelock",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Scheming Silvertongue",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Scolding Administrator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Seize the Spoils",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Send in the Pest",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Shamanic Revelation",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Shared Roots",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Shattered Acolyte",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Shattered Sanctum",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sheoldred's Edict",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Shopkeeper's Bane",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Silverquill Charm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Silverquill, the Disputant",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Skycoach Conductor",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Skycoach Waypoint",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sleight of Hand",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Slumbering Trudge",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Smallpox",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Snarl Song",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sneering Shadewriter",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Snooping Page",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Soaring Stoneglider",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Social Snub",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Spectacle Summit",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Spectacular Skywhale",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Spell Pierce",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Spellbook Seeker",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Spirit Mascot",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Spiritcall Enthusiast",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Splatter Technique",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stadium Tidalmage",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stand Up for Yourself",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stargaze",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Startled Relic Sloth",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Steal the Show",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stirring Honormancer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stirring Hopesinger",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stock Up",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stone Docent",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stormcarved Coast",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Stress Dream",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Strife Scholar",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Strixhaven Skycoach",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Studious First-Year",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Subterranean Tremors",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Summoned Dromedary",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sundering Archaic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sundown Pass",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Suspend Aggression",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Swamp",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Sylvan Library",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tablet of Discovery",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tackle Artist",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tam, Observant Sequencer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Teacher's Pest",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tenured Concocter",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Terramorphic Expanse",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tester of the Tangential",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Textbook Tabulator",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_The Dawning Archaic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Thornfist Striker",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Thunderdrum Soloist",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Titan's Grave",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Together as One",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tome Blast",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Topiary Lecturer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Tragedy Feaster",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Transcendent Archaic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Traumatic Critique",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Triumph of the Hordes",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Ulna Alley Shopkeep",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Unsubtle Mockery",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Vampiric Tutor",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Vastlands Scavenger",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Veil of Summer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Vibrant Outburst",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Vicious Rivalry",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Visionary's Dance",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Wander Off",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Wild Hypothesis",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Wildgrowth Archaic",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Wilt in the Heat",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Winds of Abandon",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Wisdom of Ages",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Witherbloom Charm",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Witherbloom, the Balancer",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Withering Curse",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Zaffai and the Tempests",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Zealous Lorecaster",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Zimone's Experiment",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "deck_Zombify",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "recorded user deck multiset",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "draft_id",
+      "raw": "0e27c50259b845798d7e8c2cb4c93124",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "event_type",
+      "raw": "PremierDraft",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "expansion",
+      "raw": "SOS",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "game_number",
+      "raw": "1",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "match_number",
+      "raw": "3",
+      "milestone": null,
+      "disposition": "informational",
+      "reason": "not a selected trajectory constraint",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "num_mulligans",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "requires known starter and recorded zero mulligans; otherwise unsupported",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "on_play",
+      "raw": "True",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "requires known starter and recorded zero mulligans; otherwise unsupported",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "opening_hand",
+      "raw": "102515|102617|102734|102734|102599|102523|102734",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "supplied through production opening draw, exact multiset checked",
+      "projection": "opening_hand_multiset",
+      "expected": [
+        "Landscape Painter",
+        "Planar Engineering",
+        "Island",
+        "Island",
+        "Ambitious Augmenter",
+        "Procrastinate",
+        "Island"
+      ]
+    },
+    {
+      "column": "opp_num_mulligans",
+      "raw": "0",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "requires known starter and recorded zero mulligans; otherwise unsupported",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_cards_discarded",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_cards_drawn_or_tutored",
+      "raw": "1",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "drawn_or_tutored_count",
+      "expected": 1
+    },
+    {
+      "column": "oppo_turn_1_creatures_attacked",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_creatures_blocked",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_creatures_blocking",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_creatures_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_creatures_unblocked",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_eot_oppo_cards_in_hand",
+      "raw": "7.0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "hand_count",
+      "expected": 7
+    },
+    {
+      "column": "oppo_turn_1_eot_oppo_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_eot_oppo_lands_in_play",
+      "raw": "70761",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "lands",
+      "expected": [
+        "Plains"
+      ]
+    },
+    {
+      "column": "oppo_turn_1_eot_oppo_life",
+      "raw": "20.0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "life",
+      "expected": 20
+    },
+    {
+      "column": "oppo_turn_1_eot_oppo_non_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_eot_user_cards_in_hand",
+      "raw": "102734|102523|102599|102734|102617|102515",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "hand",
+      "expected": [
+        "Island",
+        "Procrastinate",
+        "Ambitious Augmenter",
+        "Island",
+        "Planar Engineering",
+        "Landscape Painter"
+      ]
+    },
+    {
+      "column": "oppo_turn_1_eot_user_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_eot_user_lands_in_play",
+      "raw": "102734",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "lands",
+      "expected": [
+        "Island"
+      ]
+    },
+    {
+      "column": "oppo_turn_1_eot_user_life",
+      "raw": "20.0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "life",
+      "expected": 20
+    },
+    {
+      "column": "oppo_turn_1_eot_user_non_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_lands_played",
+      "raw": "70761",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "land_played",
+      "expected": [
+        "Plains"
+      ]
+    },
+    {
+      "column": "oppo_turn_1_non_creatures_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_oppo_abilities",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_oppo_combat_damage_taken",
+      "raw": "0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_oppo_creatures_killed_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_oppo_creatures_killed_non_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_oppo_instants_sorceries_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_oppo_mana_spent",
+      "raw": "0.0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_user_abilities",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_user_combat_damage_taken",
+      "raw": "0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_user_creatures_killed_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_user_creatures_killed_non_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_user_instants_sorceries_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "oppo_turn_1_user_mana_spent",
+      "raw": "0.0",
+      "milestone": {
+        "turn_owner": 1,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_cards_discarded",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_cards_drawn",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_cards_tutored",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_creatures_attacked",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_creatures_blocked",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_creatures_blocking",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_creatures_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_creatures_unblocked",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_eot_oppo_cards_in_hand",
+      "raw": "7.0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "hand_count",
+      "expected": 7
+    },
+    {
+      "column": "user_turn_1_eot_oppo_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_eot_oppo_lands_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_eot_oppo_life",
+      "raw": "20.0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "life",
+      "expected": 20
+    },
+    {
+      "column": "user_turn_1_eot_oppo_non_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_eot_user_cards_in_hand",
+      "raw": "102734|102523|102599|102734|102617|102515",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "hand",
+      "expected": [
+        "Island",
+        "Procrastinate",
+        "Ambitious Augmenter",
+        "Island",
+        "Planar Engineering",
+        "Landscape Painter"
+      ]
+    },
+    {
+      "column": "user_turn_1_eot_user_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_eot_user_lands_in_play",
+      "raw": "102734",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "lands",
+      "expected": [
+        "Island"
+      ]
+    },
+    {
+      "column": "user_turn_1_eot_user_life",
+      "raw": "20.0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "life",
+      "expected": 20
+    },
+    {
+      "column": "user_turn_1_eot_user_non_creatures_in_play",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_lands_played",
+      "raw": "102734",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "enforced",
+      "reason": "exact declared projection; card lists compared as multisets, not action order",
+      "projection": "land_played",
+      "expected": [
+        "Island"
+      ]
+    },
+    {
+      "column": "user_turn_1_non_creatures_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_oppo_abilities",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_oppo_combat_damage_taken",
+      "raw": "0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_oppo_creatures_killed_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_oppo_creatures_killed_non_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_oppo_instants_sorceries_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_oppo_mana_spent",
+      "raw": "0.0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_user_abilities",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_user_combat_damage_taken",
+      "raw": "0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_user_creatures_killed_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_user_creatures_killed_non_combat",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_user_instants_sorceries_cast",
+      "raw": "",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "informational",
+      "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+      "projection": null,
+      "expected": null
+    },
+    {
+      "column": "user_turn_1_user_mana_spent",
+      "raw": "0.0",
+      "milestone": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "disposition": "unsupported",
+      "reason": "no implemented projection for this recorded field; ability IDs are not card IDs",
+      "projection": null,
+      "expected": null
+    }
+  ],
+  "milestones": [
+    {
+      "turn_owner": 0,
+      "turn_index": 1,
+      "boundary": "end_of_turn",
+      "observed_player": 0
+    },
+    {
+      "turn_owner": 0,
+      "turn_index": 1,
+      "boundary": "end_of_turn",
+      "observed_player": 1
+    },
+    {
+      "turn_owner": 1,
+      "turn_index": 1,
+      "boundary": "end_of_turn",
+      "observed_player": 0
+    },
+    {
+      "turn_owner": 1,
+      "turn_index": 1,
+      "boundary": "end_of_turn",
+      "observed_player": 1
+    }
+  ],
+  "decks": [
+    [
+      "Ambitious Augmenter",
+      "Banishing Betrayal",
+      "Burrog Barrage",
+      "Deduce",
+      "Dreamroot Cascade",
+      "Encouraging Aviator",
+      "Flusterstorm",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Fractal Mascot",
+      "Geometer's Arthropod",
+      "Harmonized Trio",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Landscape Painter",
+      "Landscape Painter",
+      "Noxious Newt",
+      "Oracle's Restoration",
+      "Orysa, Tide Choreographer",
+      "Paradox Gardens",
+      "Paradox Surveyor",
+      "Pensive Professor",
+      "Planar Engineering",
+      "Procrastinate",
+      "Pterafractyl",
+      "Quick Study",
+      "Shopkeeper's Bane",
+      "Spellbook Seeker",
+      "Tenured Concocter"
+    ],
+    [
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains"
+    ]
+  ],
+  "libraries": [
+    [
+      "Landscape Painter",
+      "Planar Engineering",
+      "Island",
+      "Island",
+      "Ambitious Augmenter",
+      "Procrastinate",
+      "Island",
+      "Banishing Betrayal",
+      "Burrog Barrage",
+      "Deduce",
+      "Dreamroot Cascade",
+      "Encouraging Aviator",
+      "Flusterstorm",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Fractal Mascot",
+      "Geometer's Arthropod",
+      "Harmonized Trio",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Island",
+      "Landscape Painter",
+      "Noxious Newt",
+      "Oracle's Restoration",
+      "Orysa, Tide Choreographer",
+      "Paradox Gardens",
+      "Paradox Surveyor",
+      "Pensive Professor",
+      "Pterafractyl",
+      "Quick Study",
+      "Shopkeeper's Bane",
+      "Spellbook Seeker",
+      "Tenured Concocter"
+    ],
+    [
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains"
+    ]
+  ],
+  "assumptions": [
+    "Official Arena IDs resolve to names in a pinned mapping; runtime matching is a name projection, not proof of unique token/face characteristics. One reconstructed hidden state: recorded user deck/opening multiset, chosen opening order and listed draw-prefix order, deterministic remaining library; no search over all shuffles.",
+    "Hypothetical opponent: maximum observed name multiplicities plus Plains to forty cards, in deterministic order; neither opponent deck nor opening hand is source-confirmed.",
+    "EOT fields project the last stable end-step state before a projection-neutral cleanup/turn transition; transitions with other pre-TurnStarted events are unsupported.",
+    "Runtime preflight checks names and setup only; it does not inventory every unsupported or unimplemented card effect. Blank cells are unknown. Nonblank card lists are multiset constraints; no global action order, targets, priority decisions, or hidden information is reconstructed as fact."
+  ],
+  "issues": []
+}

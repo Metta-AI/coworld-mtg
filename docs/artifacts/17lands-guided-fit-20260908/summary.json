@@ -1,0 +1,139 @@
+{
+  "kind": "derived_guided_fit_measurement_summary",
+  "source_revision": "201aa8a139db9819911ca9b4e1d9bb02465fb5f1",
+  "worker_sha256": "7ba97b22bfdc1355f8e6de169afaa49771173f6056c9b0335d6120bd8c60d518",
+  "source_fixture": "../../../fixtures/17lands/sos-first-turns/selection-manifest.json",
+  "observed_csv_sha256": "dc93a2677e59b4b2b19900ff1ddafefb72533dce1be678b3493263709dec1215",
+  "mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+  "runtime_export_sha256": "43f7a32de97a23c14c9507bf56a9cd56d92674a4a770227194e9e63771f1a22d",
+  "games": [
+    {
+      "original_source_row": 2,
+      "fixture_row": 0,
+      "status": "matched_supported_projection",
+      "nodes": 22,
+      "witness_actions": 22,
+      "matched_player_observation_keys": 4,
+      "temporal_boundaries": 2,
+      "fully_covered_player_observation_keys": 0,
+      "turn_field_dispositions": {
+        "informational": 41,
+        "enforced": 14,
+        "unsupported": 8
+      },
+      "unsupported_source_columns": [
+        "oppo_turn_1_oppo_combat_damage_taken",
+        "oppo_turn_1_oppo_mana_spent",
+        "oppo_turn_1_user_combat_damage_taken",
+        "oppo_turn_1_user_mana_spent",
+        "user_turn_1_oppo_combat_damage_taken",
+        "user_turn_1_oppo_mana_spent",
+        "user_turn_1_user_combat_damage_taken",
+        "user_turn_1_user_mana_spent"
+      ],
+      "search_elapsed_millis": [
+        597,
+        568
+      ],
+      "process_elapsed_seconds": [
+        9.280582340434194,
+        9.18012238573283
+      ],
+      "equal_results_except_elapsed_millis": true,
+      "constraints_bytes_equal": true,
+      "results": [
+        "real-probes-01/game-2/result.json",
+        "real-probes-02/game-2/result.json"
+      ]
+    },
+    {
+      "original_source_row": 3,
+      "fixture_row": 1,
+      "status": "matched_supported_projection",
+      "nodes": 22,
+      "witness_actions": 22,
+      "matched_player_observation_keys": 4,
+      "temporal_boundaries": 2,
+      "fully_covered_player_observation_keys": 0,
+      "turn_field_dispositions": {
+        "informational": 40,
+        "enforced": 15,
+        "unsupported": 8
+      },
+      "unsupported_source_columns": [
+        "oppo_turn_1_oppo_combat_damage_taken",
+        "oppo_turn_1_oppo_mana_spent",
+        "oppo_turn_1_user_combat_damage_taken",
+        "oppo_turn_1_user_mana_spent",
+        "user_turn_1_oppo_combat_damage_taken",
+        "user_turn_1_oppo_mana_spent",
+        "user_turn_1_user_combat_damage_taken",
+        "user_turn_1_user_mana_spent"
+      ],
+      "search_elapsed_millis": [
+        620,
+        583
+      ],
+      "process_elapsed_seconds": [
+        9.230180442333221,
+        8.979500006884336
+      ],
+      "equal_results_except_elapsed_millis": true,
+      "constraints_bytes_equal": true,
+      "results": [
+        "real-probes-01/game-3/result.json",
+        "real-probes-02/game-3/result.json"
+      ]
+    },
+    {
+      "original_source_row": 11,
+      "fixture_row": 2,
+      "status": "matched_supported_projection",
+      "nodes": 31,
+      "witness_actions": 30,
+      "matched_player_observation_keys": 4,
+      "temporal_boundaries": 2,
+      "fully_covered_player_observation_keys": 0,
+      "turn_field_dispositions": {
+        "informational": 38,
+        "enforced": 16,
+        "unsupported": 9
+      },
+      "unsupported_source_columns": [
+        "oppo_turn_1_oppo_combat_damage_taken",
+        "oppo_turn_1_oppo_mana_spent",
+        "oppo_turn_1_user_abilities",
+        "oppo_turn_1_user_combat_damage_taken",
+        "oppo_turn_1_user_mana_spent",
+        "user_turn_1_oppo_combat_damage_taken",
+        "user_turn_1_oppo_mana_spent",
+        "user_turn_1_user_combat_damage_taken",
+        "user_turn_1_user_mana_spent"
+      ],
+      "search_elapsed_millis": [
+        1027,
+        892
+      ],
+      "process_elapsed_seconds": [
+        9.781156591139734,
+        9.280173412524164
+      ],
+      "equal_results_except_elapsed_millis": true,
+      "constraints_bytes_equal": true,
+      "results": [
+        "real-probes-01/game-11/result.json",
+        "real-probes-02/game-11/result.json"
+      ]
+    }
+  ],
+  "scope": "Inspected development sample; named-card projection under one explicit hidden-state reconstruction. No full-game fit, complete observation coverage, rules discrepancy or heldout generalization result.",
+  "factory_replay_integration": false,
+  "engine_error_candidates": 0,
+  "checks": {
+    "workspace_tests_passed": 73,
+    "focused_fitting_tests_passed": 8,
+    "bridge_setup_tests_passed": 2,
+    "all_recorded_check_commands_exit_zero": true
+  },
+  "derivation": "Counts read from exact constraints/results; repeats compared after removing only elapsed_millis. Original process and build receipts retained byte-for-byte."
+}

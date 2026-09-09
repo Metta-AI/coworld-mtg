@@ -1,0 +1,52 @@
+{
+  "schema": "coworld-guided-fit-supervised-probe-v1",
+  "source_revision": "201aa8a139db9819911ca9b4e1d9bb02465fb5f1",
+  "source_tree": "5da48163549b29b6954b0c6a1ff7bf33509df0a2",
+  "worker_sha256": "7ba97b22bfdc1355f8e6de169afaa49771173f6056c9b0335d6120bd8c60d518",
+  "source_sha256": "dc93a2677e59b4b2b19900ff1ddafefb72533dce1be678b3493263709dec1215",
+  "mapping_sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+  "fixture_row": 0,
+  "original_source_game_index": 2,
+  "argv": [
+    "/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/build-final/worker",
+    "fit17lands",
+    "--manifest-uri",
+    "/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/inputs/manifest.json",
+    "--replay-data",
+    "/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/fixtures/17lands/sos-first-turns/source/sos-first-turns-2-3-11.csv",
+    "--replay-sha256",
+    "dc93a2677e59b4b2b19900ff1ddafefb72533dce1be678b3493263709dec1215",
+    "--cards-csv",
+    "/home/ubuntu/repos/coworld-factory-20260907-root/repo/replays/17lands-coverage-20260907-03/artifacts/cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "--cards-csv-sha256",
+    "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "--game-index",
+    "0",
+    "--turn-pairs",
+    "1",
+    "--nodes",
+    "10000",
+    "--max-actions",
+    "128",
+    "--opponent-filler",
+    "Plains",
+    "--output-dir",
+    "/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/real-probes-01/game-2"
+  ],
+  "limits": {
+    "wall_seconds": 240,
+    "cpu_soft_seconds": 180,
+    "cpu_hard_seconds": 185,
+    "address_space_bytes": 8589934592,
+    "workers": 1
+  },
+  "elapsed_seconds": 9.280582340434194,
+  "exit_code": 0,
+  "timed_out": false,
+  "artifacts": {
+    "stdout.json": "629fedf080f3f133210cac4a7b88ee7e7aeea70632644706b73bfbd9aca2821c",
+    "constraints.json": "1de1d8e1de570d17673d02e9a43a76256bec4a37b00b875fb444cc4c6874f284",
+    "result.json": "0f2a2f021fc4cd7e0140ece526e6f93b00961b4fdf35e09434804560b8e869f6",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

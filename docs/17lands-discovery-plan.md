@@ -1,6 +1,6 @@
 # Discovering engine issues from recorded games
 
-Active plan, 8 September 2026. This plan supersedes the discovery direction in the earlier blog drafts and [design notes](verifiable-loop-design.md). At the start of this work, main was e7c578f135f49263896f1b20271feb108741393e.
+Active plan, 8 September 2026. This plan supersedes the discovery direction in the earlier blog drafts and [design notes](verifiable-loop-design.md). At the start of this work, main was e7c578f135f49263896f1b20271feb108741393e. The first bounded integration is now implemented in [201aa8a](https://github.com/Metta-AI/coworld-mtg/commit/201aa8a139db9819911ca9b4e1d9bb02465fb5f1); [measured results and raw receipts](artifacts/17lands-guided-fit-20260908/README.md) describe its scope.
 
 ## Goal
 
@@ -28,7 +28,7 @@ The current harness can generate seeded Phase games, check invariants, replay ex
 
 The accepted 17Lands coverage experiment repaired ingestion of public CSV data. The Scryfall and observed-card experiments exercised selected definitions and parsing. Those experiments do not establish that the engine can reproduce recorded games.
 
-An older, unmerged prototype contains a guided 17Lands fitter. It reconstructs a starting game, searches legal actions against observations and reports limits or discrepancies. The first implementation milestone is to bring that capability onto the current code and repair its observation and search semantics. Until that lands, current main has no guided fitting command.
+An older prototype supplied the starting approach for guided 17Lands fitting. The current fit17lands command reconstructs a starting game, searches exact legal actions with backtracking across milestones, and records witnesses, limits and issue candidates. It requires a known starter and explicitly zero mulligans, and currently checks a declared named-card projection. Complete implementation-support and token/face identity checks remain future work.
 
 ## What the old experiment actually found
 
@@ -77,6 +77,8 @@ Never silently omit an unsupported required field and call the complete game com
 All obstacles can enter the investigation queue. They do not all justify the same diagnosis. A budget exhaustion is useful evidence for improving search; it is not proof that the game engine rejected legal play. A bounded incompatibility claim requires exhausting the declared bounded model and remains conditional on its observation semantics and reconstruction.
 
 ## Milestone 1: trustworthy fitting on a small real sample
+
+Initial integration complete. All 73 workspace Rust tests and the Rust lint, formatting, pin, contract and catalog checks passed. Source rows 2, 3 and 11 were each run twice. They matched 14, 15 and 16 supported turn fields at two temporal boundaries in 22, 22 and 31 nodes. Repeated constraints were byte-identical, and results differed only in elapsed time. Each row retains eight unsupported combat-damage/mana-spent fields; row 11 also retains its ability observation. All have zero fully covered milestones and no reported engine failure. The criteria and scope below explain this first integration; full-game coverage and the shared factory connection remain ahead.
 
 Bring forward the guided fitter selectively, preserving the current Phase and corpus pins and existing seeded replay behavior. Do not merge unrelated historical generators or dependency changes.
 

@@ -71,8 +71,9 @@ establish an engine bug.
 
 **[The active plan](docs/17lands-discovery-plan.md)** describes the typed
 boundaries, outcome meanings, implementation milestones and checks. The first
-milestone is to restore the older guided fitter on current source, repair its
-observation semantics, and run a bounded sample of actual games.
+bounded fitter is now implemented and has run on three real game excerpts.
+Next are broader observation/support coverage and connecting its findings to
+the shared repair process and viewer.
 
 ## What works today and what is being built
 
@@ -80,7 +81,8 @@ observation semantics, and run a bounded sample of actual games.
 | --- | --- |
 | Seeded engine exploration and deterministic replay | Implemented: exact legal actions, events, state hashes, checkpoints and invariant checks. |
 | Public 17Lands ingestion | Implemented: official CSV normalization and card-ID mapping with source provenance. The accepted coverage run repaired this layer. |
-| Recorded-game trajectory fitting | Older prototype exists; integration and correction are in progress. Current main does not yet expose a guided fitting command. |
+| Recorded-game trajectory fitting | Implemented bounded fit17lands command with corrected turn boundaries and backtracking. Three real first-turn excerpts matched the supported observations; broader game coverage remains in progress. |
+| Card support preflight | Current fitting checks names and setup. Complete card-effect support and token/face identity checks remain planned. |
 | Regression cases and repair evaluation | Implemented typed case execution, checking, reduction and reviewed acceptance, orchestrated by agents. |
 | Factory replays and viewer | Implemented provenance and execution records. Existing 17Lands replay pages cover ingestion or parsing experiments, not complete game fitting. |
 
@@ -91,6 +93,12 @@ unresolved card IDs; inspecting its extracted requirements exposed the
 contradiction. The old run therefore cannot tell us how difficult correctly
 specified fitting will be. The active plan also covers missing identity mappings, unnecessary mulligan search and
 retaining alternative paths across observations.
+
+The [first fitting measurements](docs/artifacts/17lands-guided-fit-20260908/README.md)
+retain the exact observations, witnesses, budgets and repeated results. All three
+excerpts matched their supported first-turn checks, while combat-damage,
+mana-spent and one ability observation remain unsupported. These are partial
+fits, and this pilot found no engine error.
 
 Seeded exploration remains useful alongside recorded-game fitting. It checks
 properties such as deterministic replay and whether advertised actions execute

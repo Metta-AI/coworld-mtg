@@ -1,8 +1,9 @@
 # Agent-improvement harness operations
 
 The harness calls Phase directly through `phase-bridge`. It does not contain
-card rules, infer legal actions, or treat 17Lands observations as conformance
-expectations.
+card rules or infer legal actions. Guided fitting turns selected 17Lands
+observations into compatibility constraints; those observations do not by
+themselves establish card-rule conformance.
 
 ## Build
 
@@ -136,6 +137,68 @@ Mapping/count preservation can be checked as an ingestion contract. These
 observations do not provide a gameplay correctness gate or recover missing
 targets, action ordering, priority, or hidden state. Card rankings nominate
 workloads and later rules-backed scenarios.
+
+## Fit recorded-game observations
+
+The guided fitter searches Phase's offered legal actions against a declared
+projection of a recorded game. It preserves the source columns and distinguishes
+a matched projection, an input or projection issue, and exhausted search.
+See the [active discovery plan](17lands-discovery-plan.md) for the full loop.
+
+The first supported setup requires a known starting player and explicitly zero
+mulligans for both players. The default selects each player's first turn. It
+chooses one complete library arrangement consistent with the recorded user
+opening hand and draw prefix, plus an explicitly hypothetical opponent deck.
+It searches actions within that setup; it does not search all possible decks,
+opening orders or shuffles.
+
+Materialize a corpus manifest as described above, using a generated card export
+compatible with this checkout's Phase pin and containing the cards required by
+the selected games. The compact private corpus used for the two published play
+decks does not necessarily contain this wider sample. The measured pilot uses
+a separately retained full export, without changing the default corpus lock.
+
+The [measured pilot](artifacts/17lands-guided-fit-20260908/README.md) retains the
+actual commands, source hashes and limits. For the
+[retained SOS first-turn fixture](../fixtures/17lands/sos-first-turns/README.md):
+
+~~~sh
+scripts/cargo.sh run --locked -p coworld-mtg-harness -- fit17lands \
+  --manifest-uri /absolute/owned/fitting-corpus/manifest.json \
+  --replay-data fixtures/17lands/sos-first-turns/source/sos-first-turns-2-3-11.csv \
+  --replay-sha256 dc93a2677e59b4b2b19900ff1ddafefb72533dce1be678b3493263709dec1215 \
+  --cards-csv replays/17lands-coverage-20260907-03/artifacts/cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153 \
+  --cards-csv-sha256 cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153 \
+  --game-index 0 --turn-pairs 1 --nodes 10000 --max-actions 128 \
+  --opponent-filler Plains \
+  --output-dir /absolute/owned/fitting-output/game-0
+~~~
+
+Fixture indices 0, 1 and 2 correspond to original source rows 2, 3 and 11.
+The game index also supplies the recorded engine RNG seed. The mapping hash
+above identifies the full official mapping retained with the coverage replay,
+as used in the measured pilot. The source fixture also provides a smaller
+mapping subset for inspection.
+
+The command writes constraints.json and result.json. The former retains raw
+fields, normalized requirements, field dispositions and reconstruction
+assumptions. The latter records the supported-projection witness or longest
+matched prefix, issue candidates, source identities, seed, budgets and work.
+A milestone key includes the turn owner and observed player: four keys can
+describe two player-turn boundaries, each observing both players.
+
+A matched_supported_projection result establishes only the declared checks
+under the chosen setup. Unsupported nonblank fields remain issue candidates,
+even when that subset matches. A name match does not establish unique token or
+card-face characteristics, and preflight is not a complete implementation-support
+inventory. Offered-action failures retain the failing action and preceding
+sequence so they can be investigated separately.
+
+Node and action-depth limits apply inside the search. Use a process supervisor
+for wall-time and memory limits, including time spent inside a single engine
+action. Preserve its exit or termination receipt separately if the worker cannot
+write a result. Run repeat measurements with fixed inputs, action ordering and
+node budgets; wall-time termination can vary with host load.
 
 ## Run or resume a shard
 

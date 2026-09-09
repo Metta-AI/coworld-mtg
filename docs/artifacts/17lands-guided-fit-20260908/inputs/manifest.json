@@ -1,0 +1,31 @@
+{
+  "schema": "coworld-mtg-harness-corpus-v1",
+  "manifest_id": "3ac8a66b6bd4de88bf9e8e0b0777d868c742fe3672c766a3b4ba84bede321a96",
+  "set": "SOS",
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "generator_schema": "guided-fit-initial-slice-v1",
+  "input_labels": {
+    "purpose": "private full pinned baseline runtime input; source-name/setup audit only, no corpus cross-validation asserted"
+  },
+  "artifacts": {
+    "phase_card_data": {
+      "source": "/home/ubuntu/repos/phase-hushbringer-publish/data/card-data.json",
+      "sha256": "43f7a32de97a23c14c9507bf56a9cd56d92674a4a770227194e9e63771f1a22d",
+      "bytes": 98494669,
+      "stored_path": "/home/ubuntu/repos/phase-hushbringer-publish/data/card-data.json"
+    }
+  },
+  "output_hashes": {},
+  "validation": {
+    "phase_cards": 0,
+    "phase_oracle_ids": 0,
+    "scryfall_printings": 0,
+    "matched_oracle_ids": 0,
+    "matched_faces": 0,
+    "scryfall_layouts": {},
+    "missing_scryfall_oracle_ids": [],
+    "name_mismatches": [],
+    "oracle_text_mismatches": [],
+    "legality_mismatches": []
+  }
+}

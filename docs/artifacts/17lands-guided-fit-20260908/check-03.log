@@ -1,0 +1,255 @@
+   Compiling memchr v2.8.3
+   Compiling log v0.4.33
+   Compiling tracing-core v0.1.36
+   Compiling futures-sink v0.3.32
+   Compiling futures-channel v0.3.32
+   Compiling serde_json v1.0.150
+   Compiling tracing v0.1.44
+   Compiling futures-io v0.3.32
+   Compiling slab v0.4.12
+   Compiling futures-task v0.3.32
+   Compiling futures-util v0.3.32
+   Compiling schemars v1.2.2
+   Compiling loop-contract v0.1.0 (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/crates/loop-contract)
+   Compiling httpdate v1.0.3
+   Compiling hyper v1.10.1
+   Compiling hyper-util v0.1.20
+   Compiling tower v0.5.3
+   Compiling sha1 v0.10.7
+   Compiling nom v8.0.0
+   Compiling data-encoding v2.11.0
+   Compiling engine v0.24.0 (https://github.com/nishu-builder/phase.git?rev=54227f4527a0b45b01eb3f819d262ee49b665810#54227f45)
+   Compiling phase-bridge v0.1.0 (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/crates/phase-bridge)
+   Compiling hyper-rustls v0.27.9
+   Compiling tower-http v0.6.11
+   Compiling tungstenite v0.29.0
+   Compiling mime v0.3.17
+   Compiling axum-core v0.5.6
+   Compiling tokio-tungstenite v0.29.0
+   Compiling reqwest v0.12.28
+   Compiling serde_path_to_error v0.1.20
+   Compiling matchit v0.8.4
+   Compiling axum v0.8.9
+   Compiling futures-executor v0.3.32
+   Compiling futures v0.3.32
+   Compiling utf-8 v0.7.6
+   Compiling tungstenite v0.28.0
+   Compiling tokio-tungstenite v0.28.0
+   Compiling csv-core v0.1.13
+   Compiling lazy_static v1.5.0
+   Compiling sharded-slab v0.1.7
+   Compiling csv v1.4.0
+   Compiling tracing-log v0.2.0
+   Compiling thread_local v1.1.10
+   Compiling nu-ansi-term v0.50.3
+   Compiling tracing-subscriber v0.3.23
+   Compiling goldfish v0.1.0 (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/crates/players/goldfish)
+   Compiling coworld-mtg-harness v0.1.0 (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/crates/coworld-mtg-harness)
+   Compiling coworld-mtg-server v0.1.0 (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/crates/coworld-mtg-server)
+   Compiling factory-runtime v0.1.0 (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/repo/crates/factory-runtime)
+    Finished `test` profile [unoptimized] target(s) in 3m 46s
+     Running unittests src/lib.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/coworld_mtg_harness-e43069d0568a6d0a)
+
+running 21 tests
+test fitting::search::tests::list_comparison_preserves_multiplicity ... ok
+test fitting::search::tests::recorded_zero_mulligans_excludes_other_choices ... ok
+test fitting::search::witness_tests::known_compatible_trace_requires_backtracking_across_first_match ... ok
+test fitting::search::witness_tests::search_limits_and_wrong_mulligans_fail_before_search ... ok
+test fitting::source::tests::ambiguous_mapping_and_blanks_remain_visible ... ok
+test fitting::source::tests::distinct_owner_boundaries_keep_seven_and_six ... ok
+test fitting::source::tests::retained_source_slice_preserves_actual_chronology_and_constraints ... ok
+test fitting::source::tests::unknown_and_positive_mulligans_are_not_zero ... ok
+test invariants::tests::only_committed_spell_stack_entries_require_a_unique_zone ... ok
+test io::tests::strips_credentials_from_persisted_remote_uris ... ok
+test runner::tests::invariant_failures_keep_stable_ownership_signatures ... ok
+test soft_signals::tests::authentic_observed_game_preserves_cast_counts_identity_and_provenance ... ok
+test soft_signals::tests::auto_reaches_named_families_and_explicit_legacy_retains_broad_headers ... ok
+test soft_signals::tests::auto_rejects_unknown_case_changed_and_ambiguous_inputs_without_overwriting ... ok
+test soft_signals::tests::malformed_public_row_is_rejected_instead_of_silently_skipping_columns ... ok
+test soft_signals::tests::mapping_collisions_and_bad_identity_are_explicit_errors ... ok
+test soft_signals::tests::missing_or_corrupt_mapping_refuses_output_and_preserves_existing_report ... ok
+test soft_signals::tests::named_card_inputs_keep_existing_frequency_semantics ... ok
+test soft_signals::tests::row_limits_and_same_name_arena_aliases_keep_exact_occurrence_counts ... ok
+test soft_signals::tests::schema_rejects_ambiguous_headers_and_preserves_turn_player_roles ... ok
+test soft_signals::tests::unknown_invalid_and_repeated_ids_remain_visible_without_count_inflation ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 13.44s
+
+     Running unittests src/main.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/coworld_mtg_harness-a30c1c030764be80)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/case_protocol.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/case_protocol-bca4fa6da835fa5b)
+
+running 4 tests
+test execution_and_expectations_are_separate_and_evidence_is_append_only ... ok
+test missing_card_is_inconclusive_and_corpus_tampering_is_rejected ... ok
+test setup_reduction_preserves_predicate_and_reachability ... ok
+test worker_timeout_is_inconclusive_instead_of_a_rule_violation ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.01s
+
+     Running tests/harness.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/harness-fee5708e7bb95b05)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/coworld_mtg_server-bb94592afb478848)
+
+running 14 tests
+test assets::tests::asset_paths_cannot_escape_the_distribution_directory ... ok
+test config::tests::omitted_seed_is_fresh_while_an_explicit_seed_is_preserved ... ok
+test phase_delta::tests::round_trips_nested_state ... ok
+test tests::accepted_timeout_action_does_not_concede ... ok
+test tests::cycle_guard_distinguishes_actor_action_and_state ... ok
+test tests::only_nonadvancing_preferences_are_clock_neutral ... ok
+test tests::phase_client_payload_requires_explicit_capability ... ok
+test tests::rejected_timeout_action_concedes_instead_of_aborting_the_episode ... ok
+test tests::repeated_identical_state_and_action_reaches_cycle_limit ... ok
+test tests::simultaneous_decisions_keep_independent_clocks ... ok
+test tests::simultaneous_timeout_uses_the_earliest_effective_deadline ... ok
+test tests::timeout_cancels_an_incomplete_cast_before_choosing_a_target ... ok
+test uri::tests::decodes_coworld_zlib_replays ... ok
+test wire::tests::core_frames_match_the_shared_browser_fixture ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/coworld_mtg_server-2e42265b4621c908)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/episode.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/episode-a87104d712ed225f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/factory_runtime-ca505cb48e3507fd)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/factory_runtime-b95ef051c6c12ec0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/runtime.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/runtime-73d8c53d393187ec)
+
+running 8 tests
+test binary_artifact_is_verifiable_but_string_bundle_export_is_explicitly_unsupported ... ok
+test bundles_do_not_allow_unknown_top_level_fields ... ok
+test corrupt_missing_and_extra_bundle_artifacts_are_rejected ... ok
+test imported_manifest_and_portable_bundle_verify_without_an_engine ... ok
+test manifest_traversal_and_invalid_run_names_are_rejected ... ok
+test server_rejects_url_identity_mismatch_corruption_and_traversal ... ok
+test serves_recorded_metadata_verified_artifacts_and_viewer_assets ... ok
+test symlinked_artifact_parent_run_and_viewer_files_are_not_served ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running unittests src/lib.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/goldfish-e044a3370fd37713)
+
+running 3 tests
+test tests::chooses_largest_attack_declaration ... ok
+test tests::does_not_immediately_retry_a_cancelled_cast ... ok
+test tests::ranks_real_plays_before_priority_pass ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/goldfish-5b7d8a13a0cf96bf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/loop_contract-7d5d19e1bfa7f61a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/factory.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/factory-0a1df07d9fddc282)
+
+running 8 tests
+test canonical_json_golden_preserves_unicode_and_array_order ... ok
+test changing_embedded_plan_or_review_cannot_keep_its_old_identity ... ok
+test decision_requires_frozen_order_strong_feedback_and_bound_policy_attestation ... ok
+test explicit_errors_cancellation_and_inconclusive_are_distinct ... ok
+test live_prefix_preserves_unfinished_execution_without_claiming_completion ... ok
+test mtg_policy_cannot_relabel_opaque_feedback_as_rule_conformance ... ok
+test non_mtg_run_needs_no_game_case_or_phase_build ... ok
+test ordering_references_paths_and_artifact_hashes_are_checked ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/protocol.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/protocol-8fd6bf98e04f3551)
+
+running 7 tests
+test acceptance_requires_frozen_expectations_independent_review_and_real_gates ... ok
+test case_note_reports_checked_measurements_and_rejects_unbound_edits ... ok
+test hashing_preserves_order_and_freezes_expectations ... ok
+test missing_measurement_or_failed_guard_cannot_become_a_semantic_violation ... ok
+test origin_preserves_authored_ids_but_binds_derived_lineage ... ok
+test typed_input_rejects_unknown_fields_and_invalid_hashes ... ok
+test worker_request_schema_excludes_expected_results ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (/home/ubuntu/repos/coworld-factory-20260908-guided-fit-runtime/target/debug/deps/phase_bridge-c7ad40d0d3a5bc56)
+
+running 8 tests
+test fitting::tests::fitting_setup_preserves_starter_order_and_opening_events ... ok
+test fitting::tests::fitting_setup_rejects_incomplete_or_different_multisets_and_invalid_starter ... ok
+test oracle::tests::explicit_false_is_an_observation_not_a_missing_field ... ok
+test oracle::tests::preserves_multiword_subtype_using_engine_vocabulary ... ok
+test oracle::tests::unknown_type_context_is_explicitly_inconclusive ... ok
+test tests::accepts_actions_phase_groups_only_under_their_source_object ... ok
+test tests::pins_a_reviewable_upstream_revision ... ok
+test tests::preference_actions_delegate_to_phase_without_appearing_in_the_prompt ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s
+
+   Doc-tests coworld_mtg_harness
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests coworld_mtg_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests factory_runtime
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests goldfish
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests loop_contract
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests phase_bridge
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

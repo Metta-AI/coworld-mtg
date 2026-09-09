@@ -3,3 +3,6 @@ replays/**/artifacts/* -text
 
 # Source fixtures and their inventories also retain original bytes.
 fixtures/17lands/sos-first-turns/source/* -text
+
+# Measured fitting receipts retain the producer's byte identities.
+docs/artifacts/17lands-guided-fit-20260908/** -text
