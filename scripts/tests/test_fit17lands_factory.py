@@ -190,6 +190,49 @@ class DiscoveryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "feedback envelope"):
             factory.verify_domain(replay)
 
+    def test_comparison_preserves_origins_and_exposes_annotation_changes_without_acceptance(self):
+        with kernel.Replay(self.run) as replay:
+            before_id, before = factory.all_reports(replay)[-1]
+            patch_id = replay.artifact(b"diff --git a/fixture b/fixture\n-test\n+trace\n", raw=True, media_type="text/x-diff")
+            replay.event("changes", "change_proposed", change_id=patch_id, description="Constructed trace reporting fixture",
+                         base_revision=BASE, motivating_feedback_ids=[c["feedback_id"] for c in before["cases"]])
+            attribution = {"schema":"coworld/17lands-repair-attribution@1","change_id":patch_id,
+                "baseline_report_id":before_id,"origin_issue_ids":[i["issue_id"] for i in before["issues"]],
+                "origin_case_ids":[c["case_id"] for c in before["cases"]],
+                "diagnosis_id":replay.artifact(b"Constructed comparison test only",raw=True,media_type="text/markdown"),
+                "component":"observation_adapter","candidate_revision":"c"*40,
+                "authority":"Constructed unit-test attribution; no real compilation or repair claimed."}
+            factory.source(replay,replay.artifact(attribution),factory.PROPOSAL,"Constructed comparison fixture")
+        self.worker.write_text(WORKER.replace("Constructed fixture gap","Improved explanation; still unsupported"))
+        build = json.loads(self.build.read_bytes())
+        build.update(source_revision="c"*40,worker_sha256=kernel.sha256(self.worker.read_bytes()))
+        self.build.write_text(json.dumps(build))
+        self.args.label = "candidate"
+        self.args.change_id = patch_id
+        factory.execute(self.args)
+        after_id, _ = factory.all_reports(self.replay())[-1]
+        self.args.baseline_report_id,self.args.candidate_report_id = before_id,after_id
+        factory.compare(self.args)
+        replay = self.replay()
+        identity = factory.sources(replay,factory.COMPARISON)[-1]
+        comparison = factory.artifact_json(replay,identity)
+        self.assertEqual(comparison["assessment"],"comparison_only")
+        self.assertEqual(len(comparison["scope_changes"]),2)
+        for row in comparison["rows"]:
+            self.assertEqual(row["coverage_before"],row["coverage_after"])
+            self.assertEqual(row["resolved_issue_ids"],[])
+            self.assertEqual(row["new_issue_ids"],[])
+            self.assertTrue(row["remaining_issue_ids"])
+        self.assertFalse(factory.payloads(replay,"decision_recorded"))
+        factory.verify_domain(replay)
+        with kernel.Replay(self.run) as writer:
+            comparison["scope_changes"] = []
+            bad_id = writer.artifact(comparison)
+            replay.value["artifacts"].update(writer.value["artifacts"])
+        next(e for e in replay.value["events"] if e["payload"].get("source",{}).get("snapshot_id")==identity)["payload"]["source"]["snapshot_id"]=bad_id
+        with self.assertRaisesRegex(ValueError,"comparison differs"):
+            factory.verify_domain(replay)
+
 
 class SignatureTests(unittest.TestCase):
     def test_only_same_diagnostic_is_grouped_across_turn_numbers(self):

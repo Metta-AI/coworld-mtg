@@ -70,10 +70,16 @@ Running out of search budget creates an investigation candidate; it does not
 establish an engine bug.
 
 **[The active plan](docs/17lands-discovery-plan.md)** describes the typed
-boundaries, outcome meanings, implementation milestones and checks. The first
-bounded fitter is now implemented and has run on three real game excerpts.
-Next are broader observation/support coverage and connecting its findings to
-the shared repair process and viewer.
+boundaries, outcome meanings, implementation milestones and checks. The bounded
+pipeline now freezes real game cohorts, runs supervised fitting, groups discovered
+issues and links repair proposals back to every originating game.
+[Run and inspect it](docs/17lands-factory.md).
+
+The fitting viewer puts the recorded observations beside the engine's projected
+states, shows the retained path and failure context, and keeps unchecked fields
+visible. A before/after comparison reports changed observations and reconstruction;
+it does not turn a partial match or a disappearing diagnostic into an acceptance
+decision.
 
 ## What works today and what is being built
 
@@ -81,10 +87,10 @@ the shared repair process and viewer.
 | --- | --- |
 | Seeded engine exploration and deterministic replay | Implemented: exact legal actions, events, state hashes, checkpoints and invariant checks. |
 | Public 17Lands ingestion | Implemented: official CSV normalization and card-ID mapping with source provenance. The accepted coverage run repaired this layer. |
-| Recorded-game trajectory fitting | Implemented bounded fit17lands command with corrected turn boundaries and backtracking. Three real first-turn excerpts matched the supported observations; broader game coverage remains in progress. |
+| Recorded-game trajectory fitting | Implemented legal-action search with backtracking and typed observation/state traces. The frozen first-20-game SOS workload covers two turns from each player; full-game coverage remains in progress. |
 | Card support preflight | Current fitting checks names and setup. Complete card-effect support and token/face identity checks remain planned. |
 | Regression cases and repair evaluation | Implemented typed case execution, checking, reduction and reviewed acceptance, orchestrated by agents. |
-| Factory replays and viewer | Implemented provenance and execution records. Existing 17Lands replay pages cover ingestion or parsing experiments, not complete game fitting. |
+| Factory replays and viewer | Fitting runs now record source-derived cases, actual executions, grouped issue origins, field comparisons and separately attributed repair proposals/comparisons. Earlier ingestion/parsing replays remain available. |
 
 A concrete fault in the older fitter illustrates the work ahead: it combined
 “opponent has seven cards after my first turn” and “opponent has six cards after
@@ -95,10 +101,18 @@ specified fitting will be. The active plan also covers missing identity mappings
 retaining alternative paths across observations.
 
 The [first fitting measurements](docs/artifacts/17lands-guided-fit-20260908/README.md)
-retain the exact observations, witnesses, budgets and repeated results. All three
-excerpts matched their supported first-turn checks, while combat-damage,
-mana-spent and one ability observation remain unsupported. These are partial
-fits, and this pilot found no engine error.
+retain three repeated opening-turn examples. The larger
+[frozen cohort](fixtures/17lands/sos-cohort-20/README.md) includes all first 20
+records without filtering on fitting results. Its baseline found eight supported
+projection matches, nine unsupported mulligan reconstructions, two worker
+deadlines and one unsupported boundary. Even the matches have zero fully covered
+milestones. These records were previously inspected and are not unseen holdouts.
+
+Combat-damage, mana-spent and ability observations remain unchecked where their
+source semantics or engine bindings are unestablished. In particular, the raw
+source contains negative combat-damage values; a native damage-event total cannot
+simply be assumed to represent that column. The replay preserves the observations
+and the separate diagnosis behind this limitation.
 
 Seeded exploration remains useful alongside recorded-game fitting. It checks
 properties such as deterministic replay and whether advertised actions execute

@@ -1,6 +1,6 @@
 # Discovering engine issues from recorded games
 
-Active plan, 8 September 2026. This plan supersedes the discovery direction in the earlier blog drafts and [design notes](verifiable-loop-design.md). At the start of this work, main was e7c578f135f49263896f1b20271feb108741393e. The first bounded integration is now implemented in [201aa8a](https://github.com/Metta-AI/coworld-mtg/commit/201aa8a139db9819911ca9b4e1d9bb02465fb5f1); [measured results and raw receipts](artifacts/17lands-guided-fit-20260908/README.md) describe its scope.
+Active plan, updated 9 September 2026. This plan supersedes the discovery direction in the earlier blog drafts and [design notes](verifiable-loop-design.md). At the start of this work, main was e7c578f135f49263896f1b20271feb108741393e. The first bounded integration is now implemented in [201aa8a](https://github.com/Metta-AI/coworld-mtg/commit/201aa8a139db9819911ca9b4e1d9bb02465fb5f1); [measured results and raw receipts](artifacts/17lands-guided-fit-20260908/README.md) describe its scope.
 
 ## Goal
 
@@ -96,6 +96,15 @@ This milestone succeeds when the command runs on current source, respects the co
 
 ## Milestone 2: discovery and fixing share an evidence trail
 
+The first connection is implemented in [the fitting factory adapter](17lands-factory.md).
+A frozen cohort now supplies source-derived factory cases, bounded native
+executions, deduplicated diagnostics with all origins, and separate
+diagnosis/patch attribution. Candidate runs preserve the cohort, runtime input
+and declared bounds. Comparisons expose changed constraints and reconstruction.
+They remain comparison-only; this adapter does not automate diagnosis or
+acceptance of engine changes.
+
+
 Connect fitting receipts to the existing factory stages and recorder. Each candidate should retain the original source, bindings, observation projection, target revision, reconstruction, search budget, matched prefix and failure details. Deduplicate repeated problems while retaining every originating case.
 
 The fixing process can inspect rules, compare another implementation, minimize a case or improve the adapter. Preserve the distinction between observations that raised the issue and evidence that established the diagnosis. Version changes to the checker and search procedure as well as changes to the target program. Compare outcomes on the same source, declared observation scope, reconstruction policy and budget. Removing a difficult observation is a scope change, not a repaired fit. Corrections to the observation adapter need their own source-based justification and checks; the seven-versus-six example shows why freezing an incorrect adapter forever would also be wrong.
@@ -105,6 +114,14 @@ A repair should include a regression that captures the diagnosed fault, a discre
 The seven-versus-six contradiction is a natural first example: the source discovers an impossible demand in our measurement machinery. The improvement belongs to the fitter. Its attribution should arise from the recorded source-to-issue-to-change links, without needing a separately authored case-study post.
 
 ## Milestone 3: explain the process and spend compute deliberately
+
+The first explanatory viewer is implemented on the existing factory records.
+Native typed traces retain field comparisons, original submitted actions and
+events, before/after projections, the selected witness or prefix, and a separately
+identified failure branch. Older receipts explicitly lack those engine comparison
+values. Actual execution wall time and native node counts are recorded; per-state
+copy cost and broader agent-compute accounting are still future measurements.
+
 
 Extend the existing viewer to put recorded observations beside the engine's projected states. A reader should be able to see the last matched moment, the next required observation, the action sequence tried, and why the run stopped. Display assumptions and budget limits where they affect the interpretation.
 
