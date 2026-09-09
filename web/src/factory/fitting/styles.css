@@ -17,3 +17,6 @@
 .fitting-run:not(.show-fit-structure) .pipeline-section,.fitting-run:not(.show-fit-structure) .timeline-panel,.fitting-run:not(.show-fit-structure) .tablet-events{display:none}.fitting-run:not(.show-fit-structure) .workspace{grid-template-columns:260px minmax(0,1fr)}
 @media(min-width:701px){.fitting-run:not(.show-fit-structure) .case-content{padding-left:28px;padding-right:28px}.fitting-run:not(.show-fit-structure) .fit-head{flex-direction:row}.fitting-run:not(.show-fit-structure) .fit-report-label{width:auto;max-width:300px}.fitting-run:not(.show-fit-structure) .fit-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(min-width:701px) and (max-width:1000px){.fitting-run:not(.show-fit-structure) .workspace{grid-template-columns:210px minmax(0,1fr)}}
+
+/* Long serialized source-field records must wrap in either comparison view. */
+.fit-repair{min-width:0;overflow-wrap:anywhere}
