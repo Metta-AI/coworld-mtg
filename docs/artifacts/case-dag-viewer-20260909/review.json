@@ -1,0 +1,249 @@
+{
+  "passed": true,
+  "sourceHashes": {
+    "case-flow.html": "143705839a09fc1b1202709f4a70245043f84dbc7172dd25bc6d609fb413b0c7",
+    "case-flow.css": "51851378465399148c193ca42b31300c04d8d5f1dc79684ee588b113b0f7fbb0",
+    "case-flow.js": "fb243267b469977ef6899bfcf5ab216e13581cc796c791557b4cadd173ffe264"
+  },
+  "node_count": 9,
+  "text_fit": [
+    {
+      "step": "0",
+      "text": "SOURCE",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "0",
+      "text": "A real recorded game",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "0",
+      "text": "17Lands · source row 8",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "0",
+      "text": "Exact row and official card mapping",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "1",
+      "text": "OBSERVATIONS + SETUP",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "1",
+      "text": "Make the recording executable",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "1",
+      "text": "8 player-specific milestones",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "1",
+      "text": "2 turns per player · partial coverage",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "2",
+      "text": "BASELINE EXECUTION",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "2",
+      "text": "Search legal engine actions",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "2",
+      "text": "2,540 nodes explored",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "2",
+      "text": "2 / 8 milestone keys matched",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "3",
+      "text": "DISCOVERED OBSTACLE",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "3",
+      "text": "Preserve an issue candidate",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "3",
+      "text": "Unsupported turn boundary",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "3",
+      "text": "Evidence to investigate · no rules verdict",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "4",
+      "text": "SEPARATE REPAIR PROCESS",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "4",
+      "text": "Propose an inspectability change",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "4",
+      "text": "Retain actions, states and events",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "4",
+      "text": "Diagnosis supplied separately · origins linked",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "5",
+      "text": "CANDIDATE EXECUTION",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "5",
+      "text": "Rerun the same case",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "5",
+      "text": "2,540 nodes · 2 / 8 keys",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "5",
+      "text": "Same cohort, runtime inputs and bounds",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "6",
+      "text": "EVIDENCE FROM THE RERUN",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "6",
+      "text": "Keep the successful prefix",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "6",
+      "text": "11 actions · 6 matched fields",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "6",
+      "text": "1 end-of-turn boundary · 2 player keys",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "7",
+      "text": "SEPARATE BRANCH FROM THE RERUN",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "7",
+      "text": "Inspect a branch that stops",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "7",
+      "text": "Discard Forest",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "7",
+      "text": "Cleanup → discard → turn change",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "8",
+      "text": "MEASURED COMPARISON",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "8",
+      "text": "What actually improved?",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "8",
+      "text": "Same outcome · richer evidence",
+      "bbox": {},
+      "fits": true
+    },
+    {
+      "step": "8",
+      "text": "Comparison only · no accepted engine repair",
+      "bbox": {},
+      "fits": true
+    }
+  ],
+  "checks": [
+    "Play advances",
+    "Pause stops",
+    "direct click selects details",
+    "slider selects comparison",
+    "failure original Forest discard and source Island contrast",
+    "comparison no correctness acceptance",
+    "desktop no document overflow",
+    "mobile no document overflow",
+    "mobile graph horizontal pan",
+    "no console or page errors",
+    "Play enables edge motion and Pause clears it",
+    "Modified artifact bytes rejected with controls disabled and no graph"
+  ],
+  "screenshots": [
+    "/home/ubuntu/repos/coworld-case-dag-view-20260909/browser-review/desktop-source.png",
+    "/home/ubuntu/repos/coworld-case-dag-view-20260909/browser-review/desktop-failure.png",
+    "/home/ubuntu/repos/coworld-case-dag-view-20260909/browser-review/desktop-comparison.png",
+    "/home/ubuntu/repos/coworld-case-dag-view-20260909/browser-review/mobile-failure.png",
+    "/home/ubuntu/repos/coworld-case-dag-view-20260909/browser-review/integrity-rejection.png"
+  ],
+  "errors": []
+}

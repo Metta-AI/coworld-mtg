@@ -18,6 +18,14 @@ Serve the repository's replays directory with the factory viewer, then open:
 
     /client/factory.html?run=17lands-trajectories-20260909-01
 
+A focused visual DAG for source row 8 is available on that same server:
+
+    /client/case-flow.html?run=17lands-trajectories-20260909-01
+
+Use Play to walk through the evidence dependencies, or select any node. The
+detailed trace comes from the candidate rerun; playback does not re-execute the
+engine or reconstruct missing search states.
+
 Select source row 8 for the boundary obstacle, row 1 for a partial match, row 0
 for unsupported mulligan reconstruction, or row 6 for a worker deadline. Choose
 the candidate report to inspect typed traces; the baseline predates those traces.

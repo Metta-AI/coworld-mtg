@@ -1,0 +1,964 @@
+{
+  "schema": "coworld-case-dag-evidence-audit-v1",
+  "purpose": "Independent read-only evidence summary for a visual DAG; no new engine execution",
+  "run_id": "17lands-trajectories-20260909-01",
+  "source_row_index": 8,
+  "artifact_ids": {
+    "case": "f12030d17b48417daf662d7754781c793580d37543a987ec50dcf813c44bfa6c",
+    "baseline_report": "5ea2ba333bf885c7fea32ec5b8cb27223639ec5a7641dae81b4e33c37a242551",
+    "candidate_report": "413faa9eff65009754ef307562bdceb8016ea47f36dde065c1ef4931c53b630b",
+    "comparison": "188bb412b86a7d6a0900ecb044c1c43575ec6beb533ead14dbdcb4930ed072ee",
+    "attribution": "6895ff156758c5ac02d00b2f103ee78cf806e9bb64e4264dfb4f1b190194a651",
+    "baseline_result_id": "ccdccfa6dcb7be7926cc52fd7fdee4a231067bcecd091c872ee9bdf44c218fbc",
+    "baseline_constraints_id": "8169b347299d81a1c78fadbf89e3fa93899150ce3e8443230bb487f25cbbdb41",
+    "baseline_feedback_id": "86bf7e59828d54fc1c44302ed96533011ffaec4fac598da94b6539d3da004cc8",
+    "candidate_result_id": "a6f670f523a10b2e367e70da07e52cce41b30526483ef617c25922f7967afd56",
+    "candidate_constraints_id": "5d888c8aac7b719ad6ef73edbd9c8f423512170a92252ef6bcd0df08767760fe",
+    "candidate_feedback_id": "0ff407abafdca8b84ba7ce971b2185dd973c8342635303192a23261075ae1a87",
+    "diagnosis": "2eeb71cfb7f8e0df3f7d34350a00996c81e464c77896c6b5027703628301489c",
+    "patch": "7c3366bd0c119ccf983394bf9cb4a5f1a5eaab9b294417b817661ed9523978aa",
+    "source": "746224a63538b15e949b91ddd939423a7e884bb01d2c49dce72757ff0a109012",
+    "mapping": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153"
+  },
+  "source_row_column_count": 2629,
+  "source_metadata": {
+    "num_mulligans": "0",
+    "on_play": "True",
+    "opening_hand": "102483|102815|102732|102565|102723|102640|102738",
+    "opp_num_mulligans": "0"
+  },
+  "raw_source_fields": {
+    "user_turn_1_lands_played": "102723",
+    "user_turn_1_eot_user_lands_in_play": "102723",
+    "user_turn_1_eot_user_cards_in_hand": "102565|102732|102815|102483|102738|102640",
+    "user_turn_1_eot_user_life": "20.0",
+    "user_turn_1_eot_oppo_life": "20.0",
+    "user_turn_1_eot_oppo_cards_in_hand": "7.0",
+    "oppo_turn_1_lands_played": "102724",
+    "oppo_turn_1_eot_oppo_lands_in_play": "82391",
+    "oppo_turn_1_eot_oppo_cards_in_hand": "7.0",
+    "oppo_turn_1_cards_drawn_or_tutored": "1",
+    "oppo_turn_1_oppo_abilities": "88024"
+  },
+  "scope": {
+    "deadline_seconds": 60,
+    "max_actions": 128,
+    "memory_bytes": 8589934592,
+    "nodes": 10000,
+    "opponent_filler": "Plains",
+    "turn_pairs": 2
+  },
+  "assumptions": [
+    "Official Arena IDs resolve to names in a pinned mapping; runtime matching is a name projection, not proof of unique token/face characteristics. One reconstructed hidden state: recorded user deck/opening multiset, chosen opening order and listed draw-prefix order, deterministic remaining library; no search over all shuffles.",
+    "Hypothetical opponent: maximum observed name multiplicities plus Plains to forty cards, in deterministic order; neither opponent deck nor opening hand is source-confirmed.",
+    "EOT fields project the last stable end-step state before a projection-neutral cleanup/turn transition; transitions with other pre-TurnStarted events are unsupported.",
+    "Runtime preflight checks names and setup only; it does not inventory every unsupported or unimplemented card effect. Blank cells are unknown. Nonblank card lists are multiset constraints; no global action order, targets, priority decisions, or hidden information is reconstructed as fact."
+  ],
+  "constraint_field_count": 2629,
+  "selected_coverage_counts": {
+    "enforced": 30,
+    "informational": 79,
+    "unsupported": 17
+  },
+  "baseline": {
+    "status": "unsupported_boundary",
+    "nodes": 2540,
+    "elapsed_millis": 47705,
+    "milestones_fitted": 2,
+    "milestones_total": 8,
+    "fully_covered_milestones": 0,
+    "matched_prefix_backtracks": 4
+  },
+  "candidate": {
+    "status": "unsupported_boundary",
+    "nodes": 2540,
+    "elapsed_millis": 49229,
+    "milestones_fitted": 2,
+    "milestones_total": 8,
+    "fully_covered_milestones": 0,
+    "matched_prefix_backtracks": 4
+  },
+  "baseline_candidate_witness_equal": true,
+  "retained_prefix": {
+    "kind": "longest_prefix",
+    "transition_count": 11,
+    "first_index": 0,
+    "last_index": 10,
+    "transitions": [
+      {
+        "index": 0,
+        "seat": 0,
+        "action": {
+          "type": "MulliganDecision",
+          "data": {
+            "choice": {
+              "type": "Keep"
+            }
+          }
+        },
+        "before_phase": "Untap",
+        "after_phase": "Untap",
+        "event_kinds": []
+      },
+      {
+        "index": 1,
+        "seat": 1,
+        "action": {
+          "type": "MulliganDecision",
+          "data": {
+            "choice": {
+              "type": "Keep"
+            }
+          }
+        },
+        "before_phase": "Untap",
+        "after_phase": "Upkeep",
+        "event_kinds": [
+          "PhaseChanged"
+        ]
+      },
+      {
+        "index": 2,
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "Upkeep",
+        "after_phase": "Upkeep",
+        "event_kinds": [
+          "PriorityPassed"
+        ]
+      },
+      {
+        "index": 3,
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "Upkeep",
+        "after_phase": "PreCombatMain",
+        "event_kinds": [
+          "PhaseChanged",
+          "PhaseChanged"
+        ]
+      },
+      {
+        "index": 4,
+        "seat": 0,
+        "action": {
+          "type": "PlayLand",
+          "data": {
+            "object_id": 39,
+            "card_id": 39
+          }
+        },
+        "before_phase": "PreCombatMain",
+        "after_phase": "PreCombatMain",
+        "event_kinds": [
+          "ReplacementApplied",
+          "ZoneChanged",
+          "LandPlayed"
+        ]
+      },
+      {
+        "index": 5,
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "PreCombatMain",
+        "after_phase": "PreCombatMain",
+        "event_kinds": [
+          "PriorityPassed"
+        ]
+      },
+      {
+        "index": 6,
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "PreCombatMain",
+        "after_phase": "PostCombatMain",
+        "event_kinds": [
+          "PhaseChanged",
+          "PhaseChanged"
+        ]
+      },
+      {
+        "index": 7,
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "PostCombatMain",
+        "after_phase": "PostCombatMain",
+        "event_kinds": [
+          "PriorityPassed"
+        ]
+      },
+      {
+        "index": 8,
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "PostCombatMain",
+        "after_phase": "End",
+        "event_kinds": [
+          "PhaseChanged"
+        ]
+      },
+      {
+        "index": 9,
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "End",
+        "after_phase": "End",
+        "event_kinds": [
+          "PriorityPassed"
+        ]
+      },
+      {
+        "index": 10,
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        },
+        "before_phase": "End",
+        "after_phase": "Upkeep",
+        "event_kinds": [
+          "PhaseChanged",
+          "TurnStarted",
+          "PhaseChanged",
+          "PhaseChanged"
+        ]
+      }
+    ],
+    "milestones": [
+      {
+        "key": {
+          "turn_owner": 0,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": 10,
+        "state_position": "before_transition",
+        "enforced_fields": [
+          {
+            "source_field_id": "user_turn_1_eot_user_cards_in_hand",
+            "raw": "102565|102732|102815|102483|102738|102640",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Ancestral Anger",
+              "Plains",
+              "Deflecting Palm",
+              "Owlin Historian",
+              "Mountain",
+              "Colossus of the Blood Age"
+            ],
+            "actual": [
+              "Owlin Historian",
+              "Deflecting Palm",
+              "Plains",
+              "Ancestral Anger",
+              "Colossus of the Blood Age",
+              "Mountain"
+            ],
+            "comparison": "matched",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_lands_in_play",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": [
+              "Sundown Pass"
+            ],
+            "comparison": "matched",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": 20,
+            "comparison": "matched",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_lands_played",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": [
+              "Sundown Pass"
+            ],
+            "comparison": "matched",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 0,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": 10,
+        "state_position": "before_transition",
+        "enforced_fields": [
+          {
+            "source_field_id": "user_turn_1_eot_oppo_cards_in_hand",
+            "raw": "7.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 7,
+            "actual": 7,
+            "comparison": "matched",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "user_turn_1_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": 20,
+            "comparison": "matched",
+            "diagnostic": null
+          }
+        ]
+      }
+    ]
+  },
+  "separate_branch": {
+    "path_kind": "separate_search_branch",
+    "actions_before": [
+      {
+        "seat": 0,
+        "action": {
+          "type": "MulliganDecision",
+          "data": {
+            "choice": {
+              "type": "Keep"
+            }
+          }
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "MulliganDecision",
+          "data": {
+            "choice": {
+              "type": "Keep"
+            }
+          }
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PlayLand",
+          "data": {
+            "object_id": 39,
+            "card_id": 39
+          }
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      }
+    ],
+    "shared_prefix_action_count": 11,
+    "shared_prefix_is_exact_action_equality": true,
+    "attempt_index": 21,
+    "attempted_action": {
+      "seat": 1,
+      "action": {
+        "type": "SelectCards",
+        "data": {
+          "cards": [
+            42
+          ]
+        }
+      }
+    },
+    "detail": "The selected EOT projection requires a last stable End state followed by exactly one TurnStarted and only neutral PriorityPassed/PhaseChanged events before it. This branch had phase Cleanup, 1 TurnStarted event(s), and preceding event kinds [\"ZoneChanged\", \"Discarded\"]; no boundary field actuals are claimed.",
+    "before": {
+      "turn_owner": 1,
+      "turn_number": 2,
+      "phase": "Cleanup",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": [
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 42,
+              "name": "Forest"
+            },
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 73,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 32,
+          "graveyard_count": 0,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "after": {
+      "turn_owner": 0,
+      "turn_number": 3,
+      "phase": "Upkeep",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": [
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 73,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 32,
+          "graveyard_count": 1,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "events": [
+      {
+        "type": "ZoneChanged",
+        "data": {
+          "object_id": 42,
+          "from": "Hand",
+          "to": "Graveyard",
+          "record": {
+            "object_id": 42,
+            "name": "Forest",
+            "core_types": [
+              "Land"
+            ],
+            "subtypes": [
+              "Forest"
+            ],
+            "supertypes": [
+              "Basic"
+            ],
+            "keywords": [],
+            "power": null,
+            "toughness": null,
+            "base_power": null,
+            "base_toughness": null,
+            "colors": [],
+            "mana_value": 0,
+            "controller": 1,
+            "owner": 1,
+            "from_zone": "Hand",
+            "cast_from_zone": null,
+            "played_from_zone": null,
+            "to_zone": "Graveyard",
+            "attachments": [],
+            "linked_exile_snapshot": [],
+            "is_token": false,
+            "combat_status": {
+              "attacking": false,
+              "blocking": false,
+              "blocked": false,
+              "attacking_alone": false,
+              "blocking_alone": false,
+              "defending_player": null
+            },
+            "co_departed": [],
+            "entered_incarnation": null,
+            "attached_to": null,
+            "turn_zone_change_index": 1,
+            "is_suspected": false
+          }
+        }
+      },
+      {
+        "type": "Discarded",
+        "data": {
+          "player_id": 1,
+          "object_id": 42
+        }
+      },
+      {
+        "type": "TurnStarted",
+        "data": {
+          "player_id": 0,
+          "turn_number": 3
+        }
+      },
+      {
+        "type": "PhaseChanged",
+        "data": {
+          "phase": "Untap"
+        }
+      },
+      {
+        "type": "PermanentUntapped",
+        "data": {
+          "object_id": 39
+        }
+      },
+      {
+        "type": "PhaseChanged",
+        "data": {
+          "phase": "Upkeep"
+        }
+      }
+    ],
+    "target_milestones": [
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": null,
+        "state_position": null,
+        "enforced_fields": [
+          {
+            "source_field_id": "oppo_turn_1_eot_user_cards_in_hand",
+            "raw": "102565|102732|102815|102483|102738|102640",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Ancestral Anger",
+              "Plains",
+              "Deflecting Palm",
+              "Owlin Historian",
+              "Mountain",
+              "Colossus of the Blood Age"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_lands_in_play",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": null,
+        "state_position": null,
+        "enforced_fields": [
+          {
+            "source_field_id": "oppo_turn_1_cards_drawn_or_tutored",
+            "raw": "1",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "drawn_or_tutored_count",
+            "expected": 1,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_cards_in_hand",
+            "raw": "7.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 7,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_lands_in_play",
+            "raw": "82391",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Island"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_lands_played",
+            "raw": "102724",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Terramorphic Expanse"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          }
+        ]
+      }
+    ]
+  },
+  "issue_ids": [
+    "173f8e239831698851add8ba27079c9639d5ede591a09a6f104198ad6b77871e",
+    "3e95f18966672f5c8f4221a55041b32469c684b4117637216b1a369be15620fd",
+    "4b9bad6d4548a78cbdf7b6bd38a4d24c231340f8445caaef0df9ddd411404db7",
+    "a4750bb27bf0c30e1fbed6ca066d3172f42a787c70bb401d878c720039a9c910",
+    "d1665ee32e8e1d57a122a2590ea93d203670f72ca80c8e38255c4c224c7a8330",
+    "f0469034a1e3c1eac8f1bfd3e668ba334f19a8ee856095c16a0b5cf0e741de7c"
+  ],
+  "boundary_issue_id": "d1665ee32e8e1d57a122a2590ea93d203670f72ca80c8e38255c4c224c7a8330",
+  "attribution": {
+    "authority": "Operator-supplied diagnosis and patch; discovery alone does not prove this diagnosis.",
+    "baseline_report_id": "5ea2ba333bf885c7fea32ec5b8cb27223639ec5a7641dae81b4e33c37a242551",
+    "candidate_revision": "b5d1e69897c092a48810295016f46ec0ec47c5c3",
+    "change_id": "7c3366bd0c119ccf983394bf9cb4a5f1a5eaab9b294417b817661ed9523978aa",
+    "component": "observation_adapter",
+    "diagnosis_id": "2eeb71cfb7f8e0df3f7d34350a00996c81e464c77896c6b5027703628301489c",
+    "origin_case_ids": [
+      "02bbd7be393ec835eefaa7a16c59006e1aa66a4dc4974ab9bfd222788dbc5a2e",
+      "124ebf960a20be88df5c09f6f92c0806cecf5f3e55bab02959dad868d3703a16",
+      "3853236c9026c7e691042807d35bc59eebe2aceb37beb867c9bd1b4ded84ce94",
+      "5c49e5003a182f81442de160c51e94ce6c88d02285349258a39f23e59310c593",
+      "6b81a948e418b8ac0099770204203c609f0cb5533de0db1e55aac93861a40b57",
+      "7c725452c02aa47b55ebbb17b62093b745b081ea191d0f88a3ed3fdc9227fe62",
+      "a7255e6cf9e0212bb730ef8f3c2288da2b5bacab58c1d574815ca1a233e2af7c",
+      "c5415c8b001b4f17b58e15250c6d1ac27a2f212709390676a58d1439d776866e",
+      "f12030d17b48417daf662d7754781c793580d37543a987ec50dcf813c44bfa6c"
+    ],
+    "origin_issue_ids": [
+      "173f8e239831698851add8ba27079c9639d5ede591a09a6f104198ad6b77871e",
+      "205b8f7934cf73d90d34c40dd61c94be716ad45fb6879f7643b171072569d9d1",
+      "3e95f18966672f5c8f4221a55041b32469c684b4117637216b1a369be15620fd",
+      "4b9bad6d4548a78cbdf7b6bd38a4d24c231340f8445caaef0df9ddd411404db7",
+      "575f38598c13e966aa0ad872592f15a15812a719896d81c9de2a569e65ff7f1a",
+      "768a0ff590600ee0fc781e69a32be92ac309bcf8daea39e6a48ba34a6d720551",
+      "79f57a3d74004e819d22d2ca8b51a77ff35578df4c7f7773c9c436da9ed91944",
+      "a4750bb27bf0c30e1fbed6ca066d3172f42a787c70bb401d878c720039a9c910",
+      "d1665ee32e8e1d57a122a2590ea93d203670f72ca80c8e38255c4c224c7a8330",
+      "f0469034a1e3c1eac8f1bfd3e668ba334f19a8ee856095c16a0b5cf0e741de7c"
+    ],
+    "schema": "coworld/17lands-repair-attribution@1"
+  },
+  "comparison": {
+    "after_status": "unsupported_boundary",
+    "before_status": "unsupported_boundary",
+    "case_id": "f12030d17b48417daf662d7754781c793580d37543a987ec50dcf813c44bfa6c",
+    "new_issue_ids": [],
+    "remaining_issue_ids": [
+      "173f8e239831698851add8ba27079c9639d5ede591a09a6f104198ad6b77871e",
+      "3e95f18966672f5c8f4221a55041b32469c684b4117637216b1a369be15620fd",
+      "4b9bad6d4548a78cbdf7b6bd38a4d24c231340f8445caaef0df9ddd411404db7",
+      "a4750bb27bf0c30e1fbed6ca066d3172f42a787c70bb401d878c720039a9c910",
+      "d1665ee32e8e1d57a122a2590ea93d203670f72ca80c8e38255c4c224c7a8330",
+      "f0469034a1e3c1eac8f1bfd3e668ba334f19a8ee856095c16a0b5cf0e741de7c"
+    ],
+    "resolved_issue_ids": []
+  },
+  "changed_reason_count": 17,
+  "all_constraint_changes_reason_only": true,
+  "cautions": [
+    "This graph is a conceptual evidence/process lineage and a retained path, not the complete 2540-node search tree.",
+    "The failed branch is recorded separately and has an exact shared action prefix0\u201310, but intermediate state snapshots11\u201320 are not retained in this failure object.",
+    "The Forest discard occurs in a hypothesized engine branch; the source game does not record this discard. Its source target instead includes Terramorphic Expanse played and Island in play.",
+    "Unsupported boundary is a limit of the selected observation mapper encountered on one branch; it does not establish global incompatibility or an engine rules error.",
+    "Two fitted milestones mean both players at one end-of-turn, not two turns. Zero fully covered milestones.",
+    "Names/setup preflight is not comprehensive effect support checking.",
+    "The diagnosis and patch are operator-supplied; source-to-issue and issue-to-patch links are recorded, but a fully autonomous repair claim would be inaccurate.",
+    "The candidate adds inspectable traces and better annotations, with identical fitting outcome and coverage."
+  ]
+}

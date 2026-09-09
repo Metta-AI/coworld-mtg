@@ -33,6 +33,18 @@ the separate diagnosis, and compares the candidate on every original game. Its
 independent audit verifies that the changed constraint records contain reason
 annotation changes only. Combat observations remain unchecked.
 
+For a focused visual walkthrough, open
+`/client/case-flow.html?run=17lands-trajectories-20260909-01` on the same factory
+server. Play advances through source, observation extraction, the baseline
+attempt, issue, proposed change, rerun, retained traces and comparison. Every
+step links to original artifacts. The viewer checks the loaded artifact bytes
+against their recorded identities.
+
+The DAG represents evidence dependencies. Detailed trace nodes belong to the
+candidate rerun; the baseline did not retain those snapshots. It shows the
+retained prefix and one diagnostic branch, not all explored search states.
+Unknown intermediate states and unassigned boundary values remain absent.
+
 ## Run the pipeline
 
 Build the Coworld harness and factory runtime, retaining the harness build receipt. The worker must have access to the matching runtime corpus. Public replay artifacts do not contain that corpus.
