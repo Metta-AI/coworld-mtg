@@ -1,0 +1,1375 @@
+{
+  "cases": [
+    {
+      "boundaries": [
+        {
+          "chronological_boundary_index": 0,
+          "fields": [
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_drawn"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_tutored"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_discarded"
+            },
+            {
+              "arena_ids": [
+                "102734"
+              ],
+              "card_names": [
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "102734",
+              "source_column": "user_turn_1_lands_played"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_non_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_attacked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_blocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_unblocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_blocking"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "user_turn_1_oppo_combat_damage_taken"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "user_turn_1_user_combat_damage_taken"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_creatures_killed_non_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_creatures_killed_non_combat"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "user_turn_1_user_mana_spent"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "user_turn_1_oppo_mana_spent"
+            },
+            {
+              "arena_ids": [
+                "102734",
+                "102523",
+                "102599",
+                "102734",
+                "102617",
+                "102515"
+              ],
+              "card_names": [
+                "Island",
+                "Procrastinate",
+                "Ambitious Augmenter",
+                "Island",
+                "Planar Engineering",
+                "Landscape Painter"
+              ],
+              "presence": "present",
+              "raw_value": "102734|102523|102599|102734|102617|102515",
+              "source_column": "user_turn_1_eot_user_cards_in_hand"
+            },
+            {
+              "presence": "present",
+              "raw_value": "7.0",
+              "source_column": "user_turn_1_eot_oppo_cards_in_hand"
+            },
+            {
+              "arena_ids": [
+                "102734"
+              ],
+              "card_names": [
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "102734",
+              "source_column": "user_turn_1_eot_user_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_user_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_user_non_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_non_creatures_in_play"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "user_turn_1_eot_user_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "user_turn_1_eot_oppo_life"
+            }
+          ],
+          "owner_local_turn": 1,
+          "turn_owner": "user"
+        },
+        {
+          "chronological_boundary_index": 1,
+          "fields": [
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_cards_discarded"
+            },
+            {
+              "arena_ids": [
+                "70761"
+              ],
+              "card_names": [
+                "Plains"
+              ],
+              "presence": "present",
+              "raw_value": "70761",
+              "source_column": "oppo_turn_1_lands_played"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_non_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_attacked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_blocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_unblocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_blocking"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_oppo_combat_damage_taken"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_user_combat_damage_taken"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_creatures_killed_non_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_creatures_killed_non_combat"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "oppo_turn_1_user_mana_spent"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "oppo_turn_1_oppo_mana_spent"
+            },
+            {
+              "arena_ids": [
+                "102734",
+                "102523",
+                "102599",
+                "102734",
+                "102617",
+                "102515"
+              ],
+              "card_names": [
+                "Island",
+                "Procrastinate",
+                "Ambitious Augmenter",
+                "Island",
+                "Planar Engineering",
+                "Landscape Painter"
+              ],
+              "presence": "present",
+              "raw_value": "102734|102523|102599|102734|102617|102515",
+              "source_column": "oppo_turn_1_eot_user_cards_in_hand"
+            },
+            {
+              "presence": "present",
+              "raw_value": "7.0",
+              "source_column": "oppo_turn_1_eot_oppo_cards_in_hand"
+            },
+            {
+              "arena_ids": [
+                "102734"
+              ],
+              "card_names": [
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "102734",
+              "source_column": "oppo_turn_1_eot_user_lands_in_play"
+            },
+            {
+              "arena_ids": [
+                "70761"
+              ],
+              "card_names": [
+                "Plains"
+              ],
+              "presence": "present",
+              "raw_value": "70761",
+              "source_column": "oppo_turn_1_eot_oppo_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_oppo_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_non_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_oppo_non_creatures_in_play"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "oppo_turn_1_eot_user_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "oppo_turn_1_eot_oppo_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "1",
+              "source_column": "oppo_turn_1_cards_drawn_or_tutored"
+            }
+          ],
+          "owner_local_turn": 1,
+          "turn_owner": "oppo"
+        }
+      ],
+      "fixture_row_index": 0,
+      "on_play": "True",
+      "opening_hand_arena_ids_in_source_order": [
+        "102515",
+        "102617",
+        "102734",
+        "102734",
+        "102599",
+        "102523",
+        "102734"
+      ],
+      "opening_hand_names_in_source_order": [
+        "Landscape Painter",
+        "Planar Engineering",
+        "Island",
+        "Island",
+        "Ambitious Augmenter",
+        "Procrastinate",
+        "Island"
+      ],
+      "opening_hand_order_interpretation": "Preserved source order; not asserted to be library order.",
+      "opponent_mulligans_raw": "0",
+      "positive_user_deck_counts": {
+        "Ambitious Augmenter": 1,
+        "Banishing Betrayal": 1,
+        "Burrog Barrage": 1,
+        "Deduce": 1,
+        "Dreamroot Cascade": 1,
+        "Encouraging Aviator": 1,
+        "Flusterstorm": 1,
+        "Forest": 7,
+        "Fractal Mascot": 1,
+        "Geometer's Arthropod": 1,
+        "Harmonized Trio": 1,
+        "Island": 8,
+        "Landscape Painter": 2,
+        "Noxious Newt": 1,
+        "Oracle's Restoration": 1,
+        "Orysa, Tide Choreographer": 1,
+        "Paradox Gardens": 1,
+        "Paradox Surveyor": 1,
+        "Pensive Professor": 1,
+        "Planar Engineering": 1,
+        "Procrastinate": 1,
+        "Pterafractyl": 1,
+        "Quick Study": 1,
+        "Shopkeeper's Bane": 1,
+        "Spellbook Seeker": 1,
+        "Tenured Concocter": 1
+      },
+      "scope": "Source observations only. No proposed engine outcome or full trajectory.",
+      "sequence_basis": "on_play plus distinct user/oppo local-turn prefixes; observations of both seats remain attached to the same turn-owner boundary.",
+      "source_row_index": 2,
+      "user_mulligans_raw": "0"
+    },
+    {
+      "boundaries": [
+        {
+          "chronological_boundary_index": 0,
+          "fields": [
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_cards_discarded"
+            },
+            {
+              "arena_ids": [
+                "102714"
+              ],
+              "card_names": [
+                "Fields of Strife"
+              ],
+              "presence": "present",
+              "raw_value": "102714",
+              "source_column": "oppo_turn_1_lands_played"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_non_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_attacked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_blocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_unblocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_blocking"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_oppo_combat_damage_taken"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_user_combat_damage_taken"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_creatures_killed_non_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_creatures_killed_non_combat"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "oppo_turn_1_user_mana_spent"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "oppo_turn_1_oppo_mana_spent"
+            },
+            {
+              "arena_ids": [
+                "102734",
+                "102734",
+                "102505",
+                "102650",
+                "102740",
+                "102497",
+                "102521"
+              ],
+              "card_names": [
+                "Island",
+                "Island",
+                "Encouraging Aviator",
+                "Geometer's Arthropod",
+                "Forest",
+                "Banishing Betrayal",
+                "Orysa, Tide Choreographer"
+              ],
+              "presence": "present",
+              "raw_value": "102734|102734|102505|102650|102740|102497|102521",
+              "source_column": "oppo_turn_1_eot_user_cards_in_hand"
+            },
+            {
+              "presence": "present",
+              "raw_value": "6.0",
+              "source_column": "oppo_turn_1_eot_oppo_cards_in_hand"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_lands_in_play"
+            },
+            {
+              "arena_ids": [
+                "102714"
+              ],
+              "card_names": [
+                "Fields of Strife"
+              ],
+              "presence": "present",
+              "raw_value": "102714",
+              "source_column": "oppo_turn_1_eot_oppo_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_oppo_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_non_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_oppo_non_creatures_in_play"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "oppo_turn_1_eot_user_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "oppo_turn_1_eot_oppo_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_cards_drawn_or_tutored"
+            }
+          ],
+          "owner_local_turn": 1,
+          "turn_owner": "oppo"
+        },
+        {
+          "chronological_boundary_index": 1,
+          "fields": [
+            {
+              "arena_ids": [
+                "102768"
+              ],
+              "card_names": [
+                "Deduce"
+              ],
+              "presence": "present",
+              "raw_value": "102768",
+              "source_column": "user_turn_1_cards_drawn"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_tutored"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_discarded"
+            },
+            {
+              "arena_ids": [
+                "102740"
+              ],
+              "card_names": [
+                "Forest"
+              ],
+              "presence": "present",
+              "raw_value": "102740",
+              "source_column": "user_turn_1_lands_played"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_non_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_attacked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_blocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_unblocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_blocking"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "user_turn_1_oppo_combat_damage_taken"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "user_turn_1_user_combat_damage_taken"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_creatures_killed_non_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_creatures_killed_non_combat"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "user_turn_1_user_mana_spent"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "user_turn_1_oppo_mana_spent"
+            },
+            {
+              "arena_ids": [
+                "102768",
+                "102734",
+                "102734",
+                "102505",
+                "102650",
+                "102497",
+                "102521"
+              ],
+              "card_names": [
+                "Deduce",
+                "Island",
+                "Island",
+                "Encouraging Aviator",
+                "Geometer's Arthropod",
+                "Banishing Betrayal",
+                "Orysa, Tide Choreographer"
+              ],
+              "presence": "present",
+              "raw_value": "102768|102734|102734|102505|102650|102497|102521",
+              "source_column": "user_turn_1_eot_user_cards_in_hand"
+            },
+            {
+              "presence": "present",
+              "raw_value": "6.0",
+              "source_column": "user_turn_1_eot_oppo_cards_in_hand"
+            },
+            {
+              "arena_ids": [
+                "102740"
+              ],
+              "card_names": [
+                "Forest"
+              ],
+              "presence": "present",
+              "raw_value": "102740",
+              "source_column": "user_turn_1_eot_user_lands_in_play"
+            },
+            {
+              "arena_ids": [
+                "102714"
+              ],
+              "card_names": [
+                "Fields of Strife"
+              ],
+              "presence": "present",
+              "raw_value": "102714",
+              "source_column": "user_turn_1_eot_oppo_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_user_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_user_non_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_non_creatures_in_play"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "user_turn_1_eot_user_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "user_turn_1_eot_oppo_life"
+            }
+          ],
+          "owner_local_turn": 1,
+          "turn_owner": "user"
+        }
+      ],
+      "fixture_row_index": 1,
+      "on_play": "False",
+      "opening_hand_arena_ids_in_source_order": [
+        "102497",
+        "102740",
+        "102650",
+        "102505",
+        "102734",
+        "102734",
+        "102521"
+      ],
+      "opening_hand_names_in_source_order": [
+        "Banishing Betrayal",
+        "Forest",
+        "Geometer's Arthropod",
+        "Encouraging Aviator",
+        "Island",
+        "Island",
+        "Orysa, Tide Choreographer"
+      ],
+      "opening_hand_order_interpretation": "Preserved source order; not asserted to be library order.",
+      "opponent_mulligans_raw": "0",
+      "positive_user_deck_counts": {
+        "Ambitious Augmenter": 1,
+        "Banishing Betrayal": 1,
+        "Burrog Barrage": 1,
+        "Deduce": 1,
+        "Dreamroot Cascade": 1,
+        "Encouraging Aviator": 1,
+        "Flusterstorm": 1,
+        "Forest": 7,
+        "Fractal Mascot": 1,
+        "Geometer's Arthropod": 1,
+        "Harmonized Trio": 1,
+        "Island": 8,
+        "Landscape Painter": 2,
+        "Noxious Newt": 1,
+        "Oracle's Restoration": 1,
+        "Orysa, Tide Choreographer": 1,
+        "Paradox Gardens": 1,
+        "Paradox Surveyor": 1,
+        "Pensive Professor": 1,
+        "Planar Engineering": 1,
+        "Procrastinate": 1,
+        "Pterafractyl": 1,
+        "Quick Study": 1,
+        "Shopkeeper's Bane": 1,
+        "Spellbook Seeker": 1,
+        "Tenured Concocter": 1
+      },
+      "scope": "Source observations only. No proposed engine outcome or full trajectory.",
+      "sequence_basis": "on_play plus distinct user/oppo local-turn prefixes; observations of both seats remain attached to the same turn-owner boundary.",
+      "source_row_index": 3,
+      "user_mulligans_raw": "0"
+    },
+    {
+      "boundaries": [
+        {
+          "chronological_boundary_index": 0,
+          "fields": [
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_drawn"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_tutored"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_cards_discarded"
+            },
+            {
+              "arena_ids": [
+                "102724"
+              ],
+              "card_names": [
+                "Terramorphic Expanse"
+              ],
+              "presence": "present",
+              "raw_value": "102724",
+              "source_column": "user_turn_1_lands_played"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_non_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_attacked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_blocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_unblocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_creatures_blocking"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "user_turn_1_oppo_combat_damage_taken"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "user_turn_1_user_combat_damage_taken"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_user_creatures_killed_non_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_oppo_creatures_killed_non_combat"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "user_turn_1_user_mana_spent"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "user_turn_1_oppo_mana_spent"
+            },
+            {
+              "arena_ids": [
+                "102614",
+                "102597",
+                "73496",
+                "102808",
+                "102648",
+                "73489"
+              ],
+              "card_names": [
+                "Noxious Newt",
+                "Aberrant Manawurm",
+                "Forest",
+                "Royal Treatment",
+                "Fractal Mascot",
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "102614|102597|73496|102808|102648|73489",
+              "source_column": "user_turn_1_eot_user_cards_in_hand"
+            },
+            {
+              "presence": "present",
+              "raw_value": "7.0",
+              "source_column": "user_turn_1_eot_oppo_cards_in_hand"
+            },
+            {
+              "arena_ids": [
+                "102724"
+              ],
+              "card_names": [
+                "Terramorphic Expanse"
+              ],
+              "presence": "present",
+              "raw_value": "102724",
+              "source_column": "user_turn_1_eot_user_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_user_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_user_non_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "user_turn_1_eot_oppo_non_creatures_in_play"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "user_turn_1_eot_user_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "user_turn_1_eot_oppo_life"
+            }
+          ],
+          "owner_local_turn": 1,
+          "turn_owner": "user"
+        },
+        {
+          "chronological_boundary_index": 1,
+          "fields": [
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_cards_discarded"
+            },
+            {
+              "arena_ids": [
+                "87590"
+              ],
+              "card_names": [
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "87590",
+              "source_column": "oppo_turn_1_lands_played"
+            },
+            {
+              "arena_ids": [
+                "102507"
+              ],
+              "card_names": [
+                "Exhibition Tidecaller"
+              ],
+              "presence": "present",
+              "raw_value": "102507",
+              "source_column": "oppo_turn_1_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_non_creatures_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_instants_sorceries_cast"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_instants_sorceries_cast"
+            },
+            {
+              "ability_ids": [
+                "88024"
+              ],
+              "presence": "present",
+              "raw_value": "88024",
+              "source_column": "oppo_turn_1_user_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_abilities"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_attacked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_blocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_unblocked"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_creatures_blocking"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_oppo_combat_damage_taken"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0",
+              "source_column": "oppo_turn_1_user_combat_damage_taken"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_creatures_killed_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_user_creatures_killed_non_combat"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_oppo_creatures_killed_non_combat"
+            },
+            {
+              "presence": "present",
+              "raw_value": "0.0",
+              "source_column": "oppo_turn_1_user_mana_spent"
+            },
+            {
+              "presence": "present",
+              "raw_value": "1.0",
+              "source_column": "oppo_turn_1_oppo_mana_spent"
+            },
+            {
+              "arena_ids": [
+                "102614",
+                "102597",
+                "73496",
+                "102808",
+                "102648",
+                "73489"
+              ],
+              "card_names": [
+                "Noxious Newt",
+                "Aberrant Manawurm",
+                "Forest",
+                "Royal Treatment",
+                "Fractal Mascot",
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "102614|102597|73496|102808|102648|73489",
+              "source_column": "oppo_turn_1_eot_user_cards_in_hand"
+            },
+            {
+              "presence": "present",
+              "raw_value": "6.0",
+              "source_column": "oppo_turn_1_eot_oppo_cards_in_hand"
+            },
+            {
+              "arena_ids": [
+                "73496"
+              ],
+              "card_names": [
+                "Forest"
+              ],
+              "presence": "present",
+              "raw_value": "73496",
+              "source_column": "oppo_turn_1_eot_user_lands_in_play"
+            },
+            {
+              "arena_ids": [
+                "87590"
+              ],
+              "card_names": [
+                "Island"
+              ],
+              "presence": "present",
+              "raw_value": "87590",
+              "source_column": "oppo_turn_1_eot_oppo_lands_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_creatures_in_play"
+            },
+            {
+              "arena_ids": [
+                "102507"
+              ],
+              "card_names": [
+                "Exhibition Tidecaller"
+              ],
+              "presence": "present",
+              "raw_value": "102507",
+              "source_column": "oppo_turn_1_eot_oppo_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_user_non_creatures_in_play"
+            },
+            {
+              "presence": "blank",
+              "raw_value": "",
+              "source_column": "oppo_turn_1_eot_oppo_non_creatures_in_play"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "oppo_turn_1_eot_user_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "20.0",
+              "source_column": "oppo_turn_1_eot_oppo_life"
+            },
+            {
+              "presence": "present",
+              "raw_value": "1",
+              "source_column": "oppo_turn_1_cards_drawn_or_tutored"
+            }
+          ],
+          "owner_local_turn": 1,
+          "turn_owner": "oppo"
+        }
+      ],
+      "fixture_row_index": 2,
+      "on_play": "True",
+      "opening_hand_arena_ids_in_source_order": [
+        "73489",
+        "102648",
+        "102808",
+        "73496",
+        "102597",
+        "102614",
+        "102724"
+      ],
+      "opening_hand_names_in_source_order": [
+        "Island",
+        "Fractal Mascot",
+        "Royal Treatment",
+        "Forest",
+        "Aberrant Manawurm",
+        "Noxious Newt",
+        "Terramorphic Expanse"
+      ],
+      "opening_hand_order_interpretation": "Preserved source order; not asserted to be library order.",
+      "opponent_mulligans_raw": "0",
+      "positive_user_deck_counts": {
+        "Aberrant Manawurm": 2,
+        "Applied Geometry": 1,
+        "Brush Off": 1,
+        "Deluge Virtuoso": 1,
+        "Embrace the Paradox": 2,
+        "Emil, Vastlands Roamer": 1,
+        "Flow State": 1,
+        "Forest": 8,
+        "Fractal Mascot": 2,
+        "Germination Practicum": 1,
+        "Hydro-Channeler": 1,
+        "Island": 7,
+        "Knockout Maneuver": 1,
+        "Muse Seeker": 1,
+        "Noxious Newt": 1,
+        "Orysa, Tide Choreographer": 1,
+        "Paradox Gardens": 1,
+        "Paradox Surveyor": 1,
+        "Proctor's Gaze": 1,
+        "Royal Treatment": 1,
+        "Sylvan Library": 1,
+        "Terramorphic Expanse": 1,
+        "Tester of the Tangential": 1,
+        "Vastlands Scavenger": 1
+      },
+      "scope": "Source observations only. No proposed engine outcome or full trajectory.",
+      "sequence_basis": "on_play plus distinct user/oppo local-turn prefixes; observations of both seats remain attached to the same turn-owner boundary.",
+      "source_row_index": 11,
+      "user_mulligans_raw": "0"
+    }
+  ],
+  "schema": "17lands-sos-source-observations-v1"
+}

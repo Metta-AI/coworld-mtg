@@ -1,0 +1,73 @@
+{
+  "ability_ids": [
+    "88024"
+  ],
+  "attribution": {
+    "credit": "Source data: 17Lands public datasets. Selection, projection and source interpretation by Coworld MTG. 17Lands does not endorse this work.",
+    "documentation_url": "https://www.17lands.com/public_datasets",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "modifications": "Three complete original rows selected with exact header/row bytes. First-local-turn CSV, source observations and ability-map subset are explicitly derived. Selected card-map rows retain exact original bytes.",
+    "provider": "17Lands"
+  },
+  "blank_handling": "All raw blanks retained. Missing/blank scalar observations are unknown, never implicitly zero. No blanket empty-list-to-complete-empty-state assumption is asserted.",
+  "created_at": "2026-09-08T23:56:38.297932+00:00",
+  "current_mapping_card_ids": 36,
+  "no_engine_execution": true,
+  "observed_opponent_deck": "No opponent-deck columns. Hidden opponent identities/library remain unknown; any witness setup must be explicitly hypothetical.",
+  "recipe_sha256": "90da610736a86e6ecef4d3fb1b32cdd7ea75315a2ef94aba544cd58f56727d8b",
+  "rows": [
+    {
+      "decompressed_byte_offset": 96729,
+      "fixture_row_index": 0,
+      "row_bytes": 7304,
+      "row_sha256": "477996899609c17325e255fdf9d890482239a12fa846d9e80b7d73f626ab0094",
+      "source_row_index": 2
+    },
+    {
+      "decompressed_byte_offset": 104033,
+      "fixture_row_index": 1,
+      "row_bytes": 7646,
+      "row_sha256": "18fce51d01327e1cab04084f9b6a316ab5609645d9405f2a4b1f7e9d7a6a7f4d",
+      "source_row_index": 3
+    },
+    {
+      "decompressed_byte_offset": 161432,
+      "fixture_row_index": 2,
+      "row_bytes": 5804,
+      "row_sha256": "506ea21d08681dd44d3d83334b28235571633d65594cea83c5c924a93c9e7858",
+      "source_row_index": 11
+    }
+  ],
+  "schema": "17lands-sos-fixture-selection-v1",
+  "scope": "Input/observation preparation only. No gameplay failure, compatibility witness, exhaustive incompatibility result or rules correctness verdict.",
+  "selection": {
+    "basis": "Known contradiction row11 plus earliest inspected zero-mulligan, no first-local-turn casts/abilities examples for both on_play values (rows2 and3). Selected using source observations before any new runtime outputs.",
+    "original_column_count": 2629,
+    "previously_inspected": true,
+    "projection_column_count": 425,
+    "source_row_indices": [
+      2,
+      3,
+      11
+    ],
+    "unseen_holdout": false
+  },
+  "source_ability_mapping": {
+    "sha256": "b6c5537da37261f3bd4674f60dce8aeb9e937486614b94c45aa9ea03311c7c21",
+    "url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/abilities.csv"
+  },
+  "source_archive": {
+    "binding": "Local archive bytes rehashed. Historical downloader and final fitting results retain URL/hash association; original HTTP retrieval timestamp/headers are unavailable here. No fresh archive download.",
+    "bytes": 331979824,
+    "sha256": "db2e760e872e931b3d58238fa4cebff6647e48d178341dc5d21e642546ed4d3e",
+    "source_url": "https://17lands-public.s3.amazonaws.com/analysis_data/replay_data/replay_data_public.SOS.PremierDraft.csv.gz"
+  },
+  "source_card_mapping": {
+    "bytes": 1704693,
+    "sha256": "cda7b580a951bcd8cbdf725275a5627e94c79b81c8cfc61e5244eac374ba2153",
+    "url": "https://17lands-public.s3.amazonaws.com/analysis_data/cards/cards.csv"
+  },
+  "source_outputs_unchanged": true,
+  "unresolved_card_ids": []
+}

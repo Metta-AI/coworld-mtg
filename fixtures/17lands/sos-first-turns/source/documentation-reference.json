@@ -1,0 +1,27 @@
+{
+  "helper_sha256": "10873b986ace94016c3ca336e74ae9295b41dd8a94fb27fdcd569f3b29e151a7",
+  "helper_source_facts": {
+    "OWNER_turn_N_ACTOR_abilities": "str",
+    "OWNER_turn_N_eot_oppo_cards_in_hand": "float16",
+    "OWNER_turn_N_eot_user_cards_in_hand": "str",
+    "num_mulligans": "int8",
+    "on_play": "bool",
+    "opening_hand": "str",
+    "opp_num_mulligans": "int8",
+    "user_turn_N_cards_drawn": "str"
+  },
+  "helper_url": "https://17lands-public.s3.amazonaws.com/analysis_data/helper_files/replay_dtypes.py",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "paraphrased_dataset_license_statement": "The public dataset page assigns CC BY 4.0 to datasets unless otherwise noted.",
+  "public_application_bundle_sha256": "2bd78b3c0b3a887fc5750ab815e300deeb2b49a3fdd4e953adfbab0d53dc7982",
+  "public_application_bundle_url": "https://www.17lands.com/static/Routes.d6002c066f6e98b97e49.bundle.js",
+  "public_datasets_url": "https://www.17lands.com/public_datasets",
+  "publication_limit": "The application JavaScript excerpts and Python helper source are omitted because this audit did not independently establish their software redistribution license. URLs, hashes and factual schema descriptions suffice; dataset attribution remains explicit.",
+  "retained_public_page_metadata": {
+    "bytes": 2192,
+    "retrieved_at": "2026-09-07T22:19:06.741422+00:00",
+    "sha256": "e25403f277da0a2b4f26ca457081b2f2d5fcc087b6698e1b4bce20900a63ec9f",
+    "source_url": "https://www.17lands.com/public_datasets"
+  },
+  "schema": "17lands-documentation-reference-v1"
+}

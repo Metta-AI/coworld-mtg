@@ -4,6 +4,11 @@ Magic: The Gathering as a [Coworld](https://github.com/metta-AI/coworld): a Rust
 behind the Coworld container contract so LLM agents can play MTG in local episodes, browser play, and hosted leagues
 with replays, scoring, and baseline players.
 
+The development goal is to improve that engine from recorded play: turn partial
+17Lands observations into executable compatibility checks, discover obstacles,
+and retain the evidence behind each repair. See the
+[recorded-game discovery plan](docs/17lands-discovery-plan.md).
+
 The original shared-tabletop prototype has been removed in favor of the
 pinned, Rust-native [Phase](https://github.com/phase-rs/phase)
 rules engine so that mana, casting, priority, the stack, combat, triggers,
@@ -35,28 +40,77 @@ Generated Rust and frontend output can consume many gigabytes. Preview guarded
 cleanup with `scripts/clean-generated.sh --all`; add `--execute` only after
 reviewing the resolved paths and sizes it prints.
 
-## Fidelity harness
+## Discovering issues from recorded games
 
-`coworld-mtg-harness` runs seeded games directly against `phase-bridge`, records
-exact actions, authoritative events, canonical state hashes, and RNG-preserving
-checkpoints, then replays every trace as a hard determinism gate. It also
-materializes hash-verified Phase/Scryfall/MTGJSON/17Lands artifacts, mines
-17Lands only into soft workload signals, resumes deterministic seed shards, and
-deduplicates findings into a scoreboard.
+We are building a loop that starts with actual 17Lands games and asks whether
+Phase can reproduce the recorded play. The data leaves out some actions and
+hidden state, so the harness must search for a legal trajectory compatible with
+the observations. Unsupported cards and failed fits become issue candidates for
+a separate diagnosis and fixing process.
+
+~~~mermaid
+flowchart TD
+  G[17Lands recorded game] --> I[Resolve card identities]
+  I --> C[Check known engine support gaps]
+  I --> O[Build ordered observation milestones]
+  C --> Q[Issue candidates with source evidence]
+  O --> S[Search for compatible Phase trajectories]
+  S --> W[Matched prefix or game with witness]
+  S --> Q
+  Q --> D[Separate diagnosis and fixing process]
+  D --> R[Regression, patch and reviewed evaluation]
+  R --> G
+~~~
+
+The observations supply the initial checks. We should not have to choose a card
+rule and write its expected result before discovering a problem. Diagnosis may
+then require card rules, rulings or additional experiments. An issue can belong
+to the engine, card definitions, data mapping, observation adapter or search.
+Running out of search budget creates an investigation candidate; it does not
+establish an engine bug.
+
+**[The active plan](docs/17lands-discovery-plan.md)** describes the typed
+boundaries, outcome meanings, implementation milestones and checks. The first
+milestone is to restore the older guided fitter on current source, repair its
+observation semantics, and run a bounded sample of actual games.
+
+## What works today and what is being built
+
+| Part | Current state |
+| --- | --- |
+| Seeded engine exploration and deterministic replay | Implemented: exact legal actions, events, state hashes, checkpoints and invariant checks. |
+| Public 17Lands ingestion | Implemented: official CSV normalization and card-ID mapping with source provenance. The accepted coverage run repaired this layer. |
+| Recorded-game trajectory fitting | Older prototype exists; integration and correction are in progress. Current main does not yet expose a guided fitting command. |
+| Regression cases and repair evaluation | Implemented typed case execution, checking, reduction and reviewed acceptance, orchestrated by agents. |
+| Factory replays and viewer | Implemented provenance and execution records. Existing 17Lands replay pages cover ingestion or parsing experiments, not complete game fitting. |
+
+A concrete fault in the older fitter illustrates the work ahead: it combined
+“opponent has seven cards after my first turn” and “opponent has six cards after
+their first turn” into requirements on one state. That game stopped earlier on
+unresolved card IDs; inspecting its extracted requirements exposed the
+contradiction. The old run therefore cannot tell us how difficult correctly
+specified fitting will be. The active plan also covers missing identity mappings, unnecessary mulligan search and
+retaining alternative paths across observations.
+
+Seeded exploration remains useful alongside recorded-game fitting. It checks
+properties such as deterministic replay and whether advertised actions execute
+successfully. Recorded games add external evidence about behavior that exploring
+only the engine's own offered actions can miss.
+
+## Harness and evidence tools
 
 See [the harness operations guide](docs/agent-improvement-harness-operations.md)
-for corpus, worker, replay, minimization, and aggregation commands.
+for corpus, worker, replay, minimization and aggregation commands.
+The [verifiable case loop](docs/verifiable-cases.md) describes typed scenarios and
+repair acceptance. The [software factory](docs/software-factory.md) describes
+the shared recording protocol and viewer; Rust types generate its JSON Schemas
+and architecture diagrams.
 
-The [verifiable case loop](docs/verifiable-cases.md) adds typed rule scenarios,
-separate execution and checking, guarded reduction, and frozen before/after
-acceptance with independent review. Rust types generate its JSON Schemas and
-architecture diagrams. The focused card cases run without the full private
-runtime corpus. The newer [software factory](docs/software-factory.md) discovers
-cases from real Scryfall snapshots and records executions, feedback, changes,
-reviews, and decisions as portable replay files. Its viewer follows the same
-typed events that the runner writes. The [article draft](docs/blog-verifiable-loop-draft.md) develops the real-data example. Earlier [case notes](cases/evidence/README.md)
-remain historical artifacts. The active workspace and preserved builds are on
-[EC2](docs/ec2-workspace.md).
+[Published replays](replays/README.md) retain sources, executions, feedback and
+changes so that improvements can be traced back to their originating cases.
+Earlier [case notes](cases/evidence/README.md) and article drafts describe
+individual experiments; use the active plan for the current direction.
+The active workspace and preserved builds are on [EC2](docs/ec2-workspace.md).
 
 ## Private runtime corpus
 
