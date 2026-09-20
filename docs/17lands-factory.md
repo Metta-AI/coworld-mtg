@@ -34,16 +34,28 @@ independent audit verifies that the changed constraint records contain reason
 annotation changes only. Combat observations remain unchecked.
 
 For a focused visual walkthrough, open
-`/client/case-flow.html?run=17lands-trajectories-20260909-01` on the same factory
-server. Play advances through source, observation extraction, the baseline
-attempt, issue, proposed change, rerun, retained traces and comparison. Every
-step links to original artifacts. The viewer checks the loaded artifact bytes
-against their recorded identities.
+\`/client/case-flow.html?run=17lands-trajectories-20260909-01\` on the same factory
+server. Six chapters put observed card states beside the engine's retained states,
+then explain the obstacle, recorder change and unchanged result. In chapter 3,
+use **Step through discard** to switch between the original before/after snapshots.
+Click a card for a larger image. Original fields, native actions and artifact
+links remain in each chapter's expandable evidence section.
 
-The DAG represents evidence dependencies. Detailed trace nodes belong to the
-candidate rerun; the baseline did not retain those snapshots. It shows the
-retained prefix and one diagnostic branch, not all explored search states.
-Unknown intermediate states and unassigned boundary values remain absent.
+Observed opponent hands show only the recorded count. Named cards in the engine
+hand belong to its reconstructed setup. The matched first-turn comparison uses
+the state before transition 10; the later endpoint has already advanced to
+upkeep. The discard demonstration uses the two retained snapshots of action 21,
+without inventing intermediate states or a next-turn draw.
+
+Card art is external Scryfall reference imagery, selected by exact card name.
+The small metadata file records those choices; it does not claim the original
+printing or make the imagery part of the verification evidence. Image failures
+leave named cards and the underlying state usable. The page verifies the loaded
+evidence artifacts against their recorded identities.
+
+The compact evidence map is a reading guide. Detailed trace nodes belong to the
+candidate rerun; the baseline did not retain those snapshots. It shows selected
+retained evidence, not all explored search states.
 
 ## Run the pipeline
 

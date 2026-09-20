@@ -3,71 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f3ec">
-  <title>One game through the factory</title>
-  <link rel="stylesheet" href="./case-flow.css">
-  <script type="module" src="./case-flow.js"></script>
+  <meta name="theme-color" content="#f5f3ed">
+  <title>Why this game stopped matching · Coworld</title>
+  <link rel="stylesheet" href="./case-flow.css?v=20260919">
+  <script type="module" src="./case-flow.js?v=20260919"></script>
 </head>
 <body>
-  <a class="skip-link" href="#detail">Skip to step details</a>
+  <a class="skip-link" href="#detail">Skip to the game</a>
   <header class="page-header">
-    <div class="identity"><span class="identity-mark" aria-hidden="true"></span> COWORLD <span class="identity-divider">/</span> A CASE IN MOTION</div>
+    <a class="identity" href="./factory.html" aria-label="Coworld replay viewer"><span class="identity-mark" aria-hidden="true"></span> COWORLD <span class="identity-divider">/</span><span class="identity-context">ONE GAME, THROUGH THE SYSTEM</span></a>
     <a id="full-replay" class="replay-link" href="./factory.html">Open full replay <span aria-hidden="true">↗</span></a>
   </header>
 
-  <main>
+  <main class="page">
     <div class="intro">
-      <div>
-        <p class="eyebrow">FROM OBSERVATION TO EVIDENCE</p>
-        <h1 id="title">One game through the factory</h1>
-        <p id="subtitle" class="subtitle">Guided playback of recorded evidence, not live engine computation.</p>
+      <div class="intro-copy">
+        <p class="eyebrow">A REAL GAME THROUGH THE IMPROVEMENT LOOP</p>
+        <h1 id="title">Why this game stopped matching</h1>
+        <p id="subtitle" class="subtitle">See what 17Lands recorded, what the engine tried, and what changed afterward.</p>
       </div>
       <div id="status" class="status" role="status">Loading recorded case…</div>
     </div>
 
     <div id="error" class="error" role="alert" hidden></div>
 
-    <section class="walkthrough" aria-label="Walkthrough controls">
-      <div class="transport">
-        <button id="play" class="primary" type="button">Play walkthrough</button>
-        <button id="previous" type="button" aria-label="Previous step">Previous</button>
-        <button id="next" type="button" aria-label="Next step">Next</button>
-        <button id="restart" class="quiet" type="button">Restart</button>
-      </div>
-      <div class="scrubber">
-        <label id="step-label" for="progress">Step 1 of 9</label>
-        <input id="progress" type="range" min="0" max="8" value="0" step="1" aria-label="Walkthrough step">
-      </div>
-    </section>
-
     <div class="workspace">
-      <section class="graph-panel" aria-label="Case evidence diagram">
-        <div class="panel-heading">
-          <h2>The evidence path</h2>
-          <div class="legend" aria-label="Diagram key">
-            <span><i class="legend-current"></i> Selected step</span>
-            <span><i class="legend-evidence"></i> Recorded evidence</span>
+      <aside class="guide" aria-label="Walk through this case">
+        <div class="guide-heading"><span class="eyebrow">FOLLOW THE CASE</span><span class="guide-count">6 chapters</span></div>
+        <nav id="outline" class="outline" aria-label="Choose a walkthrough chapter"></nav>
+
+        <section class="walkthrough" aria-label="Walkthrough controls">
+          <div class="scrubber">
+            <label id="step-label" for="progress">Chapter 1 of 6</label>
+            <input id="progress" type="range" min="0" max="5" value="0" step="1" aria-label="Walkthrough chapter">
           </div>
-        </div>
-        <figure>
-          <div class="graph-scroll" tabindex="0" role="region" aria-label="Evidence diagram; scroll horizontally on narrow screens">
-            <svg id="graph" viewBox="0 0 1120 700" role="img" aria-label="The source, search, evidence, change and comparison for one recorded case">
+          <div class="transport">
+            <button id="play" class="primary" type="button">Play walkthrough</button>
+            <button id="previous" type="button" aria-label="Previous chapter">Previous</button>
+            <button id="next" type="button" aria-label="Next chapter">Next</button>
+            <button id="restart" class="quiet" type="button">Start over</button>
+          </div>
+        </section>
+
+        <details class="graph-disclosure">
+          <summary>How the evidence connects</summary>
+          <figure>
+            <svg id="graph" viewBox="0 0 260 580" role="img" aria-label="The source, search, obstacle, change and comparison for this case">
               <title>A single case through the improvement loop</title>
               <desc>Loading the recorded steps.</desc>
             </svg>
-          </div>
-          <figcaption id="graph-caption">Arrows show how evidence and changes are connected. This is a recorded evidence path, not the engine’s complete search tree.</figcaption>
-        </figure>
-        <nav id="outline" class="outline" aria-label="Choose a walkthrough step"></nav>
-      </section>
+            <figcaption id="graph-caption">Arrows connect retained evidence. This is not the engine’s complete search tree.</figcaption>
+          </figure>
+        </details>
+        <p class="guide-note">A walkthrough of recorded results. Playing it does not run a new search.</p>
+      </aside>
 
-      <section id="detail" class="detail-panel" aria-label="Selected step details" tabindex="-1" aria-live="polite" aria-atomic="true">
-        <p class="eyebrow">READING THE RECORD</p>
-        <h2>Loading the case</h2>
-        <p>The diagram will connect the source observation, the engine’s attempt, and the evidence retained for a change.</p>
+      <section id="detail" class="detail-panel scene" aria-label="Selected chapter" tabindex="-1" aria-live="polite" aria-atomic="true">
+        <span class="chapter-tag">THE RECORDED CASE</span>
+        <h2 class="stage-heading">Opening the game</h2>
+        <p class="stage-deck">Loading the source observations and the engine’s retained attempt.</p>
       </section>
     </div>
-    <p class="page-note">Explore the steps in order, or select any node to inspect its recorded evidence.</p>
+    <footer class="page-note">Representative card images via <a href="https://scryfall.com" target="_blank" rel="noopener">Scryfall</a>. Card art and text © Wizards of the Coast. Click a card to inspect it; the original records remain linked in each step.</footer>
   </main>
+
+  <dialog id="card-dialog" class="card-dialog" aria-label="Card details">
+    <div class="dialog-toolbar"><span class="eyebrow">CARD REFERENCE</span><button id="card-dialog-close" type="button" class="quiet" aria-label="Close card details">Close</button></div>
+    <div id="card-dialog-content"></div>
+  </dialog>
 </body>
 </html>

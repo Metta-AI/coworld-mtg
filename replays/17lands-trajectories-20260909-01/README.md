@@ -22,9 +22,12 @@ A focused visual DAG for source row 8 is available on that same server:
 
     /client/case-flow.html?run=17lands-trajectories-20260909-01
 
-Use Play to walk through the evidence dependencies, or select any node. The
-detailed trace comes from the candidate rerun; playback does not re-execute the
-engine or reconstruct missing search states.
+Use the six chapter links or Play to follow the case. Card visuals distinguish
+the observed game from the engine's hypothetical setup. Chapter 3 lets you step
+through the retained Forest discard, from eight cards in hand to seven plus one
+in the graveyard. Click a card to inspect it; expand the evidence section for
+the original fields and actions. Detailed states come from the candidate rerun.
+Playback does not re-execute the engine or reconstruct missing search states.
 
 Select source row 8 for the boundary obstacle, row 1 for a partial match, row 0
 for unsupported mulligan reconstruction, or row 6 for a worker deadline. Choose

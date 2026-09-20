@@ -12,7 +12,7 @@
     "build:phase": "PHASE_CLIENT_SKIP_TESTS=1 bash scripts/build-phase-client.sh",
     "typecheck": "tsc --noEmit -p web/tsconfig.json",
     "test": "npm run test:legacy && npm run test:phase",
-    "test:legacy": "vitest run --config web/vite.config.ts",
+    "test:legacy": "vitest run --config web/vite.config.ts && node --test web/tests/case-flow-model.test.mjs",
     "test:phase": "PHASE_CLIENT_TEST_ONLY=1 bash scripts/build-phase-client.sh",
     "test:e2e": "npm run build && playwright test -c web/playwright.config.ts"
   },

@@ -1,0 +1,2231 @@
+{
+  "schema": "coworld/case-clarity-evidence-audit@1",
+  "run_id": "17lands-trajectories-20260909-01",
+  "source_row_index": 8,
+  "artifact_ids": {
+    "case": "f12030d17b48417daf662d7754781c793580d37543a987ec50dcf813c44bfa6c",
+    "result": "a6f670f523a10b2e367e70da07e52cce41b30526483ef617c25922f7967afd56",
+    "constraints": "5d888c8aac7b719ad6ef73edbd9c8f423512170a92252ef6bcd0df08767760fe"
+  },
+  "artifact_byte_sha256": {
+    "case": "f12030d17b48417daf662d7754781c793580d37543a987ec50dcf813c44bfa6c",
+    "result": "a6f670f523a10b2e367e70da07e52cce41b30526483ef617c25922f7967afd56",
+    "constraints": "5d888c8aac7b719ad6ef73edbd9c8f423512170a92252ef6bcd0df08767760fe"
+  },
+  "observations": [
+    {
+      "kind": "source_observation",
+      "turn_owner": 0,
+      "local_turn": 1,
+      "players": [
+        {
+          "seat": 0,
+          "known": {
+            "hand": {
+              "value": [
+                "Ancestral Anger",
+                "Plains",
+                "Deflecting Palm",
+                "Owlin Historian",
+                "Mountain",
+                "Colossus of the Blood Age"
+              ],
+              "source_column": "user_turn_1_eot_user_cards_in_hand",
+              "raw": "102565|102732|102815|102483|102738|102640"
+            },
+            "lands": {
+              "value": [
+                "Sundown Pass"
+              ],
+              "source_column": "user_turn_1_eot_user_lands_in_play",
+              "raw": "102723"
+            },
+            "life": {
+              "value": 20,
+              "source_column": "user_turn_1_eot_user_life",
+              "raw": "20.0"
+            }
+          },
+          "unknown": [
+            {
+              "source_column": "user_turn_1_eot_user_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "source_column": "user_turn_1_eot_user_non_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "field": "tap_status",
+              "reason": "No tap-state projection in retained source constraints."
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "known": {
+            "hand_count": {
+              "value": 7,
+              "source_column": "user_turn_1_eot_oppo_cards_in_hand",
+              "raw": "7.0"
+            },
+            "life": {
+              "value": 20,
+              "source_column": "user_turn_1_eot_oppo_life",
+              "raw": "20.0"
+            }
+          },
+          "unknown": [
+            {
+              "source_column": "user_turn_1_eot_oppo_lands_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "source_column": "user_turn_1_eot_oppo_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "source_column": "user_turn_1_eot_oppo_non_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "field": "tap_status",
+              "reason": "No tap-state projection in retained source constraints."
+            }
+          ]
+        }
+      ],
+      "turn_events": {
+        "land_played": {
+          "value": [
+            "Sundown Pass"
+          ],
+          "source_column": "user_turn_1_lands_played",
+          "raw": "102723"
+        }
+      },
+      "unsupported": [
+        {
+          "column": "user_turn_1_oppo_combat_damage_taken",
+          "raw": "0",
+          "milestone": {
+            "turn_owner": 0,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 1
+          },
+          "disposition": "unsupported",
+          "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "user_turn_1_oppo_mana_spent",
+          "raw": "0.0",
+          "milestone": {
+            "turn_owner": 0,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 1
+          },
+          "disposition": "unsupported",
+          "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "user_turn_1_user_combat_damage_taken",
+          "raw": "0",
+          "milestone": {
+            "turn_owner": 0,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 0
+          },
+          "disposition": "unsupported",
+          "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "user_turn_1_user_mana_spent",
+          "raw": "0.0",
+          "milestone": {
+            "turn_owner": 0,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 0
+          },
+          "disposition": "unsupported",
+          "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+          "projection": null,
+          "expected": null
+        }
+      ]
+    },
+    {
+      "kind": "source_observation",
+      "turn_owner": 1,
+      "local_turn": 1,
+      "players": [
+        {
+          "seat": 0,
+          "known": {
+            "hand": {
+              "value": [
+                "Ancestral Anger",
+                "Plains",
+                "Deflecting Palm",
+                "Owlin Historian",
+                "Mountain",
+                "Colossus of the Blood Age"
+              ],
+              "source_column": "oppo_turn_1_eot_user_cards_in_hand",
+              "raw": "102565|102732|102815|102483|102738|102640"
+            },
+            "lands": {
+              "value": [
+                "Sundown Pass"
+              ],
+              "source_column": "oppo_turn_1_eot_user_lands_in_play",
+              "raw": "102723"
+            },
+            "life": {
+              "value": 20,
+              "source_column": "oppo_turn_1_eot_user_life",
+              "raw": "20.0"
+            }
+          },
+          "unknown": [
+            {
+              "source_column": "oppo_turn_1_eot_user_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "source_column": "oppo_turn_1_eot_user_non_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "field": "tap_status",
+              "reason": "No tap-state projection in retained source constraints."
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "known": {
+            "hand_count": {
+              "value": 7,
+              "source_column": "oppo_turn_1_eot_oppo_cards_in_hand",
+              "raw": "7.0"
+            },
+            "lands": {
+              "value": [
+                "Island"
+              ],
+              "source_column": "oppo_turn_1_eot_oppo_lands_in_play",
+              "raw": "82391"
+            },
+            "life": {
+              "value": 20,
+              "source_column": "oppo_turn_1_eot_oppo_life",
+              "raw": "20.0"
+            }
+          },
+          "unknown": [
+            {
+              "source_column": "oppo_turn_1_eot_oppo_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "source_column": "oppo_turn_1_eot_oppo_non_creatures_in_play",
+              "raw": "",
+              "reason": "blank cell retained as unknown; no zero/empty constraint inferred"
+            },
+            {
+              "field": "tap_status",
+              "reason": "No tap-state projection in retained source constraints."
+            }
+          ]
+        }
+      ],
+      "turn_events": {
+        "drawn_or_tutored_count": {
+          "value": 1,
+          "source_column": "oppo_turn_1_cards_drawn_or_tutored",
+          "raw": "1"
+        },
+        "land_played": {
+          "value": [
+            "Terramorphic Expanse"
+          ],
+          "source_column": "oppo_turn_1_lands_played",
+          "raw": "102724"
+        }
+      },
+      "unsupported": [
+        {
+          "column": "oppo_turn_1_oppo_abilities",
+          "raw": "88024",
+          "milestone": {
+            "turn_owner": 1,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 1
+          },
+          "disposition": "unsupported",
+          "reason": "recorded ability IDs require a separate runtime ability binding; they are not card IDs",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "oppo_turn_1_oppo_combat_damage_taken",
+          "raw": "0",
+          "milestone": {
+            "turn_owner": 1,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 1
+          },
+          "disposition": "unsupported",
+          "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "oppo_turn_1_oppo_mana_spent",
+          "raw": "0.0",
+          "milestone": {
+            "turn_owner": 1,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 1
+          },
+          "disposition": "unsupported",
+          "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "oppo_turn_1_user_combat_damage_taken",
+          "raw": "0",
+          "milestone": {
+            "turn_owner": 1,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 0
+          },
+          "disposition": "unsupported",
+          "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+          "projection": null,
+          "expected": null
+        },
+        {
+          "column": "oppo_turn_1_user_mana_spent",
+          "raw": "0.0",
+          "milestone": {
+            "turn_owner": 1,
+            "turn_index": 1,
+            "boundary": "end_of_turn",
+            "observed_player": 0
+          },
+          "disposition": "unsupported",
+          "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+          "projection": null,
+          "expected": null
+        }
+      ]
+    }
+  ],
+  "recorded_setup": {
+    "on_play": true,
+    "mulligans": [
+      0,
+      0
+    ],
+    "assumptions": [
+      "Official Arena IDs resolve to names in a pinned mapping; runtime matching is a name projection, not proof of unique token/face characteristics. One reconstructed hidden state: recorded user deck/opening multiset, chosen opening order and listed draw-prefix order, deterministic remaining library; no search over all shuffles.",
+      "Hypothetical opponent: maximum observed name multiplicities plus Plains to forty cards, in deterministic order; neither opponent deck nor opening hand is source-confirmed.",
+      "EOT fields project the last stable end-step state before a projection-neutral cleanup/turn transition; transitions with other pre-TurnStarted events are unsupported.",
+      "Runtime preflight checks names and setup only; it does not inventory every unsupported or unimplemented card effect. Blank cells are unknown. Nonblank card lists are multiset constraints; no global action order, targets, priority decisions, or hidden information is reconstructed as fact."
+    ],
+    "user_opening_hand_source": {
+      "column": "opening_hand",
+      "raw": "102483|102815|102732|102565|102723|102640|102738",
+      "milestone": null,
+      "disposition": "enforced",
+      "reason": "supplied through production opening draw, exact multiset checked",
+      "projection": "opening_hand_multiset",
+      "expected": [
+        "Owlin Historian",
+        "Deflecting Palm",
+        "Plains",
+        "Ancestral Anger",
+        "Sundown Pass",
+        "Colossus of the Blood Age",
+        "Mountain"
+      ]
+    }
+  },
+  "native_initial_state": {
+    "turn_owner": 0,
+    "turn_number": 1,
+    "phase": "Untap",
+    "players": [
+      {
+        "seat": 0,
+        "life": 20,
+        "hand": [
+          {
+            "object_id": 1,
+            "name": "Ancestral Anger"
+          },
+          {
+            "object_id": 3,
+            "name": "Colossus of the Blood Age"
+          },
+          {
+            "object_id": 5,
+            "name": "Deflecting Palm"
+          },
+          {
+            "object_id": 18,
+            "name": "Mountain"
+          },
+          {
+            "object_id": 22,
+            "name": "Owlin Historian"
+          },
+          {
+            "object_id": 26,
+            "name": "Plains"
+          },
+          {
+            "object_id": 39,
+            "name": "Sundown Pass"
+          }
+        ],
+        "library_count": 34,
+        "graveyard_count": 0,
+        "battlefield": []
+      },
+      {
+        "seat": 1,
+        "life": 20,
+        "hand": [
+          {
+            "object_id": 42,
+            "name": "Forest"
+          },
+          {
+            "object_id": 43,
+            "name": "Island"
+          },
+          {
+            "object_id": 44,
+            "name": "Terramorphic Expanse"
+          },
+          {
+            "object_id": 50,
+            "name": "Plains"
+          },
+          {
+            "object_id": 65,
+            "name": "Plains"
+          },
+          {
+            "object_id": 72,
+            "name": "Plains"
+          },
+          {
+            "object_id": 81,
+            "name": "Plains"
+          }
+        ],
+        "library_count": 33,
+        "graveyard_count": 0,
+        "battlefield": []
+      }
+    ],
+    "stack_count": 0
+  },
+  "native_land_play": {
+    "index": 4,
+    "seat": 0,
+    "action": {
+      "type": "PlayLand",
+      "data": {
+        "object_id": 39,
+        "card_id": 39
+      }
+    },
+    "before": {
+      "turn_owner": 0,
+      "turn_number": 1,
+      "phase": "PreCombatMain",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            },
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": []
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 42,
+              "name": "Forest"
+            },
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 33,
+          "graveyard_count": 0,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "after": {
+      "turn_owner": 0,
+      "turn_number": 1,
+      "phase": "PreCombatMain",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": [
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 42,
+              "name": "Forest"
+            },
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 33,
+          "graveyard_count": 0,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "events": [
+      {
+        "type": "ReplacementApplied",
+        "data": {
+          "source_id": 39,
+          "event_type": "Moved"
+        }
+      },
+      {
+        "type": "ZoneChanged",
+        "data": {
+          "object_id": 39,
+          "from": "Hand",
+          "to": "Battlefield",
+          "record": {
+            "object_id": 39,
+            "name": "Sundown Pass",
+            "core_types": [
+              "Land"
+            ],
+            "subtypes": [],
+            "supertypes": [],
+            "keywords": [],
+            "power": null,
+            "toughness": null,
+            "base_power": null,
+            "base_toughness": null,
+            "colors": [],
+            "mana_value": 0,
+            "controller": 0,
+            "owner": 0,
+            "from_zone": "Hand",
+            "cast_from_zone": null,
+            "played_from_zone": null,
+            "to_zone": "Battlefield",
+            "attachments": [],
+            "linked_exile_snapshot": [],
+            "is_token": false,
+            "combat_status": {
+              "attacking": false,
+              "blocking": false,
+              "blocked": false,
+              "attacking_alone": false,
+              "blocking_alone": false,
+              "defending_player": null
+            },
+            "co_departed": [],
+            "entered_incarnation": 2,
+            "attached_to": null,
+            "turn_zone_change_index": 14,
+            "is_suspected": false
+          }
+        }
+      },
+      {
+        "type": "LandPlayed",
+        "data": {
+          "object_id": 39,
+          "player_id": 0,
+          "from_zone": "Hand"
+        }
+      }
+    ]
+  },
+  "native_first_end_of_turn_transition": {
+    "index": 10,
+    "seat": 1,
+    "action": {
+      "type": "PassPriority"
+    },
+    "before": {
+      "turn_owner": 0,
+      "turn_number": 1,
+      "phase": "End",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": [
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 42,
+              "name": "Forest"
+            },
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 33,
+          "graveyard_count": 0,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "after": {
+      "turn_owner": 1,
+      "turn_number": 2,
+      "phase": "Upkeep",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": [
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 42,
+              "name": "Forest"
+            },
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 33,
+          "graveyard_count": 0,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "events": [
+      {
+        "type": "PhaseChanged",
+        "data": {
+          "phase": "Cleanup"
+        }
+      },
+      {
+        "type": "TurnStarted",
+        "data": {
+          "player_id": 1,
+          "turn_number": 2
+        }
+      },
+      {
+        "type": "PhaseChanged",
+        "data": {
+          "phase": "Untap"
+        }
+      },
+      {
+        "type": "PhaseChanged",
+        "data": {
+          "phase": "Upkeep"
+        }
+      }
+    ]
+  },
+  "matched_source_fields": [
+    {
+      "key": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 0
+      },
+      "transition_index": 10,
+      "state_position": "before_transition",
+      "fields": [
+        {
+          "source_field_id": "user_turn_1_cards_discarded",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_cards_drawn",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_cards_tutored",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_creatures_attacked",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_creatures_blocked",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_creatures_blocking",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_creatures_cast",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_creatures_unblocked",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_user_cards_in_hand",
+          "raw": "102565|102732|102815|102483|102738|102640",
+          "disposition": "enforced",
+          "reason": "exact declared projection; card lists compared as multisets, not action order",
+          "projection": "hand",
+          "expected": [
+            "Ancestral Anger",
+            "Plains",
+            "Deflecting Palm",
+            "Owlin Historian",
+            "Mountain",
+            "Colossus of the Blood Age"
+          ],
+          "actual": [
+            "Owlin Historian",
+            "Deflecting Palm",
+            "Plains",
+            "Ancestral Anger",
+            "Colossus of the Blood Age",
+            "Mountain"
+          ],
+          "comparison": "matched",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_user_creatures_in_play",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_user_lands_in_play",
+          "raw": "102723",
+          "disposition": "enforced",
+          "reason": "exact declared projection; card lists compared as multisets, not action order",
+          "projection": "lands",
+          "expected": [
+            "Sundown Pass"
+          ],
+          "actual": [
+            "Sundown Pass"
+          ],
+          "comparison": "matched",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_user_life",
+          "raw": "20.0",
+          "disposition": "enforced",
+          "reason": "exact declared projection; card lists compared as multisets, not action order",
+          "projection": "life",
+          "expected": 20,
+          "actual": 20,
+          "comparison": "matched",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_user_non_creatures_in_play",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_lands_played",
+          "raw": "102723",
+          "disposition": "enforced",
+          "reason": "exact declared projection; card lists compared as multisets, not action order",
+          "projection": "land_played",
+          "expected": [
+            "Sundown Pass"
+          ],
+          "actual": [
+            "Sundown Pass"
+          ],
+          "comparison": "matched",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_non_creatures_cast",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_user_abilities",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_user_combat_damage_taken",
+          "raw": "0",
+          "disposition": "unsupported",
+          "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unsupported",
+          "diagnostic": {
+            "metric": "native_combat_damage_received",
+            "value": 0,
+            "limitation": "Sum of actual native combat DamageDealt events to this player during the complete turn interval. Source combat_damage_taken aggregation is unverified and includes negative recorded values; this diagnostic is not compared to the source and does not increase supported coverage."
+          }
+        },
+        {
+          "source_field_id": "user_turn_1_user_creatures_killed_combat",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_user_creatures_killed_non_combat",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_user_instants_sorceries_cast",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_user_mana_spent",
+          "raw": "0.0",
+          "disposition": "unsupported",
+          "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unsupported",
+          "diagnostic": null
+        }
+      ]
+    },
+    {
+      "key": {
+        "turn_owner": 0,
+        "turn_index": 1,
+        "boundary": "end_of_turn",
+        "observed_player": 1
+      },
+      "transition_index": 10,
+      "state_position": "before_transition",
+      "fields": [
+        {
+          "source_field_id": "user_turn_1_eot_oppo_cards_in_hand",
+          "raw": "7.0",
+          "disposition": "enforced",
+          "reason": "exact declared projection; card lists compared as multisets, not action order",
+          "projection": "hand_count",
+          "expected": 7,
+          "actual": 7,
+          "comparison": "matched",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_oppo_creatures_in_play",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_oppo_lands_in_play",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_oppo_life",
+          "raw": "20.0",
+          "disposition": "enforced",
+          "reason": "exact declared projection; card lists compared as multisets, not action order",
+          "projection": "life",
+          "expected": 20,
+          "actual": 20,
+          "comparison": "matched",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_eot_oppo_non_creatures_in_play",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_oppo_abilities",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_oppo_combat_damage_taken",
+          "raw": "0",
+          "disposition": "unsupported",
+          "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unsupported",
+          "diagnostic": {
+            "metric": "native_combat_damage_received",
+            "value": 0,
+            "limitation": "Sum of actual native combat DamageDealt events to this player during the complete turn interval. Source combat_damage_taken aggregation is unverified and includes negative recorded values; this diagnostic is not compared to the source and does not increase supported coverage."
+          }
+        },
+        {
+          "source_field_id": "user_turn_1_oppo_creatures_killed_combat",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_oppo_creatures_killed_non_combat",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_oppo_instants_sorceries_cast",
+          "raw": "",
+          "disposition": "informational",
+          "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unknown",
+          "diagnostic": null
+        },
+        {
+          "source_field_id": "user_turn_1_oppo_mana_spent",
+          "raw": "0.0",
+          "disposition": "unsupported",
+          "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+          "projection": null,
+          "expected": null,
+          "actual": null,
+          "comparison": "unsupported",
+          "diagnostic": null
+        }
+      ]
+    }
+  ],
+  "separate_failure": {
+    "path_kind": "separate_search_branch",
+    "kind": "unsupported_boundary",
+    "detail": "The selected EOT projection requires a last stable End state followed by exactly one TurnStarted and only neutral PriorityPassed/PhaseChanged events before it. This branch had phase Cleanup, 1 TurnStarted event(s), and preceding event kinds [\"ZoneChanged\", \"Discarded\"]; no boundary field actuals are claimed.",
+    "actions_before": [
+      {
+        "seat": 0,
+        "action": {
+          "type": "MulliganDecision",
+          "data": {
+            "choice": {
+              "type": "Keep"
+            }
+          }
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "MulliganDecision",
+          "data": {
+            "choice": {
+              "type": "Keep"
+            }
+          }
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PlayLand",
+          "data": {
+            "object_id": 39,
+            "card_id": 39
+          }
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 1,
+        "action": {
+          "type": "PassPriority"
+        }
+      },
+      {
+        "seat": 0,
+        "action": {
+          "type": "PassPriority"
+        }
+      }
+    ],
+    "attempted_action": {
+      "seat": 1,
+      "action": {
+        "type": "SelectCards",
+        "data": {
+          "cards": [
+            42
+          ]
+        }
+      }
+    },
+    "attempt": {
+      "index": 21,
+      "seat": 1,
+      "action": {
+        "type": "SelectCards",
+        "data": {
+          "cards": [
+            42
+          ]
+        }
+      },
+      "before": {
+        "turn_owner": 1,
+        "turn_number": 2,
+        "phase": "Cleanup",
+        "players": [
+          {
+            "seat": 0,
+            "life": 20,
+            "hand": [
+              {
+                "object_id": 1,
+                "name": "Ancestral Anger"
+              },
+              {
+                "object_id": 3,
+                "name": "Colossus of the Blood Age"
+              },
+              {
+                "object_id": 5,
+                "name": "Deflecting Palm"
+              },
+              {
+                "object_id": 18,
+                "name": "Mountain"
+              },
+              {
+                "object_id": 22,
+                "name": "Owlin Historian"
+              },
+              {
+                "object_id": 26,
+                "name": "Plains"
+              }
+            ],
+            "library_count": 34,
+            "graveyard_count": 0,
+            "battlefield": [
+              {
+                "object_id": 39,
+                "name": "Sundown Pass"
+              }
+            ]
+          },
+          {
+            "seat": 1,
+            "life": 20,
+            "hand": [
+              {
+                "object_id": 42,
+                "name": "Forest"
+              },
+              {
+                "object_id": 43,
+                "name": "Island"
+              },
+              {
+                "object_id": 44,
+                "name": "Terramorphic Expanse"
+              },
+              {
+                "object_id": 50,
+                "name": "Plains"
+              },
+              {
+                "object_id": 65,
+                "name": "Plains"
+              },
+              {
+                "object_id": 72,
+                "name": "Plains"
+              },
+              {
+                "object_id": 73,
+                "name": "Plains"
+              },
+              {
+                "object_id": 81,
+                "name": "Plains"
+              }
+            ],
+            "library_count": 32,
+            "graveyard_count": 0,
+            "battlefield": []
+          }
+        ],
+        "stack_count": 0
+      },
+      "after": {
+        "turn_owner": 0,
+        "turn_number": 3,
+        "phase": "Upkeep",
+        "players": [
+          {
+            "seat": 0,
+            "life": 20,
+            "hand": [
+              {
+                "object_id": 1,
+                "name": "Ancestral Anger"
+              },
+              {
+                "object_id": 3,
+                "name": "Colossus of the Blood Age"
+              },
+              {
+                "object_id": 5,
+                "name": "Deflecting Palm"
+              },
+              {
+                "object_id": 18,
+                "name": "Mountain"
+              },
+              {
+                "object_id": 22,
+                "name": "Owlin Historian"
+              },
+              {
+                "object_id": 26,
+                "name": "Plains"
+              }
+            ],
+            "library_count": 34,
+            "graveyard_count": 0,
+            "battlefield": [
+              {
+                "object_id": 39,
+                "name": "Sundown Pass"
+              }
+            ]
+          },
+          {
+            "seat": 1,
+            "life": 20,
+            "hand": [
+              {
+                "object_id": 43,
+                "name": "Island"
+              },
+              {
+                "object_id": 44,
+                "name": "Terramorphic Expanse"
+              },
+              {
+                "object_id": 50,
+                "name": "Plains"
+              },
+              {
+                "object_id": 65,
+                "name": "Plains"
+              },
+              {
+                "object_id": 72,
+                "name": "Plains"
+              },
+              {
+                "object_id": 73,
+                "name": "Plains"
+              },
+              {
+                "object_id": 81,
+                "name": "Plains"
+              }
+            ],
+            "library_count": 32,
+            "graveyard_count": 1,
+            "battlefield": []
+          }
+        ],
+        "stack_count": 0
+      },
+      "events": [
+        {
+          "type": "ZoneChanged",
+          "data": {
+            "object_id": 42,
+            "from": "Hand",
+            "to": "Graveyard",
+            "record": {
+              "object_id": 42,
+              "name": "Forest",
+              "core_types": [
+                "Land"
+              ],
+              "subtypes": [
+                "Forest"
+              ],
+              "supertypes": [
+                "Basic"
+              ],
+              "keywords": [],
+              "power": null,
+              "toughness": null,
+              "base_power": null,
+              "base_toughness": null,
+              "colors": [],
+              "mana_value": 0,
+              "controller": 1,
+              "owner": 1,
+              "from_zone": "Hand",
+              "cast_from_zone": null,
+              "played_from_zone": null,
+              "to_zone": "Graveyard",
+              "attachments": [],
+              "linked_exile_snapshot": [],
+              "is_token": false,
+              "combat_status": {
+                "attacking": false,
+                "blocking": false,
+                "blocked": false,
+                "attacking_alone": false,
+                "blocking_alone": false,
+                "defending_player": null
+              },
+              "co_departed": [],
+              "entered_incarnation": null,
+              "attached_to": null,
+              "turn_zone_change_index": 1,
+              "is_suspected": false
+            }
+          }
+        },
+        {
+          "type": "Discarded",
+          "data": {
+            "player_id": 1,
+            "object_id": 42
+          }
+        },
+        {
+          "type": "TurnStarted",
+          "data": {
+            "player_id": 0,
+            "turn_number": 3
+          }
+        },
+        {
+          "type": "PhaseChanged",
+          "data": {
+            "phase": "Untap"
+          }
+        },
+        {
+          "type": "PermanentUntapped",
+          "data": {
+            "object_id": 39
+          }
+        },
+        {
+          "type": "PhaseChanged",
+          "data": {
+            "phase": "Upkeep"
+          }
+        }
+      ]
+    },
+    "state": {
+      "turn_owner": 1,
+      "turn_number": 2,
+      "phase": "Cleanup",
+      "players": [
+        {
+          "seat": 0,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 1,
+              "name": "Ancestral Anger"
+            },
+            {
+              "object_id": 3,
+              "name": "Colossus of the Blood Age"
+            },
+            {
+              "object_id": 5,
+              "name": "Deflecting Palm"
+            },
+            {
+              "object_id": 18,
+              "name": "Mountain"
+            },
+            {
+              "object_id": 22,
+              "name": "Owlin Historian"
+            },
+            {
+              "object_id": 26,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 34,
+          "graveyard_count": 0,
+          "battlefield": [
+            {
+              "object_id": 39,
+              "name": "Sundown Pass"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "life": 20,
+          "hand": [
+            {
+              "object_id": 42,
+              "name": "Forest"
+            },
+            {
+              "object_id": 43,
+              "name": "Island"
+            },
+            {
+              "object_id": 44,
+              "name": "Terramorphic Expanse"
+            },
+            {
+              "object_id": 50,
+              "name": "Plains"
+            },
+            {
+              "object_id": 65,
+              "name": "Plains"
+            },
+            {
+              "object_id": 72,
+              "name": "Plains"
+            },
+            {
+              "object_id": 73,
+              "name": "Plains"
+            },
+            {
+              "object_id": 81,
+              "name": "Plains"
+            }
+          ],
+          "library_count": 32,
+          "graveyard_count": 0,
+          "battlefield": []
+        }
+      ],
+      "stack_count": 0
+    },
+    "milestones": [
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 0
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "oppo_turn_1_eot_user_cards_in_hand",
+            "raw": "102565|102732|102815|102483|102738|102640",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand",
+            "expected": [
+              "Ancestral Anger",
+              "Plains",
+              "Deflecting Palm",
+              "Owlin Historian",
+              "Mountain",
+              "Colossus of the Blood Age"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_lands_in_play",
+            "raw": "102723",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Sundown Pass"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_user_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_abilities",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_user_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      },
+      {
+        "key": {
+          "turn_owner": 1,
+          "turn_index": 1,
+          "boundary": "end_of_turn",
+          "observed_player": 1
+        },
+        "transition_index": null,
+        "state_position": null,
+        "fields": [
+          {
+            "source_field_id": "oppo_turn_1_cards_discarded",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_cards_drawn_or_tutored",
+            "raw": "1",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "drawn_or_tutored_count",
+            "expected": 1,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_attacked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_blocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_blocking",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_creatures_unblocked",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_cards_in_hand",
+            "raw": "7.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "hand_count",
+            "expected": 7,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_lands_in_play",
+            "raw": "82391",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "lands",
+            "expected": [
+              "Island"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_life",
+            "raw": "20.0",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "life",
+            "expected": 20,
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_eot_oppo_non_creatures_in_play",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_lands_played",
+            "raw": "102724",
+            "disposition": "enforced",
+            "reason": "exact declared projection; card lists compared as multisets, not action order",
+            "projection": "land_played",
+            "expected": [
+              "Terramorphic Expanse"
+            ],
+            "actual": null,
+            "comparison": "not_reached",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_non_creatures_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_abilities",
+            "raw": "88024",
+            "disposition": "unsupported",
+            "reason": "recorded ability IDs require a separate runtime ability binding; they are not card IDs",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_combat_damage_taken",
+            "raw": "0",
+            "disposition": "unsupported",
+            "reason": "source aggregation is unverified: retained combat_damage_taken values can be negative, so a raw native combat-damage event total is not an established equivalent",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_creatures_killed_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_creatures_killed_non_combat",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_instants_sorceries_cast",
+            "raw": "",
+            "disposition": "informational",
+            "reason": "blank cell retained as unknown; no zero/empty constraint inferred",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unknown",
+            "diagnostic": null
+          },
+          {
+            "source_field_id": "oppo_turn_1_oppo_mana_spent",
+            "raw": "0.0",
+            "disposition": "unsupported",
+            "reason": "native mana-expenditure events do not cover every payment path; missing events cannot establish recorded mana spent, including zero",
+            "projection": null,
+            "expected": null,
+            "actual": null,
+            "comparison": "unsupported",
+            "diagnostic": null
+          }
+        ]
+      }
+    ]
+  },
+  "unique_visual_card_names": [
+    "Ancestral Anger",
+    "Colossus of the Blood Age",
+    "Deflecting Palm",
+    "Forest",
+    "Island",
+    "Mountain",
+    "Owlin Historian",
+    "Plains",
+    "Sundown Pass",
+    "Terramorphic Expanse"
+  ],
+  "clarity_recommendations": [
+    "Use two explicit lanes: Recorded game (observed) and Engine search (hypothetical). Give source unknowns a distinct appearance, never an empty-zone appearance.",
+    "First match is both players at the end of the user's first turn: 2 player milestones, 1 time boundary, 6 enforced fields. It is transition 10.before; transition 10.after is opponent Upkeep.",
+    "The source records Terramorphic Expanse played and Island in play at opponent's first end-of-turn. Show these as separate recorded facts, not an invented exact activation/sacrifice sequence; ability ID 88024 is not mapped.",
+    "The failed branch shares actions 0 through 10, then passes without playing a land and discards Forest at action 21. Source opponent hand identities are hidden; all shown engine opponent hand cards are hypotheses.",
+    "Actions 11 through 20 are retained without intermediate state snapshots. Do not animate invented intermediate states; show a gap or compact label for the unretained interval.",
+    "The boundary adapter refuses to compare the next source checkpoint across this non-neutral cleanup transition. Do not label a missing comparison a mismatch, or the branch a proof of an engine bug.",
+    "Forest moving Hand to Graveyard is retained exactly in native events. Graveyard count becomes 1; this is the only named graveyard card supported by this branch event.",
+    "The source expected opponent Island versus the branch empty battlefield is useful visually, but the system did not emit boundary actuals or an enforced mismatch at that point. Label it a visual contrast, not a completed check.",
+    "Tap flags are absent from the projected state. Render upright cards as display layout only, with a visible tap-state-unavailable note. A PermanentUntapped event exists for Sundown Pass in the failure transition, but does not supply complete tap flags for these snapshots.",
+    "Other source permanent zones are blank/unknown, including creatures; rendering a source land zone must say Lands observed, not Complete battlefield.",
+    "Card art is a name-matched illustration, not proof of the exact Arena printing. Preserve visible card names when external images fail."
+  ],
+  "proposed_narrative": [
+    "The recording gives us checkpoints, not every action.",
+    "We can reproduce the first checkpoint: Sundown Pass in play, six known cards left in the user's hand, both players at 20 life, opponent holding seven unknown cards.",
+    "The next checkpoint requires an Island in the opponent's lands and records Terramorphic Expanse played during that turn.",
+    "One search branch instead passes, reaches cleanup with eight cards, and discards Forest.",
+    "The engine can take the discard action. Our checkpoint mapper cannot yet compare across a cleanup action that changes cards, so this branch produces an adapter issue.",
+    "The improvement made this previously opaque failure inspectable. It did not make this game fit: the same two player milestones match and all six issue signatures remain."
+  ]
+}

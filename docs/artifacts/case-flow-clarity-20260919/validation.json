@@ -1,0 +1,61 @@
+{
+  "schema": "coworld/case-flow-clarity-validation@1",
+  "checked_at": "2026-09-20T05:31:36.164480+00:00",
+  "implementation_scope": "Presentation only: no engine changes, new measurements, rewritten replay receipts or changed native outcomes.",
+  "commands": [
+    {
+      "command": "node --test web/tests/case-flow-model.test.mjs",
+      "log": "model-tests.log",
+      "sha256": "80e0e4af2bdbcc2670d030b074fc6ab069805732ad5f86859b140862a179c0d2",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "log": "typecheck.log",
+      "sha256": "c960e1b85104b09b0033eb6debbb4ceadc9f7f2de1d36317ad4eb1f9be4ef338",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:legacy",
+      "log": "frontend-tests.log",
+      "sha256": "a95b1fa6eb66b441fe7ed67131886033c1f9435f9fc8edb1c0c1859215de4dd0",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build:legacy",
+      "log": "build-final.log",
+      "sha256": "1ca4d19613832afaac4e12ad2acc88ae11fb8ada7b84365da07b29725cdcd631",
+      "exit_code": 0
+    },
+    {
+      "command": "CASE_FLOW_URL=http://127.0.0.1:8030/client/clarity-preview/case-flow.html npx playwright test -c web/playwright.config.ts web/e2e/case-flow.spec.ts --workers=1",
+      "log": "browser-regressions.log",
+      "sha256": "4f440657cc78ec573a9e2fac20a5cde8f8087837ad8940abf977f1c50493aacf",
+      "exit_code": 0
+    }
+  ],
+  "tested_asset_hashes": {
+    "case-flow.html": {
+      "sha256": "9c702608423f1b990752dbe1073095c99ec548b3abe0876f4cb2e13a6748e78a",
+      "bytes": 4100
+    },
+    "case-flow.css": {
+      "sha256": "02d092ba583a2aa5a200f50828928a68994fc1a4dc597b5bc67cd067a0a0bc5a",
+      "bytes": 27702
+    },
+    "case-flow.js": {
+      "sha256": "1a8c85351b1de82a44ee87e57d1bb29babf432e1ee16f8970f39de2fc5960054",
+      "bytes": 29264
+    },
+    "case-flow-model.js": {
+      "sha256": "876e151e14c9144681cff12ec59b2ac872cacfef29cd55c44addf523498e9dac",
+      "bytes": 2670
+    },
+    "case-flow-cards.json": {
+      "sha256": "578b06a3cea287bf361cc563d2fea7d0ad557351c0358a73d057caad3ec749db",
+      "bytes": 7443
+    }
+  },
+  "image_qualification": "External Scryfall images use retained exact-name metadata. Artwork is representative; native evidence is separately hash-verified. No image media copied into the repository.",
+  "evidence_qualification": "The six-chapter guide uses observedMoments and matchedSnapshot to preserve unknowns and exact before_transition chronology. A side-by-side board does not prove the retained diagnostic branch is the recorded human path."
+}

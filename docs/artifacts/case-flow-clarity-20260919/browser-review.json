@@ -1,0 +1,337 @@
+{
+  "schema": "coworld/case-flow-browser-review@1",
+  "reviewed_at": "2026-09-20T05:27:01.150196+00:00",
+  "preview_url": "http://127.0.0.1:8030/client/clarity-preview/case-flow.html?run=17lands-trajectories-20260909-01",
+  "assets": {
+    "case-flow.html": {
+      "sha256": "9c702608423f1b990752dbe1073095c99ec548b3abe0876f4cb2e13a6748e78a",
+      "bytes": 4100
+    },
+    "case-flow.css": {
+      "sha256": "02d092ba583a2aa5a200f50828928a68994fc1a4dc597b5bc67cd067a0a0bc5a",
+      "bytes": 27702
+    },
+    "case-flow.js": {
+      "sha256": "1a8c85351b1de82a44ee87e57d1bb29babf432e1ee16f8970f39de2fc5960054",
+      "bytes": 29264
+    },
+    "case-flow-model.js": {
+      "sha256": "876e151e14c9144681cff12ec59b2ac872cacfef29cd55c44addf523498e9dac",
+      "bytes": 2670
+    },
+    "case-flow-cards.json": {
+      "sha256": "578b06a3cea287bf361cc563d2fea7d0ad557351c0358a73d057caad3ec749db",
+      "bytes": 7443
+    }
+  },
+  "checks": [
+    {
+      "name": "Unknown opponent source hand has no invented identities",
+      "pass": true
+    },
+    {
+      "name": "Matched snapshot remains End phase with six player A cards",
+      "pass": true
+    },
+    {
+      "name": "Discard toggles exact retained Cleanup/8/empty to Upkeep/7/Forest graveyard",
+      "pass": true,
+      "after": "ENGINE HYPOTHESIS\nUpkeep\nThe branch after discarding\n\nNow Player A\u2019s upkeep. The next draw has not happened.\n\nPlayer B\n20 life\nBATTLEFIELD\nNo cards in play\nHAND \u00b7 7 CARDS\nIsland\nTerramorphic Expanse\n\u00d75\nPlains\nGRAVEYARD \u00b7 1 CARD\nForest\nPlayer A \u00b7 20 life \u00b7 6 cards in hand \u00b7 Sundown Pass\n\nExact retained state from one reconstructed setup. Player B\u2019s card identities are hypothetical. Tap states are not retained."
+    },
+    {
+      "name": "Step-through discard advances to retained after state",
+      "pass": true
+    },
+    {
+      "name": "Card dialog accessible name, representative-art note, Escape and close button",
+      "pass": true
+    },
+    {
+      "name": "Previous/next/start controls",
+      "pass": true
+    },
+    {
+      "name": "Keyboard arrows change chapters when focus is outside a control",
+      "pass": true
+    },
+    {
+      "name": "Native slider keyboard navigation",
+      "pass": true
+    },
+    {
+      "name": "Play advances a chapter and pause stops playback",
+      "pass": true
+    },
+    {
+      "name": "All six chapters fit mobile390 without document overflow",
+      "pass": true
+    },
+    {
+      "name": "Mobile card dialog has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "Altered artifact shows verification failure and disables controls",
+      "pass": true
+    },
+    {
+      "name": "Unavailable replay shows clear error with disabled controls",
+      "pass": true
+    },
+    {
+      "name": "Card artwork failure preserves names and explicit dialog fallback",
+      "pass": true
+    },
+    {
+      "name": "Controls disabled during evidence loading",
+      "pass": true
+    },
+    {
+      "name": "No page JavaScript errors during interaction",
+      "pass": true
+    }
+  ],
+  "javascript_errors": [],
+  "desktop_viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "mobile_viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "mobile_image_checks": [
+    {
+      "step": 1,
+      "images": [
+        {
+          "name": "Island card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Terramorphic Expanse card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Island card",
+          "complete": true,
+          "width": 488
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "images": [
+        {
+          "name": "Sundown Pass card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Ancestral Anger card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Plains card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Deflecting Palm card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Owlin Historian card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Mountain card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Colossus of the Blood Age card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Sundown Pass card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Ancestral Anger card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Colossus of the Blood Age card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Deflecting Palm card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Mountain card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Owlin Historian card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Plains card",
+          "complete": true,
+          "width": 488
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "images": [
+        {
+          "name": "Island card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Forest card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Island card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Terramorphic Expanse card",
+          "complete": true,
+          "width": 488
+        },
+        {
+          "name": "Plains card",
+          "complete": true,
+          "width": 488
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "images": [
+        {
+          "name": "Forest card",
+          "complete": true,
+          "width": 488
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "images": [
+        {
+          "name": "Forest card",
+          "complete": true,
+          "width": 488
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "images": []
+    }
+  ],
+  "visual_review": {
+    "status": "passed",
+    "observed_defect": "Initial compact card row labels overlapped following content; fixed before final screenshots.",
+    "final_review": "Six chapters preserve source versus hypothetical engine-state distinction; desktop stage1 and stage3 and mobile stage1 and stage3 visually inspected. All chapters read and captured. Final first-stage compact card row no longer overlaps.",
+    "unresolved_material_findings": []
+  },
+  "screenshots": [
+    {
+      "file": "preview-dialog-mobile.png",
+      "sha256": "8db27c3aca477c5b984f31fa16388d25538910b1700ac7bbddecf9b3fd1a4c15",
+      "bytes": 269488
+    },
+    {
+      "file": "preview-images-unavailable-mobile.png",
+      "sha256": "63c1c8b3f279a65310d8650cca1d89b971b77ef964c3390972c872c3d2b7beee",
+      "bytes": 163869
+    },
+    {
+      "file": "preview-step1-desktop.png",
+      "sha256": "5a0b492a226c9f19b8c6fcd0d1c8c834ba344da3cf9998cce4f085e7e91d4873",
+      "bytes": 262287
+    },
+    {
+      "file": "preview-step1-mobile.png",
+      "sha256": "8ac22e03495d25b9d2819f592ae75c45b583fb84d72e1ffee9e62020b456338b",
+      "bytes": 202113
+    },
+    {
+      "file": "preview-step2-desktop.png",
+      "sha256": "ec960245903eb2ec15d7bb3c67874b83562035529b196599448b98809ebdf9cc",
+      "bytes": 454946
+    },
+    {
+      "file": "preview-step2-mobile.png",
+      "sha256": "e88c2a03470a764cd6bffcef4969a00a203fd672651a1c6d21b751b5d3e9e9b3",
+      "bytes": 318256
+    },
+    {
+      "file": "preview-step3-after-desktop.png",
+      "sha256": "5329e860d0a581b040876e5d946ce4cc91451e34cf86dc9ce863e78204a4128b",
+      "bytes": 304471
+    },
+    {
+      "file": "preview-step3-desktop.png",
+      "sha256": "e4db73a1a672a829c87553a82d549ccad7a4856a9952bf4faa37d6b6bb1597c6",
+      "bytes": 299065
+    },
+    {
+      "file": "preview-step3-mobile.png",
+      "sha256": "197334bba2ad0476798aa669980778f71452e0d43fe079455ad1487de19a976e",
+      "bytes": 231577
+    },
+    {
+      "file": "preview-step4-desktop.png",
+      "sha256": "d89d42ac04c00e92ceafd180a3bd016abc88f8fd774783777844a72b9ebafdca",
+      "bytes": 191555
+    },
+    {
+      "file": "preview-step4-mobile.png",
+      "sha256": "588f4634c11ee1e92739b2c6548dd1c6975f5a193d8f0d33b506b73ee95d096e",
+      "bytes": 148137
+    },
+    {
+      "file": "preview-step5-desktop.png",
+      "sha256": "174190b2b6a0ea171df96fe444a9047fa8b927339464c7eb2c40a302a461ed2b",
+      "bytes": 193771
+    },
+    {
+      "file": "preview-step5-mobile.png",
+      "sha256": "1cdc53b8146a10c0a03f99e56c5fff8e194c870093dcfa545ba8749f6579e905",
+      "bytes": 141656
+    },
+    {
+      "file": "preview-step6-desktop.png",
+      "sha256": "c1f108b206a5d3200b8fbc6bf55d889b80b4bd60845f1d8b598df28e3cf41479",
+      "bytes": 160858
+    },
+    {
+      "file": "preview-step6-mobile.png",
+      "sha256": "5a721d956fdd8d8a24d6648e2dc3081e3453a03970d80b796b9fb9845129cc3b",
+      "bytes": 116338
+    }
+  ]
+}

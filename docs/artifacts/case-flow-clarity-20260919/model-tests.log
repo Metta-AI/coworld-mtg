@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: a counted source hand does not acquire the reconstructed engine identities
+ok 1 - a counted source hand does not acquire the reconstructed engine identities
+  ---
+  duration_ms: 1.417279
+  type: 'test'
+  ...
+# Subtest: blank source land cells stay unknown rather than an empty battlefield
+ok 2 - blank source land cells stay unknown rather than an empty battlefield
+  ---
+  duration_ms: 0.404824
+  type: 'test'
+  ...
+# Subtest: matched first-turn state is before transition10, never its already advanced endpoint
+ok 3 - matched first-turn state is before transition10, never its already advanced endpoint
+  ---
+  duration_ms: 0.346342
+  type: 'test'
+  ...
+# Subtest: missing retained snapshot cannot be reconstructed by the viewer
+ok 4 - missing retained snapshot cannot be reconstructed by the viewer
+  ---
+  duration_ms: 1.218985
+  type: 'test'
+  ...
+# Subtest: the discard demonstrates only its original snapshots and native zone change
+ok 5 - the discard demonstrates only its original snapshots and native zone change
+  ---
+  duration_ms: 0.39464
+  type: 'test'
+  ...
+# Subtest: a changed expected value must not be described as an annotation-only change
+ok 6 - a changed expected value must not be described as an annotation-only change
+  ---
+  duration_ms: 33.905629
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 105.905124

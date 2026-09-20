@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ✓  1 web/e2e/case-flow.spec.ts:19:1 › the recording stays separate from the engine's hypothetical cards and later snapshots (443ms)
+  ✓  2 web/e2e/case-flow.spec.ts:45:1 › cards stay inspectable when external images fail, on a narrow viewport (229ms)
+  ✓  3 web/e2e/case-flow.spec.ts:59:1 › tampered evidence cannot produce a visual game state (120ms)
+
+  3 passed (1.4s)
