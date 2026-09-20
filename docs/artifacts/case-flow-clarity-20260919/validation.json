@@ -12,8 +12,9 @@
     {
       "command": "npm run typecheck",
       "log": "typecheck.log",
-      "sha256": "c960e1b85104b09b0033eb6debbb4ceadc9f7f2de1d36317ad4eb1f9be4ef338",
-      "exit_code": 0
+      "sha256": "8feabf73aca7f5b9a8e0af04855d73dc9beeb470eef44b76706971a70873495a",
+      "exit_code": 0,
+      "log_normalization": "Trailing blank lines removed when preparing the committed log; command output otherwise unchanged."
     },
     {
       "command": "npm run test:legacy",
