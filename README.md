@@ -75,6 +75,16 @@ pipeline now freezes real game cohorts, runs supervised fitting, groups discover
 issues and links repair proposals back to every originating game.
 [Run and inspect it](docs/17lands-factory.md).
 
+The implemented CAOS execution path represents the **whole improvement epoch as a CAOS
+program**: source verification, native discovery, model proposals and reviews,
+compilation, comparison, and a linked decision commit. The CAOS pilot lives in
+[`caos-factory/`](caos-factory/); [its contract and run instructions](docs/caos-factory.md)
+explain the frozen policy, attribution, cache semantics and current limits.
+[The first measured pilot](replays/caos-factory-20260920/README.md) retains the
+real 20-game discovery run and the contributor's decision to make no change.
+A separate integration candidate exercises the complete build/evaluate/review
+branch and is rejected for producing no measured improvement.
+
 The fitting viewer puts the recorded observations beside the engine's projected
 states, shows the retained path and failure context, and keeps unchecked fields
 visible. A before/after comparison reports changed observations and reconstruction;
@@ -90,6 +100,7 @@ decision.
 | Recorded-game trajectory fitting | Implemented legal-action search with backtracking and typed observation/state traces. The frozen first-20-game SOS workload covers two turns from each player; full-game coverage remains in progress. |
 | Card support preflight | Current fitting checks names and setup. Complete card-effect support and token/face identity checks remain planned. |
 | Regression cases and repair evaluation | Implemented typed case execution, checking, reduction and reviewed acceptance, orchestrated by agents. |
+| Complete improvement epoch in CAOS | Implemented native continuations and bounded maps for acquisition, discovery, proposals/reviews, candidate builds, comparison and a linked decision commit. The real pilot abstains; a synthetic no-op verifies the complete candidate branch. |
 | Factory replays and viewer | Fitting runs now record source-derived cases, actual executions, grouped issue origins, field comparisons and separately attributed repair proposals/comparisons. Earlier ingestion/parsing replays remain available. |
 
 A concrete fault in the older fitter illustrates the work ahead: it combined

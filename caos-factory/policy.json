@@ -1,0 +1,58 @@
+{
+  "schema": "coworld/caos-policy@1",
+  "scope": "Bounded recorded-game compatibility under explicit reconstruction assumptions; no full MTG correctness claim.",
+  "bounds": {
+    "nodes": 10000,
+    "max_actions": 128,
+    "turn_pairs": 2,
+    "deadline_seconds": 60,
+    "memory_bytes": 4294967296,
+    "concurrency": 2,
+    "max_model_calls": 6,
+    "max_candidate_attempts": 1
+  },
+  "roles": {
+    "model": "claude-opus-4-8",
+    "max_tokens": 12000
+  },
+  "target": {
+    "allowed_paths": [
+      "crates/coworld-mtg-harness/src/fitting/source.rs",
+      "crates/coworld-mtg-harness/src/fitting/search.rs",
+      "crates/coworld-mtg-harness/src/fitting/trace.rs",
+      "crates/phase-bridge/src/fitting.rs"
+    ],
+    "test_command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "coworld-mtg-harness",
+      "fitting::",
+      "--",
+      "--test-threads=1"
+    ],
+    "build_command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "-p",
+      "coworld-mtg-harness"
+    ]
+  },
+  "evaluation": {
+    "require_all_cases": true,
+    "allow_lost_coverage": false,
+    "allow_regressed_matches": false,
+    "minimum_improved_cases": 1,
+    "compare_wall_time": false,
+    "previously_inspected": true,
+    "unseen_holdout": false
+  },
+  "publication": {
+    "automatic": false,
+    "reason": "A recorded decision returns the reviewed candidate; external Git publication is a separate operator action."
+  }
+}

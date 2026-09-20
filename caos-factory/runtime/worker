@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+caos get /cas/args/worker1
+caos get -r /cas/args/modules
+exec python3 /cas/args/worker1
