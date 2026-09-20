@@ -1,0 +1,29 @@
+{
+  "schema": "coworld/caos-validation@1",
+  "implementation_commit": "3b34912d98d1dcf9ef47bfd5f22c0fc6531d7cf4",
+  "factory_boundary_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "baseline_native_fitting_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "candidate_native_fitting_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "candidate_outcome": "rejected",
+  "candidate_improved_cases": 0,
+  "final_candidate_integration_worker_modules_match_committed_code": {
+    "mtg.py": "318ae78caf60ff6a6b9bb51df23be05052fc242e",
+    "contracts.py": "a26585f8ab6d15a0934b5707d3d41135f7834336",
+    "build.py": "eab095ee18ae4e32772b59f09504fc8a383d282c",
+    "factory.py": "e3bd47b8e0fe502c09c6f467d58480904ebc0442",
+    "cas.py": "f65ecfc9b609bf8b8d61028316878ee80eb2a7c6",
+    "agents.py": "ccbc4ea226345d603c61ff1ed0f45e8adb0e2856",
+    "evaluate.py": "84db87fb1174271cb5b8d45b6c8119c0b9e72def"
+  },
+  "submission_helper": "new private client rejoined exactly the same root request, fetched the terminal commit and pinned it locally and on the server",
+  "export_check": "20 fit nodes; all edges reference existing nodes; all linked artifacts exist; no actual granted provider key bytes in the public export"
+}

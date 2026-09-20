@@ -1,0 +1,50 @@
+{
+  "schema": "coworld/caos-deployment@1",
+  "date": "2026-09-20",
+  "source_commit": "8116110ddd43b4c71bf7c3802851249842cd7ad2",
+  "caos_commit": "bbb31008efc443dce779d1ac5b23401dba266203",
+  "image_git_object": "91e8a886c5403596a4e18e153d5ae315d83bda14",
+  "phase_revision": "54227f4527a0b45b01eb3f819d262ee49b665810",
+  "root_request": "58410bd942e3b7d298a15f6c5938e74b2a711716",
+  "commit": "71af54aec8d387524dad2884cf055e5a9a53cc7c",
+  "tree": "9e45bcd455adc20db0154bca18445df7bf8f98aa",
+  "counts": {
+    "external_deadline": 3,
+    "input_issue": 9,
+    "matched_supported_projection": 8
+  },
+  "all_matched_games_have_zero_fully_covered_milestones": true,
+  "native_fit_requests": [
+    "02e1e8059d6ad442805ebb2bcdb3aaad3825dc26",
+    "0c68140a7bac8fb6d6847430b8b4e786078b1a61",
+    "1ef1112a1356a5d1b1bf45a0630f0536cf0dec7b",
+    "2349380ae42419cb983b7131d2fc1e172e97496b",
+    "30b2b4c604611eef101f0e247e077ce12bc9598c",
+    "5f1150bebfea5caa5f40b937107a73dd0ff08522",
+    "635f475531236e912fa5cc6a7a29ecfc7981c428",
+    "683703e84edcf7ceb4023d65916c00316534e02e",
+    "89e789d8727f06ea6ab7bbe19f9ca3edecb9d9c7",
+    "91856af2e709e33cd3308309f0b62de81f4094f9",
+    "937cb7c7c910e960342418cc5011301a6af46ef0",
+    "96d995c828562df63909163238da497641ace0bd",
+    "9a777c8a418ec9ae97cfba4192b32e79639795d5",
+    "9c8156baca00af43f9392f1d9e00e3fe6f9b918b",
+    "a57f96ec99adcd5b385d32f42d41ffa97354033c",
+    "acae03737eb8915cd64fe744efdb635496e6a40d",
+    "c251063a7efbce8edab14d67cf2639ad0645a3b8",
+    "dad14d9edbe93eaf606ed69f5c77330771e96dd1",
+    "dc5e591192ada1dfd83f9c69104d4ef35977f5be",
+    "e4d368d75cfe44d0049ee87bd78e35d3b8e68257"
+  ],
+  "baseline_build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+  "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+  "attribution": {
+    "credit": "Source data: 17Lands public datasets. Cohort selection and provenance by Coworld MTG. 17Lands does not endorse this work.",
+    "documentation_url": "https://www.17lands.com/public_datasets",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "modifications": "Exact complete CSV rows selected with their original header, quoting and line endings; no field values changed. Manifest and case labels derived.",
+    "provider": "17Lands"
+  },
+  "note": "Complete native results in this epoch are reused from identical earlier requests. The real contributor abstained; no target repair was accepted."
+}

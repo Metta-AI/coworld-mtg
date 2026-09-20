@@ -1,0 +1,106 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coworld · a CAOS factory epoch</title>
+<style>
+:root{font:15px/1.55 system-ui;color:#24323d;background:#f4f3ef}*{box-sizing:border-box}body{margin:0}
+header{padding:28px 36px 20px;border-bottom:1px solid #ccd1d1;background:white}h1{font:600 28px/1.2 Georgia;margin:0 0 8px}p{max-width:1000px;margin:8px 0}.small{font-size:12px;color:#5f6d72}a{color:#17677a}button,select{font:inherit;padding:7px 12px;background:#fff;border:1px solid #bcc8cc;border-radius:5px;cursor:pointer}
+main{display:grid;grid-template-columns:minmax(520px,1.1fr) minmax(380px,1fr);gap:20px;padding:20px}
+#graph{overflow:auto;max-height:78vh;background:white;border:1px solid #d0d5d5;border-radius:8px}svg text{font:12px system-ui}
+table{border-collapse:collapse;width:100%;font-size:12px}td,th{text-align:left;padding:8px;border-bottom:1px solid #d8dfe1;vertical-align:top;overflow-wrap:anywhere}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}[data-id][aria-pressed=true] rect{stroke:#17677a;stroke-width:3}
+#detail{background:white;padding:22px;border:1px solid #d0d5d5;border-radius:8px;overflow:auto;max-height:78vh}h2{margin-top:0;font-size:21px}pre{font:12px/1.5 ui-monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f5;padding:12px;border-radius:5px}code{font-size:12px;overflow-wrap:anywhere}.pill{display:inline-block;border:1px solid #bdcccf;padding:2px 8px;border-radius:4px;margin:4px}li{margin-bottom:8px}.cards{display:flex;flex-wrap:wrap;gap:7px}.card{width:115px;padding:7px;border:1px solid #cbd1d3;border-radius:5px;font-size:12px}.card img{width:100%;border-radius:4px}.warning{border-left:3px solid #bc7c37;padding-left:12px}input[type=range]{width:100%}
+@media(max-width:1000px){main{grid-template-columns:1fr}#graph,#detail{max-height:none}header{padding:20px}}
+</style>
+<header><h1>A factory epoch, as it happened</h1><p id="verdict">Loading linked CAOS receipts…</p>
+<p>The graph follows actual receipt references, with redundant arrows hidden. Select a step to inspect its inputs, results and artifacts. Model suggestions, measured results and the final decision are separate steps. Stages the run did not reach are not shown.</p>
+<p id="counts"></p><label>Focus <select id="focus"><option value="">Whole pipeline</option></select></label> <button id="reset">Show all steps</button>
+<p class="small">Focusing a game hides other fitting nodes; the decision still uses the complete cohort.</p><p class="small" id="disclosure"></p></header>
+<main><div id="graph"></div><article id="detail"></article></main>
+<script type="module">
+const data=await (await fetch('replay.json')).json(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
+const $=id=>document.getElementById(id),escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const readable=s=>({'no_change':'No change retained','matched_supported_projection':'Partial projection matched','input_issue':'Reconstruction unsupported','external_deadline':'Search deadline','no_safe_change':'No safe change proposed','rejected':'Rejected','accepted':'Accepted','inconclusive':'Inconclusive'}[s]||String(s).replaceAll('_',' '));
+const root=nodes.get(data.root);$('verdict').textContent=readable(root.result.verdict)+': '+root.result.reason;
+$('disclosure').textContent=data.disclosure;
+const counts=data.nodes.find(n=>n.kind==='discovery')?.result.counts;
+if(counts)$('counts').textContent=Object.entries(counts).map(([k,v])=>v+' '+readable(k).toLowerCase()).join(' · ');
+let activeNode=null;
+const fits=data.nodes.filter(n=>n.kind==='fit'),caseIds=[...new Set(fits.map(n=>n.result.case_id))].sort();
+for(const id of caseIds){let o=document.createElement('option');o.value=id;const fit=fits.find(n=>n.result.case_id===id);o.textContent='Game '+fit.result.game_index+' · '+readable(fit.result.status);$('focus').append(o)}
+const titles={'acquisition':'Verify source + derive cases','dependency-acquisition':'Capture pinned dependencies','build':'Compile and test target','discovery':'Group findings by their origins','model-plan':'Propose a change','model-plan-review':'Review the proposed plan','model-implement':'Write a candidate','candidate':'Apply exact source edits','comparison':'Compare the same games','model-implementation-review':'Review candidate evidence','decision':'Decide what to retain'};
+function title(n){return n.kind==='fit'?(n.variant||'Fit')+' · game '+n.result.game_index:(n.kind==='build'&&n.variant?n.variant+' build + tests':titles[n.kind]||n.kind)}
+function subtitle(n){return n.kind==='fit'?n.result.status:n.result.verdict||n.result.value?.status||('passed'in n.result?(n.result.passed?'passed':'failed'):n.result.valid===false?'invalid result':n.kind)}
+function draw(){
+ const selected=$('focus').value,visible=data.nodes.filter(n=>n.kind!=='fit'||!selected||n.result.case_id===selected),ids=new Set(visible.map(n=>n.id)),rawEdges=[...new Map(data.edges.filter(e=>ids.has(e.from)&&ids.has(e.to)).map(e=>[e.from+e.to,e])).values()];
+ const edges=rawEdges.filter(edge=>{const seen=new Set([edge.from]),q=[edge.from];while(q.length){const id=q.shift();for(const e of rawEdges){if(e===edge||e.from!==id)continue;if(e.to===edge.to)return false;if(!seen.has(e.to)){seen.add(e.to);q.push(e.to)}}}return true});
+ const rank=new Map;function depth(id,seen=new Set){if(rank.has(id))return rank.get(id);if(seen.has(id))throw Error('Cyclic evidence');seen.add(id);const parents=edges.filter(e=>e.to===id).map(e=>depth(e.from,new Set(seen)));let r=parents.length?1+Math.max(...parents):0;rank.set(id,r);return r}
+ visible.forEach(n=>depth(n.id));let groups=[];visible.forEach(n=>(groups[rank.get(n.id)]??=[]).push(n));const pos=new Map;groups.forEach((g,x)=>g.sort((a,b)=>(a.result.game_index??0)-(b.result.game_index??0)).forEach((n,y)=>pos.set(n.id,{x:y*230+20,y:x*92+20})));
+ let width=Math.max(...groups.map(g=>g.length))*230+20,height=groups.length*92+25;
+ let html='<svg xmlns="http://www.w3.org/2000/svg" width="'+width+'" height="'+height+'"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10" fill="#9aaeb4"/></marker></defs>';
+ for(const e of edges){let a=pos.get(e.from),b=pos.get(e.to);
+  const path=b.y-a.y>100?'M'+a.x+' '+(a.y+30)+' L8 '+(a.y+30)+' L8 '+(b.y+30)+' L'+b.x+' '+(b.y+30):'M'+(a.x+101)+' '+(a.y+60)+' C'+(a.x+101)+' '+(a.y+76)+','+(b.x+101)+' '+(b.y-16)+','+(b.x+101)+' '+b.y;
+  html+='<path d="'+path+'" fill="none" stroke="#c1cdd0" marker-end="url(#arrow)"/>'}
+ for(const n of visible){let p=pos.get(n.id);html+='<g data-id="'+n.id+'" tabindex="0" role="button" style="cursor:pointer"><rect x="'+p.x+'" y="'+p.y+'" width="202" height="60" rx="6" fill="'+(n.kind==='decision'?'#e3eef0':'#f7f9f9')+'" stroke="#9bb1b7"/><text x="'+(p.x+10)+'" y="'+(p.y+24)+'">'+escape(title(n).slice(0,30))+'</text><text x="'+(p.x+10)+'" y="'+(p.y+44)+'" fill="#68797e">'+escape(readable(subtitle(n)).slice(0,30))+'</text></g>'}
+ $('graph').innerHTML=html+'</svg>';$('graph').querySelectorAll('[data-id]').forEach(el=>{el.onclick=()=>show(nodes.get(el.dataset.id));el.onkeydown=e=>{if(e.key==='Enter')el.click()}});
+}
+async function show(n){
+ activeNode=n.id;$('graph').querySelectorAll('[data-id]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.id===n.id)));
+ let html='<h2>'+escape(title(n))+'</h2><p><span class="pill">'+escape(readable(subtitle(n)))+'</span></p>';
+ if(n.result.reason)html+='<p>'+escape(n.result.reason)+'</p>';
+ if(n.result.component)html+='<p>Component: '+escape(n.result.component)+'</p>';
+ if(n.kind==='fit'&&n.result.execution!=='completed')html+='<p class="warning">The native process did not return a completed result. Progress and node counts are unknown; this is not evidence of zero progress.</p>';
+ if(n.kind==='fit'&&n.result.execution==='completed')html+='<p>'+n.result.milestones_fitted+' of '+n.result.milestones_total+' milestones matched the supported projection; '+n.result.fully_covered_milestones+' were fully covered. '+n.result.nodes+' search nodes.</p><p class="warning">Hidden cards and library order are reconstruction assumptions. A search limit or missing witness is not proof of a rules bug.</p>';
+ if(n.result.error)html+='<p class="warning">'+escape(n.result.error)+'</p>';
+ if(n.result.value){const v=n.result.value;
+  if(v.hypothesis)html+='<h3>Reasoning from the observed cases</h3><p>'+escape(v.hypothesis)+'</p><h3>Proposed change</h3><p>'+escape(v.changes)+'</p><p><strong>Validation:</strong> '+escape(v.validation)+'</p>';
+  if('approve' in v)html+='<p><strong>'+(v.approve?'Approved':'Rejected')+'</strong> · '+escape(v.rationale)+'</p>';
+  if(v.summary)html+='<p>'+escape(v.summary)+'</p>';
+  if(v.findings?.length)html+='<ul>'+v.findings.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ul>';
+  if(v.risks?.length)html+='<details><summary>Risks identified by the contributor</summary><ul>'+v.risks.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ul></details>';
+ }
+ if(n.result.issues){html+='<details><summary>'+n.result.issues.length+' findings and their source games</summary>';
+  for(const issue of n.result.issues.slice(0,12))html+='<p><strong>'+escape(readable(issue.kind))+'</strong>'+ (issue.origins?' · '+issue.origins.length+' origins':'')+'<br>'+escape(issue.detail)+'</p>';
+  if(n.result.issues.length>12)html+='<p class="small">Showing 12 findings. All findings and origin identities are in the complete result below.</p>';
+  html+='</details>';
+ }
+ html+='<div id="state"></div>';
+ html+='<p class="small">Receipt <code>'+n.id+'</code><br>Executed request <code>'+n.request+'</code></p>';
+ html+='<p>'+Object.entries(n.artifacts).map(([k,v])=>'<a href="'+v+'" target="_blank">'+escape(k)+'</a>').join(' · ')+'</p>';
+ html+='<p><a href="status.json" target="_blank">CAOS execution tree</a></p>';
+ html+='<details><summary>Complete result and input identities</summary><pre>'+escape(JSON.stringify(n,null,2))+'</pre></details>';
+ $('detail').innerHTML=html;
+ if(n.artifacts['native/result.json']){
+  const raw=await(await fetch(n.artifacts['native/result.json'])).json();
+  if(activeNode!==n.id||!raw.trace?.initial_state)return;
+  const states=[raw.trace.initial_state,...raw.trace.transitions.map(t=>t.after)];
+  const checkpoints=(raw.trace.milestones||[]).filter(m=>Number.isInteger(m.transition_index));
+  let box=$('state');box.innerHTML='<h3>Reconstructed game states</h3><p class="small">These are states on the retained witness path. Opponent hidden cards and library order include explicit reconstruction assumptions.</p><div class="controls"><label>Checkpoint <select id="checkpoint"><option value="">Move freely</option>'+checkpoints.map((m,j)=>'<option value="'+j+'">Turn '+m.key.turn_index+' · player '+m.key.turn_owner+' · observe player '+m.key.observed_player+'</option>').join('')+'</select></label><button id="art">Show card art</button></div><input id="step" type="range" min="0" max="'+(states.length-1)+'" value="0"><p id="stepLabel"></p><div id="fields"></div><div id="board"></div>';
+  let art=false;
+  function board(){
+   const i=Number($('step').value),s=states[i],t=i>0?raw.trace.transitions[i-1]:null;
+   $('stepLabel').textContent='State '+i+' of '+(states.length-1)+' · turn '+s.turn_number+' · '+s.phase+(t?' · after player '+t.seat+': '+t.action.type:' · initial reconstruction');
+   $('board').innerHTML=s.players.map(p=>'<h4>Player '+p.seat+(s.turn_owner===p.seat?' (active)':'')+' · '+p.life+' life · '+p.library_count+' cards in library</h4>'+['battlefield','hand'].map(zone=>'<p>'+zone+'</p><div class="cards">'+(p[zone].length?p[zone].map(c=>'<div class="card">'+(art?'<img loading="lazy" src="https://api.scryfall.com/cards/named?exact='+encodeURIComponent(c.name)+'&format=image&version=small" alt="'+escape(c.name)+'">':'')+escape(c.name)+'</div>').join(''):'<span class="small">Empty</span>')+'</div>').join('')).join('');
+   $('art').textContent=art?'Hide card art':'Show card art';
+   $('board').querySelectorAll('img').forEach(img=>img.onerror=()=>{img.hidden=true});
+  }
+  $('step').oninput=()=>{$('checkpoint').value='';$('fields').innerHTML='';board()};
+  $('art').onclick=()=>{art=!art;board()};
+  $('checkpoint').onchange=()=>{
+   if($('checkpoint').value==='')return;
+   const m=checkpoints[Number($('checkpoint').value)];
+   $('step').value=m.transition_index+(m.state_position==='after_transition'?1:0);
+   const fields=m.fields.filter(f=>f.disposition!=='informational');
+   $('fields').innerHTML='<details><summary>Source comparison: '+fields.filter(f=>f.comparison==='matched').length+' matched fields, '+fields.filter(f=>f.disposition==='unsupported').length+' unsupported fields</summary><table><thead><tr><th>Recorded field</th><th>Expected</th><th>Engine projection</th><th>Check</th></tr></thead><tbody>'+fields.map(f=>'<tr><td>'+escape(f.source_field_id)+'</td><td>'+escape(JSON.stringify(f.expected??f.raw))+'</td><td>'+escape(JSON.stringify(f.actual))+'</td><td>'+escape(f.comparison)+'<br>'+escape(f.reason)+'</td></tr>').join('')+'</tbody></table></details>';
+   board();
+  };
+  board();
+  if(checkpoints.length){$('checkpoint').value='0';$('checkpoint').onchange()}
+
+ }
+}
+function focusGame(){draw();const fit=fits.find(n=>n.result.case_id===$('focus').value);show(fit||root);const url=new URL(location);if(fit)url.searchParams.set('case',fit.result.case_id);else url.searchParams.delete('case');history.replaceState(null,'',url)}
+$('focus').onchange=focusGame;$('reset').onclick=()=>{$('focus').value='';focusGame()};
+const query=new URLSearchParams(location.search).get('case');
+const interesting=fits.filter(n=>n.result.status==='matched_supported_projection').sort((a,b)=>b.result.game_index-a.result.game_index)[0]?.result.case_id;
+$('focus').value=caseIds.includes(query)?query:interesting||'';
+focusGame();
+</script>

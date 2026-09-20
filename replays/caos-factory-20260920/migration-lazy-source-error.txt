@@ -1,0 +1,26 @@
+caos-cli: GET http://127.0.0.1:19330//run?req=acad6d4fe44df20dccb391a9a0c5126230df47fb: server returned 500 Internal Server Error:
+worker failed: /worker exited with exit status: 1:
+caos: /cas/args/state/candidate/source: No such file or directory (os error 2)
+Traceback (most recent call last):
+  File "/cas/args/worker1", line 9, in <module>
+    getattr(importlib.import_module(module),function)()
+  File "/cas/args/modules/factory.py", line 148, in candidate_built
+    launch_fits(values,values["candidate"]/"source",values["candidate-build"],"candidate-fitted")
+  File "/cas/args/modules/factory.py", line 73, in launch_fits
+    requests={p.name:cas.request_path("fit",{**refs,"case":p}) for p in sorted(cases.iterdir())}
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cas/args/modules/cas.py", line 101, in request_path
+    oid = worker(stage, refs, literals, prepare=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cas/args/modules/cas.py", line 98, in worker
+    return command(*argv)
+           ^^^^^^^^^^^^^^
+  File "/cas/args/modules/cas.py", line 11, in command
+    return subprocess.check_output(["caos", *map(str, args)], text=True).strip()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['caos', 'prepare-request', '--base:@=/cas/args/base', '--worker1:@=/cas/args/worker1', '--modules:@=/cas/factory-module-closure-8eb1285b45ca', '--stage=fit', '--games:@=/cas/args/state/acquisition/games.csv', '--cards:@=/cas/args/state/acquisition/cards.csv', '--runtime:@=/cas/args/state/acquisition/runtime', '--binary:@=/cas/args/result/binary', '--target:@=/cas/args/state/candidate/source', '--policy:@=/cas/args/state/policy', '--case:@=/cas/args/state/acquisition/cases/sos-source-row-000000']' returned non-zero exit status 1.

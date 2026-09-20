@@ -1,0 +1,595 @@
+{
+  "schema": "coworld/caos-integration-test@1",
+  "contributor": "deterministic-comment-only",
+  "disclosure": "Synthetic contributor, real builds and all 20 real cohort games. This is an execution/gating test, not a model-discovered repair.",
+  "root_request": "7df27b6b9addd0cc8537d4c382663c32dd0b002f",
+  "commit": "957a4a8eac539a70a397c612aab7057126cab90c",
+  "tree": "c666af5d354ccb8fa4d55ab5ec9fc0a404eed9fa",
+  "decision": {
+    "inputs": {
+      "acquisition": "56bfac644405e89c572bc4541c28f8477de96961",
+      "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+      "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+      "candidate": "05b861500ab9779c87954a1476b44af6f5ef7f1a",
+      "candidate-build": "c1684dcfb624b431d07344e828382c00581748c0",
+      "candidate-observations": "18f1f95eb7014ce11d1bbbe509689d7e133983aa",
+      "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+      "comparison": "6912ef958628abef3ca0da63b47c4cbe417594f3",
+      "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+      "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+      "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+      "implementation": "d7bcb3e7a04f3c0e10896435b0697272375f0b8c",
+      "implementation-review": "699582050b9e3a9dffb7eeb600f31414b832c919",
+      "llm": "8ec1b4cd2ca26b5733051b7b5e38220eedf1199e",
+      "plan": "b8d575017f07a3f085ce479383b581574cd5a7dd",
+      "plan-review": "91897898eea42d72f3d320e85bbad41715e476dd",
+      "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+      "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+      "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+    },
+    "kind": "decision",
+    "request": "a40448e47ff5b03b1bc1fb0832af98a1e22d3067",
+    "result": {
+      "automatic_publication": false,
+      "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+      "component": "observation_adapter",
+      "origin_issue_ids": [
+        "a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed"
+      ],
+      "previously_inspected": true,
+      "reason": "Candidate did not satisfy the frozen comparison policy.",
+      "unseen_holdout": false,
+      "verdict": "rejected"
+    },
+    "schema": "coworld/caos-receipt@1"
+  },
+  "evidence": {
+    "baseline-build": {
+      "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+      "receipt": {
+        "inputs": {
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "build",
+        "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+        "result": {
+          "commands": [
+            {
+              "argv": [
+                "cargo",
+                "build",
+                "--offline",
+                "--locked",
+                "-p",
+                "coworld-mtg-harness"
+              ],
+              "exit_code": 0,
+              "name": "build"
+            },
+            {
+              "argv": [
+                "cargo",
+                "test",
+                "--offline",
+                "--locked",
+                "-p",
+                "coworld-mtg-harness",
+                "fitting::",
+                "--",
+                "--test-threads=1"
+              ],
+              "exit_code": 0,
+              "name": "test"
+            }
+          ],
+          "environment": {
+            "CARGO_BUILD_JOBS": "2",
+            "CARGO_INCREMENTAL": "0",
+            "CARGO_PROFILE_DEV_DEBUG": "0",
+            "CARGO_PROFILE_TEST_DEBUG": "0",
+            "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+            "RUST_MIN_STACK": "16777216"
+          },
+          "passed": true,
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "candidate": {
+      "object": "05b861500ab9779c87954a1476b44af6f5ef7f1a",
+      "receipt": {
+        "inputs": {
+          "implementation": "d7bcb3e7a04f3c0e10896435b0697272375f0b8c",
+          "plan": "b8d575017f07a3f085ce479383b581574cd5a7dd",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "candidate",
+        "request": "2b023e92fcd576c48c26a0b7c44ec6578bfe8309",
+        "result": {
+          "base_source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+          "summary": "Integration fixture: comment-only edit.",
+          "valid": true
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "candidate-build": {
+      "object": "c1684dcfb624b431d07344e828382c00581748c0",
+      "receipt": {
+        "inputs": {
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "source": "bba33efa1e31920d953af0a3be43459576cf78ea"
+        },
+        "kind": "build",
+        "request": "6286ebe4996322c9ece3b9aa28d6b5c25eda6f52",
+        "result": {
+          "commands": [
+            {
+              "argv": [
+                "cargo",
+                "build",
+                "--offline",
+                "--locked",
+                "-p",
+                "coworld-mtg-harness"
+              ],
+              "exit_code": 0,
+              "name": "build"
+            },
+            {
+              "argv": [
+                "cargo",
+                "test",
+                "--offline",
+                "--locked",
+                "-p",
+                "coworld-mtg-harness",
+                "fitting::",
+                "--",
+                "--test-threads=1"
+              ],
+              "exit_code": 0,
+              "name": "test"
+            }
+          ],
+          "environment": {
+            "CARGO_BUILD_JOBS": "2",
+            "CARGO_INCREMENTAL": "0",
+            "CARGO_PROFILE_DEV_DEBUG": "0",
+            "CARGO_PROFILE_TEST_DEBUG": "0",
+            "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+            "RUST_MIN_STACK": "16777216"
+          },
+          "passed": true,
+          "source": "bba33efa1e31920d953af0a3be43459576cf78ea"
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "comparison": {
+      "object": "6912ef958628abef3ca0da63b47c4cbe417594f3",
+      "receipt": {
+        "inputs": {
+          "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+          "observations": "18f1f95eb7014ce11d1bbbe509689d7e133983aa",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46"
+        },
+        "kind": "comparison",
+        "request": "57d99091ea046cee42b1e3a3194943e334608e61",
+        "result": {
+          "cases": [
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000000",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000001",
+              "improved": false,
+              "nodes_after": 52,
+              "nodes_before": 52,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000002",
+              "improved": false,
+              "nodes_after": 50,
+              "nodes_before": 50,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000003",
+              "improved": false,
+              "nodes_after": 47,
+              "nodes_before": 47,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000004",
+              "improved": false,
+              "nodes_after": 55,
+              "nodes_before": 55,
+              "reasons": []
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000005",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "external_deadline",
+              "assumptions_changed": false,
+              "before": "external_deadline",
+              "case_id": "sos-source-row-000006",
+              "improved": false,
+              "nodes_after": null,
+              "nodes_before": null,
+              "reasons": [
+                "candidate execution unresolved"
+              ]
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000007",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "external_deadline",
+              "assumptions_changed": false,
+              "before": "external_deadline",
+              "case_id": "sos-source-row-000008",
+              "improved": false,
+              "nodes_after": null,
+              "nodes_before": null,
+              "reasons": [
+                "candidate execution unresolved"
+              ]
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000009",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000010",
+              "improved": false,
+              "nodes_after": 50,
+              "nodes_before": 50,
+              "reasons": []
+            },
+            {
+              "after": "external_deadline",
+              "assumptions_changed": false,
+              "before": "external_deadline",
+              "case_id": "sos-source-row-000011",
+              "improved": false,
+              "nodes_after": null,
+              "nodes_before": null,
+              "reasons": [
+                "candidate execution unresolved"
+              ]
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000012",
+              "improved": false,
+              "nodes_after": 64,
+              "nodes_before": 64,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000013",
+              "improved": false,
+              "nodes_after": 47,
+              "nodes_before": 47,
+              "reasons": []
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000014",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000015",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000016",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000017",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            },
+            {
+              "after": "matched_supported_projection",
+              "assumptions_changed": false,
+              "before": "matched_supported_projection",
+              "case_id": "sos-source-row-000018",
+              "improved": false,
+              "nodes_after": 60,
+              "nodes_before": 60,
+              "reasons": []
+            },
+            {
+              "after": "input_issue",
+              "assumptions_changed": false,
+              "before": "input_issue",
+              "case_id": "sos-source-row-000019",
+              "improved": false,
+              "nodes_after": 0,
+              "nodes_before": 0,
+              "reasons": []
+            }
+          ],
+          "claim": "Measured bounded compatibility/progress only. Candidate-produced witnesses are not independently proof-checked.",
+          "improved": 0,
+          "passed": false,
+          "previously_inspected": true,
+          "reasons": [],
+          "unseen_holdout": false
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "implementation": {
+      "object": "d7bcb3e7a04f3c0e10896435b0697272375f0b8c",
+      "receipt": {
+        "inputs": {
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "evaluator": "84db87fb1174271cb5b8d45b6c8119c0b9e72def",
+          "messages": "fe198bf9bb8bc81becf26757a9252870d03b1cb8",
+          "model-request": "ccd2dba43241bdbcd32cd05d4f971ee9eb386844",
+          "plan": "b8d575017f07a3f085ce479383b581574cd5a7dd",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "response": "8798f568393c67d71b20deb1d015fb1e6f1a3140",
+          "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+          "system": "20ad27f83d7eaa3e264d5cc3bbf00124ec9e3123"
+        },
+        "kind": "model-implement",
+        "request": "a92718007d91304a6a4b9de391eba8a051cfd1fa",
+        "result": {
+          "model": "deterministic-comment-only",
+          "role": "implement",
+          "usage": {},
+          "valid": true,
+          "value": {
+            "edits": [
+              {
+                "new": "// CAOS integration fixture: no behavior change.\nuse super::*;\nuse anyhow::{anyhow, bail};\nuse std::collections::{BTreeMap, BTreeSet};\n\nfn integer(raw: &str) -> Option<u32> {\n    let n = raw.parse::<f64>().ok()?;\n    (n.is_finite() && n >= 0.0 && n ",
+                "old": "use super::*;\nuse anyhow::{anyhow, bail};\nuse std::collections::{BTreeMap, BTreeSet};\n\nfn integer(raw: &str) -> Option<u32> {\n    let n = raw.parse::<f64>().ok()?;\n    (n.is_finite() && n >= 0.0 && n ",
+                "path": "crates/coworld-mtg-harness/src/fitting/source.rs"
+              }
+            ],
+            "summary": "Integration fixture: comment-only edit."
+          }
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "implementation-review": {
+      "object": "699582050b9e3a9dffb7eeb600f31414b832c919",
+      "receipt": {
+        "inputs": {
+          "build": "c1684dcfb624b431d07344e828382c00581748c0",
+          "candidate": "05b861500ab9779c87954a1476b44af6f5ef7f1a",
+          "comparison": "6912ef958628abef3ca0da63b47c4cbe417594f3",
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "evaluator": "84db87fb1174271cb5b8d45b6c8119c0b9e72def",
+          "messages": "2d44fcfadec7bd522fad97c5aac9299bd450fb3e",
+          "model-request": "2630b8fea73fe09777b074ec72737cbf4fc59d09",
+          "plan": "b8d575017f07a3f085ce479383b581574cd5a7dd",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "response": "93f549f20fb885868feae27fef166169c73f93d6",
+          "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+          "system": "f47843f3474206e1c7b5f1af16ef42380e235ecc"
+        },
+        "kind": "model-implementation-review",
+        "request": "f001f35658a63378d686478e6ba344b3af528c81",
+        "result": {
+          "model": "deterministic-comment-only",
+          "role": "implementation-review",
+          "usage": {},
+          "valid": true,
+          "value": {
+            "approve": true,
+            "findings": [
+              "Synthetic approval for integration testing only."
+            ],
+            "rationale": "Exercise the measured-improvement gate even when the test contributor approves."
+          }
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "plan": {
+      "object": "b8d575017f07a3f085ce479383b581574cd5a7dd",
+      "receipt": {
+        "inputs": {
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "evaluator": "84db87fb1174271cb5b8d45b6c8119c0b9e72def",
+          "messages": "a3dd3dd39b20322a5c57c4cdd8789a1290644b7a",
+          "model-request": "cf222401bb0f82ce20f761915834508a212f54d2",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "response": "42a960e811548b203cfb40acce61636644e106ea",
+          "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+          "system": "0970aee1df371b4562890a8130fafdde1bc4ad15"
+        },
+        "kind": "model-plan",
+        "request": "e85590eb7d81319a7dbd1ae383e92a6e031ed6f8",
+        "result": {
+          "model": "deterministic-comment-only",
+          "role": "plan",
+          "usage": {},
+          "valid": true,
+          "value": {
+            "changes": "Add a source comment without altering behavior.",
+            "component": "observation_adapter",
+            "hypothesis": "Integration fixture: a comment-only edit must not earn improvement credit.",
+            "issue_ids": [
+              "a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed"
+            ],
+            "risks": [
+              "This is a deterministic plumbing test, not a discovered repair."
+            ],
+            "status": "propose",
+            "validation": "Run the full pipeline; expect the frozen comparison to reject the candidate."
+          }
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    },
+    "plan-review": {
+      "object": "91897898eea42d72f3d320e85bbad41715e476dd",
+      "receipt": {
+        "inputs": {
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "evaluator": "84db87fb1174271cb5b8d45b6c8119c0b9e72def",
+          "messages": "bea7e528c8b41d1fa3e398bd4e67c3d8375b247c",
+          "model-request": "a5c4b5294196edb7e30dc48b78c1d2fae7ac5afc",
+          "plan": "b8d575017f07a3f085ce479383b581574cd5a7dd",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "response": "93f549f20fb885868feae27fef166169c73f93d6",
+          "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+          "system": "616147286f00dca59de342be7f00b044243f4a9a"
+        },
+        "kind": "model-plan-review",
+        "request": "1c638d41ec67251012876d7b3e7e030370f05129",
+        "result": {
+          "model": "deterministic-comment-only",
+          "role": "plan-review",
+          "usage": {},
+          "valid": true,
+          "value": {
+            "approve": true,
+            "findings": [
+              "Synthetic approval for integration testing only."
+            ],
+            "rationale": "Exercise the measured-improvement gate even when the test contributor approves."
+          }
+        },
+        "schema": "coworld/caos-receipt@1"
+      }
+    }
+  },
+  "baseline_fit_requests": [
+    "02e1e8059d6ad442805ebb2bcdb3aaad3825dc26",
+    "0c68140a7bac8fb6d6847430b8b4e786078b1a61",
+    "1ef1112a1356a5d1b1bf45a0630f0536cf0dec7b",
+    "2349380ae42419cb983b7131d2fc1e172e97496b",
+    "30b2b4c604611eef101f0e247e077ce12bc9598c",
+    "5f1150bebfea5caa5f40b937107a73dd0ff08522",
+    "635f475531236e912fa5cc6a7a29ecfc7981c428",
+    "683703e84edcf7ceb4023d65916c00316534e02e",
+    "89e789d8727f06ea6ab7bbe19f9ca3edecb9d9c7",
+    "91856af2e709e33cd3308309f0b62de81f4094f9",
+    "937cb7c7c910e960342418cc5011301a6af46ef0",
+    "96d995c828562df63909163238da497641ace0bd",
+    "9a777c8a418ec9ae97cfba4192b32e79639795d5",
+    "9c8156baca00af43f9392f1d9e00e3fe6f9b918b",
+    "a57f96ec99adcd5b385d32f42d41ffa97354033c",
+    "acae03737eb8915cd64fe744efdb635496e6a40d",
+    "c251063a7efbce8edab14d67cf2639ad0645a3b8",
+    "dad14d9edbe93eaf606ed69f5c77330771e96dd1",
+    "dc5e591192ada1dfd83f9c69104d4ef35977f5be",
+    "e4d368d75cfe44d0049ee87bd78e35d3b8e68257"
+  ],
+  "candidate_fit_requests": [
+    "0ec6cceb6660507d8ef730b6ebc0253908d79189",
+    "2ce238c01407412eeb6cdbce858a312688cdf2c4",
+    "36a4a5cc885ca8dd14de7b3f79bd6c40389e23f3",
+    "38a2aec88513713c587049db71cf96c595597a32",
+    "3d6881426b0a8ac9312a308375e7948456a27765",
+    "4ce7c44d7abcd4d05a8d1106b680b90dbb8c9c68",
+    "5ea362d598dd902b6caee6f889340546f7490e48",
+    "7195119cdb10859a180b703eea857724ebf1b131",
+    "731abb397eb7c36843d6eb9b5d098e380b0d42c0",
+    "74d4f3f7159a3347491e11985199315a29700849",
+    "ae36298e17ae854a17e1613d59e9afe153dbbb87",
+    "b4c0e5ed7450404351c97229718e8941edcacf69",
+    "ba9b3c1e32c08fb2081db47c2a97da1a8ed073ea",
+    "bc9412b03d4ac6adcb3af1759910db9e09e58a43",
+    "cb0a462265514665c7f678acb7f24a38a4de66da",
+    "e064330d72daae61a2560e0d132b381b51d7dc1d",
+    "e26a79b730b95203003eea166c8b4f6ba54c23b4",
+    "e73503ce8e8450d95e8b2a7d0bedf5022f47ab61",
+    "ea30fc688a440400efc6ef0230548e7c97756e96",
+    "f42b6df6b33a7100ee0ed128d49394ee35d0bcf2"
+  ],
+  "expected": "rejected",
+  "actual": "rejected",
+  "improved": 0,
+  "submission_helper_reused_same_request": true
+}

@@ -1,0 +1,1431 @@
+{
+  "schema": "coworld/caos-migration-attempts@1",
+  "disclosure": "Receipts and model responses are copied from CAOS objects. Operator notes describe migration edits; they are not model-discovered engine improvements. Shared cached fits are not independent runs.",
+  "attempts": [
+    {
+      "name": "bootstrap",
+      "root_request": "a14f5f37abb9eb8d5477a9945cea2b4342c08881",
+      "commit": "1075aedbca92cd38c44ef495d7a8ea605ad37a01",
+      "tree": "d4c28cf23e2183660836883ec92a9a5e1a73d0fb",
+      "decision": {
+        "inputs": {
+          "acquisition": "a7518c595a3d0de17140579dadd099edd3a0b79f",
+          "baseline-build": "f6094a6e9edb03606b0f5c64d8f1362b33cf7bbd",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "120a0a3b0ec8df1c62759bda46eb1ebd9e6e3bbd",
+          "llm": "d2586104398325ae6b4205d2ca70c33f067af5dc",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "87ef7ae229be7429ae7b2ea624e3820f4e5ed95c",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": null,
+          "origin_issue_ids": [],
+          "previously_inspected": true,
+          "reason": "Baseline build or tests failed.",
+          "unseen_holdout": false,
+          "verdict": "inconclusive"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "f6094a6e9edb03606b0f5c64d8f1362b33cf7bbd",
+          "receipt": {
+            "inputs": {
+              "dependencies": "120a0a3b0ec8df1c62759bda46eb1ebd9e6e3bbd",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "f3236daefb8900e5caedb546c118deffa6022dd4",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 101,
+                  "name": "test"
+                }
+              ],
+              "passed": false,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        }
+      ],
+      "operator_note": "Operator fix: set RUST_MIN_STACK explicitly after the native test thread overflowed its stack."
+    },
+    {
+      "name": "wiring",
+      "root_request": "7565932bfbc308a54b9ad010a7fb45901f96c2a0",
+      "commit": "70a208a1fb856e2c3b7e8fa4e108625994f581ea",
+      "tree": "73717011ea5c37eb6e3b4fd77549360b439178ac",
+      "decision": {
+        "inputs": {
+          "acquisition": "a7518c595a3d0de17140579dadd099edd3a0b79f",
+          "baseline": "dcf6fdb358e57b992e2dab5f47a7316741f1f13a",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "a9554e1d1117ddf2f048ffdb56076303da6f74db",
+          "infrastructure-error": "9f9ff19d1e4873fa61982b680c0467c6ac9495fa",
+          "llm": "d2586104398325ae6b4205d2ca70c33f067af5dc",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "86f574c8b51e21f3c59184f66e10290334c4da88",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": null,
+          "origin_issue_ids": [],
+          "previously_inspected": true,
+          "reason": "CAOS child failed; inspect the linked infrastructure error.",
+          "unseen_holdout": false,
+          "verdict": "inconclusive"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "a9554e1d1117ddf2f048ffdb56076303da6f74db",
+          "receipt": {
+            "inputs": {
+              "observations": "dcf6fdb358e57b992e2dab5f47a7316741f1f13a"
+            },
+            "kind": "discovery",
+            "request": "8e2efadfbfb8154ec68b2cddeac9309784552e4d",
+            "result": {
+              "counts": {
+                "process_failure": 20
+              },
+              "issue_groups": 1
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        }
+      ],
+      "operator_note": "Operator fixes: use the real fit17lands CLI spelling, and fetch the lazy discovery inputs before reading child observations. These process failures were integration failures, not Magic-rule discoveries."
+    },
+    {
+      "name": "resolution",
+      "root_request": "929ac67c7f8ecb284b8ff0f325a742ab4ee4fb85",
+      "commit": "d46bbe3cf826b8ae07b74ae15399a29b1a7ee06b",
+      "tree": "4307b53a765c93e32e7a16ec7fb2203a764d0b40",
+      "decision": {
+        "inputs": {
+          "acquisition": "07b9e126e41c289cf65837bdc174457efb77338a",
+          "baseline": "c0c0efb4453345942eb7ef1562e8e48c38de2b06",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "7f8cc70f23340ad6a5b03a217e0f03508b80fdd3",
+          "llm": "d2586104398325ae6b4205d2ca70c33f067af5dc",
+          "plan": "53d52fa734f4369b557605148c3bc0257243a137",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "1bd85f3d3d8631649cdef8e2e5cd859bd6f11885",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": null,
+          "origin_issue_ids": [],
+          "previously_inspected": true,
+          "reason": "Model response failed its contract: plan",
+          "unseen_holdout": false,
+          "verdict": "inconclusive"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "7f8cc70f23340ad6a5b03a217e0f03508b80fdd3",
+          "receipt": {
+            "inputs": {
+              "observations": "c0c0efb4453345942eb7ef1562e8e48c38de2b06"
+            },
+            "kind": "discovery",
+            "request": "48c3e2a741fbc3372e530762b15f3d9a81683cd8",
+            "result": {
+              "counts": {
+                "external_deadline": 3,
+                "input_issue": 9,
+                "matched_supported_projection": 8
+              },
+              "issue_groups": 25
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "plan",
+          "object": "53d52fa734f4369b557605148c3bc0257243a137",
+          "receipt": {
+            "inputs": {
+              "discovery": "7f8cc70f23340ad6a5b03a217e0f03508b80fdd3",
+              "messages": "6b042a040dda818af484951b0e6b28952072d5a9",
+              "model-request": "68d55560a6173d883e60bbab38ad6008cb54465d",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "provider-error": "afb91a2f948a3a792398e541fc7ab2c07b9f67f1",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "af6331523f7848b25d422337f75bf69fc11088e5"
+            },
+            "kind": "model-plan",
+            "request": "5fa683083b3480df939d9523ae633f16d04d94e1",
+            "result": {
+              "error": "provider failure; see linked error",
+              "role": "plan",
+              "valid": false
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        }
+      ],
+      "operator_note": "Operator fixes: pass a resolved CAOS model-call capability rather than an unevaluated folder; represent unreported deadline progress as null instead of zero."
+    },
+    {
+      "name": "capability",
+      "root_request": "3a9a64e0515c0a7615ff6acb8d997bfa6f2d3bcd",
+      "commit": "10c47a8e9ef84c3fa54e2ce781c62016907ac09d",
+      "tree": "855b83949f559ee7dcefa584d70bee420c13e5e6",
+      "decision": {
+        "inputs": {
+          "acquisition": "56bfac644405e89c572bc4541c28f8477de96961",
+          "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "llm": "319028d70061915b605f478913227e1710b27189",
+          "plan": "5ac39231aed00905fb84820ffb98143559bb1b02",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "a0d552b53a07682a2b24299479097164384e39fb",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": null,
+          "origin_issue_ids": [],
+          "previously_inspected": true,
+          "reason": "Model response failed its contract: plan",
+          "unseen_holdout": false,
+          "verdict": "inconclusive"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "receipt": {
+            "inputs": {
+              "observations": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac"
+            },
+            "kind": "discovery",
+            "request": "571f4a6524888647c2bf81c039a352c5164577b9",
+            "result": {
+              "counts": {
+                "external_deadline": 3,
+                "input_issue": 9,
+                "matched_supported_projection": 8
+              },
+              "issue_groups": 25
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "plan",
+          "object": "5ac39231aed00905fb84820ffb98143559bb1b02",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "messages": "7573d9c01dc73db2c57e511de025e38de3cc6204",
+              "model-request": "4fd4fe3535e9e8a0d4259a79528160695adf84c1",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "provider-error": "00c1066b87698c7958537f38b8ebad1bc878abd0",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "af6331523f7848b25d422337f75bf69fc11088e5"
+            },
+            "kind": "model-plan",
+            "request": "d6ca2642f72f899666715c954e009ac507ae5848",
+            "result": {
+              "error": "provider failure; see linked error",
+              "role": "plan",
+              "valid": false
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        }
+      ],
+      "operator_note": "Operator fix: prepare-request resolves the secret-bearing contributor expression; a bare curry did not carry its secret capability."
+    },
+    {
+      "name": "first-review",
+      "root_request": "aa3f45c1ca4cf03bb897e716bfae5181ab7a13bc",
+      "commit": "dbee1328e0cd74ab01d3fe5860dd39d5f84c4adf",
+      "tree": "c8fc9f191778dca0c14370b6bb145df3a4507812",
+      "decision": {
+        "inputs": {
+          "acquisition": "56bfac644405e89c572bc4541c28f8477de96961",
+          "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "llm": "a88ba454a8a280c6120dae5e7ffd3c2581ea5332",
+          "plan": "ff0f651578325eca4d1c12a608208591415dbb8b",
+          "plan-review": "baaec1d95353aa3fad59feca255e59522081f488",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "565c13971de5e16d0e6612741a50da8b869fdbf5",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": "observation_adapter",
+          "origin_issue_ids": [
+            "a6a604fc29ef8b1e645f8e0cd78c0c39760f9f9fea6b03feea131188dac2fde9",
+            "35a37a514fed8fd1b6956ae356b9cc7c2de0a043606a3e0239cb8d1339af09a0",
+            "84d58c10481a44bf420ff063d14b5c912d52644efd742bd4adb0117d6b96e45d",
+            "eaa91e8096c94a292907f4a0b4faeb1cffb0491259994b6ed3f82795d90c64fb"
+          ],
+          "previously_inspected": true,
+          "reason": "Independent plan review rejected the proposed change.",
+          "unseen_holdout": false,
+          "verdict": "rejected"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "receipt": {
+            "inputs": {
+              "observations": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac"
+            },
+            "kind": "discovery",
+            "request": "571f4a6524888647c2bf81c039a352c5164577b9",
+            "result": {
+              "counts": {
+                "external_deadline": 3,
+                "input_issue": 9,
+                "matched_supported_projection": 8
+              },
+              "issue_groups": 25
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "plan",
+          "object": "ff0f651578325eca4d1c12a608208591415dbb8b",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "messages": "364336f4b3bd52afdc369e7ce559fc8f216724e0",
+              "model-request": "3151de2a8745f5e7521cd31a6003d0428ceff9f9",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "125ed7b695a0bba1948117dd211d16a29bc9f1b7",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "af6331523f7848b25d422337f75bf69fc11088e5"
+            },
+            "kind": "model-plan",
+            "request": "ff985424758ee592a65aa9205ee6800f30085ca1",
+            "result": {
+              "model": "claude-opus-4-8",
+              "role": "plan",
+              "usage": {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 0,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 0,
+                "cache_read_input_tokens": 0,
+                "inference_geo": "global",
+                "input_tokens": 77858,
+                "output_tokens": 1667,
+                "output_tokens_details": {
+                  "thinking_tokens": 0
+                },
+                "service_tier": "standard"
+              },
+              "valid": true,
+              "value": {
+                "changes": "In crates/coworld-mtg-harness/src/fitting/source.rs, extend the unsupported-reason match in `extract_game` (the `else` arm that currently sets `field.reason`) to add explicit cases for suffixes ending in `creatures_attacked`, `creatures_unblocked`, and `non_creatures_cast`, each with an accurate limitation string (e.g. for attacked/unblocked: 'recorded combat declaration is a per-attacker name list; the fitter does not reconstruct attack/block target assignments or blocked/unblocked status as a supported projection'; for non_creatures_cast: keep the existing documented ambiguity that the family may or may not exclude instants/sorceries). Leave `projection()` returning None for these so they stay Unsupported. In search.rs, the generic diagnostic_code branch already routes non-combat/mana/ability columns to `unsupported_source_projection`; keep that, but change the legacy fallback `detail` used when `field.projection.is_none()` so it no longer asserts 'ability IDs are not card IDs' for columns that are not `*_abilities`. Specifically, gate that ability-specific sentence on `field.column.ends_with(\"abilities\")` and otherwise emit a neutral detail like 'no implemented projection for this recorded source field'. Do not alter disposition assignment, milestone selection, or the matching/checker logic.",
+                "component": "observation_adapter",
+                "hypothesis": "Several turn columns (`creatures_attacked`, `creatures_unblocked`) fall through `projection()` to the generic `\"no implemented projection for this recorded source field\"` branch in source.rs, and search.rs then emits an issue with the misleading legacy detail string 'no implemented projection for this recorded field; ability IDs are not card IDs'. That detail is factually wrong for these non-ability columns: they are combat-declaration name lists, not ability IDs. The wrong text is deterministic noise that mislabels supported-vs-unsupported reasoning without changing coverage, and it conflates distinct source semantics (attack/block declarations) with the ability-ID limitation. Fixing the reason text and giving these columns a precise, honestly-unsupported disposition improves the truthfulness of the observation contract at fixed budget without weakening any checker.",
+                "issue_ids": [
+                  "a6a604fc29ef8b1e645f8e0cd78c0c39760f9f9fea6b03feea131188dac2fde9",
+                  "35a37a514fed8fd1b6956ae356b9cc7c2de0a043606a3e0239cb8d1339af09a0",
+                  "84d58c10481a44bf420ff063d14b5c912d52644efd742bd4adb0117d6b96e45d",
+                  "eaa91e8096c94a292907f4a0b4faeb1cffb0491259994b6ed3f82795d90c64fb"
+                ],
+                "risks": [
+                  "The legacy issue identity/detail string is used as part of factory issue identity (comment in search.rs notes 'issue identity includes detail'); changing the detail text will change issue IDs for the affected UnsupportedProjection issues, which could be read as new/lost issues by a strict differ. Mitigation: this is a text-accuracy fix on already-unsupported fields, coverage and dispositions are unchanged; confirm the evaluation policy compares coverage/matches (allow_lost_coverage=false, allow_regressed_matches=false) rather than exact issue-ID stability, and if issue-ID stability is required, scope the detail change only to the reason field and keep the top-level detail constant.",
+                  "Existing tests assert the exact string 'no implemented projection for this recorded field; ability IDs are not card IDs' (e.g. rejected_branch test); those assertions must be updated to reflect the ability-gated text, and care is needed not to weaken them into vacuous checks.",
+                  "non_creatures_cast semantics remain genuinely ambiguous; the change must keep it Unsupported and must not be misread as adding a supported projection."
+                ],
+                "status": "propose",
+                "validation": "Add/extend unit tests in source.rs asserting that fields for `user_turn_2_creatures_attacked`, `oppo_turn_2_creatures_unblocked`, and `oppo_turn_1_non_creatures_cast` have FieldDisposition::Unsupported, projection None, and a reason that does NOT contain 'ability IDs' and DOES contain the new combat-declaration wording. In search.rs witness_tests, extend the existing rejected-branch test (or add one) to assert that a non-ability unsupported column produces an issue whose detail no longer contains 'ability IDs are not card IDs' while an `*_abilities` column still does. Run the target test command `cargo test --offline --locked -p coworld-mtg-harness fitting:: -- --test-threads=1`; require all existing tests still pass (no regressed matches, no lost coverage) and the 8 matched_supported_projection cases remain matched with unchanged milestones_fitted."
+              }
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "anthropic",
+            "model": "claude-opus-4-8",
+            "usage": {
+              "input_tokens": 77858,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              },
+              "output_tokens": 1667,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard",
+              "inference_geo": "global"
+            },
+            "stop_reason": "end_turn",
+            "text": "{\"status\": \"propose\", \"component\": \"observation_adapter\", \"issue_ids\": [\"a6a604fc29ef8b1e645f8e0cd78c0c39760f9f9fea6b03feea131188dac2fde9\", \"35a37a514fed8fd1b6956ae356b9cc7c2de0a043606a3e0239cb8d1339af09a0\", \"84d58c10481a44bf420ff063d14b5c912d52644efd742bd4adb0117d6b96e45d\", \"eaa91e8096c94a292907f4a0b4faeb1cffb0491259994b6ed3f82795d90c64fb\"], \"hypothesis\": \"Several turn columns (`creatures_attacked`, `creatures_unblocked`) fall through `projection()` to the generic `\\\"no implemented projection for this recorded source field\\\"` branch in source.rs, and search.rs then emits an issue with the misleading legacy detail string 'no implemented projection for this recorded field; ability IDs are not card IDs'. That detail is factually wrong for these non-ability columns: they are combat-declaration name lists, not ability IDs. The wrong text is deterministic noise that mislabels supported-vs-unsupported reasoning without changing coverage, and it conflates distinct source semantics (attack/block declarations) with the ability-ID limitation. Fixing the reason text and giving these columns a precise, honestly-unsupported disposition improves the truthfulness of the observation contract at fixed budget without weakening any checker.\", \"changes\": \"In crates/coworld-mtg-harness/src/fitting/source.rs, extend the unsupported-reason match in `extract_game` (the `else` arm that currently sets `field.reason`) to add explicit cases for suffixes ending in `creatures_attacked`, `creatures_unblocked`, and `non_creatures_cast`, each with an accurate limitation string (e.g. for attacked/unblocked: 'recorded combat declaration is a per-attacker name list; the fitter does not reconstruct attack/block target assignments or blocked/unblocked status as a supported projection'; for non_creatures_cast: keep the existing documented ambiguity that the family may or may not exclude instants/sorceries). Leave `projection()` returning None for these so they stay Unsupported. In search.rs, the generic diagnostic_code branch already routes non-combat/mana/ability columns to `unsupported_source_projection`; keep that, but change the legacy fallback `detail` used when `field.projection.is_none()` so it no longer asserts 'ability IDs are not card IDs' for columns that are not `*_abilities`. Specifically, gate that ability-specific sentence on `field.column.ends_with(\\\"abilities\\\")` and otherwise emit a neutral detail like 'no implemented projection for this recorded source field'. Do not alter disposition assignment, milestone selection, or the matching/checker logic.\", \"validation\": \"Add/extend unit tests in source.rs asserting that fields for `user_turn_2_creatures_attacked`, `oppo_turn_2_creatures_unblocked`, and `oppo_turn_1_non_creatures_cast` have FieldDisposition::Unsupported, projection None, and a reason that does NOT contain 'ability IDs' and DOES contain the new combat-declaration wording. In search.rs witness_tests, extend the existing rejected-branch test (or add one) to assert that a non-ability unsupported column produces an issue whose detail no longer contains 'ability IDs are not card IDs' while an `*_abilities` column still does. Run the target test command `cargo test --offline --locked -p coworld-mtg-harness fitting:: -- --test-threads=1`; require all existing tests still pass (no regressed matches, no lost coverage) and the 8 matched_supported_projection cases remain matched with unchanged milestones_fitted.\", \"risks\": [\"The legacy issue identity/detail string is used as part of factory issue identity (comment in search.rs notes 'issue identity includes detail'); changing the detail text will change issue IDs for the affected UnsupportedProjection issues, which could be read as new/lost issues by a strict differ. Mitigation: this is a text-accuracy fix on already-unsupported fields, coverage and dispositions are unchanged; confirm the evaluation policy compares coverage/matches (allow_lost_coverage=false, allow_regressed_matches=false) rather than exact issue-ID stability, and if issue-ID stability is required, scope the detail change only to the reason field and keep the top-level detail constant.\", \"Existing tests assert the exact string 'no implemented projection for this recorded field; ability IDs are not card IDs' (e.g. rejected_branch test); those assertions must be updated to reflect the ability-gated text, and care is needed not to weaken them into vacuous checks.\", \"non_creatures_cast semantics remain genuinely ambiguous; the change must keep it Unsupported and must not be misread as adding a supported projection.\"]}"
+          }
+        },
+        {
+          "label": "plan-review",
+          "object": "baaec1d95353aa3fad59feca255e59522081f488",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "messages": "a7bbc00b86712acff17988966f74b41653a2da47",
+              "model-request": "a5ecfa43a7908ed1faf34f2eed951baacf94f50e",
+              "plan": "ff0f651578325eca4d1c12a608208591415dbb8b",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "a04575c5c42c158ff2a3844e62fa8f008052d180",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "c5853188a2ccb906919e5714bf643480f9808473"
+            },
+            "kind": "model-plan-review",
+            "request": "07d7a6f029a1d9fd544b1a8d9f85641703673be9",
+            "result": {
+              "model": "claude-opus-4-8",
+              "role": "plan-review",
+              "usage": {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 0,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 0,
+                "cache_read_input_tokens": 0,
+                "inference_geo": "global",
+                "input_tokens": 79964,
+                "output_tokens": 1571,
+                "output_tokens_details": {
+                  "thinking_tokens": 0
+                },
+                "service_tier": "standard"
+              },
+              "valid": true,
+              "value": {
+                "approve": false,
+                "findings": [
+                  "The plan's core factual claim is sound: `creatures_attacked`, `creatures_unblocked`, and `non_creatures_cast` all fall through `projection()` to None, then source.rs's final else-arm assigns the generic 'no implemented projection for this recorded source field' reason, and search.rs emits the misleading legacy detail 'no implemented projection for this recorded field; ability IDs are not card IDs' for these non-ability columns. So the mislabeling is real.",
+                  "CRITICAL: The plan's risk section flags but does not resolve the acceptance-policy conflict. The comment in search.rs explicitly says 'Existing factory issue identity includes detail. Keep this legacy signature stable; the precise explanation belongs in evidence.' Discovery issue IDs (e.g. a6a604fc..., 35a37a51...) are content hashes over the issue including detail. Changing the top-level `detail` will change these IDs. Under a strict differ this reads as lost issues + new issues, which collides with allow_lost_coverage=false / allow_regressed_matches=false. The plan does not commit to a concrete resolution; it only says 'if issue-ID stability is required, scope the detail change only to the reason field'. That conditional is not a scoped decision.",
+                  "The plan proposes changing the search.rs `detail` string ('gate that ability-specific sentence on field.column.ends_with(\"abilities\")'), which directly contradicts the source's documented intent to keep the legacy detail signature stable and put explanation in `evidence`. This is exactly the kind of change the source authors warned against. The correct, in-contract fix is to leave `detail` untouched and improve only `field.reason` (surfaced via `evidence.reason`), which already carries per-column semantics.",
+                  "The evidence already partially disambiguates these columns: their `evidence.diagnostic_code` is 'unsupported_source_projection' and `evidence.reason` is the generic string. Improving `field.reason` in source.rs for these three suffixes would flow into `evidence.reason` in search.rs with NO change to the identity-bearing `detail`, achieving the truthfulness goal without perturbing issue IDs. The plan instead insists on also editing the search.rs detail text, which is the harmful part.",
+                  "The plan asserts these changes yield 'no lost coverage, no regressed matches' and that the 8 matched cases stay matched. That is plausible for dispositions/milestones (unchanged), but the issue-ID churn from the detail edit means the coverage/issue diff is NOT obviously neutral. minimum_improved_cases=1 is also not clearly met: nothing about correctness or coverage improves; only issue prose changes. A pure text-accuracy edit may not register as an 'improved case' under the evaluation, leaving the change with no measurable acceptance benefit and a concrete regression risk.",
+                  "The `non_creatures_cast` handling is fine in intent (keep Unsupported, keep documented ambiguity) but note projection() already returns None for it via an explicit `\"non_creatures_cast\" => None` arm with a comment, so no source.rs change is strictly needed for that column beyond the reason text; the plan should not touch the projection() arm.",
+                  "Test-update risk is real and under-specified: `rejected_branch_retains_original_comparisons_separate_from_prefix` asserts the exact legacy detail 'no implemented projection for this recorded field; ability IDs are not card IDs' for a combat_damage_taken column. If detail is gated on abilities, that combat column's assertion must change. The plan says to update it but gives no guarantee the update stays a meaningful check rather than being loosened."
+                ],
+                "rationale": "The hypothesis is accurate and the observation-adapter scope is appropriate, but the concrete plan proposes editing the identity-bearing `detail` string in search.rs, which the source explicitly documents must stay stable because factory issue identity is hashed over it. Under the stated acceptance policy (allow_lost_coverage=false, allow_regressed_matches=false, minimum_improved_cases=1) this churns discovery issue IDs and risks being scored as lost/new issues with no offsetting correctness or coverage gain. A sound, in-contract version of this fix exists (improve only source.rs `field.reason`, which surfaces through `evidence.reason`, leaving `detail` and all IDs untouched), but the plan does not commit to that and instead requires the unsafe detail edit. Reject; resubmit scoped to reason/evidence only, with an explicit statement that top-level issue `detail` and thus issue IDs are unchanged, and with test updates that preserve, not weaken, the ability-vs-non-ability distinction."
+              }
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "anthropic",
+            "model": "claude-opus-4-8",
+            "usage": {
+              "input_tokens": 79964,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              },
+              "output_tokens": 1571,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard",
+              "inference_geo": "global"
+            },
+            "stop_reason": "end_turn",
+            "text": "{\"approve\": false, \"findings\": [\"The plan's core factual claim is sound: `creatures_attacked`, `creatures_unblocked`, and `non_creatures_cast` all fall through `projection()` to None, then source.rs's final else-arm assigns the generic 'no implemented projection for this recorded source field' reason, and search.rs emits the misleading legacy detail 'no implemented projection for this recorded field; ability IDs are not card IDs' for these non-ability columns. So the mislabeling is real.\", \"CRITICAL: The plan's risk section flags but does not resolve the acceptance-policy conflict. The comment in search.rs explicitly says 'Existing factory issue identity includes detail. Keep this legacy signature stable; the precise explanation belongs in evidence.' Discovery issue IDs (e.g. a6a604fc..., 35a37a51...) are content hashes over the issue including detail. Changing the top-level `detail` will change these IDs. Under a strict differ this reads as lost issues + new issues, which collides with allow_lost_coverage=false / allow_regressed_matches=false. The plan does not commit to a concrete resolution; it only says 'if issue-ID stability is required, scope the detail change only to the reason field'. That conditional is not a scoped decision.\", \"The plan proposes changing the search.rs `detail` string ('gate that ability-specific sentence on field.column.ends_with(\\\"abilities\\\")'), which directly contradicts the source's documented intent to keep the legacy detail signature stable and put explanation in `evidence`. This is exactly the kind of change the source authors warned against. The correct, in-contract fix is to leave `detail` untouched and improve only `field.reason` (surfaced via `evidence.reason`), which already carries per-column semantics.\", \"The evidence already partially disambiguates these columns: their `evidence.diagnostic_code` is 'unsupported_source_projection' and `evidence.reason` is the generic string. Improving `field.reason` in source.rs for these three suffixes would flow into `evidence.reason` in search.rs with NO change to the identity-bearing `detail`, achieving the truthfulness goal without perturbing issue IDs. The plan instead insists on also editing the search.rs detail text, which is the harmful part.\", \"The plan asserts these changes yield 'no lost coverage, no regressed matches' and that the 8 matched cases stay matched. That is plausible for dispositions/milestones (unchanged), but the issue-ID churn from the detail edit means the coverage/issue diff is NOT obviously neutral. minimum_improved_cases=1 is also not clearly met: nothing about correctness or coverage improves; only issue prose changes. A pure text-accuracy edit may not register as an 'improved case' under the evaluation, leaving the change with no measurable acceptance benefit and a concrete regression risk.\", \"The `non_creatures_cast` handling is fine in intent (keep Unsupported, keep documented ambiguity) but note projection() already returns None for it via an explicit `\\\"non_creatures_cast\\\" => None` arm with a comment, so no source.rs change is strictly needed for that column beyond the reason text; the plan should not touch the projection() arm.\", \"Test-update risk is real and under-specified: `rejected_branch_retains_original_comparisons_separate_from_prefix` asserts the exact legacy detail 'no implemented projection for this recorded field; ability IDs are not card IDs' for a combat_damage_taken column. If detail is gated on abilities, that combat column's assertion must change. The plan says to update it but gives no guarantee the update stays a meaningful check rather than being loosened.\"], \"rationale\": \"The hypothesis is accurate and the observation-adapter scope is appropriate, but the concrete plan proposes editing the identity-bearing `detail` string in search.rs, which the source explicitly documents must stay stable because factory issue identity is hashed over it. Under the stated acceptance policy (allow_lost_coverage=false, allow_regressed_matches=false, minimum_improved_cases=1) this churns discovery issue IDs and risks being scored as lost/new issues with no offsetting correctness or coverage gain. A sound, in-contract version of this fix exists (improve only source.rs `field.reason`, which surfaces through `evidence.reason`, leaving `detail` and all IDs untouched), but the plan does not commit to that and instead requires the unsafe detail edit. Reject; resubmit scoped to reason/evidence only, with an explicit statement that top-level issue `detail` and thus issue IDs are unchanged, and with test updates that preserve, not weaken, the ability-vs-non-ability distinction.\"}"
+          }
+        }
+      ],
+      "operator_note": "The model proposed a diagnostic wording change and its reviewer rejected it. Operator changes: provide the frozen evaluator and compact native traces, and allow one bounded plan revision. Pure diagnostic changes cannot earn improvement credit."
+    },
+    {
+      "name": "schema",
+      "root_request": "a87f4dee81daf96a1c8b0528c608c027b3e3cdb0",
+      "commit": "0e2d126c35482ec4ccf3e8b9af9d7d76273ecf9c",
+      "tree": "db4f80037be5d689ed02e72cb15bc0a46ba49464",
+      "decision": {
+        "inputs": {
+          "acquisition": "56bfac644405e89c572bc4541c28f8477de96961",
+          "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "llm": "a88ba454a8a280c6120dae5e7ffd3c2581ea5332",
+          "plan": "21e54d9f872f918097b9a8948186a7fe67ed14bf",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "977a78567fa3dd66168f7df2fa9840acef7aff5f",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": null,
+          "origin_issue_ids": [],
+          "previously_inspected": true,
+          "reason": "Model stage could not produce a valid result: plan ('source' is not a valid Component)",
+          "unseen_holdout": false,
+          "verdict": "inconclusive"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "receipt": {
+            "inputs": {
+              "observations": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac"
+            },
+            "kind": "discovery",
+            "request": "571f4a6524888647c2bf81c039a352c5164577b9",
+            "result": {
+              "counts": {
+                "external_deadline": 3,
+                "input_issue": 9,
+                "matched_supported_projection": 8
+              },
+              "issue_groups": 25
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "plan",
+          "object": "21e54d9f872f918097b9a8948186a7fe67ed14bf",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "evaluator": "658305de565bc0be0844af61e3ca9091db6762a5",
+              "messages": "de949c16bde7dd44bb41ff899734a76edfee843c",
+              "model-request": "2c854c381547dd4d1cbed6a9e8b3e48162fc92ef",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "be276fcf23325052ea6082d4477470efe1028645",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "0970aee1df371b4562890a8130fafdde1bc4ad15"
+            },
+            "kind": "model-plan",
+            "request": "33b4ae8f55174b6a97fde81c449b689710510641",
+            "result": {
+              "error": "'source' is not a valid Component",
+              "failure_kind": "invalid_response",
+              "role": "plan",
+              "valid": false
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "anthropic",
+            "model": "claude-opus-4-8",
+            "usage": {
+              "input_tokens": 89006,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              },
+              "output_tokens": 1036,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard",
+              "inference_geo": "global"
+            },
+            "stop_reason": "end_turn",
+            "text": "{\"status\": \"propose\", \"component\": \"source\", \"issue_ids\": [\"9a0b5cf3888ce9b96ca1c7370c2a779e09e7965d6fce106f5325d621b6a406d3\"], \"hypothesis\": \"The `non_creatures_cast` source family is explicitly unsupported in `projection()` (returns `None` with the comment 'Official helper gives the type but not whether this family excludes instants/sorceries'). Yet the runtime observer in search.rs already computes a distinct `non_creature_cast` bucket that is defined precisely as spells that are neither Creature nor Instant nor Sorcery. That runtime bucket is exactly a family that excludes instants/sorceries. So the recorded `*_non_creatures_cast` column, if the source dataset uses the same exclusive definition, has a directly implementable and already-observed projection. The stated blocker is a semantic-uncertainty concern, not an engine or observation gap. Case sos-source-row-000018 shows `oppo_turn_1_non_creatures_cast` currently marked unsupported while all other turn-1 milestones already match; wiring this projection could turn a previously-unsupported field into an enforced, covered one, raising fully_covered_milestones for cases that carry this column with a nonblank card list.\", \"changes\": \"This is NOT a safe change as stated, and I am flagging why rather than implementing it blindly. The evaluator rewards more fully_covered_milestones only if the newly enforced field genuinely Matches. Enabling `non_creatures_cast -> non_creature_cast` requires establishing that the 17Lands column semantics match the engine's exclusive (non-Land/non-Creature/non-Instant/non-Sorcery) bucket. The source comment records a real, unresolved ambiguity: 17Lands 'non_creatures_cast' may mean 'all noncreature spells' (INCLUDING instants/sorceries), in which case the engine's `non_creature_cast` bucket is a strict subset and comparisons would spuriously Mismatch, regressing matched_supported_projection cases (a hard evaluator failure via 'regressed compatible trajectory'). I have no run or dataset evidence resolving which definition 17Lands uses. Under the frozen policy, guessing wrong loses coverage on the eight currently-matched cases. Therefore no code edit is justified from the available evidence.\", \"validation\": \"n/a\", \"risks\": [\"The ambiguity flagged in source.rs projection() is genuine: if 17Lands non_creatures_cast includes instants/sorceries, enabling the projection produces false Mismatches that regress the 8 matched_supported_projection cases and trip evaluator reasons 'regressed compatible trajectory' and 'lost fully covered milestones'.\", \"No run or dataset schema evidence is available to disambiguate the column semantics; a bounded miss or a plausible-looking mapping is not proof.\", \"Every currently-matched case (rows 1,2,3,4,10,12,13,18) carries these turn-1 fields, so a wrong change risks broad regression rather than isolated improvement.\"]}"
+          }
+        }
+      ],
+      "operator_note": "Operator change: feed the exact schema validation failure back to the planner once. Preserve the invalid source component instead of coercing it to a valid enum."
+    },
+    {
+      "name": "epoch",
+      "root_request": "58410bd942e3b7d298a15f6c5938e74b2a711716",
+      "commit": "71af54aec8d387524dad2884cf055e5a9a53cc7c",
+      "tree": "9e45bcd455adc20db0154bca18445df7bf8f98aa",
+      "decision": {
+        "inputs": {
+          "acquisition": "56bfac644405e89c572bc4541c28f8477de96961",
+          "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "llm": "a88ba454a8a280c6120dae5e7ffd3c2581ea5332",
+          "plan": "7e8bf801a0dede385d24284ae30288b86edaa158",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "prior-plan": "e2a0e0f59f14d77f0d3da5fae1fa705a62f5a030",
+          "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "6d41897d4cd2748132cef39236e44f520512b959",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": "search",
+          "origin_issue_ids": [
+            "eebba2c2965993823d751156d19ca84eeea3dca9b7cdcce6ae579fe46a456287",
+            "9a0b5cf3888ce9b96ca1c7370c2a779e09e7965d6fce106f5325d621b6a406d3",
+            "a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed"
+          ],
+          "previously_inspected": true,
+          "reason": "Planner found no safe bounded change.",
+          "unseen_holdout": false,
+          "verdict": "no_change"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "receipt": {
+            "inputs": {
+              "observations": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac"
+            },
+            "kind": "discovery",
+            "request": "571f4a6524888647c2bf81c039a352c5164577b9",
+            "result": {
+              "counts": {
+                "external_deadline": 3,
+                "input_issue": 9,
+                "matched_supported_projection": 8
+              },
+              "issue_groups": 25
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "plan",
+          "object": "7e8bf801a0dede385d24284ae30288b86edaa158",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "evaluator": "658305de565bc0be0844af61e3ca9091db6762a5",
+              "messages": "bf470dd6554b5cb5f851f34ac9d8b1a3b9c989d7",
+              "model-request": "5f581061b883d955d8bbf666b454d2b9101b6093",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "prior-plan": "e2a0e0f59f14d77f0d3da5fae1fa705a62f5a030",
+              "response": "0445075220db7f8072514c44905f90abba2a176e",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "62db3039c31344a419d8af8e221378357326f821"
+            },
+            "kind": "model-plan",
+            "request": "50ed964e41f0a9246cda3e0f168469043d9efb5e",
+            "result": {
+              "model": "claude-opus-4-8",
+              "role": "plan",
+              "usage": {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 0,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 0,
+                "cache_read_input_tokens": 0,
+                "inference_geo": "global",
+                "input_tokens": 90580,
+                "output_tokens": 992,
+                "output_tokens_details": {
+                  "thinking_tokens": 0
+                },
+                "service_tier": "standard"
+              },
+              "valid": true,
+              "value": {
+                "changes": "None. No source edit within the allowed paths is justified by the available evidence.",
+                "component": "search",
+                "hypothesis": "I searched the available evidence for a change that could raise fully_covered_milestones or milestones_fitted, or reduce nodes on a matched case, without regressing any of the 8 matched_supported_projection cases. No candidate is safely supported. (1) The prior non_creatures_cast proposal (issue 9a0b5cf3) is blocked by a genuine semantic ambiguity that the source code itself documents in projection(): 17Lands non_creatures_cast may include instants/sorceries, whereas the engine's non_creature_cast bucket excludes them. Enabling the mapping without dataset-schema evidence risks false Mismatches on the newly-enforced field, which would trip 'regressed compatible trajectory' and 'lost fully covered milestones' across the very cases that carry this column. No run or schema evidence disambiguates it. (2) The three external_deadline cases (issue eebba2c2, rows 6/8/11) are the only cases with unresolved execution, but they show no nodes, no partial trace, and no diagnosis of WHERE the deadline is hit. I cannot attribute them to a specific search inefficiency: action ordering, branching factor, or a specific stall are all unobserved. Guessing at a search-ordering tweak is not grounded in a discovered root cause and could perturb node counts on the 8 matched cases (raising nodes counts as no improvement and could not be shown safe). (3) The zero-mulligan input_issue cases (issue a516cd46) are an intentional, documented scope boundary in source.rs and search.rs; relaxing it is a scope expansion requiring new reconstruction of mulligan chronology, not a bounded fix, and the policy forbids weakening acceptance.",
+                "issue_ids": [
+                  "eebba2c2965993823d751156d19ca84eeea3dca9b7cdcce6ae579fe46a456287",
+                  "9a0b5cf3888ce9b96ca1c7370c2a779e09e7965d6fce106f5325d621b6a406d3",
+                  "a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed"
+                ],
+                "risks": [
+                  "Enabling non_creatures_cast without confirming 17Lands column semantics would produce false Mismatches, regressing the 8 matched_supported_projection cases (evaluator reasons 'regressed compatible trajectory', 'lost fully covered milestones').",
+                  "The external_deadline cases lack any node/trace evidence, so any search-ordering change is an unattributed guess that could increase nodes on matched cases (never an improvement) while not being demonstrably safe.",
+                  "Relaxing the zero-mulligan gate weakens a documented scope boundary and would require unverified reconstruction of mulligan chronology, violating the acceptance policy."
+                ],
+                "status": "no_safe_change",
+                "validation": "n/a"
+              }
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "anthropic",
+            "model": "claude-opus-4-8",
+            "usage": {
+              "input_tokens": 90580,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              },
+              "output_tokens": 992,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard",
+              "inference_geo": "global"
+            },
+            "stop_reason": "end_turn",
+            "text": "{\"status\": \"no_safe_change\", \"component\": \"search\", \"issue_ids\": [\"eebba2c2965993823d751156d19ca84eeea3dca9b7cdcce6ae579fe46a456287\", \"9a0b5cf3888ce9b96ca1c7370c2a779e09e7965d6fce106f5325d621b6a406d3\", \"a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed\"], \"hypothesis\": \"I searched the available evidence for a change that could raise fully_covered_milestones or milestones_fitted, or reduce nodes on a matched case, without regressing any of the 8 matched_supported_projection cases. No candidate is safely supported. (1) The prior non_creatures_cast proposal (issue 9a0b5cf3) is blocked by a genuine semantic ambiguity that the source code itself documents in projection(): 17Lands non_creatures_cast may include instants/sorceries, whereas the engine's non_creature_cast bucket excludes them. Enabling the mapping without dataset-schema evidence risks false Mismatches on the newly-enforced field, which would trip 'regressed compatible trajectory' and 'lost fully covered milestones' across the very cases that carry this column. No run or schema evidence disambiguates it. (2) The three external_deadline cases (issue eebba2c2, rows 6/8/11) are the only cases with unresolved execution, but they show no nodes, no partial trace, and no diagnosis of WHERE the deadline is hit. I cannot attribute them to a specific search inefficiency: action ordering, branching factor, or a specific stall are all unobserved. Guessing at a search-ordering tweak is not grounded in a discovered root cause and could perturb node counts on the 8 matched cases (raising nodes counts as no improvement and could not be shown safe). (3) The zero-mulligan input_issue cases (issue a516cd46) are an intentional, documented scope boundary in source.rs and search.rs; relaxing it is a scope expansion requiring new reconstruction of mulligan chronology, not a bounded fix, and the policy forbids weakening acceptance.\", \"changes\": \"None. No source edit within the allowed paths is justified by the available evidence.\", \"validation\": \"n/a\", \"risks\": [\"Enabling non_creatures_cast without confirming 17Lands column semantics would produce false Mismatches, regressing the 8 matched_supported_projection cases (evaluator reasons 'regressed compatible trajectory', 'lost fully covered milestones').\", \"The external_deadline cases lack any node/trace evidence, so any search-ordering change is an unattributed guess that could increase nodes on matched cases (never an improvement) while not being demonstrably safe.\", \"Relaxing the zero-mulligan gate weakens a documented scope boundary and would require unverified reconstruction of mulligan chronology, violating the acceptance policy.\"]}"
+          }
+        },
+        {
+          "label": "prior-plan",
+          "object": "e2a0e0f59f14d77f0d3da5fae1fa705a62f5a030",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "evaluator": "658305de565bc0be0844af61e3ca9091db6762a5",
+              "messages": "de949c16bde7dd44bb41ff899734a76edfee843c",
+              "model-request": "2c854c381547dd4d1cbed6a9e8b3e48162fc92ef",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "be276fcf23325052ea6082d4477470efe1028645",
+              "sample": "c4c6fe969ff027ad171a6851ca3661c38fd4be25",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "0970aee1df371b4562890a8130fafdde1bc4ad15"
+            },
+            "kind": "model-plan",
+            "request": "fff1c7269f2f1581ecf8ab9adb274a4b8c9531e4",
+            "result": {
+              "error": "'source' is not a valid Component",
+              "failure_kind": "invalid_response",
+              "role": "plan",
+              "valid": false
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "anthropic",
+            "model": "claude-opus-4-8",
+            "usage": {
+              "input_tokens": 89006,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              },
+              "output_tokens": 1036,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard",
+              "inference_geo": "global"
+            },
+            "stop_reason": "end_turn",
+            "text": "{\"status\": \"propose\", \"component\": \"source\", \"issue_ids\": [\"9a0b5cf3888ce9b96ca1c7370c2a779e09e7965d6fce106f5325d621b6a406d3\"], \"hypothesis\": \"The `non_creatures_cast` source family is explicitly unsupported in `projection()` (returns `None` with the comment 'Official helper gives the type but not whether this family excludes instants/sorceries'). Yet the runtime observer in search.rs already computes a distinct `non_creature_cast` bucket that is defined precisely as spells that are neither Creature nor Instant nor Sorcery. That runtime bucket is exactly a family that excludes instants/sorceries. So the recorded `*_non_creatures_cast` column, if the source dataset uses the same exclusive definition, has a directly implementable and already-observed projection. The stated blocker is a semantic-uncertainty concern, not an engine or observation gap. Case sos-source-row-000018 shows `oppo_turn_1_non_creatures_cast` currently marked unsupported while all other turn-1 milestones already match; wiring this projection could turn a previously-unsupported field into an enforced, covered one, raising fully_covered_milestones for cases that carry this column with a nonblank card list.\", \"changes\": \"This is NOT a safe change as stated, and I am flagging why rather than implementing it blindly. The evaluator rewards more fully_covered_milestones only if the newly enforced field genuinely Matches. Enabling `non_creatures_cast -> non_creature_cast` requires establishing that the 17Lands column semantics match the engine's exclusive (non-Land/non-Creature/non-Instant/non-Sorcery) bucket. The source comment records a real, unresolved ambiguity: 17Lands 'non_creatures_cast' may mean 'all noncreature spells' (INCLUDING instants/sorceries), in which case the engine's `non_creature_cast` bucket is a strict subset and comparisons would spuriously Mismatch, regressing matched_supported_projection cases (a hard evaluator failure via 'regressed compatible trajectory'). I have no run or dataset evidence resolving which definition 17Lands uses. Under the frozen policy, guessing wrong loses coverage on the eight currently-matched cases. Therefore no code edit is justified from the available evidence.\", \"validation\": \"n/a\", \"risks\": [\"The ambiguity flagged in source.rs projection() is genuine: if 17Lands non_creatures_cast includes instants/sorceries, enabling the projection produces false Mismatches that regress the 8 matched_supported_projection cases and trip evaluator reasons 'regressed compatible trajectory' and 'lost fully covered milestones'.\", \"No run or dataset schema evidence is available to disambiguate the column semantics; a bounded miss or a plausible-looking mapping is not proof.\", \"Every currently-matched case (rows 1,2,3,4,10,12,13,18) carries these turn-1 fields, so a wrong change risks broad regression rather than isolated improvement.\"]}"
+          }
+        }
+      ],
+      "operator_note": "Real-data epoch: the second planner abstained. This is a model judgment under the supplied evidence, not proof that no repair exists. Native requests shared with earlier attempts are cached, not fresh trials."
+    },
+    {
+      "name": "noop-readonly",
+      "root_request": "ca181d5f93b5080775232223d81263ce6ca6ac60",
+      "commit": "7539f2e20357698011b9c19e44711ba7d2aa24f8",
+      "tree": "89b3b98e4fea16ab66b0b9d7ca9dab182f0595e8",
+      "decision": {
+        "inputs": {
+          "acquisition": "56bfac644405e89c572bc4541c28f8477de96961",
+          "baseline": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac",
+          "baseline-build": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "candidate": "9b135ec49946d486c1f66fb5270bd7f097cb9365",
+          "cohort": "ffc68182a5eb3cae22b57ced79c5d1036be8909c",
+          "corpus": "a29eb32c5f737883c247ab5fd709e1956214be7c",
+          "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+          "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "implementation": "fafb22b0f5916bdf8d54ed331936f31ec0eb85ca",
+          "llm": "8ec1b4cd2ca26b5733051b7b5e38220eedf1199e",
+          "plan": "d76ccccd43a547fa499a0598f3ea956f273b5ad2",
+          "plan-review": "4fcfe398e067ac9b9139b821e242ab5d1406296c",
+          "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+          "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+          "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+        },
+        "kind": "decision",
+        "request": "b1140ffe2dadbd41f3f8e1ce217ef2c2b23a0ab8",
+        "result": {
+          "automatic_publication": false,
+          "claim": "Bounded compatibility under declared assumptions; no rules-correctness proof.",
+          "component": "observation_adapter",
+          "origin_issue_ids": [
+            "a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed"
+          ],
+          "previously_inspected": true,
+          "reason": "Candidate edits did not apply under the frozen edit policy.",
+          "unseen_holdout": false,
+          "verdict": "rejected"
+        },
+        "schema": "coworld/caos-receipt@1"
+      },
+      "selected_evidence": [
+        {
+          "label": "baseline-build",
+          "object": "40b57e0d1a15ba57319ad7bbb1c190a83ac55cd7",
+          "receipt": {
+            "inputs": {
+              "dependencies": "822489fcd54fb6d60cc38d2b8da0c33a6b0b10b4",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "build",
+            "request": "ad6dc795e0deb089e9b080d643fdf650669293d3",
+            "result": {
+              "commands": [
+                {
+                  "argv": [
+                    "cargo",
+                    "build",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness"
+                  ],
+                  "exit_code": 0,
+                  "name": "build"
+                },
+                {
+                  "argv": [
+                    "cargo",
+                    "test",
+                    "--offline",
+                    "--locked",
+                    "-p",
+                    "coworld-mtg-harness",
+                    "fitting::",
+                    "--",
+                    "--test-threads=1"
+                  ],
+                  "exit_code": 0,
+                  "name": "test"
+                }
+              ],
+              "environment": {
+                "CARGO_BUILD_JOBS": "2",
+                "CARGO_INCREMENTAL": "0",
+                "CARGO_PROFILE_DEV_DEBUG": "0",
+                "CARGO_PROFILE_TEST_DEBUG": "0",
+                "RUSTUP_TOOLCHAIN": "nightly-2026-04-19",
+                "RUST_MIN_STACK": "16777216"
+              },
+              "passed": true,
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "candidate",
+          "object": "9b135ec49946d486c1f66fb5270bd7f097cb9365",
+          "receipt": {
+            "inputs": {
+              "implementation": "fafb22b0f5916bdf8d54ed331936f31ec0eb85ca",
+              "plan": "d76ccccd43a547fa499a0598f3ea956f273b5ad2",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d"
+            },
+            "kind": "candidate",
+            "request": "f1208e450338d74d160418e8180e5f197020ccea",
+            "result": {
+              "error": "[Errno 13] Permission denied: '/tmp/factory-candidate-mzghcxh_/source/crates/coworld-mtg-harness/src/fitting/source.rs'",
+              "valid": false
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "discovery",
+          "object": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+          "receipt": {
+            "inputs": {
+              "observations": "921dabe6e2f55a7fa2d165c13266c57faeaae2ac"
+            },
+            "kind": "discovery",
+            "request": "571f4a6524888647c2bf81c039a352c5164577b9",
+            "result": {
+              "counts": {
+                "external_deadline": 3,
+                "input_issue": 9,
+                "matched_supported_projection": 8
+              },
+              "issue_groups": 25
+            },
+            "schema": "coworld/caos-receipt@1"
+          }
+        },
+        {
+          "label": "implementation",
+          "object": "fafb22b0f5916bdf8d54ed331936f31ec0eb85ca",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "evaluator": "658305de565bc0be0844af61e3ca9091db6762a5",
+              "messages": "b113160ba39657c0a94fac9c28b2619ffec4faf3",
+              "model-request": "f17d5a4d634644b1642dc09d50feee51d3ea8a3a",
+              "plan": "d76ccccd43a547fa499a0598f3ea956f273b5ad2",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "8798f568393c67d71b20deb1d015fb1e6f1a3140",
+              "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "20ad27f83d7eaa3e264d5cc3bbf00124ec9e3123"
+            },
+            "kind": "model-implement",
+            "request": "096094d996276b1afed9e4e029dcc5cd68f77aaa",
+            "result": {
+              "model": "deterministic-comment-only",
+              "role": "implement",
+              "usage": {},
+              "valid": true,
+              "value": {
+                "edits": [
+                  {
+                    "new": "// CAOS integration fixture: no behavior change.\nuse super::*;\nuse anyhow::{anyhow, bail};\nuse std::collections::{BTreeMap, BTreeSet};\n\nfn integer(raw: &str) -> Option<u32> {\n    let n = raw.parse::<f64>().ok()?;\n    (n.is_finite() && n >= 0.0 && n ",
+                    "old": "use super::*;\nuse anyhow::{anyhow, bail};\nuse std::collections::{BTreeMap, BTreeSet};\n\nfn integer(raw: &str) -> Option<u32> {\n    let n = raw.parse::<f64>().ok()?;\n    (n.is_finite() && n >= 0.0 && n ",
+                    "path": "crates/coworld-mtg-harness/src/fitting/source.rs"
+                  }
+                ],
+                "summary": "Integration fixture: comment-only edit."
+              }
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "test-fixture",
+            "model": "deterministic-comment-only",
+            "usage": {},
+            "stop_reason": "end_turn",
+            "text": "{\"summary\": \"Integration fixture: comment-only edit.\", \"edits\": [{\"path\": \"crates/coworld-mtg-harness/src/fitting/source.rs\", \"old\": \"use super::*;\\nuse anyhow::{anyhow, bail};\\nuse std::collections::{BTreeMap, BTreeSet};\\n\\nfn integer(raw: &str) -> Option<u32> {\\n    let n = raw.parse::<f64>().ok()?;\\n    (n.is_finite() && n >= 0.0 && n \", \"new\": \"// CAOS integration fixture: no behavior change.\\nuse super::*;\\nuse anyhow::{anyhow, bail};\\nuse std::collections::{BTreeMap, BTreeSet};\\n\\nfn integer(raw: &str) -> Option<u32> {\\n    let n = raw.parse::<f64>().ok()?;\\n    (n.is_finite() && n >= 0.0 && n \"}]}"
+          }
+        },
+        {
+          "label": "plan",
+          "object": "d76ccccd43a547fa499a0598f3ea956f273b5ad2",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "evaluator": "658305de565bc0be0844af61e3ca9091db6762a5",
+              "messages": "de949c16bde7dd44bb41ff899734a76edfee843c",
+              "model-request": "fb0664e35e9e4658beec92c92a4a0c1843c89a52",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "42a960e811548b203cfb40acce61636644e106ea",
+              "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "0970aee1df371b4562890a8130fafdde1bc4ad15"
+            },
+            "kind": "model-plan",
+            "request": "62303a7aea051c401025e3020d9cf9a8fe33d7af",
+            "result": {
+              "model": "deterministic-comment-only",
+              "role": "plan",
+              "usage": {},
+              "valid": true,
+              "value": {
+                "changes": "Add a source comment without altering behavior.",
+                "component": "observation_adapter",
+                "hypothesis": "Integration fixture: a comment-only edit must not earn improvement credit.",
+                "issue_ids": [
+                  "a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed"
+                ],
+                "risks": [
+                  "This is a deterministic plumbing test, not a discovered repair."
+                ],
+                "status": "propose",
+                "validation": "Run the full pipeline; expect the frozen comparison to reject the candidate."
+              }
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "test-fixture",
+            "model": "deterministic-comment-only",
+            "usage": {},
+            "stop_reason": "end_turn",
+            "text": "{\"status\": \"propose\", \"component\": \"observation_adapter\", \"issue_ids\": [\"a516cd4622f5bffcda808a3c47fbefb08e064eeb8a026e4b3b1022d3035d66ed\"], \"hypothesis\": \"Integration fixture: a comment-only edit must not earn improvement credit.\", \"changes\": \"Add a source comment without altering behavior.\", \"validation\": \"Run the full pipeline; expect the frozen comparison to reject the candidate.\", \"risks\": [\"This is a deterministic plumbing test, not a discovered repair.\"]}"
+          }
+        },
+        {
+          "label": "plan-review",
+          "object": "4fcfe398e067ac9b9139b821e242ab5d1406296c",
+          "receipt": {
+            "inputs": {
+              "discovery": "91f5b1e4d0ea154bf79eb892022b1dd9b0120757",
+              "evaluator": "658305de565bc0be0844af61e3ca9091db6762a5",
+              "messages": "74ff5b5373acc40a4a50156e9ddad211dd2f233d",
+              "model-request": "4ea0f027694de5bc20da02b3ed9b471427a557c0",
+              "plan": "d76ccccd43a547fa499a0598f3ea956f273b5ad2",
+              "policy": "5a823fc1f4a0eca69ddec7f55b838c32be1e4d46",
+              "response": "93f549f20fb885868feae27fef166169c73f93d6",
+              "sample": "7553e2db1785e12eec58a513d767b844cbf5d4cf",
+              "source": "65f627843a46c4a8f7466cc0ac69e8dd0213247d",
+              "system": "616147286f00dca59de342be7f00b044243f4a9a"
+            },
+            "kind": "model-plan-review",
+            "request": "f250f38fce3df29ef7c8734a74a8e24c38815459",
+            "result": {
+              "model": "deterministic-comment-only",
+              "role": "plan-review",
+              "usage": {},
+              "valid": true,
+              "value": {
+                "approve": true,
+                "findings": [
+                  "Synthetic approval for integration testing only."
+                ],
+                "rationale": "Exercise the measured-improvement gate even when the test contributor approves."
+              }
+            },
+            "schema": "coworld/caos-receipt@1"
+          },
+          "model_response": {
+            "schema": "coworld/model-call@1",
+            "provider": "test-fixture",
+            "model": "deterministic-comment-only",
+            "usage": {},
+            "stop_reason": "end_turn",
+            "text": "{\"approve\": true, \"findings\": [\"Synthetic approval for integration testing only.\"], \"rationale\": \"Exercise the measured-improvement gate even when the test contributor approves.\"}"
+          }
+        }
+      ],
+      "operator_note": "Integration fixture exposed read-only copied CAOS blobs. Operator fix: make only the validated target file writable in the private candidate copy before editing."
+    },
+    {
+      "name": "noop-lazy-source",
+      "root_request": "acad6d4fe44df20dccb391a9a0c5126230df47fb",
+      "terminal_commit": null,
+      "error_artifact": "migration-lazy-source-error.txt",
+      "operator_note": "Integration fixture built and tested the candidate, then failed while preparing candidate fits. Operator fix: materialize the candidate receipt and its source child before handing the source to fitting requests."
+    }
+  ]
+}
